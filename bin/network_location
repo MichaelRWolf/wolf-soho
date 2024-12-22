@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Use a while loop to read each line from the command output
+locations=()
+while IFS= read -r location; do
+    locations+=("$location")
+done < <(networksetup -listlocations)
+
+# Get the current network location
+current_location=$(networksetup -getcurrentlocation)
+
+# Display the current location
+echo "Current Network Location:"
+echo "    $current_location"
+
+# Display instructions to switch locations
+echo ""
+echo "To switch, execute following:"
+for location in "${locations[@]}"; do
+    if [ "$location" != "$current_location" ]; then
+        echo "    networksetup -switchtolocation \"$location\""
+    fi
+done
