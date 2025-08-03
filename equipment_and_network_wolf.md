@@ -9,6 +9,11 @@
   - Used for mobile internet
   - USB tethering and Wi-Fi supported
   - Known to overheat, sometimes placed on an ice pack
+- **Mesh AP**: `wolfden-mesh` (Ubiquiti UAP-AC-M-US)
+  - Model: UAP-AC-M-US
+  - Manufacturer: Ubiquiti (unifi.ui.com)
+  - Purchased: 2025-07 from Amazon
+  - Status: New device, integration pending
 - **NAS**: Synology DS220j
   - Used for Time Machine backups
   - Accessible by fixed local IP
