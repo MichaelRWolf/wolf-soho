@@ -1,0 +1,38 @@
+#!/bin/bash
+set -euo pipefail
+
+# See background fuckery at 
+# https://chatgpt.com/share/68863e98-b1dc-8009-9d9e-eaa3e8a823ba
+
+CERT_DIR=~/Desktop/synology-cert
+mkdir -p "$CERT_DIR"
+cd "$CERT_DIR"
+
+cat > san.cnf <<'EOF'
+[req]
+default_bits       = 2048
+prompt             = no
+default_md         = sha256
+req_extensions     = req_ext
+distinguished_name = dn
+
+[dn]
+CN = wolfssynology.synology.me
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = wolfssynology.synology.me
+DNS.2 = wolfsynology.direct.quickconnect.to
+DNS.3 = wolfden-nas
+IP.1  = 192.168.8.129
+EOF
+
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+  -keyout synology.key -out synology.crt \
+  -config san.cnf -extensions req_ext
+
+echo "✅ Certificate ready:"
+echo "   $CERT_DIR/synology.crt"
+echo "   $CERT_DIR/synology.key"

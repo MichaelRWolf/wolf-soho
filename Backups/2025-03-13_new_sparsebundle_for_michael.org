@@ -1,0 +1,89 @@
+
+
+
+
+2025-03-13_new_sparsebundle_for_michael.org
+
+
+
+## Exclude from Backup
+
+/Applications
+~/Downloads
+~/Library/Application Support/Google
+~/Library/CloudStorage
+~/Library/CloudStorage/Dropbox
+~/Library/Containers
+~/Library/Dropbox
+~/Library/Mobile Documents/com~apple~CloudDocs
+~/Pictures
+~/repos
+
+#+begin_src bash
+tmutil destinationinfo
+#+end_src
+
+#+RESULTS:
+| ==================================================== |   |                                                         |
+| Name                                                 | : | Backups                                                 |
+| Kind                                                 | : | Network                                                 |
+| URL                                                  | : | smb://michaelrwolf@wolfden_NAS._smb._tcp.local./Backups |
+| ID                                                   | : | 3DCEB6F9-FED5-4621-A32D-784E5A3D1EBD                    |
+
+
+** tmutil listbackups
+#+begin_src bash
+tmutil listbackups
+#+end_src
+
+#+RESULTS:
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-01-27-221451.backup/2023-01-27-221451.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-02-04-171346.backup/2023-02-04-171346.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-02-11-091750.backup/2023-02-11-091750.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-02-18-163030.backup/2023-02-18-163030.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-02-25-204512.backup/2023-02-25-204512.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-03-10-133912.backup/2023-03-10-133912.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-04-13-120210.backup/2023-04-13-120210.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-04-24-130125.backup/2023-04-24-130125.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-06-13-155134.backup/2023-06-13-155134.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-07-04-135731.backup/2023-07-04-135731.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-07-13-205510.backup/2023-07-13-205510.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-07-31-143615.backup/2023-07-31-143615.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-08-15-124651.backup/2023-08-15-124651.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-08-29-174628.backup/2023-08-29-174628.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-09-10-144646.backup/2023-09-10-144646.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-09-23-223129.backup/2023-09-23-223129.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-10-06-195315.backup/2023-10-06-195315.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2023-11-06-113913.backup/2023-11-06-113913.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-01-31-162608.backup/2024-01-31-162608.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-02-07-190741.backup/2024-02-07-190741.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-03-10-172955.backup/2024-03-10-172955.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-04-24-121349.backup/2024-04-24-121349.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-06-08-123725.backup/2024-06-08-123725.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-07-12-231112.backup/2024-07-12-231112.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-07-19-154045.backup/2024-07-19-154045.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-08-04-170159.backup/2024-08-04-170159.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-08-20-194803.backup/2024-08-20-194803.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-09-19-223909.backup/2024-09-19-223909.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-10-01-180305.backup/2024-10-01-180305.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-10-10-201712.backup/2024-10-10-201712.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-10-17-140215.backup/2024-10-17-140215.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-10-25-142541.backup/2024-10-25-142541.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-11-04-175357.backup/2024-11-04-175357.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-11-11-112829.backup/2024-11-11-112829.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-11-18-105731.backup/2024-11-18-105731.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2024-12-22-141728.backup/2024-12-22-141728.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2025-01-01-153026.backup/2025-01-01-153026.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2025-01-02-151458.backup/2025-01-02-151458.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2025-01-02-174227.backup/2025-01-02-174227.backup |
+| /Volumes/.timemachine/29266512-A76E-4153-A05A-A2AA1631C390/2025-01-03-024830.backup/2025-01-03-024830.backup |
+
+
+
+
+** tmutil calculatedrift
+#+begin_src bash
+tmutil calculatedrift ~
+#+end_src
+
+#+RESULTS:
