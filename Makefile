@@ -2,7 +2,7 @@ SOURCE_BIN_DIR := bin
 BIN_FILES := bin/network_location
 INSTALL_BIN_DIR := $(HOME)/bin
 
-.PHONY: all clean symlink_bin
+.PHONY: all symlink_bin clean todo
 
 all: symlink_bin
 
@@ -15,3 +15,8 @@ symlink_bin:
 
 clean:
 	@echo "Nothing to clean."
+
+
+todo:
+	@echo 1. Incorporate '~/repos/wolf-soho' into 'Portable-Profile'
+	@echo 2. Incorporate '~/repos/apple-photos' into 'Portable-Profile' and/or wolf-soho
