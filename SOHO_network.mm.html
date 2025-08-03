@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SOHO Updated: 2013-08-25</title>
+<style type="text/css">
+    li { list-style: none;  margin: 0; }
+    p { margin: 0; }
+    span.foldopened { color: white; font-size: xx-small;
+    border-width: 1; font-family: monospace; padding: 0em 0.25em 0em 0.25em; background: #e0e0e0;
+    VISIBILITY: visible;
+    cursor:pointer; }
+
+
+    span.foldclosed { color: #666666; font-size: xx-small;
+    border-width: 1; font-family: monospace; padding: 0em 0.25em 0em 0.25em; background: #e0e0e0;
+    VISIBILITY: hidden;
+    cursor:pointer; }
+
+    span.foldspecial { color: #666666; font-size: xx-small; border-style: none solid solid none;
+    border-color: #CCCCCC; border-width: 1; font-family: sans-serif; padding: 0em 0.1em 0em 0.1em; background: #e0e0e0;
+    cursor:pointer; }
+
+    span.l { color: red; font-weight: bold; }
+
+    a.mapnode:link {text-decoration: none; color: black; }
+    a.mapnode:visited {text-decoration: none; color: black; }
+    a.mapnode:active {text-decoration: none; color: black; }
+    a.mapnode:hover {text-decoration: none; color: black; background: #eeeee0; }
+
+</style>
+<!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+</head>
+<body>
+
+<script type="text/javascript">
+   // Here we implement folding. It works fine with MSIE5.5, MSIE6.0 and
+   // Mozilla 0.9.6.
+
+   if (document.layers) {
+      //Netscape 4 specific code
+      pre = 'document.';
+      post = ''; }
+   if (document.getElementById) {
+      //Netscape 6 specific code
+      pre = 'document.getElementById("';
+      post = '").style'; }
+   if (document.all) {
+      //IE4+ specific code
+      pre = 'document.all.';
+      post = '.style'; }
+
+function layer_exists(layer) {
+   try {
+      eval(pre + layer + post);
+      return true; }
+   catch (error) {
+      return false; }}
+
+function show_layer(layer) {
+   eval(pre + layer + post).position = 'relative'; 
+   eval(pre + layer + post).visibility = 'visible'; }
+
+function hide_layer(layer) {
+   eval(pre + layer + post).visibility = 'hidden';
+   eval(pre + layer + post).position = 'absolute'; }
+
+function hide_folder(folder) {
+    hide_folding_layer(folder)
+    show_layer('show'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function show_folder(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_layer('show'+folder+'_'+i); }
+}
+function show_folder_completely(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_folder_completely(folder+'_'+i); }
+}
+
+
+
+function hide_folding_layer(folder) {
+   var i;
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       hide_folding_layer(folder+'_'+i); }
+
+   hide_layer('hide'+folder);
+   hide_layer('show'+folder);
+   hide_layer('fold'+folder);
+
+   scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function fold_document() {
+   var i;
+   var folder = '1';
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       hide_folder(folder+'_'+i); }
+}
+
+function unfold_document() {
+   var i;
+   var folder = '1';
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_folder_completely(folder+'_'+i); }
+}
+
+</script>
+<SPAN class="foldspecial" onclick="fold_document()">All +</SPAN>
+<SPAN class="foldspecial" onclick="unfold_document()">All -</SPAN>
+<p>SOHO
+<br>
+Updated: 2013-08-25
+<ul><li>ISP
+<ul><li>att.net
+
+</li>
+
+</ul>
+</li>
+<li>Computers
+<ul><li>WolfServer
+<ul><li>users
+<ul><li>administrator/mini~
+
+</li>
+<li>michael/
+
+</li>
+
+</ul>
+</li>
+<li>&nbsp;
+<ul><li>&nbsp;
+
+</li>
+
+</ul>
+</li>
+<li>&nbsp;
+<ul><li>&nbsp;
+
+</li>
+<li>&nbsp;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>mmac
+<ul><li>en0
+<ul><li>Model: MPCP79-1
+
+</li>
+<li>MAC: 00:1123:32:b3:31:fa
+
+</li>
+
+</ul>
+</li>
+<li>en1
+<ul><li>Model: 802.11 (a/b/g/n
+
+</li>
+<li>MAC: 00:23:12:55:35:00
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>wmac
+
+</li>
+<li>Michaels-iPhone
+<ul><li>MAC: 00:26:b0:82:85:59
+
+</li>
+
+</ul>
+</li>
+<li>Wendys-iPhone
+<ul><li>MAC: 00:25:bc:b2:8c:d4
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>Network
+<ul><li>Router
+<ul><li>Model: &nbsp;Linksys WRT54G2 v1.5
+
+</li>
+<li>S/N: CSV21JA57191
+
+</li>
+<li>MAC: 00:25:96:53:D1:60
+
+</li>
+<li>Swappy logo: 0237-6653
+
+</li>
+<li>SSID: WolfDen
+
+</li>
+<li>WPA/WPA2: "a secure den is safe"
+
+</li>
+<li>Username: administrator
+
+</li>
+<li>Password: routingw0lf
+
+</li>
+<li>Gateway: 192.168.1.1
+
+</li>
+<li>Mask: 255.255.255.0
+
+</li>
+
+</ul>
+</li>
+<li>Modem
+<ul><li>Model: SMC8014
+
+</li>
+<li>S/N: H2130434BFA9
+
+</li>
+<li>SMC UI: 10.1.10.1/login.asp
+<ul><li>User: cusadmin
+
+</li>
+<li>Password: highspeed
+
+</li>
+
+</ul>
+</li>
+<li>Comcast Business Class
+<ul><li>800-391-3000
+
+</li>
+<li>Account Num: 8498-32-001-4033314
+
+</li>
+<li>work.comcast.net
+
+</li>
+<li>Signature Support
+<ul><li>855-556-0602
+
+</li>
+
+</ul>
+</li>
+<li>Fixed IP Address
+<ul><li>162.17.180.193
+
+</li>
+<li>DNS
+<ul><li>75.75.75.75
+
+</li>
+<li>75.75.76.76
+
+</li>
+
+</ul>
+</li>
+<li>Subnet
+<ul><li>&nbsp;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1" class="foldclosed" onClick="show_folder('1_1')" style="POSITION: absolute">+</span> <span id="hide1_1" class="foldopened" onClick="hide_folder('1_1')">-</span>
+Disconnected
+<ul id="fold1_1" style="POSITION: relative; VISIBILITY: visible;"><li>Gateway
+<ul><li>Actiontec GT701-WG
+
+</li>
+<li>MAC: 00:20:E0:04:14:C4
+
+</li>
+<li>Firmware: QW06.5-3.60.3.0.8.6-GT701-WG 
+<br>
+(installed 4/22/09)
+<ul><li>3.60.1.0.4.1-GT701-WG
+
+</li>
+
+</ul>
+</li>
+<li>http://192.168.0.1
+<ul><li>user: alphawolf
+
+</li>
+<li>password: biter
+
+</li>
+<li>LAN
+<ul><li>Gateway: 192.168.0.1
+<ul><li>DHCP range: 192.168.0.2 - 192.168.0.254
+
+</li>
+
+</ul>
+</li>
+<li>Netmask: 255.255.255.0
+
+</li>
+
+</ul>
+</li>
+<li>WAN
+<ul><li>Mode: PPPoA
+
+</li>
+<li>Gateway: 63.231.10.204
+
+</li>
+<li>Subnet Mask: 255.255.255.255
+
+</li>
+<li>DNS1: 205.171.3.25
+
+</li>
+<li>DNS2: 205.171.2.25
+
+</li>
+<li>PPPoA
+<ul><li>ISP Username: wolfwemichael@qwest.net
+<br>
+
+
+</li>
+<li>ISP password: SmHg7p7n
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>Wireless
+<ul><li>ESSID: WQWEST
+
+</li>
+<li>Authentication: Open
+
+</li>
+<li>Channel: 1
+
+</li>
+<li>Encryption: 64-bit WEP
+
+</li>
+<li>64-Bit WEP key: AAAABBBBCD
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>Router
+<ul><li>D-Link WBR-2310
+
+</li>
+<li>MAC: 00-1B-11-EE-93-17
+
+</li>
+<li>Firmware: 1.02 (Jun 27, 2006)
+
+</li>
+<li>HW version: A1
+
+</li>
+<li>S/N: F30Z177013451
+
+</li>
+<li>http://172.16.0.10
+<ul><li>user: admin
+
+</li>
+<li>password: &lt;empty&gt;
+
+</li>
+<li>LAN
+<ul><li>MAC: 00-1B-11-EE-93-16
+
+</li>
+<li>Subnet mask: 255.255.0.0
+
+</li>
+<li>DHCP: enabled
+
+</li>
+
+</ul>
+</li>
+<li>WAN
+<ul><li>MAC: 00-12-79-b3-56-54
+
+</li>
+<li>Gateway: 192.168.0.1
+
+</li>
+<li>Subnet Mask: 255.255.255.0
+
+</li>
+<li>DNS1: 192.168.0.1
+
+</li>
+<li>DNS2: 205.171.3.25
+
+</li>
+
+</ul>
+</li>
+<li>Wireless
+<ul><li>SSID: wolf
+
+</li>
+<li>Authentication: WPA-PSK
+
+</li>
+<li>Encryption: TKIP
+
+</li>
+<li>Passphrase: 'run with the one'
+
+</li>
+
+</ul>
+</li>
+<li>Router
+<ul><li>IP: 172.16.0.1
+
+</li>
+<li>Subnet Mask: 255.255.0.0
+
+</li>
+<li>DHCP: enabled
+
+</li>
+<li>DHCP Address Range: 100-199
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_1" class="foldclosed" onClick="show_folder('1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1" class="foldopened" onClick="hide_folder('1_1_1')">-</span>
+Print Server
+<ul id="fold1_1_1" style="POSITION: relative; VISIBILITY: visible;"><li>D-Link DPR-1260
+<ul><li>LAN
+
+</li>
+<li>WAN
+
+</li>
+<li>Wireless
+
+</li>
+<li>USB1
+<ul><li>hp psc 1310 series
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>MAC: 00-15-E9-FC-0A-EC
+
+</li>
+<li>Firmware: 1.20
+
+</li>
+<li>HW version: A1
+
+</li>
+<li>S/N: DQXN173003228
+
+</li>
+<li>http://172.16.0.10 (static)
+
+</li>
+
+</ul>
+</li>
+<li>CLEAR Series M Modem
+<ul><li>device name: wolfwimax
+
+</li>
+<li>Model: &nbsp;Moterola CPEi25725
+
+</li>
+<li>S/N: TS199YOLD1
+
+</li>
+<li>WiMax MAC: 00:23:A2:FA:BF:C1
+
+</li>
+<li>LAN MAC: 00:24:A1:68:EA:E6
+
+</li>
+<li>WiMAX CPE
+<ul><li>http://192.168.15.1
+
+</li>
+<li>Password: CLEAR123
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>wlaptop
+<ul><li>Wireless
+<ul><li>MAC: 00:16:e3:04:5c:51
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>MLAPTOP
+<ul><li>HP WLAN 802.11 a/b/g
+
+</li>
+<li>Broadcom NetXtreme Gigabet Ethernet
+
+</li>
+<li>Ethernet
+<ul><li>MAC: 00:08:02:36:9a:51
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul><SCRIPT type="text/javascript">
+fold_document();
+</SCRIPT>
+</body>
+</html>

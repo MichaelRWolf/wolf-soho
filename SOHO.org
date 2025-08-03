@@ -1,0 +1,139 @@
+* Devices
+** Michael's iPhone [0/1]
+ - [ ] Multiple entries in messages (i.e. Teri, Wendy)
+
+
+** Wendy's iPhone [0/1]
+  - [ ] fingerprint on main button
+
+
+** mmac - Michael's MacBook [0/1]
+*** ProntoApp
+> "No Internet."
+> " needs to connect to the internet in order to work."
+> "Please connect and try again"
+> [OK]
+
+Following code in ~/bin/wiggle_OSX_window.py helped  
+
+#+ begin_src python
+import time
+from Quartz import CGWindowListCopyWindowInfo, kCGWindowListExcludeDesktopElements, kCGNullWindowID
+from Foundation import NSSet, NSMutableSet
+
+wl1 = CGWindowListCopyWindowInfo(kCGWindowListExcludeDesktopElements, kCGNullWindowID)
+print 'Move target window'
+time.sleep(5)
+wl2 = CGWindowListCopyWindowInfo(kCGWindowListExcludeDesktopElements, kCGNullWindowID)
+
+w = NSMutableSet.setWithArray_(wl1)
+w.minusSet_(NSSet.setWithArray_(wl2))
+print '\nList of windows that moved:'
+print w
+print '\n'
+#+ end_src
+
+Output:
+[0] $ python ~/bin/wiggle_OSX_window.py 
+Move target window
+
+List of windows that moved:
+{(
+        {
+        kCGWindowAlpha = 1;
+        kCGWindowBounds =         {
+            Height = 151;
+            Width = 420;
+            X = "-729";
+            Y = 96;
+        };
+        kCGWindowIsOnscreen = 1;
+        kCGWindowLayer = 8;
+        kCGWindowMemoryUsage = 263432;
+        kCGWindowName = "";
+        kCGWindowNumber = 208;
+        kCGWindowOwnerName = ProntoApp;
+        kCGWindowOwnerPID = 994;
+        kCGWindowSharingState = 1;
+        kCGWindowStoreType = 2;
+    }
+)}
+
+
+
+~ 
+[0] $ 
+
+
+
+1. Ran python script to find that window was ProntoApp.
+1. [[https://community.webroot.com/t5/Webroot-SecureAnywhere-for-Macs/I-have-a-Mac-that-is-infected-with-pronto-video-converter-Can/td-p/253280][WebRoot posting]] alerted me about [[https://en.wikipedia.org/wiki/Potentially_unwanted_program][PUA]]'s and ProntoApp.
+2. Worked through [[malwarefixes.com][malwarefixes]] article [[https://malwarefixes.com/remove-pronto-video-converter/][Remove Pronto Video Converter
+   (Mac OS X)]].  It was helpful to know to remove the LaunchAgent files
+   which would have re-installed the malware.
+
+[0] $ find ~/Library/LaunchAgents /Library/LaunchAgents -mtime 15 | grep -i pronto
+/Users/michael/Library/LaunchAgents/pronto.update.plist
+/Users/michael/Library/LaunchAgents/pronto.notification.plist
+
+~ 
+[0] $ find ~/Library/LaunchAgents /Library/LaunchAgents -mtime 15 | grep -i pronto | xargs rm
+
+~ 
+[0] $ find ~/Library/LaunchAgents /Library/LaunchAgents -mtime 15 | grep -i pronto
+
+~ 
+[1] $ 
+
+
+rm ~/Library/Application Support/ProntoApp
+
+Similar probelem with Smokeyashan, solved with malwarefixes article [[https://malwarefixes.com/how-to-remove-smokyashan/][How to Remove Smokyashan]]
+
+Ditto with Stormygreatz, solved with [[https://malwarefixes.com/remove-stormygreatz-mac-safari/][Remove Stormygreatz (Mac and Safari)]]
+
+
+*** Photos.app
+  - [ ] get photos under control
+        - phone <-> macbook
+        - devices <-> iCloud
+        - delete photos from devices w/out deleting them from cloud
+        - throttle data usage on devices to dynamically respond
+
+*** Contacts.app
+ - Why does "Malena at-NP" show up in messages on iPhone, but her
+   phone number shows up in messages on MacBook?  How can I prevent
+   iPhone from storing local contacts, and use the default DL account
+   instead?
+ - next
+
+
+** wmac - Wendy's MacBook Pro  [0/0]
+  
+
+** wolfserver [0/0]
+
+* Backup
+  - [X] Select alternative to iDrive
+  - [-] Install mozy
+    - [X] mmac        
+    - [X] Wendy's MacBook
+    - [ ] wolfserver
+  - [ ] Confirm initial backup
+    - [ ] mmac        
+    - [ ] Wendy's MacBook
+    - [ ] wolfserver
+
+
+** iDrive
+iDrive.app cannot add ~ as a backup target.  Time to choose something
+else.  Ben use mozy.
+
+** Mozy
+2018-04-26 - Started 3-computer subscription to Mozy.  Installed on
+Michael's and Wendy's MacBooks.
+
+
+
+* Network
+- [[file:SOHO_network.mm][SOHO network mind map]] ([[file:SOHO_network.mm.html][as HTML]])

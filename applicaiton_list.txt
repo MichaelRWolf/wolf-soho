@@ -1,0 +1,72 @@
+     1	Address Book.app
+     2	Adobe
+     3	Airspace.app
+     4	App Store.app
+     5	Application Loader.app
+     6	Aquamacs.app
+     7	Automator.app
+     8	Calculator.app
+     9	Chess.app
+    10	Cobook.app
+    11	CodeBlocks.app
+    12	CrashPlan.app
+    13	DVD Player.app
+    14	Dashboard.app
+    15	Daylite.app
+    16	Dictionary.app
+    17	Evernote.app
+    18	FaceTime.app
+    19	Firefox.app
+    20	Fireplace live HD free.app
+    21	Flux.app
+    22	Font Book.app
+    23	FreeMind.app
+    24	FreeMind_bak.app
+    25	Gimp.app
+    26	GitHub.app
+    27	GitX.app
+    28	GoToMeeting (1009).app
+    29	Google Chrome.app
+    30	Google Drive.app
+    31	Google Earth 2.app
+    32	Google Earth.app
+    33	GrandPerspective.app
+    34	HandBrake.app
+    35	Image Capture.app
+    36	Launchpad.app
+    37	Leap Motion Orientation.app
+    38	Leap Motion.app
+    39	Mail.app
+    40	Microsoft Office 2008
+    41	Microsoft Silverlight
+    42	Mission Control.app
+    43	Mobile Mouse Server.app
+    44	MyPoint Connector.app
+    45	MySQLWorkbench.app
+    46	Neat.app
+    47	NeatWorks-v3.5.7.app
+    48	Office
+    49	Optimal Layout.app
+    50	OverDrive Media Console.app
+    51	Pandora.app
+    52	Photo Booth.app
+    53	Preview.app
+    54	QuickTime Player.app
+    55	Quicksilver.app
+    56	Safari.app
+    57	Skype.app
+    58	Stickies.app
+    59	System Preferences.app
+    60	TextEdit.app
+    61	Things.app
+    62	Time Machine.app
+    63	TweetDeck.app
+    64	Utilities
+    65	Xcode.app
+    66	calibre.app
+    67	iCal.app
+    68	iChat.app
+    69	iPhoto.app
+    70	iTunes.app
+    71	kdiff3.app
+    72	sfCubed.app
