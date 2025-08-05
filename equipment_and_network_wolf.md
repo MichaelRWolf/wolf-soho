@@ -14,6 +14,11 @@
   - Manufacturer: Ubiquiti (unifi.ui.com)
   - Purchased: 2025-07 from Amazon
   - Status: New device, integration pending
+  - **Management**: 
+    - [Device Information](Ubiquiti/device_info.md)
+    - [Configuration Guide](Ubiquiti/configuration_guide.md)
+    - [Network Integration](Ubiquiti/network_integration.md)
+    - [Setup Guide](Ubiquiti/ubiquiti_setup.md)
 - **NAS**: Synology DS220j
   - Used for Time Machine backups
   - Accessible by fixed local IP
