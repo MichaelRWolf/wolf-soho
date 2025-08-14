@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Beryl_tweaks.html</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+</head>
+
+<body>
+
+<h1 id="section">2025-08-13</h1>
+<h2 id="chatgpt-discussion">ChatGPT discussion</h2>
+<p><a href="https://chatgpt.com/c/689c901c-8a40-8327-9c83-0b55325f4fe6"
+class="uri">https://chatgpt.com/c/689c901c-8a40-8327-9c83-0b55325f4fe6</a></p>
+<p>Heck yes. Here’s a tight, Beryl-focused hardening recipe. Each step =
+<strong>Do / Why / How it works</strong>. (Assumes GL-MT1300 “Beryl”,
+GL.iNet firmware v3.x. I note LuCI/SSH paths too.)</p>
+<hr />
+<h2 id="snapshot-basics">0) Snapshot + basics</h2>
+<p><strong>Do:</strong> Back up config (GL.iNet UI → <em>More Settings →
+Backup / Restore</em>). <strong>Why:</strong> Fast rollback if a tweak
+misbehaves. <strong>How it works:</strong> Exports UCI configs so you
+can restore without re-pairing everything.</p>
+<hr />
+<h2 id="enable-sqm-cake-on-wan">1) Enable SQM (CAKE) on WAN</h2>
+<p><strong>Do:</strong> Install &amp; enable SQM; cap to ~85–90% of real
+uplink/downlink.</p>
+<ul>
+<li><p>SSH:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opkg</span> update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opkg</span> install luci-app-sqm sqm-scripts kmod-sched-cake kmod-ifb</span></code></pre></div>
+<p>LuCI → <em>Network → SQM QoS</em> → <code>Enable</code> on
+<strong>WAN</strong> (usually <code>eth0</code>/<code>wwan</code>), set
+bandwidth (e.g., if real = 10/2 Mbps, enter 9000/1800 Kbps). Queue:
+<strong>cake</strong>; Script: <strong>piece_of_cake.qos</strong>.
+<strong>Why:</strong> Kills bufferbloat so latency stays stable under
+load. <strong>How it works:</strong> CAKE fairly schedules flows and
+intentionally “shaves” throughput to prevent the upstream queue from
+bloating (where you have no control).</p></li>
+</ul>
+<hr />
+<h2 id="fix-mtumss-prevent-silent-fragmentation">2) Fix MTU/MSS (prevent
+silent fragmentation)</h2>
+<p><strong>Do:</strong> Turn on TCP MSS clamping; set a safe clamp.</p>
+<ul>
+<li>LuCI → <em>Network → Firewall → General Settings</em> → <strong>TCP
+MSS</strong>: <em>Clamp to PMTU</em> (or explicit <strong>1420</strong>
+if you’ll use WireGuard/VPN).</li>
+<li>GL.iNet UI sometimes has <strong>Fix MTU</strong> under VPN.
+<strong>Why:</strong> Campground+CGNAT+VPN often reduce path MTU;
+mismatched MTU → stalls/ECONNRESET. <strong>How it works:</strong>
+Router rewrites TCP options so endpoints send packets small enough for
+the narrowest link—no fragmentation surprises.</li>
+</ul>
+<hr />
+<h2 id="add-a-stable-vpn-egress-wireguard-vps">3) Add a stable VPN
+egress (WireGuard → VPS)</h2>
+<p><strong>Do:</strong> Stand up a $5/mo VPS (near Midwest) and make a
+WireGuard tunnel from Beryl. Route only your Mac through it.</p>
+<ul>
+<li>On VPS (Ubuntu): install WireGuard; create peer keys.</li>
+<li>On Beryl (GL UI): <em>VPN → WireGuard Client → Add new</em> (peer,
+endpoint, <code>AllowedIPs = 0.0.0.0/0</code>, <strong>MTU
+1420</strong>, <strong>PersistentKeepalive 25</strong>).</li>
+<li><em>VPN Policy</em> → “Only allow the following clients via VPN” →
+check your Mac’s DHCP reservation. <strong>Why:</strong> Gives your
+flows one clean, consistent public IP and keeps NAT tables warm; masks
+campground jitter/CGNAT oddities. <strong>How it works:</strong> Your
+Mac’s traffic rides an encrypted UDP tunnel to the VPS. Short, regular
+keepalives prevent NAT idle timeouts; Cloud services see a steady
+endpoint.</li>
+</ul>
+<hr />
+<h2 id="dual-uplink-failover-optional-but-clutch">4) Dual-uplink
+failover (optional but clutch)</h2>
+<p><strong>Do:</strong> Add LTE/iPhone tether as <strong>backup
+WAN</strong> and enable failover.</p>
+<ul>
+<li>GL UI → <em>Network → Multi-WAN</em> (install plugin if prompted).
+Primary = Campground Wi-Fi; Secondary = <strong>Tethering</strong> (USB)
+or <strong>Cellular modem</strong>; Health check every ~5–10s; failback
+= on. <strong>Why:</strong> When the camp link dies, long-lived sessions
+don’t; WireGuard rides the surviving uplink. <strong>How it
+works:</strong> The router watches pings/DNS to known hosts; on failure,
+routes the WireGuard underlay over LTE. VPN keeps your app sessions
+intact.</li>
+</ul>
+<hr />
+<h2 id="dns-caching-keep-lookups-fast-when-link-wobbles">5) DNS caching
+(keep lookups fast when link wobbles)</h2>
+<p><strong>Do:</strong> Keep <strong>dnsmasq</strong> as local cache;
+set multiple upstreams; avoid DoH on a flaky link.</p>
+<ul>
+<li>GL UI → <em>DNS</em> → Upstreams: <code>1.1.1.1</code>,
+<code>8.8.8.8</code>, <code>9.9.9.9</code>. Disable DoH unless your link
+is stable. <strong>Why:</strong> Slow/failed DNS looks like “the
+internet is broken.” Local cache shields you from transient upstream
+failures. <strong>How it works:</strong> dnsmasq answers repeats from
+RAM and cycles upstream resolvers if one stalls.</li>
+</ul>
+<hr />
+<h2 id="lock-wi-fi-to-be-boring-and-predictable">6) Lock Wi-Fi to be
+boring and predictable</h2>
+<p><strong>Do:</strong> Split SSIDs, fix channels, reduce roam-flap.</p>
+<ul>
+<li>GL UI → <em>Wireless</em>: create <strong>separate SSIDs</strong>
+for 2.4 GHz (range) and 5 GHz (work). Turn off band-steering. Fix 2.4
+GHz to <strong>1/6/11</strong> (pick least noisy); fix 5 GHz to a clean
+non-DFS channel your Mac supports. Place Beryl near a window toward the
+camp AP. <strong>Why:</strong> Band-steering and auto-channel changes
+cause momentary drops that kill WebSockets. <strong>How it
+works:</strong> Static channels + separate SSIDs stop the client from
+bouncing bands; better SNR lowers retransmits and jitter.</li>
+</ul>
+<hr />
+<h2 id="rate-limit-elephants-during-work-hours">7) Rate-limit
+“elephants” during work hours</h2>
+<p><strong>Do:</strong> Put cloud backup/photo sync on a schedule or cap
+it.</p>
+<ul>
+<li>LuCI → <em>Network → SQM → Advanced</em> can give
+<strong>diffserv</strong> prioritization; simplest: pause heavy sync
+while coding. <strong>Why:</strong> Big uploads inflate latency and blow
+up interactive flows even with SQM (less so, but still). <strong>How it
+works:</strong> Keeping queues light preserves headroom for
+ACKs/keepalives.</li>
+</ul>
+<hr />
+<h2 id="keepalive-pings-so-captivecgnat-doesnt-idle-you-out">8)
+Keepalive pings so captive/CGNAT doesn’t idle you out</h2>
+<p><strong>Do:</strong> Enable network check/keepalive.</p>
+<ul>
+<li>GL UI → <em>More Settings → Network Check</em>: ping
+<code>1.1.1.1</code> and <code>8.8.8.8</code> every 60–120s
+(lightweight). <strong>Why:</strong> Some public Wi-Fi/CGNAT boxes drop
+idle mappings; a tiny periodic packet keeps the door open. <strong>How
+it works:</strong> Prevents state expiry in upstream NAT/firewalls; your
+sessions don’t get surprise RSTs.</li>
+</ul>
+<hr />
+<h2 id="give-wireguard-priority-over-bulk-if-available">9) Give
+WireGuard priority over bulk (if available)</h2>
+<p><strong>Do:</strong> If your SQM supports per-flow prioritization,
+mark WG (UDP:51820) high.</p>
+<ul>
+<li>LuCI → <em>Network → Firewall → Traffic Rules</em> (mangle/DSCP) or
+SQM advanced: <code>diffserv4</code>. <strong>Why:</strong> Ensures the
+control plane (VPN) stays smooth even when other stuff is busy.
+<strong>How it works:</strong> DSCP marks steer packets into a
+higher-priority queue inside CAKE.</li>
+</ul>
+<hr />
+<h2 id="quick-health-dashboard-youll-actually-look-at">10) Quick health
+dashboard you’ll actually look at</h2>
+<p><strong>Do:</strong> On your Mac, run:</p>
+<ul>
+<li><code>gping 1.1.1.1 8.8.8.8 &lt;your VPS IP&gt;</code> while you
+work.</li>
+<li><code>sudo nping --tcp -p 443 api.openai.com</code> when Cursor
+feels bad. <strong>Why:</strong> Immediate visual on jitter/loss locally
+vs tunnel vs destination. <strong>How it works:</strong> If VPS stays
+flat but api.openai.com jitters, it’s beyond you; if both jitter, it’s
+the uplink.</li>
+</ul>
+<hr />
+<h3 id="order-of-ops-fastest-impact-first">Order of ops (fastest impact
+first)</h3>
+<ol type="1">
+<li><strong>SQM (CAKE)</strong> + <strong>MSS clamp</strong></li>
+<li><strong>WireGuard → VPS</strong> with <strong>policy
+routing</strong> for your Mac</li>
+<li><strong>DNS cache</strong> &amp; <strong>Wi-Fi channel/SSID
+hygiene</strong></li>
+<li><strong>Failover WAN</strong> (tether)</li>
+<li><strong>Keepalives</strong> + optional prioritization</li>
+</ol>
+<p>If you want, tell me:</p>
+<ul>
+<li>Your GL.iNet firmware (3.x exact),</li>
+<li>WAN interface name it shows for the campground (so I target SQM to
+the right device),</li>
+<li>The static DHCP IP of your Mac, and I’ll give you copy-paste configs
+(WG, SQM, PBR) tailored to your box.</li>
+</ul>
+
+</body>
+</html>

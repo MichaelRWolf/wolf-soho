@@ -1,5 +1,87 @@
 # AT&T Loging Fuckery
 
+## Exodus from att.net and Mail.app
+
+### Email Service Alternatives (You Pay, You're the Customer)
+
+**Paid Email Services:**
+- **Fastmail** - $3-5/month, excellent IMAP support, no ads, privacy-focused
+- **ProtonMail** - $4-8/month, end-to-end encryption, Swiss-based privacy
+- **Zoho Mail** - $1-4/month, business-focused, good IMAP/SMTP support
+- **Tutanota** - €1-6/month, German-based, encrypted email
+- **Posteo** - €1/month, German-based, eco-friendly, privacy-focused
+- **Mailbox.org** - €1-3/month, German-based, GDPR compliant
+- **Runbox** - $2-7/month, Norwegian-based, privacy-focused
+
+**IMAP Mail Services (Custom Domain Support):**
+- **Fastmail** - Full IMAP/SMTP, custom domains, excellent reliability
+- **Zoho Mail** - Business IMAP, custom domains, good uptime
+- **Google Workspace** - $6/month, Gmail with custom domain (you pay, not the product)
+- **Microsoft 365** - $6/month, Outlook with custom domain
+- **Rackspace Email** - $2/month, pure email hosting, no other services
+
+### Email Client Alternatives (Modern Authentication Support)
+
+**Cross-Platform:**
+- **Spark** - Excellent OAuth 2.0 support, modern UI, free/paid tiers
+- **Airmail** - Highly customizable, OAuth 2.0 support, $5
+- **Thunderbird** - Mozilla's client, actively maintained, free
+- **Outlook** - Microsoft's client, excellent OAuth 2.0 support, free
+
+**macOS Specific:**
+- **Canary Mail** - Modern, OAuth 2.0 support, $20/year
+- **Mimestream** - Native macOS, Gmail-focused, $50/year
+- **Postbox** - Thunderbird-based, enhanced features, $40
+
+**Criteria for Selection:**
+- You pay them money (you're the customer)
+- They provide technical service (not selling your data)
+- Modern authentication support (OAuth 2.0)
+- No ads, no data mining
+- Reliable uptime and support
+- Can import historical data from @att.net IMAP
+
+## 2025-08-14
+
+### Summary of Attempts and Blockages
+
+**What We Tried:**
+- Attempted login to `https://signin.att.com` via multiple browsers (Chrome, Safari, incognito modes)
+- Tried `https://currently.att.yahoo.com` and `https://mail.yahoo.com` redirects
+- Investigated iOS Mail app authentication method (found it uses legacy SMTP with Secure Mail Key)
+- Discovered AT&T's M&A clusterfuck with account linking between wireless and email services
+
+**Where We Got Blocked:**
+- All web portals return "It's not you, it's us" error page - AT&T's authentication system is completely down
+- Care Code 201 [LU100] errors on all login attempts (indicates authentication failure/account security lock)
+- Cannot access Secure Mail Key management without web portal access
+- iPhone Mail app works (using existing SMK) but MacBook Mail.app needs its own SMK
+
+**Key Findings:**
+- iPhone uses legacy authentication (smtp.mail.att.net, port 465, SSL) with Secure Mail Key
+- AT&T requires separate SMKs for each device/app that doesn't support OAuth 2.0
+- Account name "Y! - MRW w/SMK" confirms previous SMK setup was successful
+- AT&T's web authentication portal is completely broken (server-side issue)
+
+### Next Steps
+
+**First Step - Verify Portal Status:**
+Before attempting any login procedures, verify that AT&T's web portal is functional:
+1. Try accessing `https://signin.att.com` in a fresh browser session
+2. If still showing "It's not you, it's us" error, wait and retry later
+3. Only proceed with login attempts when portal returns normal login page
+
+**When Portal is Working:**
+1. Attempt login via `https://signin.att.com` (bypass myAT&T Profile if possible)
+2. Navigate to Secure Mail Key management
+3. Generate new SMK specifically for MacBook Mail.app
+4. Update Mail.app preferences with new SMK
+
+**Alternative Approaches:**
+- Try accessing email account management through wireless myAT&T Profile if email is "linked"
+- Contact AT&T support specifically about "legacy email account linking" issues
+- Consider switching to third-party email client with OAuth 2.0 support
+
 ## 2025-08-13
 
 ### Problem
