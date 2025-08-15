@@ -116,9 +116,9 @@
 
 Recommended providers:
 
-- Namecheap - Competitive pricing, good UI, strong reputation
+- Namecheap - Competitive pricing, good UI, strong reputation -- Yes
 - Google Domains - Simple interface, integrates well with other Google services
-- Cloudflare - Very competitive pricing, excellent security features
+- Cloudflare - Very competitive pricing, excellent security features -- NO
 - GoDaddy - Well-known, extensive features but more aggressive upselling
 
 ### Email Hosting Providers
@@ -131,7 +131,21 @@ Recommended providers:
 - Microsoft 365 - Full Office suite included, enterprise-grade but costlier
 - ProtonMail - End-to-end encryption, privacy focused, premium pricing
 
+Non-starters:
+- Microsoft 365
+- Premium pricing (therefore ProntoMail)
+- Google
+- Technical setup required
+
 #### Important Considerations
+
+Server - Important for mail service provider (MTA) - to handle RunningWolf.net
+- No "technical setup" requirement.  We do NOT want to be 1995 system administrators to do everything.
+- MUST allow multiple domains for email
+- MUST allow sub-domains for email
+
+App - Important for MUA (Mail User Agent) like Mail.app (on macBook) or xxx (on iPHone)
+- 
 
 **Security & Privacy:**
 
@@ -174,6 +188,8 @@ Recommended providers:
 - Does it work well with Apple Mail and other clients? -> ???
 - Is the interface intuitive and easy to navigate? -> ???
 - Do they offer mobile apps? -> ???
+- Good rule system for incoming mail.  Something that is text based instead of relying on middle schoolers to design a clickey-clickey interface.
+- (Optional) Auto-reactive rule based system that observes your behavior and operates to do rule-ish moving or viewing.
 
 ### Using Same Provider vs Separate Providers
 
@@ -191,6 +207,15 @@ Cons of Using Same Provider:
 - Often more expensive than best-of-breed choices
 - Risk of vendor lock-in
 - Email migration becomes tied to domain transfer timing
+
+#### Hosting Providers - Features
+
+#### Hosting Providers - Rules
+
+#### Hosting Providers - Spam
+
+
+
 
 ## Next Steps
 
