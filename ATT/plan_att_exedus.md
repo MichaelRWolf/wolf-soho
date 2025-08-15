@@ -145,7 +145,6 @@ Server - Important for mail service provider (MTA) - to handle RunningWolf.net
 - MUST allow sub-domains for email
 
 App - Important for MUA (Mail User Agent) like Mail.app (on macBook) or xxx (on iPHone)
-- 
 
 **Security & Privacy:**
 
@@ -210,25 +209,25 @@ Cons of Using Same Provider:
 
 #### Hosting Providers - Features
 
-| Vendor     | OAuth 2.0 | Custom Domain | Multiple Domains | Storage | Cost/Month | Mobile Apps | Calendar | Contacts | Overall Rank | Notes |
-|------------|-----------|---------------|------------------|---------|------------|-------------|----------|----------|--------------|-------|
-| Fastmail   | ✅ Yes    | ✅ Yes        | ✅ Yes           | 2-25GB  | $3-5       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 1st          | Best features, modern interface |
-| Zoho Mail  | ✅ Yes    | ✅ Yes        | ✅ Yes           | 5-50GB  | $1-4       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 2nd          | Good features, affordable |
-| ProtonMail | ✅ Yes    | ✅ Yes        | ✅ Yes           | 5-500GB | $4-8       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 3rd          | Privacy-focused, higher cost |
-| MXroute    | ❌ No     | ✅ Yes        | ✅ Yes           | 10-50GB | $2-7       | ❌ Limited  | ❌ No    | ❌ No    | 4th          | Basic features, technical setup |
-| Namecheap  | ❌ No     | ✅ Yes        | ✅ Yes           | 10GB    | $2.88      | ❌ Limited  | ❌ No    | ❌ No    | 5th          | Basic features, no OAuth 2.0 |
+| Vendor     | OAuth 2.0 | Custom Domain | Multiple Domains | Storage | Cost/Month | Mobile Apps | Calendar | Contacts | Overall Rank | Notes                                   |
+|------------|-----------|---------------|------------------|---------|------------|-------------|----------|----------|--------------|-----------------------------------------|
+| Fastmail   | ✅ Yes    | ✅ Yes        | ✅ Yes           | 2-25GB  | $3-5       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 1st          | Best features, modern interface         |
+| Zoho Mail  | ✅ Yes    | ✅ Yes        | ✅ Yes           | 5-50GB  | $1-4       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 2nd          | Good features, affordable               |
+| ProtonMail | ✅ Yes    | ✅ Yes        | ✅ Yes           | 5-500GB | $4-8       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 3rd          | Privacy-focused, higher cost            |
+| MXroute    | ❌ No     | ✅ Yes        | ✅ Yes           | 10-50GB | $2-7       | ❌ Limited  | ❌ No    | ❌ No    | 4th          | Basic features, technical setup         |
+| Namecheap  | ❌ No     | ✅ Yes        | ✅ Yes           | 10GB    | $2.88      | ❌ Limited  | ❌ No    | ❌ No    | 5th          | Basic features, no OAuth 2.0            |
 | AT&T       | ❌ No     | ❌ No         | ❌ No            | 1GB     | $0         | ✅ Yes      | ❌ No    | ❌ No    | 6th          | Degraded service, authentication issues |
 
 #### Hosting Providers - Rules
 
-| Vendor     | Rule Interface | Text-based Rules | Visual Builder | Version Control | Mail.app Integration | Overall Rank | Notes |
-|------------|----------------|------------------|----------------|-----------------|---------------------|--------------|-------|
-| Fastmail   | ✅ Dual-pane    | ✅ Full Sieve    | ✅ Drag & drop | ✅ Internal     | ✅ OAuth 2.0         | 1st          | Modern dual-interface, best rule system |
-| Zoho Mail  | ❌ GUI only     | ❌ Limited       | ✅ Traditional | ✅ Internal     | ✅ OAuth 2.0         | 2nd          | Competent but no Sieve support |
-| ProtonMail | ✅ Text-based   | ✅ Sieve-based   | ❌ Limited     | ✅ Internal     | ✅ OAuth 2.0         | 3rd          | Privacy-focused, good Sieve support |
-| MXroute    | ❌ Basic GUI    | ❌ Limited       | ❌ Minimal     | ❌ None         | ❌ Basic auth        | 4th          | Basic rules, technical setup required |
-| Namecheap  | ❌ Basic GUI    | ❌ None          | ❌ Minimal     | ❌ None         | ❌ No OAuth 2.0      | 5th          | Limited rule capabilities |
-| AT&T       | ❌ Poor GUI     | ❌ None          | ❌ Broken      | ❌ None         | ❌ Legacy auth       | 6th          | Broken authentication, poor rules |
+| Vendor     | Rule Interface | Text-based Rules | Visual Builder | Version Control | Mail.app Integration | Overall Rank | Notes                                   |
+|------------|----------------|------------------|----------------|-----------------|----------------------|--------------|-----------------------------------------|
+| Fastmail   | ✅ Dual-pane   | ✅ Full Sieve    | ✅ Drag & drop | ✅ Internal     | ✅ OAuth 2.0         | 1st          | Modern dual-interface, best rule system |
+| Zoho Mail  | ❌ GUI only    | ❌ Limited       | ✅ Traditional | ✅ Internal     | ✅ OAuth 2.0         | 2nd          | Competent but no Sieve support          |
+| ProtonMail | ✅ Text-based  | ✅ Sieve-based   | ❌ Limited     | ✅ Internal     | ✅ OAuth 2.0         | 3rd          | Privacy-focused, good Sieve support     |
+| MXroute    | ❌ Basic GUI   | ❌ Limited       | ❌ Minimal     | ❌ None         | ❌ Basic auth        | 4th          | Basic rules, technical setup required   |
+| Namecheap  | ❌ Basic GUI   | ❌ None          | ❌ Minimal     | ❌ None         | ❌ No OAuth 2.0      | 5th          | Limited rule capabilities               |
+| AT&T       | ❌ Poor GUI    | ❌ None          | ❌ Broken      | ❌ None         | ❌ Legacy auth       | 6th          | Broken authentication, poor rules       |
 
 #### Hosting Providers - Spam
 
@@ -241,32 +240,33 @@ Cons of Using Same Provider:
 | Namecheap  | ✅ Full support | ❌ Minimal        | ❌ No Sieve             | 5th          | Basic filtering, no OAuth 2.0                     |
 | AT&T       | ✅ Limited      | ❌ Poor           | ❌ No Sieve             | 6th          | Degraded service, authentication issues           |
 
-
 #### Hosting Providers - MUA Compatability
+
 Features
-| MUA (Mail User Agent) | OAuth 2.0 | Sieve Support | Rule Interface | Spam Filtering | Mobile Sync | Cost | Overall Rank | Notes |
-|----------------------|-----------|---------------|----------------|----------------|-------------|------|--------------|-------|
-| Spark | ✅ Yes | ✅ Yes | ✅ Modern dual-interface | ✅ Advanced | ✅ Excellent | Free/Paid | 1st | Best modern interface, excellent OAuth 2.0 support |
-| Airmail | ✅ Yes | ✅ Yes | ✅ Highly customizable | ✅ Good | ✅ Good | $5 | 2nd | Very customizable, good rule system |
-| Thunderbird | ✅ Yes | ✅ Yes | ✅ Traditional but powerful | ✅ Basic | ✅ Limited | Free | 3rd | Open source, full feature set, dated UI |
-| Outlook | ✅ Yes | ❌ No | ✅ Traditional GUI | ✅ Good | ✅ Excellent | Free | 4th | Microsoft ecosystem, good mobile sync |
-| Canary Mail | ✅ Yes | ❌ No | ✅ Modern interface | ✅ Good | ✅ Good | $20/year | 5th | Native macOS, privacy-focused |
-| Mimestream | ✅ Yes | ❌ No | ✅ Modern interface | ✅ Basic | ❌ Limited | $50/year | 6th | Gmail-focused, native macOS |
-| Postbox | ✅ Yes | ❌ No | ✅ Traditional GUI | ✅ Basic | ❌ Limited | $40 | 7th | Thunderbird-based, enhanced features |
-| Mail.app | ❌ Limited | ❌ No | ❌ Basic GUI only | ❌ Poor | ✅ Good | Free | 8th | Apple ecosystem, legacy authentication issues |
+
+| MUA (Mail User Agent) | OAuth 2.0  | Sieve Support | Rule Interface              | Spam Filtering | Mobile Sync  | Cost      | Overall Rank | Notes                                              |
+|-----------------------|------------|---------------|-----------------------------|----------------|--------------|-----------|--------------|----------------------------------------------------|
+| Spark                 | ✅ Yes     | ✅ Yes        | ✅ Modern dual-interface    | ✅ Advanced    | ✅ Excellent | Free/Paid | 1st          | Best modern interface, excellent OAuth 2.0 support |
+| Airmail               | ✅ Yes     | ✅ Yes        | ✅ Highly customizable      | ✅ Good        | ✅ Good      | $5        | 2nd          | Very customizable, good rule system                |
+| Thunderbird           | ✅ Yes     | ✅ Yes        | ✅ Traditional but powerful | ✅ Basic       | ✅ Limited   | Free      | 3rd          | Open source, full feature set, dated UI            |
+| Outlook               | ✅ Yes     | ❌ No         | ✅ Traditional GUI          | ✅ Good        | ✅ Excellent | Free      | 4th          | Microsoft ecosystem, good mobile sync              |
+| Canary Mail           | ✅ Yes     | ❌ No         | ✅ Modern interface         | ✅ Good        | ✅ Good      | $20/year  | 5th          | Native macOS, privacy-focused                      |
+| Mimestream            | ✅ Yes     | ❌ No         | ✅ Modern interface         | ✅ Basic       | ❌ Limited   | $50/year  | 6th          | Gmail-focused, native macOS                        |
+| Postbox               | ✅ Yes     | ❌ No         | ✅ Traditional GUI          | ✅ Basic       | ❌ Limited   | $40       | 7th          | Thunderbird-based, enhanced features               |
+| Mail.app              | ❌ Limited | ❌ No         | ❌ Basic GUI only           | ❌ Poor        | ✅ Good      | Free      | 8th          | Apple ecosystem, legacy authentication issues      |
 
 Compatability Matrix
 
-| MUA / MTA | Fastmail | Zoho Mail | ProtonMail | MXroute | Namecheap | AT&T |
-|-----------|----------|-----------|------------|---------|-----------|------|
-| **Spark** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
-| **Airmail** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
-| **Thunderbird** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ❌ Legacy auth issues |
-| **Outlook** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ❌ Legacy auth issues |
-| **Canary Mail** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
-| **Mimestream** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
-| **Postbox** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ❌ Legacy auth issues |
-| **Mail.app** | ❌ Limited OAuth 2.0 | ❌ Limited OAuth 2.0 | ❌ Limited OAuth 2.0 | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| MUA / MTA       | Fastmail             | Zoho Mail            | ProtonMail           | MXroute            | Namecheap          | AT&T                  |
+|-----------------|----------------------|----------------------|----------------------|--------------------|--------------------|-----------------------|
+| **Spark**       | ✅ Full              | ✅ Full              | ✅ Full              | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Airmail**     | ✅ Full              | ✅ Full              | ✅ Full              | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Thunderbird** | ✅ Full              | ✅ Full              | ✅ Full              | ✅ Full            | ✅ Full            | ❌ Legacy auth issues |
+| **Outlook**     | ✅ Full              | ✅ Full              | ✅ Full              | ✅ Full            | ✅ Full            | ❌ Legacy auth issues |
+| **Canary Mail** | ✅ Full              | ✅ Full              | ✅ Full              | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Mimestream**  | ✅ Full              | ✅ Full              | ✅ Full              | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Postbox**     | ✅ Full              | ✅ Full              | ✅ Full              | ✅ Full            | ✅ Full            | ❌ Legacy auth issues |
+| **Mail.app**    | ❌ Limited OAuth 2.0 | ❌ Limited OAuth 2.0 | ❌ Limited OAuth 2.0 | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
 
 **Compatibility Notes:**
 - **✅ Full:** OAuth 2.0 support, modern authentication, all features work
