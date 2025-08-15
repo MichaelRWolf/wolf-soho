@@ -43,30 +43,45 @@
 
 ## Data Migration Options (25+ years of mail)
 
-  ---------------------------------------------------------------------------------
-  Option        Description         Pros         Cons         Typical Cost
+## Migration Options
 
-  **Full        Copy every          All history  Larger       \$0--\$100 one-time
-  migration**   message + folder    searchable   mailbox      if DIY; \$200--\$500
-                into new provider   in one place cost; more   if hiring migration
-                                                 time to      service
-                                                 transfer
+### Full Migration
+**Description:** Copy every message + folder into new provider
 
-  **Partial     Move only recent    Lower        Old mail     \$0--\$50 if DIY
-  migration**   mail (e.g., last    storage      stays
-                1--3 years)         cost; faster separate,
-                                    migration    requires
-                                                 legacy
-                                                 access
+**Pros:**
+- All history searchable in one place
 
-Archive + clean start   Export old mail to  No ongoing   Searching    \$0--\$50 for storage
-                .mbox and store     hosting cost old mail is  
-                offline; new inbox  for old      clunkier;
-                starts empty        mail;        requires
-                                    fastest new  opening
-                                    setup        archives
-                                                 separately
-  ---------------------------------------------------------------------------------
+**Cons:**
+- Larger mailbox cost
+- More time to transfer
+
+**Typical Cost:** $0--$100 one-time if DIY; $200--$500 if hiring migration service
+
+### Partial Migration
+**Description:** Move only recent mail (e.g., last 1--3 years)
+
+**Pros:**
+- Lower storage cost
+- Faster migration
+
+**Cons:**
+- Old mail stays separate
+- Requires legacy access
+
+**Typical Cost:** $0--$50 if DIY
+
+### Archive + Clean Start
+**Description:** Export old mail to .mbox and store offline; new inbox starts empty
+
+**Pros:**
+- No ongoing hosting cost for old mail
+- Fastest new setup
+
+**Cons:**
+- Searching old mail is clunkier
+- Requires opening archives separately
+
+**Typical Cost:** $0--$50 for storage
 
 ## Clarifications
 
