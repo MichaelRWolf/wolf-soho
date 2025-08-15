@@ -40,6 +40,13 @@
 7. **Longevity**
     - Service likely to exist and stay standards-compliant into the
         2040s.
+8. Use cases
+    Shared domain name with separate email addresses for michael@example.com and wendy@example.com
+    Shared email account for shared services (e.g. bank, amazon, netflix), possibly shared-service@example.com or becu-login@example.com
+    Possible sub-domain in future for different business iniatives - MichaelPassionProject.example.com
+    Start with email migration away from @att.net
+    Possibly move hosted web sites to new domain
+    Start out using this new domain and service for personal email.  Have migration plan to extend it to professional email.
 
 ## Data Migration Options (25+ years of mail)
 
