@@ -210,7 +210,14 @@ Cons of Using Same Provider:
 
 #### Hosting Providers - Features
 
-
+| Vendor     | OAuth 2.0 | Custom Domain | Multiple Domains | Storage | Cost/Month | Mobile Apps | Calendar | Contacts | Overall Rank | Notes |
+|------------|-----------|---------------|------------------|---------|------------|-------------|----------|----------|--------------|-------|
+| Fastmail   | ✅ Yes    | ✅ Yes        | ✅ Yes           | 2-25GB  | $3-5       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 1st          | Best features, modern interface |
+| Zoho Mail  | ✅ Yes    | ✅ Yes        | ✅ Yes           | 5-50GB  | $1-4       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 2nd          | Good features, affordable |
+| ProtonMail | ✅ Yes    | ✅ Yes        | ✅ Yes           | 5-500GB | $4-8       | ✅ Yes      | ✅ Yes   | ✅ Yes   | 3rd          | Privacy-focused, higher cost |
+| MXroute    | ❌ No     | ✅ Yes        | ✅ Yes           | 10-50GB | $2-7       | ❌ Limited  | ❌ No    | ❌ No    | 4th          | Basic features, technical setup |
+| Namecheap  | ❌ No     | ✅ Yes        | ✅ Yes           | 10GB    | $2.88      | ❌ Limited  | ❌ No    | ❌ No    | 5th          | Basic features, no OAuth 2.0 |
+| AT&T       | ❌ No     | ❌ No         | ❌ No            | 1GB     | $0         | ✅ Yes      | ❌ No    | ❌ No    | 6th          | Degraded service, authentication issues |
 
 #### Hosting Providers - Rules
 
@@ -234,6 +241,8 @@ Cons of Using Same Provider:
 | Namecheap  | ✅ Full support | ❌ Minimal        | ❌ No Sieve             | 5th          | Basic filtering, no OAuth 2.0                     |
 | AT&T       | ✅ Limited      | ❌ Poor           | ❌ No Sieve             | 6th          | Degraded service, authentication issues           |
 
+
+#### Hosting Providers - MUA Compatability
 
 
 
