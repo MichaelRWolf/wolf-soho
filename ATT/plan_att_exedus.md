@@ -101,9 +101,74 @@
 - **Archival strategy**: Decide if your email provider is your
     long-term archive or if you keep historical archives offline.
 
+## Coupling domain name registrar and email host
+### Domain Name Registrars
+Recommended providers:
+- Namecheap - Competitive pricing, good UI, strong reputation
+- Google Domains - Simple interface, integrates well with other Google services
+- Cloudflare - Very competitive pricing, excellent security features
+- GoDaddy - Well-known, extensive features but more aggressive upselling
+
+### Email Hosting Providers
+Recommended providers:
+- MXroute - Excellent value, multiple domains allowed, technical setup required
+- Fastmail - Great interface, custom domain support, strong privacy focus
+- Zoho Mail - Affordable, includes business tools, can be complex to set up
+- Microsoft 365 - Full Office suite included, enterprise-grade but costlier
+- ProtonMail - End-to-end encryption, privacy focused, premium pricing
+
+#### Important Considerations
+
+**Security & Privacy:**
+- What level of encryption do they offer? (end-to-end, at-rest, in-transit) -> ???
+- Do they scan your email for advertising/targeting? -> ???
+- What's their data retention policy? -> ???
+- Where are their servers located? (jurisdiction matters for privacy laws) -> ???
+
+**Reliability & Support:**
+- What's their uptime guarantee? -> ???
+- Do they offer 24/7 support? -> ???
+- How quickly do they respond to support requests? -> ???
+- Do they have a good reputation for reliability? -> ???
+
+**Features & Compatibility:**
+- Do they support IMAP/SMTP for all email clients? -> ???
+- Do they offer OAuth 2.0 authentication? -> ???
+- Can you use your own domain name? -> ???
+- Do they offer calendar and contact sync? -> ???
+
+**Cost & Storage:**
+- What's the monthly/yearly cost? -> ???
+- How much storage is included? -> ???
+- What are the costs for additional storage? -> ???
+- Are there any hidden fees or setup costs? -> ???
+
+**Migration & Import:**
+- Do they provide migration tools from AT&T? -> ???
+- Can you import .mbox files? -> ???
+- Do they offer migration assistance? -> ???
+- How long does migration typically take? -> ???
+
+
+### Using Same Provider vs Separate Providers
+
+Pros of Using Same Provider:
+- Simplified billing and account management
+- Potentially easier initial setup
+- Often includes package discounts
+- Single support contact
+
+Cons of Using Same Provider:
+- Less flexibility to change services independently
+- May compromise on quality of one service
+- Often more expensive than best-of-breed choices
+- Risk of vendor lock-in
+- Email migration becomes tied to domain transfer timing
+
 ## Next Steps
 
-1. Pick a **RunningWolf.net** registrar + email host shortlist.
-2. Decide **migration option** for your 25 years of mail.
-3. Lay out **transition steps** so @att.net forwards during a clean
-    cutover.
+1. Select a domain name -> RunningWolf.net
+2. Select a domain name registrar -> ???
+3. Select an email host -> ???
+4. Decide **migration option** for your 25 years of mail.
+5. Lay out **transition steps** so @att.net forwards during a clean cutover.
