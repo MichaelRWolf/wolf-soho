@@ -149,6 +149,11 @@ Recommended providers:
 - Do they offer migration assistance? -> ???
 - How long does migration typically take? -> ???
 
+**Usability:**
+- Do they have a modern webmail interface? -> ???
+- Does it work well with Apple Mail and other clients? -> ???
+- Is the interface intuitive and easy to navigate? -> ???
+- Do they offer mobile apps? -> ???
 
 ### Using Same Provider vs Separate Providers
 
