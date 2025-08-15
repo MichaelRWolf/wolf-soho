@@ -214,6 +214,15 @@ Cons of Using Same Provider:
 
 #### Hosting Providers - Spam
 
+| Vendor     | Mail.app Rules  | Server-side Rules | Supports Sieve          | Overall Rank | Notes                                             |
+|------------|-----------------|-------------------|-------------------------|--------------|---------------------------------------------------|
+| Fastmail   | ✅ Full support | ✅ Advanced       | ✅ Full RFC 5228        | 1st          | Best spam filtering, modern dual-interface editor |
+| Zoho Mail  | ✅ Full support | ✅ Basic          | ❌ Traditional GUI only | 2nd          | Competent filtering, no Sieve support             |
+| ProtonMail | ✅ Full support | ✅ Advanced       | ✅ Sieve-based          | 3rd          | Privacy-focused, good filtering                   |
+| MXroute    | ✅ Full support | ✅ Basic          | ❌ Limited              | 4th          | Basic spam protection, technical setup            |
+| Namecheap  | ✅ Full support | ❌ Minimal        | ❌ No Sieve             | 5th          | Basic filtering, no OAuth 2.0                     |
+| AT&T       | ✅ Limited      | ❌ Poor           | ❌ No Sieve             | 6th          | Degraded service, authentication issues           |
+
 
 
 
