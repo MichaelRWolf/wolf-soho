@@ -48,56 +48,7 @@
     Possibly move hosted web sites to new domain
     Start out using this new domain and service for personal email.  Have migration plan to extend it to professional email.
 
-## Data Migration Options (25+ years of mail)
 
-## Migration Options
-
-### Full Migration
-
-**Description:** Copy every message + folder into new provider
-
-**Pros:**
-
-- All history searchable in one place
-
-**Cons:**
-
-- Larger mailbox cost
-- More time to transfer
-
-**Typical Cost:** $0--$100 one-time if DIY; $200--$500 if hiring migration service
-
-### Partial Migration
-
-**Description:** Move only recent mail (e.g., last 1--3 years)
-
-**Pros:**
-
-- Lower storage cost
-- Faster migration
-
-**Cons:**
-
-- Old mail stays separate
-- Requires legacy access
-
-**Typical Cost:** $0--$50 if DIY
-
-### Archive + Clean Start
-
-**Description:** Export old mail to .mbox and store offline; new inbox starts empty
-
-**Pros:**
-
-- No ongoing hosting cost for old mail
-- Fastest new setup
-
-**Cons:**
-
-- Searching old mail is clunkier
-- Requires opening archives separately
-
-**Typical Cost:** $0--$50 for storage
 
 ## Clarifications
 
@@ -427,5 +378,5 @@ Modern email providers (Fastmail, Zoho, ProtonMail) work well with modern email 
 2. Select a domain name registrar -> ???
 3. Select an email host (MTA) -> ???
 4. Select an email program (MUA) -> ???
-5. Decide **migration option** for your 25 years of mail.
-6. Lay out **transition steps** so @att.net forwards during a clean cutover.
+5. **Data Migration:** Execute migration plan from [`./plan_migrate_old_email.md`](./plan_migrate_old_email.md)
+6. **Transition:** Set up @att.net forwarding during clean cutover

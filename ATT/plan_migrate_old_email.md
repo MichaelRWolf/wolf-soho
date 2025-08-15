@@ -1,5 +1,48 @@
 # Data Migration Plan
 
+## Data Migration Options (25+ years of mail)
+
+### Full Migration
+
+**Description:** Copy every message + folder into new provider
+
+**Pros:**
+- All history searchable in one place
+
+**Cons:**
+- Larger mailbox cost
+- More time to transfer
+
+**Typical Cost:** $0--$100 one-time if DIY; $200--$500 if hiring migration service
+
+### Partial Migration
+
+**Description:** Move only recent mail (e.g., last 1--3 years)
+
+**Pros:**
+- Lower storage cost
+- Faster migration
+
+**Cons:**
+- Old mail stays separate
+- Requires legacy access
+
+**Typical Cost:** $0--$50 if DIY
+
+### Archive + Clean Start
+
+**Description:** Export old mail to .mbox and store offline; new inbox starts empty
+
+**Pros:**
+- No ongoing hosting cost for old mail
+- Fastest new setup
+
+**Cons:**
+- Searching old mail is clunkier
+- Requires opening archives separately
+
+**Typical Cost:** $0--$50 for storage
+
 ## Step 1: Data Assessment
 
 - **Estimate total size** of mail for each account:
