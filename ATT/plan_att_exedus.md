@@ -351,6 +351,39 @@ Modern email providers (Fastmail, Zoho, ProtonMail) work well with modern email 
 
 ### **MUA (Email Client): Spark**
 
+**Spark Plans Overview:**
+
+**Free Plan:**
+- **Cost:** $0/month
+- **Features:** Basic email management, 5GB storage, 2 email accounts
+- **Limitations:** No team features, basic support, ads in mobile app
+
+**Premium Plan:**
+- **Cost:** $7.99/month or $79.99/year
+- **Added Features:**
+  - Unlimited email accounts
+  - 10GB storage per account
+  - Advanced search and filters
+  - Email templates
+  - Snooze and send later
+  - Read receipts
+  - No ads
+  - Priority support
+  - **Advanced spam filtering and rules**
+  - **Custom email rules and automation**
+  - **Smart folders and intelligent categorization**
+
+**Team Plan:**
+- **Cost:** $7.99/month per user
+- **Added Features:**
+  - Team collaboration tools
+  - Shared templates
+  - Team analytics
+  - Admin controls
+  - Advanced security features
+  - **Team-wide spam and security policies**
+  - **Shared rule templates and automation**
+
 **Why Spark:**
 - **OAuth 2.0 Support:** Full modern authentication
 - **Sieve Support:** Works with Fastmail's text-based rules
