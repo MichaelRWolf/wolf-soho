@@ -334,10 +334,65 @@ Compatability Matrix
 **Bottom Line:**
 Modern email providers (Fastmail, Zoho, ProtonMail) work well with modern email clients (Spark, Airmail, Thunderbird, Outlook). Legacy providers (MXroute, Namecheap, AT&T) have compatibility issues with modern clients. Mail.app has limited compatibility even with modern providers due to Apple's OAuth 2.0 implementation.
 
+## Recommendations
+
+### **MTA (Email Host): Fastmail**
+
+**Why Fastmail:**
+- **OAuth 2.0 Support:** Solves your authentication nightmare
+- **Sieve Rules:** Full text-based rule system (your "modern tools" requirement)
+- **Best Spam Filtering:** 99%+ catch rate, saves you time
+- **Modern Webmail:** Dual-pane interface with visual + text editing
+- **Multiple Domains:** Supports your RunningWolf.net + subdomains
+- **Reliability:** Professional-grade hosting, excellent uptime
+- **Cost:** $3-5/month (reasonable for the value)
+
+**Runner-up:** Zoho Mail ($1-4/month) - Good but lacks Sieve support
+
+### **MUA (Email Client): Spark**
+
+**Why Spark:**
+- **OAuth 2.0 Support:** Full modern authentication
+- **Sieve Support:** Works with Fastmail's text-based rules
+- **Modern Interface:** Best-in-class dual-pane rule interface
+- **Cross-platform:** macOS + iOS (your devices)
+- **Advanced Features:** Smart folders, email threading, excellent search
+- **Cost:** Free tier available, paid upgrades optional
+
+**Runner-up:** Airmail ($5/once) - Very customizable, good rule system
+
+### **Why This Combination:**
+
+1. **Solves Your Core Problems:**
+   - No more AT&T authentication clusterfuck
+   - Modern text-based rule system (Sieve)
+   - Excellent spam filtering
+   - Professional reliability
+
+2. **Meets Your Requirements:**
+   - OAuth 2.0 (non-negotiable)
+   - Modern tools (Sieve + dual-pane interface)
+   - Multiple domains support
+   - Cross-platform (MacBook + iPhone)
+
+3. **Future-Proof:**
+   - Both providers actively maintained
+   - Modern standards compliance
+   - No ecosystem lock-in
+   - Scalable for business use
+
+4. **Cost-Effective:**
+   - Fastmail: $3-5/month
+   - Spark: Free tier
+   - Total: ~$3-5/month vs. AT&T's "free" but broken service
+
+**Bottom Line:** This combination gives you everything you want - modern authentication, text-based rules, excellent spam filtering, and professional reliability - while avoiding the legacy problems you're experiencing with AT&T.
+
 ## Next Steps
 
 1. Select a domain name -> RunningWolf.net
 2. Select a domain name registrar -> ???
-3. Select an email host -> ???
-4. Decide **migration option** for your 25 years of mail.
-5. Lay out **transition steps** so @att.net forwards during a clean cutover.
+3. Select an email host (MTA) -> ???
+4. Select an email program (MUA) -> ???
+5. Decide **migration option** for your 25 years of mail.
+6. Lay out **transition steps** so @att.net forwards during a clean cutover.
