@@ -243,8 +243,39 @@ Cons of Using Same Provider:
 
 
 #### Hosting Providers - MUA Compatability
+Features
+| MUA (Mail User Agent) | OAuth 2.0 | Sieve Support | Rule Interface | Spam Filtering | Mobile Sync | Cost | Overall Rank | Notes |
+|----------------------|-----------|---------------|----------------|----------------|-------------|------|--------------|-------|
+| Spark | ✅ Yes | ✅ Yes | ✅ Modern dual-interface | ✅ Advanced | ✅ Excellent | Free/Paid | 1st | Best modern interface, excellent OAuth 2.0 support |
+| Airmail | ✅ Yes | ✅ Yes | ✅ Highly customizable | ✅ Good | ✅ Good | $5 | 2nd | Very customizable, good rule system |
+| Thunderbird | ✅ Yes | ✅ Yes | ✅ Traditional but powerful | ✅ Basic | ✅ Limited | Free | 3rd | Open source, full feature set, dated UI |
+| Outlook | ✅ Yes | ❌ No | ✅ Traditional GUI | ✅ Good | ✅ Excellent | Free | 4th | Microsoft ecosystem, good mobile sync |
+| Canary Mail | ✅ Yes | ❌ No | ✅ Modern interface | ✅ Good | ✅ Good | $20/year | 5th | Native macOS, privacy-focused |
+| Mimestream | ✅ Yes | ❌ No | ✅ Modern interface | ✅ Basic | ❌ Limited | $50/year | 6th | Gmail-focused, native macOS |
+| Postbox | ✅ Yes | ❌ No | ✅ Traditional GUI | ✅ Basic | ❌ Limited | $40 | 7th | Thunderbird-based, enhanced features |
+| Mail.app | ❌ Limited | ❌ No | ❌ Basic GUI only | ❌ Poor | ✅ Good | Free | 8th | Apple ecosystem, legacy authentication issues |
 
+Compatability Matrix
 
+| MUA / MTA | Fastmail | Zoho Mail | ProtonMail | MXroute | Namecheap | AT&T |
+|-----------|----------|-----------|------------|---------|-----------|------|
+| **Spark** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Airmail** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Thunderbird** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ❌ Legacy auth issues |
+| **Outlook** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ❌ Legacy auth issues |
+| **Canary Mail** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Mimestream** | ✅ Full | ✅ Full | ✅ Full | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+| **Postbox** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ❌ Legacy auth issues |
+| **Mail.app** | ❌ Limited OAuth 2.0 | ❌ Limited OAuth 2.0 | ❌ Limited OAuth 2.0 | ❌ Basic auth only | ❌ Basic auth only | ❌ Legacy auth issues |
+
+**Compatibility Notes:**
+- **✅ Full:** OAuth 2.0 support, modern authentication, all features work
+- **❌ Basic auth only:** Traditional username/password, may have authentication issues
+- **❌ Limited OAuth 2.0:** Partial OAuth 2.0 support, some features may not work
+- **❌ Legacy auth issues:** AT&T's broken authentication system
+
+**Bottom Line:**
+Modern email providers (Fastmail, Zoho, ProtonMail) work well with modern email clients (Spark, Airmail, Thunderbird, Outlook). Legacy providers (MXroute, Namecheap, AT&T) have compatibility issues with modern clients. Mail.app has limited compatibility even with modern providers due to Apple's OAuth 2.0 implementation.
 
 ## Next Steps
 
