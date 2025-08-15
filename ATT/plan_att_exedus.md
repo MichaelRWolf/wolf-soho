@@ -207,7 +207,7 @@ Cons of Using Same Provider:
 - Risk of vendor lock-in
 - Email migration becomes tied to domain transfer timing
 
-#### Hosting Providers - Features
+#### Hosting Providers - Backend Features
 
 | Vendor     | OAuth 2.0 | Custom Domain | Multiple Domains | Storage | Cost/Month | Mobile Apps | Calendar | Contacts | Overall Rank | Notes                                   |
 |------------|-----------|---------------|------------------|---------|------------|-------------|----------|----------|--------------|-----------------------------------------|
@@ -217,6 +217,8 @@ Cons of Using Same Provider:
 | MXroute    | ❌ No     | ✅ Yes        | ✅ Yes           | 10-50GB | $2-7       | ❌ Limited  | ❌ No    | ❌ No    | 4th          | Basic features, technical setup         |
 | Namecheap  | ❌ No     | ✅ Yes        | ✅ Yes           | 10GB    | $2.88      | ❌ Limited  | ❌ No    | ❌ No    | 5th          | Basic features, no OAuth 2.0            |
 | AT&T       | ❌ No     | ❌ No         | ❌ No            | 1GB     | $0         | ✅ Yes      | ❌ No    | ❌ No    | 6th          | Degraded service, authentication issues |
+
+#### Hosting Providers - Webmail Features
 
 #### Hosting Providers - Rules
 
@@ -239,6 +241,38 @@ Cons of Using Same Provider:
 | MXroute    | ✅ Full support | ✅ Basic          | ❌ Limited              | 4th          | Basic spam protection, technical setup            |
 | Namecheap  | ✅ Full support | ❌ Minimal        | ❌ No Sieve             | 5th          | Basic filtering, no OAuth 2.0                     |
 | AT&T       | ✅ Limited      | ❌ Poor           | ❌ No Sieve             | 6th          | Degraded service, authentication issues           |
+
+#### MUA Features
+
+| Feature                      | Spark        | Airmail         | Thunderbird    | Outlook      | Canary Mail  | Mimestream   | Postbox      | Mail.app     |
+|------------------------------|--------------|-----------------|----------------|--------------|--------------|--------------|--------------|--------------|
+| **Base Features**            |              |                 |                |              |              |              |              |              |
+| OAuth 2.0 Support            | ✅ Full      | ✅ Full         | ✅ Full        | ✅ Full      | ✅ Full      | ✅ Full      | ✅ Full      | ❌ Limited   |
+| IMAP/SMTP Support            | ✅ Full      | ✅ Full         | ✅ Full        | ✅ Full      | ✅ Full      | ✅ Full      | ✅ Full      | ✅ Full      |
+| Custom Domain Support        | ✅ Yes       | ✅ Yes          | ✅ Yes         | ✅ Yes       | ✅ Yes       | ✅ Yes       | ✅ Yes       | ✅ Yes       |
+| Mobile Apps                  | ✅ Excellent | ✅ Good         | ❌ Limited     | ✅ Excellent | ✅ Good      | ❌ Limited   | ❌ Limited   | ✅ Good      |
+| **Critical Differentiators** |              |                 |                |              |              |              |              |              |
+| Sieve Rule Support           | ✅ Full      | ✅ Full         | ✅ Full        | ❌ No        | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
+| Modern Rule Interface        | ✅ Dual-pane | ✅ Customizable | ✅ Traditional | ❌ Basic GUI | ❌ Basic GUI | ❌ Basic GUI | ❌ Basic GUI | ❌ Basic GUI |
+| Spam Filtering               | ✅ Advanced  | ✅ Good         | ✅ Basic       | ✅ Good      | ✅ Good      | ✅ Basic     | ✅ Basic     | ❌ Poor      |
+| Version Control              | ✅ Internal  | ✅ Internal     | ✅ Internal    | ❌ None      | ❌ None      | ❌ None      | ❌ None      | ❌ None      |
+| **Productivity Features**    |              |                 |                |              |              |              |              |              |
+| Calendar Integration         | ✅ Yes       | ✅ Yes          | ✅ Yes         | ✅ Yes       | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
+| Contact Sync                 | ✅ Yes       | ✅ Yes          | ✅ Yes         | ✅ Yes       | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
+| Search Capabilities          | ✅ Advanced  | ✅ Good         | ✅ Good        | ✅ Good      | ✅ Good      | ✅ Basic     | ✅ Good      | ✅ Basic     |
+| **Cost & Ecosystem**         |              |                 |                |              |              |              |              |              |
+| Cost                         | Free/Paid    | $5/once         | Free           | Free         | $20/year     | $50/year     | $40/once     | Free         |
+| Ecosystem Lock-in            | ❌ None      | ❌ None         | ❌ None        | ✅ Microsoft | ❌ None      | ✅ Gmail     | ❌ None      | ✅ Apple     |
+| **Overall Assessment**       |              |                 |                |              |              |              |              |              |
+| Modern Tools                 | ✅ Best      | ✅ Good         | ✅ Competent   | ❌ Limited   | ❌ Limited   | ❌ Limited   | ❌ Limited   | ❌ Poor      |
+| Authentication               | ✅ Excellent | ✅ Excellent    | ✅ Excellent   | ✅ Good      | ✅ Good      | ✅ Good      | ✅ Good      | ❌ Poor      |
+| **Platform Support**         |              |                 |                |              |              |              |              |              |
+| macOS                        | ✅ Yes       | ✅ Yes          | ✅ Yes         | ✅ Yes       | ✅ Yes       | ✅ Yes       | ✅ Yes       | ✅ Yes       |
+| iOS                          | ✅ Yes       | ✅ Yes          | ❌ No          | ✅ Yes       | ❌ No        | ❌ No        | ❌ No        | ✅ Yes       |
+| Chrome                       | ❌ No        | ❌ No           | ❌ No          | ❌ No        | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
+| Safari                       | ❌ No        | ❌ No           | ❌ No          | ❌ No        | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
+| Firefox                      | ❌ No        | ❌ No           | ❌ No          | ❌ No        | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
+
 
 #### Hosting Providers - MUA Compatability
 
