@@ -220,6 +220,29 @@ Cons of Using Same Provider:
 
 #### Hosting Providers - Webmail Features
 
+| Vendor     | Interface Type | Rule Management | Sieve Support | Search Quality | Mobile Responsive | Security Features | Overall Rank | Notes |
+|------------|----------------|-----------------|---------------|----------------|-------------------|------------------|--------------|-------|
+| Fastmail   | ✅ Custom      | ✅ Full         | ✅ Full Sieve | ✅ Advanced    | ✅ Excellent      | ✅ 2FA, MFA      | 1st          | Best webmail, modern interface |
+| Zoho Mail  | ✅ Custom      | ✅ Traditional  | ❌ GUI only   | ✅ Good        | ✅ Good           | ✅ 2FA, MFA      | 2nd          | Good webmail, business-focused |
+| ProtonMail | ✅ Custom      | ✅ Basic        | ❌ Limited    | ✅ Good        | ✅ Good           | ✅ Advanced      | 3rd          | Privacy-focused, good security |
+| MXroute    | ✅ Custom      | ❌ Basic        | ❌ None       | ❌ Basic       | ❌ Limited        | ❌ Basic         | 4th          | Basic webmail, functional |
+| Namecheap  | ❌ cPanel      | ❌ Basic        | ❌ None       | ❌ Basic       | ❌ Limited        | ❌ Basic         | 5th          | Generic cPanel webmail |
+| AT&T       | ❌ Yahoo!      | ❌ Poor         | ❌ None       | ❌ Poor        | ❌ Poor           | ❌ Poor          | 6th          | Degraded Yahoo! interface |
+
+**Webmail Considerations:**
+- **Fastmail:** Best webmail experience with full Sieve support and modern interface
+- **Zoho:** Good webmail with traditional rule management, business-focused features
+- **ProtonMail:** Privacy-focused webmail with advanced security features
+- **MXroute/Namecheap:** Basic webmail interfaces with limited functionality
+- **AT&T:** Degraded Yahoo! interface with poor functionality and authentication issues
+
+**Key Webmail Features:**
+- **Rule Management:** Ability to create/edit email rules via webmail
+- **Sieve Support:** Text-based rule editing in webmail interface
+- **Search Quality:** Advanced search capabilities in webmail
+- **Mobile Responsive:** How well webmail works on mobile devices
+- **Security Features:** 2FA, MFA, session management, etc.
+
 #### Hosting Providers - Rules
 
 | Vendor     | Rule Interface | Text-based Rules | Visual Builder | Version Control | Mail.app Integration | Overall Rank | Notes                                   |
