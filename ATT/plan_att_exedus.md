@@ -210,7 +210,18 @@ Cons of Using Same Provider:
 
 #### Hosting Providers - Features
 
+
+
 #### Hosting Providers - Rules
+
+| Vendor     | Rule Interface | Text-based Rules | Visual Builder | Version Control | Mail.app Integration | Overall Rank | Notes |
+|------------|----------------|------------------|----------------|-----------------|---------------------|--------------|-------|
+| Fastmail   | ✅ Dual-pane    | ✅ Full Sieve    | ✅ Drag & drop | ✅ Internal     | ✅ OAuth 2.0         | 1st          | Modern dual-interface, best rule system |
+| Zoho Mail  | ❌ GUI only     | ❌ Limited       | ✅ Traditional | ✅ Internal     | ✅ OAuth 2.0         | 2nd          | Competent but no Sieve support |
+| ProtonMail | ✅ Text-based   | ✅ Sieve-based   | ❌ Limited     | ✅ Internal     | ✅ OAuth 2.0         | 3rd          | Privacy-focused, good Sieve support |
+| MXroute    | ❌ Basic GUI    | ❌ Limited       | ❌ Minimal     | ❌ None         | ❌ Basic auth        | 4th          | Basic rules, technical setup required |
+| Namecheap  | ❌ Basic GUI    | ❌ None          | ❌ Minimal     | ❌ None         | ❌ No OAuth 2.0      | 5th          | Limited rule capabilities |
+| AT&T       | ❌ Poor GUI     | ❌ None          | ❌ Broken      | ❌ None         | ❌ Legacy auth       | 6th          | Broken authentication, poor rules |
 
 #### Hosting Providers - Spam
 
