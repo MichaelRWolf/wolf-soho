@@ -48,8 +48,6 @@
     Possibly move hosted web sites to new domain
     Start out using this new domain and service for personal email.  Have migration plan to extend it to professional email.
 
-
-
 ## Clarifications
 
 - **Self-host vs IaaS**: Self-host = your server, your electric bill,
@@ -291,7 +289,6 @@ Cons of Using Same Provider:
 | Safari                       | ❌ No        | ❌ No           | ❌ No          | ❌ No        | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
 | Firefox                      | ❌ No        | ❌ No           | ❌ No          | ❌ No        | ❌ No        | ❌ No        | ❌ No        | ❌ No        |
 
-
 #### Hosting Providers - MUA Compatability
 
 Features
@@ -419,35 +416,41 @@ Modern email providers (Fastmail, Zoho, ProtonMail) work well with modern email 
 ## Next Steps
 
 ### Domain & Hosting Setup
+
 1. ✅ Select a domain name -> RunningWolf.net
 2. ✅ Select a domain name registrar -> Porkbun
 3. ✅ Select an email host (MTA) -> Fastmail
 4. ✅ Select an email program (MUA) -> Spark
 
 ### Migration Planning
-5. ✅ **Data Migration Plan:** Create detailed migration plan in [`./plan_migrate_old_email.md`](./plan_migrate_old_email.md)
-6. ❓ **Data Assessment:** Estimate total size of mail for each account (michaelrwolf@att.net, wendyrwolf@att.net, michaelrunningwolf@att.net, wendyrunningwolf@att.net, mbalenger@att.net)
-7. ❓ **Migration Strategy:** Decide on Full/Partial/Archive + Clean Start approach based on data size and cost analysis
-8. ❓ **Storage Planning:** Work backwards to estimate storage needs for previous 6 months, 1 year, 2 years, 3 years, 5 years, 10 years, forever
+
+1. ✅ **Data Migration Plan:** Create detailed migration plan in [`./plan_migrate_old_email.md`](./plan_migrate_old_email.md)
+2. ❓ **Data Assessment:** Estimate total size of mail for each account (<michaelrwolf@att.net>, <wendyrwolf@att.net>, <michaelrunningwolf@att.net>, <wendyrunningwolf@att.net>, <mbalenger@att.net>)
+3. ❓ **Migration Strategy:** Decide on Full/Partial/Archive + Clean Start approach based on data size and cost analysis
+4. ❓ **Storage Planning:** Work backwards to estimate storage needs for previous 6 months, 1 year, 2 years, 3 years, 5 years, 10 years, forever
 
 ### Technical Preparation
-9. ❓ **Domain Registration:** Purchase and configure RunningWolf.net through selected registrar
-10. ❓ **DNS Configuration:** Set up MX, SPF, DKIM, and DMARC records for new email hosting
-11. ❓ **Email Host Setup:** Configure Fastmail account with RunningWolf.net domain
-12. ❓ **MUA Testing:** Test Spark with existing AT&T account (if login becomes possible) to get familiar with new interface
+
+1. ❓ **Domain Registration:** Purchase and configure RunningWolf.net through selected registrar
+2. ❓ **DNS Configuration:** Set up MX, SPF, DKIM, and DMARC records for new email hosting
+3. ❓ **Email Host Setup:** Configure Fastmail account with RunningWolf.net domain
+4. ❓ **MUA Testing:** Test Spark with existing AT&T account (if login becomes possible) to get familiar with new interface
 
 ### Migration Execution
-13. ❓ **Data Migration:** Execute migration plan from [`./plan_migrate_old_email.md`](./plan_migrate_old_email.md)
-14. ❓ **Account Setup:** Create new email addresses (michael@runningwolf.net, wendy@runningwolf.net, etc.)
-15. ❓ **Client Configuration:** Configure Spark on MacBook and iPhone with new Fastmail accounts
+
+1. ❓ **Data Migration:** Execute migration plan from [`./plan_migrate_old_email.md`](./plan_migrate_old_email.md)
+2. ❓ **Account Setup:** Create new email addresses (<michael@runningwolf.net>, <wendy@runningwolf.net>, etc.)
+3. ❓ **Client Configuration:** Configure Spark on MacBook and iPhone with new Fastmail accounts
 
 ### Transition Management
-16. ❓ **Forwarding Setup:** Configure @att.net forwarding to new addresses during clean cutover
-17. ❓ **Notification Period:** Inform contacts of email address changes
-18. ❓ **Legacy Access:** Maintain access to @att.net accounts for any missed emails during transition
+
+1. ❓ **Forwarding Setup:** Configure @att.net forwarding to new addresses during clean cutover
+2. ❓ **Notification Period:** Inform contacts of email address changes
+3. ❓ **Legacy Access:** Maintain access to @att.net accounts for any missed emails during transition
 
 ### Post-Migration
-19. ❓ **Verification:** Confirm all emails are being received at new addresses
-20. ❓ **Legacy Cleanup:** Remove old email configurations from devices
-21. ❓ **Archive Strategy:** Decide on long-term archival approach for historical email data
-22. ❓ **Business Extension:** Plan migration to extend service to professional email needs
+
+1. ❓ **Verification:** Confirm all emails are being received at new addresses
+2. ❓ **Legacy Cleanup:** Remove old email configurations from devices
+3. ❓ **Archive Strategy:** Decide on long-term archival approach for historical email data
+4. ❓ **Business Extension:** Plan migration to extend service to professional email needs
