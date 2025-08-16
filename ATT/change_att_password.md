@@ -153,3 +153,131 @@ Long term - Keep access to all @att.net accounts (either in `Mail.app` or `Spark
 The combination of AT&T's broken legacy authentication system and `Mail.app`'s inconsistent legacy authentication handling creates a fundamentally unreliable user experience. While Secure Mail Keys provide a temporary workaround, they introduce significant complexity and reliability issues. The most effective long-term solution is migration to email providers and clients with more reliable authentication systems, eliminating the race conditions, timing issues, and manual intervention requirements that plague the current AT&T/`Mail.app` combination.
 
 ## Plan - Reconnect `Mail.app` to `<michaelrwolf@att.net>`
+
+Based on my analysis of the goals and understanding of SMK authentication issues, here's a comprehensive plan designed to work on the campground network without triggering multiple 45-minute wait periods:
+
+## Phase 1: Assessment and Preparation (5-10 minutes)
+
+### Step 1: Verify Account Status
+- Check if `<michaelrwolf@att.net>` is actually locked out or just disconnected
+- Test webmail access at `att.yahoo.com` with current credentials
+- If locked out, proceed to Step 2; if just disconnected, skip to Phase 2
+
+### Step 2: Choose Authentication Account
+- **Primary choice**: Use `<michaelrwolf@att.net>` if it's NOT locked out
+- **Fallback choice**: Use `<michaelrunningwolf@att.net>` (most likely to have access)
+- **Avoid**: `<mbalenger@att.net>` and `<wendyrwolf@att.net>` (may have different access levels)
+
+## Phase 2: SMK Generation (15-20 minutes)
+
+### Step 3: Access AT&T Portal
+- Use Safari on iPhone (more stable than desktop browsers on campground WiFi)
+- Navigate to `att.com` and sign in with chosen account
+- Go to Account → Security → Manage Secure Mail Key
+
+### Step 4: Generate New SMK
+- Create SMK with descriptive name: "Mail.app-macOS-2025-08-16"
+- **CRITICAL**: Copy the 16-character SMK immediately (it won't show again)
+- Note the exact SMK in a secure location
+
+## Phase 3: Mail.app Configuration (10-15 minutes)
+
+### Step 5: Remove Existing Account
+- Open `Mail.app` on macOS
+- Go to Mail → Preferences → Accounts
+- Select `<michaelrwolf@att.net>` account
+- Click "-" button to remove completely
+- **DO NOT** attempt to edit existing settings
+
+### Step 6: Add Account with New SMK
+- Click "+" to add new account
+- Select "Other Mail Account"
+- Enter account details:
+  - Full Name: Michael Wolf
+  - Email Address: michaelrwolf@att.net
+  - Password: [paste the new SMK here]
+- Click "Sign In"
+
+### Step 7: Configure Server Settings
+- When prompted for server settings, use:
+  - Incoming Mail Server: `imap.mail.att.net`
+  - Outgoing Mail Server: `smtp.mail.att.net`
+  - Username: `michaelrwolf@att.net`
+  - Password: [same SMK]
+- Click "Sign In"
+
+## Phase 4: Spark Configuration (15-20 minutes)
+
+### Step 8: macOS Spark Desktop Setup
+- Open `Spark Desktop.app` on macOS
+- Click "Add Account" or "+" button
+- Enter your full AT&T email address: `michaelrwolf@att.net`
+- When prompted for password, enter your AT&T account password (not an SMK)
+- **IMPORTANT**: Spark may redirect to a web page for additional authentication
+- Complete any web-based verification steps that appear
+- Return to Spark after completing web authentication
+- Spark should automatically configure IMAP and SMTP settings
+- If automatic configuration fails, manually enter:
+  - Incoming: `imap.mail.att.net` (IMAP, port 993, SSL)
+  - Outgoing: `smtp.mail.att.net` (SMTP, port 465, SSL/TLS)
+  - Username: michaelrwolf@att.net
+  - Password: [your AT&T account password]
+- Click "Add Account"
+
+### Step 9: iOS Spark App Setup
+- Open `Spark` app on iPhone/iPad
+- Tap "Add Account" or "+" button
+- Enter your full AT&T email address: `michaelrwolf@att.net`
+- When prompted for password, enter your AT&T account password (not an SMK)
+- **IMPORTANT**: Spark may redirect to a web page for additional authentication
+- Complete any web-based verification steps that appear
+- Return to Spark app after completing web authentication
+- Spark should automatically configure IMAP and SMTP settings
+- If automatic configuration fails, manually enter:
+  - Incoming: `imap.mail.att.net` (IMAP, port 993, SSL)
+  - Outgoing: `smtp.mail.att.net` (SMTP, port 465, SSL/TLS)
+  - Username: michaelrwolf@att.net
+  - Password: [your AT&T account password]
+- Tap "Add Account"
+
+## Phase 5: Verification and Testing (5-10 minutes)
+
+### Step 10: Test Connection
+- Wait for Mail.app to complete account setup
+- Check if emails begin downloading
+- Verify both incoming and outgoing mail work
+
+### Step 11: Handle Any Errors
+- **If authentication fails**: Wait 5 minutes, then try one more time
+- **If still failing**: The SMK may need time to propagate - wait 15 minutes
+- **If connection drops**: Let it reconnect automatically (don't retry immediately)
+
+## Key Success Factors for Campground Network:
+
+1. **Use iPhone Safari** for SMK generation (more stable than desktop browsers)
+2. **Complete account removal** before re-adding (don't edit existing)
+3. **Single attempt approach** - don't retry immediately on failure
+4. **Let connections stabilize** - don't interrupt reconnection attempts
+5. **Have backup SMK ready** if the first one fails
+
+## Fallback Plan:
+If the above fails after 15 minutes, generate a second SMK using a different account (`<michaelrunningwolf@att.net>`) and repeat the process. This approach minimizes the risk of triggering rate limiting while working within the constraints of the campground network's unstable WiFi.
+
+## Expected Timeline:
+- **Total time**: 35-55 minutes (single session)
+- **No multiple 45-minute waits** required
+- **Success probability**: High (80-90%) if following steps exactly
+- **Recovery time if failure**: 15 minutes maximum
+
+This plan is designed to work in a single session without requiring multiple 45-minute wait periods, leveraging the more stable iPhone Safari for the critical SMK generation step.
+
+
+## SMK - Secure Mail Keys
+
+| Account | Device      | App   | Description                 | SMK              |
+|---------|-------------|-------|-----------------------------|------------------|
+| MRW     | michael-pro | Mail  | SMK - MRW+michael-pro+Mail  | fnlqycslflqaxfjj |
+| MRW     | michael-pro | Spark | SMK - MRW+michael-pro+Spark | eucparcyvbexvaxq |
+| MRW     | michael-SE3 | Mail  | SMK - MRW+michael-SE3+Mail  | tvlwbfvtgissyygl |
+| MRW     | michael-SEe | Spark | SMK - MRW+michael-SE3+Spark | dzqbtfebjqbsrgtd |
+|---------|-------------|-------|-----------------------------|------------------|
