@@ -4,13 +4,21 @@
 
 The AT&T email password change process is fraught with technical issues and architectural problems that make it unreliable and frustrating for users.
 
+## Goals
+
+Short term - Reconnect `Mail.app` to <michaelrwolf@att.net> email account.  They have been dissonnected for 9 days (2025-08-07 through 2025-08-16).n
+
+Medium term - Connect `Spark Desktop.app` to all @att.net accounts to get used to new MUA
+
+Long term - Keep access to all @att.net accounts (either in `Mail.app` or `Spark Desktop.app`) until data export is complete.
+
 ## Context
 
 ### SMK (Secure Mail Key)
 
 **What they are**: Secure Mail Keys are AT&T's legacy authentication mechanism for email clients that don't support modern authentication standards. They are 16-character alphanumeric strings that serve as app-specific passwords for email authentication.
 
-**How they are used**: SMKs are entered in the password field of email clients (like Mail.app) instead of the account password. They authenticate IMAP/SMTP connections to AT&T's email servers (imap.mail.att.net and smtp.mail.att.net).
+**How they are used**: SMKs are entered in the password field of email clients (like `Mail.app`) instead of the account password. They authenticate IMAP/SMTP connections to AT&T's email servers (imap.mail.att.net and smtp.mail.att.net).
 
 **Scope of use**: Each SMK is device-specific and should only be used for a single email client on a single device. Using the same SMK across multiple devices can cause authentication conflicts and account lockouts.
 
@@ -26,12 +34,12 @@ The AT&T email password change process is fraught with technical issues and arch
 
 **Network characteristics**: Reliance on campground WiFi infrastructure with no cellular coverage available. WiFi connections experience frequent ECONNRESET failures due to shared bandwidth, signal interference, and infrastructure limitations.
 
-**Why ECONNRESET confounds AT&T authentication**: Unstable connections amplify AT&T's existing authentication problems by interrupting partial authentication attempts, triggering rate limiting, and corrupting authentication sessions. The combination of AT&T's broken legacy system + Mail.app's inconsistent handling + unstable WiFi creates a perfect storm where connection drops register as failed login attempts, potentially invalidating recently changed passwords or triggering account lockouts.
+**Why ECONNRESET confounds AT&T authentication**: Unstable connections amplify AT&T's existing authentication problems by interrupting partial authentication attempts, triggering rate limiting, and corrupting authentication sessions. The combination of AT&T's broken legacy system + `Mail.app`'s inconsistent handling + unstable WiFi creates a perfect storm where connection drops register as failed login attempts, potentially invalidating recently changed passwords or triggering account lockouts.
 
 **System differences matter**: Some systems (browsers, devices, or email clients) may handle connection interruptions more gracefully than others, making system selection critical for successful authentication in this environment.
 
 **Fragile systems (avoid for authentication in unstable WiFi)**:
-- **Mail.app on macOS**: Particularly vulnerable to connection interruptions, often requires complete account removal/re-addition after failures
+- **`Mail.app` on macOS**: Particularly vulnerable to connection interruptions, often requires complete account removal/re-addition after failures
 - **Chrome on macOS**: Can cache corrupted authentication states, requiring browser cache clearing after connection failures
 - **Safari on macOS**: Better than Chrome but still vulnerable to session corruption from interrupted connections
 
@@ -61,23 +69,23 @@ The AT&T email password change process is fraught with technical issues and arch
 - **Multi-Endpoint Coordination**: The login process coordinates between multiple authentication endpoints, which can experience timing and synchronization failures
 - **Legacy Protocol Dependencies**: The email system continues to rely on older authentication protocols that have limited integration with newer consolidated authentication systems
 
-## Mail.app Legacy Authentication Limitations
+## `Mail.app` Legacy Authentication Limitations
 
 ### Secure Mail Key (SMK) Configuration Issues
 
-- **Legacy Authentication Required**: Mail.app requires Secure Mail Keys (SMKs) in the password field, not the account password or OAuth2.0 tokens
+- **Legacy Authentication Required**: `Mail.app` requires Secure Mail Keys (SMKs) in the password field, not the account password or OAuth2.0 tokens
 - **Incomplete Documentation**: The setup process documentation lacks critical details about SMK generation and configuration requirements
 - **Complex Setup Procedures**: Adding a new att.net account requires following multi-step SMK generation and configuration processes
 
 ### Missing OAuth2.0 Support Issues
 
-- **No OAuth2.0 Implementation**: Mail.app lacks OAuth2.0 support, forcing reliance on legacy SMK authentication methods
+- **No OAuth2.0 Implementation**: `Mail.app` lacks OAuth2.0 support, forcing reliance on legacy SMK authentication methods
 - **Legacy Authentication Limitations**: Without OAuth2.0, users cannot benefit from modern authentication security features like token refresh and app-specific access
-- **Authentication Flow Disruption**: Mail.app's legacy authentication can be disrupted by AT&T's multi-domain authentication system, causing authentication loops or failures
+- **Authentication Flow Disruption**: `Mail.app`'s legacy authentication can be disrupted by AT&T's multi-domain authentication system, causing authentication loops or failures
 
 ### Legacy Authentication Method Limitations
 
-- **Credential Storage Limitations**: Mail.app's credential storage mechanisms have known limitations with SMK authentication and legacy protocols
+- **Credential Storage Limitations**: `Mail.app`'s credential storage mechanisms have known limitations with SMK authentication and legacy protocols
 - **Protocol Handling Variations**: The app exhibits inconsistent behavior when handling legacy authentication protocols and SMK validation
 - **Authentication Flow Interruptions**: Security validations can interrupt legitimate SMK authentication flows, resulting in authentication failures
 
@@ -86,7 +94,7 @@ The AT&T email password change process is fraught with technical issues and arch
 ### Why Legacy Systems Don't Work Well Together
 
 - **Broken Legacy Infrastructure**: AT&T's legacy authentication system has fundamental flaws (race conditions, timing issues, rate limiting)
-- **Inconsistent Legacy Client Support**: Mail.app's legacy authentication handling is unreliable when connecting to AT&T's broken system
+- **Inconsistent Legacy Client Support**: `Mail.app`'s legacy authentication handling is unreliable when connecting to AT&T's broken system
 - **No Fallback Mechanisms**: Legacy systems lack the redundancy and error handling that modern systems provide
 
 ### Specific Interaction Problems
@@ -94,11 +102,11 @@ The AT&T email password change process is fraught with technical issues and arch
 - **SMK Generation Complexity**: Users must manually generate Secure Mail Keys through AT&T's web portal, which can be inaccessible during authentication failures
 - **Device-Specific Authentication**: Each device requires a separate SMK, creating management overhead and potential for authentication failures
 - **No Automatic Recovery**: Legacy authentication doesn't support automatic recovery mechanisms, requiring manual intervention when failures occur
-- **System Synchronization Issues**: AT&T's multi-domain authentication system doesn't reliably synchronize with Mail.app's authentication expectations
+- **System Synchronization Issues**: AT&T's multi-domain authentication system doesn't reliably synchronize with `Mail.app`'s authentication expectations
 
 ### Impact on User Experience
 
-- **Authentication Failures**: The combination of AT&T's broken system and Mail.app's inconsistent handling creates frequent authentication failures
+- **Authentication Failures**: The combination of AT&T's broken system and `Mail.app`'s inconsistent handling creates frequent authentication failures
 - **Manual Intervention Required**: Users must frequently regenerate SMKs and reconfigure email clients when authentication issues occur
 - **Unpredictable Behavior**: The legacy systems don't provide consistent, reliable authentication experiences
 - **Maintenance Overhead**: Users must constantly manage and troubleshoot authentication issues that shouldn't exist in a working system
@@ -112,7 +120,7 @@ The AT&T email password change process is fraught with technical issues and arch
 3. **Gradual Testing**: Test the new password on one device first, then gradually add other devices
 4. **Avoid Rapid Retries**: Don't attempt multiple login attempts in quick succession
 
-### For Mail.app Configuration
+### For `Mail.app` Configuration
 
 1. **Use Secure Mail Keys (SMKs)**: Generate SMKs specifically for each device/app instead of using account passwords
 2. **Follow SMK Setup Sequence**: Adhere to the documented SMK generation and configuration sequence for legacy authentication
@@ -142,4 +150,6 @@ The AT&T email password change process is fraught with technical issues and arch
 
 ## Conclusion
 
-The combination of AT&T's broken legacy authentication system and Mail.app's inconsistent legacy authentication handling creates a fundamentally unreliable user experience. While Secure Mail Keys provide a temporary workaround, they introduce significant complexity and reliability issues. The most effective long-term solution is migration to email providers and clients with more reliable authentication systems, eliminating the race conditions, timing issues, and manual intervention requirements that plague the current AT&T/Mail.app combination.
+The combination of AT&T's broken legacy authentication system and `Mail.app`'s inconsistent legacy authentication handling creates a fundamentally unreliable user experience. While Secure Mail Keys provide a temporary workaround, they introduce significant complexity and reliability issues. The most effective long-term solution is migration to email providers and clients with more reliable authentication systems, eliminating the race conditions, timing issues, and manual intervention requirements that plague the current AT&T/`Mail.app` combination.
+
+## Plan - Reconnect `Mail.app` to `<michaelrwolf@att.net>`
