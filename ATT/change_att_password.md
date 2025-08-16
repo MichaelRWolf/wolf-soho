@@ -21,6 +21,23 @@ The AT&T email password change process is fraught with technical issues and arch
 
 **Timeline**: SMKs became necessary in the early 2010s when AT&T began restricting direct password authentication for security reasons, but failed to implement modern OAuth2.0 standards. Industry alternatives like OAuth2.0 became widely available around 2012-2015, making AT&T's proprietary SMK system increasingly outdated and problematic.
 
+### Campground Network (WiFi but not cellular)
+**Network characteristics**: Reliance on campground WiFi infrastructure with no cellular coverage available. WiFi connections experience frequent ECONNRESET failures due to shared bandwidth, signal interference, and infrastructure limitations.
+
+**Why ECONNRESET confounds AT&T authentication**: Unstable connections amplify AT&T's existing authentication problems by interrupting partial authentication attempts, triggering rate limiting, and corrupting authentication sessions. The combination of AT&T's broken legacy system + Mail.app's inconsistent handling + unstable WiFi creates a perfect storm where connection drops register as failed login attempts, potentially invalidating recently changed passwords or triggering account lockouts.
+
+**System differences matter**: Some systems (browsers, devices, or email clients) may handle connection interruptions more gracefully than others, making system selection critical for successful authentication in this environment.
+
+**Fragile systems (avoid for authentication in unstable WiFi)**:
+- **Mail.app on macOS**: Particularly vulnerable to connection interruptions, often requires complete account removal/re-addition after failures
+- **Chrome on macOS**: Can cache corrupted authentication states, requiring browser cache clearing after connection failures
+- **Safari on macOS**: Better than Chrome but still vulnerable to session corruption from interrupted connections
+
+**Robust systems (prefer for authentication in unstable WiFi)**:
+- **iPhone Mail app**: More resilient to connection interruptions, often recovers automatically after WiFi reconnection
+- **Safari on iPhone**: Handles connection drops more gracefully, maintains authentication state better than desktop browsers
+- **Webmail (att.yahoo.com)**: More forgiving of connection interruptions, often resumes authentication flow after reconnection
+
 ## Known Problems with AT&T Password Change Process
 
 ### Race Conditions and Timing Issues
