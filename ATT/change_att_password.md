@@ -4,6 +4,23 @@
 
 The AT&T email password change process is fraught with technical issues and architectural problems that make it unreliable and frustrating for users.
 
+## Context
+
+### SMK (Secure Mail Key)
+**What they are**: Secure Mail Keys are AT&T's legacy authentication mechanism for email clients that don't support modern authentication standards. They are 16-character alphanumeric strings that serve as app-specific passwords for email authentication.
+
+**How they are used**: SMKs are entered in the password field of email clients (like Mail.app) instead of the account password. They authenticate IMAP/SMTP connections to AT&T's email servers (imap.mail.att.net and smtp.mail.att.net).
+
+**Scope of use**: Each SMK is device-specific and should only be used for a single email client on a single device. Using the same SMK across multiple devices can cause authentication conflicts and account lockouts.
+
+**Generation and distribution**: SMKs are generated through AT&T's web portal (att.com) in the account security settings. Users must manually create them through the "Manage secure mail key" section, name them descriptively, and copy the generated key immediately as it won't be displayed again. The process requires web portal access and cannot be automated.
+
+**Industry Standards - NOT**: SMKs are not based on any industry standard. They are AT&T's proprietary, vendor-specific authentication mechanism that creates vendor lock-in and doesn't follow modern email authentication best practices.
+
+**What would be better**: Industry-standard OAuth2.0 authentication, RFC 5804 compliant app-specific passwords, or SAML/SAML2 enterprise authentication standards that provide interoperability, security, and modern security features like token refresh and app-specific access controls.
+
+**Timeline**: SMKs became necessary in the early 2010s when AT&T began restricting direct password authentication for security reasons, but failed to implement modern OAuth2.0 standards. Industry alternatives like OAuth2.0 became widely available around 2012-2015, making AT&T's proprietary SMK system increasingly outdated and problematic.
+
 ## Known Problems with AT&T Password Change Process
 
 ### Race Conditions and Timing Issues
