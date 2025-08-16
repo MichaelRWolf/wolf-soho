@@ -67,10 +67,54 @@
 
 Recommended providers:
 
-- Namecheap - Competitive pricing, good UI, strong reputation -- Yes
-- Google Domains - Simple interface, integrates well with other Google services
-- Cloudflare - Very competitive pricing, excellent security features -- NO
-- GoDaddy - Well-known, extensive features but more aggressive upselling
+- **Hover** - Clean interface, zero upsells, excellent support, owned by Tucows
+- **Porkbun** - Very competitive pricing, minimal upsells, good security features
+- **NameSilo** - Extremely competitive pricing, no upsells, free WHOIS privacy
+- **Google Domains (Squarespace)** - Simple interface, no upsells, excellent DNS management
+
+Non-starters:
+- **Cloudflare** - Requires ecosystem lock-in, complex interface, forced upsells
+- **GoDaddy** - Aggressive upselling, poor customer experience, hidden fees
+- **Namecheap** - Increasingly aggressive upsells, declining customer satisfaction
+
+#### Registrar Feature Comparison - Backend/Technical Features
+
+| Provider               | Pricing (.com)          | DNS Management | Security     | Bulk Management | API Access | Overall Rank | Notes                                                 |
+|------------------------|-------------------------|----------------|--------------|-----------------|------------|--------------|-------------------------------------------------------|
+| **Porkbun**            | $11.06/year             | ✅ Basic       | ✅ Good      | ❌ Basic        | ❌ No      | 1st          | Best value for money, clean experience, free features |
+| **NameSilo**           | $9-11/year              | ✅ Basic       | ✅ Good      | ❌ Basic        | ❌ No      | 2nd          | Lowest price, no frills approach                      |
+| **Hover**              | $14.99 reg/$16.99 renew | ✅ Basic       | ✅ Good      | ✅ Advanced     | ✅ Yes     | 3rd          | Premium experience but higher pricing                 |
+| **Google/Squarespace** | $12-15/year             | ✅ Advanced    | ✅ Excellent | ✅ Advanced     | ✅ Yes     | 4th          | Best interface, but recent acquisition uncertainty    |
+| **Cloudflare**         | $8-9/year               | ✅ Advanced    | ✅ Excellent | ✅ Advanced     | ✅ Yes     | 5th          | Cheap but ecosystem lock-in required                  |
+| **Namecheap**          | $10-12/year             | ✅ Basic       | ✅ Good      | ✅ Good         | ❌ No      | 6th          | Good features but increasing upsell pressure          |
+| **GoDaddy**            | $12-15/year             | ✅ Basic       | ✅ Good      | ✅ Advanced     | ✅ Yes     | 7th          | Avoid - poor customer experience                      |
+
+#### Registrar Feature Comparison - Customer Experience Features
+
+| Provider               | Upsells            | Interface         | Support      | Mobile Experience | Overall Rank | Notes                                                 |
+|------------------------|--------------------|-------------------|--------------|-------------------|--------------|-------------------------------------------------------|
+| **Porkbun**            | ❌ Minimal         | ✅ Clean          | ✅ Good      | ✅ Good           | 1st          | Best value for money, clean experience, free features |
+| **NameSilo**           | ❌ None            | ✅ Functional     | ✅ Basic     | ❌ Limited        | 2nd          | Lowest price, no frills approach                      |
+| **Hover**              | ❌ None            | ✅ Clean & Simple | ✅ Excellent | ✅ Excellent      | 3rd          | Premium experience but higher pricing                 |
+| **Google/Squarespace** | ❌ None            | ✅ Excellent      | ✅ Good      | ✅ Excellent      | 4th          | Best interface, but recent acquisition uncertainty    |
+| **Cloudflare**         | ❌ Heavy           | ❌ Complex        | ✅ Good      | ❌ Limited        | 5th          | Cheap but ecosystem lock-in required                  |
+| **Namecheap**          | ❌ Aggressive      | ✅ Good           | ✅ Good      | ✅ Good           | 6th          | Good features but increasing upsell pressure          |
+| **GoDaddy**            | ❌ Very Aggressive | ❌ Cluttered      | ❌ Poor      | ✅ Good           | 7th          | Avoid - poor customer experience                      |
+
+#### Final Recommendation: **Porkbun**
+
+**Why Porkbun is the best choice:**
+
+1. **Best Value:** $11.06/year for .com domains with free included features
+2. **Minimal Upsells:** Clean interface without aggressive marketing
+3. **Free Features:** WHOIS privacy, SSL certificates, DNS management via Cloudflare, URL forwarding, up to 20 email forwards
+4. **Good Reputation:** Known for straightforward service and minimal upselling
+5. **No Ecosystem Lock-in:** You can use any DNS provider, email host, or web host
+6. **Cost-Effective:** Significantly cheaper than Hover ($14.99 reg/$16.99 renew)
+
+**Runner-up: Hover** - If you want the absolute best customer experience and are willing to pay the premium price.
+
+**Avoid:** Cloudflare (ecosystem lock-in), GoDaddy (aggressive sales), and Namecheap (declining quality).
 
 ### Email Hosting Providers
 
@@ -376,7 +420,7 @@ Modern email providers (Fastmail, Zoho, ProtonMail) work well with modern email 
 
 ### Domain & Hosting Setup
 1. ✅ Select a domain name -> RunningWolf.net
-2. ❓ Select a domain name registrar -> ???
+2. ✅ Select a domain name registrar -> Porkbun
 3. ✅ Select an email host (MTA) -> Fastmail
 4. ✅ Select an email program (MUA) -> Spark
 
