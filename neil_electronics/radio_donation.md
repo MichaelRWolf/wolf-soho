@@ -5,15 +5,17 @@
 Step - Refine goal and context ✅
 Step - Target organizations that may know interested individuals
 Step - Contact these organizations
-  - bulk email
-  - individual call
-  - research web for other contact info
+
+- bulk email
+- individual call
+- research web for other contact info
 
 ## Goal
 
 Donate electronic, computer, audio, video, and radio equipment from an estate of a life-time radio/electronics enthusiast
 
 Priorities:
+
 - Donate equipment to working professionals or students
 - Keep out of landfill
  Tax benefits are NOT a priority
@@ -59,6 +61,7 @@ Dear [Organization Name],
 I'm helping to donate a significant collection of electronics and radio equipment from the estate of a lifetime radio/electronics enthusiast in Calumet.
 
 **What's Available:**
+
 - Test equipment (oscilloscopes, signal generators, analyzers)
 - Ham radio equipment and antennas
 - Satellite dishes (10' to 2' diameter)
@@ -68,6 +71,7 @@ I'm helping to donate a significant collection of electronics and radio equipmen
 - Most equipment in working condition
 
 **Terms:**
+
 - FREE - No cost to recipient
 - As-is condition
 - Must be picked up locally
@@ -76,6 +80,7 @@ I'm helping to donate a significant collection of electronics and radio equipmen
 **Goal:** Move quickly to avoid landfill while ensuring this treasured collection goes to people who will use and appreciate it.
 
 **Next Steps:**
+
 - Representative photos attached
 - Available for viewing this Saturday
 - Text Neil at (906) 555-1212 to arrange viewing time and get address
@@ -113,18 +118,17 @@ Best regards,
 
 ### High Priority Contact Information
 
-| Group | Email | Phone/Contact | Web URL |
-|-------|-------|---------------|---------|
-| **Keweenaw Amateur Radio Club** | keweenawarc@gmail.com | (906) 487-XXXX | https://keweenawarc.org |
-| **Michigan Tech Electrical Engineering** | ece@mtu.edu | (906) 487-2550 | https://www.mtu.edu/ece/ |
-| **Michigan Tech Computer Engineering** | cpe@mtu.edu | (906) 487-2550 | https://www.mtu.edu/cpe/ |
-| **Michigan Tech Physics Department** | physics@mtu.edu | (906) 487-2550 | https://www.mtu.edu/physics/ |
-| **Finlandia University** | admissions@finlandia.edu | (906) 487-7250 | https://www.finlandia.edu/ |
-| **Gogebic Community College** | info@gogebic.edu | (906) 932-4231 | https://www.gogebic.edu/ |
-| **ARRL Michigan Section** | michigan@arrl.org | (517) 484-XXXX | https://michigan.arrl.org/ |
-| **Marquette Amateur Radio Club** | marquettearc@gmail.com | (906) 225-XXXX | https://marquettearc.org |
-| **Upper Peninsula Amateur Radio Association** | upara@arrl.net | (906) XXX-XXXX | https://upara.org |
-
+| Group                                         | Email                      | Phone/Contact  | Web URL                        |
+|-----------------------------------------------|----------------------------|----------------|--------------------------------|
+| **Keweenaw Amateur Radio Club**               | <keweenawarc@gmail.com>    | (906) 487-XXXX | <https://keweenawarc.org>      |
+| **Michigan Tech Electrical Engineering**      | <ece@mtu.edu>              | (906) 487-2550 | <https://www.mtu.edu/ece/>     |
+| **Michigan Tech Computer Engineering**        | <cpe@mtu.edu>              | (906) 487-2550 | <https://www.mtu.edu/cpe/>     |
+| **Michigan Tech Physics Department**          | <physics@mtu.edu>          | (906) 487-2550 | <https://www.mtu.edu/physics/> |
+| **Finlandia University**                      | <admissions@finlandia.edu> | (906) 487-7250 | <https://www.finlandia.edu/>   |
+| **Gogebic Community College**                 | <info@gogebic.edu>         | (906) 932-4231 | <https://www.gogebic.edu/>     |
+| **ARRL Michigan Section**                     | <michigan@arrl.org>        | (517) 484-XXXX | <https://michigan.arrl.org/>   |
+| **Marquette Amateur Radio Club**              | <marquettearc@gmail.com>   | (906) 225-XXXX | <https://marquettearc.org>     |
+| **Upper Peninsula Amateur Radio Association** | <upara@arrl.net>           | (906) XXX-XXXX | <https://upara.org>            |
 
 ### Medium Priority (Good Value, Some Coordination)
 
