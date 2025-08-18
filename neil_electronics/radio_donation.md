@@ -47,11 +47,35 @@ Priorities:
 
 
 
-## Target Grups
+## Target Groups
 
-- Technical schools/universties
-- Radio clubs
-- Working professionals
+### High Priority (Quick Turnaround)
+- **Local Radio Clubs** - Immediate interest, local pickup
+- **Electronics Repair Shops** - Working equipment value, quick decisions
+- **Community Colleges** - Often need equipment, structured pickup
+- **Ham Radio Operators** - Individual collectors, fast response
+- **Online Marketplaces** - Craigslist, Facebook Marketplace (local pickup)
+
+### Medium Priority (Good Value, Some Coordination)
+- **Technical Schools** - Vocational programs, larger quantities
+- **University Engineering Departments** - Lab equipment needs
+- **Broadcast Engineers** - Professional equipment users
+- **Maker Spaces** - Community workshops, tool needs
+- **Electronics Hobbyists** - Individual collectors via online forums
+
+### Lower Priority (Specialized Interest, More Coordination)
+- **Technology Museums** - Historical items, may need documentation
+- **Radio Museums** - Specialized collections, selective interest
+- **Telecommunications Companies** - Corporate processes, selective needs
+- **Independent Contractors** - Electronics technicians, individual needs
+- **Historical Societies** - Documentation requirements, selective interest
+
+### Online Communities (Wide Reach)
+- **Reddit r/amateurradio** - Large community, local pickup arrangements
+- **Reddit r/electronics** - Hobbyist community, technical interest
+- **Facebook Groups** - Local electronics/radio enthusiast groups
+- **ARRL Forums** - Amateur radio community, equipment discussions
+- **Electronics Forums** - Technical communities, component interest
 
 
 
