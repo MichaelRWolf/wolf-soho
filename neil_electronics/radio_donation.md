@@ -5,6 +5,9 @@
 Step - Refine goal and context ✅
 Step - Target organizations that may know interested individuals
 Step - Contact these organizations
+  - bulk email
+  - individual call
+  - research web for other contact info
 
 ## Goal
 
@@ -45,6 +48,48 @@ Priorities:
 
 ## Target Groups
 
+### High Priority - email message
+
+**Subject:** Electronics & Radio Equipment Donation - Estate of Radio Enthusiast (Calumet)
+
+**Message:**
+
+Dear [Organization Name],
+
+I'm helping to donate a significant collection of electronics and radio equipment from the estate of a lifetime radio/electronics enthusiast in Calumet.
+
+**What's Available:**
+- Test equipment (oscilloscopes, signal generators, analyzers)
+- Ham radio equipment and antennas
+- Satellite dishes (10' to 2' diameter)
+- Electronic tools and components
+- Audio/video equipment and cabling
+- Historical electronics dating back to 1970s
+- Most equipment in working condition
+
+**Terms:**
+- FREE - No cost to recipient
+- As-is condition
+- Must be picked up locally
+- Available immediately
+
+**Goal:** Move quickly to avoid landfill while ensuring this treasured collection goes to people who will use and appreciate it.
+
+**Next Steps:**
+- Representative photos attached
+- Available for viewing this Saturday
+- Text Neil at (906) 555-1212 to arrange viewing time and get address
+
+Please let me know if your organization might be interested, or if you can suggest others who might benefit from this equipment.
+
+Thank you for your consideration.
+
+Best regards,
+[Your name]
+
+---
+*This is a bulk email to local organizations that might benefit from electronics equipment donations.*
+
 ### High Priority (Quick Turnaround)
 
 - **Local Radio Clubs** - Immediate interest, local pickup
@@ -65,6 +110,21 @@ Priorities:
 - **Online Marketplaces** - Craigslist, Facebook Marketplace (local pickup)
   - **Craigslist Upper Peninsula** - Local pickup arrangements
   - **Facebook Marketplace Houghton/Hancock** - Local community
+
+### High Priority Contact Information
+
+| Group | Email | Phone/Contact | Web URL |
+|-------|-------|---------------|---------|
+| **Keweenaw Amateur Radio Club** | keweenawarc@gmail.com | (906) 487-XXXX | https://keweenawarc.org |
+| **Michigan Tech Electrical Engineering** | ece@mtu.edu | (906) 487-2550 | https://www.mtu.edu/ece/ |
+| **Michigan Tech Computer Engineering** | cpe@mtu.edu | (906) 487-2550 | https://www.mtu.edu/cpe/ |
+| **Michigan Tech Physics Department** | physics@mtu.edu | (906) 487-2550 | https://www.mtu.edu/physics/ |
+| **Finlandia University** | admissions@finlandia.edu | (906) 487-7250 | https://www.finlandia.edu/ |
+| **Gogebic Community College** | info@gogebic.edu | (906) 932-4231 | https://www.gogebic.edu/ |
+| **ARRL Michigan Section** | michigan@arrl.org | (517) 484-XXXX | https://michigan.arrl.org/ |
+| **Marquette Amateur Radio Club** | marquettearc@gmail.com | (906) 225-XXXX | https://marquettearc.org |
+| **Upper Peninsula Amateur Radio Association** | upara@arrl.net | (906) XXX-XXXX | https://upara.org |
+
 
 ### Medium Priority (Good Value, Some Coordination)
 
