@@ -6,17 +6,16 @@ Step - Refine goal and context ✅
 Step - Target organizations that may know interested individuals
 Step - Contact these organizations
 
-
 ## Goal
 
 Donate electronic, computer, audio, video, and radio equipment from an estate of a life-time radio/electronics enthusiast
 
 Priorities:
-  - Donate equipment to working professionals or students
-  - Keep out of landfill
-  - Tax benefits are NOT a priority
+- Donate equipment to working professionals or students
+- Keep out of landfill
+ Tax benefits are NOT a priority
 
-## Context:
+## Context
 
 - Estate house basement and 2 outbuildings are filled with electronics equipment.
 - New owner does not recognize value of the equipment
@@ -32,7 +31,7 @@ Priorities:
   - Microwave receivers
   - Microwave wave guides
   - Roof-top antennas
-  - Electronic assembly tools (soldering iron, hand tools, 
+  - Electronic assembly tools (soldering iron, hand tools, small components)
   - Test equipment
   - Audio/Video cabling and switches
   - Parts bins full of components
@@ -44,12 +43,10 @@ Priorities:
 - Donated for $0.00.
 - As-is condition
 
-
-
-
 ## Target Groups
 
 ### High Priority (Quick Turnaround)
+
 - **Local Radio Clubs** - Immediate interest, local pickup
 - **Electronics Repair Shops** - Working equipment value, quick decisions
 - **Community Colleges** - Often need equipment, structured pickup
@@ -57,6 +54,7 @@ Priorities:
 - **Online Marketplaces** - Craigslist, Facebook Marketplace (local pickup)
 
 ### Medium Priority (Good Value, Some Coordination)
+
 - **Technical Schools** - Vocational programs, larger quantities
 - **University Engineering Departments** - Lab equipment needs
 - **Broadcast Engineers** - Professional equipment users
@@ -64,6 +62,7 @@ Priorities:
 - **Electronics Hobbyists** - Individual collectors via online forums
 
 ### Lower Priority (Specialized Interest, More Coordination)
+
 - **Technology Museums** - Historical items, may need documentation
 - **Radio Museums** - Specialized collections, selective interest
 - **Telecommunications Companies** - Corporate processes, selective needs
@@ -71,11 +70,9 @@ Priorities:
 - **Historical Societies** - Documentation requirements, selective interest
 
 ### Online Communities (Wide Reach)
+
 - **Reddit r/amateurradio** - Large community, local pickup arrangements
 - **Reddit r/electronics** - Hobbyist community, technical interest
 - **Facebook Groups** - Local electronics/radio enthusiast groups
 - **ARRL Forums** - Amateur radio community, equipment discussions
 - **Electronics Forums** - Technical communities, component interest
-
-
-
