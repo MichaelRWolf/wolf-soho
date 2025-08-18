@@ -1,7 +1,13 @@
+# Donate estate contents from Neil's Snowboarders House
+
+## Plan
+
+Step - Refine goal and context ✅
+Step - Target organizations that may know interested individuals
+Step - Contact these organizations
 
 
-
-# Goal
+## Goal
 
 Donate electronic, computer, audio, video, and radio equipment from an estate of a life-time radio/electronics enthusiast
 
@@ -39,10 +45,6 @@ Priorities:
 - As-is condition
 
 
-## Steps
-
-Step - Target organizations that may know interested individuals
-Step - Contact these organizations
 
 
 ## Target Grups
