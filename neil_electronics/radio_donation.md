@@ -116,8 +116,6 @@ Best regards,
   - **Craigslist Upper Peninsula** - Local pickup arrangements
   - **Facebook Marketplace Houghton/Hancock** - Local community
 
-### High Priority Contact Information
-
 | Group                                         | Email                      | Phone/Contact  | Web URL                        |
 |-----------------------------------------------|----------------------------|----------------|--------------------------------|
 | **Keweenaw Amateur Radio Club**               | <keweenawarc@gmail.com>    | (906) 487-XXXX | <https://keweenawarc.org>      |
