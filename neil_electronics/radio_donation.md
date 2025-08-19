@@ -151,6 +151,17 @@ Best regards,
   - **Michigan Tech Alumni Network** - Engineering graduates
   - **Copper Country Hobbyists** (local group)
 
+| Group                                   | Email                              | Phone/Contact  | Web URL                                |
+|-----------------------------------------|------------------------------------|----------------|----------------------------------------|
+| **Northern Michigan University**        | <admissions@nmu.edu>               | (906) 227-2650 | <https://www.nmu.edu/>                 |
+| **Lake Superior State University**      | <admissions@lssu.edu>              | (906) 635-2234 | <https://www.lssu.edu/>                |
+| **WMTU-FM Student Radio**               | <wmtu@mtu.edu>                     | (906) 487-XXXX | <https://www.wmtu.fm/>                 |
+| **WCCY-FM**                             | <wccy@wccy.com>                    | (906) 337-XXXX | <https://www.wccy.com/>                |
+| **MTU Makerspace**                      | <makerspace@mtu.edu>               | (906) 487-XXXX | <https://makerspace.mtu.edu/>          |
+| **Houghton Makerspace**                 | <info@houghtonmakerspace.org>      | (906) XXX-XXXX | <https://houghtonmakerspace.org/>      |
+| **Copper Country Makerspace**           | <info@coppercountrymakerspace.org> | (906) XXX-XXXX | <https://coppercountrymakerspace.org/> |
+| **Upper Peninsula Broadcast Engineers** | <upbea@arrl.net>                   | (906) XXX-XXXX | <https://upbea.org>                    |
+
 ### Lower Priority (Specialized Interest, More Coordination)
 
 - **Technology Museums** - Historical items, may need documentation
@@ -173,6 +184,18 @@ Best regards,
   - **Houghton County Historical Society** (Houghton)
   - **Calumet Historical Society** (Calumet)
 
+| Group                                  | Email                              | Phone/Contact  | Web URL                                    |
+|----------------------------------------|------------------------------------|----------------|--------------------------------------------|
+| **A.E. Seaman Mineral Museum**         | <museum@mtu.edu>                   | (906) 487-2572 | <https://www.museum.mtu.edu/>              |
+| **Copper Country Historical Society**  | <info@coppercountryhistorical.org> | (906) 337-XXXX | <https://coppercountryhistorical.org/>     |
+| **Michigan Tech Archives**             | <archives@mtu.edu>                 | (906) 487-2505 | <https://www.mtu.edu/library/archives/>    |
+| **Michigan Tech Communication Arts**   | <commarts@mtu.edu>                 | (906) 487-XXXX | <https://www.mtu.edu/humanities/commarts/> |
+| **AT&T Upper Peninsula**               | <uppeninsula@att.com>              | (906) XXX-XXXX | <https://www.att.com/>                     |
+| **Consolidated Communications**        | <uppeninsula@consolidated.com>     | (906) XXX-XXXX | <https://www.consolidated.com/>            |
+| **Keweenaw County Historical Society** | <info@keweenawhistory.org>         | (906) 289-XXXX | <https://keweenawhistory.org/>             |
+| **Houghton County Historical Society** | <info@houghtonhistory.org>         | (906) 482-XXXX | <https://houghtonhistory.org/>             |
+| **Calumet Historical Society**         | <info@calumethistory.org>          | (906) 337-XXXX | <https://calumethistory.org/>              |
+
 ### Online Communities (Wide Reach)
 
 - **Reddit r/amateurradio** - Large community, local pickup arrangements
@@ -191,3 +214,15 @@ Best regards,
 - **Electronics Forums** - Technical communities, component interest
   - **EEVblog Forum** - Electronics engineering community
   - **All About Circuits** - Electronics hobbyist community
+
+| Group                                     | Email | Phone/Contact | Web URL                                                     |
+|-------------------------------------------|-------|---------------|-------------------------------------------------------------|
+| **Reddit r/amateurradio**                 | N/A   | N/A           | <https://www.reddit.com/r/amateurradio/>                    |
+| **Reddit r/UpperPeninsula**               | N/A   | N/A           | <https://www.reddit.com/r/UpperPeninsula/>                  |
+| **Reddit r/electronics**                  | N/A   | N/A           | <https://www.reddit.com/r/electronics/>                     |
+| **Reddit r/MichiganTech**                 | N/A   | N/A           | <https://www.reddit.com/r/MichiganTech/>                    |
+| **Facebook - Upper Peninsula Ham Radio**  | N/A   | N/A           | <https://www.facebook.com/groups/uppeninsulahamradio/>      |
+| **Facebook - Copper Country Electronics** | N/A   | N/A           | <https://www.facebook.com/groups/coppercountryelectronics/> |
+| **Facebook - Michigan Tech Alumni**       | N/A   | N/A           | <https://www.facebook.com/groups/michigantechalumni/>       |
+| **EEVblog Forum**                         | N/A   | N/A           | <https://www.eevblog.com/forum/>                            |
+| **All About Circuits**                    | N/A   | N/A           | <https://www.allaboutcircuits.com/>                         |
