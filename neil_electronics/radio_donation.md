@@ -128,6 +128,8 @@ Best regards,
 | **Marquette Amateur Radio Club**              | <marquettearc@gmail.com>   | (906) 225-XXXX | <https://marquettearc.org>     |
 | **Upper Peninsula Amateur Radio Association** | <upara@arrl.net>           | (906) XXX-XXXX | <https://upara.org>            |
 
+**To:** keweenawarc@gmail.com, ece@mtu.edu, cpe@mtu.edu, physics@mtu.edu, admissions@finlandia.edu, info@gogebic.edu, michigan@arrl.org, marquettearc@gmail.com, upara@arrl.net
+
 ### Medium Priority (Good Value, Some Coordination)
 
 - **Technical Schools** - Vocational programs, larger quantities
@@ -161,6 +163,8 @@ Best regards,
 | **Houghton Makerspace**                 | <info@houghtonmakerspace.org>      | (906) XXX-XXXX | <https://houghtonmakerspace.org/>      |
 | **Copper Country Makerspace**           | <info@coppercountrymakerspace.org> | (906) XXX-XXXX | <https://coppercountrymakerspace.org/> |
 | **Upper Peninsula Broadcast Engineers** | <upbea@arrl.net>                   | (906) XXX-XXXX | <https://upbea.org>                    |
+
+**To:** admissions@nmu.edu, admissions@lssu.edu, wmtu@mtu.edu, wccy@wccy.com, makerspace@mtu.edu, info@houghtonmakerspace.org, info@coppercountrymakerspace.org, upbea@arrl.net
 
 ### Lower Priority (Specialized Interest, More Coordination)
 
@@ -196,6 +200,8 @@ Best regards,
 | **Houghton County Historical Society** | <info@houghtonhistory.org>         | (906) 482-XXXX | <https://houghtonhistory.org/>             |
 | **Calumet Historical Society**         | <info@calumethistory.org>          | (906) 337-XXXX | <https://calumethistory.org/>              |
 
+**To:** museum@mtu.edu, info@coppercountryhistorical.org, archives@mtu.edu, commarts@mtu.edu, uppeninsula@att.com, uppeninsula@consolidated.com, info@keweenawhistory.org, info@houghtonhistory.org, info@calumethistory.org
+
 ### Online Communities (Wide Reach)
 
 - **Reddit r/amateurradio** - Large community, local pickup arrangements
@@ -226,3 +232,5 @@ Best regards,
 | **Facebook - Michigan Tech Alumni**       | N/A   | N/A           | <https://www.facebook.com/groups/michigantechalumni/>       |
 | **EEVblog Forum**                         | N/A   | N/A           | <https://www.eevblog.com/forum/>                            |
 | **All About Circuits**                    | N/A   | N/A           | <https://www.allaboutcircuits.com/>                         |
+
+**To:** [Note: Online communities use web platforms, not email. Post to Reddit subreddits and Facebook groups directly.]
