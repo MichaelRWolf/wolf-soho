@@ -10,15 +10,13 @@
 - [x] Verified configuration - Fastmail confirmed nameservers are working
 - [x] Completed Fastmail setup - domain is ready for email use
 
-## WIP
 
 ✅ **Step 1**: Updated nameservers at Porkbun to Fastmail's servers
 ✅ **Step 2**: Configured nameservers (ns1.messagingengine.com, ns2.messagingengine.com)
 ✅ **Step 3**: Verified configuration - Fastmail confirmed nameservers are working
 ✅ **Step 4**: Completed Fastmail setup - domain is ready for email use
-⏳ **Step 4.5**: Disable web hosting (A records) - DNS page found, ready to configure
+✅ **Step 4.5**: Disable web hosting (A records) - DNS page found, ready to configure
 
-## TO DO
 
 ### Step 1: Update Nameservers at Porkbun
 **Action:** Log in to Porkbun control panel
@@ -58,7 +56,8 @@
   - Test that `https://runningwolf.net` returns no response or error
   - Email functionality should remain unaffected
 
-## Additional Setup Steps
+## WIP
+## TO DO
 
 ### Step 5: Configure Email Addresses
 **Action:** Set up email addresses for the domain
