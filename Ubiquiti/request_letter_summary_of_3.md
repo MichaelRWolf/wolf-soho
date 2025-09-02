@@ -1,70 +1,55 @@
-# Request Letter to Adam - Network Integration Assistance
-
-## Hello -- Get Related
+# Letter to Adam
 
 Hi Adam,
 
-I hope this finds you well. I wanted to reach out and express my appreciation for all the work you've done over the past few summers setting up the infrastructure here at Trails End - both the water systems and the data network. Your vision of treating WiFi as just another farm system has really made a difference for everyone here, and I'm grateful for the three summers we've worked together as part of that vision.
+I hope this finds you well as "official summer" blends into late summer, back-to-school, and return-of-Béla.
 
-## Transition -- Gentle Request for Guidance or Assistance
+First, thank you for all the "infrastructure" work you did at Trails
+End and Lake Effect. We're back for a 4th summer in large part to that
+work. I like how water pipes and the data pipes were both "farm
+systems" to you.
 
-We've been experiencing some internet connectivity challenges this summer, and I've made a few incremental improvements on my own, but I'm hitting the limits of what I can accomplish without deeper knowledge of the network setup. I understand there have been some changes to the system since you were here last, and I'm not sure of the current state.
+As technomads, we especially appreciate the WiFi. It far exceeds what
+we could expect -- meeting clients around the country (and world) from
+a camp site that's off the power grid but on the internet!
 
-## Summary of Problem
+But zoom has infrequent, but obtrusive, drops.  Working from home doesn't work when the network drops.
 
-**What we need**: A stable, reliable internet connection for work and communication that doesn't require constant troubleshooting or reconnection. **What we're getting**: Intermittent connectivity through the Beryl router that works sometimes but is unstable enough to disrupt video calls and development work. **What's missing**: Consistent signal strength and network stability, particularly during peak usage times.
+I've done a lot of monitoring, debugging, configuring, and research.
+ChatGPT and Claude have been invaluable but I'm at the limits of what
+I can accomplish alone.
 
-## Options
+Here's what my AI collegues recommended.
 
-### Option 1: Adopt My Ubiquiti to Existing Network
-**Better for us**: Stable backhaul connection without client WiFi hopping, predictable performance, and integration with existing infrastructure. **Better for others around us**: Extended coverage in our area, reduced retries, and additional network capacity using your standard policies.
+- **DONE**
+  1. Reposition mobile router while monitoring signal strength, noise, and failures.  Given that it was designed for airports and hotels, it's doing a yoeman's job and unlikely to improve.
 
-**Technical Details**:
+- **Attempted/Failed**
+  1. Ubiquiti device in stand-alone mode.  I purchased the same device that's on Katya's RV.  I could not get it working in stand-alone mode.
+
+- **Suggested**
+  1. Adopt my Ubiquiti device into existing mesh.  I suspect this is Katya's setup. It uses the device's default mode: mesh.  It would be powered by our house battery, and accessible by anyone in range.  It's likely a 5-minute adoption step, then would be managed in the pool of exising AP's with no extra work.
+  2. Join another network - The public SSID likely optomizes speed, but we need predictabiltiy/stability more than speed.  When zoom is flakey, the available bandwidth is 10x-20x what's required.  It's the dropped connections that are likely the problem.
+
+Could you direct or advise me how to continue?
+
+Thanks,
+Michael
+
+P.S. Technical Appendix (courtesy of ChatGPT)
+
+I'd be happy to have ChatGPT generate a step-by-step guide -- it's really good at that.  Here are the parameters it thinks are necessary.
+
+**Adopting Ubiquiti:**
 - Device: Ubiquiti UAP-AC-M-US (same model Katya uses)
 - MAC Address: D8:B3:70:CC:AA:7C
 - Current status: Factory reset, ready for adoption
-- I can supply the AP, mount it where you prefer, and provide PoE if needed
-
-**Benefits**: One-time 5-minute adoption step, then managed with your other APs - no extra day-to-day work for you.
-
-### Option 2: Suggest Tweaks to Beryl Usage
-**Line of sight considerations**: Check-in building (300 feet), site 2/3 locations, or barn positioning. **Current challenges**: Wind sway affecting 300-foot signal path, antenna orientation optimization needed, and signal strength monitoring required.
-
-**What I've learned**: The Beryl is working as a repeater but the connection to "Trails End Wifi" shows as disconnected in LUCI while appearing connected in Beryl admin - suggesting a configuration mismatch that needs resolution.
-
-### Option 3: Join Alternative Network
-**Options**: Either a new "Wolf Enterprises" network, or one of the existing Crew or Lake Effect SSID's. **Benefits**: Reduced load on public "Trails End Wifi", potentially better performance, and clearer traffic separation.
-
-### Option 4: Something Other
-I'm open to any other approaches you might suggest that would work within your current network architecture and management preferences.
-
-## Close with Appreciation, Gratitude, Looking to Reuse (Not Reinvent), Happy to Contribute
-
-My preference would be to contribute to the existing shared network rather than create and maintain my own separate system. I'd much rather work with you given our history and your understanding of the setup, but I'm also open to an introduction to Jeff if that would work better for you.
-
-I'm committed to being a contributor to the community pool, not just a taker. If my device could be adopted into the existing mesh, it would become part of the network infrastructure, and anyone could connect through it seamlessly with no observable difference.
-
-Thanks for considering this, and I appreciate all you've done to make this place work so well.
-
-## Closing
-
-Best regards,  
-Michael
-
----
-
-## P.S. Technical Appendix
-
-I have been working with ChatGPT and Claude to do lots of learning/debugging not mentioned here. Happy to share the step-by-step it suggested for how 'admin' user can add my Ubiquiti to Trails End networks. It's really good at this kind of research and recommendation.
-
-**Key Technical Points**:
-- UAP-AC-M-US ready for adoption (factory reset)
-- Can provide PoE injector and mounting hardware
+- I an provide PoE injector and mounting hardware
 - Prefer integration over standalone operation
 - Willing to follow your network policies and naming conventions
 - Can document setup for future reference
 
-**Alternative Approaches** (if adoption isn't feasible):
+**Alternative Approaches:** (if adoption isn't feasible):
 - Private SSID with device MAC allowlist
 - QoS prioritization for work traffic
 - Band steering optimization
