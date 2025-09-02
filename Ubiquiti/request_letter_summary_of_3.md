@@ -2,8 +2,7 @@
 
 Hi Adam,
 
-I hope this finds you well as "official summer" blends into late
-summer, back-to-school, and return-of-Béla.
+I hope this finds you well as "official summer" blends into late summer, back-to-school, and return-of-Béla.
 
 First, thank you for all the "infrastructure" work you did at Trails End and Lake Effect. We're back for a 4th summer in large part to that work. I like how water pipes and the data pipes were both "farm systems" to you.
 
