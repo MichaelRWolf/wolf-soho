@@ -31,6 +31,7 @@
 ## Computing Devices
 
 - `michael-pro` (MacBook Pro)
+  - **Battery Replacement**: [Battery Replacement Project](michael-pro_battery.md)
 - `wendy-pro` (MacBook Pro)
 - `wolf-pro` (MacBook, newer)
 - `wolf-air` (MacBook Air)
