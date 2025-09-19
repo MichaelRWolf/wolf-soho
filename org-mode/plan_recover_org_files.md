@@ -59,6 +59,39 @@ See if there are ones from 1-3 months ago.  Maybe in TimeMachine.  Mayb in some 
 
 ## Archive Directory Comparison Results
 
+### Data Duration Analysis
+
+**File Modification Dates (Last Edit Time)**:
+- **Earliest**: March 7, 2023 (Tue Mar 7 20:30:27 EST 2023)
+- **Latest**: October 24, 2024 (Thu Oct 24 14:08:30 EDT 2024)
+- **Duration**: ~19 months, 3 weeks
+- **Purpose**: When files were last edited/updated
+
+**Filename-Encoded Dates (File Creation Time + UID)**:
+- **Earliest Page**: 20230413 (April 13, 2023) - `20230413-*`
+- **Latest Page**: 20241024 (October 24, 2024) - `20241024121632-*`
+- **Duration**: ~18 months, 1 week
+- **Purpose**: File creation timestamp, used as unique identifier in org-roam
+
+**Journal File Dates**:
+- **Earliest Journal**: 2023_03_20.org (March 20, 2023)
+- **Latest Journal**: 2023-07-05.org (July 5, 2023)
+- **Journal Duration**: ~3.5 months (35 journal files)
+
+**Data Volume**:
+- **Total org files**: 1,431
+- **Date-encoded pages**: 1,060 files
+- **Journal files**: 35 files
+- **Other files**: ~336 files
+
+### Date Analysis Summary
+- **Two distinct timestamps**: Creation time (filename) vs. last edit time (modification date)
+- **Journal activity stopped** after July 2023 (only 3.5 months of journals)
+- **Page creation continued** until October 2024 (18+ months of sustained activity)
+- **Active editing continued** until October 2024 (19+ months of usage)
+- **Actual content span**: ~18-19 months of meaningful data creation and editing
+- **Both timestamps are valid** - filename shows creation, modification shows last edit
+
 | Archive Directory                      | Org Files Total | quotes.org Found | org-roam-logseq/pages/ Files | Directory Contents          | Completeness      |
 |----------------------------------------|-----------------|------------------|------------------------------|-----------------------------|-------------------|
 | `~/iCloud Drive (Archive) - 1`         | **1,431**       | ✅ **YES**       | **1,100**                    | Full Logseq structure       | **MOST COMPLETE** |
