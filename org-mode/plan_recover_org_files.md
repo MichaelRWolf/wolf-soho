@@ -187,6 +187,21 @@ See if there are ones from 1-3 months ago.  Maybe in TimeMachine.  Mayb in some 
 
 **Surgeon General Warning**: TimeMachine is the fuckery wrapped in buggery surrounded by an enigma. The orange asshole may have given up on health and truth and fired the surgeon general, but we can still issue our own warning: **TimeMachine exploration is probably futile**.
 
+**Alternative Recovery Approach**: Since the data in `~/iCloud Drive (Archive) - 1` IS backed up by TimeMachine, you could use a simple `mv` instead of `rsync`:
+
+```bash
+# Simple move instead of copy (since it's already backed up)
+mv "/Users/michael/iCloud Drive (Archive) - 1/Logseq/org-roam-logseq" ~/recovered-org-files/
+```
+
+**TimeMachine Behavior with Renames**: TimeMachine should notice the rename operation and handle it efficiently:
+- **First backup after rename**: TimeMachine will detect the move/rename and update its index
+- **Subsequent backups**: Should not need to copy the 1,431 files again (they're already in the backup)
+- **Space efficiency**: Rename operations are much more efficient than copy operations in TimeMachine
+- **Caveat**: This assumes TimeMachine is still actively backing up the archive directory
+
+**Recommendation**: Use `mv` instead of `rsync` for faster recovery, since the data is already safely backed up in TimeMachine.
+
 **Conclusion**: Archive - 1 (`~/iCloud Drive (Archive) - 1`) is almost certainly the complete and only source of your org files. TimeMachine analysis is not recommended unless you're feeling particularly masochistic.
 
 ## Step - Research mobile app fuckery and collusion with cloud files
