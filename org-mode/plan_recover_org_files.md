@@ -102,9 +102,9 @@ See if there are ones from 1-3 months ago.  Maybe in TimeMachine.  Mayb in some 
 **Source**: `~/iCloud Drive (Archive) - 1` (1,431 org files, including quotes.org)
 
 **Steps**:
-1. **Copy archive to local directory**:
+1. **Copy archive to local directory** (preserving metadata):
    ```bash
-   cp -r "/Users/michael/iCloud Drive (Archive) - 1/Logseq/org-roam-logseq" ~/recovered-org-files/
+   rsync -av "/Users/michael/iCloud Drive (Archive) - 1/Logseq/org-roam-logseq/" ~/recovered-org-files/
    ```
 
 2. **Verify quotes.org recovery**:
@@ -116,7 +116,7 @@ See if there are ones from 1-3 months ago.  Maybe in TimeMachine.  Mayb in some 
 3. **Set up new local workflow** (no iCloud dependencies):
    ```bash
    mkdir ~/org-workspace
-   cp -r ~/recovered-org-files/* ~/org-workspace/
+   rsync -av ~/recovered-org-files/ ~/org-workspace/
    ```
 
 ### Phase 2: Alternative Approaches
