@@ -94,6 +94,24 @@ Look for `qdisc cake` counters increasing, and drops/marks not exploding.
 - **5 GHz preferred** to upstream AP (if CG AP supports it); otherwise 2.4 GHz with least‑used channel.
 - **Avoid double‑NAT churn** beyond necessity; Beryl as simple client/repeater is fine.
 
+### E.1. Wi‑Fi Band/SSID Selection
+
+On Mac, check band/SNR and scan channels:
+
+```bash
+/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I
+/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -s
+```
+
+Aim for **RSSI ≥ −65 dBm** and **SNR ≥ 25 dB**; prefer **5 GHz** when available.
+
+*Advanced*: pin Beryl to a specific campground AP **BSSID** to avoid roaming:
+
+```bash
+iw dev wlan-sta scan | grep -A5 -i 'Trails End'
+# then set option bssid 'aa:bb:cc:dd:ee:ff' in /etc/config/wireless and wifi reload
+```
+
 ---
 
 ## F. Troubleshooting Flow
@@ -102,6 +120,17 @@ Look for `qdisc cake` counters increasing, and drops/marks not exploding.
 2. **Clean hop 1–2, spikes downstream** → upstream (Starlink/Pasty) jitter/congestion.
 3. **Short total loss (10–60s)** → satellite handoff or uplink flip.
 4. **RPM < 50** on Mac while SQM on → lower SQM rates another 10–15% and retest.
+
+### F.1. ICMP vs TCP/UDP mtr troubleshooting
+
+If ICMP looks weird → try TCP/UDP probes:
+
+```bash
+mtr -T -P 443 -ezbw -i 0.5 -c 40 -r 1.1.1.1   # TCP looks like real HTTPS
+mtr -u -P 33434 -ezbw -i 0.5 -c 40 -r 1.1.1.1  # UDP classic traceroute
+```
+
+Note: loss at intermediate hops that doesn't persist downstream is likely ICMP rate-limiting (cosmetic).
 
 ---
 
