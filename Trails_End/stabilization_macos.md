@@ -59,6 +59,11 @@
   ```
 
   - Confirms where loss/jitter starts (LAN vs upstream) and catches handoff stalls.
+  - **Alternative**: if ICMP looks weird, try TCP/UDP variants:
+    ```bash
+    sudo mtr -T -P 443 -ezbw -i 0.5 -c 40 -r 1.1.1.1   # TCP
+    sudo mtr -u -P 33434 -ezbw -i 0.5 -c 40 -r 1.1.1.1  # UDP
+    ```
 
 ---
 
@@ -73,6 +78,10 @@
   ```
 
 - Optional: add a daily cron/launchd to rotate `uplink_log.txt`.
+- **Event marker** for NSURLError -1005 during network issues:
+  ```bash
+  echo "EVENT -1005 $(date '+%F %T')" >> ~/uplink_log.txt; ./uplink-describe >> ~/uplink_log.txt
+  ```
 
 ---
 
