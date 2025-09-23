@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD013 -->
 # Uplink at Trails End
 
 In a conversation between ChatGPT and Michael on 2025-09-23, we discussed:

@@ -1,4 +1,5 @@
-# macOS Stabilization Playbook (formerly “Remediation”)
+<!-- markdownlint-disable MD013 -->
+# macOS Stabilization Playbook (formerly "Remediation")
 
 > Goal: increase responsiveness and session resilience for Zoom/Cursor on variable campground uplinks (Starlink/Pasty), trading a bit of raw Mbps for stability.
 

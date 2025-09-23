@@ -1,4 +1,5 @@
-# Beryl Stabilization Playbook (formerly “Remediation”)
+<!-- markdownlint-disable MD013 -->
+# Beryl Stabilization Playbook (formerly "Remediation")
 
 > Goal: shape queues and improve resilience to jitter/blackouts when the campground flips between Pasty and Starlink.
 
