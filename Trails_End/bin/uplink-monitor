@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+. "$(dirname "$0")/uplink-lib.sh"
+uplink_log_loop "${1:-$HOME/uplink_log.txt}" "${2:-300}"
