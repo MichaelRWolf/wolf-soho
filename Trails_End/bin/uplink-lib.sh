@@ -35,9 +35,9 @@ uplink_description_short() {
   echo "Uplink: ${org} — ${nat} — IP ${ip}"
 }
 
-uplink_description() {
+uplink_description_verbose() {
   echo "=== $(date '+%F %T') ==="
-  uplink_short_description
+  uplink_description_short
   echo
   traceroute -n -m 6 1.1.1.1
   echo
