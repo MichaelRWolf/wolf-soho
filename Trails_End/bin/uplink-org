@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 . "$(dirname "$0")/uplink-lib.sh"
-uplink_description_short
+uplink_org
