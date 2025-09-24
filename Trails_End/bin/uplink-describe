@@ -1,4 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 . "$(dirname "$0")/uplink-lib.sh"
-uplink_description
+
+# Parse arguments
+verbose=false
+for arg in "$@"; do
+  case "$arg" in
+    --verbose|-v)
+      verbose=true
+      ;;
+  esac
+done
+
+# Call appropriate function based on verbose flag
+if [ "$verbose" = true ]; then
+  uplink_description_verbose
+else
+  uplink_description_short
+fi
