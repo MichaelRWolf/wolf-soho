@@ -21,6 +21,13 @@ get_org_from_rdap() {
   ' <<<"$rdap"
 }
 
+uplink_org() {
+  local ip org
+  ip="$(get_public_ip)"
+  org="$(get_org_from_rdap "$ip")"
+  echo "$org"
+}
+
 is_cgnat_ipv4() {
   local ip="$1"
   [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || return 1
@@ -30,7 +37,7 @@ is_cgnat_ipv4() {
 uplink_description_short() {
   local ip org nat="public IP"
   ip="$(get_public_ip)"
-  org="$(get_org_from_rdap "$ip")"
+  org="$(uplink_org)"
   if is_cgnat_ipv4 "$ip"; then nat="CGNAT (shared IPv4)"; fi
   echo "Uplink: ${org} — ${nat} — IP ${ip}"
 }
