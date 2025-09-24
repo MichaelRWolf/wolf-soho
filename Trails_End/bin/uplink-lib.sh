@@ -27,7 +27,7 @@ is_cgnat_ipv4() {
   ipcalc -nb 100.64.0.0/10 "$ip" >/dev/null 2>&1
 }
 
-uplink_short_description() {
+uplink_description_short() {
   local ip org nat="public IP"
   ip="$(get_public_ip)"
   org="$(get_org_from_rdap "$ip")"
