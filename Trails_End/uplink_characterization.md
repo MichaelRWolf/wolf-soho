@@ -35,15 +35,18 @@ In a conversation between ChatGPT and Michael on 2025-09-23, we discussed:
 ## 3. Evidence from Actual Data
 
 ### Speedtest
+
 - ~23 Mbps down / 18 Mbps up looked healthy.  
 - Jitter: up to 909 ms, indicating unstable performance.  
 
 ### `networkQuality`
+
 - Idle Latency: ~63 ms (951 RPM).  
 - Responsiveness: **Low** — ~45 RPM (1.3s).  
 - Much more informative than Speedtest.
 
 ### `mtr` Traceroute
+
 - Example Pasty path:  
   `AS27337 i1.pasty.net (199.38.31.1)`  
 - Example Starlink path:  
@@ -79,14 +82,17 @@ Idle Latency: 69.627 milliseconds | 861 RPM
 ## 5. Remediation Strategies
 
 ### Observation
+
 - Use scripts (`uplink-short`, `uplink-describe`, `uplink-monitor`) to log uplink identity and traceroutes.  
 - Correlate flips with Zoom/Cursor issues.  
 
 ### Mitigation: Beryl Router
+
 - Enable **SQM (Smart Queue Management)** with **cake/codel** to smooth jitter.  
 - Test profiles (e.g., “TCP optimization”) in LuCI; keep a fallback config.  
 
 ### Mitigation: macOS
+
 - Use `networkQuality -v` to measure responsiveness (RPM).  
 - Run `mtr` for live hop-by-hop loss/jitter.  
 - Automate logging with `launchd` to gather continuous data.  
@@ -126,6 +132,7 @@ ipcalc -nb 100.64.0.0/10 <IP>
 ### Vulnerabilities by Application Type
 
 #### Zoom (UDP-based media)
+
 - **Latency**: tolerates up to ~300 ms; above this, conversation flow suffers.
 - **Jitter**: highly sensitive to >100 ms spikes; causes audio gaps and video freezes.
 - **Packet Loss**: tolerates <1–2% via FEC; noticeable degradation >3–5%.
@@ -133,6 +140,7 @@ ipcalc -nb 100.64.0.0/10 <IP>
 - **Behavior**: *degrades gradually* — call continues, quality worsens.
 
 #### Cursor (TCP/WebSockets over HTTPS)
+
 - **Latency**: moderate RTT is fine; multi-second stalls (>5–10s) risk TCP timeout.
 - **Jitter**: less sensitive to small spikes; long jitter events = stall/disconnect.
 - **Packet Loss**: TCP retransmits hide small loss; sustained loss slows throughput.
@@ -144,6 +152,7 @@ ipcalc -nb 100.64.0.0/10 <IP>
 ### Benchmarks and Thresholds
 
 #### Latency (RTT)
+
 - **< 50 ms**: Excellent, feels instantaneous.
 - **50–150 ms**: Usable, minor lag.
 - **150–300 ms**: Laggy, double-talk issues.
@@ -151,6 +160,7 @@ ipcalc -nb 100.64.0.0/10 <IP>
 - **> 800 ms bursts**: Zoom freezes; Cursor retries stall.
 
 #### Jitter (variation in latency)
+
 - **< 20 ms**: Excellent.
 - **20–50 ms**: Acceptable.
 - **50–100 ms**: Zoom may wobble.
@@ -158,6 +168,7 @@ ipcalc -nb 100.64.0.0/10 <IP>
 - **> 200 ms sustained**: Zoom nearly unusable.
 
 #### Packet Loss
+
 - **< 1%**: Normal.
 - **1–3%**: Minor Zoom glitches.
 - **3–5%**: Zoom freezes/blocks; Cursor laggy.
@@ -165,6 +176,7 @@ ipcalc -nb 100.64.0.0/10 <IP>
 - **> 10%**: Unusable.
 
 #### Responsiveness (RPM, Apple `networkQuality`)
+
 - **> 400 RPM (~250 ms)**: Smooth.
 - **200–400 RPM**: Acceptable.
 - **50–200 RPM**: Laggy.
@@ -213,4 +225,3 @@ ipcalc -nb 100.64.0.0/10 <IP>
 - **TCP**: Transmission Control Protocol — reliable, ordered byte streams.  
 - **UDP**: User Datagram Protocol — fast, connectionless, no delivery guarantees.  
 - **WebSockets**: Persistent, bidirectional communication channel over a single TCP connection.  
-

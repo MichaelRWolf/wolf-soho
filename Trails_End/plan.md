@@ -62,10 +62,10 @@ Related docs:
 
 ### macOS (Supportive levers — see **remediation_macos**)
 
-4. **TCP keepalive test profile** (temporary; rollback script ready).
-5. **DNS** set to 1.1.1.1 or 8.8.8.8.
-6. **Disable VPN** during calls, or switch to **WireGuard** if required.
-7. **Wi‑Fi hygiene**: 5 GHz, close to Beryl, disable auto‑join to campground SSID.
+1. **TCP keepalive test profile** (temporary; rollback script ready).
+2. **DNS** set to 1.1.1.1 or 8.8.8.8.
+3. **Disable VPN** during calls, or switch to **WireGuard** if required.
+4. **Wi‑Fi hygiene**: 5 GHz, close to Beryl, disable auto‑join to campground SSID.
 
 **Decision Gate C:** If handoff stalls still cause disconnects despite SQM and keepalives, accept that 20–60 s blackouts are not maskable — focus on detection/avoidance.
 
