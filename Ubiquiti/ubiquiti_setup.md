@@ -21,6 +21,12 @@
 3. **Keep holding** for specified duration
 4. **Release** and let device boot
 
+### Visual Indicators:
+- **During Reset**: LED should flash/blink white
+- **After Reset**: LED should be steady white (not blue)
+- **Success**: Device should broadcast default SSID
+- **Blue LED**: Device connected to controller (needs reset)
+
 ## Verified Login Sequence
 
 ### Factory Reset Method:
@@ -34,6 +40,7 @@
 ### Alternative Access Methods:
 - **Web Interface**: `http://192.168.1.20` (default credentials: `ubnt`/`ubnt`)
 - **Device SSID**: Look for `UAP-AC-M-XXXXXX` (where XXXXXX is device MAC)
+- **Controller Mode**: If device is in controller mode, try `admin`/`admin`
 
 ## Operating Modes
 
@@ -110,8 +117,8 @@ Trails End WiFi → wolfden-mesh (client mode) → Running Wolf Router (direct)
 
 ### SSH Access
 ```bash
-# Default credentials
-ssh ubnt@192.168.1.20
+# Default credentials with macOS security parameters
+ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostKeyAlgorithms=+ssh-rsa,ssh-dss -o Ciphers=+aes128-cbc ubnt@192.168.1.20
 # Password: ubnt
 
 # Check device status
