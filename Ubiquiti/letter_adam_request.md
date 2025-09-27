@@ -17,6 +17,7 @@ I would like to set up a network configuration in our RV that uses a **passive P
   - This single cable will carry both power and data to the device
 
 ## Benefits
+
 - Eliminates the need to run an additional AC power cord outside
 - Reduces cable clutter and complexity
 - Maintains flexibility for power source options (RV DC system or shore power via adapter)
@@ -25,4 +26,3 @@ Please let me know if you approve this configuration, or if there are specific r
 
 Thank you,  
 [Your Name]  
- 
