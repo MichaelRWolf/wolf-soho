@@ -79,7 +79,7 @@ Howdy Adam,
 
 Good to hear from you too, and no worries about the timing—I know it's harvest season.
 
-I have powered up my Ubiquiti UAP-AC-M-US device. I attempted a 60-second factory reset that seemed to hang, then a 30-second reset that seemed to complete. I will keep it powered while the sun shines. Since we are now in site 1, it should be easy to adopt. The device model is UAP-AC-M-US with MAC address D8:B3:70:CC:AA:7C, and it's factory reset and ready for adoption.
+My UAP is ready for adoption [See Note 1].  I'll keep it powered-up during daylight hours.   Unfortunately, subsequent monitoring and research leads me to believe this may not improve things [See Note 2].
 
 When I offered to help out with solar panel re-installation, Aaron said you may be on site to assist, too. I'd enjoy that, and to learn what you've been up to. (Aside, while you're here, feel welcome to join us for dinner.)
 
@@ -89,3 +89,18 @@ I am now unsure if adopting the Ubiquiti device will be sufficient. Subsequent l
 
 Thanks,
 Michael
+
+---
+
+Notes
+
+1 - I have powered up my Ubiquiti UAP-AC-M-US device. I attempted a 60-second factory reset that seemed to hang, then a 30-second reset that seemed to complete. Since we are now in site 1, it should be easy to adopt. The device model is UAP-AC-M-US with MAC address D8:B3:70:CC:AA:7C, and it's factory reset and ready for adoption.
+
+2 - My AI assistants summarized the problem thusly:
+
+The network analysis shows adequate bandwidth (10-20× Zoom requirements) with dual hosting between Pasty and Starlink, but Zoom and Cursor crash due to connection instability and network jitter rather than insufficient speed. The intermittent latency spikes and connection drops disrupt real-time applications that require consistent, low-latency connections, making it difficult to prevent these crashes through client-side configuration alone.
+
+Hosting tweaks (Pasty/Starlink optimization) or Ubiquiti mesh parameters could improve user experience by reducing handoff delays, implementing QoS prioritization for real-time traffic, and optimizing channel selection to minimize interference—all without consuming additional bandwidth. Michael could implement TCP keepalive adjustments, DNS optimization to 1.1.1.1, and macOS network stack tuning to improve connection resilience.
+
+The benefits are asymmetric: network-side improvements (hosting optimization, mesh configuration) provide broader, more reliable gains affecting all users, while client-side tweaks (MacBook networking, equipment positioning) offer targeted improvements primarily benefiting Michael's specific setup and usage patterns.
+
