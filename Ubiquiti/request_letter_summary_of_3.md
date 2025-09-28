@@ -77,30 +77,33 @@ Also, I appreciate the offer of systems checking the bus. I think Béla left it 
 
 Howdy Adam,
 
-Good to hear from you too, and no worries about the timing—I know it's harvest season.
+Good to hear from you! No worries about timing—I know harvest season is crazy.
 
-My UAP is ready for adoption [See Note 1].  I'll keep it powered-up during daylight hours.   Unfortunately, subsequent monitoring and research leads me to believe this may not improve things [See Note 2].
+My UAP is ready for adoption [Note 1]. I'll keep it powered up while our solar panels can support it.
 
-When I offered to help out with solar panel re-installation, Aaron said you may be on site to assist, too. I'd enjoy that, and to learn what you've been up to. (Aside, while you're here, feel welcome to join us for dinner.)
+When I offered to help with the solar panel re-installation, Aaron mentioned you might be on site too. I'd love to work together and catch up on what you've been up to. (And you're welcome to join us for dinner while you're here.)
 
-I will do a quick check at the bus.
+My network monitoring has revealed something interesting [Note 2]: plenty of bandwidth, but Zoom still drops due to connection instability. Let's start with adopting the UAP and see how that goes.
 
-I am now unsure if adopting the Ubiquiti device will be sufficient. Subsequent learning and monitoring has had me realize that signal strength and download/upload speed is sufficient for normal email and browsing, but the problem with Zoom (and other HTTPS/streaming tools) is the connection stability and network jitter. The bandwidth is more than adequate—it's the intermittent connection drops and latency spikes that disrupt video calls. We're probably OK for this year, but it would be good to know if you think this is addressable for next year.
+I'm curious about your take on whether the network configuring we started a couple years ago might still be possible.  This both a computer network topology question, and also wondering if Jeff is up to it. What's your read?
+
+I'll check the bus on my next walk to the compost windrow. (Can you imagine a more beautiful walk for a kitchen chore?)
 
 Thanks,
 Michael
 
 ---
 
-Notes
+**Technical Notes:**
+My AI assistants are great at technical analysis and also technical writing...
 
-1 - I have powered up my Ubiquiti UAP-AC-M-US device. I attempted a 60-second factory reset that seemed to hang, then a 30-second reset that seemed to complete. Since we are now in site 1, it should be easy to adopt. The device model is UAP-AC-M-US with MAC address D8:B3:70:CC:AA:7C, and it's factory reset and ready for adoption.
+**Note 1 - Device Status:** UAP-AC-M-US (MAC: D8:B3:70:CC:AA:7C), factory reset complete (60- and 30-second versions), powered up at site 1, ready for adoption.
 
-2 - My AI assistants summarized the problem thusly:
+**Note 2 - Network Analysis:** Bandwidth adequate (10-20× Zoom requirements), dual hosting Pasty/Starlink. Issue: connection instability/jitter causing drops for Zoom (and other streaming tools).  There is sufficient speed. Client-side fixes insufficient for real-time application stability.
 
-The network analysis shows adequate bandwidth (10-20× Zoom requirements) with dual hosting between Pasty and Starlink, but Zoom and Cursor crash due to connection instability and network jitter rather than insufficient speed. The intermittent latency spikes and connection drops disrupt real-time applications that require consistent, low-latency connections, making it difficult to prevent these crashes through client-side configuration alone.
+**Potential Solutions:**
+- **Network-side (inside the barn):** QoS prioritization, handoff optimization, channel selection
+- **Client-side (inside the RV):** TCP keepalive tuning, DNS optimization (1.1.1.1), macOS network stack adjustments
 
-Hosting tweaks (Pasty/Starlink optimization) or Ubiquiti mesh parameters could improve user experience by reducing handoff delays, implementing QoS prioritization for real-time traffic, and optimizing channel selection to minimize interference—all without consuming additional bandwidth. Michael could implement TCP keepalive adjustments, DNS optimization to 1.1.1.1, and macOS network stack tuning to improve connection resilience.
-
-The benefits are asymmetric: network-side improvements (hosting optimization, mesh configuration) provide broader, more reliable gains affecting all users, while client-side tweaks (MacBook networking, equipment positioning) offer targeted improvements primarily benefiting Michael's specific setup and usage patterns.
+**Benefit Analysis:** Network improvements provide broader gains for all users; client-side tweaks offer targeted improvements for specific setups.
 
