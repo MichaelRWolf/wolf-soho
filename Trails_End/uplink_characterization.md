@@ -56,7 +56,7 @@ In a conversation between ChatGPT and Michael on 2025-09-23, we discussed:
 ### Sample Script Output
 
 ```bash
-$ ./uplink-short
+$ uplink-short
 Uplink: SpaceX Services, Inc. — public IP — IP 2605:59ca:13ad:c910:41f0:638f:7b84:376
 
 michael@michael-pro: (wolf-soho)/Trails_End/bin 
@@ -104,13 +104,13 @@ Idle Latency: 69.627 milliseconds | 861 RPM
 
 ```bash
 # Current uplink, org, and IP
-./uplink-short
+uplink-short
 
 # Detailed snapshot with traceroute
-./uplink-describe
+uplink-describe
 
 # Continuous logging every 5 minutes
-./uplink-monitor ~/uplink_log.txt 300
+uplink-monitor ~/uplink_log.txt 300
 
 # Apple’s responsiveness test (RPM)
 networkQuality -v
