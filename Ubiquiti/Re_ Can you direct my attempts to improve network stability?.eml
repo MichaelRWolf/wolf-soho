@@ -1,0 +1,360 @@
+Received: from 10.196.227.159
+ by atlas108.att.mail.bf1.yahoo.com pod-id NONE with HTTPS; Wed, 24 Sep 2025 21:04:00 +0000
+Return-Path: <adam@urbanrootsfarm.com>
+X-Originating-Ip: [209.85.222.44]
+Received-SPF: pass (domain of urbanrootsfarm.com designates 209.85.222.44 as permitted sender)
+Authentication-Results: atlas108.att.mail.bf1.yahoo.com;
+ dkim=pass header.i=@urbanrootsfarm-com.20230601.gappssmtp.com header.s=20230601 arc_overridden_status=NOT_OVERRIDDEN;
+ spf=pass smtp.mailfrom=urbanrootsfarm.com arc_overridden_status=NOT_OVERRIDDEN;
+ dmarc=unknown header.from=urbanrootsfarm.com arc_overridden_status=NOT_OVERRIDDEN;
+X-Apparently-To: michaelrwolf@att.net; Wed, 24 Sep 2025 21:04:00 +0000
+X-YMailISG: u6jSyM4WLDvywUyVWz2.DNqE_fGLsomZ_sjqX6183Q.BmQsa
+ AXTptWgpdT0DkRPF2uHVD6_paiIBF8NOErxmOanleQv0znCwvQhfC9J4VmuD
+ B_HRaJAkOacusLKpAkm2TKt8TT3EeMSgFeMdebGHzS2VVqYAAmzb4sPP6rMj
+ DGt0DTRK03Vo1m4D3Yad6YRd8PXrn52_PedIiTXdDTkxonFHMr12tbiM7ivw
+ UhHzMEclfuo_klYjCC.1q9FZYrp3ExSKfxv6yax1jFa4yuvnVNI_QBp4HVSE
+ GjgQRcZRDfgds5aC3r_eWAnABsjbonyo6Vn97fwLmA1WSBjVxS5Wnzh4._gC
+ 0OKD95dc5Gk3OLW4iW_KOH.Z2qk_5q0yIzGTShmEPnmxzpvDBoZ78qRXWSBa
+ UxoFhKKn_PyUPn_1u4akCvb7cfrxGZaxbwRjzQo3Xf_esTsH7nYoT9kxBdfW
+ qXHIXMEAOeEvlD4mCPzYSPpXK4ARF1ndczim94EAHDYLx8YvCWD7pej550JK
+ d5EgBmyeuDs3CrMyxGjQ59TD6PufZ2bZkBVZHyVfvsh4C3goCP2uCbOl57tw
+ .nPWsheMSkoMOtQpqejl2YEl_J_neanZ7xAkeTSBcUVco.S5RKJGUCJrwNTk
+ mXklcBIF1LlJNRp_e1J7veUueHRgPoVUtL926RZRIF8MtO.aqr1.opZSrq_M
+ pvHA0f1EZkPREMm.GT232SXDUEEPz7MG7cNpqKWTxuzcYyJGYDlGeZWX50K6
+ dgjHod5bXw7xO3i0KziQFvIyvp5NnaD7aLxJ0muGA4lH.cp_Tvm5k4e_DBW5
+ AQUGs8jfXg.wneP_yX4RirwgjvSJlylv.ilayYKdtpKxNvX3.Bvape2SAdIn
+ C7bT3.Ixto3CBxvYoy9v0j.BmRV2ZNjgC6vI_mqVLdn483WS2WgcwaAUn4OT
+ 6605ZdRB1XLPpJXKMhcJJYJVD2YuqlooGZL2FZkMx75KiO_YmlXU6IY4u846
+ 6FT1.SEA1nlYMvAhZvjr.LSByBmFBZYEL44OphFPpkcIRJXW3HnbulbQtJ43
+ MfbkZsWRAPqKQ3LZolNmOb7.353x187_XqX33MRlDyxOUb3BZAk2K6tKyBRu
+ vYgVKRC4PWUC0X_Hjarxmrexeu3wv123ymduV1Bnty0W4WXIyRpx.5UCm07V
+ KrPMX4V8O3Gos2BAOp_JfBMxyoPenX6Phj289G6G5ICF0dd.Rl1Oi9yBIJft
+ X03hKhbdPVsVJlXhZVSPzozHF4nGQeSS4CZPPdO.DABI7xsJ8I1bCcATD_OO
+ .Ex3yFUcoY29hsFCgY0hNktqBEmZdV1nZRPkYXHGA.yNh.nzU2K7CkPnXZqo
+ wtEtBZl31QxjJ3qRpQxikUYdssxuARbRunTPew0yLllrGsGEtWLFxBG.9MH8
+ XJRiVXYatrbPO3sSWkyDiybRuRQYq._HLftp38OY5_kp6Raia2nKP8YWIqFs
+ 0uKOB_voY60TwdP_6BgnEiOuAXlFKjSagkU-
+Received: from 209.85.222.44 (EHLO mail-ua1-f44.google.com)
+ by 10.196.227.159 with SMTPs
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256);
+ Wed, 24 Sep 2025 21:04:00 +0000
+Received: by mail-ua1-f44.google.com with SMTP id a1e0cc1a2514c-890190a3579so53046241.2
+        for <MichaelRWolf@att.net>; Wed, 24 Sep 2025 14:04:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=urbanrootsfarm-com.20230601.gappssmtp.com; s=20230601; t=1758747840; x=1759352640; darn=att.net;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=XqfevrBLokCN9NftMvSH4FdQbtq4mNiD9dCYuG7fQ5E=;
+        b=i7OBSiUXehsO9mA7Q2AkDFSQUcYuHStCPpZAmHtowJlLghYhxIClq0AXI7eIcYpom+
+         oZW5BQs6IZ41btom5aTZK3O5Lq/8EvttQmJewyfY6OXzMem1S10eIthHcRGTSwSQsS7O
+         CmuLfJd6oFP8vO+c8g405q86scL2b5O7O6ck5R7HJbyPib2Xgj/4k8KsH0Tu7ZSU36Xp
+         hJaq0GvzvfD/52oLVP3aAhX+jWLJC8hG8Jjz/ZLHvshWDzRw3ilCJmryzgtXXFAp1M2Y
+         +/T1AwPySDyM3dnibM7EHedqWlUM464ySaeKRhR9hBKXxhdA/yXcahtEes4Z4fQ0ElSG
+         x8nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758747840; x=1759352640;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=XqfevrBLokCN9NftMvSH4FdQbtq4mNiD9dCYuG7fQ5E=;
+        b=G6fu/WLIm8HSI7eYWm2JjhMUukWQ9CutuOV+Nr6sJrejD5eyJg1Sd3oAM1vbeyPDKc
+         vm4B5aq0lqAH3CXLp7d+Yq3gALzth2TZGPv/PDFFpxY4JK8OTGErQpRzdcd5EqjJqb9q
+         pOZ5uRW3o8xRvqpwZySlyYrk1uDJg6Vl0s0DqCzdvW3+cdgZPJ7faWCpb0BeCgelNbX9
+         CJjPeMc+v8n3k7dWYOWL5QC71LSSbysJmk61O6OJv9fwy/Ge8P4tlb4MIlBAcTHZwnX0
+         ZqVvmxct2rCYSzappSy5+BTZnz6026/0i1aukihsri+ohDkGT6hdicCySs5o0ObvOZbE
+         TabA==
+X-Gm-Message-State: AOJu0Yx+8aIBiFWBeQMtTiBBTVyWUwf6k7nGm2Vao9f2IsaLO4gehsIR
+	9cMQ44XGxz+RcCpWRETs3HkKh2RCi5gFpONadwx0H5UTB6RcA5O4OttJ563X0SOIyOegwV9AyTX
+	MVrqnWHFxl0l7j4T03Yt3LJFk1URbF/2b3PPgu1NYpi/9F1ZbBrs6
+X-Gm-Gg: ASbGnctGjHSoz9HWqdigxPUInzlAWpi/+REbx4xQcUHeTNMBeu4FIcgKzzYh7igWcHf
+	lS5Gpug8sJj6X/VWbTL5iuFc82Io/I684ibPVx9bIdUHInrgMfj9Du2sSnPOpX87TFeoYqRI5Bi
+	Sl5rKm2uLqf0W9RbfEBVIENT72WrTGJwgIImQyAWVlbewH/wnTV9nqW11rcuclqJVpcE6luDcgY
+	bfu9w==
+X-Google-Smtp-Source: AGHT+IHn4mtd9Q65iejtSXXARfzMheqcDU2+3vGu2/51iuY4WD8Ui1BWyNNb+WBNtyjsPFdnKyxfmepssp8QNzWvIzA=
+X-Received: by 2002:a05:6122:a02:b0:54a:1e96:e958 with SMTP id
+ 71dfb90a1353d-54bea01ba83mr672670e0c.0.1758747839873; Wed, 24 Sep 2025
+ 14:03:59 -0700 (PDT)
+MIME-Version: 1.0
+References: <66E29B12-3AE3-4164-8D3E-52653AC5D430.ref@att.net> <66E29B12-3AE3-4164-8D3E-52653AC5D430@att.net>
+In-Reply-To: <66E29B12-3AE3-4164-8D3E-52653AC5D430@att.net>
+From: Adam Millsap <adam@urbanrootsfarm.com>
+Date: Wed, 24 Sep 2025 16:03:34 -0500
+X-Gm-Features: AS18NWB0m6jhO9wHyCVhXvxBz2hIO1juDqObf2lG_23XXVNkA19QnAA3Us-Bg0A
+Message-ID: <CAGaadT_pM2hjFATC8oYG2HhOMPSonE+gaeVYT=M53C8eYOu96A@mail.gmail.com>
+Subject: Re: Can you direct my attempts to improve network stability?
+To: "Michael R. Wolf" <MichaelRWolf@att.net>
+Content-Type: multipart/alternative; boundary="0000000000003ed231063f926417"
+Content-Length: 12460
+
+--0000000000003ed231063f926417
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Howdy Micheal,
+
+Good to hear from you. Sorry I'm just getting back to you, things have been
+quite busy here, and I've fallen behind in emails.
+
+First off; disclosures. =F0=9F=98=89 I'm no longer running the network up t=
+here. I
+handed that off to Jeff in the spring at Aarons request.
+
+That being said, I do still have full admin access, and could probably help
+you get your uap mesh adopted. In fact, most likely if you give it a
+factory reset, and power it up, It will show up in my dashboard for
+adoption. Shoot me a text when it's fired up.
+
+Also, I appreciate the offer of systems checking the bus. I think B=C3=A9la=
+ left
+it in good order, but I certainly wouldn't complain if you dropped by and
+had a look. I think the keys are in the door.
+
+--Adam
+
+
+
+Adam  Millsap
+
+Farmer & Consultant
+417-848-8877
+Adam@UrbanRootsFarm.com <Adam@urbanrootsfarm.com>
+www. UrbanRootsFarm.com <https://www.%20urbanrootsfarm.com/>
+
+          -- Know your Farmer. Know your food. --
+
+
+On Tue, Sep 2, 2025 at 4:04=E2=80=AFPM Michael R. Wolf <MichaelRWolf@att.ne=
+t> wrote:
+
+> Hi Adam,
+>
+> I hope this finds you well as summer shifts into late summer,
+> back-to-school season, and B=C3=A9la=E2=80=99s return.
+>
+> First, thank you for all the infrastructure work you did at Trails End an=
+d
+> Lake Effect. We're back for a fourth summer largely because of those
+> efforts. I love how both the water pipes and data pipes became =E2=80=9Cf=
+arm
+> systems=E2=80=9D in your hands.
+>
+> As technomads, we especially appreciate the WiFi. It far exceeds
+> expectations=E2=80=94allowing us to meet with clients across the country =
+(and
+> world) from an off=E2=80=91grid campsite that=E2=80=99s still on the inte=
+rnet!
+>
+> That said, Zoom calls sometimes drop. Infrequent as they are, they=E2=80=
+=99re
+> disruptive. Remote work depends on a stable connection.
+>
+> I=E2=80=99ve done quite a bit of monitoring, debugging, configuring, and =
+research.
+> ChatGPT and Claude have been invaluable, but I=E2=80=99ve reached the lim=
+it of what
+> I can solve alone.
+>
+> Here=E2=80=99s what I=E2=80=99ve tried so far:
+>
+> **Done:**
+>
+> 1. Repositioned my mobile router while tracking signal strength, noise,
+> and errors. For a device designed for airports and hotels, it=E2=80=99s d=
+oing a
+> yeoman=E2=80=99s job, but there=E2=80=99s little room for improvement.
+>
+> **Attempted (but unsuccessful):**
+>
+> 1. Tried running a Ubiquiti device in stand=E2=80=91alone mode. I bought =
+the same
+> model Katya uses, hoping it could connect to *Trails End WiFi* instead of
+> my mobile router. I couldn=E2=80=99t get it working.
+>
+> **Possible next steps:**
+>
+> 1. **Adopt my Ubiquiti device into the existing mesh.** I believe this is
+> how Katya=E2=80=99s setup works. The device is factory=E2=80=91reset and =
+ready. Once
+> adopted, it would be powered by our house battery, available to anyone
+> nearby, and managed alongside existing APs. Likely just a quick setup.
+> 2. **Join a different network.** The public SSID may optimize for speed,
+> but what I need is predictability and stability. Even when Zoom is flaky,
+> available bandwidth is 10=E2=80=9320=C3=97 what=E2=80=99s required=E2=80=
+=94it=E2=80=99s the dropped connections
+> that matter.
+>
+> Could you point me in the right direction?
+>
+> Thanks,
+> Michael
+>
+> ---
+>
+> **Technical Appendix (courtesy of ChatGPT):**
+>
+> *Adopting Ubiquiti Device:*
+>
+> * Model: Ubiquiti UAP=E2=80=91AC=E2=80=91M=E2=80=91US (same as Katya=E2=
+=80=99s)
+> * MAC Address: D8\:B3:70\:CC\:AA:7C
+> * Status: Factory reset, ready for adoption
+> * Power: PoE injector and mounting hardware available
+> * Preference: Integration into existing mesh (not standalone)
+> * Compliance: Happy to follow network policies and naming conventions
+> * Documentation: Will provide setup notes for future reference
+>
+> *Alternative approaches (if adoption isn=E2=80=99t feasible):*
+>
+> * Private SSID with device MAC allow=E2=80=91list
+> * QoS prioritization for work traffic
+> * Band steering adjustments
+> * Channel selection guidance
+>
+>
+
+--0000000000003ed231063f926417
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Howdy Micheal,=C2=A0</div><div><br></div><div>Good to=
+ hear from you. Sorry I&#39;m just getting back to you, things have been qu=
+ite busy here, and I&#39;ve fallen behind in emails.=C2=A0</div><div><br></=
+div><div>First off; disclosures.=C2=A0=F0=9F=98=89=C2=A0I&#39;m no longer r=
+unning the network up there. I handed that off to Jeff in the spring at Aar=
+ons request.=C2=A0</div><div><br></div><div>That=C2=A0being said, I do stil=
+l have full admin access, and could probably help you get your uap mesh ado=
+pted. In fact, most likely if you give it a factory reset, and power it up,=
+ It will show up in my dashboard=C2=A0for adoption. Shoot me a text when it=
+&#39;s=C2=A0fired up.</div><div><br></div><div>Also, I appreciate the offer=
+ of systems checking the=C2=A0bus. I think B=C3=A9la left it in good order,=
+ but I certainly wouldn&#39;t complain if you dropped by and had a look. I =
+think the keys are in the door.=C2=A0</div><div><br></div><div>--Adam</div>=
+<div><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_sig=
+nature"><div dir=3D"ltr"><div><br></div><div><br></div><table cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"color:rgb(255,255,255);font-size:medium;v=
+ertical-align:-webkit-baseline-middle;font-family:Arial"><tbody><tr><td col=
+or=3D"#a3c37d" height=3D"1" style=3D"width:343px;border-bottom:1px solid rg=
+b(163,195,125);border-left:none;display:block"></td></tr><tr><td height=3D"=
+30"><br></td></tr><tr><td style=3D"vertical-align:middle"><table cellpaddin=
+g=3D"0" cellspacing=3D"0" style=3D"vertical-align:-webkit-baseline-middle;f=
+ont-family:Arial"><tbody><tr><td><h3 color=3D"#000000" style=3D"margin:0px;=
+font-size:18px;color:rgb(0,0,0)">Adam=C2=A0=C2=A0Millsap</h3><p color=3D"#0=
+00000" style=3D"margin:0px;color:rgb(0,0,0);font-size:14px;line-height:22px=
+">Farmer &amp; Consultant</p></td><td width=3D"15"><div></div></td><td colo=
+r=3D"#a3c37d" width=3D"1" style=3D"width:1px;border-bottom:none;border-left=
+:1px solid rgb(163,195,125)"></td><td width=3D"15"><div></div></td><td><tab=
+le cellpadding=3D"0" cellspacing=3D"0" style=3D"vertical-align:-webkit-base=
+line-middle;font-family:Arial"><tbody><tr height=3D"25" style=3D"vertical-a=
+lign:middle"><td width=3D"30" style=3D"vertical-align:middle"><table cellpa=
+dding=3D"0" cellspacing=3D"0" style=3D"vertical-align:-webkit-baseline-midd=
+le;font-family:Arial"><tbody><tr><td style=3D"vertical-align:bottom"><span =
+color=3D"#a3c37d" width=3D"11" style=3D"display:block;background-color:rgb(=
+163,195,125)"><img src=3D"https://cdn2.hubspot.net/hubfs/53/tools/email-sig=
+nature-generator/icons/phone-icon-2x.png" color=3D"#a3c37d" width=3D"13" st=
+yle=3D"display:block"></span></td></tr></tbody></table></td><td style=3D"pa=
+dding:0px;color:rgb(0,0,0)"><a href=3D"tel:417-848-8877" color=3D"#000000" =
+style=3D"color:rgb(0,0,0);font-size:12px" target=3D"_blank">417-848-8877</a=
+></td></tr><tr height=3D"25" style=3D"vertical-align:middle"><td width=3D"3=
+0" style=3D"vertical-align:middle"><table cellpadding=3D"0" cellspacing=3D"=
+0" style=3D"vertical-align:-webkit-baseline-middle;font-family:Arial"><tbod=
+y><tr><td style=3D"vertical-align:bottom"><span color=3D"#a3c37d" width=3D"=
+11" style=3D"display:block;background-color:rgb(163,195,125)"><img src=3D"h=
+ttps://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/emai=
+l-icon-2x.png" color=3D"#a3c37d" width=3D"13" style=3D"display:block"></spa=
+n></td></tr></tbody></table></td><td style=3D"padding:0px"><a href=3D"mailt=
+o:Adam@urbanrootsfarm.com" color=3D"#000000" style=3D"color:rgb(0,0,0);font=
+-size:12px" target=3D"_blank">Adam@UrbanRootsFarm.com</a></td></tr><tr heig=
+ht=3D"25" style=3D"vertical-align:middle"><td width=3D"30" style=3D"vertica=
+l-align:middle"><table cellpadding=3D"0" cellspacing=3D"0" style=3D"vertica=
+l-align:-webkit-baseline-middle;font-family:Arial"><tbody><tr><td style=3D"=
+vertical-align:bottom"><span color=3D"#a3c37d" width=3D"11" style=3D"displa=
+y:block;background-color:rgb(163,195,125)"><img src=3D"https://cdn2.hubspot=
+.net/hubfs/53/tools/email-signature-generator/icons/link-icon-2x.png" color=
+=3D"#a3c37d" width=3D"13" style=3D"display:block"></span></td></tr></tbody>=
+</table></td><td style=3D"padding:0px"><a href=3D"https://www.%20urbanroots=
+farm.com/" color=3D"#000000" style=3D"color:rgb(0,0,0);font-size:12px" targ=
+et=3D"_blank">www. UrbanRootsFarm.com</a></td></tr></tbody></table></td></t=
+r></tbody></table></td></tr></tbody></table><div style=3D"text-align:left">=
+<br></div><div style=3D"text-align:left">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ -- Know your Farmer. Know your food. --<br></div></div></div></div><br></d=
+iv><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cl=
+ass=3D"gmail_attr">On Tue, Sep 2, 2025 at 4:04=E2=80=AFPM Michael R. Wolf &=
+lt;<a href=3D"mailto:MichaelRWolf@att.net">MichaelRWolf@att.net</a>&gt; wro=
+te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi Adam,<br>
+<br>
+I hope this finds you well as summer shifts into late summer, back-to-schoo=
+l season, and B=C3=A9la=E2=80=99s return.<br>
+<br>
+First, thank you for all the infrastructure work you did at Trails End and =
+Lake Effect. We&#39;re back for a fourth summer largely because of those ef=
+forts. I love how both the water pipes and data pipes became =E2=80=9Cfarm =
+systems=E2=80=9D in your hands.<br>
+<br>
+As technomads, we especially appreciate the WiFi. It far exceeds expectatio=
+ns=E2=80=94allowing us to meet with clients across the country (and world) =
+from an off=E2=80=91grid campsite that=E2=80=99s still on the internet!<br>
+<br>
+That said, Zoom calls sometimes drop. Infrequent as they are, they=E2=80=99=
+re disruptive. Remote work depends on a stable connection.<br>
+<br>
+I=E2=80=99ve done quite a bit of monitoring, debugging, configuring, and re=
+search. ChatGPT and Claude have been invaluable, but I=E2=80=99ve reached t=
+he limit of what I can solve alone.<br>
+<br>
+Here=E2=80=99s what I=E2=80=99ve tried so far:<br>
+<br>
+**Done:**<br>
+<br>
+1. Repositioned my mobile router while tracking signal strength, noise, and=
+ errors. For a device designed for airports and hotels, it=E2=80=99s doing =
+a yeoman=E2=80=99s job, but there=E2=80=99s little room for improvement.<br=
+>
+<br>
+**Attempted (but unsuccessful):**<br>
+<br>
+1. Tried running a Ubiquiti device in stand=E2=80=91alone mode. I bought th=
+e same model Katya uses, hoping it could connect to *Trails End WiFi* inste=
+ad of my mobile router. I couldn=E2=80=99t get it working.<br>
+<br>
+**Possible next steps:**<br>
+<br>
+1. **Adopt my Ubiquiti device into the existing mesh.** I believe this is h=
+ow Katya=E2=80=99s setup works. The device is factory=E2=80=91reset and rea=
+dy. Once adopted, it would be powered by our house battery, available to an=
+yone nearby, and managed alongside existing APs. Likely just a quick setup.=
+<br>
+2. **Join a different network.** The public SSID may optimize for speed, bu=
+t what I need is predictability and stability. Even when Zoom is flaky, ava=
+ilable bandwidth is 10=E2=80=9320=C3=97 what=E2=80=99s required=E2=80=94it=
+=E2=80=99s the dropped connections that matter.<br>
+<br>
+Could you point me in the right direction?<br>
+<br>
+Thanks,<br>
+Michael<br>
+<br>
+---<br>
+<br>
+**Technical Appendix (courtesy of ChatGPT):**<br>
+<br>
+*Adopting Ubiquiti Device:*<br>
+<br>
+* Model: Ubiquiti UAP=E2=80=91AC=E2=80=91M=E2=80=91US (same as Katya=E2=80=
+=99s)<br>
+* MAC Address: D8\:B3:70\:CC\:AA:7C<br>
+* Status: Factory reset, ready for adoption<br>
+* Power: PoE injector and mounting hardware available<br>
+* Preference: Integration into existing mesh (not standalone)<br>
+* Compliance: Happy to follow network policies and naming conventions<br>
+* Documentation: Will provide setup notes for future reference<br>
+<br>
+*Alternative approaches (if adoption isn=E2=80=99t feasible):*<br>
+<br>
+* Private SSID with device MAC allow=E2=80=91list<br>
+* QoS prioritization for work traffic<br>
+* Band steering adjustments<br>
+* Channel selection guidance<br>
+<br>
+</blockquote></div>
+
+--0000000000003ed231063f926417--
