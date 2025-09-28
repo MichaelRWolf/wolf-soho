@@ -73,16 +73,16 @@
 - Use the repo tools we made:
 
   ```bash
-  ./uplink-short       # one-liner: Pasty vs Starlink + IP
-  ./uplink-describe    # includes traceroute
-  nohup ./uplink-monitor ~/uplink_log.txt 300 &
+  uplink-short       # one-liner: Pasty vs Starlink + IP
+  uplink-describe    # includes traceroute
+  nohup uplink-monitor ~/uplink_log.txt 300 &
   ```
 
 - Optional: add a daily cron/launchd to rotate `uplink_log.txt`.
 - **Event marker** for NSURLError -1005 during network issues:
 
   ```bash
-  echo "EVENT -1005 $(date '+%F %T')" >> ~/uplink_log.txt; ./uplink-describe >> ~/uplink_log.txt
+  echo "EVENT -1005 $(date '+%F %T')" >> ~/uplink_log.txt; uplink-describe >> ~/uplink_log.txt
   ```
 
 ---
