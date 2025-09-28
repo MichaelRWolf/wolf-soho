@@ -6,9 +6,24 @@ INSTALL_BIN_DIR := $(HOME)/bin
 UPLINK_COMMANDS := uplink-describe uplink-org uplink-monitor
 UPLINK_LIB := uplink-lib.sh
 
-.PHONY: all symlink_bin install_uplink uninstall_uplink clean todo help
+.PHONY: all symlink_bin install uninstall install_uplink uninstall_uplink clean todo help
 
-all: symlink_bin install_uplink
+# Default target - show help
+all: help
+
+# Install all project tools
+install: symlink_bin install_uplink
+
+# Uninstall all project tools
+uninstall: uninstall_uplink
+	@echo "Removing symlinks from $(INSTALL_BIN_DIR)/"
+	@for bin_file in $(BIN_FILES); do \
+		if [ -L $(INSTALL_BIN_DIR)/$$(basename $$bin_file) ]; then \
+			rm $(INSTALL_BIN_DIR)/$$(basename $$bin_file); \
+			echo "  Removed $(INSTALL_BIN_DIR)/$$(basename $$bin_file)"; \
+		fi; \
+	done
+	@echo "Uninstall complete!"
 
 symlink_bin:
 	@mkdir -p $(INSTALL_BIN_DIR)
@@ -64,13 +79,20 @@ help:
 	@echo "Wolf-SOHO Project Makefile"
 	@echo ""
 	@echo "Targets:"
-	@echo "  all            - Install all project tools (symlinks + uplink commands)"
-	@echo "  symlink_bin    - Create symlinks for project binaries"
+	@echo "  install       - Install all project tools (symlinks + uplink commands)"
+	@echo "  uninstall     - Remove all project tools (symlinks + uplink commands)"
+	@echo "  symlink_bin   - Create symlinks for project binaries"
 	@echo "  install_uplink - Install uplink monitoring commands"
 	@echo "  uninstall_uplink - Remove uplink monitoring commands"
-	@echo "  clean          - Clean project files"
-	@echo "  todo           - Show project todos"
-	@echo "  help           - Show this help message"
+	@echo "  clean         - Clean project files"
+	@echo "  todo          - Show project todos"
+	@echo "  help          - Show this help message"
+	@echo ""
+	@echo "Usage:"
+	@echo "  make           - Show this help (default)"
+	@echo "  make install   - Install all project tools"
+	@echo "  make uninstall - Remove all project tools"
+	@echo "  make help      - Show this help message"
 
 todo:
 	@echo 1. Incorporate '~/repos/wolf-soho' into 'Portable-Profile'
