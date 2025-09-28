@@ -11,3 +11,10 @@
 - User expects pre-commit hooks to run normally and dislikes bypassing them with --no-verify
 - User prefers to perform git commands themselves and assistant should remind them rather than run git commands automatically
 - In this project, the markdown linter is markdownlint and you should use 'markdownlint --fix' to check and fix markdown formatting issues
+
+## Instruction Following
+- Follow user instructions exactly as given - do not add unrequested steps
+- If asked to "analyze then commit only staged files", do exactly that: analyze staged files, then commit them
+- Do NOT stage files unless explicitly asked to do so
+- Do NOT commit files unless explicitly asked to do so
+- If no staged files exist when asked to commit staged files, report this and wait for further instructions
