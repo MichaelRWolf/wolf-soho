@@ -35,14 +35,11 @@ symlink_bin:
 install_uplink: $(INSTALL_BIN_DIR)
 	@echo "Installing uplink commands to $(INSTALL_BIN_DIR)/"
 	@# Install library
-	@cp bin/$(UPLINK_LIB) $(INSTALL_BIN_DIR)/
-	@echo "  $(UPLINK_LIB) -> $(INSTALL_BIN_DIR)/$(UPLINK_LIB)"
+	@ln -sfv $(PWD)/bin/$(UPLINK_LIB) $(INSTALL_BIN_DIR)/$(UPLINK_LIB)
 	@# Install commands
 	@for cmd in $(UPLINK_COMMANDS); do \
 		if [ -f bin/$$cmd ]; then \
-			cp bin/$$cmd $(INSTALL_BIN_DIR)/$$cmd; \
-			chmod +x $(INSTALL_BIN_DIR)/$$cmd; \
-			echo "  $$cmd -> $(INSTALL_BIN_DIR)/$$cmd"; \
+			ln -sfv $(PWD)/bin/$$cmd $(INSTALL_BIN_DIR)/$$cmd; \
 		else \
 			echo "  ERROR: bin/$$cmd not found!"; \
 			exit 1; \
@@ -61,12 +58,12 @@ $(INSTALL_BIN_DIR):
 uninstall_uplink:
 	@echo "Removing uplink commands from $(INSTALL_BIN_DIR)/"
 	@for cmd in $(UPLINK_COMMANDS); do \
-		if [ -f $(INSTALL_BIN_DIR)/$$cmd ]; then \
+		if [ -L $(INSTALL_BIN_DIR)/$$cmd ]; then \
 			rm $(INSTALL_BIN_DIR)/$$cmd; \
 			echo "  Removed $(INSTALL_BIN_DIR)/$$cmd"; \
 		fi; \
 	done
-	@if [ -f $(INSTALL_BIN_DIR)/$(UPLINK_LIB) ]; then \
+	@if [ -L $(INSTALL_BIN_DIR)/$(UPLINK_LIB) ]; then \
 		rm $(INSTALL_BIN_DIR)/$(UPLINK_LIB); \
 		echo "  Removed $(INSTALL_BIN_DIR)/$(UPLINK_LIB)"; \
 	fi
