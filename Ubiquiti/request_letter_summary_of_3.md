@@ -107,3 +107,27 @@ My AI assistants are great at technical analysis and also technical writing...
 
 **Benefit Analysis:** Network improvements provide broader gains for all users; client-side tweaks offer targeted improvements for specific setups.
 
+
+## Email from Adam 2025-09-28
+```
+Howdy Michael,
+
+I've adopted your Access Point (AP) and adjusted the radio channels in the area, which should lead to some improvements. The previous auto-settings were configured in a counterproductive way. Your radio is now meshing with the AP on the roof of the pole barn. Any steps you can take to improve the line of sight between your device and that AP will help strengthen your downlink signal, as it's currently quite weak.
+
+Could you let me know which site you are currently camped at? There's a wired AP located between Site 3 and the lake. For some reason, I wasn't able to mesh your radio to it directly, but if the signal is good, this would be a better option because no other radios use it for their downlink.
+
+Please keep me updated on how things perform with this new arrangement.
+
+Regarding further improvements to the network infrastructure and software configurations, I'm not entirely sure about Jeff's specific skill set in this area. He is capable, but I'm uncertain how motivated he is to undertake the necessary learning and the trial-and-error efforts that will likely be required. It's important to note that the more devices, especially radios, that are added, the more challenging it becomes to manage the network to prevent interference. You can easily achieve a great signal with many radios, but still experience very poor throughput if they are interfering with each other.
+
+Lastly, the Starlink service was removed from the network in the spring, and the ISP switched back to Pasty Net. Here's a screenshot of the most recent automated tests, which run daily at 5 AM.  I've also included a latency report, as this is likely contributing to the problems you've described. This represents about the best performance typically reported. This bandwidth is split among all network activities. Given that, I'm actually surprised you've had much success with video calls at all.
+
+—Adam
+
+Screenshot 2025-09-28 at 4.29.40 PM.png
+Screenshot 2025-09-28 at 4.43.06 PM.png
+```
+
+![Screenshot 2025-09-28 at 4.43.06 PM](/Users/michael/repos/wolf-soho/Ubiquiti/Screenshot 2025-09-28 at 4.29.40 PM.png)
+
+![Screenshot 2025-09-28 at 4.43.06 PM](/Users/michael/repos/wolf-soho/Ubiquiti/Screenshot 2025-09-28 at 4.43.06 PM.png)
