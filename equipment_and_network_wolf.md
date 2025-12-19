@@ -1,6 +1,7 @@
 # Wolf Network Equipment (Mobile/RV-Based)
 
 ## Network Infrastructure
+
 - **Router**: `wolfden-router` (GL.iNet Beryl GL-MT1300)
   - Functions: Primary router in RV
   - Broadcasts: `Running Wolf Router`
@@ -14,11 +15,6 @@
   - Manufacturer: Ubiquiti (unifi.ui.com)
   - Purchased: 2025-07 from Amazon
   - Status: New device, integration pending
-  - **Management**: 
-    - [Device Information](Ubiquiti/device_info.md)
-    - [Configuration Guide](Ubiquiti/configuration_guide.md)
-    - [Network Integration](Ubiquiti/network_integration.md)
-    - [Setup Guide](Ubiquiti/ubiquiti_setup.md)
 - **NAS**: Synology DS220j
   - Used for Time Machine backups
   - Accessible by fixed local IP
@@ -26,14 +22,22 @@
   - Serves SMB shares, uses `synology-cert`
   - Certificate generation: `create_synology_cert` script
   - **Management**: [Synology Management Notes](Synology/synology_mananagement.md)
+- **WiFi Extender**: Cheapo USB WiFi Repeater
+  - Model: Generic USB WiFi repeater (Amazon B0DCBYCHR7)
+  - Purchased: 2025-08-10 for $18
+  - Functions: Portable WiFi signal extension, campground connectivity backup
+  - **Documentation**: [Cheapo Extender Setup Guide](cheapo_extender.md)
 
 ## Computing Devices
+
 - `michael-pro` (MacBook Pro)
+  - **Battery Replacement**: [Battery Replacement Project](michael-pro_battery.md)
 - `wendy-pro` (MacBook Pro)
 - `wolf-pro` (MacBook, newer)
 - `wolf-air` (MacBook Air)
 
 ## Services
+
 - Time Machine backups (quotas discussed)
 - NAS uses HTTPS on port 5001
 - Self-signed certificates installed and trusted

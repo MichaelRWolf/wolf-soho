@@ -1,0 +1,1 @@
+../../committer-agent/.claude/commands/commit.md
