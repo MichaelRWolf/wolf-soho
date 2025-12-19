@@ -3,12 +3,14 @@
 ## The Crucial Perspective Change
 
 ### **From "No-Fucking-Way" to "Hell-Yes":**
-The key realization was that **"Trails End Crew" IS the external network** that can be used in standalone mode. 
+
+The key realization was that **"Trails End Crew" IS the external network** that can be used in standalone mode.
 
 **Previous Misconception**: Thinking the device needed to join the mesh infrastructure
 **Correct Understanding**: The device can connect to "Trails End Crew" as a client (same as Beryl) but with better performance
 
 ### **Why This Works:**
+
 1. **"Trails End Crew"** is a WiFi network (not mesh-only)
 2. **Ubiquiti can connect** to any WiFi network in client mode
 3. **No mesh adoption** required - just WiFi credentials
@@ -17,16 +19,19 @@ The key realization was that **"Trails End Crew" IS the external network** that 
 ### **Verification from Multiple Perspectives:**
 
 #### **Network Perspective:**
+
 - **Current**: Beryl connects to "Trails End Crew" → bridges to RV network
 - **New**: Ubiquiti connects to "Trails End Crew" → bridges to RV network
 - **Result**: Same network access, better performance
 
 #### **Technical Perspective:**
+
 - **Beryl**: Consumer router with internal antennas
 - **Ubiquiti**: Professional device with outdoor mounting capability
 - **Advantage**: Better signal reception and stability
 
 #### **Operational Perspective:**
+
 - **No admin access needed** - just WiFi credentials
 - **No mesh integration** - pure client mode
 - **Same end result** - internet access for RV
@@ -245,11 +250,13 @@ The key realization was that **"Trails End Crew" IS the external network** that 
 ## Expected Results
 
 ### **Network Flow:**
-```
+
+```text
 Trails End Crew WiFi → Ubiquiti (client mode) → Running Wolf Router → Local Devices
 ```
 
 ### **Performance Improvements:**
+
 - **Better signal strength** due to outdoor mounting
 - **More stable connection** due to professional hardware
 - **Higher speeds** due to better signal quality
@@ -258,12 +265,14 @@ Trails End Crew WiFi → Ubiquiti (client mode) → Running Wolf Router → Loca
 ## Verification Checklist
 
 ### **Before Starting:**
+
 - [ ] Device is factory reset and accessible via SSH
 - [ ] "Trails End Crew" WiFi credentials are available
 - [ ] RV network uses 192.168.8.x subnet
 - [ ] PoE injector is available and compatible
 
 ### **After Configuration:**
+
 - [ ] Device connects to "Trails End Crew" successfully
 - [ ] RV devices can access internet through Ubiquiti
 - [ ] Signal strength is better than current Beryl setup
@@ -272,23 +281,27 @@ Trails End Crew WiFi → Ubiquiti (client mode) → Running Wolf Router → Loca
 ## Why This Will Work
 
 ### **1. Same Network Access:**
+
 - Uses same "Trails End Crew" network as Beryl
 - No mesh integration required
 - Standard WiFi client mode
 
 ### **2. Better Hardware:**
+
 - Professional-grade antennas
 - Outdoor mounting capability
 - Higher transmit power
 - Better signal processing
 
 ### **3. Same Configuration:**
+
 - Client mode connection
 - Network bridge to RV
 - Static IP assignment
 - Standard routing
 
 ### **4. Proven Technology:**
+
 - Ubiquiti devices designed for this use case
 - WiFi client mode is standard functionality
 - No experimental or untested features
@@ -296,6 +309,7 @@ Trails End Crew WiFi → Ubiquiti (client mode) → Running Wolf Router → Loca
 ## Conclusion
 
 This setup will work because:
+
 - **"Trails End Crew" is accessible WiFi** (not mesh-only)
 - **Ubiquiti can connect as client** (same as Beryl)
 - **Better hardware** provides performance improvement

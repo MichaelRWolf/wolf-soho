@@ -1,0 +1,3 @@
+[submodule "committer-agent"]
+	path = committer-agent
+	url = https://github.com/nitsanavni/committer-agent.git

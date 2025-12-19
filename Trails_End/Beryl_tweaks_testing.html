@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Beryl_tweaks_testing.html</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+</head>
+
+<body>
+
+<h1 id="beryl-tweak-testing-plan">Beryl Tweak Testing Plan</h1>
+<p>This plan lists each recommended tweak, a way to test its effect, and
+a table to record before/after results.</p>
+<hr />
+<h2 id="sqm-cake-reduce-bufferbloat">1. SQM (CAKE) – Reduce
+Bufferbloat</h2>
+<p><strong>Command to run:</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 20 8.8.8.8</span></code></pre></div>
+<p><strong>What to look for:</strong></p>
+<ul>
+<li><p>Average latency (should drop under load)</p></li>
+<li><p>Jitter (variation between min and max should be smaller)
+<strong>Before/After Table:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Avg latency (ms)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Min latency (ms)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Max latency (ms)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<hr />
+<h2 id="mss-clamping-prevent-fragmentation">2. MSS Clamping – Prevent
+Fragmentation</h2>
+<p><strong>Command to run:</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 5 <span class="at">-M</span> do <span class="at">-s</span> 1472 8.8.8.8</span></code></pre></div>
+<p><strong>What to look for:</strong></p>
+<ul>
+<li><p>If this fails before the tweak, find largest <code>-s</code> that
+passes</p></li>
+<li><p>After tweak, 1472 (or higher) should pass without fragmentation
+<strong>Before/After Table:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Max passing payload size</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<hr />
+<h2 id="wireguard-to-vps-stabilize-ip-jitter">3. WireGuard to VPS –
+Stabilize IP &amp; Jitter</h2>
+<p><strong>Command to run:</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gping</span> 1.1.1.1 <span class="op">&lt;</span>your_VPS_IP<span class="op">&gt;</span></span></code></pre></div>
+<p><strong>What to look for:</strong></p>
+<ul>
+<li>VPS line should have less jitter and fewer spikes than direct public
+IP test <strong>Before/After Table:</strong> | VPS jitter range (ms) |
+Before | After | |———————–|——–|——-| | Packet loss % | | |</li>
+</ul>
+<hr />
+<h2 id="dual-wan-failover-reduce-dropouts">4. Dual-WAN Failover – Reduce
+Dropouts</h2>
+<p><strong>Command to run:</strong></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 100 1.1.1.1</span></code></pre></div>
+<p><strong>What to look for:</strong></p>
+<ul>
+<li>During a forced outage on primary WAN, pings should continue via
+backup <strong>Before/After Table:</strong> | Packet loss during
+failover | Before | After |</li>
+</ul>
+<hr />
+<h2 id="dns-caching-speed-repeated-lookups">5. DNS Caching – Speed
+Repeated Lookups</h2>
+<p><strong>Command to run:</strong></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">5</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">time</span> dig +short api.openai.com<span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<p><strong>What to look for:</strong></p>
+<ul>
+<li>First lookup time vs. subsequent lookup times (cached should be
+faster) <strong>Before/After Table:</strong> | Avg cached lookup time
+(ms) | Before | After |</li>
+</ul>
+<hr />
+<h2 id="wi-fi-channelssid-hygiene-reduce-retries">6. Wi-Fi Channel/SSID
+Hygiene – Reduce Retries</h2>
+<p><strong>Command to run:</strong></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">airport</span> <span class="at">-I</span> <span class="kw">|</span> <span class="fu">grep</span> agrCtlRSSI</span></code></pre></div>
+<p>(run this repeatedly during work) <strong>What to look
+for:</strong></p>
+<ul>
+<li>RSSI should be stable, retries fewer, disconnects rarer
+<strong>Before/After Table:</strong> | RSSI avg (dBm) | Before | After |
+|—————-|——–|——-|</li>
+</ul>
+<hr />
+<h2 id="keepalive-pings-maintain-nat-mapping">7. Keepalive Pings –
+Maintain NAT Mapping</h2>
+<p><strong>Command to run:</strong></p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 300 <span class="op">&lt;</span>WireGuard_peer_IP<span class="op">&gt;</span></span></code></pre></div>
+<p><strong>What to look for:</strong></p>
+<ul>
+<li>No large gaps or 100% loss streaks during idle periods
+<strong>Before/After Table:</strong> | Longest idle gap without loss |
+Before | After |</li>
+</ul>
+
+</body>
+</html>
