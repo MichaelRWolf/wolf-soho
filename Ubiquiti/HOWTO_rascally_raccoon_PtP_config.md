@@ -65,7 +65,7 @@ MacBook → USB‑C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
 
 * Mode: **PTP**
 * Role: **Access Point**
-* SSID: `RunningWolf-PtP`
+* SSID: `Running Wolf PtP`
 * Security: **WPA2-Personal**
 * Channel width: 40 or 80 MHz
 * Frequency: Manual (avoid DFS initially)
@@ -76,7 +76,7 @@ MacBook → USB‑C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
 
 * Mode: **PTP**
 * Role: **Station**
-* SSID: `RunningWolf-PtP`
+* SSID: `Running Wolf PtP`
 * Security: WPA2-Personal
 * Lock to AP MAC (recommended)
 
