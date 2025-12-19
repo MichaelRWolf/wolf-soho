@@ -56,33 +56,59 @@ MacBook → USB‑C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
 * Country: United States
 * Management IP: **DHCP**
 * DHCP fallback: `192.168.1.20/24`
-* airMAX: **Enabled**
 * Management radio: Enabled (temporarily)
+* Power: 24V passive PoE (POE-24-12W injector)
+
+---
+
+## PtP Roles: AP vs Station
+
+In a Point-to-Point link, one radio is the **AP (master)** and the other is the **Station (client)**.
+
+| | AP (Access Point) | Station |
+|---|---|---|
+| **Role** | Master / Hub | Client / Spoke |
+| **Creates the network** | Yes — broadcasts SSID | No — joins SSID |
+| **Waits for connection** | Yes | No — initiates connection |
+| **Typical location** | Fixed infrastructure (House) | Mobile/remote end (RV) |
+
+**UI Settings (Wireless → Basic Wireless Settings):**
+
+| Radio | ACCESS POINT | PTP MODE |
+|-------|--------------|----------|
+| House (AP) | **On** | **On** |
+| RV (Station) | **Off** (implies Station) | **On** |
 
 ---
 
 ## House-Side Radio (AP / PTP Master)
 
 * MAC Address: **1C:6A:1B:CA:EF:9B**
-* Mode: **PTP**
-* Role: **Access Point**
+
+**UI Settings (Wireless → Basic Wireless Settings):**
+
+* ACCESS POINT: **On**
+* PTP MODE: **On**
 * SSID: `Running Wolf PtP`
-* Security: **WPA2-Personal**
-* Channel width: 40 or 80 MHz
-* Frequency: Manual (avoid DFS initially)
-* Power: 24V passive PoE (POE-24-12W injector)
+* WPA SECURITY: **Personal**
+* WPA2 PRESHARED KEY: *(see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)*
+* CHANNEL WIDTH: **40 MHz**
+* FREQUENCY: Manual (avoid DFS initially)
 
 ---
 
 ## RV-Side Radio (Station)
 
 * MAC Address: **1C:6A:1B:C6:E5:A3**
-* Mode: **PTP**
-* Role: **Station**
+
+**UI Settings (Wireless → Basic Wireless Settings):**
+
+* ACCESS POINT: **Off** *(Off implies Station, not AP)*
+* PTP MODE: **On**
 * SSID: `Running Wolf PtP`
-* Security: WPA2-Personal (AES)
-* Lock to AP MAC (recommended)
-* Power: 24V passive PoE (POE-24-12W injector)
+* WPA SECURITY: **Personal**
+* WPA2 PRESHARED KEY: *(see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)*
+* LOCK TO AP MAC: **1C:6A:1B:CA:EF:9B** *(House AP — prevents connecting to rogue APs)*
 
 ---
 
@@ -159,10 +185,16 @@ Management IP: 192.168.1.20 (DHCP fallback)
 
 Firmware: airMAX (factory)
 Band: 5 GHz
-Mode: airMAX AP
-SSID: Running Wolf PtP
-Security: WPA2-Personal (AES)
 Peer: RV-side Loco5AC (Station)
+
+UI Settings (Wireless → Basic Wireless Settings):
+  ACCESS POINT: On
+  PTP MODE: On
+  SSID: Running Wolf PtP
+  WPA SECURITY: Personal
+  WPA2 PRESHARED KEY: (see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)
+  CHANNEL WIDTH: 40 MHz
+  FREQUENCY: Manual (avoid DFS initially)
 
 Access:
   SSH: ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc admin@192.168.1.20
@@ -182,10 +214,15 @@ Management IP: 192.168.1.20 (DHCP fallback)
 
 Firmware: airMAX (factory)
 Band: 5 GHz
-Mode: airMAX Station
-SSID: Running Wolf PtP
-Security: WPA2-Personal (AES)
 Peer: House-side Loco5AC (AP)
+
+UI Settings (Wireless → Basic Wireless Settings):
+  ACCESS POINT: Off (Off implies Station, not AP)
+  PTP MODE: On
+  SSID: Running Wolf PtP
+  WPA SECURITY: Personal
+  WPA2 PRESHARED KEY: (see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)
+  LOCK TO AP MAC: 1C:6A:1B:CA:EF:9B (House AP — prevents connecting to rogue APs)
 
 Access:
   SSH: ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc admin@192.168.1.20
@@ -196,9 +233,9 @@ Access:
 
 ## Validation (Bench)
 
-* Both radios reachable
-* Station sees AP
-* airMAX Quality > 50%
+* Both radios reachable at 192.168.1.20 (one at a time)
+* Station sees AP (check Main/Status page)
+* Signal strength visible (dBm)
 * Peer MAC matches expected
 
 ---
