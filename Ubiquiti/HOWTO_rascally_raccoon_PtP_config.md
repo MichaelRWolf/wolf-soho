@@ -59,8 +59,6 @@ MacBook → USB‑C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
 
 * Firmware: current / matching
 * Country: United States
-* Management IP: **DHCP**
-* DHCP fallback: `192.168.1.20/24`
 * Management radio: Enabled (temporarily)
 * Power: 24V passive PoE (POE-24-12W injector)
 
@@ -90,6 +88,13 @@ In a Point-to-Point link, one radio is the **AP (master)** and the other is the 
 
 * MAC Address: **1C:6A:1B:CA:EF:9B**
 
+**UI Settings (Network):**
+
+* NETWORK MODE: **Bridge**
+* MANAGEMENT IP ADDRESS: **DHCP**
+* DHCP FALLBACK IP: `192.168.1.20`
+* DHCP FALLBACK NETMASK: `255.255.255.0`
+
 **UI Settings (Wireless → Basic Wireless Settings):**
 
 * ACCESS POINT: **On**
@@ -105,6 +110,14 @@ In a Point-to-Point link, one radio is the **AP (master)** and the other is the 
 ## RV-Side Radio (Station)
 
 * MAC Address: **1C:6A:1B:C6:E5:A3**
+
+**UI Settings (Network):**
+
+* NETWORK MODE: **Bridge**
+* MANAGEMENT IP ADDRESS: **Static**
+* IP ADDRESS: `192.168.1.21`
+* NETMASK: `255.255.255.0`
+* GATEWAY: `192.168.1.1`
 
 **UI Settings (Wireless → Basic Wireless Settings):**
 
@@ -186,11 +199,15 @@ Physical Mount: TBD (house-facing RV direction)
 Power: 24V passive PoE (POE-24-12W injector)
 
 MAC Address: 1C:6A:1B:CA:EF:9B
-Management IP: 192.168.1.20 (DHCP fallback)
-
 Firmware: airMAX (factory)
 Band: 5 GHz
 Peer: RV-side Loco5AC (Station)
+
+UI Settings (Network):
+  NETWORK MODE: Bridge
+  MANAGEMENT IP ADDRESS: DHCP
+  DHCP FALLBACK IP: 192.168.1.20
+  DHCP FALLBACK NETMASK: 255.255.255.0
 
 UI Settings (Wireless → Basic Wireless Settings):
   ACCESS POINT: On
@@ -215,11 +232,16 @@ Physical Mount: TBD (RV-facing house direction)
 Power: 24V passive PoE (POE-24-12W injector)
 
 MAC Address: 1C:6A:1B:C6:E5:A3
-Management IP: 192.168.1.20 (DHCP fallback)
-
 Firmware: airMAX (factory)
 Band: 5 GHz
 Peer: House-side Loco5AC (AP)
+
+UI Settings (Network):
+  NETWORK MODE: Bridge
+  MANAGEMENT IP ADDRESS: Static
+  IP ADDRESS: 192.168.1.21
+  NETMASK: 255.255.255.0
+  GATEWAY: 192.168.1.1
 
 UI Settings (Wireless → Basic Wireless Settings):
   ACCESS POINT: Off (Off implies Station, not AP)
@@ -230,8 +252,8 @@ UI Settings (Wireless → Basic Wireless Settings):
   LOCK TO AP MAC: 1C:6A:1B:CA:EF:9B (House AP — prevents connecting to rogue APs)
 
 Access:
-  SSH: ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc admin@192.168.1.20
-  Web UI: http://192.168.1.20 (Safari only)
+  SSH: ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc admin@192.168.1.21
+  Web UI: http://192.168.1.21 (Safari only)
 ```
 
 ---
