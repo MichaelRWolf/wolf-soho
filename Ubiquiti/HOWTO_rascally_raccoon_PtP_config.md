@@ -27,8 +27,13 @@ Bench configuration of Ubiquiti airMAX PtP link (NanoStation Loco 5AC) for the *
 1. System Settings → Network → Location → **Add Location**
 2. Name: `Ubiquiti-Setup`
 3. Enable only **Belkin USB‑C LAN / Thunderbolt Ethernet**
-4. IPv4: **Configure Automatically (DHCP)**
+4. IPv4: **Configure Manually**
+   - IP Address: `192.168.1.100`
+   - Subnet Mask: `255.255.255.0`
+   - Router: *(leave blank)*
 5. Wi‑Fi: Off
+
+*Note: The Loco5AC has a static fallback IP (192.168.1.20) but no DHCP server. Manual IP required.*
 
 ---
 
