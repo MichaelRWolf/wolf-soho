@@ -9,12 +9,12 @@
 
 ## Power-On Reset Timing
 
-| Reset Type | Reset Button Press (seconds) | Explanation |
-|------------|------------------------------|-------------|
-| **Power Cycle** | 0 | Simple reboot, keeps configuration |
-| **Soft Reset** | 10-15 | Clears some config, keeps network settings |
-| **Factory Reset** | 15-30 | Factory defaults, clears mesh associations |
-| **Recovery Reset** | 60+ | Complete factory reset, last resort |
+| Reset Type         | Reset Button Press (sec) | Explanation                                |
+|--------------------|--------------------------|--------------------------------------------|
+| **Power Cycle**    | 0                        | Simple reboot, keeps configuration         |
+| **Soft Reset**     | 10-15                    | Clears some config, keeps network settings |
+| **Factory Reset**  | 15-30                    | Factory defaults, clears mesh associations |
+| **Recovery Reset** | 60+                      | Complete factory reset, last resort        |
 
 ### Reset Sequence
 
