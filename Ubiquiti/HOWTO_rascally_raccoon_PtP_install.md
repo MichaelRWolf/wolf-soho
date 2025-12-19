@@ -22,7 +22,7 @@ PtP Radio (House) ))) ~460 ft RF~ ((( PtP Radio (RV)
                                         ↓
                                       PoE
                                         ↓
-                                      UAP
+                                      Beryl (travel router)
                                         ↓
                                    RV Wi‑Fi
 ```
@@ -37,11 +37,11 @@ PtP Radio (House) ))) ~460 ft RF~ ((( PtP Radio (RV)
 * 8–12 ft above ground is usually sufficient
 * Avoid people regularly walking through the beam
 
-### Co‑mounting PtP + UAP
+### RV-Side WiFi Distribution
 
-* Same pole/tree is fine
-* Vertical separation: **≥ 3 ft preferred**, ≥ 1 ft minimum
-* Aim PtP precisely; UAP is omnidirectional
+Beryl (GL.iNet travel router) connects via Ethernet to PtP RV Station and broadcasts WiFi for RV devices.
+
+*Note: UAP-AC-M was evaluated but rejected. UniFi APs require a controller for configuration and do not support true standalone operation. The airMAX PtP radios (Loco5AC) are a different product line with standalone capability.*
 
 ---
 
