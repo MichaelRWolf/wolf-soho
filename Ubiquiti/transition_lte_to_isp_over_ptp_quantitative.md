@@ -28,24 +28,24 @@ Primary goal: provide a table-first ledger for diagnosing and improving macOS `n
 
 The goal of this table is *directional* comparison and establishing that the transport became deterministic after the transition.
 
-| Metric | LTE (Before) | ISP + PtP (After) | Notes |
-| --- | ---: | ---: | --- |
-| Downlink capacity | ~10–30 Mbps (variable) | ~50 Mbps | Land-based ISP is faster and far more stable |
-| Uplink capacity | ~2–10 Mbps (variable) | ~9 Mbps | Uplink is still the constraint; now consistent |
-| Idle latency | Often elevated/inconsistent | ~48 ms | Predictable after transition |
-| Responsiveness / loaded latency | Often poor/variable | ~580–660 ms (Low) | Primary remaining problem domain |
-| Jitter | High/unpredictable | Lower/more stable | PtP removes cellular variability |
+| Metric                          | LTE (Before)                | ISP + PtP (After)   | Notes                                          |
+|:--------------------------------|:----------------------------|:--------------------|:----------------------------------------------|
+| Downlink capacity               | ~10–30 Mbps (variable)      | ~50 Mbps            | Land-based ISP is faster and far more stable   |
+| Uplink capacity                 | ~2–10 Mbps (variable)       | ~9 Mbps             | Uplink is still the constraint; now consistent |
+| Idle latency                    | Often elevated/inconsistent | ~48 ms              | Predictable after transition                   |
+| Responsiveness / loaded latency | Often poor/variable         | ~580–660 ms (Low)   | Primary remaining problem domain               |
+| Jitter                          | High/unpredictable          | Lower/more stable   | PtP removes cellular variability               |
 
 ---
 
 ## Current baseline (ISP-over-PtP) — representative `networkQuality -v`
 
-| Field | Value |
-| --- | ---: |
-| Downlink capacity | ~49.8 Mbps |
-| Uplink capacity | ~9.0 Mbps |
-| Idle latency | ~48 ms |
-| Responsiveness | Low (~580–660 ms HTTP loaded) |
+| Field             | Value                         |
+|:------------------|-----------------------------:|
+| Downlink capacity |                    ~49.8 Mbps |
+| Uplink capacity   |                     ~9.0 Mbps |
+| Idle latency      |                        ~48 ms |
+| Responsiveness    | Low (~580–660 ms HTTP loaded) |
 
 ---
 
@@ -57,20 +57,20 @@ Append rows here as you iterate on SQM / shaping. This table is meant to answer:
 - Did `networkQuality` responsiveness improve?
 - Under what conditions did it regress?
 
-| Date/time | Client | Link_to_router | SQM_enabled | Shaping_down_Mbps | Shaping_up_Mbps | Concurrent_load | networkQuality_summary | Notes |
-| --- | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| YYYY-MM-DD HH:MM | wolf-air / michael-pro | Ethernet / Wi‑Fi | On/Off | — | — | none / upload / call | DL ? / UL ? / idle ? / resp ? | — |
+| Date/time        | Client                | Link_to_router   | SQM_enabled | Shaping_down_Mbps | Shaping_up_Mbps | Concurrent_load      | networkQuality_summary             | Notes |
+|:-----------------|:----------------------|:-----------------|:-----------|------------------:|----------------:|:---------------------|:-----------------------------------|:------|
+| YYYY-MM-DD HH:MM | wolf-air / michael-pro | Ethernet / Wi‑Fi | On/Off      |                 — |               — | none / upload / call | DL ? / UL ? / idle ? / resp ?      | —     |
 
 ---
 
 ## Suggested test cases (to populate the log)
 
-| Test_case | Goal | How |
-| --- | --- | --- |
-| Baseline (quiet) | Establish a stable reference | No significant background traffic; run `networkQuality -v` |
-| Upload-saturated | Confirm upstream bufferbloat symptoms | Start a large upload; run `networkQuality -v` during sustained upload |
-| SQM tuned | Validate queue control at the router | Enable SQM; set shaping below measured rates; re-run tests |
-| Real workflow | Validate subjective experience | Video call + background upload; observe responsiveness |
+| Test_case        | Goal                                 | How                                                                    |
+|:-----------------|:-------------------------------------|:-----------------------------------------------------------------------|
+| Baseline (quiet) | Establish a stable reference          | No significant background traffic; run `networkQuality -v`             |
+| Upload-saturated | Confirm upstream bufferbloat symptoms | Start a large upload; run `networkQuality -v` during sustained upload  |
+| SQM tuned        | Validate queue control at the router  | Enable SQM; set shaping below measured rates; re-run tests             |
+| Real workflow    | Validate subjective experience        | Video call + background upload; observe responsiveness                 |
 
 ---
 
