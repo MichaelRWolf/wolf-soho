@@ -1,7 +1,9 @@
 # Ubiquiti airMAX PtP Configuration (DRY Refactor)
 
-This document records the **intended, deployed configuration** for the Wolfden point‑to‑point wireless bridge.  
+This document records the **intended, deployed configuration** for the Wolfden point‑to‑point wireless bridge.
 It is structured to avoid duplication by separating **shared link settings** from **device‑specific differences**.
+
+> **Status:** Configuration complete. PtP is production‑ready and set‑and‑forget.
 
 ---
 
@@ -29,18 +31,22 @@ Wolfden – Running Wolf PtP – WPA2 Link Key
 - Band: 5 GHz
 - Channel Width: 40 MHz
 - Frequency: Fixed (identical on both sides)
-- Output Power: Low / default during alignment
+- Output Power: Default / low during alignment; left unchanged post‑deployment
 
 ### airMAX / Bridge Behavior
 - PtP Mode: Enabled
-- airMAX: Implicitly enabled by PtP mode
+- airMAX: Enabled implicitly by PtP mode
 - Transparent bridging: Enabled (Layer‑2 bridge, no NAT)
+
+### Regulatory / Country
+- Regulatory Domain: **US**
+- Country setting verified on both radios
+- Management radios disabled after deployment
 
 ### Management & Access
 - Admin Interface: HTTP Web UI
-- Browser Compatibility: Safari required (Chrome unreliable)
-- SSH: Available (may require legacy algorithm flags)
-- Country / Regulatory Domain: Set identically on both devices
+- Browser Compatibility: Safari recommended (Chrome unreliable)
+- SSH: Available (legacy algorithm flags may be required)
 
 ---
 
@@ -66,15 +72,20 @@ Wolfden – Ubiquiti Loco5AC – House PtP (AP)
 - Access Point: ON
 - PtP Mode: ON
 
-### Management Networking
-- Management IP Mode: DHCP
-- DHCP Fallback IP: 192.168.1.20 /24
-- Static IP: Deferred until link validation complete
+### Management Networking (Final, Stable)
+- IP Mode: **Static**
+- Management IP: **192.168.1.20 /24**
+- Netmask: 255.255.255.0
+- Gateway: **Not set (intentionally empty)**
+- DNS: Not set
+
+> Rationale: Infrastructure device. Does not initiate off‑subnet traffic.
+> Configuration is independent of any specific router (e.g., Beryl).
 
 ### Operational Notes
-- Configured on bench via Safari
-- Management radio disabled temporarily
-- Mounted at house, aimed toward RV
+- Configured via Ethernet using Safari
+- Management radio disabled
+- Permanently mounted at house, aimed toward RV
 
 ---
 
@@ -101,14 +112,18 @@ Wolfden – Ubiquiti Loco5AC – RV PtP (Station)
 - PtP Mode: ON  
   *(Station role is inferred from this combination)*
 
-### Management Networking
-- Management IP Mode: DHCP
-- DHCP Fallback IP: 192.168.1.20 /24 (factory default)
-- Static IP: To be assigned after link alignment
+### Management Networking (Final, Stable)
+- IP Mode: **Static**
+- Management IP: **192.168.1.21 /24**
+- Netmask: 255.255.255.0
+- Gateway: **Not set (intentionally empty)**
+- DNS: Not set
+
+> Rationale identical to AP‑side device.
 
 ### Operational Notes
 - Bench‑configured prior to outdoor mounting
-- Receives DHCP lease across PtP bridge once link is active
+- Verified reachable via static IP regardless of DHCP/router changes
 - Mounted near RV, aimed toward house
 
 ---
@@ -120,12 +135,26 @@ Wolfden – Ubiquiti Loco5AC – RV PtP (Station)
 - Fine alignment performed using:
   - Signal strength
   - Noise floor
-  - SNR / airMAX quality metrics
+  - CINR / Link Potential metrics
 - Permanent mounting only after stable link confirmed
 
 ---
 
-## 5. Change Control
+## 5. Operations Model (Important)
+
+- PtP radios are treated as **infrastructure**, not clients
+- Management access is via **static IPs**, not DHCP, DNS, or discovery
+- Device reachability does **not** depend on:
+  - Beryl
+  - DHCP server behavior
+  - DNS availability
+- Management access is preserved via **1Password entries** pointing to static IPs
+
+This avoids outage‑mode forensics when checking link status.
+
+---
+
+## 6. Change Control
 
 Any change to the following **must be applied symmetrically** and documented:
 
@@ -134,6 +163,68 @@ Any change to the following **must be applied symmetrically** and documented:
 - Channel width
 - Frequency
 - Regulatory domain
-- Management IP mode
+- Management IP addresses
 
 This document and the corresponding 1Password entries are the **source of truth**.
+
+---
+
+## 7. One-Minute Health Check (When You Just Want to Know “Is It Fine?”)
+
+Use this when something feels slow, weird, or you just want reassurance.
+Do **not** tune. Do **not** optimize. Observe, then stop.
+
+### Step 1: Open the radios
+From 1Password:
+- `loco-ap` → http://192.168.1.20
+- `loco-station` → http://192.168.1.21
+
+Log in to the airOS UI on **either** device.
+
+---
+
+### Step 2: Check these fields only (Main / Status page)
+
+Look at the **Wireless** section.
+
+- **Link State:** Connected
+- **Link Potential:** ≥ 95%
+- **CINR / SNR:** Stable and comfortably positive (no rapid swings)
+- **Tx/Rx Rate:** Reasonable and not flapping wildly
+
+You do **not** need exact numbers. Stability matters more than peaks.
+
+---
+
+### Step 3: Decide and stop
+
+- If Link Potential is high and stable → **The PtP link is healthy**
+- If CINR is stable → **Alignment and interference are fine**
+- If rates are steady → **Throughput issues are elsewhere**
+
+Close the tab.
+
+---
+
+### Explicit Stop Conditions (Important)
+
+Do **not**:
+- re-aim antennas
+- change channel width
+- change frequency
+- adjust transmit power
+
+Unless:
+- Link Potential drops persistently below ~90%, **or**
+- The link actually drops.
+
+---
+
+### Mental Model (Write This Down)
+
+> **PtP health is about stability, not perfection.**
+
+If it’s boring, it’s working.
+
+---
+
