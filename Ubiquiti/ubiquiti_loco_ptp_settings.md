@@ -11,6 +11,7 @@ Each section corresponds to a 1Password entry.
 
 ### Common to Loco5AC
 
+- Model: Ubiquiti NanoStation Loco5AC
 - SSID: `Running Wolf PtP`
 - Security: WPA2 Personal (PSK), AES
 - Band: 5 GHz
@@ -20,14 +21,14 @@ Each section corresponds to a 1Password entry.
 - airMAX: Enabled
 - Bridging: Layer-2 transparent
 - Regulatory Domain: US
+- Power: 24V passive PoE (POE-24-12W)
 
 ### Unique to AP
 
-- Model: Ubiquiti NanoStation Loco5AC
+- Hostname: loco-ap
 - MAC: 1C:6A:1B:CA:EF:9B
 - Role: Access Point (AP ON, PtP ON)
 - IP: 192.168.1.20 /24 (static, no gateway, no DNS)
-- Power: 24V passive PoE (POE-24-12W)
 
 ---
 
@@ -35,6 +36,7 @@ Each section corresponds to a 1Password entry.
 
 ### Common to Loco5AC
 
+- Model: Ubiquiti NanoStation Loco5AC
 - SSID: `Running Wolf PtP`
 - Security: WPA2 Personal (PSK), AES
 - Band: 5 GHz
@@ -44,14 +46,15 @@ Each section corresponds to a 1Password entry.
 - airMAX: Enabled
 - Bridging: Layer-2 transparent
 - Regulatory Domain: US
+- Power: 24V passive PoE (POE-24-12W)
 
 ### Unique to Station
 
-- Model: Ubiquiti NanoStation Loco5AC
+- Hostname: loco-station
 - MAC: 1C:6A:1B:C6:E5:A3
 - Role: Station (AP OFF, PtP ON)
 - IP: 192.168.1.21 /24 (static, no gateway, no DNS)
-- Power: 24V passive PoE (POE-24-12W)
+- Lock to AP MAC: 1C:6A:1B:CA:EF:9B
 
 ---
 
