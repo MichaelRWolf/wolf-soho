@@ -28,12 +28,12 @@ Bench configuration of Ubiquiti airMAX PtP link (NanoStation Loco 5AC) for the *
 2. Name: `Ubiquiti-Setup`
 3. Enable only **Belkin USB‑C LAN / Thunderbolt Ethernet**
 4. IPv4: **Configure Manually**
-   - IP Address: `192.168.1.100`
-   - Subnet Mask: `255.255.255.0`
-   - Router: *(leave blank)*
+   * IP Address: `192.168.1.100`
+   * Subnet Mask: `255.255.255.0`
+   * Router: *(leave blank)*
 5. Wi‑Fi: Off
 
-*Note: The Loco5AC has a static fallback IP (192.168.1.20) but no DHCP server. Manual IP required.*
+*Note: The Loco5AC radios are managed via static IPs in `192.168.1.0/24` (AP: `192.168.1.20`, Station: `192.168.1.21`). Manual IP is required for bench setup.*
 
 ---
 
@@ -68,19 +68,19 @@ MacBook → USB‑C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
 
 In a Point-to-Point link, one radio is the **AP (master)** and the other is the **Station (client)**.
 
-| | AP (Access Point) | Station |
-|---|---|---|
-| **Role** | Master / Hub | Client / Spoke |
-| **Creates the network** | Yes — broadcasts SSID | No — joins SSID |
-| **Waits for connection** | Yes | No — initiates connection |
-| **Typical location** | Fixed infrastructure (House) | Mobile/remote end (RV) |
+|                          | AP (Access Point)            | Station                   |
+|--------------------------|------------------------------|---------------------------|
+| **Role**                 | Master / Hub                 | Client / Spoke            |
+| **Creates the network**  | Yes — broadcasts SSID        | No — joins SSID           |
+| **Waits for connection** | Yes                          | No — initiates connection |
+| **Typical location**     | Fixed infrastructure (House) | Mobile/remote end (RV)    |
 
 **UI Settings (Wireless → Basic Wireless Settings):**
 
-| Radio | ACCESS POINT | PTP MODE |
-|-------|--------------|----------|
-| House (AP) | **On** | **On** |
-| RV (Station) | **Off** (implies Station) | **On** |
+| Radio        | ACCESS POINT              | PTP MODE |
+|--------------|---------------------------|----------|
+| House (AP)   | **On**                    | **On**   |
+| RV (Station) | **Off** (implies Station) | **On**   |
 
 ---
 
@@ -91,9 +91,11 @@ In a Point-to-Point link, one radio is the **AP (master)** and the other is the 
 **UI Settings (Network):**
 
 * NETWORK MODE: **Bridge**
-* MANAGEMENT IP ADDRESS: **DHCP**
-* DHCP FALLBACK IP: `192.168.1.20`
-* DHCP FALLBACK NETMASK: `255.255.255.0`
+* MANAGEMENT IP ADDRESS: **Static**
+* IP ADDRESS: `192.168.1.20`
+* NETMASK: `255.255.255.0`
+* GATEWAY: *(leave blank)*
+* DNS: *(leave blank)*
 
 **UI Settings (Wireless → Basic Wireless Settings):**
 
@@ -117,7 +119,8 @@ In a Point-to-Point link, one radio is the **AP (master)** and the other is the 
 * MANAGEMENT IP ADDRESS: **Static**
 * IP ADDRESS: `192.168.1.21`
 * NETMASK: `255.255.255.0`
-* GATEWAY: `192.168.1.1`
+* GATEWAY: *(leave blank)*
+* DNS: *(leave blank)*
 
 **UI Settings (Wireless → Basic Wireless Settings):**
 
@@ -205,9 +208,11 @@ Peer: RV-side Loco5AC (Station)
 
 UI Settings (Network):
   NETWORK MODE: Bridge
-  MANAGEMENT IP ADDRESS: DHCP
-  DHCP FALLBACK IP: 192.168.1.20
-  DHCP FALLBACK NETMASK: 255.255.255.0
+  MANAGEMENT IP ADDRESS: Static
+  IP ADDRESS: 192.168.1.20
+  NETMASK: 255.255.255.0
+  GATEWAY: (leave blank)
+  DNS: (leave blank)
 
 UI Settings (Wireless → Basic Wireless Settings):
   ACCESS POINT: On
@@ -241,7 +246,8 @@ UI Settings (Network):
   MANAGEMENT IP ADDRESS: Static
   IP ADDRESS: 192.168.1.21
   NETMASK: 255.255.255.0
-  GATEWAY: 192.168.1.1
+  GATEWAY: (leave blank)
+  DNS: (leave blank)
 
 UI Settings (Wireless → Basic Wireless Settings):
   ACCESS POINT: Off (Off implies Station, not AP)
