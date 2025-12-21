@@ -1,0 +1,130 @@
+#!/bin/sh
+
+# Set GL.iNet Beryl (GL-MT1300) Wi-Fi regulatory domain to US and reload Wi-Fi.
+# Can be executed directly on Beryl or from another machine (auto-SSHs to Beryl).
+# Manual SSH usage:
+#   ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa root@192.168.8.1 < uci_set_country.sh
+
+BERYL_HOST="192.168.8.1"
+BERYL_USER="root"
+SSH_OPTS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
+
+is_on_beryl() {
+  # Check if we're running on Beryl/OpenWrt by looking for:
+  # 1. uci command (OpenWrt-specific)
+  # 2. MT7615 wireless interfaces (Beryl-specific)
+  if command -v uci >/dev/null 2>&1; then
+    if uci show wireless 2>/dev/null | grep -q "mt7615"; then
+      return 0
+    fi
+  fi
+  return 1
+}
+
+execute_via_ssh() {
+  # Get the script's own path
+  SCRIPT_PATH="$0"
+  
+  # Handle different execution scenarios
+  case "$SCRIPT_PATH" in
+    /*)
+      # Absolute path - use as-is
+      ;;
+    */*)
+      # Relative path - make absolute
+      SCRIPT_PATH="$(pwd)/$SCRIPT_PATH"
+      ;;
+    *)
+      # Script in PATH - try to find it
+      if command -v "$SCRIPT_PATH" >/dev/null 2>&1; then
+        SCRIPT_PATH="$(command -v "$SCRIPT_PATH")"
+      else
+        echo "ERROR: Cannot determine script path. Please run with full path:"
+        echo "  ./uci_set_country.sh"
+        echo "  or"
+        echo "  /full/path/to/uci_set_country.sh"
+        exit 1
+      fi
+      ;;
+  esac
+
+  # Verify script file exists and is readable
+  if [ ! -r "$SCRIPT_PATH" ]; then
+    echo "ERROR: Cannot read script at: $SCRIPT_PATH"
+    exit 1
+  fi
+
+  echo "==> Not running on Beryl. Executing via SSH..."
+  echo "==> Connecting to ${BERYL_USER}@${BERYL_HOST}"
+  
+  ssh ${SSH_OPTS} "${BERYL_USER}@${BERYL_HOST}" < "$SCRIPT_PATH"
+  exit $?
+}
+
+# Auto-detect and route to SSH if not on Beryl
+if ! is_on_beryl; then
+  execute_via_ssh
+fi
+
+# If we get here, we're on Beryl - enable strict error handling
+set -eu
+
+check_root() {
+  if [ "$(id -u)" != "0" ]; then
+    echo "ERROR: must run as root (on OpenWrt/GL.iNet router)."
+    exit 1
+  fi
+}
+
+set_uci_country_settings() {
+  echo "==> Setting UCI country/region/regdom to US (MT7615)"
+  # These names matched your device: wireless.mt7615e5 and wireless.mt7615e2
+  # country: used by OpenWrt config
+  # region/aregion: MediaTek driver-specific regulatory settings (important on MT7615)
+  uci set wireless.mt7615e5.country='US' || true
+  uci set wireless.mt7615e2.country='US' || true
+
+  # US region values observed/used on MT7615: region 7, aregion 10
+  uci set wireless.mt7615e5.region='7' || true
+  uci set wireless.mt7615e5.aregion='10' || true
+  uci set wireless.mt7615e2.region='7' || true
+  uci set wireless.mt7615e2.aregion='10' || true
+
+  # Global regdomain hint (may or may not be honored by driver; harmless to set)
+  uci set wireless.regdom='US' || true
+}
+
+commit_uci_changes() {
+  echo "==> Committing UCI changes"
+  uci commit wireless
+}
+
+set_kernel_regdomain() {
+  echo "==> Setting kernel regdomain to US (runtime)"
+  iw reg set US || true
+}
+
+reload_wifi() {
+  echo "==> Reloading Wi-Fi"
+  wifi reload || true
+}
+
+verify_settings() {
+  echo "==> Verifying kernel regdomain"
+  iw reg get || true
+
+  echo "==> Showing configured wireless country/region/regdom"
+  uci show wireless | grep -E "country|regdom|region|aregion" || true
+}
+
+main() {
+  check_root
+  set_uci_country_settings
+  commit_uci_changes
+  set_kernel_regdomain
+  reload_wifi
+  verify_settings
+  echo "==> Done."
+}
+
+main

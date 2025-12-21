@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Install persistent hooks on GL.iNet / OpenWrt so kernel regdomain is forced to US
+# after boot and whenever Wi-Fi restarts.
+set -eu
+
+if [ "$(id -u)" != "0" ]; then
+  echo "ERROR: must run as root on the router."
+  exit 1
+fi
+
+echo "==> Writing hotplug hook: /etc/hotplug.d/ieee80211/99-regdom"
+mkdir -p /etc/hotplug.d/ieee80211
+cat > /etc/hotplug.d/ieee80211/99-regdom <<'EOF'
+#!/bin/sh
+# Force regulatory domain after cfg80211/driver events.
+# Runs on Wi-Fi (ieee80211) hotplug events such as radio up/down.
+iw reg set US 2>/dev/null || true
+EOF
+chmod 0755 /etc/hotplug.d/ieee80211/99-regdom
+
+echo "==> Ensuring /etc/rc.local forces regdomain at boot"
+if [ -f /etc/rc.local ]; then
+  # Insert before 'exit 0' if present; otherwise append.
+  if grep -q '^exit 0' /etc/rc.local; then
+    sed -i 's/^exit 0$/iw reg set US 2>\/dev\/null || true\nexit 0/' /etc/rc.local
+  else
+    printf '\niw reg set US 2>/dev/null || true\n' >> /etc/rc.local
+  fi
+else
+  cat > /etc/rc.local <<'EOF'
+#!/bin/sh
+iw reg set US 2>/dev/null || true
+exit 0
+EOF
+  chmod 0755 /etc/rc.local
+fi
+
+echo "==> Done. Reboot to test persistence."
