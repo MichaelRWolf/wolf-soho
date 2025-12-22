@@ -81,3 +81,7 @@ Upstream internet source for the PtP link. Contact Moe for admin access.
 - FW Version: 7.0.1-1-795640-g202508082008-SAC2V1A-prod
 - Location: House side of PtP link
 - Admin: Moe (credentials in 1Password if shared)
+
+- Default WiFi SSID: SpectrumSetup-DO
+- Default WiFi password: mediumriver064
+- Spectrum app / setup: spectrum.net/getapp
