@@ -68,3 +68,16 @@ Related transition/performance docs (for bufferbloat / `networkQuality` Responsi
 - Authentication: WPA2 Personal (PSK)
 - Encryption: AES
 - Passphrase: (stored in 1Password)
+
+---
+
+## Rascally Raccoon – Spectrum Router (Moe's)
+
+Upstream internet source for the PtP link. Contact Moe for admin access.
+
+- Model: SAC2V1A (Spectrum Advanced WiFi)
+- Serial Number: A5L4H956C14029
+- MAC: A8:97:CD:70:61:D0
+- FW Version: 7.0.1-1-795640-g202508082008-SAC2V1A-prod
+- Location: House side of PtP link
+- Admin: Moe (credentials in 1Password if shared)
