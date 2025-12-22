@@ -42,7 +42,7 @@ Columns:
   - `ping_B`: hop2 gateway
   - `ping_C`: internet target (`1.1.1.1`)
 
-| ts_local          | host        | link          | hop2        | sqm | nq_dl_mbps | nq_ul_mbps | nq_idle_ms | nq_resp                                   | ping_A_loss | ping_A_avg_ms | ping_A_max_ms | ping_B_loss | ping_B_avg_ms | ping_B_max_ms | ping_C_loss | ping_C_avg_ms | ping_C_max_ms | notes                                           |
+| ts_local          | host        | link          | hop2         | sqm | nq_dl_mbps | nq_ul_mbps | nq_idle_ms | nq_resp                                   | ping_A_loss | ping_A_avg_ms | ping_A_max_ms | ping_B_loss | ping_B_avg_ms | ping_B_max_ms | ping_C_loss | ping_C_avg_ms | ping_C_max_ms | notes                                           |
 |------------------|-------------|---------------|-------------|-----|-----------:|-----------:|----------:|-------------------------------------------|------------:|--------------:|--------------:|------------:|--------------:|--------------:|------------:|--------------:|--------------:|------------------------------------------------|
 | 2025-12-21 18:46 | michael-pro | WiFi(en0)      | 192.168.1.1 | Off |     55.641 |     19.640 |    55.357 | 1294ms @ 46 RPM (HTTP_loaded 1813ms @ 33) |             |               |               |             |               |               |             |               |               | baseline from Cursor run; traceroute hop1=192.168.8.1 |
 | 2025-12-21 18:50 | michael-pro | WiFi(en0)      | 192.168.1.1 | Off |     50.555 |     18.313 |    49.993 | 1879ms @ 31 RPM                            |        15.0 |         46.753 |       1557.453 |        15.5 |         61.821 |       1560.288 |        17.0 |        130.114 |       1573.337 | ping-under-load during networkQuality; hop1=192.168.8.1 |
@@ -53,6 +53,11 @@ Columns:
 | 2025-12-21 19:30 | michael-pro | WiFi(en0)      | 192.168.1.1 | Off |     62.392 |            |    54.591 | 560ms @ 107.2 RPM (dl_only; JSON -c -u)   |        15.5 |         19.080 |       1435.884 |        15.0 |         34.215 |        634.978 |        15.5 |        100.529 |       2153.973 | Wi‑Fi-only download-only (`networkQuality -I en0 -c -u`); `dl_responsiveness` present, `responsiveness` absent |
 | 2025-12-21 19:31 | michael-pro | WiFi(en0)      | 192.168.1.1 | Off |            |     14.330 |    57.780 | 4094ms @ 14.7 RPM (ul_only; JSON -c -d)   |        13.5 |         21.739 |        942.106 |        14.5 |         19.726 |        741.480 |        14.0 |         98.884 |        959.445 | Wi‑Fi-only upload-only (`networkQuality -I en0 -c -d`); `ul_responsiveness` present, `responsiveness` absent |
 | 2025-12-21 19:37 | michael-pro | Ethernet(en13) | 192.168.1.1 | Off |            |     17.967 |    61.048 | 3454ms @ 17.4 RPM (ul_only; JSON -c -d)   |         0.0 |          1.342 |         20.235 |         1.0 |          2.994 |         42.978 |         0.5 |         53.928 |        285.982 | Ethernet-only upload-only (`networkQuality -I en13 -c -d`); Wi‑Fi disabled; `ul_responsiveness` present |
+| 2025-12-21 20:29 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |     72.394 |     19.345 |    63.314 | 209ms @ 286.9 RPM (direct_to_loco; JSON -c) |         0.0 |          3.032 |         19.725 |         1.4 |         35.371 |        253.247 |         0.9 |         45.947 |        387.692 | Direct-to-loco-station (Beryl bypass); gw=192.168.1.1; ping_A=gw, ping_B=hop2 |
+| 2025-12-21 20:30 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |            |     25.472 |    51.374 | 3329ms @ 18.0 RPM (ul_only; direct_to_loco; JSON -c -d) |         0.0 |          2.685 |         55.426 |         0.0 |         57.979 |        296.401 |         0.0 |         68.073 |        313.943 | Direct-to-loco-station (Beryl bypass); gw=192.168.1.1; upload-only still bad while gw ping stays clean |
+| 2025-12-21 20:55 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |            |            |    47.132 | baseline: gw 2.2ms, hop2 14.3ms, inet 25.5ms |         0.0 |          2.218 |         17.013 |         0.0 |         14.263 |         33.776 |         0.0 |         25.511 |         58.319 | Direct-to-loco baseline pings only (no induced load) |
+| 2025-12-21 20:57 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |            |     14.165 |    53.879 | 3877ms @ 15.5 RPM (ul_only; direct_to_loco; JSON -c -d) |         0.0 |          2.709 |         79.724 |         0.0 |         48.196 |        186.324 |         0.0 |         57.984 |        195.361 | Direct-to-loco upload-only; gw stays low while hop2/inet inflate |
+| 2025-12-21 20:58 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |     86.474 |            |    47.132 | 102ms @ 588.3 RPM (dl_only; direct_to_loco; JSON -c -u) |         1.8 |          3.190 |         47.498 |         2.7 |         14.538 |         61.978 |         1.8 |         24.840 |         50.435 | Direct-to-loco download-only; responsiveness excellent |
 
 ### Snapshot: observations (as of 2025-12-21 19:37)
 
@@ -64,6 +69,11 @@ Columns:
 - 19:30 — Wi‑Fi download-only: **dl_responsiveness ~107 RPM** (still degraded) and **loss persists** → download load hurts, but less than upload.
 - 19:31 — Wi‑Fi upload-only: **ul_responsiveness ~14.7 RPM (~4.1s)** → upload is the worst case on Wi‑Fi.
 - 19:37 — Ethernet upload-only: **ul_responsiveness still low (~17.4 RPM)** while **LAN pings are clean** → uplink queueing is also a separate issue (beyond the local Ethernet link).
+- 20:29 — Direct-to-loco full: **Responsiveness good (~287 RPM)** → Beryl not required to get good full-test responsiveness on wired path.
+- 20:30 — Direct-to-loco upload-only: **ul_responsiveness still low (~18 RPM)** while **gateway ping stays clean** → queueing is beyond Mac↔gateway (upstream/ISP-side).
+- 20:55 — Direct-to-loco baseline: **gw ~2ms / hop2 ~14ms / inet ~26ms** with 0% loss → baseline path is healthy.
+- 20:57 — Direct-to-loco upload-only: **ul_responsiveness ~15.5 RPM (~3.9s)**; **gw stays low** but hop2/inet inflate → bottleneck queue is beyond `192.168.1.1` LAN, likely gateway WAN/ISP.
+- 20:58 — Direct-to-loco download-only: **dl_responsiveness ~588 RPM (~102ms)** → the pathological direction is upload, not download.
 
 ## Raw outputs (optional, paste blocks)
 
@@ -261,3 +271,100 @@ ul_responsiveness_rpm: 17.4  (3.454s)
 So what: Ethernet keeps LAN/gateway clean (near-zero loss to router/hop2), yet upload-only responsiveness is still very low (~17 RPM) → the remaining issue is **uplink/WAN queueing**, not the Mac↔Beryl cable.
 
 Now what: this is the exact symptom SQM/CAKE is designed to fix; the next “separate HOWTO + ledger” experiment is enabling SQM on the true uplink interface and tuning rates.
+
+### Direct-to-loco-station (Beryl bypass) — topology and hop map
+
+```text
+host: michael-pro
+enabled_interfaces: WiFi=en0(inactive), BelkinUSBCLAN=en13(active)
+default_route: 1.1.1.1 via gw=192.168.1.1 iface=en13
+en13_ip: 192.168.1.221
+
+traceroute to 1.1.1.1 (1.1.1.1), 6 hops max
+ 1  192.168.1.1
+ 2  72.31.129.125
+ 3  71.46.25.177
+ 4  72.31.119.184
+ 5  72.31.119.188
+ 6  66.109.6.42 / 66.109.9.114
+```
+
+So what: with Beryl removed, the gateway is now **192.168.1.1** and hop2 is **72.31.129.125**; the path is stable/low-latency at idle.
+
+Now what: run the same full + upload-only `networkQuality` tests and compare ping-under-load to the gateway vs hop2 to see where queueing inflates.
+
+### Direct-to-loco full (2025-12-21 20:29)
+
+```text
+host: michael-pro
+enabled_interfaces: WiFi=en0(inactive), BelkinUSBCLAN=en13(active)
+default_route: 1.1.1.1 via gw=192.168.1.1 iface=en13
+en13_ip: 192.168.1.221
+targets: A(gateway)=192.168.1.1 B(hop2)=72.31.129.125 C(inet)=1.1.1.1
+
+ping_A_gw:   0.0% loss, rtt min/avg/max = 1.413/3.032/19.725 ms
+ping_B_hop2: 1.4% loss, rtt min/avg/max = 6.336/35.371/253.247 ms
+ping_C_inet: 0.9% loss, rtt min/avg/max = 16.023/45.947/387.692 ms
+
+networkQuality JSON summary (`networkQuality -I en13 -c`):
+dl_mbps: 72.394
+ul_mbps: 19.345
+base_rtt_ms: 63.314
+responsiveness_rpm: 286.9  (0.209s)
+```
+
+So what: full-test responsiveness is **good (~287 RPM)** with Beryl bypassed → Beryl is not required for good responsiveness on wired traffic.
+
+Now what: compare upload-only, because that’s where bufferbloat/queueing dominates.
+
+### Direct-to-loco upload-only (2025-12-21 20:30)
+
+```text
+host: michael-pro
+enabled_interfaces: WiFi=en0(inactive), BelkinUSBCLAN=en13(active)
+default_route: 1.1.1.1 via gw=192.168.1.1 iface=en13
+en13_ip: 192.168.1.221
+targets: A(gateway)=192.168.1.1 B(hop2)=72.31.129.125 C(inet)=1.1.1.1
+
+ping_A_gw:   0.0% loss, rtt min/avg/max = 1.352/2.685/55.426 ms
+ping_B_hop2: 0.0% loss, rtt min/avg/max = 9.457/57.979/296.401 ms
+ping_C_inet: 0.0% loss, rtt min/avg/max = 16.214/68.073/313.943 ms
+
+networkQuality JSON summary (`networkQuality -I en13 -c -d`):
+ul_mbps: 25.472
+base_rtt_ms: 51.374
+ul_responsiveness_rpm: 18.0  (3.329s)
+```
+
+So what: even with Beryl removed, upload-only responsiveness is still **very low (~18 RPM)** while ping to the local gateway stays clean → the bloated queue is **upstream of the gateway** (or at the gateway’s WAN edge), not on the Mac or the USB/Ethernet hop.
+
+Now what: if we want to fix upload-only responsiveness without touching Moe’s router, the practical move is to reinsert Beryl as a **shaper** (Ethernet uplink) and enable SQM/CAKE; otherwise, the fix is upstream (Moe’s gateway QoS/SQM, or ISP-side behavior).
+
+### Direct-to-loco baseline + direction split (2025-12-21 20:55–20:58)
+
+```text
+host: michael-pro
+enabled_interfaces: WiFi=en0(inactive), BelkinUSBCLAN=en13(active)
+default_route: 1.1.1.1 via gw=192.168.1.1 iface=en13
+en13_ip: 192.168.1.221
+hop2: 72.31.129.125
+
+Baseline pings (no induced load):
+gw (192.168.1.1):      0.0% loss, rtt min/avg/max = 1.369/2.218/17.013 ms
+hop2 (72.31.129.125):  0.0% loss, rtt min/avg/max = 4.581/14.263/33.776 ms
+inet (1.1.1.1):        0.0% loss, rtt min/avg/max = 15.361/25.511/58.319 ms
+
+Upload-only under load (`networkQuality -I en13 -c -d`):
+ul_responsiveness_rpm: 15.5  (3.877s)
+gw ping:   0.0% loss, avg 2.709ms (max 79.724ms)
+hop2 ping: 0.0% loss, avg 48.196ms (max 186.324ms)
+inet ping: 0.0% loss, avg 57.984ms (max 195.361ms)
+
+Download-only under load (`networkQuality -I en13 -c -u`):
+dl_responsiveness_rpm: 588.3  (0.102s)
+gw/hop2/inet: small loss (1.8–2.7%), modest RTT changes
+```
+
+So what: upload-only creates large latency inflation **after the gateway** (hop2/inet rise) while gateway RTT remains low → the queue/bottleneck sits at the gateway WAN edge or beyond (ISP), not on the local LAN.\n\nDownload-only behaves well (high RPM), so the pathological direction is upload.
+
+Now what: the fastest non-invasive fix is to put a shaper you control (Beryl SQM/CAKE) *in front of* the gateway so the queue forms on the shaper, not at the gateway/ISP.
