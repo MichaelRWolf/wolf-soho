@@ -3,13 +3,18 @@
 Settings reference for the Wolfden point-to-point wireless bridge.
 Each section corresponds to a 1Password entry.
 
+Related transition/performance docs (for bufferbloat / `networkQuality` Responsiveness investigation):
+
+- `Ubiquiti/transition_lte_to_isp_over_ptp_qualitative.md`
+- `Ubiquiti/transition_lte_to_isp_over_ptp_quantitative.md`
+
 > **Status:** Configuration complete. PtP is production-ready and set-and-forget.
 
 ---
 
 ## Wolfden – Ubiquiti Loco5AC – AP PtP
 
-### Common to Loco5AC
+### Common to Loco5AC (Station)
 
 - Model: Ubiquiti NanoStation Loco5AC
 - SSID: `Running Wolf PtP`
