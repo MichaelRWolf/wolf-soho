@@ -74,6 +74,11 @@ Columns:
 - 20:55 — Direct-to-loco baseline: **gw ~2ms / hop2 ~14ms / inet ~26ms** with 0% loss → baseline path is healthy.
 - 20:57 — Direct-to-loco upload-only: **ul_responsiveness ~15.5 RPM (~3.9s)**; **gw stays low** but hop2/inet inflate → bottleneck queue is beyond `192.168.1.1` LAN, likely gateway WAN/ISP.
 - 20:58 — Direct-to-loco download-only: **dl_responsiveness ~588 RPM (~102ms)** → the pathological direction is upload, not download.
+- 22:31 — SQM/CAKE configured in LuCI on WAN; SQM logs show “started successfully,” but `networkQuality -d` still exceeded cap → SQM not yet attached to real egress queue.
+- 22:39 — SSH verification: `tc` showed egress wasn’t shaped on `eth0.2`; switching SQM interface to **`eth0`** fixed CAKE attachment.
+- 23:00 — With SQM attached at 11000 kbit/s, `networkQuality -d -v` showed uplink ≈ 10 Mbps but still Low RPM → cap was above instantaneous bottleneck; needed lower upload shaping.
+- 23:19 — Upload shaping at **8000 kbit/s** produced repeatable Medium/High uplink responsiveness in repeated `networkQuality -d` runs (hundreds–thousands RPM).
+- 23:33 — Full `networkQuality -v` sometimes still reported overall Responsiveness Low due to downlink collapsing (~3–6 Mbps during test); direction split confirmed upload-only High while download-only Low.
 
 ## Raw outputs (optional, paste blocks)
 
@@ -368,3 +373,81 @@ gw/hop2/inet: small loss (1.8–2.7%), modest RTT changes
 So what: upload-only creates large latency inflation **after the gateway** (hop2/inet rise) while gateway RTT remains low → the queue/bottleneck sits at the gateway WAN edge or beyond (ISP), not on the local LAN.\n\nDownload-only behaves well (high RPM), so the pathological direction is upload.
 
 Now what: the fastest non-invasive fix is to put a shaper you control (Beryl SQM/CAKE) *in front of* the gateway so the queue forms on the shaper, not at the gateway/ISP.
+
+## Shaping numbers: what to type into SQM (pre-SQM summary)
+
+This section translates the observed `networkQuality` **throughput** numbers into a conservative first-pass SQM configuration.
+
+### Standard words (so we talk consistently)
+
+- **Downlink / Download**: Internet → you (receive).
+- **Uplink / Upload**: you → Internet (send). This is the direction that is currently pathological.
+- **Measured throughput**: what `networkQuality` reported for capacity/throughput at that moment (Mbps).
+- **Bottleneck rate**: the *lowest sustained* throughput you can rely on (use the low end of observed wired measurements, not the best-case peak).
+- **Shaping rate** (SQM setting): the cap you configure (kbit/s) so the queue forms on your device (CAKE) instead of upstream.
+- **Headroom**: the intentional reduction (typically 10–20%) so you stay below the true bottleneck.
+
+Rule of thumb:
+
+- Pick a **bottleneck rate** from the **low end** of your wired measurements.
+- Set the SQM **shaping rate** to **80–90%** of that bottleneck rate.
+
+### Observed wired throughput ranges (this repo session)
+
+These are the wired numbers that matter for shaping (Wi‑Fi numbers are excluded because Wi‑Fi is a separate failure mode).
+
+| Path / vantage point | Observed downlink (Mbps) | Observed uplink (Mbps) | Notes |
+|---|---:|---:|---|
+| Wired behind Beryl (en13, gateway `192.168.8.1`) | 77.354–82.804 | 12.602–17.967 | Includes full + upload-only runs |
+| Beryl bypass (direct-to-loco, en13, gateway `192.168.1.1`) | 72.394–86.474 | 14.165–25.472 | Includes full + upload-only runs |
+
+### Recommended starting SQM shaping rates (safe first pass)
+
+Pick the conservative “bottleneck” values:
+
+- **Uplink bottleneck (conservative)**: **12.6 Mbps** (lowest observed wired uplink)
+- **Downlink bottleneck (conservative)**: **72.4 Mbps** (lowest observed wired downlink)
+
+Then apply headroom (start at ~85%):
+
+| Direction | Bottleneck basis (Mbps) | Headroom | Start shaping (Mbps) | Start shaping (kbit/s) |
+|---|---:|---:|---:|---:|
+| Uplink (upload) | 12.6 | 85% | 10.7 ≈ **11** | **11000** |
+| Downlink (download) | 72.4 | 85% | 61.5 ≈ **62** | **62000** |
+
+Practical tuning guidance:
+
+- If responsiveness is still bad on upload: lower **uplink shaping** by another 10–15% and retest.
+- If everything feels great but bandwidth feels unnecessarily capped: raise shaping in 0.5–1 Mbps steps.
+- Keep the shaping rate below what you see at the worst times of day (the low end is what matters).
+
+### End-of-day wrap (2025-12-21): SQM enabled + first tuning
+
+What:
+
+- Built a baseline with `networkQuality` + ping-under-load and proved topology/hops (Beryl `192.168.8.1` → Moe gateway `192.168.1.1`).
+- Proved with Beryl bypass (Mac → loco-station) that upload-only responsiveness was still catastrophic while gateway RTT stayed low → upstream/WAN queueing was real.
+- Enabled SQM/CAKE and debugged attachment issues:
+  - SQM “started” on `eth0.2` but didn’t shape egress (tc showed `noqueue`).
+  - Switching SQM to `eth0` produced an actual `qdisc cake ... bandwidth ...` on egress.
+- Tuned upload shaping using repeated `networkQuality -d` runs (fast proxy for “Zoom + browsing under contention”).
+
+So what:
+
+- Pre-SQM we had two separate issues:
+  - Wi‑Fi could collapse under load (loss/spikes even to the router), so Ethernet is the stable baseline.
+  - Upload-only queueing lived beyond the LAN (gateway WAN edge / ISP), so shaping must be done on a device we control.
+- SQM/CAKE is now genuinely active and enforcing a cap (confirmed by `tc` showing CAKE + overlimits/drops during load).
+- Upload shaping around **7.5–8.0 Mbps** yields **Medium/High** uplink responsiveness (hundreds–thousands RPM) in repeated `networkQuality -d` runs.
+- Overall “Responsiveness” can still show Low when the downlink side collapses during the combined test; direction-split showed upload-only High but download-only Low when downlink fell to ~3–6 Mbps (likely transient congestion/background downloads).
+
+Now what:
+
+- Keep today’s “working” settings as the baseline:
+  - SQM interface: **`eth0`**
+  - Qdisc/script: **CAKE + `piece_of_cake.qos`**
+  - Upload shaping tried: **11000 → 8500 → 8000 → 7500** (best observed stability today: **8000**, fallback **7500**)
+  - Download shaping: **62000** (may need to come down temporarily if `networkQuality -u` stays ~3–6 Mbps)
+- Next steps to try later:
+  - If downlink-only stays Low: temporarily set download shaping near observed bottleneck (e.g., **5000–12000 kbit/s**) to see if downlink responsiveness stabilizes.
+  - Use `nettop` to identify background downloaders before downlink tests (avoid chasing transient contention).
