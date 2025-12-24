@@ -236,14 +236,14 @@ Idle Latency: 57.883 milliseconds | 1036 RPM
 
 ### Comparison Summary
 
-| Component | HTTP/2 | HTTP/1.1 | Ratio |
-| --- | --- | --- | --- |
-| **Responsiveness** | 13 RPM | 472 RPM | **36x worse** |
-| **HTTP loaded** | 12.241s | N/A | **N/A** |
-| **Idle Latency** | 1319 RPM | 1036 RPM | 1.27x better |
-| **Transport (Idle)** | 2840 RPM | 2696 RPM | 1.05x better |
-| **Security (Idle)** | 649 RPM | 511 RPM | 1.27x better |
-| **HTTP (Idle)** | 2619 RPM | 1757 RPM | 1.49x better |
+| Component            | HTTP/2   | HTTP/1.1 | Ratio         |
+|----------------------|----------|----------|---------------|
+| **Responsiveness**   | 13 RPM   | 472 RPM  | **36x worse** |
+| **HTTP loaded**      | 12.241s  | N/A      | **N/A**       |
+| **Idle Latency**     | 1319 RPM | 1036 RPM | 1.27x better  |
+| **Transport (Idle)** | 2840 RPM | 2696 RPM | 1.05x better  |
+| **Security (Idle)**  | 649 RPM  | 511 RPM  | 1.27x better  |
+| **HTTP (Idle)**      | 2619 RPM | 1757 RPM | 1.49x better  |
 
 **Critical Finding**: The "HTTP loaded" component (12.2 seconds) is the primary cause of poor HTTP/2 responsiveness. This component does not exist in HTTP/1.1 tests.
 
