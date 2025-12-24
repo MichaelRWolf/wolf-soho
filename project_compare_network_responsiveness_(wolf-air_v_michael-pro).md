@@ -1,4 +1,73 @@
-# Michael-Pro Network Quality Investigation
+# Network Responsiveness Comparison: wolf-air vs michael-pro
+
+## Executive Summary (Last Updated: 2025-12-24T14:25:32-0500)
+
+### Problem
+
+michael-pro shows **18-30 RPM responsiveness** vs wolf-air's **1245 RPM** (68x worse), despite both using the same router.
+
+### Root Cause Identified
+
+**HTTP/2 performance is broken on michael-pro** - networkQuality shows:
+
+- HTTP/2: 30 RPM (Low responsiveness)
+- HTTP/1.1: 917 RPM (Medium responsiveness) - **30x better**
+
+### Key Findings
+
+1. **HTTP/2 "HTTP loaded" component**: Takes 8.7 seconds in HTTP/2, doesn't exist in HTTP/1.1
+2. **LuLu firewall detected**: Running (PID 1082, system extension active) - could be interfering with HTTP/2
+3. **Transport layer is healthy**: ~2700 RPM shows network itself is fine
+4. **USB-C Ethernet adapter**: Limits download (2.5 Mbps vs 4.6 Mbps on WiFi)
+5. **CPU throttling ruled out**: michael-pro has better CPU specs and lower load
+
+### Current Hypothesis
+
+**LuLu firewall is interfering with networkQuality's HTTP/2 connections**, causing the 8.7-second "HTTP loaded" delay. curl HTTP/2 works fine, suggesting the issue is specific to networkQuality's CFNetwork implementation + LuLu interaction.
+
+### Next Steps (Priority Order)
+
+1. **Test with LuLu disabled**: Temporarily disable LuLu firewall and run `networkQuality -f h2 -v` to see if HTTP/2 improves
+2. **Check LuLu logs**: Look for blocked/delayed connections during networkQuality tests
+3. **Research LuLu + HTTP/2**: Check if this is a known compatibility issue
+4. **Configure LuLu**: If LuLu is the issue, configure it to allow networkQuality/HTTP/2 or find alternative
+
+### Quick Reference Commands
+
+```bash
+# Test HTTP/2 performance
+networkQuality -f h2 -v
+
+# Test HTTP/1.1 performance (baseline - works well)
+networkQuality -f h1 -v
+
+# Check LuLu status (requires sudo/GUI)
+# LuLu GUI: /Applications/LuLu.app
+# System extension: /Library/SystemExtensions/ECEF2EFD-04A4-42F7-96C7-32EA2512EC4B/
+
+# Check networkQuality endpoint
+networkQuality -v | grep "Test Endpoint"
+
+# Compare with wolf-air (when SSH available)
+ssh wolf-air "networkQuality -f h2 -v"
+```
+
+### System Info
+
+- **michael-pro**: macOS 15.7.3 (Sequoia), WiFi (en0), LuLu firewall active
+- **wolf-air**: macOS 12.7.6 (Monterey), WiFi, no LuLu detected  
+- **Router**: GL-MT1300 (192.168.8.1) - same for both systems
+- **LuLu location**: /Applications/LuLu.app, system extension active
+
+### Important Notes
+
+- Both systems use same router (GL-MT1300) - router is NOT the issue
+- curl HTTP/2 works fine - issue is specific to networkQuality's CFNetwork implementation
+- CPU throttling ruled out - michael-pro has better CPU specs and lower load
+- Packet loss was ICMP rate-limiting, not actual data loss
+- networkQuality uses CFNetwork (Apple framework), curl uses libcurl - different stacks
+
+---
 
 ## Problem Statement
 
