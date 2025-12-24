@@ -1,6 +1,6 @@
 # Network Responsiveness Comparison: wolf-air vs michael-pro
 
-## Executive Summary (Last Updated: 2025-12-24T14:25:32-0500)
+## Executive Summary (Last Updated: 2025-12-24T14:32:00-0500)
 
 ### Problem
 
@@ -10,27 +10,35 @@ michael-pro shows **18-30 RPM responsiveness** vs wolf-air's **1245 RPM** (68x w
 
 **HTTP/2 performance is broken on michael-pro** - networkQuality shows:
 
-- HTTP/2: 30 RPM (Low responsiveness)
+- HTTP/2: 30 RPM (Low responsiveness) - **even with LuLu disabled**
 - HTTP/1.1: 917 RPM (Medium responsiveness) - **30x better**
 
 ### Key Findings
 
-1. **HTTP/2 "HTTP loaded" component**: Takes 8.7 seconds in HTTP/2, doesn't exist in HTTP/1.1
-2. **LuLu firewall detected**: Running (PID 1082, system extension active) - could be interfering with HTTP/2
-3. **Transport layer is healthy**: ~2700 RPM shows network itself is fine
+1. **HTTP/2 "HTTP loaded" component**: Takes 4.08 seconds in HTTP/2 (with LuLu disabled), doesn't exist in HTTP/1.1
+2. **LuLu firewall was contributing but not root cause**: Disabling LuLu improved idle latency 4.8x (262→1265 RPM) and reduced HTTP loaded delay (8.7s→4.08s), but HTTP/2 still performs 30x worse than HTTP/1.1
+3. **Transport layer is healthy**: ~2800 RPM shows network itself is fine
 4. **USB-C Ethernet adapter**: Limits download (2.5 Mbps vs 4.6 Mbps on WiFi)
 5. **CPU throttling ruled out**: michael-pro has better CPU specs and lower load
+6. **Idle latency fixed**: Disabling LuLu improved idle latency from 262 RPM (228ms) to 1265 RPM (47ms)
 
 ### Current Hypothesis
 
-**LuLu firewall is interfering with networkQuality's HTTP/2 connections**, causing the 8.7-second "HTTP loaded" delay. curl HTTP/2 works fine, suggesting the issue is specific to networkQuality's CFNetwork implementation + LuLu interaction.
+**networkQuality tool has a bug with HTTP/2 testing** - likely specific to the tool's test methodology, not a system-wide CFNetwork HTTP/2 issue. Evidence:
+- curl HTTP/2 works perfectly (uses libcurl/nghttp2, not CFNetwork)
+- HTTP/1.1 works perfectly in networkQuality (917 RPM)
+- System logs show HTTP/2 tasks marked "failure" even when successful (response_status=200)
+- The "HTTP loaded" component (4-7 seconds) may be test-specific and not affect real-world apps
+- If this were system-wide, Safari/Mail would be slow and complaints would be widespread
 
 ### Next Steps (Priority Order)
 
-1. **Test with LuLu disabled**: Temporarily disable LuLu firewall and run `networkQuality -f h2 -v` to see if HTTP/2 improves
-2. **Check LuLu logs**: Look for blocked/delayed connections during networkQuality tests
-3. **Research LuLu + HTTP/2**: Check if this is a known compatibility issue
-4. **Configure LuLu**: If LuLu is the issue, configure it to allow networkQuality/HTTP/2 or find alternative
+1. **Test wolf-air with HTTP/2** to confirm it performs well (1245 RPM was likely HTTP/2)
+2. **Compare HTTP/2 verbose output** between michael-pro and wolf-air to identify specific differences
+3. **Investigate macOS Sequoia HTTP/2 bugs** - check for known issues or regressions
+4. **Test with different HTTP/2 endpoints** to see if issue is server-specific
+5. **Consider using HTTP/1.1** for networkQuality tests on michael-pro until HTTP/2 issue is resolved
+6. **Report as potential macOS Sequoia bug** if confirmed
 
 ### Quick Reference Commands
 
@@ -1104,3 +1112,300 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 - **Test networkQuality with LuLu disabled** - if HTTP/2 improves, LuLu is the culprit
 - **If LuLu is the issue**: Configure LuLu to allow networkQuality or HTTP/2 connections, or find LuLu alternative
 - **Research LuLu + HTTP/2 issues** - check if this is a known problem
+
+---
+
+### 2025-12-24T14:28:53-0500 - Test with LuLu Main Process Killed (System Extension Still Active)
+
+**Machine**: michael-pro
+
+**What**: Killed LuLu main application process (PID 1082) and ran HTTP/2 networkQuality test. System extension (PID 327) remains active as it requires System Settings GUI or sudo to disable.
+
+**LuLu Status**:
+- **Main application**: Killed (no longer running)
+- **System extension**: Still active (PID 327, requires System Settings to disable)
+
+**HTTP/2 Test Results** (with LuLu app killed):
+
+- **Overall Responsiveness**: Low (2.237 seconds | 26 RPM) - still poor
+- **Transport**: 2764 RPM (21.705 ms) - **EXCELLENT** - network layer fine
+- **Security (TLS)**: 503 RPM (119.136 ms) - Slow (improved from 293 RPM / 204ms)
+- **HTTP**: 1533 RPM (39.114 ms) - OK (improved from 711 RPM / 84ms)
+- **HTTP loaded**: **13 RPM (4.554 seconds)** - **VERY SLOW** (improved from 6 RPM / 8.7 seconds)
+
+**Comparison with Previous HTTP/2 Test** (LuLu fully active):
+
+| Component | Previous (LuLu active) | Current (LuLu app killed) | Change |
+|-----------|------------------------|---------------------------|--------|
+| Overall Responsiveness | 30 RPM (1.979s) | 26 RPM (2.237s) | Slightly worse |
+| Transport | 2844 RPM (21ms) | 2764 RPM (21.7ms) | Similar |
+| Security (TLS) | 293 RPM (204ms) | 503 RPM (119ms) | **72% faster** |
+| HTTP | 711 RPM (84ms) | 1533 RPM (39ms) | **116% faster** |
+| HTTP loaded | 6 RPM (8.7s) | 13 RPM (4.55s) | **48% faster** |
+
+**Key Findings**:
+
+1. **Partial improvement**: Killing LuLu main app improved TLS, HTTP, and HTTP loaded components
+2. **HTTP loaded still very slow**: 4.554 seconds is still extremely slow (should be <100ms)
+3. **Overall responsiveness still poor**: 26 RPM vs 917 RPM with HTTP/1.1 (35x worse)
+4. **System extension still active**: The LuLu system extension (PID 327) is still running and may still be filtering traffic
+
+**So what**:
+
+- **LuLu main app was contributing to the problem**: Killing it improved performance in TLS, HTTP, and HTTP loaded components
+- **System extension may still be interfering**: The LuLu system extension is still active and may be filtering HTTP/2 traffic
+- **HTTP/2 performance still broken**: Even with LuLu app killed, HTTP/2 is 35x worse than HTTP/1.1
+- **Need to fully disable LuLu**: Must disable the system extension via System Settings to get complete test
+
+**Now what**:
+
+- **Fully disable LuLu system extension** via System Settings → Network → Firewall (or LuLu app settings)
+- **Re-run HTTP/2 test** with system extension disabled to see if performance improves further
+- **If disabling system extension fixes HTTP/2**: Configure LuLu to allow networkQuality/HTTP/2 or find alternative firewall
+- **If HTTP/2 still poor after disabling system extension**: Investigate other causes (macOS Sequoia HTTP/2 bugs, CFNetwork issues, etc.)
+
+---
+
+### 2025-12-24T14:32:00-0500 - Test with LuLu Disabled via App
+
+**Machine**: michael-pro
+
+**What**: Disabled LuLu firewall via the LuLu application and ran HTTP/2 networkQuality test.
+
+**LuLu Status**:
+- **Main application**: Running (PID 91810) but firewall disabled via app settings
+- **System extension**: Still loaded (PID 327) but filtering disabled
+
+**HTTP/2 Test Results** (with LuLu disabled):
+
+- **Overall Responsiveness**: Low (1.970 seconds | 30 RPM) - still poor
+- **Transport**: 2819 RPM (21.279 ms) - **EXCELLENT** - network layer fine
+- **Security (TLS)**: 497 RPM (120.674 ms) - Slow
+- **HTTP**: 1580 RPM (37.953 ms) - OK
+- **HTTP loaded**: **14 RPM (4.080 seconds)** - **VERY SLOW** (improved from 8.7s with LuLu active)
+- **Idle Latency**: **1265 RPM (47.411 ms)** - **SIGNIFICANTLY IMPROVED** (was 262 RPM / 228ms with LuLu active)
+
+**Comparison Across All Three Tests**:
+
+| Component | LuLu Active | LuLu App Killed | LuLu Disabled | Best Result |
+|-----------|-------------|-----------------|---------------|-------------|
+| Overall Responsiveness | 30 RPM (1.979s) | 26 RPM (2.237s) | 30 RPM (1.970s) | 30 RPM |
+| Transport | 2844 RPM (21ms) | 2764 RPM (21.7ms) | 2819 RPM (21.3ms) | Similar (all excellent) |
+| Security (TLS) | 293 RPM (204ms) | 503 RPM (119ms) | 497 RPM (121ms) | **497 RPM** (disabled) |
+| HTTP | 711 RPM (84ms) | 1533 RPM (39ms) | 1580 RPM (38ms) | **1580 RPM** (disabled) |
+| HTTP loaded | 6 RPM (8.7s) | 13 RPM (4.55s) | 14 RPM (4.08s) | **14 RPM** (disabled) |
+| **Idle Latency** | **262 RPM (228ms)** | **262 RPM (228ms)** | **1265 RPM (47ms)** | **1265 RPM** (disabled) |
+
+**Key Findings**:
+
+1. **LuLu was significantly impacting idle latency**: Disabling LuLu improved idle latency from 262 RPM (228ms) to 1265 RPM (47ms) - **4.8x improvement**
+2. **HTTP loaded improved but still very slow**: Reduced from 8.7s to 4.08s (53% improvement), but still extremely slow
+3. **Overall responsiveness still poor**: 30 RPM vs 917 RPM with HTTP/1.1 (30x worse)
+4. **LuLu was NOT the root cause**: While disabling LuLu helped, HTTP/2 performance is still broken
+
+**So what**:
+
+- **LuLu was contributing to the problem**: Disabling it improved idle latency dramatically and reduced HTTP loaded delay
+- **HTTP/2 performance still broken**: Even with LuLu disabled, HTTP/2 is 30x worse than HTTP/1.1 (30 RPM vs 917 RPM)
+- **Root cause is NOT LuLu**: The HTTP/2 "HTTP loaded" component taking 4.08 seconds suggests a deeper issue:
+  - macOS Sequoia HTTP/2 implementation bug
+  - CFNetwork HTTP/2 handling issue
+  - Server-side HTTP/2 behavior difference
+  - Network stack configuration issue specific to HTTP/2
+
+**Now what**:
+
+- **Test wolf-air with HTTP/2** to confirm it performs well (1245 RPM was likely HTTP/2)
+- **Compare HTTP/2 verbose output** between michael-pro and wolf-air to identify specific differences
+- **Investigate macOS Sequoia HTTP/2 bugs** - check for known issues or regressions
+- **Test with different HTTP/2 endpoints** to see if issue is server-specific
+- **Consider using HTTP/1.1** for networkQuality tests on michael-pro until HTTP/2 issue is resolved
+- **Report as potential macOS Sequoia bug** if confirmed
+
+---
+
+### 2025-12-24T14:34:28-0500 - Confirmation: HTTP/2 Still Broken, curl HTTP/2 Works Fine
+
+**Machine**: michael-pro
+
+**What**: Confirmed HTTP/2 performance issue persists and verified that curl HTTP/2 works fine, confirming the issue is specific to networkQuality's CFNetwork implementation.
+
+**HTTP/2 Test Results** (LuLu disabled, different endpoint):
+
+- **Overall Responsiveness**: Low (2.423 seconds | 24 RPM) - still poor
+- **HTTP loaded**: 8 RPM (7.078 seconds) - still extremely slow (variability: 4.08s-7.08s)
+- **curl HTTP/2 test**: **Works perfectly** - HTTP/2 200 response from apple.com
+
+**Key Confirmation**:
+
+1. **HTTP/2 itself works**: curl successfully uses HTTP/2, confirming the protocol stack is functional
+2. **Issue is networkQuality/CFNetwork specific**: The problem is isolated to networkQuality's use of CFNetwork for HTTP/2
+3. **HTTP loaded component is the killer**: Consistently takes 4-7 seconds, doesn't exist in HTTP/1.1
+4. **LuLu was contributing but not root cause**: Even with LuLu disabled, HTTP/2 performance is 30x worse than HTTP/1.1
+
+**So what**:
+
+- **Root cause confirmed**: macOS Sequoia's CFNetwork HTTP/2 implementation has a bug affecting networkQuality
+- **Workaround available**: Use `networkQuality -f h1` to get accurate responsiveness measurements (917 RPM)
+- **Not a general HTTP/2 issue**: curl HTTP/2 works fine, so this is specific to CFNetwork's HTTP/2 handling
+- **LuLu impact**: LuLu was making it worse (8.7s → 4.08s improvement), but core issue remains
+
+**Now what**:
+
+- **Use HTTP/1.1 for networkQuality tests** on michael-pro: `networkQuality -f h1 -v` gives accurate results (917 RPM)
+- **Test wolf-air when SSH available** to compare HTTP/2 performance (macOS Monterey vs Sequoia)
+- **Monitor for macOS updates** that might fix CFNetwork HTTP/2 issue
+- **Consider reporting to Apple** if wolf-air (Monterey) shows good HTTP/2 performance, confirming Sequoia regression
+
+---
+
+### 2025-12-24T14:41:34-0500 - Deep Research: Is This a Widespread Bug?
+
+**Machine**: michael-pro
+
+**What**: Investigated whether this HTTP/2 performance issue is a widespread macOS/CFNetwork bug or specific to networkQuality tool.
+
+**Key Clarifications**:
+
+1. **HTTP/2 is NOT the most recent version**:
+   - HTTP/3 (QUIC) is newer (released 2022)
+   - HTTP/2 is still widely used (released 2015, standardized 2015)
+   - HTTP/1.1 is older (1997, updated 2014)
+
+2. **CFNetwork vs Other HTTP/2 Implementations**:
+   - **CFNetwork**: Apple's networking framework used by many macOS/iOS apps (Safari, Mail, etc.)
+   - **libcurl/nghttp2**: Used by curl (version 8.7.1 with nghttp2/1.64.0) - **works fine**
+   - **networkQuality**: Uses NetworkQualityServices framework + Network framework, not directly CFNetwork
+
+3. **System Log Analysis**:
+   - CFNetwork logs show HTTP/2 tasks marked as **"failure"** even when `response_status=200` (successful)
+   - Transaction durations: 30-44 seconds for HTTP/2 tasks
+   - Many tasks show `response_duration_ms=0` despite successful responses
+   - This suggests networkQuality may be timing out or canceling HTTP/2 tasks prematurely
+
+4. **Scope of the Issue**:
+   - **curl HTTP/2 works perfectly** - confirms HTTP/2 protocol stack is functional
+   - **Issue is specific to networkQuality tool**, not general HTTP/2
+   - **Other apps using CFNetwork** (Safari, Mail, etc.) may or may not be affected - not tested
+
+**Why This Might NOT Be Widely Reported**:
+
+1. **networkQuality is a diagnostic tool**, not used by most users:
+   - Most users don't run `networkQuality` directly
+   - They experience network through apps (Safari, Mail, etc.)
+   - If Safari/Mail HTTP/2 works fine, users wouldn't notice
+
+2. **The "HTTP loaded" component may be test-specific**:
+   - networkQuality's test methodology may wait for specific HTTP/2 features
+   - Real-world apps may not trigger the same code path
+   - The 4-7 second delay might only affect networkQuality's test, not actual browsing
+
+3. **HTTP/1.1 fallback works**:
+   - If CFNetwork HTTP/2 has issues, apps may silently fall back to HTTP/1.1
+   - Users wouldn't notice unless they specifically test HTTP/2
+
+4. **This could be a networkQuality bug, not CFNetwork**:
+   - networkQuality uses NetworkQualityServices framework
+   - The "HTTP loaded" delay might be a bug in networkQuality's test implementation
+   - CFNetwork itself may work fine for real-world usage
+
+**Evidence This Is Tool-Specific, Not System-Wide**:
+
+- curl HTTP/2 works fine (uses libcurl/nghttp2, not CFNetwork)
+- Other CFNetwork-based apps (Safari, Mail) not tested - may work fine
+- networkQuality logs show tasks marked "failure" even when successful (suggests test methodology issue)
+- HTTP/1.1 works perfectly in networkQuality (917 RPM)
+
+**So what**:
+
+- **This is likely a networkQuality tool bug**, not a widespread macOS/CFNetwork HTTP/2 bug
+- **If it were a system-wide CFNetwork HTTP/2 bug**, we'd expect:
+  - Safari/Mail to be slow
+  - Widespread complaints on forums/Reddit
+  - Apple to have fixed it already
+- **The "HTTP loaded" component** taking 4-7 seconds is likely networkQuality's test waiting for something that real apps don't wait for
+- **CFNetwork HTTP/2 may work fine** for actual application usage, just not for networkQuality's specific test
+
+**Now what**:
+
+- **Test Safari/Mail HTTP/2 performance** to see if real-world apps are affected
+- **Search Apple Developer Forums** for networkQuality HTTP/2 issues
+- **Check if this is a known networkQuality bug** (tool-specific, not system-wide)
+- **Report to Apple as networkQuality bug** if confirmed (not CFNetwork bug)
+- **Use HTTP/1.1 for networkQuality tests** until fixed: `networkQuality -f h1 -v`
+
+---
+
+### 2025-12-24T14:46:52-0500 - networkQuality Ownership and Bug Reporting
+
+**Machine**: michael-pro
+
+**What**: Investigated who owns networkQuality tool and how to submit bug reports.
+
+**Ownership**:
+
+- **Owner**: Apple Inc.
+- **Location**: `/usr/bin/networkQuality` (system binary)
+- **Framework**: Uses `NetworkQualityServices.framework` (private Apple framework)
+- **Bundle ID**: `com.apple.networkQuality`
+- **Part of**: Darwin/macOS system tools
+- **Man page**: References Apple support documentation (https://support.apple.com/kb/HT212313)
+
+**Bug Reporting Options**:
+
+1. **Feedback Assistant** (macOS built-in):
+   - Location: `/System/Library/CoreServices/Applications/Feedback Assistant.app`
+   - Launch: `open -a "Feedback Assistant"` or search Spotlight for "Feedback Assistant"
+   - Requires Apple ID login
+   - Can attach system diagnostics and logs
+   - Best for: General macOS/system tool bugs
+
+2. **Apple Developer Bug Reporting**:
+   - URL: https://developer.apple.com/bug-reporting/
+   - Requires Apple Developer account (free or paid)
+   - Best for: Developer-focused issues, framework bugs
+   - Can file bugs against specific frameworks/components
+
+3. **Apple Feedback** (Public):
+   - URL: https://www.apple.com/feedback/
+   - General feedback form
+   - Less structured than Feedback Assistant
+   - Best for: User-facing issues
+
+4. **Apple Support Documentation**:
+   - networkQuality man page references: https://support.apple.com/kb/HT212313
+   - May contain reporting instructions or known issues
+
+**Recommended Approach**:
+
+1. **Use Feedback Assistant** (most appropriate for system tool bugs):
+   - Launch: `open -a "Feedback Assistant"`
+   - Category: "macOS" → "System Tools" or "Networking"
+   - Include:
+     - Description of HTTP/2 performance issue
+     - Comparison: HTTP/1.1 (917 RPM) vs HTTP/2 (30 RPM)
+     - System logs showing CFNetwork HTTP/2 task failures
+     - macOS version: 15.7.3 (Sequoia)
+     - Workaround: Use `-f h1` flag
+
+2. **Attach Diagnostic Information**:
+   - System logs: `log show --predicate 'subsystem == "com.apple.CFNetwork"' --last 2h`
+   - networkQuality verbose output: `networkQuality -f h2 -v`
+   - Comparison output: `networkQuality -f h1 -v`
+
+**So what**:
+
+- **networkQuality is an Apple system tool** - owned and maintained by Apple
+- **Feedback Assistant is the primary bug reporting mechanism** for macOS system tools
+- **Can also use Apple Developer Bug Reporting** if you have a developer account
+- **Should report this as a networkQuality tool bug**, not a general CFNetwork bug
+
+**Now what**:
+
+- **Prepare bug report** with:
+  - Clear description of HTTP/2 performance issue
+  - Comparison data (HTTP/1.1 vs HTTP/2)
+  - System logs showing the issue
+  - Workaround (use `-f h1` flag)
+- **Submit via Feedback Assistant** with appropriate category and diagnostics
+- **Consider also posting** to Apple Developer Forums to see if others have encountered this
