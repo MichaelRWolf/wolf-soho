@@ -25,6 +25,7 @@ michael-pro shows **18-30 RPM responsiveness** vs wolf-air's **1245 RPM** (68x w
 ### Current Hypothesis
 
 **networkQuality tool has a bug with HTTP/2 testing** - likely specific to the tool's test methodology, not a system-wide CFNetwork HTTP/2 issue. Evidence:
+
 - curl HTTP/2 works perfectly (uses libcurl/nghttp2, not CFNetwork)
 - HTTP/1.1 works perfectly in networkQuality (917 RPM)
 - System logs show HTTP/2 tasks marked "failure" even when successful (response_status=200)
@@ -1122,6 +1123,7 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 **What**: Killed LuLu main application process (PID 1082) and ran HTTP/2 networkQuality test. System extension (PID 327) remains active as it requires System Settings GUI or sudo to disable.
 
 **LuLu Status**:
+
 - **Main application**: Killed (no longer running)
 - **System extension**: Still active (PID 327, requires System Settings to disable)
 
@@ -1173,6 +1175,7 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 **What**: Disabled LuLu firewall via the LuLu application and ran HTTP/2 networkQuality test.
 
 **LuLu Status**:
+
 - **Main application**: Running (PID 91810) but firewall disabled via app settings
 - **System extension**: Still loaded (PID 327) but filtering disabled
 
@@ -1349,7 +1352,7 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 - **Framework**: Uses `NetworkQualityServices.framework` (private Apple framework)
 - **Bundle ID**: `com.apple.networkQuality`
 - **Part of**: Darwin/macOS system tools
-- **Man page**: References Apple support documentation (https://support.apple.com/kb/HT212313)
+- **Man page**: References Apple support documentation (<https://support.apple.com/kb/HT212313>)
 
 **Bug Reporting Options**:
 
@@ -1361,19 +1364,19 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
    - Best for: General macOS/system tool bugs
 
 2. **Apple Developer Bug Reporting**:
-   - URL: https://developer.apple.com/bug-reporting/
+   - URL: <https://developer.apple.com/bug-reporting/>
    - Requires Apple Developer account (free or paid)
    - Best for: Developer-focused issues, framework bugs
    - Can file bugs against specific frameworks/components
 
 3. **Apple Feedback** (Public):
-   - URL: https://www.apple.com/feedback/
+   - URL: <https://www.apple.com/feedback/>
    - General feedback form
    - Less structured than Feedback Assistant
    - Best for: User-facing issues
 
 4. **Apple Support Documentation**:
-   - networkQuality man page references: https://support.apple.com/kb/HT212313
+   - networkQuality man page references: <https://support.apple.com/kb/HT212313>
    - May contain reporting instructions or known issues
 
 **Recommended Approach**:
