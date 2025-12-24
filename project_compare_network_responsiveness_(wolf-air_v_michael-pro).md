@@ -675,3 +675,363 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 - **Investigate USB-C adapter performance** - check for known issues with Belkin USB-C LAN adapter
 - **Consider testing with different Ethernet adapter** if available
 - **Focus investigation on network interface/driver** rather than CPU/system performance
+
+---
+
+### 2025-12-24T13:52:22-0500 - WiFi vs Ethernet (USB-C) Comparison Test
+
+**Machine**: michael-pro
+
+**What**: Tested networkQuality on WiFi to compare with Ethernet (USB-C adapter) performance.
+
+**Test Configuration**:
+
+- **Ethernet**: Belkin USB-C LAN adapter (en13), 1000baseT full-duplex
+- **WiFi**: Built-in WiFi (en0), autoselect
+
+**networkQuality Results**:
+
+| Metric | Ethernet (USB-C) | WiFi | Difference |
+|--------|------------------|------|------------|
+| **Upload Capacity** | 15.126 Mbps | 15.536 Mbps | +0.410 Mbps (similar) |
+| **Download Capacity** | 2.573 Mbps | 4.580 Mbps | **+2.007 Mbps (+78%)** |
+| **Responsiveness** | Low (18 RPM) | Low (18 RPM) | Same (still poor) |
+| **Idle Latency** | 48.834 ms | 45.885 ms | Slightly better |
+
+**Comparison with wolf-air**:
+
+| Metric | michael-pro WiFi | wolf-air WiFi | Difference |
+|--------|------------------|---------------|------------|
+| **Download Capacity** | 4.580 Mbps | 5.149 Mbps | -0.569 Mbps (11% lower) |
+| **Upload Capacity** | 15.536 Mbps | 12.733 Mbps | +2.803 Mbps (higher) |
+| **Responsiveness** | Low (18 RPM) | High (1245 RPM) | **-1227 RPM (68x worse)** |
+
+**Key Findings**:
+
+1. **USB-C Ethernet adapter IS limiting download**: WiFi download is **78% better** (4.58 vs 2.57 Mbps)
+2. **WiFi download still below wolf-air**: 4.58 Mbps vs 5.15 Mbps (11% lower)
+3. **Responsiveness still poor on WiFi**: 18 RPM on both interfaces, vs 1245 RPM on wolf-air
+4. **Upload capacity similar**: Both interfaces achieve ~15 Mbps upload
+5. **The USB-C adapter is a problem, but not the only problem**: Even with WiFi (78% better download), responsiveness is still Low
+
+**So what**:
+
+- **USB-C Ethernet adapter confirmed as download bottleneck**: Download capacity increases 78% when switching to WiFi
+- **Additional issues beyond interface**: Responsiveness is still Low (18 RPM) on WiFi, suggesting:
+  - Network stack configuration issues
+  - Packet loss or latency issues
+  - Router/switch configuration differences
+  - macOS network stack differences (Sequoia vs Monterey)
+- **Download capacity gap**: WiFi (4.58 Mbps) is still 11% lower than wolf-air (5.15 Mbps), but much closer than Ethernet (2.57 Mbps)
+- **Responsiveness gap remains huge**: 18 RPM vs 1245 RPM (68x difference) even with similar download capacity
+
+**Now what**:
+
+- **Use WiFi instead of USB-C Ethernet adapter** for better download performance (78% improvement)
+- **Investigate why responsiveness is still poor on WiFi**:
+  - Compare network stack settings between michael-pro and wolf-air
+  - Check for packet loss differences
+  - Investigate macOS version differences (Sequoia 15.7.3 vs Monterey 12.7.6)
+  - Check router/switch port configuration differences
+- **Consider replacing USB-C Ethernet adapter** if Ethernet is needed
+- **Investigate why michael-pro responsiveness is 68x worse** than wolf-air even with similar download capacity
+
+---
+
+### 2025-12-24T13:56:17-0500 - CRITICAL: Packet Loss Identified as Root Cause
+
+**Machine**: michael-pro
+
+**What**: Measured packet loss to router and internet to investigate responsiveness issues.
+
+**Packet Loss Measurements**:
+
+| Target | Packets Sent | Packets Received | Packet Loss | Latency (min/avg/max/stddev) |
+|--------|--------------|------------------|-------------|------------------------------|
+| **Router (192.168.8.1)** | 20 | 16 | **20%** | 2.033/46.304/495.441/118.260 ms |
+| **Router (192.168.8.1)** | 50 | 46 | **8%** | 2.004/21.138/310.263/48.845 ms |
+| **Internet (8.8.8.8)** | 20 | 15 | **25%** | 19.796/22.545/28.086/2.675 ms |
+| **Internet (8.8.8.8)** | 50 | 46 | **8%** | 18.102/35.282/139.050/27.253 ms |
+
+**Key Observations**:
+
+- **Severe packet loss**: 8-25% packet loss is EXTREMELY high (normal is <1%)
+- **High jitter**: stddev up to 118ms to router (normal is <10ms)
+- **Latency spikes**: Up to 495ms to router (normal is <10ms)
+- **Packet loss occurs at router level**: 20% loss to router itself indicates router or WiFi issues
+- **Inconsistent loss**: Varies between 8-25% (suggests intermittent congestion or interference)
+
+**Network Interface Statistics**:
+
+- **WiFi interface (en0)**: 0 errors, 0 collisions (interface itself is healthy)
+- **TCP statistics**: 0 retransmits, 0 out-of-order packets (TCP layer is handling loss)
+- **Router**: console.gl-inet.com (192.168.8.1) - GL-iNet router
+
+**So what**:
+
+- **ROOT CAUSE IDENTIFIED**: **8-25% packet loss is causing poor responsiveness**
+- **Packet loss explains 18 RPM vs 1245 RPM**: With 8-25% packet loss, responsiveness tests fail because:
+  - Request packets are lost, requiring retransmission
+  - Response packets are lost, requiring retransmission
+  - High jitter (118ms stddev) causes inconsistent timing
+  - Latency spikes (up to 495ms) cause timeouts
+- **Packet loss is at router level**: 20% loss to router itself suggests:
+  - Router buffer overflow/overload
+  - WiFi interference or quality issues
+  - Router firmware/configuration problems
+  - Network congestion on router
+- **This is NOT a michael-pro system issue**: The packet loss is happening in the network path, not on the machine
+
+**Now what**:
+
+- **Investigate router (GL-iNet) status and configuration**:
+  - Check router CPU/memory usage
+  - Check router buffer settings
+  - Check WiFi channel interference
+  - Check router firmware version
+  - Check for QoS/throttling settings
+- **Compare packet loss on wolf-air** (when SSH is available) to see if it's router-wide or michael-pro specific
+- **Test from different devices** to isolate if it's michael-pro WiFi or router issue
+- **Check WiFi signal strength and channel** on michael-pro
+- **Consider router firmware update or reset** if router is overloaded
+- **Investigate WiFi interference** - check for channel congestion, neighboring networks
+
+---
+
+### 2025-12-24T14:00:58-0500 - CORRECTION: ICMP Rate Limiting, Not Actual Packet Loss
+
+**Machine**: michael-pro
+
+**What**: Discovered that router (GL-MT1300) is rate-limiting ICMP ping packets, not dropping actual data traffic.
+
+**ICMP Ping Test Results**:
+
+| Test | Interval | Packets | Packet Loss | Notes |
+|------|----------|---------|-------------|-------|
+| Fast pings to router | 0.1s | 10 | **90%** | Router rate-limiting ICMP |
+| Slow pings to router | 0.2s | 100 | **0%** | Normal traffic OK |
+| Ping to wolf-air | 1s | 20 | 5-10% | Some loss to other device |
+| Ping to internet | 1s | 50 | 8% | Some loss |
+
+**Actual Data Traffic Tests**:
+
+- **TCP connections**: All successful (router port 80, internet port 53)
+- **HTTP requests**: Fast and reliable (0.1s to router, 0.18s to google.com)
+- **TCP statistics**: 0 retransmits, 0 out-of-order packets
+- **Network interface**: 0 errors, 0 collisions
+
+**Key Discovery**:
+
+- **Router is rate-limiting ICMP**, not dropping actual data packets
+- **TCP/UDP data traffic works fine** - no actual packet loss detected
+- **The 8-25% "packet loss" was ICMP throttling**, not real data loss
+- **networkQuality uses TCP/UDP**, not ICMP, so ICMP rate-limiting doesn't affect it
+
+**So what**:
+
+- **Previous packet loss analysis was misleading**: ICMP rate-limiting is not the cause of poor responsiveness
+- **Actual data traffic is fine**: TCP connections work, HTTP requests are fast
+- **Router is NOT the problem**: Both michael-pro and wolf-air use the same router, so router can't explain the difference
+- **Need to look elsewhere**: Since router works fine and both machines use it, the 18 RPM vs 1245 RPM difference must be:
+  - macOS version differences (Sequoia 15.7.3 vs Monterey 12.7.6)
+  - Network stack configuration differences
+  - System-level network settings
+  - Application-level differences in how networkQuality runs
+
+**Now what**:
+
+- **Focus on macOS/network stack differences** between Sequoia and Monterey
+- **Compare networkQuality implementation** - does it behave differently on different macOS versions?
+- **Check system network settings** that might affect responsiveness testing
+- **Investigate if networkQuality has known issues** on macOS Sequoia
+- **Compare actual TCP performance** between systems using iperf3 or similar tools
+- **Look for macOS network stack bugs** or configuration issues in Sequoia
+
+---
+
+### 2025-12-24T14:08:35-0500 - Network Stack Settings and networkQuality Verbose Analysis
+
+**Machine**: michael-pro
+
+**What**: Collected network stack settings and ran networkQuality with verbose output to get detailed breakdown of responsiveness components.
+
+**Network Stack Settings - michael-pro**:
+
+| Setting | Value |
+|---------|-------|
+| **TCP sendspace** | 131072 bytes (128 KB) |
+| **TCP recvspace** | 131072 bytes (128 KB) |
+| **TCP congestion control** | CUBIC (95% of sockets) |
+| **TCP delayed_ack** | 3 |
+| **MTU** | 1500 (standard) |
+| **DNS** | System default (none set on WiFi) |
+| **Proxy** | Minimal (only .local and 169.254/16 exceptions) |
+| **TSO (TCP Segmentation Offload)** | Enabled |
+| **Path MTU Discovery** | Enabled |
+
+**networkQuality Verbose Output Breakdown**:
+
+| Component | RPM | Latency | Notes |
+|-----------|-----|---------|-------|
+| **Overall Responsiveness** | **30 RPM** | 1.979 seconds | **Low** |
+| Transport | 2838 RPM | 21.140 ms | **GOOD** - network layer is fast |
+| Security (TLS/SSL) | 495 RPM | 121.070 ms | **SLOW** - TLS handshake bottleneck |
+| HTTP | 1575 RPM | 38.093 ms | OK |
+| **HTTP loaded** | **14 RPM** | 4.245 seconds | **VERY SLOW** - page load bottleneck |
+
+**Idle Latency Breakdown**:
+
+- Overall: 1104 RPM (54.345 ms) - **High** (good)
+- Transport: 2566 RPM (23.375 ms) - Excellent
+- Security: 524 RPM (114.500 ms) - Slow TLS
+- HTTP: 2384 RPM (25.159 ms) - Good
+
+**Test Details**:
+
+- Test Endpoint: usmia1-edge-fx-018.aaplimg.com
+- Interface: en0 (WiFi)
+- Protocol: HTTP/2 (100%)
+- ECN: Disabled (100%)
+- L4S: Disabled (100%)
+- OS Version: macOS 15.7.3 (Build 24G419)
+
+**Key Findings**:
+
+1. **Transport layer is FAST**: 2838 RPM (21ms) - network transport itself is not the problem
+2. **TLS/SSL handshake is SLOW**: 495 RPM (121ms) - Security layer is a bottleneck
+3. **HTTP page load is VERY SLOW**: 14 RPM (4.245 seconds) - This is the main problem
+4. **Overall responsiveness dominated by HTTP loaded**: 4.245 seconds out of 1.979 total (wait, that doesn't add up - need to investigate)
+5. **Idle latency is good**: 1104 RPM shows the connection itself is healthy
+
+**So what**:
+
+- **Network transport is NOT the problem**: 2838 RPM transport layer shows network is fast
+- **TLS/SSL performance is a bottleneck**: 121ms for security handshake is slow
+- **HTTP page load is the main issue**: 14 RPM (4.245 seconds) is extremely slow
+- **The problem is in the application/HTTP layer**, not the network stack
+- **This suggests**:
+  - TLS/SSL library performance issues
+  - HTTP/2 implementation issues
+  - Possible macOS Sequoia-specific TLS/HTTP performance regression
+  - Browser/HTTP client performance differences
+
+**Now what**:
+
+- **Compare verbose output with wolf-air** to see if TLS/HTTP performance differs
+- **Test with different protocols** (HTTP/1.1, HTTP/3/QUIC) using `-f` flag
+- **Investigate TLS/SSL performance** - check for macOS Sequoia TLS regressions
+- **Check HTTP/2 implementation** - see if forcing HTTP/1.1 or HTTP/3 improves performance
+- **Compare TLS library versions** between systems
+- **Test with L4S enabled** (`-f L4S`) to see if it helps
+- **Investigate if this is a known macOS Sequoia issue** with TLS/HTTP performance
+
+---
+
+### 2025-12-24T14:12:34-0500 - CRITICAL FINDING: HTTP/2 Performance Issue Identified
+
+**Machine**: michael-pro
+
+**What**: Tested networkQuality with different HTTP protocols to isolate the performance issue.
+
+**Protocol Comparison Results**:
+
+| Protocol | Responsiveness | RPM | Latency | Status |
+|----------|----------------|-----|---------|--------|
+| **HTTP/2** (default) | **Low** | **30 RPM** | 1.979 seconds | **POOR** |
+| **HTTP/1.1** (`-f h1`) | **Medium** | **917 RPM** | 65.429 ms | **30x BETTER!** |
+
+**HTTP/1.1 Verbose Breakdown**:
+
+- Overall: 917 RPM (65.429 ms) - **Medium** responsiveness
+- Transport: 2742 RPM (21.875 ms) - Fast (similar to HTTP/2)
+- Security: 653 RPM (91.875 ms) - Faster than HTTP/2 (495 RPM)
+- HTTP: 1493 RPM (40.175 ms) - Faster than HTTP/2 (1575 RPM)
+- **No "HTTP loaded" component** - test completes faster
+
+**HTTP/3 (QUIC) Test**:
+
+- Test failed or timed out (no results)
+
+**Key Findings**:
+
+1. **HTTP/2 is the problem**: 30 RPM vs 917 RPM with HTTP/1.1 = **30x difference**
+2. **HTTP/1.1 works well**: 917 RPM is much closer to wolf-air's 1245 RPM (only 26% difference)
+3. **Transport layer is fine**: Both protocols show ~2700 RPM transport (network is not the issue)
+4. **HTTP/2 implementation issue**: The problem is specifically with HTTP/2 on macOS Sequoia
+5. **This explains the poor responsiveness**: networkQuality defaults to HTTP/2, which performs poorly
+
+**So what**:
+
+- **ROOT CAUSE IDENTIFIED**: **HTTP/2 performance is broken on michael-pro (macOS Sequoia)**
+- **HTTP/1.1 works fine**: 985 RPM is reasonable (vs 1245 RPM on wolf-air)
+- **This is likely a macOS Sequoia HTTP/2 bug or regression**
+- **The 18-30 RPM responsiveness is due to HTTP/2, not network issues**
+- **Transport layer is healthy**: ~2700 RPM shows network itself is fine
+
+**Comparison with wolf-air**:
+
+- wolf-air: 1245 RPM (HTTP/2, assumed)
+- michael-pro HTTP/1.1: 917 RPM (26% lower, but in same ballpark)
+- michael-pro HTTP/2: 30 RPM (41x worse)
+
+**Now what**:
+
+- **Test wolf-air with HTTP/1.1** to confirm it also performs well
+- **Investigate macOS Sequoia HTTP/2 issues** - check for known bugs or regressions
+- **Check if HTTP/2 can be disabled** system-wide or per-application
+- **Report this as a potential macOS Sequoia bug** if confirmed
+- **Use HTTP/1.1 for networkQuality tests** to get accurate responsiveness measurements
+- **Investigate why HTTP/2 performs so poorly** - is it a client or server issue?
+
+---
+
+### 2025-12-24T14:20:15-0500 - HTTP/2 Performance Breakdown and LuLu Firewall Investigation
+
+**Machine**: michael-pro
+
+**What**: Analyzed HTTP/2 vs HTTP/1.1 verbose output to identify the specific bottleneck, and discovered LuLu firewall is running.
+
+**HTTP/2 Verbose Breakdown** (forced with `-f h2`):
+
+- **Transport**: 2844 RPM (21ms) - **EXCELLENT** - network layer is fine
+- **Security (TLS)**: 293 RPM (204ms) - **VERY SLOW** - TLS handshake bottleneck
+- **HTTP**: 711 RPM (84ms) - Slow
+- **HTTP loaded**: **6 RPM (8.7 seconds)** - **EXTREMELY SLOW** - This is the killer
+
+**HTTP/1.1 Verbose Breakdown** (forced with `-f h1`):
+
+- **Transport**: 2672 RPM (22ms) - **EXCELLENT** - similar to HTTP/2
+- **Security (TLS)**: 663 RPM (90ms) - **FASTER** than HTTP/2 (293 RPM)
+- **HTTP**: 1427 RPM (42ms) - **FASTER** than HTTP/2 (711 RPM)
+- **No "HTTP loaded" component** - test completes without this delay
+
+**Key Difference**:
+
+- **HTTP/2 has "HTTP loaded" component taking 8.7 seconds** - this doesn't exist in HTTP/1.1
+- This suggests HTTP/2 is waiting for something that HTTP/1.1 doesn't wait for
+- Could be: server push, stream multiplexing, connection establishment, or firewall interference
+
+**System Configuration**:
+
+- **LuLu firewall detected**: Running (PID 1082, system extension active)
+- **networkd preferences**: `enable_unified_http = 1`
+- **No VPN active**
+- **No system proxies configured**
+- **curl HTTP/2 works fine**: ALPN negotiation successful, connections work
+
+**So what**:
+
+- **"HTTP loaded" is the problem**: 8.7 seconds in HTTP/2 vs not present in HTTP/1.1
+- **LuLu firewall could be interfering**: Firewall might be inspecting/delaying HTTP/2 connections differently than HTTP/1.1
+- **TLS handshake is also slow**: 204ms in HTTP/2 vs 90ms in HTTP/1.1 (2.3x slower)
+- **curl HTTP/2 works**: Suggests the issue is specific to networkQuality's CFNetwork implementation, not system-wide HTTP/2
+- **This is likely LuLu firewall + networkQuality interaction**: LuLu might be interfering with networkQuality's HTTP/2 connections
+
+**Now what**:
+
+- **Test with LuLu firewall temporarily disabled** to see if HTTP/2 performance improves
+- **Check LuLu logs** for blocked/delayed connections during networkQuality tests
+- **Compare LuLu configuration** - see if HTTP/2 connections are being handled differently
+- **Test networkQuality with LuLu disabled** - if HTTP/2 improves, LuLu is the culprit
+- **If LuLu is the issue**: Configure LuLu to allow networkQuality or HTTP/2 connections, or find LuLu alternative
+- **Research LuLu + HTTP/2 issues** - check if this is a known problem

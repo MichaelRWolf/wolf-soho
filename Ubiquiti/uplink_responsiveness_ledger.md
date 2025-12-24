@@ -58,8 +58,15 @@ Columns:
 | 2025-12-21 20:55 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |            |            |    47.132 | baseline: gw 2.2ms, hop2 14.3ms, inet 25.5ms |         0.0 |          2.218 |         17.013 |         0.0 |         14.263 |         33.776 |         0.0 |         25.511 |         58.319 | Direct-to-loco baseline pings only (no induced load) |
 | 2025-12-21 20:57 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |            |     14.165 |    53.879 | 3877ms @ 15.5 RPM (ul_only; direct_to_loco; JSON -c -d) |         0.0 |          2.709 |         79.724 |         0.0 |         48.196 |        186.324 |         0.0 |         57.984 |        195.361 | Direct-to-loco upload-only; gw stays low while hop2/inet inflate |
 | 2025-12-21 20:58 | michael-pro | Ethernet(en13) | 72.31.129.125 | Off |     86.474 |            |    47.132 | 102ms @ 588.3 RPM (dl_only; direct_to_loco; JSON -c -u) |         1.8 |          3.190 |         47.498 |         2.7 |         14.538 |         61.978 |         1.8 |         24.840 |         50.435 | Direct-to-loco download-only; responsiveness excellent |
+| 2025-12-22 21:40 | michael-pro | WiFi(en0)      | 192.168.1.1   | On(cake,6000/8000,eth0) |      4.554 |     13.433 |   140.656 | 2462ms @ 24 RPM (full; HTTP_loaded 4255ms @ 14) |             |               |               |             |               |               |             |               |               | Overnight crater: downlink collapsed and responsiveness unusable; Wi‑Fi to Beryl |
+| 2025-12-22 21:?? | michael-pro | WiFi(en0)      | 192.168.1.1   | On(cake,6000/8000,eth0) |      4.692 |            |    49.803 | 2154ms @ 27 RPM (dl_only)                    |             |               |               |             |               |               |             |               |               | Downlink-only with download shaping 6000 |
+| 2025-12-22 21:?? | michael-pro | WiFi(en0)      | 192.168.1.1   | On(cake,6000/8000,eth0) |            |     10.559 |    46.563 | 111ms @ 542 RPM (ul_only)                     |             |               |               |             |               |               |             |               |               | Uplink-only remained good with upload shaping 8000 |
+| 2025-12-22 21:?? | michael-pro | Ethernet(en13) | 192.168.1.1   | On(cake,6000/8000,eth0) |      4.538 |            |    59.621 | 2120ms @ 28 RPM (dl_only)                     |             |               |               |             |               |               |             |               |               | Ethernet confirms downlink crater is upstream (not Wi‑Fi) |
+| 2025-12-22 21:?? | michael-pro | Ethernet(en13) | 192.168.1.1   | On(cake,3000/8000,eth0) |      2.212 |            |    80.736 | 4043ms @ 14 RPM (dl_only)                     |             |               |               |             |               |               |             |               |               | Download shaping 3000 reduced throughput but did not improve dl responsiveness |
+| 2025-12-22 21:?? | michael-pro | Ethernet(en13) | 192.168.1.1   | On(cake,2000/8000,eth0) |      1.398 |            |    98.244 | 5519ms @ 10 RPM (dl_only)                     |             |               |               |             |               |               |             |               |               | Download shaping 2000 worsened dl throughput and reported dl responsiveness |
+| 2025-12-22 22:57 | michael-pro | Ethernet(en13) | 192.168.1.1   | (unknown) |      4.826 |            |    71.873 | 1950ms @ 30.8 RPM (dl_only; JSON -c -u)       |         0.0 |          3.558 |         36.738 |         0.0 |          6.318 |         23.584 |         0.0 |         27.210 |         86.096 | Agent-run: baseline pings clean; under dl load pings stayed low/no loss despite low dl RPM |
 
-### Snapshot: observations (as of 2025-12-21 19:37)
+### Snapshot: observations (as of 2025-12-22)
 
 - 18:46 — Wi‑Fi full test: **Responsiveness Low (~46 RPM)** despite good throughput.
 - 18:50 — Wi‑Fi under load: **high loss + >1.5s spikes even to Beryl** → local Wi‑Fi path collapses under contention.
@@ -79,6 +86,9 @@ Columns:
 - 23:00 — With SQM attached at 11000 kbit/s, `networkQuality -d -v` showed uplink ≈ 10 Mbps but still Low RPM → cap was above instantaneous bottleneck; needed lower upload shaping.
 - 23:19 — Upload shaping at **8000 kbit/s** produced repeatable Medium/High uplink responsiveness in repeated `networkQuality -d` runs (hundreds–thousands RPM).
 - 23:33 — Full `networkQuality -v` sometimes still reported overall Responsiveness Low due to downlink collapsing (~3–6 Mbps during test); direction split confirmed upload-only High while download-only Low.
+- 2025-12-22 (night) — Downlink cratered to **~4–5 Mbps** and stayed **Low (~24–31 RPM)** across **Wi‑Fi and Ethernet**, while uplink could still be **Medium/High** with SQM upload shaping.
+- 2025-12-22 — Lowering download shaping to **3000 → 2000 kbit/s** reduced measured downlink capacity (**2.2 → 1.4 Mbps**) without improving the downlink RPM metric.
+- 2025-12-22 22:57 — Under a downlink-only test on Ethernet, **concurrent pings remained clean** (0% loss; WAN RTT stayed in the tens of ms) despite low `networkQuality -u` RPM → this points more toward **true upstream downlink impairment / low capacity** (or the way `networkQuality` scores downlink on very low Mbps) than classic “download bufferbloat on our LAN.”
 
 ## Raw outputs (optional, paste blocks)
 
@@ -89,6 +99,112 @@ host: <michael-pro|wolf-air>
 enabled_interfaces: <example: WiFi=en0(on), BelkinUSBCLAN=en13(off)>
 default_route: <example: 1.1.1.1 via gw=192.168.8.1 iface=en0>
 ```
+
+### 2025-12-22 21:40 — Wi‑Fi full test (downlink crater)
+
+```text
+host: michael-pro
+enabled_interfaces: WiFi=en0(active), BelkinUSBCLAN=en13(inactive)
+path: Wi‑Fi → Beryl (192.168.8.1) → hop2 192.168.1.1
+sqm: On(cake,down=6000,up=8000,iface=eth0) (as configured at the time)
+
+==== SUMMARY ====
+Uplink capacity: 13.433 Mbps
+Downlink capacity: 4.554 Mbps
+Responsiveness: Low (2.462 seconds | 24 RPM)
+Idle Latency: 140.656 milliseconds | 426 RPM
+```
+
+So what: downlink collapsed to ~4.6 Mbps and overall responsiveness became unusable (24 RPM). This is not the “normal” PtP day behavior.
+
+Now what: confirm whether the crater is Wi‑Fi-only or persists on Ethernet (it persisted), then treat as upstream downlink impairment; keep SQM upload shaping (works) and avoid using `networkQuality -u` alone as the KPI for download tuning.
+
+### 2025-12-22 21:?? — Direction split with SQM (download 6000, upload 8000)
+
+```text
+host: michael-pro
+sqm: download shaping 6000, upload shaping 8000
+
+==== SUMMARY ====
+Downlink capacity: 4.692 Mbps
+Downlink Responsiveness: Low (2.154 seconds | 27 RPM)
+Idle Latency: 49.803 milliseconds | 1204 RPM
+
+==== SUMMARY ====
+Uplink capacity: 10.559 Mbps
+Uplink Responsiveness: Medium (110.578 milliseconds | 542 RPM)
+Idle Latency: 46.563 milliseconds | 1288 RPM
+```
+
+So what: SQM upload shaping is still doing its job (uplink Medium, 542 RPM). Downlink remains the bottleneck and is scoring Low.
+
+Now what: focus on keeping uplink stable for calls; treat downlink as “upstream/ISP event” until proven otherwise.
+
+### 2025-12-22 21:?? — Ethernet confirms downlink crater
+
+```text
+host: michael-pro
+enabled_interfaces: WiFi=en0(inactive), BelkinUSBCLAN=en13(active)
+
+==== SUMMARY ====
+Downlink capacity: 4.538 Mbps
+Downlink Responsiveness: Low (2.120 seconds | 28 RPM)
+Idle Latency: 59.621 milliseconds | 1006 RPM
+```
+
+So what: the crater persists on Ethernet, so this is not “Beryl Wi‑Fi melting.” It’s upstream (house gateway / Spectrum / ISP node) or a transient contention source beyond the RV.
+
+Now what: any “fix” we can do locally is limited to prioritizing interactive traffic (SQM) and/or waiting out the upstream impairment.
+
+### 2025-12-22 21:?? — Download shaping experiments (3000, then 2000)
+
+```text
+download shaping 3000
+
+==== SUMMARY ====
+Downlink capacity: 2.212 Mbps
+Downlink Responsiveness: Low (4.043 seconds | 14 RPM)
+Idle Latency: 80.736 milliseconds | 743 RPM
+
+download shaping 2000
+
+==== SUMMARY ====
+Downlink capacity: 1.398 Mbps
+Downlink Responsiveness: Low (5.519 seconds | 10 RPM)
+Idle Latency: 98.244 milliseconds | 610 RPM
+```
+
+So what: lowering the download cap reduced measured downlink capacity and did not improve the downlink “responsiveness” score. This suggests the event is dominated by low/unstable upstream downlink rather than a controllable local queue on the RV side.
+
+Now what: stop tuning download shaping off of `networkQuality -u` alone during a downlink crater; instead, use ping-under-download-load as the guardrail and keep SQM upload shaping for Zoom stability.
+
+### 2025-12-22 22:56–22:57 — Ethernet downlink-only under load + pings (agent-run)
+
+```text
+host: michael-pro
+enabled_interfaces: WiFi=en0(inactive), BelkinUSBCLAN=en13(active)
+default_route: 1.1.1.1 via gw=192.168.8.1 iface=en13
+hop2: 192.168.1.1
+
+Baseline pings (no induced load):
+gw (192.168.8.1):     0.0% loss, rtt min/avg/max = 0.718/1.618/21.697 ms
+hop2 (192.168.1.1):   0.0% loss, rtt min/avg/max = 1.692/3.152/19.874 ms
+inet (1.1.1.1):       0.0% loss, rtt min/avg/max = 20.052/25.425/42.208 ms
+
+Download-only under load (`networkQuality -I en13 -c -u`):
+dl_mbps: 4.826
+base_rtt_ms: 71.873
+dl_responsiveness_rpm: 30.8  (~1.95s per round trip)
+
+Pings during the downlink-only load:
+gw (192.168.8.1):     0.0% loss, rtt min/avg/max = 0.804/3.558/36.738 ms
+hop2 (192.168.1.1):   0.0% loss, rtt min/avg/max = 1.705/6.318/23.584 ms
+inet (1.1.1.1):       0.0% loss, rtt min/avg/max = 19.191/27.210/86.096 ms
+```
+
+So what: even while downlink-only “responsiveness” scored Low, the pings stayed relatively stable with 0% loss. That’s inconsistent with classic download bufferbloat on the local path and more consistent with an upstream downlink impairment / low-goodput condition (or `networkQuality`’s scoring behavior when downlink Mbps is very low).
+
+Now what: treat “downlink RPM” as secondary when the ISP is in a crater; instead, use ping-under-load and real app behavior. Keep upload SQM in place (it demonstrably helps Zoom), and plan for a dedicated AP later to remove the local Wi‑Fi failure mode when the ISP is healthy again.
 
 ### traceroute
 
@@ -265,6 +381,7 @@ en13_ip: 192.168.8.235
 
 ping_A (192.168.8.1):  0.0% loss, rtt min/avg/max = 0.690/1.342/20.235 ms
 ping_B (192.168.1.1):  1.0% loss, rtt min/avg/max = 1.629/2.994/42.978 ms
+
 ping_C (1.1.1.1):      0.5% loss, rtt min/avg/max = 15.787/53.928/285.982 ms
 
 networkQuality JSON summary (`networkQuality -I en13 -c -d`):
@@ -451,3 +568,49 @@ Now what:
 - Next steps to try later:
   - If downlink-only stays Low: temporarily set download shaping near observed bottleneck (e.g., **5000–12000 kbit/s**) to see if downlink responsiveness stabilizes.
   - Use `nettop` to identify background downloaders before downlink tests (avoid chasing transient contention).
+
+## Next up (tomorrow): test directly on Moe’s Spectrum gateway (Ethernet)
+
+Goal: determine whether the **downlink crater (~1–5 Mbps + Low RPM)** is coming from **Spectrum / Moe gateway side** versus our **PtP/Beryl/RV** path.
+
+### Setup (lowest-risk)
+
+- Plug `michael-pro` into Moe’s Spectrum gateway LAN via Ethernet/USB adapter.
+- Disable Wi‑Fi (keep the test single-homed).
+- Do **not** change any router settings; this is read-only measurement.
+
+### Capture (copy/paste into a new raw-output block)
+
+```bash
+date '+%F %T'
+route -n get 1.1.1.1 | egrep 'gateway:|interface:'
+traceroute -n -m 2 1.1.1.1
+
+# Primary metrics (direction split)
+networkQuality -c -u
+networkQuality -c -d
+
+# Impairment check (idle)
+ping -c 200 1.1.1.1
+```
+
+Optional (only if you want a “real app” proxy):
+
+- Run a downlink load while watching latency:
+
+```bash
+ping -i 0.2 1.1.1.1
+networkQuality -u
+```
+
+### Decision rules (what the results mean)
+
+- If Moe-gateway Ethernet shows **normal downlink** (tens of Mbps) and decent loaded behavior:
+  - The crater is likely **between gateway ↔ RV** (PtP alignment/interference, cable/power issues, Beryl path, or local contention).
+- If Moe-gateway Ethernet also shows **~1–5 Mbps downlink** and/or high idle latency:
+  - It’s an **upstream Spectrum / gateway / node** event. Local tuning won’t “fix” bandwidth; keep SQM upload shaping for Zoom stability and wait/escalate to ISP if persistent.
+
+### What to log
+
+- Add a new table row with `link=Ethernet(on_Moe_gateway)` and `hop2` from traceroute.
+- Include the `networkQuality -c` JSON blobs in the raw section so we can compare apples-to-apples.
