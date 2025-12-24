@@ -20,6 +20,29 @@ The `networkQuality` tool exhibits severe performance degradation when using HTT
 
 ---
 
+## Feedback Assistant Form Fields
+
+### Descriptive Title
+
+```text
+networkQuality HTTP/2 performance severely degraded - 36x slower than HTTP/1.1
+```
+
+### Which Area Are You Seeing an Issue With?
+
+**Primary Area**: System Tools → Networking
+
+**Specific Component**: networkQuality (`/usr/bin/networkQuality`)
+
+**Related Areas**:
+
+- Network Performance Testing
+- HTTP/2 Protocol Implementation
+- CFNetwork Framework
+- NetworkQualityServices Framework
+
+---
+
 ## Problem Description
 
 ### Symptoms
@@ -60,15 +83,15 @@ When running `networkQuality` with HTTP/1.1 (forced with `-f h1`):
 
 ### Test Results Comparison
 
-| Metric | HTTP/2 | HTTP/1.1 | Difference |
-| --- | --- | --- | --- |
-| **Responsiveness** | 13 RPM (Low) | 472 RPM (Medium) | **36x worse** |
-| **HTTP loaded** | 4 RPM (12.241s) | N/A (doesn't exist) | **N/A** |
-| **Transport** | 1068 RPM (56ms) | 85 RPM (700ms) | HTTP/1.1 slower here |
-| **Security (TLS)** | 149 RPM (402ms) | 106 RPM (565ms) | HTTP/1.1 slower here |
-| **HTTP** | 710 RPM (84ms) | 335 RPM (179ms) | HTTP/1.1 slower here |
-| **Idle Latency** | 1319 RPM (45ms) | 1036 RPM (58ms) | HTTP/2 better |
-| **Test Duration** | ~48 seconds | ~45 seconds | Similar |
+| Metric             | HTTP/2          | HTTP/1.1            | Difference           |
+|--------------------|-----------------|---------------------|----------------------|
+| **Responsiveness** | 13 RPM (Low)    | 472 RPM (Medium)    | **36x worse**        |
+| **HTTP loaded**    | 4 RPM (12.241s) | N/A (doesn't exist) | **N/A**              |
+| **Transport**      | 1068 RPM (56ms) | 85 RPM (700ms)      | HTTP/1.1 slower here |
+| **Security (TLS)** | 149 RPM (402ms) | 106 RPM (565ms)     | HTTP/1.1 slower here |
+| **HTTP**           | 710 RPM (84ms)  | 335 RPM (179ms)     | HTTP/1.1 slower here |
+| **Idle Latency**   | 1319 RPM (45ms) | 1036 RPM (58ms)     | HTTP/2 better        |
+| **Test Duration**  | ~48 seconds     | ~45 seconds         | Similar              |
 
 **Key Observation**: The "HTTP loaded" component (12.2 seconds) is the primary bottleneck in HTTP/2 tests. This component does not exist in HTTP/1.1 tests.
 
@@ -181,11 +204,17 @@ Or search Spotlight for "Feedback Assistant"
 
 ### Step 4: Fill Out Form
 
-**Title**:
+**Descriptive Title** (see "Feedback Assistant Form Fields" section above):
 
 ```text
 networkQuality HTTP/2 performance severely degraded - 36x slower than HTTP/1.1
 ```
+
+**Which Area Are You Seeing an Issue With?** (see "Feedback Assistant Form Fields" section above):
+
+- **Primary Area**: System Tools → Networking
+- **Specific Component**: networkQuality (`/usr/bin/networkQuality`)
+- **Related Areas**: Network Performance Testing, HTTP/2 Protocol Implementation, CFNetwork Framework
 
 **Description** (copy from "Problem Description" section above):
 
