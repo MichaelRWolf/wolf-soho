@@ -10,7 +10,7 @@
 #   beryl_sqm night
 #   beryl_sqm <upload_kbit>                    # derives download from upload and recurses
 #   beryl_sqm <download_kbit> <upload_kbit>    # set directly
-#   beryl_sqm                                 # show current config + qdisc snapshot
+#   beryl_sqm                                 # same as: beryl_sqm status
 #
 # Notes:
 # - We treat a single numeric argument as *upload* (uplink) in kbit/s, because
@@ -21,6 +21,15 @@
 # Requirements:
 # - SSH config entry for `beryl` (or set BERYL_HOST env var).
 #
+# NOTE: This script uses bash arrays. If invoked via `sh beryl_sqm` (or any
+# non-bash shell), re-exec under bash so we don't trip `set -u` on bash-only
+# expansions like "${argv[@]}".
+#
+# Must be POSIX-safe (no `[[ ... ]]`) because it may run under `/bin/sh`.
+if [ -z "${BASH_VERSION:-}" ]; then
+  exec bash "$0" "$@"
+fi
+
 set -euo pipefail
 
 BERYL_HOST="${BERYL_HOST:-beryl}"
@@ -212,7 +221,8 @@ dry_run_args() {
 }
 
 main() {
-  local argv=()
+  local -a argv
+  argv=()
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --dry-run|-n)
@@ -232,10 +242,16 @@ main() {
         ;;
     esac
   done
-  set -- "${argv[@]}"
+  # Bash 3.2 + `set -u` can error on expanding an empty array.
+  if (( ${#argv[@]} )); then
+    set -- "${argv[@]}"
+  else
+    set --
+  fi
 
   if [[ $# -eq 0 ]]; then
-    emit_remote_show | run_or_echo_remote
+    # No-arg invocation is read-only and should behave like `status`.
+    emit_remote_status | run_or_echo_remote
     return 0
   fi
 
