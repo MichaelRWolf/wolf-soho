@@ -1,0 +1,210 @@
+#!/usr/bin/env bash
+# beryl_sqm: set SQM download/upload shaping rates on Beryl (OpenWrt) via SSH.
+#
+# Usage:
+#   beryl_sqm --dry-run [args...] | ssh root@beryl
+#   beryl_sqm --dry-run [args...]               # print remote commands only
+#   beryl_sqm [args...]                         # execute via ssh
+#   beryl_sqm day
+#   beryl_sqm night
+#   beryl_sqm <upload_kbit>                    # derives download from upload and recurses
+#   beryl_sqm <download_kbit> <upload_kbit>    # set directly
+#   beryl_sqm                                 # show current config + qdisc snapshot
+#
+# Notes:
+# - We treat a single numeric argument as *upload* (uplink) in kbit/s, because
+#   uplink shaping is usually the primary "responsiveness" lever.
+# - Derived download is controlled by BERYL_SQM_DL_PER_UL (default 7.75),
+#   so upload=8000 -> download≈62000.
+#
+# Requirements:
+# - SSH config entry for `beryl` (or set BERYL_HOST env var).
+#
+set -euo pipefail
+
+BERYL_HOST="${BERYL_HOST:-beryl}"
+BERYL_SQM_SECTION="${BERYL_SQM_SECTION:-}"
+BERYL_SQM_DL_PER_UL="${BERYL_SQM_DL_PER_UL:-7.75}"
+DRY_RUN=0
+
+die() {
+  echo "ERROR: $*" >&2
+  exit 2
+}
+
+is_int() {
+  [[ "${1:-}" =~ ^[0-9]+$ ]]
+}
+
+ssh_beryl() {
+  ssh -o BatchMode=yes "root@${BERYL_HOST}" "$@"
+}
+
+derive_download_from_upload() {
+  local upload_kbit="$1"
+  # Round to nearest 1000 kbit/s to keep configs tidy.
+  python3 - <<PY
+import math
+ul=int(${upload_kbit})
+ratio=float("${BERYL_SQM_DL_PER_UL}")
+dl=ul*ratio
+dl_rounded=int(round(dl/1000.0)*1000)
+print(dl_rounded)
+PY
+}
+
+emit_remote_prelude() {
+  # Emit a POSIX sh script intended to run on Beryl (OpenWrt/BusyBox ash).
+  cat <<EOF
+set -e
+
+SQM_SECTION="${BERYL_SQM_SECTION}"
+
+detect_sqm_section() {
+  sections=\$(uci show sqm 2>/dev/null | sed -n 's/^sqm\\.\\([^.]*\\)=queue$/\\1/p')
+  for s in \$sections; do
+    en=\$(uci -q get "sqm.\${s}.enabled" 2>/dev/null || true)
+    if [ "\$en" = "1" ]; then
+      echo "\$s"
+      return 0
+    fi
+  done
+  return 1
+}
+
+if [ -z "\$SQM_SECTION" ]; then
+  SQM_SECTION="\$(detect_sqm_section || true)"
+fi
+
+if [ -z "\$SQM_SECTION" ]; then
+  echo "ERROR: could not auto-detect an enabled SQM queue section" >&2
+  exit 2
+fi
+EOF
+}
+
+emit_remote_show() {
+  emit_remote_prelude
+  cat <<'EOF'
+
+echo "=== SQM section ==="
+echo "$SQM_SECTION"
+echo
+
+echo "=== SQM UCI config ==="
+uci show "sqm.${SQM_SECTION}" 2>/dev/null || true
+echo
+
+echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
+tc -s qdisc show dev eth0 || true
+echo "---"
+tc -s qdisc show dev ifb4eth0 || true
+EOF
+}
+
+emit_remote_set() {
+  local download_kbit="$1"
+  local upload_kbit="$2"
+  is_int "$download_kbit" || die "download must be integer kbit/s, got: $download_kbit"
+  is_int "$upload_kbit" || die "upload must be integer kbit/s, got: $upload_kbit"
+
+  emit_remote_prelude
+  cat <<EOF
+
+echo "=== Setting SQM (download/upload) ==="
+echo "download_kbit=${download_kbit} upload_kbit=${upload_kbit}"
+echo
+
+uci set "sqm.\${SQM_SECTION}.download=${download_kbit}"
+uci set "sqm.\${SQM_SECTION}.upload=${upload_kbit}"
+uci commit sqm
+/etc/init.d/sqm restart
+echo
+
+echo "=== Applied SQM (download/upload) ==="
+echo "download_kbit=\$(uci -q get sqm.\${SQM_SECTION}.download || echo '?') upload_kbit=\$(uci -q get sqm.\${SQM_SECTION}.upload || echo '?')"
+echo
+
+echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
+tc -s qdisc show dev eth0 | head -n 3 || true
+echo "---"
+tc -s qdisc show dev ifb4eth0 | head -n 3 || true
+EOF
+}
+
+run_or_echo_remote() {
+  if [[ $DRY_RUN -eq 1 ]]; then
+    cat
+    return 0
+  fi
+  # Execute the remote script via stdin.
+  ssh_beryl 'sh -s'
+}
+
+dry_run_args() {
+  # Echo args to forward to recursive calls (only when DRY_RUN is enabled).
+  if [[ $DRY_RUN -eq 1 ]]; then
+    echo "--dry-run"
+  fi
+}
+
+main() {
+  local argv=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run|-n)
+        DRY_RUN=1
+        shift
+        ;;
+      --help|-h)
+        die "usage: beryl_sqm [--dry-run] [day|night|<upload_kbit>|<download_kbit> <upload_kbit>]"
+        ;;
+      *)
+        argv+=("$1")
+        shift
+        ;;
+    esac
+  done
+  set -- "${argv[@]}"
+
+  if [[ $# -eq 0 ]]; then
+    emit_remote_show | run_or_echo_remote
+    return 0
+  fi
+
+  if [[ $# -eq 1 ]]; then
+    case "$1" in
+      day)
+        # Note: DRY_RUN is numeric; `${DRY_RUN:+...}` is NOT safe because "0" is non-empty.
+        # We forward --dry-run only when DRY_RUN==1.
+        main $(dry_run_args) 62000 8000
+        return 0
+        ;;
+      night)
+        main $(dry_run_args) 12000 8000
+        return 0
+        ;;
+    esac
+
+    local upload_kbit="$1"
+    is_int "$upload_kbit" || die "1-arg form must be 'day', 'night', or <upload_kbit> (integer)"
+    local download_kbit
+    download_kbit="$(derive_download_from_upload "$upload_kbit")"
+    echo "Derived download=${download_kbit} kbit/s from upload=${upload_kbit} kbit/s (BERYL_SQM_DL_PER_UL=${BERYL_SQM_DL_PER_UL})"
+    echo
+    main $(dry_run_args) "$download_kbit" "$upload_kbit"
+    return 0
+  fi
+
+  if [[ $# -eq 2 ]]; then
+    local download_kbit="$1"
+    local upload_kbit="$2"
+    emit_remote_set "$download_kbit" "$upload_kbit" | run_or_echo_remote
+    return 0
+  fi
+
+  die "usage: beryl_sqm [--dry-run] [day|night|<upload_kbit>|<download_kbit> <upload_kbit>]"
+}
+
+main "$@"
+
