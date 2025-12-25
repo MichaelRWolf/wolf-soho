@@ -276,6 +276,7 @@ main() {
     if is_int "$download_kbit" && is_int "$upload_kbit" && 
         (( download_kbit < upload_kbit )); then
         echo "⚠️ WARNING: download ($download_kbit) is less than upload ($upload_kbit)" >&2
+        sleep 2
     fi
 
     emit_remote_set "$download_kbit" "$upload_kbit" | run_or_echo_remote
