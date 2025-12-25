@@ -1,64 +1,41 @@
 # Network Responsiveness Comparison: wolf-air vs michael-pro
 
-## Executive Summary (Last Updated: 2025-12-24T14:32:00-0500)
+## Executive Summary (Last Updated: 2025-12-25)
 
-### Problem
+### Where we landed
 
-michael-pro shows **18-30 RPM responsiveness** vs wolf-air's **1245 RPM** (68x worse), despite both using the same router.
+There are two overlapping realities:
 
-### Root Cause Identified
+1. **Real network variability / congestion** exists (time-of-day effects), especially on **download**, and SQM rates need to be validated against what the line can actually sustain at that hour.
+2. On **michael-pro (macOS Sequoia)**, Apple’s `networkQuality` tool can produce extremely low “Responsiveness” when using **HTTP/2**, while **HTTP/1.1** looks normal. This appears **tool/methodology-specific**, not “HTTP/2 is broken on the internet.”
 
-**HTTP/2 performance is broken on michael-pro** - networkQuality shows:
+### Current decisions / status
 
-- HTTP/2: 30 RPM (Low responsiveness) - **even with LuLu disabled**
-- HTTP/1.1: 917 RPM (Medium responsiveness) - **30x better**
+- **SQM/CAKE is active on Beryl** (OpenWrt) and is the primary control lever for loaded-latency.
+  - Current “day” settings we’ve been using: **download 62000 kbit/s**, **upload 8000 kbit/s** (interface `eth0`).
+  - Download shaping can be disabled (set to `0`) for experiments; this can help or hurt depending on conditions.
+- **Use `bin/beryl_sqm` to view/change SQM** from a Mac without copy/paste:
+  - `bin/beryl_sqm status` (read-only)
+  - `bin/beryl_sqm <download_kbit> <upload_kbit>`
+  - `bin/beryl_sqm day|night`
+- **Use `bin/network_test` (curl-based)** as a simple, portable check across macOS versions.
+- For Sequoia debugging, treat `networkQuality` results with caution unless forced to HTTP/1.1:
+  - Use `networkQuality -f h1 -v` on `michael-pro` when you want a “sanity check” RPM.
 
-### Key Findings
-
-1. **HTTP/2 "HTTP loaded" component**: Takes 4.08 seconds in HTTP/2 (with LuLu disabled), doesn't exist in HTTP/1.1
-2. **LuLu firewall was contributing but not root cause**: Disabling LuLu improved idle latency 4.8x (262→1265 RPM) and reduced HTTP loaded delay (8.7s→4.08s), but HTTP/2 still performs 30x worse than HTTP/1.1
-3. **Transport layer is healthy**: ~2800 RPM shows network itself is fine
-4. **USB-C Ethernet adapter**: Limits download (2.5 Mbps vs 4.6 Mbps on WiFi)
-5. **CPU throttling ruled out**: michael-pro has better CPU specs and lower load
-6. **Idle latency fixed**: Disabling LuLu improved idle latency from 262 RPM (228ms) to 1265 RPM (47ms)
-
-### Current Hypothesis
-
-**networkQuality tool has a bug with HTTP/2 testing** - likely specific to the tool's test methodology, not a system-wide CFNetwork HTTP/2 issue. Evidence:
-
-- curl HTTP/2 works perfectly (uses libcurl/nghttp2, not CFNetwork)
-- HTTP/1.1 works perfectly in networkQuality (917 RPM)
-- System logs show HTTP/2 tasks marked "failure" even when successful (response_status=200)
-- The "HTTP loaded" component (4-7 seconds) may be test-specific and not affect real-world apps
-- If this were system-wide, Safari/Mail would be slow and complaints would be widespread
-
-### Next Steps (Priority Order)
-
-1. **Test wolf-air with HTTP/2** to confirm it performs well (1245 RPM was likely HTTP/2)
-2. **Compare HTTP/2 verbose output** between michael-pro and wolf-air to identify specific differences
-3. **Investigate macOS Sequoia HTTP/2 bugs** - check for known issues or regressions
-4. **Test with different HTTP/2 endpoints** to see if issue is server-specific
-5. **Consider using HTTP/1.1** for networkQuality tests on michael-pro until HTTP/2 issue is resolved
-6. **Report as potential macOS Sequoia bug** if confirmed
-
-### Quick Reference Commands
+### Quick Reference Commands (current)
 
 ```bash
-# Test HTTP/2 performance
-networkQuality -f h2 -v
+# Read-only: show current SQM settings + CAKE counters
+bin/beryl_sqm status
 
-# Test HTTP/1.1 performance (baseline - works well)
+# Apply shaping (kbit/s): download upload
+bin/beryl_sqm 62000 8000
+
+# Portable curl-based test
+bin/network_test
+
+# networkQuality workaround on macOS Sequoia
 networkQuality -f h1 -v
-
-# Check LuLu status (requires sudo/GUI)
-# LuLu GUI: /Applications/LuLu.app
-# System extension: /Library/SystemExtensions/ECEF2EFD-04A4-42F7-96C7-32EA2512EC4B/
-
-# Check networkQuality endpoint
-networkQuality -v | grep "Test Endpoint"
-
-# Compare with wolf-air (when SSH available)
-ssh wolf-air "networkQuality -f h2 -v"
 ```
 
 ### System Info
@@ -67,6 +44,10 @@ ssh wolf-air "networkQuality -f h2 -v"
 - **wolf-air**: macOS 12.7.6 (Monterey), WiFi, no LuLu detected  
 - **Router**: GL-MT1300 (192.168.8.1) - same for both systems
 - **LuLu location**: /Applications/LuLu.app, system extension active
+
+### Notes on this document
+
+- The long “Working Notes” section below is **append-only history**. Some intermediate hypotheses were later falsified (e.g., misreading cumulative nettop counters as instantaneous rates). Prefer the “Current decisions / status” section above for the present state.
 
 ### Important Notes
 
@@ -88,20 +69,52 @@ michael-pro consistently shows worse network quality (especially responsiveness)
 
 ## Current Test Results
 
-### michael-pro (local, Ethernet)
+**Tool**: `network_test.sh` (uses `curl` - built-in on all macOS versions)
 
-- Uplink capacity: 9.795 Mbps
-- Downlink capacity: 2.477 Mbps
-- Responsiveness: Low (3.720 seconds | 16 RPM)
-- Idle Latency: 48.277 milliseconds | 1242 RPM
+### Comparison Table
+
+| Metric                    | michael-pro         | wolf-air            | Notes                                                    |
+|---------------------------|---------------------|---------------------|----------------------------------------------------------|
+| **Download**              | 2.59 Mbps           | 2.84 Mbps           | Both very low, upload 2.5-3x higher                      |
+| **Upload**                | ~7.5 Mbps           | 7.03 Mbps           | Unusually high relative to download                      |
+| **Upload/Download Ratio** | 2.9:1               | 2.5:1               | **⚠️ Anomaly**: Upload > Download (opposite of typical)  |
+| **RPM**                   | 68                  | 60                  | michael-pro slightly better                              |
+| **Response Time**         | 0.875s              | 0.997s              | michael-pro slightly faster                              |
+| **Test Date**             | 2025-12-24T17:43:13 | 2025-12-24T17:46:25 | Same day, 3 minutes apart                                |
+|                           |                     |                     |                                                          |
+
+### michael-pro (local, WiFi - en0)
+
+**network_test.sh Results** (2025-12-24T17:43:13-0500):
+
+- **Download**: 2.59 Mbps
+- **Upload**: ~7.5 Mbps (983632 bytes/sec)
+- **Responsiveness (RPM)**: 68
+- **Average Response Time**: 0.875s
+- **Tool**: curl (built-in)
 
 ### wolf-air (via SSH, WiFi)
 
-- Upload capacity: 4.069 Mbps
-- Download capacity: 5.247 Mbps
-- Upload flows: 4
-- Download flows: 20
-- Responsiveness: Medium (748 RPM)
+**network_test.sh Results** (2025-12-24T17:46:25-0500):
+
+- **Download**: 2.84 Mbps
+- **Upload**: ~7.03 Mbps (879143 bytes/sec)
+- **Responsiveness (RPM)**: 60
+- **Average Response Time**: 0.997s
+- **Tool**: curl via network_test.sh
+
+**⚠️ Anomaly Detected**: Both machines show upload speeds 2.5-3x HIGHER than download speeds. This is unusual - typical broadband has download 5-20x faster than upload. See Working Notes for detailed analysis.
+
+**Previous networkQuality Results** (2025-12-24T15:44:02-0500, Tool: `networkQuality`):
+
+- Upload capacity: 2.799 Mbps
+- Download capacity: 3.446 Mbps
+- Responsiveness: High (1180 RPM)
+- Base RTT: 24 ms
+
+---
+
+**Note**: Migrated to `network_test.sh` (curl-based) - simple, built-in tool that works on all macOS versions. Avoids installation issues and HTTP/2 bugs in networkQuality. See Working Notes section for detailed migration notes.
 
 ## Investigation Plan
 
@@ -628,24 +641,24 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **Capacity Measurements**:
 
-| Metric | michael-pro | wolf-air | Difference |
-|--------|-------------|----------|------------|
-| Upload Capacity | 15.126 Mbps | 12.733 Mbps | +2.393 Mbps (michael-pro higher) |
-| Download Capacity | 2.573 Mbps | 5.149 Mbps | -2.576 Mbps (wolf-air 2x higher) |
-| Responsiveness | Low (18 RPM) | High (1245 RPM) | -1227 RPM (wolf-air 69x better) |
+| Metric            | michael-pro  | wolf-air        | Difference                       |
+|-------------------|--------------|-----------------|----------------------------------|
+| Upload Capacity   | 15.126 Mbps  | 12.733 Mbps     | +2.393 Mbps (michael-pro higher) |
+| Download Capacity | 2.573 Mbps   | 5.149 Mbps      | -2.576 Mbps (wolf-air 2x higher) |
+| Responsiveness    | Low (18 RPM) | High (1245 RPM) | -1227 RPM (wolf-air 69x better)  |
 
 **Actual Traffic Rates During Test (12-second delta)**:
 
-| Process | michael-pro OUT | wolf-air OUT | michael-pro IN | wolf-air IN |
-|---------|----------------|--------------|----------------|-------------|
-| networkQuality | 3.96 Mbps | 7.11 Mbps | 2.33 Mbps | 4.63 Mbps |
+| Process        | michael-pro OUT | wolf-air OUT | michael-pro IN | wolf-air IN |
+|----------------|-----------------|--------------|----------------|-------------|
+| networkQuality | 3.96 Mbps       | 7.11 Mbps    | 2.33 Mbps      | 4.63 Mbps   |
 
 **Bandwidth Utilization During Test**:
 
-| Metric | michael-pro | wolf-air |
-|--------|-------------|----------|
-| Upload Utilization | 26.2% | 55.8% |
-| Download Utilization | 90.7% | 89.9% |
+| Metric               | michael-pro | wolf-air |
+|----------------------|-------------|----------|
+| Upload Utilization   | 26.2%       | 55.8%    |
+| Download Utilization | 90.7%       | 89.9%    |
 
 **Key Findings**:
 
@@ -696,32 +709,32 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **System Specifications**:
 
-| Metric | michael-pro | wolf-air |
-|--------|-------------|----------|
-| **Model** | MacBook Pro 16,2 | MacBook Air 7,2 |
-| **CPU** | Intel Core i5-1038NG7 @ 2.00GHz | Intel Core i5-5350U @ 1.80GHz |
-| **Cores** | 4 physical / 8 logical | 2 physical / 4 logical |
-| **Memory** | 16 GB | 8 GB |
-| **Network** | Ethernet (USB-C adapter, 1000baseT) | WiFi (autoselect) |
-| **Battery** | 100% charged, AC power | Unknown |
+| Metric      | michael-pro                         | wolf-air                      |
+|-------------|-------------------------------------|-------------------------------|
+| **Model**   | MacBook Pro 16,2                    | MacBook Air 7,2               |
+| **CPU**     | Intel Core i5-1038NG7 @ 2.00GHz     | Intel Core i5-5350U @ 1.80GHz |
+| **Cores**   | 4 physical / 8 logical              | 2 physical / 4 logical        |
+| **Memory**  | 16 GB                               | 8 GB                          |
+| **Network** | Ethernet (USB-C adapter, 1000baseT) | WiFi (autoselect)             |
+| **Battery** | 100% charged, AC power              | Unknown                       |
 
 **CPU Performance Metrics**:
 
-| Metric | michael-pro | wolf-air |
-|--------|-------------|----------|
-| **Load Average** | 2.92 2.89 3.57 | 7.96 5.34 6.30 |
-| **Load per Core** | ~0.36-0.45 | ~1.33-1.99 |
-| **CPU Usage** | 18.70% user, 14.63% sys, 66.66% idle | Unknown |
-| **CPU Frequency** | 2.0 GHz (locked at base) | Unknown |
-| **Thermal Level** | 56 (scale unknown) | Unknown |
-| **Pages Throttled** | 0 | Unknown |
+| Metric              | michael-pro                          | wolf-air       |
+|---------------------|--------------------------------------|----------------|
+| **Load Average**    | 2.92 2.89 3.57                       | 7.96 5.34 6.30 |
+| **Load per Core**   | ~0.36-0.45                           | ~1.33-1.99     |
+| **CPU Usage**       | 18.70% user, 14.63% sys, 66.66% idle | Unknown        |
+| **CPU Frequency**   | 2.0 GHz (locked at base)             | Unknown        |
+| **Thermal Level**   | 56 (scale unknown)                   | Unknown        |
+| **Pages Throttled** | 0                                    | Unknown        |
 
 **Memory Status**:
 
-| Metric | michael-pro | wolf-air |
-|--------|-------------|----------|
-| **Total RAM** | 16 GB | 8 GB |
-| **Swap Used** | 2.5 GB / 4 GB | 4.5 GB / 5 GB |
+| Metric            | michael-pro    | wolf-air        |
+|-------------------|----------------|-----------------|
+| **Total RAM**     | 16 GB          | 8 GB            |
+| **Swap Used**     | 2.5 GB / 4 GB  | 4.5 GB / 5 GB   |
 | **Swap Pressure** | Low (62% free) | High (11% free) |
 
 **Key Findings**:
@@ -769,20 +782,20 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **networkQuality Results**:
 
-| Metric | Ethernet (USB-C) | WiFi | Difference |
-|--------|------------------|------|------------|
-| **Upload Capacity** | 15.126 Mbps | 15.536 Mbps | +0.410 Mbps (similar) |
-| **Download Capacity** | 2.573 Mbps | 4.580 Mbps | **+2.007 Mbps (+78%)** |
-| **Responsiveness** | Low (18 RPM) | Low (18 RPM) | Same (still poor) |
-| **Idle Latency** | 48.834 ms | 45.885 ms | Slightly better |
+| Metric                | Ethernet (USB-C) | WiFi         | Difference             |
+|-----------------------|------------------|--------------|------------------------|
+| **Upload Capacity**   | 15.126 Mbps      | 15.536 Mbps  | +0.410 Mbps (similar)  |
+| **Download Capacity** | 2.573 Mbps       | 4.580 Mbps   | **+2.007 Mbps (+78%)** |
+| **Responsiveness**    | Low (18 RPM)     | Low (18 RPM) | Same (still poor)      |
+| **Idle Latency**      | 48.834 ms        | 45.885 ms    | Slightly better        |
 
 **Comparison with wolf-air**:
 
-| Metric | michael-pro WiFi | wolf-air WiFi | Difference |
-|--------|------------------|---------------|------------|
-| **Download Capacity** | 4.580 Mbps | 5.149 Mbps | -0.569 Mbps (11% lower) |
-| **Upload Capacity** | 15.536 Mbps | 12.733 Mbps | +2.803 Mbps (higher) |
-| **Responsiveness** | Low (18 RPM) | High (1245 RPM) | **-1227 RPM (68x worse)** |
+| Metric                | michael-pro WiFi | wolf-air WiFi   | Difference                |
+|-----------------------|------------------|-----------------|---------------------------|
+| **Download Capacity** | 4.580 Mbps       | 5.149 Mbps      | -0.569 Mbps (11% lower)   |
+| **Upload Capacity**   | 15.536 Mbps      | 12.733 Mbps     | +2.803 Mbps (higher)      |
+| **Responsiveness**    | Low (18 RPM)     | High (1245 RPM) | **-1227 RPM (68x worse)** |
 
 **Key Findings**:
 
@@ -824,12 +837,12 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **Packet Loss Measurements**:
 
-| Target | Packets Sent | Packets Received | Packet Loss | Latency (min/avg/max/stddev) |
-|--------|--------------|------------------|-------------|------------------------------|
-| **Router (192.168.8.1)** | 20 | 16 | **20%** | 2.033/46.304/495.441/118.260 ms |
-| **Router (192.168.8.1)** | 50 | 46 | **8%** | 2.004/21.138/310.263/48.845 ms |
-| **Internet (8.8.8.8)** | 20 | 15 | **25%** | 19.796/22.545/28.086/2.675 ms |
-| **Internet (8.8.8.8)** | 50 | 46 | **8%** | 18.102/35.282/139.050/27.253 ms |
+| Target                   | Packets Sent | Packets Received | Packet Loss | Latency (min/avg/max/stddev)    |
+|--------------------------|--------------|------------------|-------------|---------------------------------|
+| **Router (192.168.8.1)** | 20           | 16               | **20%**     | 2.033/46.304/495.441/118.260 ms |
+| **Router (192.168.8.1)** | 50           | 46               | **8%**      | 2.004/21.138/310.263/48.845 ms  |
+| **Internet (8.8.8.8)**   | 20           | 15               | **25%**     | 19.796/22.545/28.086/2.675 ms   |
+| **Internet (8.8.8.8)**   | 50           | 46               | **8%**      | 18.102/35.282/139.050/27.253 ms |
 
 **Key Observations**:
 
@@ -884,12 +897,12 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **ICMP Ping Test Results**:
 
-| Test | Interval | Packets | Packet Loss | Notes |
-|------|----------|---------|-------------|-------|
-| Fast pings to router | 0.1s | 10 | **90%** | Router rate-limiting ICMP |
-| Slow pings to router | 0.2s | 100 | **0%** | Normal traffic OK |
-| Ping to wolf-air | 1s | 20 | 5-10% | Some loss to other device |
-| Ping to internet | 1s | 50 | 8% | Some loss |
+| Test                 | Interval | Packets | Packet Loss | Notes                     |
+|----------------------|----------|---------|-------------|---------------------------|
+| Fast pings to router | 0.1s     | 10      | **90%**     | Router rate-limiting ICMP |
+| Slow pings to router | 0.2s     | 100     | **0%**      | Normal traffic OK         |
+| Ping to wolf-air     | 1s       | 20      | 5-10%       | Some loss to other device |
+| Ping to internet     | 1s       | 50      | 8%          | Some loss                 |
 
 **Actual Data Traffic Tests**:
 
@@ -935,27 +948,27 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **Network Stack Settings - michael-pro**:
 
-| Setting | Value |
-|---------|-------|
-| **TCP sendspace** | 131072 bytes (128 KB) |
-| **TCP recvspace** | 131072 bytes (128 KB) |
-| **TCP congestion control** | CUBIC (95% of sockets) |
-| **TCP delayed_ack** | 3 |
-| **MTU** | 1500 (standard) |
-| **DNS** | System default (none set on WiFi) |
-| **Proxy** | Minimal (only .local and 169.254/16 exceptions) |
-| **TSO (TCP Segmentation Offload)** | Enabled |
-| **Path MTU Discovery** | Enabled |
+| Setting                            | Value                                           |
+|------------------------------------|-------------------------------------------------|
+| **TCP sendspace**                  | 131072 bytes (128 KB)                           |
+| **TCP recvspace**                  | 131072 bytes (128 KB)                           |
+| **TCP congestion control**         | CUBIC (95% of sockets)                          |
+| **TCP delayed_ack**                | 3                                               |
+| **MTU**                            | 1500 (standard)                                 |
+| **DNS**                            | System default (none set on WiFi)               |
+| **Proxy**                          | Minimal (only .local and 169.254/16 exceptions) |
+| **TSO (TCP Segmentation Offload)** | Enabled                                         |
+| **Path MTU Discovery**             | Enabled                                         |
 
 **networkQuality Verbose Output Breakdown**:
 
-| Component | RPM | Latency | Notes |
-|-----------|-----|---------|-------|
-| **Overall Responsiveness** | **30 RPM** | 1.979 seconds | **Low** |
-| Transport | 2838 RPM | 21.140 ms | **GOOD** - network layer is fast |
-| Security (TLS/SSL) | 495 RPM | 121.070 ms | **SLOW** - TLS handshake bottleneck |
-| HTTP | 1575 RPM | 38.093 ms | OK |
-| **HTTP loaded** | **14 RPM** | 4.245 seconds | **VERY SLOW** - page load bottleneck |
+| Component                  | RPM        | Latency       | Notes                                |
+|----------------------------|------------|---------------|--------------------------------------|
+| **Overall Responsiveness** | **30 RPM** | 1.979 seconds | **Low**                              |
+| Transport                  | 2838 RPM   | 21.140 ms     | **GOOD** - network layer is fast     |
+| Security (TLS/SSL)         | 495 RPM    | 121.070 ms    | **SLOW** - TLS handshake bottleneck  |
+| HTTP                       | 1575 RPM   | 38.093 ms     | OK                                   |
+| **HTTP loaded**            | **14 RPM** | 4.245 seconds | **VERY SLOW** - page load bottleneck |
 
 **Idle Latency Breakdown**:
 
@@ -1013,10 +1026,10 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **Protocol Comparison Results**:
 
-| Protocol | Responsiveness | RPM | Latency | Status |
-|----------|----------------|-----|---------|--------|
-| **HTTP/2** (default) | **Low** | **30 RPM** | 1.979 seconds | **POOR** |
-| **HTTP/1.1** (`-f h1`) | **Medium** | **917 RPM** | 65.429 ms | **30x BETTER!** |
+| Protocol               | Responsiveness | RPM         | Latency       | Status          |
+|------------------------|----------------|-------------|---------------|-----------------|
+| **HTTP/2** (default)   | **Low**        | **30 RPM**  | 1.979 seconds | **POOR**        |
+| **HTTP/1.1** (`-f h1`) | **Medium**     | **917 RPM** | 65.429 ms     | **30x BETTER!** |
 
 **HTTP/1.1 Verbose Breakdown**:
 
@@ -1137,13 +1150,13 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **Comparison with Previous HTTP/2 Test** (LuLu fully active):
 
-| Component | Previous (LuLu active) | Current (LuLu app killed) | Change |
-|-----------|------------------------|---------------------------|--------|
-| Overall Responsiveness | 30 RPM (1.979s) | 26 RPM (2.237s) | Slightly worse |
-| Transport | 2844 RPM (21ms) | 2764 RPM (21.7ms) | Similar |
-| Security (TLS) | 293 RPM (204ms) | 503 RPM (119ms) | **72% faster** |
-| HTTP | 711 RPM (84ms) | 1533 RPM (39ms) | **116% faster** |
-| HTTP loaded | 6 RPM (8.7s) | 13 RPM (4.55s) | **48% faster** |
+| Component              | Previous (LuLu active) | Current (LuLu app killed) | Change          |
+|------------------------|------------------------|---------------------------|-----------------|
+| Overall Responsiveness | 30 RPM (1.979s)        | 26 RPM (2.237s)           | Slightly worse  |
+| Transport              | 2844 RPM (21ms)        | 2764 RPM (21.7ms)         | Similar         |
+| Security (TLS)         | 293 RPM (204ms)        | 503 RPM (119ms)           | **72% faster**  |
+| HTTP                   | 711 RPM (84ms)         | 1533 RPM (39ms)           | **116% faster** |
+| HTTP loaded            | 6 RPM (8.7s)           | 13 RPM (4.55s)            | **48% faster**  |
 
 **Key Findings**:
 
@@ -1190,14 +1203,14 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
 
 **Comparison Across All Three Tests**:
 
-| Component | LuLu Active | LuLu App Killed | LuLu Disabled | Best Result |
-|-----------|-------------|-----------------|---------------|-------------|
-| Overall Responsiveness | 30 RPM (1.979s) | 26 RPM (2.237s) | 30 RPM (1.970s) | 30 RPM |
-| Transport | 2844 RPM (21ms) | 2764 RPM (21.7ms) | 2819 RPM (21.3ms) | Similar (all excellent) |
-| Security (TLS) | 293 RPM (204ms) | 503 RPM (119ms) | 497 RPM (121ms) | **497 RPM** (disabled) |
-| HTTP | 711 RPM (84ms) | 1533 RPM (39ms) | 1580 RPM (38ms) | **1580 RPM** (disabled) |
-| HTTP loaded | 6 RPM (8.7s) | 13 RPM (4.55s) | 14 RPM (4.08s) | **14 RPM** (disabled) |
-| **Idle Latency** | **262 RPM (228ms)** | **262 RPM (228ms)** | **1265 RPM (47ms)** | **1265 RPM** (disabled) |
+| Component              | LuLu Active         | LuLu App Killed     | LuLu Disabled       | Best Result             |
+|------------------------|---------------------|---------------------|---------------------|-------------------------|
+| Overall Responsiveness | 30 RPM (1.979s)     | 26 RPM (2.237s)     | 30 RPM (1.970s)     | 30 RPM                  |
+| Transport              | 2844 RPM (21ms)     | 2764 RPM (21.7ms)   | 2819 RPM (21.3ms)   | Similar (all excellent) |
+| Security (TLS)         | 293 RPM (204ms)     | 503 RPM (119ms)     | 497 RPM (121ms)     | **497 RPM** (disabled)  |
+| HTTP                   | 711 RPM (84ms)      | 1533 RPM (39ms)     | 1580 RPM (38ms)     | **1580 RPM** (disabled) |
+| HTTP loaded            | 6 RPM (8.7s)        | 13 RPM (4.55s)      | 14 RPM (4.08s)      | **14 RPM** (disabled)   |
+| **Idle Latency**       | **262 RPM (228ms)** | **262 RPM (228ms)** | **1265 RPM (47ms)** | **1265 RPM** (disabled) |
 
 **Key Findings**:
 
@@ -1412,3 +1425,480 @@ When an application tries to send 29 Mbps but only 9.225 Mbps is available, the 
   - Workaround (use `-f h1` flag)
 - **Submit via Feedback Assistant** with appropriate category and diagnostics
 - **Consider also posting** to Apple Developer Forums to see if others have encountered this
+
+---
+
+### 2025-12-24T15:44:28-0500 - Updated RPM Measurements
+
+**Machine**: michael-pro and wolf-air
+
+**What**: Ran networkQuality tests on both machines to update recent RPM measurements.
+
+**michael-pro HTTP/2 Test Results**:
+
+- Uplink capacity: 8.995 Mbps
+- Downlink capacity: 4.438 Mbps
+- Responsiveness: Low (2.675 seconds | **22 RPM**)
+- Idle Latency: 73.958 milliseconds | 811 RPM
+- HTTP loaded: 9 RPM (6.089 seconds) - still very slow
+- Transport: 2760 RPM (21.738 ms) - excellent
+- Security: 470 RPM (127.548 ms) - slow TLS
+- HTTP: 1603 RPM (37.429 ms) - OK
+
+**michael-pro HTTP/1.1 Test Results**:
+
+- Uplink capacity: 15.155 Mbps
+- Downlink capacity: 4.443 Mbps
+- Responsiveness: Medium (65.778 milliseconds | **912 RPM**)
+- Idle Latency: 44.958 milliseconds | 1334 RPM
+- Transport: 2487 RPM (24.122 ms) - excellent
+- Security: 476 RPM (125.902 ms) - slow TLS
+- HTTP: 1262 RPM (47.537 ms) - OK
+- **No "HTTP loaded" component** - test completes without this delay
+
+**wolf-air Test Results** (macOS 12.7.6, no `-f` flag support):
+
+- Upload capacity: 2.799 Mbps
+- Download capacity: 3.446 Mbps
+- Responsiveness: High (**1180 RPM**)
+- Base RTT: 24 ms
+- Protocol: Likely HTTP/2 (default for networkQuality)
+
+**So what**:
+
+- **HTTP/2 performance still broken on michael-pro**: 22 RPM vs 912 RPM with HTTP/1.1 (**41x worse**)
+- **HTTP/1.1 performance stable**: 912 RPM (similar to previous 917 RPM measurement)
+- **wolf-air performance excellent**: 1180 RPM (slightly lower than previous 1245 RPM, but still excellent)
+- **HTTP loaded component persists**: Still taking 6.089 seconds in HTTP/2, confirming the issue
+- **Gap between machines**: michael-pro HTTP/2 (22 RPM) vs wolf-air (1180 RPM) = **54x difference**
+- **HTTP/1.1 brings michael-pro closer**: 912 RPM vs wolf-air 1180 RPM = only **23% difference** (much better than 54x)
+
+**Now what**:
+
+- **Continue using HTTP/1.1 for networkQuality tests** on michael-pro: `networkQuality -f h1 -v` gives accurate results (912 RPM)
+- **Monitor for macOS updates** that might fix CFNetwork HTTP/2 issue
+- **Consider reporting to Apple** if HTTP/2 performance doesn't improve in future macOS updates
+
+---
+
+### 2025-12-24T15:45:00-0500 - curl Validation: HTTP/2 Works Fine, Issue is Tool-Specific
+
+**Machine**: michael-pro and wolf-air
+
+**What**: Validated networkQuality measurements using curl with timing to test HTTP/1.1 vs HTTP/2 performance on both machines.
+
+**Test Methodology**:
+
+- Used `curl` with `-w` flag to measure timing breakdown
+- Tested both HTTP/1.1 (`--http1.1`) and HTTP/2 (`--http2`)
+- Ran 5 requests per protocol per machine to <www.apple.com>
+- Measured: DNS lookup, Connect, SSL handshake, Time to First Byte (TTFB), Total time, Speed
+
+**michael-pro HTTP/1.1 Results** (5 tests):
+
+- Total time: 0.565s, 0.718s, 0.877s, 0.918s, 0.808s
+- **Average: 0.777 seconds**
+- TTFB: 0.161s, 0.122s, 0.187s, 0.156s, 0.128s (avg 0.151s)
+- Speed: 482-337 KB/s (avg ~361 KB/s)
+- All successful (HTTP 200)
+
+**michael-pro HTTP/2 Results** (5 tests):
+
+- Total time: 0.505s, 0.534s, **5.934s**, 1.255s, 0.526s
+- **Average: 1.751 seconds** (with outlier), **0.705 seconds** (without outlier)
+- TTFB: 0.105s, 0.129s, 0.096s, 0.599s, 0.119s (avg 0.210s)
+- Speed: 539-46 KB/s (variable due to outlier)
+- All successful (HTTP 200)
+- **Note**: One outlier at 5.9s (similar to networkQuality's "HTTP loaded" delay)
+
+**wolf-air HTTP/1.1 Results** (5 tests):
+
+- Total time: 0.539s, 0.518s, 0.502s, 0.589s, 0.506s
+- **Average: 0.531 seconds**
+- TTFB: 0.150s, 0.121s, 0.108s, 0.198s, 0.115s (avg 0.138s)
+- Speed: 505-463 KB/s (avg ~515 KB/s)
+- All successful (HTTP 200)
+
+**wolf-air HTTP/2 Results** (5 tests):
+
+- Total time: 1.323s, 0.552s, 0.775s, 0.883s, 0.844s
+- **Average: 0.875 seconds**
+- TTFB: 0.464s, 0.119s, 0.114s, 0.114s, 0.121s (avg 0.186s)
+- Speed: 206-494 KB/s (avg ~336 KB/s)
+- All successful (HTTP 200)
+
+**Key Findings**:
+
+1. **HTTP/2 works fine with curl on both machines**: Both michael-pro and wolf-air successfully use HTTP/2 with curl (libcurl/nghttp2), confirming HTTP/2 protocol stack is functional
+
+2. **michael-pro HTTP/2 performance is acceptable with curl**: Average 0.705s (excluding outlier) vs HTTP/1.1 average 0.777s - **HTTP/2 is actually slightly faster**
+
+3. **One HTTP/2 outlier on michael-pro**: One request took 5.9s (similar to networkQuality's "HTTP loaded" delay), but this is intermittent, not consistent
+
+4. **wolf-air HTTP/2 performs well**: Average 0.875s vs HTTP/1.1 average 0.531s - slightly slower but still acceptable
+
+5. **The problem is tool-specific, not network-wide**:
+   - curl HTTP/2 works fine (0.7s average on michael-pro)
+   - networkQuality HTTP/2 is broken (22 RPM = 2.675s average, with 6s "HTTP loaded" delay)
+   - This confirms the issue is with **networkQuality's CFNetwork HTTP/2 implementation**, not the network or HTTP/2 protocol itself
+
+6. **Validation of networkQuality HTTP/1.1**:
+   - networkQuality HTTP/1.1: 912 RPM (65.8ms = 0.066s)
+   - curl HTTP/1.1: 0.777s average
+   - Different test methodologies (networkQuality does multiple requests, curl is single request), but both show HTTP/1.1 works well
+
+**So what**:
+
+- **HTTP/2 protocol is NOT broken**: curl successfully uses HTTP/2 on both machines with good performance
+- **networkQuality's CFNetwork HTTP/2 implementation has a bug**: The tool-specific "HTTP loaded" delay (4-7 seconds) doesn't occur with curl
+- **The issue is isolated to networkQuality**: Real-world applications using HTTP/2 (via curl/libcurl) work fine
+- **networkQuality HTTP/1.1 is accurate**: 912 RPM (65.8ms) is reasonable and validates the tool works correctly with HTTP/1.1
+
+**Now what**:
+
+- **Continue using HTTP/1.1 for networkQuality tests**: `networkQuality -f h1 -v` provides accurate measurements
+- **HTTP/2 is fine for real applications**: curl and other libcurl-based tools work correctly with HTTP/2
+- **Report as networkQuality tool bug**: The issue is specific to networkQuality's CFNetwork HTTP/2 test implementation, not a system-wide problem
+- **Monitor for networkQuality updates**: Apple may fix the CFNetwork HTTP/2 issue in future macOS updates
+
+---
+
+### 2025-12-24T16:08:18-0500 - Tool Migration: Switching from networkQuality to speedtest (Ookla)
+
+**Machine**: michael-pro and wolf-air
+
+**What**: Logging final networkQuality values and switching to speedtest (Ookla Speedtest CLI) - the industry-standard tool used by network engineers.
+
+**Reason for Switch**:
+
+- networkQuality has HTTP/2 bugs on macOS Sequoia (22 RPM vs 912 RPM with HTTP/1.1)
+- networkQuality is Apple-specific and not widely used by network engineers
+- speedtest (Ookla) is the industry standard, reliable, and works consistently
+- speedtest provides comprehensive metrics: download, upload, latency, jitter, packet loss
+
+**Final networkQuality Values** (Tool: `networkQuality`):
+
+**michael-pro** (macOS 15.7.3, WiFi - en0):
+
+- **HTTP/2 Test** (2025-12-24T15:42:13-0500):
+  - Upload: 8.995 Mbps
+  - Download: 4.438 Mbps
+  - Responsiveness: 22 RPM (Low)
+  - Idle Latency: 73.958 ms (811 RPM)
+- **HTTP/1.1 Test** (2025-12-24T15:43:03-0500):
+  - Upload: 15.155 Mbps
+  - Download: 4.443 Mbps
+  - Responsiveness: 912 RPM (Medium)
+  - Idle Latency: 44.958 ms (1334 RPM)
+
+**wolf-air** (macOS 12.7.6, WiFi):
+
+- **Test** (2025-12-24T15:44:02-0500):
+  - Upload: 2.799 Mbps
+  - Download: 3.446 Mbps
+  - Responsiveness: 1180 RPM (High)
+  - Base RTT: 24 ms
+
+**Initial speedtest Values** (Tool: `speedtest` - Ookla Speedtest CLI v1.2.0.84):
+
+**michael-pro** (2025-12-24T21:09:11Z):
+
+- **Download**: 5.51 Mbps
+- **Upload**: 4.50 Mbps
+- **Latency**: 15.56 ms
+- **Jitter**: 1.84 ms
+- **Packet Loss**: 0%
+- **Server**: Spectrum, Tampa, FL (tampfl-speedtest-ookla-01.st.charter.com)
+- **ISP**: Spectrum
+- **Interface**: en0 (WiFi), IP: 192.168.8.124
+
+**wolf-air**:
+
+- speedtest not yet installed (needs installation)
+
+**Comparison: networkQuality vs speedtest (michael-pro)**:
+
+| Metric   | networkQuality (HTTP/1.1) | speedtest | Difference                   |
+|----------|---------------------------|-----------|------------------------------|
+| Download | 4.443 Mbps                | 5.51 Mbps | +24% (speedtest higher)      |
+| Upload   | 15.155 Mbps               | 4.50 Mbps | -70% (networkQuality higher) |
+| Latency  | 44.958 ms (idle)          | 15.56 ms  | -65% (speedtest lower)       |
+
+**So what**:
+
+- **Download speeds are similar**: 4.44 Mbps (networkQuality) vs 5.51 Mbps (speedtest) - within reasonable variance
+- **Upload discrepancy**: networkQuality shows 15.155 Mbps vs speedtest 4.50 Mbps - significant difference, needs investigation
+- **Latency much better with speedtest**: 15.56 ms vs 44.96 ms idle latency - speedtest shows better network performance
+- **speedtest provides more metrics**: Includes jitter and packet loss, which networkQuality doesn't report clearly
+- **Tool migration complete**: Moving forward, all bandwidth/latency measurements will use speedtest
+
+**Now what**:
+
+- **Install speedtest on wolf-air**: `brew install speedtest` (or equivalent)
+- **Run speedtest on wolf-air** to get baseline measurements
+- **Use speedtest for all future measurements** - discontinue use of networkQuality
+- **Investigate upload discrepancy** - why networkQuality shows 15 Mbps upload vs speedtest 4.5 Mbps
+- **Update Current Test Results section** to use speedtest values going forward
+
+---
+
+### 2025-12-24T17:43:13-0500 - Final Tool Migration: curl-based network_test.sh
+
+**Machine**: michael-pro and wolf-air
+
+**What**: Migrated from speedtest to `network_test.sh` (curl-based script) due to installation difficulties on wolf-air.
+
+**Reason for Final Migration**:
+
+- speedtest installation was painful on wolf-air (different macOS version)
+- curl is built-in on all macOS versions (no installation needed)
+- network_test.sh script provides both bandwidth and RPM measurements
+- Simple, reliable, works via SSH without dependencies
+- Avoids HTTP/2 bugs in networkQuality
+- Avoids installation issues with speedtest
+
+**Tool Details**:
+
+- **Script**: `bin/network_test.sh`
+- **Underlying Tool**: `curl` (built-in, macOS 12+)
+- **Tests**:
+  - Download bandwidth: Downloads 10MB file from Cloudflare CDN
+  - Upload bandwidth: Uploads 1MB test data
+  - Responsiveness (RPM): 10 HTTP requests to <www.apple.com>, calculates average and RPM
+
+**Initial network_test.sh Results**:
+
+**michael-pro** (2025-12-24T17:43:13-0500):
+
+- **Download**: 2.59 Mbps
+- **Upload**: ~7.5 Mbps (983632 bytes/sec)
+- **Responsiveness (RPM)**: 68
+- **Average Response Time**: 0.875s
+- **Tool**: curl via network_test.sh
+
+**wolf-air**:
+
+- Test pending - script ready to run via SSH
+
+**Comparison with Previous Tools**:
+
+| Tool                      | Download (michael-pro) | Upload (michael-pro) | RPM (michael-pro) | Installation          |
+|---------------------------|------------------------|----------------------|-------------------|-----------------------|
+| networkQuality (HTTP/1.1) | 4.443 Mbps             | 15.155 Mbps          | 912               | Built-in              |
+| speedtest                 | 5.51 Mbps              | 4.50 Mbps            | N/A               | Requires brew install |
+| network_test.sh (curl)    | 2.59 Mbps              | ~7.5 Mbps            | 68                | Built-in (curl)       |
+
+**So what**:
+
+- **curl-based approach is simplest**: No installation, works on all macOS versions
+- **Download speeds vary**: Different tools/test endpoints show different results (2.59-5.51 Mbps)
+- **RPM measurement differs**: networkQuality shows 912 RPM vs curl shows 68 RPM - different methodologies
+- **Tool is ready for both machines**: Script can be run via SSH without installation
+- **Final tool choice**: network_test.sh (curl) - simple, reliable, no dependencies
+
+**Now what**:
+
+- **Run network_test.sh on wolf-air** via SSH to get baseline measurements
+- **Use network_test.sh for all future measurements** - discontinue networkQuality and speedtest
+- **Document RPM methodology differences** - networkQuality vs curl measure different things
+- **Update all future test results** to use network_test.sh values
+
+---
+
+### 2025-12-24T17:47:27-0500 - wolf-air Measurements and Upload/Download Anomaly Analysis
+
+**Machine**: michael-pro and wolf-air
+
+**What**: Ran network_test.sh on wolf-air and compared results with michael-pro. Identified unusual pattern where download speeds are fractions of upload speeds (opposite of typical broadband).
+
+**wolf-air network_test.sh Results** (2025-12-24T17:46:25-0500):
+
+- **Download**: 2.84 Mbps
+- **Upload**: 7.03 Mbps (879143 bytes/sec)
+- **Responsiveness (RPM)**: 60
+- **Average Response Time**: 0.997s
+- **Tool**: curl via network_test.sh
+
+**michael-pro network_test.sh Results** (2025-12-24T17:43:13-0500):
+
+- **Download**: 2.59 Mbps
+- **Upload**: ~7.5 Mbps (983632 bytes/sec)
+- **Responsiveness (RPM)**: 68
+- **Average Response Time**: 0.875s
+- **Tool**: curl via network_test.sh
+
+**Comparison: michael-pro vs wolf-air**:
+
+| Metric                    | michael-pro | wolf-air  | Difference                  |
+|---------------------------|-------------|-----------|-----------------------------|
+| **Download**              | 2.59 Mbps   | 2.84 Mbps | +9.7% (wolf-air higher)     |
+| **Upload**                | ~7.5 Mbps   | 7.03 Mbps | -6.3% (michael-pro higher)  |
+| **Upload/Download Ratio** | 2.9:1       | 2.5:1     | Both show upload > download |
+| **RPM**                   | 68          | 60        | +13% (michael-pro higher)   |
+| **Response Time**         | 0.875s      | 0.997s    | -12% (michael-pro faster)   |
+
+**CRITICAL FINDING: Download is Fractions of Upload (Unusual Pattern)**:
+
+Both machines show **upload speeds 2.5-3x HIGHER than download speeds**, which is the **opposite** of typical broadband connections where download is usually 5-20x higher than upload.
+
+**Possible Explanations**:
+
+1. **ISP Throttling/Prioritization**:
+   - ISP may be throttling download bandwidth during peak hours or based on usage patterns
+   - Upload path may have less congestion or different QoS policies
+   - Could be intentional ISP policy (unlikely but possible)
+
+2. **Router/Network Configuration**:
+   - Router QoS settings may prioritize upload traffic
+   - Bandwidth limiting rules may be misconfigured
+   - Router firmware bugs affecting download path
+
+3. **WiFi Interference/Channel Congestion**:
+   - Download path may be experiencing more interference
+   - WiFi channel congestion affecting download more than upload
+   - Neighboring networks causing interference on download frequencies
+
+4. **Test Methodology Limitations**:
+   - Cloudflare CDN endpoint may have rate limiting or geographic routing issues
+   - Download test (10MB file) may hit different bottlenecks than upload test (1MB)
+   - Different test endpoints may have different capacity
+
+5. **Network Stack/TCP Issues**:
+   - TCP receive window scaling issues affecting download
+   - Download path buffer bloat or queuing delays
+   - Network interface driver issues affecting download performance
+
+6. **ISP Connection Type**:
+   - If using LTE/cellular backup, upload may be prioritized
+   - Satellite or fixed wireless may have asymmetric characteristics
+   - Cable modem issues affecting download more than upload
+
+7. **Time-of-Day/Network Congestion**:
+   - Tests run during peak hours when download is more congested
+   - ISP network capacity issues affecting download path
+   - Regional network congestion
+
+**Evidence Supporting Each Theory**:
+
+- **ISP Throttling**: Both machines show same pattern (2.5-3x upload advantage) - suggests network-wide issue
+- **Router Configuration**: Both use same router (GL-MT1300) - router could be the common factor
+- **WiFi Issues**: Both on WiFi - interference could affect both similarly
+- **Test Methodology**: Different file sizes and endpoints - could explain some variance
+- **Network Stack**: Different macOS versions (15.7.3 vs 12.7.6) but similar results - less likely
+
+**Most Likely Causes** (in order):
+
+1. **Router QoS/Bandwidth Limiting**: GL-MT1300 router may have misconfigured QoS or bandwidth limits affecting download
+2. **ISP Throttling**: ISP may be throttling download bandwidth (common during peak hours or high usage)
+3. **WiFi Channel Congestion**: Download path experiencing more interference/congestion than upload
+4. **Test Endpoint Limitations**: Cloudflare CDN may have rate limiting or routing issues affecting download tests
+
+**So what**:
+
+- **Both machines show same unusual pattern**: Upload 2.5-3x faster than download
+- **This is NOT normal**: Typical broadband has download 5-20x faster than upload
+- **Pattern is consistent**: Both machines, multiple tests show same ratio
+- **Suggests network-wide issue**: Router or ISP-level problem, not machine-specific
+- **Download speeds are very low**: 2.5-3 Mbps download is quite slow for modern broadband
+
+**Now what**:
+
+- **Check router QoS/bandwidth settings**: Review GL-MT1300 router configuration for download throttling
+- **Test with different endpoints**: Try other CDNs or test servers to rule out Cloudflare-specific issues
+- **Test at different times**: Run tests at off-peak hours to check for ISP throttling
+- **Check router firmware**: Update or review GL-MT1300 firmware for known issues
+- **Test with Ethernet**: If possible, test michael-pro on Ethernet to rule out WiFi-specific issues
+- **Contact ISP**: If router checks out, contact ISP about download throttling or capacity issues
+- **Compare with other devices**: Test from other devices on same network to confirm pattern
+- **Monitor over time**: Track download/upload ratios over days/weeks to identify patterns
+
+---
+
+### 2025-12-24T18:04:45-0500 - ROOT CAUSE IDENTIFIED: Router QoS Configuration
+
+**Machine**: Router (GL-MT1300)
+
+**What**: Discovered router QoS bandwidth limits that explain the upload/download anomaly.
+
+**Router QoS Settings** (GL-MT1300):
+
+- **Download Limit**: 6000 kbps (6 Mbps)
+- **Upload Limit**: 8000 kbps (8 Mbps)
+- **QoS Discipline**: CAKE (Common Applications Kept Enhanced)
+
+**Analysis**:
+
+The router has bandwidth limits configured where **upload limit (8 Mbps) is HIGHER than download limit (6 Mbps)**. This is unusual - typical configurations have download limits 5-20x higher than upload.
+
+**Measured vs Configured Limits**:
+
+| Direction    | Configured Limit | Measured Speed | Utilization      |
+|--------------|------------------|----------------|------------------|
+| **Download** | 6 Mbps           | 2.5-2.8 Mbps   | ~42-47% of limit |
+| **Upload**   | 8 Mbps           | 7.0-7.5 Mbps   | ~88-94% of limit |
+
+**Key Findings**:
+
+1. **Upload is hitting the limit**: Measured upload (7-7.5 Mbps) is close to the configured limit (8 Mbps), suggesting the limit is active
+2. **Download is well below limit**: Measured download (2.5-2.8 Mbps) is only ~42-47% of the configured limit (6 Mbps), suggesting other factors are limiting download
+3. **CAKE QoS discipline**: CAKE is a modern, sophisticated QoS algorithm that manages bandwidth fairly - the limits are being enforced
+4. **Configuration is backwards**: Upload limit (8 Mbps) > Download limit (6 Mbps) is opposite of typical broadband
+
+**Why Download is Below Limit**:
+
+Even though the router allows 6 Mbps download, we're only getting 2.5-2.8 Mbps. Possible reasons:
+
+- ISP may be providing less than 6 Mbps actual capacity
+- WiFi interference/congestion reducing effective download speed
+- Other network bottlenecks between router and internet
+- CAKE QoS may be prioritizing upload traffic, leaving less for download
+
+**So what**:
+
+- **Root cause confirmed**: Router QoS settings explain why upload > download
+- **Configuration is unusual**: Upload limit higher than download is atypical
+- **Download underperforming**: Getting only 42-47% of configured download limit suggests other bottlenecks
+- **Upload performing well**: Getting 88-94% of configured upload limit
+
+**Recommendations**:
+
+1. **Adjust Router QoS Settings** (if download capacity is available):
+   - **Recommended**: Set download limit to 2-3x upload limit (typical broadband ratio)
+   - Example: Download 20-24 Mbps, Upload 8 Mbps (if ISP provides this capacity)
+   - Or: Download 12 Mbps, Upload 8 Mbps (if ISP provides ~12 Mbps)
+   - **Check ISP plan first**: Verify actual download capacity before increasing limits
+
+2. **Investigate Why Download is Below Limit**:
+   - Test download speed directly connected to router (bypass WiFi) to rule out WiFi issues
+   - Check ISP plan - may only provide 3-4 Mbps download despite router allowing 6 Mbps
+   - Test at different times to check for ISP throttling
+   - Check router logs for download path errors or drops
+
+3. **Optimize CAKE QoS Settings**:
+   - Review CAKE configuration - may need adjustment for your use case
+   - Consider if CAKE is prioritizing upload too aggressively
+   - Check if CAKE "ingress" (download) vs "egress" (upload) settings need tuning
+
+4. **Verify ISP Capacity**:
+   - Contact ISP to confirm actual download/upload capacity
+   - If ISP provides more than 6 Mbps download, increase router limit accordingly
+   - If ISP only provides 3 Mbps download, router limit of 6 Mbps is fine (other factors limiting)
+
+5. **Test After Changes**:
+   - After adjusting QoS limits, re-run network_test.sh on both machines
+   - Verify download speeds improve if limits were too restrictive
+   - Monitor for any negative impacts on upload performance
+
+**Suggested Configuration** (assuming ISP provides adequate capacity):
+
+- **Download**: 20-24 Mbps (or match ISP plan, typically 3-4x upload)
+- **Upload**: 8 Mbps (keep current if working well)
+- **Discipline**: CAKE (keep - it's a good choice)
+- **Rationale**: Typical broadband has download 3-5x upload. If ISP provides 20+ Mbps download, set limit accordingly.
+
+**Now what**:
+
+- **Check ISP plan capacity**: Verify what download speed ISP actually provides
+- **Adjust router QoS limits**: Set download limit to 2-3x upload limit (if ISP capacity allows)
+- **Re-test after changes**: Run network_test.sh to verify improvements
+- **Monitor performance**: Track speeds over time to ensure stable performance
