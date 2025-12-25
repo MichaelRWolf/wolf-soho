@@ -122,7 +122,25 @@ uci commit sqm
 echo
 
 echo "=== Applied SQM (download/upload) ==="
-echo "download_kbit=\$(uci -q get sqm.\${SQM_SECTION}.download || echo '?') upload_kbit=\$(uci -q get sqm.\${SQM_SECTION}.upload || echo '?')"
+dl_kbit="\$(uci -q get sqm.\${SQM_SECTION}.download || echo 0)"
+ul_kbit="\$(uci -q get sqm.\${SQM_SECTION}.upload || echo 0)"
+echo "download_kbit=\${dl_kbit} upload_kbit=\${ul_kbit}"
+echo
+
+echo "=== Summary ==="
+dl_pct_of_ul=0
+ul_pct_of_dl=0
+if [ "\$ul_kbit" -gt 0 ]; then
+  dl_pct_of_ul=\$((dl_kbit * 100 / ul_kbit))
+fi
+if [ "\$dl_kbit" -gt 0 ]; then
+  ul_pct_of_dl=\$((ul_kbit * 100 / dl_kbit))
+fi
+echo "Download: \${dl_kbit} (\${dl_pct_of_ul}% of upload)"
+echo "Upload: \${ul_kbit} (\${ul_pct_of_dl}% of download)"
+if [ "\$dl_kbit" -lt "\$ul_kbit" ]; then
+  echo "WARNING: download is set lower than upload" >&2
+fi
 echo
 
 echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
