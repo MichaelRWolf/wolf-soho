@@ -1,0 +1,84 @@
+#!/bin/bash
+# Network Performance Test Script
+# Uses curl (built-in) for bandwidth and responsiveness testing
+# Works on all macOS versions
+
+set -e
+
+echo "=== Network Performance Test ==="
+echo "Tool: curl (built-in)"
+echo "Timestamp: $(date -Iseconds)"
+echo ""
+
+# Test server (using a reliable CDN)
+TEST_URL="https://www.apple.com"
+large_file_size_MB=10
+large_file_size_byte=$((large_file_size_MB * 1000000))
+LARGE_FILE_URL="https://speed.cloudflare.com/__down?bytes=${large_file_size_byte}"
+
+# Initialize variables for summary
+download_Mb_per_sec=""
+upload_Mb_per_sec=""
+responsiveness_rpm=""
+
+echo "=== Bandwidth Test (Download) ==="
+echo "Downloading ${large_file_size_MB} MB test file..."
+download_output=$(curl -w "%{time_total}|%{size_download}|%{speed_download}" -s -o /dev/null "$LARGE_FILE_URL")
+IFS='|' read -r download_time_sec download_size_byte download_rate_byte_per_sec <<< "$download_output"
+
+# Calculate Mbps
+download_Mb_per_sec=$(echo "scale=2; $download_rate_byte_per_sec * 8 / 1000000" | bc)
+echo "  Total Time: ${download_time_sec}s"
+echo "  Size: ${download_size_byte} bytes"
+echo "  Speed: ${download_rate_byte_per_sec} bytes/sec"
+echo "  Speed: ${download_Mb_per_sec} Mb/sec"
+echo ""
+
+echo "=== Bandwidth Test (Upload) ==="
+echo "Uploading 1 MB test data..."
+upload_output=$(dd if=/dev/zero bs=1048576 count=1 2>/dev/null | \
+    curl -w "%{time_total}|%{size_upload}|%{speed_upload}" \
+         -s -o /dev/null -X POST --data-binary @- "$LARGE_FILE_URL" 2>&1)
+
+if [[ $? -eq 0 ]] && [[ "$upload_output" != *"error"* ]]; then
+    IFS='|' read -r upload_time_sec upload_size_byte upload_rate_byte_per_sec <<< "$upload_output"
+    # Calculate Mbps
+    upload_Mb_per_sec=$(echo "scale=2; $upload_rate_byte_per_sec * 8 / 1000000" | bc)
+    echo "  Total Time: ${upload_time_sec}s"
+    echo "  Size: ${upload_size_byte} bytes"
+    echo "  Speed: ${upload_Mb_per_sec} Mb/sec"
+else
+    echo "  Upload test not supported by server"
+    upload_Mb_per_sec="N/A"
+fi
+echo ""
+
+echo "=== Responsiveness Test (RPM) ==="
+echo "Running 10 HTTP requests to measure responsiveness..."
+time_list_sec=()
+for i in {1..10}; do
+    req_time_sec=$(curl -w "%{time_total}" -s -o /dev/null "$TEST_URL")
+    time_list_sec+=("${req_time_sec}")
+    echo "  Request $i: ${req_time_sec}s"
+    sleep 0.5
+done
+
+# Calculate average and RPM
+sum_sec=0
+for t_sec in "${time_list_sec[@]}"; do
+    sum_sec=$(echo "$sum_sec + $t_sec" | bc)
+done
+avg_sec=$(echo "scale=3; $sum_sec / 10" | bc)
+responsiveness_rpm=$(echo "scale=0; 60 / $avg_sec" | bc)
+
+echo ""
+echo "Average Response Time: ${avg_sec}s"
+echo "Responsiveness (RPM): ${responsiveness_rpm}"
+echo ""
+
+echo "=== Summary ==="
+echo "Download: ${download_Mb_per_sec} Mb/sec"
+echo "Upload: ${upload_Mb_per_sec} Mb/sec"
+echo "Responsiveness: ${responsiveness_rpm} RPM"
+echo ""
+echo "=== Test Complete ==="
