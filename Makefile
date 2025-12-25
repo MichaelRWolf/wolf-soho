@@ -1,5 +1,5 @@
 SOURCE_BIN_DIR := bin
-BIN_FILES := bin/network_location
+BIN_FILES := bin/network_location bin/beryl_sqm bin/network_test
 INSTALL_BIN_DIR := $(HOME)/bin
 
 # Uplink commands configuration
