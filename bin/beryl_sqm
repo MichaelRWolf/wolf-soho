@@ -2,8 +2,8 @@
 # beryl_sqm: set SQM download/upload shaping rates on Beryl (OpenWrt) via SSH.
 #
 # Usage:
-#   beryl_sqm --dry-run [args...] | ssh root@beryl
-#   beryl_sqm --dry-run [args...]               # print remote commands only
+#   beryl_sqm --no-execute [args...]            # print ssh commands only (no changes)
+#   beryl_sqm --dry-run [args...]               # alias for --no-execute (compat)
 #   beryl_sqm [args...]                         # execute via ssh
 #   beryl_sqm status                            # read-only: show settings + shaping
 #   beryl_sqm day
@@ -35,7 +35,7 @@ set -euo pipefail
 BERYL_HOST="${BERYL_HOST:-beryl}"
 BERYL_SQM_SECTION="${BERYL_SQM_SECTION:-}"
 BERYL_SQM_DL_PER_UL="${BERYL_SQM_DL_PER_UL:-7.75}"
-DRY_RUN=0
+NO_EXECUTE=0
 
 die() {
   echo "ERROR: $*" >&2
@@ -46,7 +46,23 @@ is_int() {
   [[ "${1:-}" =~ ^[0-9]+$ ]]
 }
 
-ssh_beryl() {
+ssh_on_beryl() {
+  # Usage: ssh_on_beryl <command> [args...]
+  #
+  # In execute mode, runs:
+  #   ssh root@beryl <command> [args...]
+  #
+  # In --no-execute mode, prints a pasteable command line using %q quoting.
+  if [[ $NO_EXECUTE -eq 1 ]]; then
+    printf 'ssh -o BatchMode=yes %q' "root@${BERYL_HOST}"
+    local a
+    for a in "$@"; do
+      printf ' %q' "$a"
+    done
+    printf '\n'
+    return 0
+  fi
+
   ssh -o BatchMode=yes "root@${BERYL_HOST}" "$@"
 }
 
@@ -63,159 +79,194 @@ print(dl_rounded)
 PY
 }
 
-emit_remote_prelude() {
-  # Emit a POSIX sh script intended to run on Beryl (OpenWrt/BusyBox ash).
-  cat <<EOF
-set -e
+summary_down_up() {
+  # Print a small, stable summary block based on kbit/s values.
+  local dl="$1" ul="$2"
 
-SQM_SECTION="${BERYL_SQM_SECTION}"
+  case "$dl" in ''|*[!0-9]*) dl=0 ;; esac
+  case "$ul" in ''|*[!0-9]*) ul=0 ;; esac
+
+  local dl_pct_of_ul=0 ul_pct_of_dl=0
+  if (( ul > 0 )); then
+    dl_pct_of_ul=$(( dl * 100 / ul ))
+  fi
+  if (( dl > 0 )); then
+    ul_pct_of_dl=$(( ul * 100 / dl ))
+  fi
+
+  printf "Download: %5s (%5s%% of upload)\n" "${dl}" "${dl_pct_of_ul}"
+  printf "Upload:   %5s (%5s%% of download)\n"  "${ul}" "${ul_pct_of_dl}"
+  if (( dl_pct_of_ul < 100 )); then
+      printf "⚠️ WARNING: download less than upload\n"
+  fi
+}
 
 detect_sqm_section() {
-  sections=\$(uci show sqm 2>/dev/null | sed -n 's/^sqm\\.\\([^.]*\\)=queue$/\\1/p')
-  for s in \$sections; do
-    en=\$(uci -q get "sqm.\${s}.enabled" 2>/dev/null || true)
-    if [ "\$en" = "1" ]; then
-      echo "\$s"
+  # Returns the enabled SQM queue section name.
+  #
+  # NOTE: in --no-execute mode, we do not auto-detect (it requires remote reads).
+  # Callers should handle an empty result by printing a helpful command to run.
+  if [[ -n "${BERYL_SQM_SECTION}" ]]; then
+    echo "${BERYL_SQM_SECTION}"
+    return 0
+  fi
+
+  if [[ $NO_EXECUTE -eq 1 ]]; then
+    echo ""
+    return 0
+  fi
+
+  local sqm_show sections s en
+  sqm_show="$(ssh_on_beryl uci show sqm 2>/dev/null || true)"
+  sections="$(sed -n 's/^sqm\.\([^.]*\)=queue$/\1/p' <<<"$sqm_show")"
+  for s in $sections; do
+    en="$(ssh_on_beryl uci -q get "sqm.${s}.enabled" 2>/dev/null || true)"
+    if [[ "$en" = "1" ]]; then
+      echo "$s"
       return 0
     fi
   done
   return 1
 }
 
-summary_down_up() {
-  dl="\$1"
-  ul="\$2"
+print_no_execute_autodetect_help() {
+  cat <<'EOF'
+NOTE: --no-execute can’t auto-detect SQM_SECTION without running remote reads.
 
-  # Coerce to integers (defensive against empty/garbage).
-  case "\$dl" in ''|*[!0-9]*) dl=0 ;; esac
-  case "\$ul" in ''|*[!0-9]*) ul=0 ;; esac
-
-  dl_pct_of_ul=0
-  ul_pct_of_dl=0
-  if [ "\$ul" -gt 0 ]; then
-    dl_pct_of_ul=\$(expr "\$dl" \\* 100 / "\$ul")
-  fi
-  if [ "\$dl" -gt 0 ]; then
-    ul_pct_of_dl=\$(expr "\$ul" \\* 100 / "\$dl")
-  fi
-
-  download_balance_warning=""
-  if [ "\$dl_pct_of_ul" -lt 100 ]; then
-    download_balance_warning=" ⚠️ WARNING: less than upload"
-  fi
-
-  echo "Download_1: \${dl} (\${dl_pct_of_ul}% of upload\${download_balance_warning})"
-  echo "Upload_1:   \${ul} (\${ul_pct_of_dl}% of download)"
-}
-
-if [ -z "\$SQM_SECTION" ]; then
-  SQM_SECTION="\$(detect_sqm_section || true)"
-fi
-
-if [ -z "\$SQM_SECTION" ]; then
-  echo "ERROR: could not auto-detect an enabled SQM queue section" >&2
-  exit 2
-fi
+Run this to detect the enabled SQM section:
 EOF
-}
 
-emit_remote_show() {
-  emit_remote_prelude
+  # Print (not execute) a single ssh command that returns the enabled queue section.
+  ssh_on_beryl sh -c '
+sections="$(uci show sqm 2>/dev/null | sed -n '"'"'s/^sqm\.\([^.]*\)=queue$/\1/p'"'"')"
+for s in $sections; do
+  en="$(uci -q get "sqm.${s}.enabled" 2>/dev/null || true)"
+  if [ "$en" = "1" ]; then
+    echo "$s"
+    exit 0
+  fi
+done
+exit 1
+'
+
   cat <<'EOF'
 
-echo "=== SQM section ==="
-echo "$SQM_SECTION"
-echo
-
-echo "=== SQM UCI config ==="
-uci show "sqm.${SQM_SECTION}" 2>/dev/null || true
-echo
-
-echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
-tc -s qdisc show dev eth0 || true
-echo "---"
-tc -s qdisc show dev ifb4eth0 || true
+Then rerun with:
+  BERYL_SQM_SECTION=<that_section> beryl_sqm --no-execute ...
 EOF
 }
 
-emit_remote_status() {
-  emit_remote_prelude
-  cat <<'EOF'
+do_show() {
+  local sqm_section
+  sqm_section="$(detect_sqm_section || true)"
+  if [[ -z "$sqm_section" ]]; then
+    if [[ $NO_EXECUTE -eq 1 ]]; then
+      print_no_execute_autodetect_help
+      return 0
+    fi
+    die "could not auto-detect an enabled SQM queue section"
+  fi
 
-echo "=== SQM section ==="
-echo "$SQM_SECTION"
-echo
+  echo "=== SQM section ==="
+  echo "$sqm_section"
+  echo
 
-dl_kbit="$(uci -q get sqm.${SQM_SECTION}.download || echo 0)"
-ul_kbit="$(uci -q get sqm.${SQM_SECTION}.upload || echo 0)"
+  echo "=== SQM UCI config ==="
+  ssh_on_beryl uci show "sqm.${sqm_section}" 2>/dev/null || true
+  echo
 
-echo "=== Settings ==="
-echo "Download: ${dl_kbit} kbit/s"
-echo "Upload:   ${ul_kbit} kbit/s"
-
-echo
-echo "=== Summary ==="
-summary_down_up "$dl_kbit" "$ul_kbit"
-echo
-
-echo "=== Shaping (ifb4eth0 / download, if present) ==="
-tc -s qdisc show dev ifb4eth0 2>/dev/null | egrep '^(qdisc cake| Sent | backlog |  drops|  overlimits|  pk_delay|  av_delay)' || true
-echo
-
-echo "=== Shaping (eth0 / upload) ==="
-tc -s qdisc show dev eth0 2>/dev/null | egrep '^(qdisc cake| Sent | backlog |  drops|  overlimits|  pk_delay|  av_delay)' || true
-EOF
+  echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
+  ssh_on_beryl tc -s qdisc show dev eth0 || true
+  echo "---"
+  ssh_on_beryl tc -s qdisc show dev ifb4eth0 || true
 }
 
-emit_remote_set() {
+do_status() {
+  local sqm_section
+  sqm_section="$(detect_sqm_section || true)"
+  if [[ -z "$sqm_section" ]]; then
+    if [[ $NO_EXECUTE -eq 1 ]]; then
+      print_no_execute_autodetect_help
+      return 0
+    fi
+    die "could not auto-detect an enabled SQM queue section"
+  fi
+
+  echo "=== SQM section ==="
+  echo "$sqm_section"
+  echo
+
+  local dl_kbit ul_kbit
+  dl_kbit="$(ssh_on_beryl uci -q get "sqm.${sqm_section}.download" 2>/dev/null || echo 0)"
+  ul_kbit="$(ssh_on_beryl uci -q get "sqm.${sqm_section}.upload" 2>/dev/null || echo 0)"
+
+  echo "=== Speed Limits ==="
+  summary_down_up "$dl_kbit" "$ul_kbit"
+  echo
+
+  echo "=== Shaping (ifb4eth0 / download, if present) ==="
+  {
+    local out
+    out="$(ssh_on_beryl tc -s qdisc show dev ifb4eth0 2>/dev/null || true)"
+    egrep '^(qdisc cake| Sent | backlog |  drops|  overlimits|  pk_delay|  av_delay)' <<<"$out" || true
+  }
+  echo
+
+  echo "=== Shaping (eth0 / upload) ==="
+  {
+    local out
+    out="$(ssh_on_beryl tc -s qdisc show dev eth0 2>/dev/null || true)"
+    egrep '^(qdisc cake| Sent | backlog |  drops|  overlimits|  pk_delay|  av_delay)' <<<"$out" || true
+  }
+}
+
+do_set() {
   local download_kbit="$1"
   local upload_kbit="$2"
   is_int "$download_kbit" || die "download must be integer kbit/s, got: $download_kbit"
   is_int "$upload_kbit" || die "upload must be integer kbit/s, got: $upload_kbit"
 
-  emit_remote_prelude
-  cat <<EOF
-
-echo "=== Setting SQM (download/upload) ==="
-echo "download_kbit=${download_kbit} upload_kbit=${upload_kbit}"
-echo
-
-uci set "sqm.\${SQM_SECTION}.download=${download_kbit}"
-uci set "sqm.\${SQM_SECTION}.upload=${upload_kbit}"
-uci commit sqm
-/etc/init.d/sqm restart
-echo
-
-echo "=== Applied SQM (download/upload) ==="
-dl_kbit="\$(uci -q get sqm.\${SQM_SECTION}.download || echo 0)"
-ul_kbit="\$(uci -q get sqm.\${SQM_SECTION}.upload || echo 0)"
-echo "download_kbit=\${dl_kbit} upload_kbit=\${ul_kbit}"
-echo
-
-echo "=== Summary ==="
-summary_down_up "\$dl_kbit" "\$ul_kbit"
-echo
-
-echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
-tc -s qdisc show dev eth0 | head -n 3 || true
-echo "---"
-tc -s qdisc show dev ifb4eth0 | head -n 3 || true
-EOF
-}
-
-run_or_echo_remote() {
-  if [[ $DRY_RUN -eq 1 ]]; then
-    cat
-    return 0
+  local sqm_section
+  sqm_section="$(detect_sqm_section || true)"
+  if [[ -z "$sqm_section" ]]; then
+    if [[ $NO_EXECUTE -eq 1 ]]; then
+      print_no_execute_autodetect_help
+      return 0
+    fi
+    die "could not auto-detect an enabled SQM queue section"
   fi
-  # Execute the remote script via stdin.
-  ssh_beryl 'sh -s'
+
+  echo "=== Setting SQM (download/upload) ==="
+  echo "download_kbit=${download_kbit} upload_kbit=${upload_kbit}"
+  echo
+
+  ssh_on_beryl uci set "sqm.${sqm_section}.download=${download_kbit}"
+  ssh_on_beryl uci set "sqm.${sqm_section}.upload=${upload_kbit}"
+  ssh_on_beryl uci commit sqm
+  ssh_on_beryl /etc/init.d/sqm restart
+  echo
+
+  echo "=== Applied SQM (download/upload) ==="
+  local dl_kbit ul_kbit
+  dl_kbit="$(ssh_on_beryl uci -q get "sqm.${sqm_section}.download" 2>/dev/null || echo 0)"
+  ul_kbit="$(ssh_on_beryl uci -q get "sqm.${sqm_section}.upload" 2>/dev/null || echo 0)"
+  echo "download_kbit=${dl_kbit} upload_kbit=${ul_kbit}"
+  echo
+
+  echo "=== Speed Limits ==="
+  summary_down_up "$dl_kbit" "$ul_kbit"
+  echo
+
+  echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
+  ssh_on_beryl tc -s qdisc show dev eth0 2>/dev/null | head -n 3 || true
+  echo "---"
+  ssh_on_beryl tc -s qdisc show dev ifb4eth0 2>/dev/null | head -n 3 || true
 }
 
-dry_run_args() {
-  # Echo args to forward to recursive calls (only when DRY_RUN is enabled).
-  if [[ $DRY_RUN -eq 1 ]]; then
-    echo "--dry-run"
+no_execute_args() {
+  # Echo args to forward to recursive calls (only when NO_EXECUTE is enabled).
+  if [[ $NO_EXECUTE -eq 1 ]]; then
+    echo "--no-execute"
   fi
 }
 
@@ -224,8 +275,8 @@ main() {
   argv=()
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      --dry-run|-n)
-        DRY_RUN=1
+      --no-execute|--dry-run|-n)
+        NO_EXECUTE=1
         shift
         ;;
       --status)
@@ -233,7 +284,7 @@ main() {
         shift
         ;;
       --help|-h)
-        die "usage: beryl_sqm [--dry-run] [day|night|<upload_kbit>|<download_kbit> <upload_kbit>]"
+        die "usage: beryl_sqm [--no-execute] [day|night|status|show|<upload_kbit>|<download_kbit> <upload_kbit>]"
         ;;
       *)
         argv+=("$1")
@@ -250,24 +301,27 @@ main() {
 
   if [[ $# -eq 0 ]]; then
     # No-arg invocation is read-only and should behave like `status`.
-    emit_remote_status | run_or_echo_remote
+    do_status
     return 0
   fi
 
   if [[ $# -eq 1 ]]; then
     case "$1" in
+      show)
+        do_show
+        return 0
+        ;;
       status)
-        emit_remote_status | run_or_echo_remote
+        do_status
         return 0
         ;;
       day)
-        # Note: DRY_RUN is numeric; `${DRY_RUN:+...}` is NOT safe because "0" is non-empty.
-        # We forward --dry-run only when DRY_RUN==1.
-        main $(dry_run_args) 62000 8000
+        # Forward --no-execute only when enabled.
+        main $(no_execute_args) 62000 8000
         return 0
         ;;
       night)
-        main $(dry_run_args) 12000 8000
+        main $(no_execute_args) 12000 8000
         return 0
         ;;
     esac
@@ -278,7 +332,7 @@ main() {
     download_kbit="$(derive_download_from_upload "$upload_kbit")"
     echo "Derived download=${download_kbit} kbit/s from upload=${upload_kbit} kbit/s (BERYL_SQM_DL_PER_UL=${BERYL_SQM_DL_PER_UL})"
     echo
-    main $(dry_run_args) "$download_kbit" "$upload_kbit"
+    main $(no_execute_args) "$download_kbit" "$upload_kbit"
     return 0
   fi
 
@@ -294,11 +348,11 @@ main() {
         sleep 2
     fi
 
-    emit_remote_set "$download_kbit" "$upload_kbit" | run_or_echo_remote
+    do_set "$download_kbit" "$upload_kbit"
     return 0
   fi
 
-  die "usage: beryl_sqm [--dry-run] [day|night|<upload_kbit>|<download_kbit> <upload_kbit>]"
+  die "usage: beryl_sqm [--no-execute] [day|night|status|show|<upload_kbit>|<download_kbit> <upload_kbit>]"
 }
 
 main "$@"
