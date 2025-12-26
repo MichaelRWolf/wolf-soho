@@ -82,6 +82,32 @@ detect_sqm_section() {
   return 1
 }
 
+summary_down_up() {
+  dl="\$1"
+  ul="\$2"
+
+  # Coerce to integers (defensive against empty/garbage).
+  case "\$dl" in ''|*[!0-9]*) dl=0 ;; esac
+  case "\$ul" in ''|*[!0-9]*) ul=0 ;; esac
+
+  dl_pct_of_ul=0
+  ul_pct_of_dl=0
+  if [ "\$ul" -gt 0 ]; then
+    dl_pct_of_ul=\$(expr "\$dl" \\* 100 / "\$ul")
+  fi
+  if [ "\$dl" -gt 0 ]; then
+    ul_pct_of_dl=\$(expr "\$ul" \\* 100 / "\$dl")
+  fi
+
+  download_balance_warning=""
+  if [ "\$dl_pct_of_ul" -lt 100 ]; then
+    download_balance_warning=" ⚠️ WARNING: less than upload"
+  fi
+
+  echo "Download_1: \${dl} (\${dl_pct_of_ul}% of upload\${download_balance_warning})"
+  echo "Upload_1:   \${ul} (\${ul_pct_of_dl}% of download)"
+}
+
 if [ -z "\$SQM_SECTION" ]; then
   SQM_SECTION="\$(detect_sqm_section || true)"
 fi
@@ -127,24 +153,9 @@ echo "=== Settings ==="
 echo "Download: ${dl_kbit} kbit/s"
 echo "Upload:   ${ul_kbit} kbit/s"
 
-dl_pct_of_ul=0
-ul_pct_of_dl=0
-if [ "$ul_kbit" -gt 0 ]; then
-  dl_pct_of_ul=$((dl_kbit * 100 / ul_kbit))
-fi
-if [ "$dl_kbit" -gt 0 ]; then
-  ul_pct_of_dl=$((ul_kbit * 100 / dl_kbit))
-fi
 echo
 echo "=== Summary ==="
-echo "Download: ${dl_kbit} (${dl_pct_of_ul}% of upload)"
-echo "Upload:   ${ul_kbit} (${ul_pct_of_dl}% of download)"
-# Coerce to integers before comparing (defensive against empty/garbage).
-case "$dl_kbit" in ''|*[!0-9]*) dl_kbit=0 ;; esac
-case "$ul_kbit" in ''|*[!0-9]*) ul_kbit=0 ;; esac
-if [ "$dl_kbit" -lt "$ul_kbit" ]; then
-  echo "⚠️ WARNING: download ($dl_kbit) is less than upload ($ul_kbit)" >&2
-fi
+summary_down_up "$dl_kbit" "$ul_kbit"
 echo
 
 echo "=== Shaping (ifb4eth0 / download, if present) ==="
@@ -182,19 +193,7 @@ echo "download_kbit=\${dl_kbit} upload_kbit=\${ul_kbit}"
 echo
 
 echo "=== Summary ==="
-dl_pct_of_ul=0
-ul_pct_of_dl=0
-# Coerce to integers before comparing (defensive against empty/garbage).
-case "\$dl_kbit" in ''|*[!0-9]*) dl_kbit=0 ;; esac
-case "\$ul_kbit" in ''|*[!0-9]*) ul_kbit=0 ;; esac
-if [ "\$ul_kbit" -gt 0 ]; then
-  dl_pct_of_ul=\$((dl_kbit * 100 / ul_kbit))
-fi
-if [ "\$dl_kbit" -gt 0 ]; then
-  ul_pct_of_dl=\$((ul_kbit * 100 / dl_kbit))
-fi
-echo "Download: \${dl_kbit} (\${dl_pct_of_ul}% of upload)"
-echo "Upload: \${ul_kbit} (\${ul_pct_of_dl}% of download)"
+summary_down_up "\$dl_kbit" "\$ul_kbit"
 echo
 
 echo "=== Active qdiscs (eth0 + ifb4eth0 if present) ==="
