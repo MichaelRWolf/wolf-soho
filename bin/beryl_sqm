@@ -96,7 +96,7 @@ summary_down_up() {
 
   printf "Download: %5s (%5s%% of upload)\n" "${dl}" "${dl_pct_of_ul}"
   printf "Upload:   %5s (%5s%% of download)\n"  "${ul}" "${ul_pct_of_dl}"
-  if (( dl_pct_of_ul < 100 )); then
+  if (( dl < ul )) && (( dl > 0 )); then
       printf "⚠️ WARNING: download less than upload\n"
   fi
 }
@@ -127,6 +127,16 @@ detect_sqm_section() {
     fi
   done
   return 1
+}
+
+sqm_section_and_interface() {
+  local sqm_section="$1"
+
+  echo "${sqm_section}"
+
+  # SQM section names are arbitrary; this prints the actual interface binding.
+  # Example: sqm.eth1.interface='eth0'
+  ssh_on_beryl uci show "sqm.${sqm_section}.interface" 2>/dev/null || true
 }
 
 print_no_execute_autodetect_help() {
@@ -167,8 +177,8 @@ do_show() {
     die "could not auto-detect an enabled SQM queue section"
   fi
 
-  echo "=== SQM section ==="
-  echo "$sqm_section"
+  echo "=== SQM section (and interface) ==="
+  sqm_section_and_interface "$sqm_section"
   echo
 
   echo "=== SQM UCI config ==="
@@ -192,8 +202,9 @@ do_status() {
     die "could not auto-detect an enabled SQM queue section"
   fi
 
-  echo "=== SQM section ==="
-  echo "$sqm_section"
+  echo "=== SQM section (and interface) ==="
+  sqm_section_and_interface "$sqm_section"
+
   echo
 
   local dl_kbit ul_kbit
