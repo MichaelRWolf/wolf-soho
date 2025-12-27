@@ -87,16 +87,16 @@ summary_down_up() {
   case "$ul" in ''|*[!0-9]*) ul=0 ;; esac
 
   local dl_pct_of_ul=0 ul_pct_of_dl=0
-  if (( ul > 0 )); then
+  if (( 0 < ul )); then
     dl_pct_of_ul=$(( dl * 100 / ul ))
   fi
-  if (( dl > 0 )); then
+  if (( 0 < dl )); then
     ul_pct_of_dl=$(( ul * 100 / dl ))
   fi
 
   printf "Download: %5s (%5s%% of upload)\n" "${dl}" "${dl_pct_of_ul}"
   printf "Upload:   %5s (%5s%% of download)\n"  "${ul}" "${ul_pct_of_dl}"
-  if (( dl < ul )) && (( dl > 0 )); then
+  if (( dl < ul )) && (( 0 < dl )); then
       printf "⚠️ WARNING: download less than upload\n"
   fi
 }
