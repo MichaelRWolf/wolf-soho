@@ -353,3 +353,178 @@ Now what:
 - During a captured gap, collect Beryl-side Wi‑Fi telemetry to distinguish “wolf-air client” vs “AP/airtime”:
   - `iwinfo ra0 assoclist`
   - `logread -f | egrep -i 'hostapd|wlan|wifi|deauth|disassoc|disconnect|sta'`
+
+### 16:53–16:56 — Beryl kernel logs show DFS/CAC “Enable MAC TX” events during stalls
+
+What:
+
+- Symptom: Beryl-side “watch loops” (run via `ssh root@beryl ...` from michael-pro) pause for ~4000–5000ms, then resume with normal output; “bad output” is hard to capture because the whole loop stops during the stall.
+- During each stall/resume window, `logread -f` emits a new block of kernel warnings (pasted):
+
+```text
+Sat Dec 27 16:53:40 2025 kern.warn kernel: [ 5851.654123] [DfsCacNormalStart] Normal start. Enable MAC TX
+Sat Dec 27 16:53:40 2025 kern.warn kernel: [ 5851.679420] Start Seq = 00000a0d
+Sat Dec 27 16:53:40 2025 kern.warn kernel: [ 5851.686368] Start Seq = 00000061
+Sat Dec 27 16:53:40 2025 kern.warn kernel: [ 5851.791205] Start Seq = 00000933
+Sat Dec 27 16:53:41 2025 kern.warn kernel: [ 5852.054638] Start Seq = 00000e60
+Sat Dec 27 16:54:25 2025 kern.warn kernel: [ 5896.860539] [DfsCacNormalStart] Normal start. Enable MAC TX
+Sat Dec 27 16:54:26 2025 kern.warn kernel: [ 5897.115897] Start Seq = 00000012
+Sat Dec 27 16:54:26 2025 kern.warn kernel: [ 5897.123022] Start Seq = 00000f28
+Sat Dec 27 16:54:26 2025 kern.warn kernel: [ 5897.642381] Start Seq = 00000371
+Sat Dec 27 16:54:26 2025 kern.warn kernel: [ 5897.697078] Start Seq = 00000adf
+Sat Dec 27 16:54:26 2025 kern.warn kernel: [ 5897.704215] Start Seq = 00000bd3
+Sat Dec 27 16:54:29 2025 kern.warn kernel: [ 5900.787976] Start Seq = 00000bf1
+Sat Dec 27 16:55:10 2025 kern.warn kernel: [ 5942.028442] [DfsCacNormalStart] Normal start. Enable MAC TX
+Sat Dec 27 16:55:13 2025 kern.warn kernel: [ 5944.217927] Start Seq = 00000931
+Sat Dec 27 16:55:55 2025 kern.warn kernel: [ 5986.581797] [DfsCacNormalStart] Normal start. Enable MAC TX
+Sat Dec 27 16:55:56 2025 kern.warn kernel: [ 5987.217233] Start Seq = 000001eb
+Sat Dec 27 16:55:56 2025 kern.warn kernel: [ 5987.223968] Start Seq = 00000763
+Sat Dec 27 16:55:56 2025 kern.warn kernel: [ 5987.770443] Start Seq = 0000091b
+Sat Dec 27 16:56:13 2025 kern.warn kernel: [ 6004.751374] Start Seq = 000007b7
+Sat Dec 27 16:56:13 2025 kern.warn kernel: [ 6004.758379] Start Seq = 00000ff2
+```
+
+So what:
+
+- These look like the Wi‑Fi driver is repeatedly transitioning through a DFS/CAC-related state (or radio restart) and re-enabling TX.
+- That would plausibly cause brief, periodic “everyone on Wi‑Fi pauses for a few seconds” events while Ethernet clients remain fine.
+
+Now what:
+
+- Confirm whether these log bursts correlate 1:1 with the observed ping gaps on wolf-air (and/or NAS-over-Wi‑Fi).
+- Identify the active AP interface and channel at the moment of the events (and whether the AP is on a DFS channel).
+
+### 16:57:37 — “All good” snapshot: `iwinfo ra0 assoclist`
+
+What:
+
+```text
+Sat Dec 27 16:57:37 EST 2025
+D6:A2:15:0B:FF:4E  -71 dBm / -95 dBm (SNR 24)  5475000 ms ago
+ RX: 450.0 MBit/s                               16098 Pkts.
+ TX: 450.0 MBit/s                               36755 Pkts.
+ expected throughput: unknown
+
+10:94:BB:E8:88:D4  -52 dBm / -95 dBm (SNR 43)  1209000 ms ago
+ RX: 450.0 MBit/s                              401105 Pkts.
+ TX: 450.0 MBit/s                              869055 Pkts.
+ expected throughput: unknown
+
+4A:6B:0C:7A:A4:53  -60 dBm / -95 dBm (SNR 35)  5452000 ms ago
+ RX: 450.0 MBit/s                               11587 Pkts.
+ TX: 450.0 MBit/s                               16037 Pkts.
+ expected throughput: unknown
+
+CE:F8:B8:B9:0C:C8  -56 dBm / -95 dBm (SNR 39)  5447000 ms ago
+ RX: 450.0 MBit/s                              745439 Pkts.
+ TX: 450.0 MBit/s                             3174936 Pkts.
+ expected throughput: unknown
+```
+
+So what:
+
+- Next step is to map these MACs to actual hostnames/IPs (`/tmp/dhcp.leases`, `ip neigh`) so we can watch wolf-air’s specific station entry during a stall.
+
+### ~17:0x — wolf-air NSS/MCS/Tx rate fluctuate; NAS turned off
+
+What:
+
+- Observation source: macOS Wi‑Fi menu (Option-click) on wolf-air.
+- NSS flips between 1 and 2:
+  - When NSS=1: MCS ~4–5 and Tx rate ~50–450 Mbps.
+  - When NSS=2: MCS ~9 and Tx rate ~700+ Mbps.
+- This 1↔2 behavior does not appear to correlate with outages or ping spikes.
+- NAS was still on during earlier tests; NAS is now turned off to remove it as a confounder.
+
+So what:
+
+- NSS/MCS/Tx rate changes can be normal rate adaptation; the lack of correlation suggests it is not the primary driver of the multi-second stalls.
+- Turning off the NAS is a good control to rule out local LAN traffic causing airtime starvation.
+
+Now what:
+
+- Re-run the “wolf-air pinging 192.168.8.1 + 1.1.1.1” test with NAS off and note whether gaps still occur.
+
+### 17:49 — Change: force 5 GHz AP to channel 36 @ 40 MHz (avoid DFS/CAC churn)
+
+What:
+
+- In LuCI (`/cgi-bin/luci/admin/network/wireless`), changed the 5 GHz AP settings:
+  - Channel width: 40 MHz
+  - Channel: 36 (from 44)
+- Motivation: repeated kernel warnings `[DfsCacNormalStart] Normal start. Enable MAC TX` were occurring roughly every ~45–50 seconds and appeared correlated with multi-second Wi‑Fi stalls.
+
+So what:
+
+- This is a causality test: if DFS/CAC/radio state churn is driving the 4–5s gaps, forcing a stable non-DFS channel/width should reduce or eliminate the stalls (and the log spam).
+
+Now what:
+
+- Validate:
+  - On wolf-air: continue pinging `192.168.8.1` and `1.1.1.1` and note whether multi-second gaps persist.
+  - On Beryl: confirm channel and check for DFS/CAC log lines:
+    - `iwinfo ra0 info`
+    - `logread | tail -n 200 | egrep -i 'DfsCac|dfs|cac|radar|Enable MAC TX'`
+
+### 17:49–17:50 — Post-change: DFS/CAC log spam persists (~45s cadence) and gaps still occur
+
+What:
+
+- After forcing channel 36 @ 40 MHz, Beryl continues emitting `[DfsCacNormalStart] Normal start. Enable MAC TX` roughly every ~45 seconds.
+- Observed gap (user note): seq 0390–0405.
+- Sample logs after the 17:49 change (pasted):
+
+```text
+Sat Dec 27 17:49:19 2025 kern.warn kernel: [ 9190.286535] [DfsCacNormalStart] Normal start. Enable MAC TX
+Sat Dec 27 17:49:19 2025 kern.warn kernel: [ 9190.482328] Start Seq = 0000004b
+Sat Dec 27 17:49:20 2025 kern.warn kernel: [ 9191.433789] wifi_sys_open(), wdev idx = 13
+Sat Dec 27 17:49:20 2025 kern.warn kernel: [ 9191.475419] Caller: wlan_operate_init+0xf4/0x108 [mt_wifi]
+Sat Dec 27 17:49:20 2025 kern.warn kernel: [ 9191.540562] Start Seq = 00000000
+Sat Dec 27 17:49:22 2025 kern.warn kernel: [ 9193.380279] Start Seq = 00000576
+Sat Dec 27 17:50:04 2025 kern.warn kernel: [ 9235.540197] [DfsCacNormalStart] Normal start. Enable MAC TX
+Sat Dec 27 17:50:04 2025 kern.warn kernel: [ 9235.560889] Start Seq = 000000c7
+Sat Dec 27 17:50:06 2025 kern.warn kernel: [ 9237.043889] Start Seq = 000004a5
+Sat Dec 27 17:50:06 2025 kern.warn kernel: [ 9237.050696] Start Seq = 0000005d
+Sat Dec 27 17:50:22 2025 kern.warn kernel: [ 9253.061820] Start Seq = 00000304
+Sat Dec 27 17:50:44 2025 user.notice mtk-wifi: new_station ce:f8:b8:b9:0c:c8 ra0
+Sat Dec 27 17:50:44 2025 kern.warn kernel: [ 9275.324998] Start Seq = 00000000
+Sat Dec 27 17:50:44 2025 kern.warn kernel: [ 9275.608606] Start Seq = 00000002
+Sat Dec 27 17:50:44 2025 kern.warn kernel: [ 9275.820449] Start Seq = 00000000
+Sat Dec 27 17:50:49 2025 kern.warn kernel: [ 9280.708185] [DfsCacNormalStart] Normal start. Enable MAC TX
+Sat Dec 27 17:50:49 2025 kern.warn kernel: [ 9280.723291] Start Seq = 00000146
+Sat Dec 27 17:50:50 2025 kern.warn kernel: [ 9281.066073] Start Seq = 00000876
+Sat Dec 27 17:50:50 2025 kern.warn kernel: [ 9281.074253] Start Seq = 00000418
+Sat Dec 27 17:50:52 2025 kern.warn kernel: [ 9283.725772] Start Seq = 000000c9
+Sat Dec 27 17:50:53 2025 kern.warn kernel: [ 9284.561304] Start Seq = 000001c4
+Sat Dec 27 17:50:53 2025 kern.warn kernel: [ 9284.568721] Start Seq = 00000047
+```
+
+So what:
+
+- Channel 36 is normally non-DFS, so repeated “DfsCacNormalStart” at a steady cadence suggests either:
+  - the driver is using this message for a broader “radio restarted / TX re-enabled” event (not strictly DFS radar handling), or
+  - the AP is not actually staying on the intended channel/width, or
+  - the device is repeatedly reinitializing the Wi‑Fi subsystem (`wifi_sys_open` / `wlan_operate_init`).
+
+Now what:
+
+- Verify the radio is truly on channel 36 @ 40 MHz (`iwinfo ra0 info` should show the channel).
+- If the spam persists on 36, test another non-DFS channel family (e.g. 149 @ 40 MHz) to see if behavior changes.
+
+### ~18:0x — Channel experiments: CAC/DFS spam persists on 36; 149 unusable; reverting to 44
+
+What:
+
+- Observation: `DfsCacNormalStart` messages continue on channel 36 (reported as “35/36”).
+- Attempted channel 149:
+  - wolf-air was unable to connect (prompted for password; did not connect successfully).
+- Next step: revert to channel 44 (known-working association) to keep testing while investigating the periodic radio/TX reset behavior.
+
+So what:
+
+- Persistence of `DfsCacNormalStart` on a non-DFS channel strengthens the hypothesis that this message is effectively “radio TX re-enabled / Wi‑Fi subsystem restart,” not true DFS radar handling.
+- Inability to use 149 suggests a regulatory/driver limitation or a configuration mismatch (but not the primary cause of the periodic resets).
+
+Now what:
+
+- On channel 44, continue correlating ping gaps with the `DfsCacNormalStart` log bursts and look for any accompanying netifd/hostapd/mtk-wifi reset messages.
