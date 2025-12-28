@@ -59,7 +59,7 @@ time_list_sec=()
 for i in {1..10}; do
     req_time_sec=$(curl -w "%{time_total}" -s -o /dev/null "$TEST_URL")
     time_list_sec+=("${req_time_sec}")
-    echo "  Request $i: ${req_time_sec}s"
+    printf "  Request %2s: %ss\n" "$i" "${req_time_sec}"
     sleep 0.5
 done
 
@@ -77,8 +77,9 @@ echo "Responsiveness (RPM): ${responsiveness_rpm}"
 echo ""
 
 echo "=== Summary ==="
-echo "Download: ${download_Mb_per_sec} Mb/sec"
-echo "Upload: ${upload_Mb_per_sec} Mb/sec"
-echo "Responsiveness: ${responsiveness_rpm} RPM"
+printf "Download:        %6s Mb/sec\n" "${download_Mb_per_sec}"
+printf "Upload:          %6s Mb/sec\n" "${upload_Mb_per_sec}"
+printf "Responsiveness:  %-6s RPM\n"    "${responsiveness_rpm}"
+
 echo ""
 echo "=== Test Complete ==="
