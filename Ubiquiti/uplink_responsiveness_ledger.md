@@ -65,6 +65,7 @@ Columns:
 | 2025-12-22 21:?? | michael-pro | Ethernet(en13) | 192.168.1.1   | On(cake,3000/8000,eth0) |      2.212 |            |    80.736 | 4043ms @ 14 RPM (dl_only)                     |             |               |               |             |               |               |             |               |               | Download shaping 3000 reduced throughput but did not improve dl responsiveness |
 | 2025-12-22 21:?? | michael-pro | Ethernet(en13) | 192.168.1.1   | On(cake,2000/8000,eth0) |      1.398 |            |    98.244 | 5519ms @ 10 RPM (dl_only)                     |             |               |               |             |               |               |             |               |               | Download shaping 2000 worsened dl throughput and reported dl responsiveness |
 | 2025-12-22 22:57 | michael-pro | Ethernet(en13) | 192.168.1.1   | (unknown) |      4.826 |            |    71.873 | 1950ms @ 30.8 RPM (dl_only; JSON -c -u)       |         0.0 |          3.558 |         36.738 |         0.0 |          6.318 |         23.584 |         0.0 |         27.210 |         86.096 | Agent-run: baseline pings clean; under dl load pings stayed low/no loss despite low dl RPM |
+| 2025-12-27 17:49 | (various)   | WiFi(5G,ch36/40) + Ethernet | 192.168.1.1 | On(cake,6000/6400,eth0) |            |            |           |                                           |             |               |               |             |               |               |             |               |               | Wi‑Fi outages every ~45s; DFS/CAC logs on non‑DFS channels; factory reset restored stability; see `GL-iNet/beryl_is_fucked_do_factory_reset_2025-12-27.md` and `GL-iNet/beryl-cheat-sheet.md` |
 
 ### Snapshot: observations (as of 2025-12-22)
 
@@ -89,6 +90,19 @@ Columns:
 - 2025-12-22 (night) — Downlink cratered to **~4–5 Mbps** and stayed **Low (~24–31 RPM)** across **Wi‑Fi and Ethernet**, while uplink could still be **Medium/High** with SQM upload shaping.
 - 2025-12-22 — Lowering download shaping to **3000 → 2000 kbit/s** reduced measured downlink capacity (**2.2 → 1.4 Mbps**) without improving the downlink RPM metric.
 - 2025-12-22 22:57 — Under a downlink-only test on Ethernet, **concurrent pings remained clean** (0% loss; WAN RTT stayed in the tens of ms) despite low `networkQuality -u` RPM → this points more toward **true upstream downlink impairment / low capacity** (or the way `networkQuality` scores downlink on very low Mbps) than classic “download bufferbloat on our LAN.”
+
+### Snapshot: observations (as of 2025-12-27)
+
+- 2025-12-27 — New failure mode discovered: Beryl Wi‑Fi entered a periodic (~45s) outage cycle:
+  - clients experience multi-second gaps/timeouts to both `192.168.8.1` and `1.1.1.1`
+  - Ethernet clients remain fine during the same windows
+  - kernel/firmware logs repeatedly include `[DfsCacNormalStart] Normal start. Enable MAC TX` and “beacon lost / AP disabled” symptoms (see referenced doc)
+  - changing channel (36/44) and width (80 → 40 MHz) did not stop the cycle; channel 149 was unusable to associate
+- 2025-12-27 — Factory reset restored “appliance-like” behavior immediately (stable Wi‑Fi and normal throughput again).
+  - Best-fit explanation: vendor Wi‑Fi firmware/driver stack was in a crash/recovery loop; factory reset re-established a clean driver/firmware handshake and default state.
+  - References:
+    - `GL-iNet/beryl_is_fucked_do_factory_reset_2025-12-27.md` (reasoning + log evidence)
+    - `GL-iNet/beryl-cheat-sheet.md` (pre-reset config capture + post-reset reminders)
 
 ## Raw outputs (optional, paste blocks)
 
