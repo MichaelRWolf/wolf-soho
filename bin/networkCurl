@@ -77,9 +77,10 @@ echo "Responsiveness (RPM): ${responsiveness_rpm}"
 echo ""
 
 echo "=== Summary ==="
-printf "Download:        %6s Mb/sec\n" "${download_Mb_per_sec}"
-printf "Upload:          %6s Mb/sec\n" "${upload_Mb_per_sec}"
-printf "Responsiveness:  %-6s RPM\n"    "${responsiveness_rpm}"
+download_over_upload_percent=$(echo "scale=0; (${download_Mb_per_sec} * 100 / ${upload_Mb_per_sec})" | bc)
+printf "Download (Mb/s): %4s%%  %6s\n"  "${download_over_upload_percent}" "${download_Mb_per_sec}"  
+printf "Upload (Mb/s):          %6s\n"         "${upload_Mb_per_sec}"
+printf "Responsiveness (RPM):   %6s\n"         "${responsiveness_rpm}"
 
 echo ""
 echo "=== Test Complete ==="
