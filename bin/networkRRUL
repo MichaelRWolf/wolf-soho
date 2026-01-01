@@ -115,16 +115,23 @@ PY
 extract_rtt_ms() {
   # macOS ships BSD awk; keep parsing portable by using Python.
   python3 - <<'PY'
-import re,sys
-pat=re.compile(r"time=([0-9.]+) *ms")
+import re, sys
+
+# Match both 'time=12.3 ms' and (rare) 'time<1 ms'
+pat = re.compile(r"time[=<]([0-9.]+)\s*ms")
+
 for ln in sys.stdin:
-  m=pat.search(ln)
-  if m:
-    sys.stdout.write(m.group(1)+"\n")
+    m = pat.search(ln)
+    if m:
+        sys.stdout.write(m.group(1) + "\n")
+    elif "time<" in ln and "ms" in ln:
+        # Treat sub-1ms as ~1ms so it participates in stats
+        sys.stdout.write("0.99\n")
 PY
 }
 
 summarize_rtts() {
+
 
   # stdin: RTTs in ms, one per line
   # output: count avg p50 p95 max
@@ -174,7 +181,8 @@ PING_LOG="$(mktemp -t rrul_ping.XXXXXX)"
 IPERF_LOG="$(mktemp -t rrul_iperf.XXXXXX)"
 
 cleanup() {
-  rm -f "$BASELINE_FILE" "$LOAD_FILE" "$PING_LOG" "$IPERF_LOG" 2>/dev/null || true
+  # Under set -u, these variables may not be set if we fail early.
+  rm -f "${BASELINE_FILE-}" "${LOAD_FILE-}" "${PING_LOG-}" "${IPERF_LOG-}" 2>/dev/null || true
 }
 trap cleanup EXIT
 
