@@ -1,0 +1,329 @@
+#!/usr/bin/env bash
+# networkRRUL.sh
+#
+# Crude “RRUL-like” test for your own network using *your* reflection point.
+# - Runs a short baseline ping
+# - Saturates link with iperf3 (upload by default)
+# - Keeps pinging during load
+# - Computes latency inflation (“bufferbloat vibe”) and prints GREEN/YELLOW/RED
+#
+# Requirements:
+#   - iperf3 installed on michael-pro and on the reflection host (beryl or wolf-air)
+#   - iperf3 server running on the reflection host:
+#       iperf3 -s
+#   - macOS ping available (built-in)
+#
+# Typical usage:
+#   ./networkRRUL.sh beryl
+#   ./networkRRUL.sh wolf-air --download-only
+#   ./networkRRUL.sh 192.168.8.1 --interval 0.2 --count 5 --timeout 1000
+#
+# Notes:
+#   - This is intentionally “shape-first”: we use simple deltas and stoplight output.
+#   - Default run length is 20s max.
+
+set -euo pipefail
+
+# ---------- defaults ----------
+DURATION=20
+MODE="upload"          # upload|download|bidir
+PING_INTERVAL="0.2"     # seconds
+PING_COUNT=5            # baseline count
+PING_TIMEOUT_MS=1000    # per-ping timeout in ms (translated)
+PING_HOST="1.1.1.1"     # what we ping to measure responsiveness
+IPERF_PORT=5201
+IPERF_PARALLEL=2
+BASELINE_COUNT=$PING_COUNT
+
+# thresholds (latency inflation in ms)
+GREEN_MS=20
+YELLOW_MS=80
+LOSS_YELLOW_PCT=1
+LOSS_RED_PCT=5
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  networkRRUL.sh <reflection-host> [options]
+
+Reflection host:
+  A host that runs iperf3 -s (e.g., beryl, wolf-air, or an IP).
+
+Options:
+  --upload-only            Upload test (default)
+  --download-only          Download test (iperf3 -R)
+  --bi-directional         Bidirectional test (iperf3 --bidir if supported; else parallel up+down)
+
+  --duration SECONDS       Test duration (max 20; default 20)
+  --interval SECONDS       Ping interval in seconds (default 0.2)
+  --count N                Baseline ping count (default 5)
+  --timeout MS             Ping timeout in milliseconds (default 1000)
+  --ping-host HOST         Host to ping for responsiveness (default 1.1.1.1)
+
+  --iperf-port PORT         iperf3 port (default 5201)
+  --iperf-parallel N        iperf3 parallel streams (default 2)
+
+Examples:
+  ./networkRRUL.sh beryl
+  ./networkRRUL.sh wolf-air --download-only
+  ./networkRRUL.sh 192.168.8.1 --interval 0.1 --count 10 --timeout 800
+USAGE
+}
+
+# ---------- args ----------
+if [[ $# -lt 1 ]]; then
+  usage >&2
+  exit 2
+fi
+
+REFLECTION_HOST="$1"; shift
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --upload-only) MODE="upload"; shift ;;
+    --download-only) MODE="download"; shift ;;
+    --bi-directional|--bidirectional|--bidir) MODE="bidir"; shift ;;
+
+    --duration) DURATION="$2"; shift 2 ;;
+    --interval) PING_INTERVAL="$2"; shift 2 ;;
+    --count) PING_COUNT="$2"; BASELINE_COUNT="$2"; shift 2 ;;
+    --timeout) PING_TIMEOUT_MS="$2"; shift 2 ;;
+    --ping-host) PING_HOST="$2"; shift 2 ;;
+
+    --iperf-port) IPERF_PORT="$2"; shift 2 ;;
+    --iperf-parallel) IPERF_PARALLEL="$2"; shift 2 ;;
+
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
+  esac
+done
+
+# cap duration at 20s (per your requirement)
+if [[ "$DURATION" -gt 20 ]]; then
+  DURATION=20
+fi
+
+# ---------- helpers ----------
+now_ms() { python3 - <<'PY'
+import time
+print(int(time.time()*1000))
+PY
+}
+
+# Parse macOS ping output lines with time=XX ms
+# Writes one RTT (ms) per line to stdout
+extract_rtt_ms() {
+  # macOS ships BSD awk; keep parsing portable by using Python.
+  python3 - <<'PY'
+import re,sys
+pat=re.compile(r"time=([0-9.]+) *ms")
+for ln in sys.stdin:
+  m=pat.search(ln)
+  if m:
+    sys.stdout.write(m.group(1)+"\n")
+PY
+}
+
+summarize_rtts() {
+
+  # stdin: RTTs in ms, one per line
+  # output: count avg p50 p95 max
+  python3 - <<'PY'
+import sys, statistics
+vals=[float(x.strip()) for x in sys.stdin if x.strip()]
+if not vals:
+  print("0 NaN NaN NaN NaN")
+  sys.exit(0)
+vals_sorted=sorted(vals)
+count=len(vals_sorted)
+avg=sum(vals_sorted)/count
+p50=vals_sorted[int(0.50*(count-1))]
+p95=vals_sorted[int(0.95*(count-1))]
+mx=vals_sorted[-1]
+print(f"{count} {avg:.2f} {p50:.2f} {p95:.2f} {mx:.2f}")
+PY
+}
+
+colorize() {
+  local color="$1"; shift
+  case "$color" in
+    green) printf "\033[32m%s\033[0m" "$*" ;;
+    yellow) printf "\033[33m%s\033[0m" "$*" ;;
+    red) printf "\033[31m%s\033[0m" "$*" ;;
+    *) printf "%s" "$*" ;;
+  esac
+}
+
+# ---------- preflight ----------
+if ! command -v iperf3 >/dev/null 2>&1; then
+  echo "ERROR: iperf3 not found on this machine." >&2
+  exit 1
+fi
+
+# check server reachability quickly
+if ! nc -vz "$REFLECTION_HOST" "$IPERF_PORT" >/dev/null 2>&1; then
+  echo "ERROR: Cannot reach iperf3 server at ${REFLECTION_HOST}:${IPERF_PORT}." >&2
+  echo "Start it on the reflection host: iperf3 -s" >&2
+  exit 1
+fi
+
+# ---------- run baseline ping ----------
+BASELINE_FILE="$(mktemp -t rrul_baseline.XXXXXX)"
+LOAD_FILE="$(mktemp -t rrul_load.XXXXXX)"
+PING_LOG="$(mktemp -t rrul_ping.XXXXXX)"
+IPERF_LOG="$(mktemp -t rrul_iperf.XXXXXX)"
+
+cleanup() {
+  rm -f "$BASELINE_FILE" "$LOAD_FILE" "$PING_LOG" "$IPERF_LOG" 2>/dev/null || true
+}
+trap cleanup EXIT
+
+# macOS ping timeout: -W is in ms on macOS (per man ping); if it behaves differently on yours,
+# the script still works, it just waits a bit longer.
+PING_CMD=(ping -n -i "$PING_INTERVAL" -W "$PING_TIMEOUT_MS" "$PING_HOST")
+
+echo "Reflection: $REFLECTION_HOST:$IPERF_PORT | Mode: $MODE | Duration: ${DURATION}s"
+echo "Ping target: $PING_HOST | interval: $PING_INTERVAL | baseline count: $BASELINE_COUNT | timeout(ms): $PING_TIMEOUT_MS"
+
+echo "[1/3] Baseline ping..."
+# Take baseline by running ping and stopping after BASELINE_COUNT replies.
+# We do this by reading RTTs and counting.
+"${PING_CMD[@]}" 2>/dev/null | tee "$PING_LOG" | extract_rtt_ms | awk -v n="$BASELINE_COUNT" 'NR<=n{print} NR==n{exit}' > "$BASELINE_FILE" || true
+
+# start continuous ping for load phase
+"${PING_CMD[@]}" 2>/dev/null | tee -a "$PING_LOG" | extract_rtt_ms > "$LOAD_FILE" &
+PING_PID=$!
+
+# ---------- run load ----------
+echo "[2/3] Applying load (${DURATION}s)..."
+
+iperf_supports_bidir() {
+  iperf3 --help 2>&1 | grep -q -- "--bidir"
+}
+
+run_iperf_upload() {
+  iperf3 -c "$REFLECTION_HOST" -p "$IPERF_PORT" -t "$DURATION" -P "$IPERF_PARALLEL" --forceflush >"$IPERF_LOG" 2>&1 || true
+}
+
+run_iperf_download() {
+  iperf3 -c "$REFLECTION_HOST" -p "$IPERF_PORT" -t "$DURATION" -P "$IPERF_PARALLEL" -R --forceflush >"$IPERF_LOG" 2>&1 || true
+}
+
+run_iperf_bidir() {
+  if iperf_supports_bidir; then
+    iperf3 -c "$REFLECTION_HOST" -p "$IPERF_PORT" -t "$DURATION" -P "$IPERF_PARALLEL" --bidir --forceflush >"$IPERF_LOG" 2>&1 || true
+  else
+    # fallback: run upload+download concurrently
+    iperf3 -c "$REFLECTION_HOST" -p "$IPERF_PORT" -t "$DURATION" -P "$IPERF_PARALLEL" --forceflush >"$IPERF_LOG" 2>&1 &
+    local up_pid=$!
+    iperf3 -c "$REFLECTION_HOST" -p "$IPERF_PORT" -t "$DURATION" -P "$IPERF_PARALLEL" -R --forceflush >>"$IPERF_LOG" 2>&1 &
+    local down_pid=$!
+    wait "$up_pid" "$down_pid" || true
+  fi
+}
+
+case "$MODE" in
+  upload) run_iperf_upload ;;
+  download) run_iperf_download ;;
+  bidir) run_iperf_bidir ;;
+  *) echo "ERROR: unknown MODE=$MODE" >&2; exit 2 ;;
+esac
+
+# stop ping
+kill "$PING_PID" 2>/dev/null || true
+wait "$PING_PID" 2>/dev/null || true
+
+echo "[3/3] Scoring..."
+
+# Baseline stats
+read -r b_count b_avg b_p50 b_p95 b_max < <(summarize_rtts < "$BASELINE_FILE")
+
+# Load stats (use only the last DURATION seconds worth of ping samples by truncating to a window)
+# We approximate by taking the last N lines, where N ~ DURATION / interval.
+WINDOW_N=$(python3 - <<PY
+import math
+interval=float("$PING_INTERVAL")
+dur=int("$DURATION")
+print(max(1, int(math.ceil(dur/interval))))
+PY
+)
+read -r l_count l_avg l_p50 l_p95 l_max < <(tail -n "$WINDOW_N" "$LOAD_FILE" | summarize_rtts)
+
+# Packet loss estimate from ping log: count 'timeout' lines vs replies.
+loss_pct=$(python3 - <<PY
+import re
+log=open("$PING_LOG","r",errors="ignore").read().splitlines()
+replies=sum(1 for ln in log if "time=" in ln)
+timeouts=sum(1 for ln in log if "Request timeout" in ln or "100.0% packet loss" in ln)
+# best-effort: macOS ping does not always print a clean per-packet timeout line in all modes
+# so this is conservative.
+total=max(1, replies+timeouts)
+print(f"{(timeouts/total)*100:.2f}")
+PY
+)
+
+# Latency inflation: compare p50 under load vs baseline p50
+inflation=$(python3 - <<PY
+b=float("$b_p50")
+l=float("$l_p50")
+if any(map(lambda x: x!=x, [b,l])):
+  print("nan")
+else:
+  print(f"{(l-b):.2f}")
+PY
+)
+
+# Decide stoplight (simple, deliberately)
+stoplight=$(python3 - <<PY
+import math
+try:
+  b=float("$b_p50")
+  l=float("$l_p50")
+  inflation=l-b
+except Exception:
+  inflation=float('nan')
+try:
+  loss=float("$loss_pct")
+except Exception:
+  loss=0.0
+GREEN=float("$GREEN_MS")
+YELLOW=float("$YELLOW_MS")
+LOSS_Y=float("$LOSS_YELLOW_PCT")
+LOSS_R=float("$LOSS_RED_PCT")
+if math.isnan(inflation):
+  print('red')
+elif inflation > YELLOW or loss >= LOSS_R:
+  print('red')
+elif inflation > GREEN or loss >= LOSS_Y:
+  print('yellow')
+else:
+  print('green')
+PY
+)
+
+case "$stoplight" in
+  green) label=$(colorize green "GREEN") ;;
+  yellow) label=$(colorize yellow "YELLOW") ;;
+  red) label=$(colorize red "RED") ;;
+  *) label="$stoplight" ;;
+esac
+
+cat <<EOF
+
+Result: $label
+
+Baseline ping p50: ${b_p50} ms (avg ${b_avg} ms, p95 ${b_p95} ms)
+Load ping     p50: ${l_p50} ms (avg ${l_avg} ms, p95 ${l_p95} ms)
+Inflation (p50):   ${inflation} ms
+Loss (est):        ${loss_pct} %
+
+Iperf log: $IPERF_LOG
+Ping log:  $PING_LOG
+EOF
+
+# exit code mirrors stoplight (handy for scripts)
+case "$stoplight" in
+  green) exit 0 ;;
+  yellow) exit 1 ;;
+  red) exit 2 ;;
+esac
