@@ -1,3 +1,5 @@
+# Confluence deletes 10 years data after 42 days of inactivity!
+
 Confluence deletes 10 years data after 42 days of inactivity!
 
 Atlassian seems to have redefined what "Free" means.
