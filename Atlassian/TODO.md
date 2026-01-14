@@ -25,7 +25,6 @@ calm, factual, non-defensive
 Action-Offer commenters
 contact notes / next steps
 
-
 ## Communication
 
 -[ ] Public Follow-Up Post

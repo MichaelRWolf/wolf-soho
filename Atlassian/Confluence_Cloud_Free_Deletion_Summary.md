@@ -1,4 +1,5 @@
 # Confluence Cloud Free Site Deletion  
+
 ## What Happened and What Support Confirmed
 
 This document records a real experience involving the suspension and permanent deletion of a long-standing **Confluence Cloud Free** site in late 2025.
@@ -21,12 +22,14 @@ Everything below is based on written support responses, case records, and observ
 - Subscription was cancelled 42 days after most recent login.
 - Data was deleted after a 14-day soft-deletion window.
 - Customer was unable to login 56 days after most recent login.
-- 
+-
+
 logged in 56(?) days after most recent login to find subscription cancelled.
 
 after 42 days of activity.
+
 - Data was deleted after
-- Data was deleted after a 14-day soft-deletion window, but before 
+- Data was deleted after a 14-day soft-deletion window, but before
 - Customer login 56(?) days after most recent login was beyond the 14-day soft-deletion window.
 - Prior written guidance stated a **120-day inactivity window**; support later confirmed the window had been reduced to **~40 days**.
 - This change was not discoverable in public documentation at the time of deletion.
@@ -50,14 +53,17 @@ This document is shared so others can take preventative action sooner.
 ## Timeline of Events
 
 ### September 29, 2025
+
 An Atlassian Customer Advocate, responding to a Billing & Licensing support request, stated in writing:
 
 > “Confluence on a Free plan will be deactivated after 120 days of inactivity. To prevent your site from being deactivated, just log in and view any Confluence page — that’ll count as activity and reset the 120-day clock.”
 
 ### September 30, 2025
+
 I used my Confluence site extensively. Atlassian later confirmed that this activity occurred.
 
 ### November 30, 2025
+
 I was informed by a Billing & Licensing team member that:
 
 > “Your Confluence subscription… was cancelled on November 13, 2025, due to inactivity.”
@@ -65,9 +71,11 @@ I was informed by a Billing & Licensing team member that:
 This meant that **just 44 days after confirmed use**, the site had been deactivated — and, following a 14-day soft-deletion window, permanently deleted due to “inactivity.”
 
 ### December 2025
+
 For just over a month, I engaged in a sustained effort to understand what had happened and whether recovery was possible, involving multiple Atlassian teams.
 
 ### December 30, 2025
+
 Atlassian Cloud Support informed me:
 
 > “The inactivity period was updated from 120 days to 40 days. Unfortunately, there are no options to recover the data.”
@@ -75,6 +83,7 @@ Atlassian Cloud Support informed me:
 At no point prior to deletion was a **40-day inactivity threshold** clearly communicated in a way that allowed me to make an informed decision about safeguarding my data.
 
 ### January 13, 2026
+
 As of this date, I was unable to locate any publicly accessible Atlassian documentation that describes a 40-day inactivity threshold for Confluence Free plan sites. Public documentation references only deactivation after a general period of inactivity, without specifying a numeric value.
 
 ---
@@ -93,7 +102,8 @@ Departments interfaced with:
 - Deactivation / Inactivity Service (internal)
 - Internal deactivation-service review (via Cloud Support)
 
-**Case / ticket numbers**
+Case / ticket numbers
+
 - DATA-49352 (DSAR)
 - DATA-49608 (follow-up, cancelled)
 - JST-1229029 (technical review)
@@ -124,6 +134,7 @@ Could I have caught the emails sooner? Yes.
 Could I have been more vigilant? Also yes.
 
 But:
+
 - My expectations were shaped by years of prior experience.
 - Email overload and phishing have changed how people triage attention.
 - Nothing in the messages unmistakably signaled: **“This is different — act now or lose everything.”**
@@ -178,11 +189,13 @@ The issue was not individual conduct, but **rules that changed without a clear r
 
 This document reflects one user’s documented experience with Confluence Cloud Free, based on written support responses and case records from December 2025.
 
-### This document **is**:
+### This document **is**
+
 - A factual record of observed behavior and support-confirmed outcomes
 - A practical warning for other users
 
-### This document **is not**:
+### This document **is not**
+
 - A claim of wrongdoing
 - Legal advice
 - A vendor comparison
