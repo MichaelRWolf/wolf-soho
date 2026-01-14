@@ -1,10 +1,5 @@
 # Public Followup Post
 
-## Corrections
-
-- The account in this incident has been active for approximately 7 years (not 10).
-
-- The account in this incident has always been a free account.  There is a different account that oscellated from free to paid over a similar time period.
 
 ## TODO
 - Provide dates of emails. Indicate whether they included deadline for account access, deadline for data recovery, backup tools, export tools, or account upgrade options.  Good to acknowledge that emails arrived, and document that they were not helpful.  (Maybe)
@@ -114,4 +109,10 @@ This date marks the originally communicated inactivity window under which the si
 
 
 Note on timeline reconstruction:
-Some events are dated based on information provided later by Atlassian support. These dates were not known or visible at the time they occurred and were inferred retroactively from subsequent written communications.
+Some events are dated based on information provided later by Atlassian support, and were not known or visible at the time they occurred.  Dates were inferred retroactively from subsequent written communications.
+
+
+Clarification
+The Confluence site involved 
+ - was approximately 7 years old
+ - was always on the Free plan.   A separate account moved between Free and Paid during a similar period.
