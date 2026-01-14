@@ -1,0 +1,1862 @@
+0 notifications total
+
+Skip to search
+
+Skip to main content
+
+Keyboard shortcuts
+Close jump menu
+I’m looking for…
+Home
+My Network
+Jobs
+Messaging
+25
+25 new notifications
+Notifications
+Michael Wolf
+Me
+
+For Business
+Learning
+Premium
+Photo of Michael Wolf,#OPEN_TO_WORK
+Michael Wolf
+Real work. Real learning. Together.
+
+United States
+
+
+Experience
+Profile viewers
+224
+Post impressions
+60,785
+Your Premium features
+
+Feed detail update
+Promote this post to reach people who matter to you.
+Boost
+Feed post
+View Michael Wolf’s open to work graphic link
+Michael WolfMichael Wolf
+   • YouPremium • You
+Real work. Real learning. Together.Real work. Real learning. Together.
+3d •  3 days ago • Visible to anyone on or off LinkedIn
+
+Confluence deleted 10 years of work after 42 days of inactivity.
+
+Not archived.
+Not suspended.
+**Deleted.**
+
+A colleague of mine just lost a decade of courses, client work, and personal writing because Atlassian seems to have changed what “Free” means.
+
+It used to mean *free if you stay small*.
+
+Now it means *free for a limited time, with no backup or data retention policy"
+
+After six weeks and ten support escalations, the answer hasn’t changed:
+**Confluence will not restore it.**
+
+If you know any recovery paths she hasn’t tried, please reach out. This data represents a huge part of her life's work.
+
+And if you’re using free SaaS tools for anything that matters, assume this can happen to you too.
+likesupportinsightful
+208
+127 comments
+28 reposts
+Reactions
+View Ryan Bergman’s  graphic link
+like
+View Sally Sloley’s  graphic link
+funny
+View Kevin Mireles’  graphic link
+like
+View Christian Hujer’s  graphic link
+like
+View Chris Kavas’  graphic link
+support
+…
+
+
+
+
+60,661 impressions
+View analytics
+Michael Wolf is open to work
+
+
+Add a comment…
+Open Emoji Keyboard
+
+Current selected sort order is Most relevant
+Most relevant
+View Kevin Mireles’  graphic link
+Kevin Mireles
+ • 1st
+Led $20M modernization. Drove over $120M in new revenue and $90M in savings annually. Created Minimum Viable Replacement Framework. Product Management, E-commerce, Sustainability expert.
+3d
+
+That’s awful! @confluence do the right thing 
+
+Like
+like
+1
+
+Reply
+5 replies
+5 Replies on Kevin Mireles’ comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Kevin Mireles I think 4 reminders over 60 days to only log in to keep the site active plus another 60 to reactivate is more than reasonable, and if the issue was that she ran out of storage, she could've spent less than $7/month to have more storage. Plus, free backup tools are available so I'm not sure how this is Atlassian's fault. 
+
+Like
+like
+2
+
+Reply
+View Reid Pinchback’s  graphic link
+Reid Pinchback
+   • 3rd+
+Data Engineering and Microservices Consulting
+2d
+
+Bryan Guffey no, it isn't reasonable, because Atlassian is not the center of the universe. 
+
+Humans are busy and they have multiple dimensions of activity. Having one business constantly screaming "pay attention to me, pay attention to me!" is nonsense. 
+
+I used to use Atlassian products, tried the various free and paid lower-tier offerings over the years, used to be a pretty consistent booster for some of the products with clients, but as a consultant I got fed up with having my Jira and Confluence totally trashed if I was focused on client work instead of home office projects for 6 months. 
+
+Just because the world has created an attention economy does not mean that having that forced down everyone's throat 24x7 is reasonable. What is reasonable is not having to give 2 effs about a piece of software when I don't have any reason right now to have it on my radar. My attention belongs to *me*. Companies that can't respect something that fundamental deserve to find churn metrics eating their business.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Reid Pinchback bro. log in once every six months. That’s reasonable. You can say it’s not, but sparing 30 seconds for perpetual free storage and compute is a damn good deal. On top of that, $7/mo and you dont ever have to log in. 
+
+And guess what? If you’re so upset by a tiny bit of friction for free shit, you’re not worth it to Atlassian.
+
+Like
+like
+2
+
+Reply
+View Reid Pinchback’s  graphic link
+Reid Pinchback
+   • 3rd+
+Data Engineering and Microservices Consulting
+2d
+
+Bryan Guffey i ran into the exact same outcome this post was about with a paid account. I ditched them after even having a paid account didn't stop them trashing my work and it didn't take six months. Every few months I had to get customer service to restore what they had deleted, and I got sick of it. 
+
+Try ditching the toxic attitude and turning it into something vaguely approximating professionalism.
+
+Like
+likeinsightful
+5
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+(edited)
+1d
+
+Reid Pinchback mmm okay. Show me the receipts. I’ve been in this business for 20+ years and the number of times the issue is PEBCAK when people swear it’s the company is pretty high. 
+
+It’s not impossible that you had the experience you describe, no company is perfect, but it would far and away be the very rare minority experience.
+
+I take objection to people simply assuming a story that files in the face of all of the stated policies of a company, with zero evidence of the facts, is true.
+
+Like
+
+Reply
+
+Collapse replies
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+(edited)
+2d
+
+Let this be a lesson for everyone. Tech regulation is practically inexistent. I use markdown-based Obsidian locally for all my documents (migrated from Evernote and couldn't be happier) and do the same (local) for everything I can, like LLMs (ollama) and security camera footage, for example.
+
+Like
+like
+7
+
+Reply
+17 replies
+17 Replies on Javier Bonnemaison’s comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Javier Bonnemaison This isn't about tech regulation. There was ample warning and opportunity for her to address the issue. 
+
+Like
+like
+1
+
+Reply
+View Ryan K.’s  graphic link
+Ryan K.
+ • 2nd
+Computer Programmer, Business Owner/Operator
+(edited)
+2d
+
+Bryan Guffey That she didn't log in and give Atlassian her attention often enough? Are they a company providing a service or a jealous boyfriend?
+
+Edit: Or a bank. They can get pretty huffy if you don't use your card or log in to shuffle money enough in 30 days too.
+
+Like
+likefunny
+3
+
+Reply
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+2d
+
+Bryan Guffey While it's true that I don't have knowledge of the details (perhaps you can enlighten me), why should Atlassian unilaterally decide what is reasonable, and how do they balance their cost management policies with destroying years of intellectual property that has been entrusted to them? The point about regulation is that in a world where we put our lives online, often with the expectation that companies are operating in good faith and will protect and respect our content and privacy, there are no legal safeguards to compel companies to do this.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+1d
+
+Javier Bonnemaison because Atlassian is the one paying for the storage of all her data. Atlassian is the one keeping her instance of the platform running. Atlassian is the one assuming all of the ongoing costs of providing her a space to work. There is an exchange there and I’m perfectly fine with there being a reasonable and equitable exchange of value.
+
+Like
+
+Reply
+View Ben Ford’s  graphic link
+Ben Ford
+   • 2nd
+Community leader and founder
+1d
+
+Bryan Guffey while this is technically true, it’s true because atlassian discontinued its on-premise product and forced everyone onto its cloud services.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+1d
+
+Ben Ford every single one of Atlassian’s primary competitors are Cloud-only. Atlassian was at risk of continually falling behind trying to shop for two very differently-developed platforms or risk undergoing a significant rewrite in order to unify the codebases for a rapidly shrinking piece of the customer base, while the part of the customer base that’s growing is all-SaaS. 
+
+As someone who has been in the ecosystem for 20 years, cut my teeth running all of Atlassian’s products on hardwareI owned, and still to this day work primarily on self-hosted Atlassian instances (nearly every single Atlassian product still has a self-hosted version available and will until 2029 with support until 2032), Atlassian is making the smart business decision and the decision that is, long-term, best for its customers.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+(edited)
+1d
+
+Ben Ford oh and did you know that when Atlassian discontinued the Ssrver versions of its products it also made sure that those licenses remained perpetual for the rest of time for those still using the product? 
+
+Not only that, but every one of those people who own Server version of any Atlassian product have access to the full source code for the product so they’re able to patch and update and extend it for the rest of time.
+
+They also gave people like, at least two years’ notice. 
+
+Seems pretty customer-friendly to me.
+
+Like
+
+Reply
+View Ben Ford’s  graphic link
+Ben Ford
+   • 2nd
+Community leader and founder
+1d
+
+Bryan Guffey yes that is indeed what their PR materials said.
+
+Like
+
+Reply
+View Ben Ford’s  graphic link
+Ben Ford
+   • 2nd
+Community leader and founder
+1d
+
+Bryan Guffey and yes, I did know what they offered for their Server customers as I was one.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+1d
+
+Ben Ford literally also have been a server customer, still have the source code, still able to run it ¯\_(ツ)_/¯ 
+
+I dunno what to tell you
+
+Like
+
+Reply
+View Ben Ford’s  graphic link
+Ben Ford
+   • 2nd
+Community leader and founder
+1d
+
+Bryan Guffey you don’t need to say anything. I’ve got no beef in this conversation other than to say that companies who force you into using their resources are a little hypocritical to then complain when you …. use their resources.
+
+(I say that as a former product manager for the puppet forge and dev tools who had these same conversations when leadership started complaining about the bandwidth bill… 😂)
+
+Like
+like
+1
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+1d
+
+Ben Ford but there’s no forcing anyone to use the tools - people can leave, they can go to other tools. The options exist! I hear why you’re saying but this was a choice the user made. She could’ve used another tool that fit her needs better; arguably she should have.
+
+Like
+like
+2
+
+Reply
+View Jordan Welbourne’s open to work graphic link
+Jordan Welbourne
+   • 3rd+
+Front-end Engineer @ Integris Group | Angular, React, E-Commerce, Accessibility Specialist
+1d
+
+Javier Bonnemaison I was trying to decide between Obsidian and Joplin and ended up going with Joplin. I am enjoying it and it does everything I need. 
+
+Like
+
+Reply
+View Emmett Raymond’s open to work graphic link
+Emmett Raymond
+   • 3rd+
+Software Architect | Backend & Systems Engineering | Rust, Python, Java, Typescript | Distributed Systems · IAM / Auth · Fintech & High-Risk Platforms
+1d
+
+Javier Bonnemaison Obsidian is incredible, and the level of ownership it gives you is unheard-of with modern text editors and knowledgebases. 10/10, a beautiful product, and something that should be a serious contender for any documentation system.
+
+Like
+like
+1
+
+Reply
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+1d
+
+Emmett Raymond it also has a fantastic plug-in development community.
+
+Like
+like
+1
+
+Reply
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+23h
+
+Jordan Welbourne Joplin looks great as well. My point was not really about promoting a specific tool, but rather to emphasize the importance of retaining ownership, security, privacy, and portability by focusing on markdown content (standard format) and local hosting.
+
+Like
+like
+1
+
+Reply
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+22h
+
+Bryan Guffey Whatever business model Atlassian decided to deploy, it was based on their needs and strategy. They are not doing free users any favors, they simply assume that some of them will convert to paid and perhaps generate some positive reviews and/or referral sales, and they are calculating that this is a good investment. Offering this service in good faith includes taking reasonable measures to protect and preserve user content, as well as making it easy for people to take their content with them for any reason (I assume that Atlassian does not provide a tool to conveniently do this, as it would harm user lock-in, but I may be wrong). Ultimately, they are free to change their commercial terms, but they still have a responsibility to protect user content to the best of their abilities. Regulation could, for example, require companies to archive user accounts for a full year after termination in a portable format (like markdown) and contact users repeatedly via multiple channels if possible. In the current world, if a manager decides that they want to cut storage costs or make some other KPI look better this quarter, and that involves deleting user accounts after minimal warning, users have no recourse whatsoever.
+
+Like
+like
+2
+
+Reply
+
+Collapse replies
+View Michael Vizdos’  graphic link
+Michael Vizdos
+   • 2nd
+Chief Product Officer | Strategic Advisor | EdTech | CST
+3d
+
+A good reminder.  Anything we get for “free” means we ARE the product. 
+
+Here.  There.   Anywhere really. 
+
+Focus. hashtag#deliver 
+
+Like
+likesupportcelebrate
+28
+
+Reply
+10 replies
+10 Replies on Michael Vizdos’ comment
+View Jonathan Dale’s  graphic link
+Jonathan Dale
+   • 3rd+
+Technical Solutions Expert | Ph.D. Scientist | Bridging Technology & Customer Success | Driving Revenue Growth Through Innovation
+3d
+
+Michael Vizdos These days, you're usually the product even if you *are* paying. If the data isn't on your computer, it's not yours.
+
+Like
+likeinsightful
+11
+
+Reply
+View James Peckham’s  graphic link
+James Peckham
+   • 2nd
+Software Engineering and Agile Practices Leader
+(edited)
+3d
+
+Michael Vizdos true and I feel more relevant is a reminder that data protection and business continuity needs to consider the risk of a single vendor and or single method of recovery. And that business continuity does include knowledge management systems. And be sure to practice your Disaster recovery process on some interval...
+
+Like
+likecelebrate
+3
+
+Reply
+View Michael Vizdos’  graphic link
+Michael Vizdos
+   • 2nd
+Chief Product Officer | Strategic Advisor | EdTech | CST
+3d
+
+Jonathan Dale and even then... that might be questionable if we've ever spent more than 3 seconds before hitting "I accept" on the terms and conditions. [ sigh - now I gotta find that old south park episode that was so so wrong in so many ways lol ]
+
+Focus. hashtag#deliver
+Comment image, no alternative text available
+
+Like
+like
+2
+
+Reply
+View Michael Vizdos’  graphic link
+Michael Vizdos
+   • 2nd
+Chief Product Officer | Strategic Advisor | EdTech | CST
+3d
+
+James Peckham so so right thank you. And heh... that last part... actually RESTORE your backups during a disaster recovery drill. hashtag#protip
+
+Focus. hashtag#deliver 
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Michael Vizdos confusing, since Atlassian provided her four reminders over 60 days to simply *log in* and keep her site active and then another 60 days to simply reach out to support and ask them to reactivate her product before they deleted anything. Also, Atlassian doesn't use that data, nor do they run third-party advertisements, and this is exactly why they can't provide forever-free products that people don't use (They're happy to give you forever free as long as your storage usage is under 2GB). 
+
+Like
+insightfullike
+3
+
+Reply
+View Helen O’s open to work graphic link
+Helen O
+   • 2nd
+Technical Writer | Content Engineer | Information Architect | AI savvy | Former engineer passionate about dev experience - Ex-MSFT, Ex-Atlassian
+2d
+
+Bryan Guffey In my experience, there are different types of Atlassian free accounts, depending on which mechanism you used to create them and also how long ago you created them. A 10 year user's account may indeed have different settings on it and therefore handled differently than a recently-created one using a mechanism that didn't exist 10 years ago.
+
+Simply because of my experience with this, and inside Atlassian, I am inclined to give the user the benefit of the doubt that they DID in fact log in within the past 60 days. Mistakes do happen at Atlassian, as they do everywhere.
+
+Like
+like
+1
+
+Reply
+View Mark Kilby’s  graphic link
+Mark Kilby
+   • 2nd
+Adaptive Leadership Coach | Transforming Teams Through Crisis & Change | Remote Work Pioneer | Turning Around Struggling Projects into Success Stories
+2d
+
+And any software you use for "free" you should have a way to back it up independent of the vendor. So sorry to hear about this. It's a painful lesson.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Helen O it’s true, but then there’s another 60 days post - deactivation. And if there’s a mistake, then it should be reversible./
+
+Like
+
+Reply
+View Michael Vizdos’  graphic link
+Michael Vizdos
+   • 2nd
+Chief Product Officer | Strategic Advisor | EdTech | CST
+2d
+
+Bryan Guffey All good and thanks for the clarification. At the end of the day, it comes down to personal accountability too (like you wrote).
+
+I celebrated the day that I let that specific account die heh and yep, it'll happen more and more (just like it's been done over the years!). 
+
+The data though? It's never gone so yeah the price we pay either way (no matter how or if it's ever used).
+
+Focus. hashtag#deliver 
+
+Like
+
+Reply
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+1d
+
+Michael Vizdos Not necessarily. Caveat emptor is a political choice.
+
+Like
+
+Reply
+
+Collapse replies
+View Fred Morris’  graphic link
+Fred Morris
+ • 1st
+internet plumber • telemetry • observability
+3d
+
+> Now it means *free for a limited time, with no backup or data retention policy*
+
+Now? Was there ever a policy for restoring your free stuff from a backup? Does that exist ANYWHERE? I have always assumed that that does not exist. I wouldn't expect LinkedIn to do it, barring the fact that they're a social media company and killing your livestock because you forgot to feed or water them tends to be bad for the rancher. (Make backups of your LinkedIn content from time to time, folks!) Furthermore it sounds like there *is* a data retention policy. The whole point of retention policies is so that you can DELETE stuff at some point in time and not find yourself on the wrong end of a court order for discovery.
+
+Michael, if you are in a circle which doesn't understand the above, be an agent of light and not darkness.
+
+(And "Hi!" and I hope you're doing well...)
+
+Like
+like
+6
+
+Reply
+View Marc H. Weiner’s  graphic link
+Marc H. Weiner
+   • 3rd+
+Founder, Aeroview.io. Fractional CTO/DevOps/AI. Previously at ec.ai, Shutterstock, Marvel, Advizr (acq' 2019).
+2d
+
+Jesus. That's awful. Shame on Atlassian for that.
+
+Like
+like
+7
+
+Reply
+3 replies
+3 Replies on Marc H. Weiner’s comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Marc H. Weiner For what? Reminding her four times that she needed to log back in to keep her site active? For asking her to pay $6.70/month if she wanted more storage? For giving her an additional 60 days after her site was deactivated to reactivate her account and still have access to all her data? For giving her built-it tools to back up her data? 
+
+Which is the shame?
+
+Like
+likeinsightfulcelebrate
+18
+
+Reply
+View Marc H. Weiner’s  graphic link
+Marc H. Weiner
+   • 3rd+
+Founder, Aeroview.io. Fractional CTO/DevOps/AI. Previously at ec.ai, Shutterstock, Marvel, Advizr (acq' 2019).
+(edited)
+2d
+
+Bryan Guffey That all sounds reasonable, but that's not what the OP said. I apologize for not doing all the research on my own (I'm way too busy for that) or prefacing my comment with "If this is true..." I've seen too many companies do shady shit, especially big ones, so it's easy to believe. Again, my apologies.
+
+Like
+like
+1
+
+Reply
+View Adam Cragg’s open to work graphic link
+Adam Cragg
+   • 2nd
+Senior Software Engineer | TypeScript | GCP | Vibe Code Cleanup Specialist
+1d
+
+Bryan Guffey some people want the world while paying little to nothing for it. Welcome to the modern age where entitlement rules supreme.
+
+Like
+
+Reply
+
+Collapse replies
+View Joe Schaefer’s  graphic link
+Joe Schaefer
+   • 2nd
+Heyókȟa; Information Security, Performance and Reliability Leader
+3d
+
+You could use Orion you know. We partner with our customers, not abuse them.
+
+Like
+like
+1
+
+Reply
+10 replies
+10 Replies on Joe Schaefer’s comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Joe Schaefer Do you allow users to continue to squat on URLs and domain names infinitely? Do you do more than notify them four times over 60 days and then give them another 60 days to address the issue before deleting their data? I find it very hard to call this *abuse*
+
+Like
+insightfullike
+4
+
+Reply
+View Joe Schaefer’s  graphic link
+Joe Schaefer
+   • 2nd
+Heyókȟa; Information Security, Performance and Reliability Leader
+2d
+
+If your free tier is a loss leader scam, at least admit it in public.
+
+Like
+like
+1
+
+Reply
+View Jens Schumacher’s  graphic link
+Jens Schumacher
+ • 2nd
+Co-founder / CEO @ Released - Building the #1 Jira app for product teams · Early Atlassian
+2d
+
+Joe Schaefer define scam
+
+Like
+like
+3
+
+Reply
+View Joe Schaefer’s  graphic link
+Joe Schaefer
+   • 2nd
+Heyókȟa; Information Security, Performance and Reliability Leader
+2d
+
+Jens Schumacher a third party Atlassian reseller
+
+Like
+like
+1
+
+Reply
+View Jens Schumacher’s  graphic link
+Jens Schumacher
+ • 2nd
+Co-founder / CEO @ Released - Building the #1 Jira app for product teams · Early Atlassian
+2d
+
+Joe Schaefer How so? And how does that relate to the „loss leader scam“?
+
+Like
+
+Reply
+View Joe Schaefer’s  graphic link
+Joe Schaefer
+   • 2nd
+Heyókȟa; Information Security, Performance and Reliability Leader
+2d
+
+Jens Schumacher become an Orion customer and find out.
+
+Like
+funny
+1
+
+Reply
+View Jens Schumacher’s  graphic link
+Jens Schumacher
+ • 2nd
+Co-founder / CEO @ Released - Building the #1 Jira app for product teams · Early Atlassian
+2d
+
+Joe Schaefer find out what a real scam looks like?
+
+Like
+likefunny
+2
+
+Reply
+View Joe Schaefer’s  graphic link
+Joe Schaefer
+   • 2nd
+Heyókȟa; Information Security, Performance and Reliability Leader
+2d
+
+Jens Schumacher feisty. Didn’t realize you were such a wise guy for Atlassian.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Joe Schaefer who’s a third party Atlassian reseller?
+
+Like
+
+Reply
+View Joe Schaefer’s  graphic link
+Joe Schaefer
+   • 2nd
+Heyókȟa; Information Security, Performance and Reliability Leader
+2d
+
+Scam = scumbag firm that derives 90% of its wealth from F/OSS products at The Apache Software Foundation, yet contributes zero (both in dollars and code) to their maintenance and upkeep.
+
+Like
+insightful
+1
+
+Reply
+
+Collapse replies
+View Ashley Frieze’s  graphic link
+Ashley Frieze
+   • 2nd
+Software Engineering Consultant, Leader and Practitioner
+3d
+
+Atlassian products are broadly speaking evil.
+
+Like
+like
+1
+
+Reply
+13 replies
+13 Replies on Ashley Frieze’s comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Ashley Frieze lmao this is absolutely false and really hilarious. 
+
+Like
+
+Reply
+View Ashley Frieze’s  graphic link
+Ashley Frieze
+   • 2nd
+Software Engineering Consultant, Leader and Practitioner
+2d
+
+Bryan Guffey allow me to show my working https://on.soundcloud.com/vYEdKRX5cwofsCRFnQ
+
+Atlassian products are just over complicated tools with mediocre-to-bad UI and a ridiculous amount of annoying third party plugins. The mentality that they ship with this tooling though is the death of organisations
+
+Songs in the Key of JIRA by Ashley Frieze
+Listen to Songs in the Key of JIRA by Ashley Frieze #np on #SoundCloud
+
+Like
+likecelebrate
+2
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Ashley Frieze lmao you’re incorrect goodbye
+
+Like
+
+Reply
+View Ashley Frieze’s  graphic link
+Ashley Frieze
+   • 2nd
+Software Engineering Consultant, Leader and Practitioner
+2d
+
+Bryan Guffey do you have any reasons?
+
+Or did you get a ticket in Jira telling you to adopt this viewpoint?
+
+Like
+funnylike
+5
+
+Reply
+View Eugene Brodsky’s  graphic link
+Eugene Brodsky
+   • 3rd+
+Platform Engineer, GenAI, SRE / DevOps
+2d
+
+Ashley Frieze Atlassian products are the pool of tears where the soul goes to drown
+
+Like
+
+Reply
+View Ashley Frieze’s  graphic link
+Ashley Frieze
+   • 2nd
+Software Engineering Consultant, Leader and Practitioner
+1d
+
+Eugene Brodsky every time someone says “you need to write a ticket first”, a fairy dies
+
+Like
+lovesupport
+2
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+1d
+
+Ashley Frieze yeah, my queer fraternity, which has empowered and given voice and leadership training to more than 4000 young queer people, wouldn’t have been able to operate as a remote and scaled organization on nearly zero dollars for 15 years if not for Atlassian’s incredibly generous donation of millions of dollars of product licenses to a non-traditional nonprofit because of our mission.
+
+So yeah, cool, totally evil, except for the part where their products enabled the existence of an organization that has saved hundreds of people from self-harm. 
+
+Thanks!
+
+Like
+
+Reply
+View Eugene Brodsky’s  graphic link
+Eugene Brodsky
+   • 3rd+
+Platform Engineer, GenAI, SRE / DevOps
+1d
+
+Ashley Frieze it writes a ticket and then dies
+
+Like
+
+Reply
+View Eugene Brodsky’s  graphic link
+Eugene Brodsky
+   • 3rd+
+Platform Engineer, GenAI, SRE / DevOps
+1d
+
+Bryan Guffey Their products suck and they donate some services to charity. Both things can be true. Their products still suck, everyone hates JIRA.
+
+Like
+
+Reply
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+1d
+
+Eugene Brodsky haha yeah, no, everyone doesn’t hate Jira. How do I know? Because how many other enterprise software products have a self-organizing VOLUNTEER community of users, power users, and admins who dedicate their own hard earned time and money to tell other people how cool their products are? 
+
+I’ll wait.
+
+Like
+
+Reply
+View Eugene Brodsky’s  graphic link
+Eugene Brodsky
+   • 3rd+
+Platform Engineer, GenAI, SRE / DevOps
+1d
+
+Bryan Guffey uh. (...widely gestures towards all of OSS) 🤣
+you are literally the first volunteer Atlassian shill I've ever had the pleasure to encounter. It's so bizarre, like sharing fruit-by-the-foot with a platypus. 😜
+
+Like
+
+Reply
+View Ashley Frieze’s  graphic link
+Ashley Frieze
+   • 2nd
+Software Engineering Consultant, Leader and Practitioner
+1d
+
+Bryan Guffey I’m not really saying the organisation is evil. I’m saying the products are a blight on the technical community.
+
+I’m totally on board with your mission and I’m delighted that you were able to use free software from Atlassian to help achieve your goals.
+
+I think we’re coming at this question from very different places.
+
+That said, had you chosen Trello, Slack and Mediawiki, would you have been as successful?
+
+Like
+
+Reply
+View Ashley Frieze’s  graphic link
+Ashley Frieze
+   • 2nd
+Software Engineering Consultant, Leader and Practitioner
+1d
+
+Eugene Brodsky it needs to remember to close the ticket first
+
+Like
+
+Reply
+
+Collapse replies
+View Bryan Finster’s  graphic link
+Bryan Finster
+   • 2nd
+Developer - MinimumCD.org co-author, SADMF certified
+3d
+
+This is terrible. It’s also why I keep everything important in version control. Even if GitHub goes away, I have it locally and can push it elsewhere.
+
+Like
+likeinsightfullove
+62
+
+Reply
+2 replies
+2 Replies on Bryan Finster’s comment
+View Chris Yu’s  graphic link
+Chris Yu
+   • 2nd
+Lead DevOps Engineer
+2h
+
+Bryan Finster Another reminder why keeping multiple backups are part of fault tolerance and disaster recovery thinking.
+
+Like
+
+Reply
+View Bryan Finster’s  graphic link
+Bryan Finster
+   • 2nd
+Developer - MinimumCD.org co-author, SADMF certified
+43m
+
+Chris Yu Yep. I've over 300K photos on my NAS backed up nightly offsite. If it's not replaceable, HA/DR.
+
+Like
+
+Reply
+
+Collapse replies
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Atlassian begins sending emails 60 days prior to product deactivation due to inactivity. 
+
+They send emails on day 60, day 30, day 7, and day 0. On day 0, they inform you that your product has been deactivated. At the time of deactivation, the site admin still has *another* 60 days to reactivate their account. 
+
+This means your friend managed to ignore her life's work for two months (totally understandable, life happens), miss the emails, and then go *another* two months without trying to reactivate. 
+
+If you friend ran out of space, she would've only been restricted to what she could do in Confluence and as long as she either upgraded to a paid plan (only $6.70/month, paid monthly) or just kept logging back in every 59 days, her data would never have been deleted nor her account deactivated. Additionally, Atlassian provides built-in backup tools for users to use that are point and click. 
+
+I am finding it difficult to have much anger at Atlassian in this situation. I feel for your friend, but if this was much of her life's work, it also feels like a significant lack of personal responsibility for this data. 
+
+Like
+like
+21
+
+Reply
+1 reply
+1 Comment on Bryan Guffey’s comment
+View Lukasz Pietrzak’s  graphic link
+Lukasz Pietrzak
+   • 2nd
+Vice-CEO w Craftware. | Highest Quality Veeva & Salesforce Services | EO'er
+(edited)
+2d
+
+Bryan Guffey yeah I think your version does not fit 'bad Atlassian' narrative
+
+Like
+like
+3
+
+Reply
+View Tim Nolan’s  graphic link
+Tim Nolan
+   • 1st
+Knowledge Worker, Visual Management Professional, Earthling
+3d
+
+😠 
+
+Like
+
+Reply
+View David Eglin’s  graphic link
+David Eglin
+   • 3rd+
+Headless CMS strategist & architect helping brands to create their “what’s next” with modern tech & content stacks. If you’re considering a headless transformation, or already in the middle of one: david@headless.company
+2d
+
+Yeah… this just doesn’t ring quite true, I’m afraid. At very least it’s not the whole truth. Say what you like about Atlassian, but their policies and processes are pretty well set out. 
+
+Your friend will have been warned several times about their data, and then there will have been a period after deactivation for them to reactivate. At the end of the day, we can’t expect companies to keep inactive data indefinitely, especially not for free accounts. 
+
+I think the real lesson here is that, if you value something enough, if it represents a significant portion of your life’s work… perhaps consider paying for the platform you are storing it on.
+
+Like
+like
+7
+
+Reply
+View Kelvin Meeks’  graphic link
+Kelvin Meeks
+ • 2nd
+Consulting Architect/CTO - Leadership in Enterprise Architecture and Software Engineering Innovation (US Army Veteran)
+(edited)
+3d
+
+Rule #801 - "Before you do anything - make a backup"
+
+Tool doesn't allow making a backup? You need a better tool.
+
+Also,
+Rule #804 - "Hope is a _very_ poor Business Continuity plan"
+
+Like
+likecelebrate
+11
+
+Reply
+3 replies
+3 Replies on Kelvin Meeks’ comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+3d
+
+Kelvin Meeks Tool allows making backups. 
+
+Like
+
+Reply
+View André Koot’s  graphic link
+André Koot
+   • 3rd+
+IAM Strategist - all about access - at SonicBee
+2d
+
+Joop Entert(r)ainer - An honor roll given by students
+
+Like
+like
+1
+
+Reply
+View Joop Entert(r)ainer - An honor roll given by students’  graphic link
+Joop Entert(r)ainer - An honor roll given by students
+ • 3rd+
+Hon FBCI, Hon FBCI awards recognise those who’ve made major contributions to business continuity. BCM Ambassador. Shortlisted BCI Europe Awards 2024 Continuity & Resilience Volunteer.
+2d
+
+André Koot gelukkig heb ik mijn eigen NAS ergens anders in het land staan en er net nieuwe schijven ingezet.
+
+Show translation
+Show translation of this comment
+
+Like
+like
+1
+
+Reply
+
+Collapse replies
+View Daniel Liljeberg’s  graphic link
+Daniel Liljeberg
+   • 2nd
+Working hard to enable people to be able to actually solve the needs of users.
+3d
+
+Look into suing them. Depending on which country your colleague resides in they could very well be responsible for deleting his data like that. As long as he has upheld his part of the agreement he entered. Also, the simple prospect of potentially being sued might also make them find a way to restore the data.
+
+Like
+like
+4
+
+Reply
+3 replies
+3 Replies on Daniel Liljeberg’s comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Daniel Liljeberg yeah, she'd lose. four emails over 60 days, plus another 60 days to ensure that she could resolve the issue, before deletion, is pretty generous. And as long as she kept logging in, she'd have been just fine even if she ran out of space. 
+
+Like
+insightfullikefunny
+5
+
+Reply
+View Philip Peterson’s  graphic link
+Philip Peterson
+ • 3rd+
+Engineering Leader | YC startups | Building High-Performing Teams
+2d
+
+Bryan Guffey The data has got to be there in a backup tape somewhere right? I imagine restoring it for some reasonable fee would be… reasonable?
+
+Like
+like
+1
+
+Reply
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+23h
+
+Bryan Guffey Pretty generous according to you. What if her email had changed or didn't forward correctly. What if her mother died or she went on a three month vacation? There are other options that are less final than deleting the account and all their contents after 60 days and only using one channel of communication. I sense we are not going to agree, so I won't pester you further.
+
+Like
+
+Reply
+
+Collapse replies
+View ✨Sascha Brossmann’s  graphic link
+✨Sascha Brossmann
+   • 2nd
+Operational Excellence for SaaS – 👉 available 👈 Executive Advisor | Fractional CPO/VP Product | Keynote Speaker | Community Builder
+(edited)
+2d
+
+Oh my, that’s an extremely brutal frustrating lesson for sure. My heart goes out to your friend.
+
+I don’t think that Atlassian is to blame here, though. 
+
+There are three fundamental rules for safeguarding business continuity:
+1. Make backups from day one
+2. Make backups elsewhere from day one
+3. Automate all your backups from day one
+
+Exactly _because_ life happens and you might not be capable of doing what’s necessary when something unexpected happens. 
+
+It’s mindblowing how many people still naively rely on a single storage for their most valuable data. Both professionally and in their private life. Help them become aware, please.
+
+Like
+like
+3
+
+Reply
+View Barbara C.’s  graphic link
+Barbara C.
+ • 2nd
+I’ve helped hundreds of nonprofits use their technology to engage the right community, donors, volunteers, activists, and champions. 🤓 Indiana Master Naturalist 🦇
+2d
+
+It's almost like some commenters here have never had to carry a mental load of elder or child care, especially during an emergency. Or have their own life/health emergency (fed medical leave is 12 weeks for a reason,  y'all. Time flies when you're in care mode). Or heck just change emails and miss one change accidentally. Or get hacked, lose access, and spend months getting nowhere with terrible support. Or just not be terribly techy and misunderstand the issue. 
+
+Instead:
+I'm so sorry that happened! It sure seems like direct deletion is not a great route. It's a good reminder for all of us, too, that it's so important to have backup plans and good record keeping. I do hope there's a better outcome for your friend soon. 
+
+Like
+like
+2
+
+Reply
+View Bill Richardson’s  graphic link
+Bill Richardson
+   • 3rd+
+CISO and CTrO | Security, Privacy, HIPAA, AI Governance
+2d
+
+Free isn’t really free. And IMO if you are using a product for an important part of your business and/or are holding client data, just buy a paid license. If for no other reason that you have very few options for legal action with free licenses.
+
+Like
+like
+3
+
+Reply
+View Bob Van Dell II’s  graphic link
+Bob Van Dell II
+   • 2nd
+Software Master Craftsman
+1d
+
+Another way to think about this is that your colleague enjoyed the product Confluence's talented team of developers, product mangers, and others made possible for 10 years, but did not care enough about the hard work and labor that team put into it to pay them for it.
+
+I am not inclined to feel sympathy for the moral lesson your colleague is learning from this: pay people for their work.
+
+If after 10 years, you're still too small to pay for Confluence, you've got a bigger problem than losing your Confluence data.
+
+Even not-for-profit companies earn revenue to cover the overhead required for them to deliver on their mission.
+
+Like
+like
+1
+
+Reply
+1 reply
+1 Comment on Bob Van Dell II’s comment
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+23h
+
+Bob Van Dell II You make a good point, but there is no need to punish people for taking advantage of a freemium model by deleting their data in an aggressive time frame. Closing the account for inactivity or any other valid business reason does not have to imply immediate deletion of user data. For example, a company could email a link to an export file and save that file for a longer period of time, for example.
+
+Like
+
+Reply
+View Matt Pieper’s  graphic link
+Matt Pieper
+   • 2nd
+Right Sizing Your Tech Stack | Business Systems Leader | Developer Relations | Photographer | rightsized.tech | mattpieper.com
+3d
+
+woof, that's rough. i don't know a path forward, but it's one of the reasons for my personal stuff I've built archiving mechanisms over the years.
+Companies go out of business, change pricing, change policies. my IP and conent is mine and i take control of it.
+
+hope they find a path forward, and would love to hear an update
+
+Like
+like
+3
+
+Reply
+View Keirstin Hafermann’s  graphic link
+Keirstin Hafermann
+   • 3rd+
+Space Strategy & Growth | Slingshot Aerospace
+1d
+
+If it truly was 42 days, they breached policy. They typically require a 120 day inactivity period for free plans. Even then there is like a ~60 day grace period to reactivate (possibly by signing up for a paid plan).
+
+If your friend didn't adhere to those, or whatever T&Cs were in their plan...there likely isn't a recovery path. Not because they don't want to - but the inactivity and grace period elapsed. 
+
+That data has to live somewhere, and you are paying for it either in cash through a paid plan or activity in a free plan. 
+
+In this instance - it wasn't about paying for a service with money. It was about paying for a service in activity they likely use to advertise/inform development of their product. 
+
+Like
+like
+1
+
+Reply
+View Alex Matthews’  graphic link
+Alex Matthews
+   • 3rd+
+Leading DevSecOps and Digital Engineering Solutions to Enable DoD & IC Missions
+(edited)
+2d
+
+Unfortunate to be sure. More concerning is their loss of business when moving to purely SaaS with EoL of their Data Center product in 2029 and realistically before that: https://www.atlassian.com/licensing/data-center-end-of-life. Many of us have been worried this day would come.
+Data Center End of Life | Atlassian
+Everything you need to know about licensing Data Center as well as upgrading from server licenses of Jira, Confluence, and Bitbucket.
+
+Like
+like
+2
+
+Reply
+1 reply
+1 Comment on Alex Matthews’ comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Alex Matthews concerning for who?
+
+Like
+
+Reply
+View Chuck Charbeneau’s open to work graphic link
+Chuck Charbeneau
+   • 3rd+
+VP of Engineering | Executive & Transformation Coach | Modern Engineering, Agile & DevOps Leadership
+1d
+
+I use Obsidian for all of my knowledge management work. If you need a free cloud available backup, use github as a backing store, treat it as code, and you can even use jekyll or quartz to continuously deploy to a web site for publishable content.
+
+Like
+like
+1
+
+Reply
+View Jace Benson’s  graphic link
+Jace Benson
+   • 3rd+
+Affordable ServiceNow AI, One Price Forever
+2d
+
+Looking at these comments make me more sad than the post. 
+
+Yes, that should have been ample notice, yes she should have responded, and yet she didn’t. 
+
+I make things. I don’t host things for my customers yet but I’d like to think when I get there I’d have a way to restore from backup and also an ounce of EMPATHY. Ten years of content is heartbreaking. 
+
+If you have any contacts or if anyone I know has contacts at atlassian reach out to the poster here
+
+Like
+like
+6
+
+Reply
+View Aaron King’s  graphic link
+Aaron King
+   • 2nd
+Smart and Fun to Work With.
+2d
+
+Great reminder to backup. Backups are our friends. GitHub, One Drive, iCloud, Google Drive, Confluence, are not our friends. Nothing is guaranteed but disasters will happen, it’s when, not if.
+
+Like
+like
+2
+
+Reply
+View Cédric Renzi’s  graphic link
+Cédric Renzi
+ • 3rd+
+R&D - Dev(Sec)Ops | Multiphysics Sims&Tests | Systems Modeling/Design/Optimization/V&V | Scientifical SW Dev&Data analysis | Troubleshooting&Digitalization | Project mgmt&Team inspiration
+(edited)
+3d
+
+Regular pdf extraction, kinda personal backup, of the Space is the usual preparation to recovery path.
+
+Like
+like
+2
+
+Reply
+View Justin M.’s  graphic link
+Justin M.
+   • 3rd+
+Cloud Infrastructure engineering, DevRel, DevOps
+20h
+
+Brutal. This happened to me using Zoho invoices. Soon as I was inactive the entire organization gets deleted with no recovery path. I learned my lesson there. Good luck though, hope there's a path for her
+
+Like
+
+Reply
+View David L. Willson’s  graphic link
+David L. Willson
+ • 2nd
+Founder, Engineer, and Teacher at Software Freedom School
+2d
+
+Ensure that every important thing always exists in more than one place. Let the number of places and distance between them be proportional to the importance of the thing.
+
+Anytime this is found to be untrue, it must be because it's impossible (one cannot create a backup copy of a human or a forest), because the thing is not actually as important as we thought, or because we failed to do something.
+
+Corollary: Anything that is not used will not be maintained.
+
+Like
+
+Reply
+View Ryan K.’s  graphic link
+Ryan K.
+ • 2nd
+Computer Programmer, Business Owner/Operator
+2d
+
+SaaS as a concept is abuse waiting to happen. We need a real competitive market with local ownership options.
+
+Like
+like
+3
+
+Reply
+View 🌞Svavar S.’s  graphic link
+🌞Svavar S.
+   • 3rd+
+Technology Leader - Cat Hearder - Silo Breaker Througher
+1d
+
+If she's not paying, she's not the customer.
+
+I'm sorry your friend lost all that work.
+
+Hopefully this will be a lesson in the importance of backups and taking out a paid subscription rather than relying on a free product for critical data.
+
+Like
+
+Reply
+1 reply
+1 Comment on 🌞Svavar S.’s comment
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+23h
+
+🌞Svavar S. This is absolutely not the case in a freemium model. Companies still have a responsibility to protect your data.
+
+Like
+
+Reply
+View Elizabeth Jones’  graphic link
+Elizabeth Jones
+   • 2nd
+Product and Operations Executive | GenAI and Enterprise Transformation | Driving Scalable Business Impact
+3d
+
+Have you reached out to Atlassian? Deleted without warning is very unusual behavior and I’m certain that they would be happy to help you resolve the issue.
+
+Like
+like
+2
+
+Reply
+1 reply
+1 Comment on Elizabeth Jones’ comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Elizabeth Jones it clearly wasn't deleted without warning. Atlassian sends multiple emails regarding deletion of sites. I think at least five or six. I know because I provision a lot of free sites. 
+
+Like
+like
+2
+
+Reply
+View Dimitre Dimitrov’s  graphic link
+Dimitre Dimitrov
+   • 2nd
+Agile Delivery, Transformation Lead
+3d
+
+I noticed Atlassian are a sponsor to an F1 team (Williams maybe). 
+
+A long shot, but they might care of their perceived image more on an F1 forum than on a support thread. So if you can figure out how to make it stink for them over there, maybe one of their marketing/image people can care enough to engage 
+
+Like
+like
+4
+
+Reply
+View Fadoua M. B.’s  graphic link
+Fadoua M. B.
+   • 2nd
+Sr. Atlassian Developer @ Freddie Mac | Information Technology, Agile Methodologies
+3d
+
+This is a reminder to read the notification emails we get, not to setup a filter and have them deleted automatically or disregard them. I feel bad for you that you lost this much data.
+
+Like
+like
+2
+
+Reply
+View Eric Xanderson’s  graphic link
+Eric Xanderson
+   • 3rd+
+Professional Geologist & Technologist
+3d
+
+enshittification is the business model to rule a sociopathic business class for technology.
+
+Like
+like
+8
+
+Reply
+2 replies
+2 Replies on Eric Xanderson’s comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+Eric Xanderson confused where 120 days of complete inactivity plus four reminders and a paltry $$6.70/month for perpetual availability is enshittification.
+
+Like
+like
+3
+
+Reply
+View Eric Xanderson’s  graphic link
+Eric Xanderson
+   • 3rd+
+Professional Geologist & Technologist
+8h
+
+Todays great deal is tomorrows lock in.
+
+Like
+
+Reply
+
+Collapse replies
+View Craig Cockburn’s  graphic link
+Craig Cockburn
+   • 2nd
+Business improvement, delivery and transformation specialist - Agile, Lean, Product, Coaching, Product, Critical thinking. Winner, IT Project Team of the Year (British Computer Society). I deliver long term value.
+3d
+
+No warning? 
+Comment image, no alternative text available
+
+Like
+like
+7
+
+Reply
+1 reply
+1 Comment on Craig Cockburn’s comment
+View Kevin G.’s  graphic link
+Kevin G.
+   • 3rd+
+PR & CSR | Digital Skills Trainer and Strategy Consultant.
+22h
+
+Craig Cockburn I've had this email from Atlassian a few times over the years. They don't just nuke an account to unrecoverable, with no warning - something's definitely off here.
+
+Like
+
+Reply
+View Andrew Day’s  graphic link
+Andrew Day
+   • 3rd+
+FedRAMP & Cloud Security Strategy | GRC Leadership for Gov & Healthcare | Salesforce Security Architect | USAF Veteran
+3d
+
+I don’t think the responsibility is being properly framed here.
+
+Like
+like
+4
+
+Reply
+View Jannis Schreiber’s  graphic link
+Jannis Schreiber
+ • 3rd+
+Building in house Salesforce Solutions at day. And an open-source security audit engine for Salesforce at night.
+3d
+
+Comes a little late, but she should give „Obsidian“ a try :)
+
+Like
+like
+2
+
+Reply
+View Johan Ovlinger’s  graphic link
+Johan Ovlinger
+ • 3rd+
+Software Engineer
+1d
+
+Didn’t JWZ say something about this: you have an organization problem. “I know” you say, “I’ll use atlassian”. Now you have two problems. 
+
+Like
+
+Reply
+View Lorde Astor West’s  graphic link
+Lorde Astor West
+   • 2nd
+Hello World 👾 Operator building the aiOS for humans + machines
+1d
+
+Nothing is ever "deleted"
+
+Like
+like
+1
+
+Reply
+View Vincent Huijts’  graphic link
+Vincent Huijts
+   • 2nd
+Tech lead | Crafting software | Java | Kotlin | Architecture | RDBMS | Event-driven
+6h
+
+I recommend generating your confluence pages from asciidoc. But yeah, pretty meh
+
+Like
+
+Reply
+View Chale Dodge’s  graphic link
+Chale Dodge
+   • 2nd
+Strategic & People-Focused Business Analysis Leader | Agile | Lean Six Sigma | PROSCI | Prince2 | Leading High Performance Teams | Digital Transformation | Strategic Planning & Execution
+3d
+
+Mike Cannon-Brookes any recommendations to help an old customer out?
+
+Like
+
+Reply
+View Lyndon Warner’s  graphic link
+Lyndon Warner
+   • 3rd+
+Securing SaaS & Cloud Data | Account Executive @ Rewind | Protecting What Matters
+1d
+
+Really sorry to hear this, Michael Wolf. Situations like this are exactly why we built Rewind. It’s meant to give you a safety net so important work doesn’t just disappear, and so recovery is simple when things go sideways. Let me know if there’s any way we can help.
+
+Like
+celebrate
+1
+
+Reply
+View Michael W.’s  graphic link
+Michael W.
+ • 3rd+
+Somebody needs to update this.
+2d
+
+Internet Archive? ( Always a good idea to backup. )
+
+Like
+
+Reply
+View Vitaly Karasik’s  graphic link
+Vitaly Karasik
+   • 2nd
+VitalyOps Consulting: DevOps | Observability | CICD | Cloud | GitHub Actions | AWS Cost Optimization | High Availability | Linux | Security / 40 years of experience “There is no compression algorithm for experience”
+2d
+
+Are there more details?
+Did Atlassian send emails in advance? What was exactly reason for canceling his account?
+
+Like
+
+Reply
+View Rakib Mirza’s  graphic link
+Rakib Mirza
+   • 3rd+
+Principal Engineer — AI Native | Cloud, Microservices & DevSecOps | Retail & eCommerce Transformation
+2d
+
+Same here but luckily that was a throwaway account with all AI generated stuff.
+
+Like
+
+Reply
+View Johannes '🔥' Bertens’  graphic link
+Johannes '🔥' Bertens
+   • 2nd
+Dynamics 365, Power Platform, Copilot - what else do you need?
+3d
+
+Oh wow! That's horrible.
+
+Cloud services are convenient, but keep a backup of your valuables
+
+Like
+celebrate
+1
+
+Reply
+View Mr. John P.’s  graphic link
+Mr. John P.
+   • 3rd+
+Founder: Cielo Vista Software
+1d
+
+I've always hated that platform always. Sorry this happened to you. Github appears to be working for me 8th year now.
+
+Like
+
+Reply
+View Kevin Riedl 🐌🍫’s  graphic link
+Kevin Riedl 🐌🍫
+   • 2nd
+F*cked by Dev Shop? We fix Software, we build it and we stop you from building something nobody buys or WE PAY 💻 Fractional Co-Founder ➝ Build (Software Development) ➝ Break (QA / Testing). Fractional CTO/CPO (Product)
+1d
+
+how to alienate users
+
+Like
+
+Reply
+View Tracy Bannon’s  graphic link
+Tracy Bannon
+   • 2nd
+Software Architect & Researcher | Real Technologist | Advancing AI-Augmented Software Engineering | DevOps Champion | International Speaker | Author | Mentor
+2d
+
+We need to have an “oh sh*t” button to react to the situation
+
+Like
+
+Reply
+View AJ Omernik’s  graphic link
+AJ Omernik
+   • 2nd
+The best stories involve grit, heart, and more than a little bit of coffee. Just please don’t drop a gritty heart in my coffee, that’s gross.
+3d
+
+I am so sorry for your friend but I'm so glad you posted this. This is an outstanding cautionary tale. Atlassian should be ashamed.
+
+Like
+
+Reply
+1 reply
+1 Comment on AJ Omernik’s comment
+View Bryan Guffey’s open to work graphic link
+Bryan Guffey
+   • 2nd
+Atlassian Architect | System of Work Advocate | Strategic Communicator
+2d
+
+AJ Omernik ashamed of what? Reminding her four times that she needed to log back in to keep her site active? For asking her to pay $6.70/month if she wanted more storage? For giving her an additional 60 days after her site was deactivated to reactivate her account and still have access to all her data? For giving her built-in tools to back up her data? 
+
+What should they be ashamed of?
+
+Like
+like
+1
+
+Reply
+View Piotr Dudała’s  graphic link
+Piotr Dudała
+   • 3rd+
+versatile software tester
+2d
+
+There are 10 types of people in the industry...
+
+Like
+
+Reply
+View Shawn Wallack’s  graphic link
+Shawn Wallack
+   • 2nd
+Follow me for unconventional Agile, AI, and Project Management opinions and insights shared with humor.
+2d
+
+Michael Wolf Horrible. What a terrible lesson.
+
+Like
+
+Reply
+View Ryan M.’s  graphic link
+Ryan M.
+   • 2nd
+Co-founder; Factotum & Majordomo. Syndicalist. Perpetual Mentee.
+2d
+
+I just use One Note.
+
+Like
+
+Reply
+1 reply
+1 Comment on Ryan M.’s comment
+View Aaron Cooke’s  graphic link
+Aaron Cooke
+   • 2nd
+CTO & Co-Founder at CLARA | Techno-Interpreter | Digital Ecosystem Architect | Deadline Crusher
+2h
+
+Ryan M. I’ve been logging in every month to maintain a small number of not terribly important documents in confluence and finally decided to just let them go. Also, we switched over to youtrack from Jira. So far seems like a decent enough product for a small team.
+
+Like
+
+Reply
+
+About
+Accessibility
+Help Center
+
+Privacy & Terms
+Ad Choices
+Advertising
+
+Business Services
+Get the LinkedIn app
+More
+ LinkedIn Corporation © 2026
+Michael Wolf
+MessagingYou are on the messaging overlay. Press enter to open the list of conversations.
+
+Compose message
+You are on the messaging overlay. Press enter to open the list of conversations.
