@@ -1,0 +1,50 @@
+when people swear it’s the company is pretty high. 
+
+It’s not impossible that you had the experience you describe, no company is perfect, but it would far and away be the very rare minority experience.
+
+I take objection to people simply assuming a story that files in the face of all of the stated policies of a company, with zero evidence of the facts, is true.
+…more
+
+Like
+
+Reply
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+(edited)
+3d
+
+Let this be a lesson for everyone. Tech regulation is practically inexistent. I use markdown-based Obsidian locally for all my documents (migrated from Evernote and couldn't be happier) and do the same (local) for everything I can, like LLMs (ollama) and security camera footage, for example.
+…more
+
+Like
+like
+9
+
+Reply
+17 replies
+17 Replies on Javier Bonnemaison’s comment
+
+See previous replies
+View Javier Bonnemaison’s  graphic link
+Javier Bonnemaison
+   • 2nd
+Software development operational excellence practitioner and consultant
+1d
+
+Bryan Guffey Whatever business model Atlassian decided to deploy, it was based on their needs and strategy. They are not doing free users any favors, they simply assume that some of them will convert to paid and perhaps generate some positive reviews and/or referral sales, and they are calculating that this is a good investment. Offering this service in good faith includes taking reasonable measures to protect and preserve user content, as well as making it easy for people to take their content with them for any reason (I assume that Atlassian does not provide a tool to conveniently do this, as it would harm user lock-in, but I may be wrong). Ultimately, they are free to change their commercial terms, but they still have a responsibility to protect user content to the best of their abilities. Regulation could, for example, require companies to archive user accounts for a full year after termination in a portable format (like markdown) and contact users repeatedly via multiple channels if possible. In the current world, if a manager decides that they want to cut storage costs or make some other KPI look better this quarter, and that involves deleting user accounts after minimal warning, users have no recourse whatsoever.
+…more
+
+Like
+like
+2
+
+Reply
+View Michael Vizdos’  graphic link
+Michael Vizdos
+   • 2nd
+Chief Product Officer | Strategic Advisor | EdTech | CST
+3d
+
+A good reminder.  Anything we get for “free” means we ARE 
