@@ -1,6 +1,5 @@
 # Bryan Guffey
 
-
 ## ChatGPT letter
 
 ### V5
@@ -21,9 +20,7 @@ No obligation at all — but given your experience in the Atlassian ecosystem, I
 
 Thanks for engaging thoughtfully.
 
-
 ### V4
-
 
 Hi Bryan —
 
@@ -40,7 +37,6 @@ We’ve also documented a more detailed, source-backed timeline of the interacti
 No obligation at all — but given your experience in the Atlassian ecosystem, I’d genuinely value your take on whether this fits any known edge cases, backend classifications, or recent changes that wouldn’t be obvious from public documentation.
 
 Thanks for engaging thoughtfully.
-
 
 ### V3
 
@@ -60,7 +56,6 @@ No obligation at all — but given your experience in the Atlassian ecosystem, I
 
 Thanks for engaging thoughtfully.
 
-
 ### V2
 
 Hi Bryan —
@@ -77,12 +72,9 @@ No obligation at all — but if you’re willing to take a look and share a pers
 
 Thanks again for engaging thoughtfully.
 
-
-
 ### V1
 
-https://chatgpt.com/g/g-p-69654b7112ac81918ba608f982a158fd-wendy-s-confluence-data/c/69617f8e-5750-832f-8f1a-f8cccc50fdb9
-
+<https://chatgpt.com/g/g-p-69654b7112ac81918ba608f982a158fd-wendy-s-confluence-data/c/69617f8e-5750-832f-8f1a-f8cccc50fdb9>
 
 Hi Bryan —
 

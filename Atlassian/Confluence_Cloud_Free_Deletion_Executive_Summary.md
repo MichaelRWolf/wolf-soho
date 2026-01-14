@@ -1,9 +1,11 @@
 # Executive Summary  
+
 ## Confluence Cloud Free Site Deletion (Late 2025)
 
 This executive summary distills a documented experience involving the permanent deletion of a long‑standing **Confluence Cloud Free** site due to inactivity.
 
 The purpose is twofold:
+
 1. To warn other users of data‑loss risk earlier than was apparent here.
 2. To accurately reflect what Atlassian support confirmed *after* deletion occurred.
 
