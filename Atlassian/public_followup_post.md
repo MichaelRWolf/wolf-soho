@@ -1,5 +1,41 @@
 # Public Followup Post
 
+## Shortened prose
+
+TL;DR:  My collegue logged in the day after a personal Atlassian message clarified that Free plans are deactivated after 120 days of inactivity.  61 days later, the subscription was expired and the data had already been deleted.  The following is a short summary of their experience.
+
+summarizes their experience.
+
+ in detail in another
+
+summarizes my colleagues actual experience,
+
+The day after being advised that Free plans are deactivated after
+
+Immediately after being advised tha Free plans deactivate after 120 days of inactivity, collegue logged in
+
+Given the volume of comments about inactivity windows and recovery expectations, I want to clarify what actually occurred, based solely on written support responses and confirmed dates.
+
+The Confluence site belonged to a long-standing colleague who began using Confluence at my suggestion. The timeline below documents the observed sequence of events.
+
+On Sep 29, 2025 (Day -1), an Atlassian Customer Advocate wrote:
+> “Confluence on a Free plan will be deactivated after 120 days of inactivity. To prevent your site from being deactivated, just log in and view any Confluence page — that’ll count as activity and reset the 120-day clock.”
+
+The next day (Sep 30, 2025, Day 0), logged in and used Confluence extensively (later confirmed by Atlassian).
+
+What happened next:
+• Day 44 (Nov 13): the Confluence subscription was expired for “inactivity” (date learned retroactively)
+• Day 58 (Nov 27): site data was permanently deleted after a 14-day soft-deletion window (date learned retroactively)
+• Day 61 (Nov 30): login failed for the first time, first noticed problem
+• Day 61 (Nov 30): Started communication with Atlassian.
+• Day 62-91: A prolonged back-and-forth with multiple Atlassian teams
+• Day 91 (Dec 30, 2025): Atlassian Cloud Support wrote:
+  “The inactivity period was updated from 120 days to 40 days. Unfortunately, there are no options to recover the data.”
+
+• Day 120 (Jan 28) This date marks the originally communicated inactivity window under which the site was expected to remain active, based on prior written guidance.
+
+Day 120 is still in the future.
+
 ## TODO
 
 - Provide dates of emails. Indicate whether they included deadline for account access, deadline for data recovery, backup tools, export tools, or account upgrade options.  Good to acknowledge that emails arrived, and document that they were not helpful.  (Maybe)
