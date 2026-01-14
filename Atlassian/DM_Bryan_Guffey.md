@@ -8,13 +8,13 @@ Hi Bryan —
 
 Thanks again for engaging in the thread and sharing your perspective. I appreciate you doing that publicly, especially in a comment stream that attracted a lot of heat and side conversations.
 
-I understand why, based on how Atlassian’s policies are usually described, this situation would sound unlikely. That expectation is exactly why we were surprised by what unfolded.
+I understand why, based on how Atlassian’s policies are usually described, this situation would sound unlikely. That expectation is exactly why my colleague and I were surprised by what unfolded.
 
 I posted a short public clarification today that lays out the sequence of events using confirmed dates and written support responses.
 
 For additional context: my colleague has been a long-time Confluence user, has recommended it to others over the years, and has used paid Atlassian products for other work. This was a long-running, actively used site.
 
-We’ve also documented a more detailed, source-backed timeline of the support interactions, in case that’s useful beyond the public summary. I’m happy to share that, or to walk through it on a call, if you think it would help interpret what we saw.
+Due to the attention this post recieved, my colleague documented a more detailed, source-backed timeline of the support interactions, in case that’s useful beyond the public summary. I’m happy to share that, or to walk through it on a call, if you think it would help interpret what my colleague saw.
 
 No obligation at all — but given your experience in the Atlassian ecosystem, I’d genuinely value your take on whether this fits any known edge cases, backend classifications, or recent changes that wouldn’t be obvious from public documentation.
 
