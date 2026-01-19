@@ -1,3 +1,7 @@
+# Header 1
+
+## Header 2
+
 ### Prompt to Generate Mermaid Code
 
 Take the following Markdown file, which describes a home network setup, including nodes, network connections, and modes of operation. Generate a Mermaid diagram that represents:
@@ -8,6 +12,7 @@ Take the following Markdown file, which describes a home network setup, includin
 Use proper Mermaid syntax for the graph, and ensure subgraphs are labeled with descriptive titles matching the modes.
 
 #### Input Example
+
 ```markdown
 ### Home Network Description
 

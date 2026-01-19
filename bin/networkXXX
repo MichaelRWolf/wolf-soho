@@ -1,0 +1,27 @@
+#! /bin/bash
+
+set -euo pipefail
+
+function warn() { echo "WARN: $@" >&2; }
+function info() { echo "INFO: $@" >&2; }
+
+
+function is_iperf3_listening(){
+    host=$1
+    port=$2
+
+    if ! nc -w2 -z "$host" "$port" >/dev/null 2>&1; then
+	warn "iperf3 server not reachable at $host:${port}"
+	return 1
+    fi
+    return 0
+}
+
+
+iperf3_server_name='wolf-air.local'
+iperf3_server_port'5201'
+
+if is_iperf3_listening $iperf3_server_name $iperf3_server_name
+
+if
+    

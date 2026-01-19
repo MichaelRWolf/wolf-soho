@@ -10,7 +10,7 @@
 ## Email Server - Fastmail
 
 - **Service:** Fastmail Email Hosting
-- **Account:** michaelrwolf@fastmail.net
+- **Account:** <michaelrwolf@fastmail.net>
 - **Plan:** Duo
 - **Domain:** runningwolf.net
 - **Login URL:** [https://www.fastmail.com/login](https://www.fastmail.com/login)

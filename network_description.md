@@ -1,6 +1,11 @@
+# Header 1
+
+## Header 2
+
 ### Home Network Description
 
 #### Nodes
+
 1. Portable Router:
    - Acts as a repeater for WiFi or provides local LAN/WiFi access.
    - Can connect to external WiFi (e.g., public WiFi or iPhone hotspot).
@@ -20,6 +25,7 @@
    - Can access the internet through the router, depending on the mode.
 
 #### Network Connections
+
 - Portable Router:
   - Can repeat WiFi signals (e.g., public WiFi or iPhone hotspot).
   - Provides LAN and WiFi connectivity for MacBook and NAS.
@@ -33,6 +39,7 @@
   - Internet access depends on the Portable Router's upstream connection.
 
 #### Modes
+
 1. Offline Mode:
    - Internet: None.
    - Access: MacBook communicates with NAS through the Portable Router.
