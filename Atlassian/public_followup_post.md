@@ -2,23 +2,31 @@
 
 ## Shortened prose - Post & Pin This
 
-Given the volume of comments about inactivity windows and recovery expectations, I want to clarify what actually occurred in an ultra-short summary.
+Given the volume of discussion about inactivity windows and recovery expectations, here is a brief clarification of what occurred.
 
-In a reply message, Atlassian clarified that Free plans are deactivated after 120 days of inactivity.  The next day, Sep 30 (Day 0), my colleague logged in to Confluence (confirmed by Atlassian). The site was expired at Day 44, deleted at day 58, only to be discovered at Day 61.  On Day 91, after a prolonged back/forth with many Atlassian teams, Atlassian Cloud Support wrote:
+Atlassian support stated in writing that Free plans are deactivated after 120 days of inactivity. The following day, Sep 30 (Day 0), my colleague logged in and used Confluence (later confirmed by Atlassian).
 
-  “The inactivity period was updated from 120 days to 40 days. Unfortunately, there are no options to recover the data.”
+Despite that activity:
 
-In the previous 5+ years, many 61-day periods of inactivity had not resulted in expiration or deletion.
+Day 44: the subscription was expired for “inactivity”
 
-Today, we are still within the 120-day period that started on the last confirmed login date.  Neither the account nor the data are accessible.
+Day 58: site data was permanently deleted
+
+Day 61: the issue was first noticed when login failed
+
+After a prolonged exchange with multiple teams, Atlassian Cloud Support wrote on Day 91:
+
+“The inactivity period was updated from 120 days to 40 days. Unfortunately, there are no options to recover the data.”
+
+For more than five prior years, multiple 61-day inactivity periods had not resulted in expiration or deletion.
+
+Today, is still within 120 days of the last confirmed login under the previously stated guidance, yet neither the account nor the data are accessible.
+
+A longer summary is linked in a follow-up comment.
 
 ----
 
-For a medium-lenght summary (or link to a long summary), see comment.
-
-----
-
-## Comment to the posted/pinned comment
+## Reply 1 to the posted/pinned comment
 
 • Day -1 (Sep 29, 2025): Atlassian Customer Advocate wrote:
   “Confluence on a Free plan will be deactivated after 120 days of inactivity. To prevent your site from being deactivated, just log in and view any Confluence page — that’ll count as activity and reset the 120-day clock.”
@@ -35,7 +43,9 @@ For a medium-lenght summary (or link to a long summary), see comment.
 
 • Day 120 (Jan 28): This date marks the originally communicated inactivity window under which the site was expected to remain active, based on prior written guidance.
 
-We’ve also documented a more detailed, source-backed timeline of the support interactions, in case that’s useful beyond the short summary -- <https://docs.google.com/document/d/1PxOWALqoezgVpwf4ZHPFECNeTDXNeO2mB94RCI3rRZU/edit?usp=sharing>
+## Reply 2 to the posted/pinned comment
+
+There is also a more detailed, source-backed timeline of the support interactions, in case that’s useful beyond the short summary -- <https://docs.google.com/document/d/1PxOWALqoezgVpwf4ZHPFECNeTDXNeO2mB94RCI3rRZU/edit?usp=sharing>
 
 ## TODO
 
@@ -59,7 +69,6 @@ We’ve also documented a more detailed, source-backed timeline of the support i
 |                             | January 14, 2026   | TODAY                                                                          | 104 days            |
 |-----------------------------|--------------------|--------------------------------------------------------------------------------|---------------------|
 |                             | January 28, 2026   |                                                                                | 120 days            |
-|                             |                    |                                                                                |                     |
 
 ## Timeline of Events - Extended
 

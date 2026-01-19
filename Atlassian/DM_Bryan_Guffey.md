@@ -2,6 +2,35 @@
 
 ## ChatGPT letter
 
+### V6
+
+Subject: Would value your perspective on the Confluence site deletion
+
+Hi Bryan —
+
+Thanks again for engaging my post about a colleague's Confluence site deletion, and sharing your perspective. I appreciate you doing that publicly, especially in a comment stream that attracted a lot of heat and side conversations.
+
+I understand why, based on how Atlassian’s policies are usually described, this situation would sound unlikely. That expectation is exactly why my colleague and I were surprised by what unfolded.
+
+I posted a short public clarification today that lays out the sequence of events using confirmed dates and written support responses.
+
+Because of the attention this received, my colleague invested additional time documenting a detailed, source-backed timeline of the support interactions. The document is a careful reconstruction drawn from a month of emails, tickets, and written responses, and reflects her direct experience navigating the process.
+
+The reference is included below for context. I’m also happy to walk through it on a call, or to answer any questions, if you think it would be useful beyond the public summary.
+
+No obligation at all — but given your experience in the Atlassian ecosystem, I’d genuinely value your take on whether this aligns with any known edge cases, backend classifications, or recent changes that wouldn’t be obvious from public documentation.
+
+I reached out privately to avoid adding more noise to the public thread.
+
+Thanks again for engaging thoughtfully.
+
+Michael
+
+—
+**Reference (optional):**
+Detailed Observations & Communications
+<https://docs.google.com/document/d/1PxOWALqoezgVpwf4ZHPFECNeTDXNeO2mB94RCI3rRZU/edit?tab=t.0#heading=h.lqkpt7vtq13v>
+
 ### V5
 
 Hi Bryan —
@@ -12,13 +41,16 @@ I understand why, based on how Atlassian’s policies are usually described, thi
 
 I posted a short public clarification today that lays out the sequence of events using confirmed dates and written support responses.
 
-For additional context: my colleague has been a long-time Confluence user, has recommended it to others over the years, and has used paid Atlassian products for other work. This was a long-running, actively used site.
-
-Due to the attention this post recieved, my colleague documented a more detailed, source-backed timeline of the support interactions, in case that’s useful beyond the public summary. I’m happy to share that, or to walk through it on a call, if you think it would help interpret what my colleague saw.
+Due to the attention this post recieved, my colleague documented a more detailed, source-backed timeline of the support interactions, in case that’s useful beyond the public summary.  I’m happy to share that, or to walk through it on a call, if you think it would help interpret what my colleague saw.
 
 No obligation at all — but given your experience in the Atlassian ecosystem, I’d genuinely value your take on whether this fits any known edge cases, backend classifications, or recent changes that wouldn’t be obvious from public documentation.
 
 Thanks for engaging thoughtfully.
+
+Michael
+
+Reference (Optional):
+ Detailed Observations & Communications: <https://docs.google.com/document/d/1PxOWALqoezgVpwf4ZHPFECNeTDXNeO2mB94RCI3rRZU>
 
 ### V4
 
