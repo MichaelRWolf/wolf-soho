@@ -1,6 +1,7 @@
 # Michael-Pro Battery Replacement Project
 
 ## Device Information
+
 - **Device**: `michael-pro` (MacBook Pro)
 - **Model**: 13-inch, 2020, Four Thunderbolt 3 ports
 - **Model Identifier**: MacBookPro16,2
@@ -12,6 +13,7 @@
 - **System Firmware**: 2075.140.4.0.0
 
 ## Battery Status
+
 - **Current Status**: Service Recommended ⚠️
 - **Battery Health**: Poor (1,501 cycles)
 - **Cycle Count**: 1,501 (Apple recommends replacement at 1,000)
@@ -24,6 +26,7 @@
 - **Hardware Revision**: 2
 
 ## Project Tasks
+
 - [x] Check current battery health and cycle count
 - [ ] Research battery replacement options
 - [ ] Order replacement battery (MacBook Pro 13-inch 2020, Model A2251)
@@ -33,10 +36,12 @@
 - [ ] Update documentation
 
 ## Notes
+
 - Battery is significantly degraded with 1,501 cycles (50% over Apple's 1,000 cycle recommendation)
 - System shows "Service Recommended" status
 - Capacity reduced to 3,691 mAh from original specification
 - Need battery specifically for MacBookPro16,2 (2020 13-inch model)
 
 ## Resources
-https://www.ifixit.com/Search?query=MacBookPro16%2C2+battery
+
+<https://www.ifixit.com/Search?query=MacBookPro16%2C2+battery>

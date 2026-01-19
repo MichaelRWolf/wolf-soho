@@ -32,8 +32,10 @@ Friendly.  Apprecative.  Asking a favor.  Relying on relatedness from previous 3
 - My final shot at handling this alone was misguided.  I thought that I could use the same device that Katya uses, but configure it to "stand-alone mode" instead of factory default (mesh) mode.  That is incorrect.  I now know that I can not **attach to** the Unifi mesh, but must, rather, be **adopted by** the mesh.  See appendix for suggestions, but first, is this something you can assist with or direct me on?
 
 Appendix:
+
 - Unifi device - model, MAC address
 - Alternatives
+
  1. Adopt my device into existing mesh.  It will become become part of the mesh.  Anyone can attach via my device with no observable difference.
  2. Create similar structure to "Trails End Crew" or "Lake Effect Farm", say "Wolf Enterprises" or "Wolf Den".
 
@@ -50,6 +52,7 @@ We've been experiencing some internet connectivity challenges this summer, and I
 I'm reaching out to ask for your advice on next steps. My latest attempt to solve this myself was misguided - I purchased a UniFi AC Mesh device (same model Katya uses) thinking I could configure it in "stand-alone mode" to attach to the existing mesh. I now realize that's not how UniFi mesh networks work - I can't simply attach to the mesh, but rather need to be adopted by it.
 
 Here's what I'm working with:
+
 - Device: Ubiquiti UAP-AC-M-US
 - MAC Address: D8:B3:70:CC:AA:7C
 - Current status: Factory reset, ready for adoption

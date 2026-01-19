@@ -18,6 +18,7 @@
 | Charger, Apple - No load         | 0.02  |
 
 Notes:
+
 - `michael-pro` is always in low-power mode.
 
 ## Observations
