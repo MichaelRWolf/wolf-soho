@@ -52,52 +52,70 @@ Day 120 is January 28, 2026
 > Based on what we’ve now confirmed, is there *any* internal escalation path or known edge case worth trying **before Day 120** (January 28), or does this look like a hard stop once deletion has occurred?
 > Totally fine either way — a yes/no from your perspective would be helpful guidance.
 
+Sent: 2026-01-19T19:42-05:00
+
 ---
 
 ### Jan 20–22 – Action‑Offer Outreach (Max 2–3)
 
 #### DM to Jace Benson (Jan 20)
 
-> Hi Jace — your comment about escalation paths caught my eye.
-> Given we’re still within the originally stated 120‑day window, is there any role or channel you’d suggest exploring before Day 120 (January 28)?
+> Hi Jace —
+> Thank you for the empathy you expressed around the data loss. Your comment centered the human impact in a thread that was otherwise focused on mechanics, policy, and tech.
+> I wanted to acknowledge that perspective. I appreciated you naming it.
+
+Sent: 2026-01-19T20:00-05:00
 
 #### DM to Chale Dodge (Jan 21)
 
 > Hi Chale — you mentioned exec‑level visibility as sometimes making a difference.
 > In a case like this, is there any specific function or role worth approaching before Day 120 (January 28)?
 
+Not sent.
+
 #### DM to Lyndon Warner (Jan 22)
 
 > Hi Lyndon — appreciated your offer around recovery tooling.
-> Given the timeline here, is there *any* realistic recovery angle left, or is deletion effectively final once executed?
+>
+> Given the timeline here (Day 120 is January 28), is there *any* realistic recovery angle left, or is deletion effectively final once executed?
+>
+> Best,
+> Michael
+
+Sent: 2026-01-19T20:17-05:00
 
 ### Relationship Follow-Ups (Non-Recovery)
 
 #### DM to Helen O — Jan 19, 2026
 
-Hi Helen —
+> Hi Helen —
+>
+> Your comment about account age and creation paths resonated. Having seen how different departments (marketing, billing, operations) can carry different definitions of “state,” it seems plausible that internal provisioning changes could unintentionally move an older account into a different expiration flow.
+>
+> I appreciated you keeping open the idea that long institutional memory isn’t always consistent across systems.
+>
+> Thanks for adding that nuance.
 
-Your comment about account age and creation paths resonated. Having seen how different departments (marketing, billing, operations) can carry different definitions of “state,” it seems plausible that internal provisioning changes could unintentionally move an older account into a different expiration flow.
-
-I appreciated you keeping open the idea that long institutional memory isn’t always consistent across systems.
-
-Thanks for adding that nuance.
+Sent: 2026-01-19T20:19-05:00
 
 #### DM to Javier Bonnemaison — Jan 20, 2026
 
-Hi Javier —
+> Hi Javier —
+>
+> Your point that a freemium model doesn’t absolve a company of responsibility stuck with me. It reframed the discussion away from user behavior and toward trust boundaries in system design.
+>
+> That distinction clarified the issue more than most policy explanations. Appreciate you articulating it plainly.
+>
+> > "Caveat Emptor" is a political choice.
+>
+> Indeed!
+>
+> Here's to other choices.
+>
+> Best,
+> Michael
 
-Your point that a freemium model doesn’t absolve a company of responsibility stuck with me. It reframed the discussion away from user behavior and toward trust boundaries in system design.
-
-That distinction clarified the issue more than most policy explanations. Appreciate you articulating it plainly.
-
-#### DM to Lyndon Warner — Jan 21, 2026
-
-Hi Lyndon —
-
-Thanks for offering concrete recovery and tooling perspectives in the thread. Even where the specifics may not apply here, the way you think about “what’s still possible” rather than blame was useful.
-
-Appreciated you taking a practical angle.
+Sent: 2026-01-19T20:25-05:00
 
 ---
 
