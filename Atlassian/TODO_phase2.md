@@ -98,6 +98,15 @@ Sent: 2026-01-19T20:17-05:00
 
 Sent: 2026-01-19T20:19-05:00
 
+##### Helen's reply
+
+The following day..
+
+``` text
+100%. Although other longtime resources have since assured me that it's unlikely that happened, my gut instinct is that it is ENTIRELY possible. I definitely have two different accounts that were created at different times through different onboarding workflows, and different settings are applied to each, they get (or don't get) updates at different times, etc. If that's my experience, it's plausible to me that some other account creation path had different flags on it at some point in time that put it in the "delete" bucket but not the "notify" bucket.
+
+```
+
 #### DM to Javier Bonnemaison — Jan 20, 2026
 
 > Hi Javier —

@@ -68,26 +68,8 @@ _Select one option and mark complete._
 
 ## Personal DM from Michael to Helen
 
-**Intent:** Acknowledge Helen’s framing and ask quietly about possible internal routing or institutional knowledge — without transferring emotional labor to Wendy.
+See: [day_113_plan_helen.md](day_113_plan_helen.md)
 
-Helen — posture & assertions
-
-- Internal-system nuance
-- Plausibility of misaligned legacy flags
-
-Message
-
-```text
-Hi Helen —
-
-Thank you for your comment on the post. Your observation about different onboarding paths and account histories resonated strongly with what we observed.
-
-The site in question was an older account, and your framing helped make sense of how it might have moved through an unexpected lifecycle path.
-
-If there’s anyone you’d suggest who understands those internal distinctions — past or present — I’d appreciate knowing. No obligation at all.
-
-Thanks again for keeping that nuance visible.
-```
 
 ---
 
@@ -159,22 +141,7 @@ This is about **preserving self**, not proving facts.
 
 ### Wendy → Helen
 
-**Intent:** Speak as primary source; affirm continuity of lived work; acknowledge Helen’s systems framing.
-
-Message
-
-```text
-Hi Helen —
-
-I’m the account holder Michael referred to. I wanted to thank you for naming the possibility that different onboarding paths or legacy flags could lead to divergent outcomes — that aligned closely with what I experienced.
-
-These materials were things I returned to repeatedly in my work, not archived notes, which made the loss especially disruptive.
-
-I’ve put together a short factual summary here in case it’s useful context:
-<link to ultra-short summary>
-
-No expectation of action — I simply appreciated your perspective.
-```
+See: [day_113_plan_helen.md](day_113_plan_helen.md)
 
 ---
 
