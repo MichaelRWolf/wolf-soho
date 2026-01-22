@@ -71,34 +71,9 @@ _Select one option and mark complete._
 
 See: [day_113_plan_helen.md](day_113_plan_helen.md)
 
-## Persoanl DMs to Michaels atlassian contacts
+## Persoanl DMs from Michaels to Atlassian contacts
 
-``` text
-Hi — quick favor, given your Atlassian background.
-
-A colleague lost 5+ years of Confluence content after the site was deleted by Day 59, despite being told the inactivity window was 120 days and logging in during that period. Support later confirmed the lifecycle window had changed internally.
-
-My post earlier this month got over 70,000 impressions (WOW! - personal record) but nothing that could determine
-- whether any recovery path still exists, and
-- whether this reflects a legacy-account edge case that could affect others.
-
-If you know of anyone who understands legacy flags or deletion routing at Atlassian, I’d appreciate a pointer. The 120-day window ends next week.
-
-
-Thanks.
-
-Michael
-
-(Optional) References
-  * My LinkedIn post - <https://www.linkedin.com/posts/mrwolf_confluence-deleted-10-years-of-work-after-activity-7415522186616377344-0MLB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAADxzIBUUakc3o7MptwunFkY9GeiKZrIN8>
-  * Timeline -- <https://www.linkedin.com/feed/update/urn:li:activity:7415522186616377344?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7415522186616377344%2C7417261789324943360%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287417261789324943360%2Curn%3Ali%3Aactivity%3A7415522186616377344%29>
-
-
-https://www.linkedin.com/feed/update/urn:li:activity:7415522186616377344?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7415522186616377344%2C7417261789324943360%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287417261789324943360%2Curn%3Ali%3Aactivity%3A7415522186616377344%29
-
-
-```
-
+[day_113_plan_atlassian_colleagues.md](day_113_plan_atlassian_colleagues.md)
 
 ---
 
