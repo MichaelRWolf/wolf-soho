@@ -130,7 +130,7 @@ This is about **preserving self**, not proving facts.
   - Use only if someone explicitly asks
 
 - Long reconstruction
-  - See [Reply: Link to long list](https://www.linkedin.com/feed/update/urn:li:activity:7415522186616377344?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7415522186616377344%2C7417261789324943360%29&replyUrn=urn%3Ali%3Acomment%3A%28activity%3A7415522186616377344%2C7417262544115015681%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287417261789324943360%2Curn%3Ali%3Aactivity%3A7415522186616377344%29&dashReplyUrn=urn%3Ali%3Afsd_comment%3A%287417262544115015681%2Curn%3Ali%3Aactivity%3A7415522186616377344%29)
+  - See [Reply: Link to long list](https://www.linkedin.com/feed/update/urn:li:activity:7415522186616377344?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7415522186616377344%2C7417261789324943360%29&replyUrn=urn%3Ali%3Acomment%3A%28activity%3A7415522186616377344%2C7417262544115015681%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287417261789324943360%2Curn%3Ali%3Aactivity%3A7415522186616377344%29&dashReplyUrn=urn%3Ali%3Afsd_comment%3A%287417262544115015681%2Curn%3Ali%3Aactivity%3A7415522186616377344%29) which points to <https://docs.google.com/document/d/1PxOWALqoezgVpwf4ZHPFECNeTDXNeO2mB94RCI3rRZU/edit?tab=t.0#heading=h.lqkpt7vtq13v>
   - Multi-page, source-backed
   - Represents significant care and labor
   - Not required for outreach; exists to honor the work done
