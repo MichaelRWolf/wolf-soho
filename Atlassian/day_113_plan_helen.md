@@ -61,16 +61,19 @@ Message
 ```text
 Hi Helen —
 
-Thank you for your reply. Your point about differing onboarding paths and legacy flags is exactly what we’re trying to understand.
+Thank you for your reply. Your point about differing onboarding paths and legacy flags is exactly what this turns on.
 
-At this stage we’re focused on two things:
-1) whether there is any remaining recovery path for this specific account, given its age and apparent lifecycle classification, and
-2) whether this reflects an edge case where older accounts can behave differently than what’s currently communicated.
+At this stage, there are two goals
+- Data recovery: identify whether any recovery path still exists for this specific account, given its age and lifecycle classification
+- Future prevention: determine whether this reflects a legacy-account edge case where deletion behavior diverges from what users are told to expect, creating risk for others
 
-If someone inside Atlassian would actually know how legacy flags and deletion routing worked — or where to even ask that question — I’d appreciate being pointed in that direction. If not, that’s also useful to know.
+If you know of a team or person who understands how legacy flags and onboarding paths affected deletion routing, I’d appreciate being pointed in that direction.
 
 Thanks for engaging seriously with this.
+
 ```
+
+Sent: 2026-01-21T20:22-05:00
 
 ---
 
