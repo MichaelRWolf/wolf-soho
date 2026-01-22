@@ -100,6 +100,28 @@ If there’s any remaining way to check whether this account was routed through 
 Thank you for engaging thoughtfully.
 ```
 
+To which she replied (22 minutes later)
+
+``` text
+Atlassian has recognised that difficulty as an issue for high-paying Enterprise customers, and as a result they put user-controlled backup functionality out for beta ifor Enterprise customers n mid-2025. (It's still in beta. And as far as online comments go, is not a full backup of all metadata.)
+
+```
+
+To which I replied (22 minutes later)
+
+``` text
+Helen,
+
+
+Thank you so much for the quick and thoughtful reply.  I appreciate the care and clarity your brought to this reply.  It's rare to connect with someone who can hold out the option that things are not always the way they are right now.
+
+Regardless of outcome, your willingness to engage seriously and share your perspective has been genuinely helpful.
+
+Best,
+Michael
+```
+
+
 ---
 
 ## Decision Outcomes
