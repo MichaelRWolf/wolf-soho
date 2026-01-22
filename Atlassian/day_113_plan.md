@@ -30,7 +30,7 @@ Outcome framing remains **neutral**: recovery may or may not occur.
 ## Tasks
 
 - [ ] **Michael** — Decide and execute Bryan close-out (no action or one-line reply)
-- [X] **Michael** — Send DM to Helen
+- [ ] **Michael** — Send DM to Helen
 - [ ] **Wendy** — Select up to 5 reposts using criteria below
 - [ ] **Wendy** — Post canonical comment on selected reposts (or consciously skip)
 - [ ] **Wendy** — Send private DMs to selected individuals

@@ -8,6 +8,8 @@ On Friday, 2026-01-09, I posted to LinkedIn:
 
 - [2025_data_purge.md](2025_data_purge.md)
 - [Original LinkedIn Post](https://www.linkedin.com/feed/update/urn:li:activity:7415522186616377344)
+- [Original LinkedIn Post (different UFL?)](https://www.linkedin.com/posts/mrwolf_confluence-deleted-10-years-of-work-after-activity-7415522186616377344-0MLB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAADxzIBUUakc3o7MptwunFkY9GeiKZrIN8)
+
 
 |                        | Impressions | Reactions | Comments | Reposts | Profile views |
 |------------------------|-------------|-----------|----------|---------|---------------|
