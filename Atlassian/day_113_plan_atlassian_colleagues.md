@@ -33,6 +33,16 @@ Michael
 
 ## Recipients
 
+Sent 2026-01-22
+
+Drew G
+<https://www.linkedin.com/in/drewgarvey-enterprise/>
+
+Matt Wietlisbach
+<https://www.linkedin.com/in/matt-wietlisbach/>
+
+Sent 2026-01-21
+
 Isaac Montgomery
 <https://www.linkedin.com/in/isaacmontgomerypmp/>
 
