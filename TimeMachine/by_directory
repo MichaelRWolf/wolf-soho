@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Sum sizes by top-level directory under the path (e.g. /Users/michael/Pictures -> Pictures).
+# Usage: by_directory <export.tsv>
+
+if [[ -z "${1:-}" || ! -f "$1" ]]; then
+  echo "Usage: $0 <path/to/export.tsv>" >&2
+  exit 1
+fi
+EXPORT="$1"
+
+awk -F'\t' '
+NR == 1 { next }
+{
+  n = split($1, a, "/")
+  if (n >= 4)
+    dir = a[4]
+  else
+    dir = "(root)"
+  sum[dir] += $2
+}
+END {
+  for (d in sum)
+    print sum[d], d
+}' "$EXPORT" | sort -rn

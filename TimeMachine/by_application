@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Sum sizes by application (Library/Application Support, Caches, Containers).
+# Usage: by_application <export.tsv>
+
+if [[ -z "${1:-}" || ! -f "$1" ]]; then
+  echo "Usage: $0 <path/to/export.tsv>" >&2
+  exit 1
+fi
+EXPORT="$1"
+
+awk -F'\t' '
+NR == 1 { next }
+$1 ~ /\/Library\/Application Support\// {
+  sub(/.*\/Library\/Application Support\//, "", $1)
+  split($1, a, "/")
+  app = a[1]
+  sum["Application Support/" app] += $2
+  next
+}
+$1 ~ /\/Library\/Caches\// {
+  sub(/.*\/Library\/Caches\//, "", $1)
+  split($1, a, "/")
+  app = a[1]
+  sum["Caches/" app] += $2
+  next
+}
+$1 ~ /\/Library\/Containers\// {
+  sub(/.*\/Library\/Containers\//, "", $1)
+  split($1, a, "/")
+  app = a[1]
+  sum["Containers/" app] += $2
+  next
+}
+END {
+  for (k in sum)
+    print sum[k], k
+}' "$EXPORT" | sort -rn

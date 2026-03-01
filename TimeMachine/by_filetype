@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Sum sizes by file extension.
+# Usage: by_filetype <export.tsv>
+
+if [[ -z "${1:-}" || ! -f "$1" ]]; then
+  echo "Usage: $0 <path/to/export.tsv>" >&2
+  exit 1
+fi
+EXPORT="$1"
+
+awk -F'\t' '
+NR == 1 { next }
+{
+  path = $1
+  if (match(path, /\.[a-zA-Z0-9_]+$/))
+    ext = substr(path, RSTART)
+  else
+    ext = "(no ext)"
+  sum[ext] += $2
+}
+END {
+  for (e in sum)
+    print sum[e], e
+}' "$EXPORT" | sort -rn

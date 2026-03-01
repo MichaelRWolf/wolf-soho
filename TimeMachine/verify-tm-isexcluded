@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# verify-tm-isexcluded
+#
+# Verifies Time Machine inclusion/exclusion state against a YAML config.
+# Outputs TAP (Test Anything Protocol). Does not change any TM settings.
+#
+# Usage:
+#   Stand-alone (run from TimeMachine dir or same dir as YAML):
+#     ./verify-tm-isexcluded
+#     ./verify-tm-isexcluded path/to/tm-exclude-include.yaml
+#
+#   As part of a test runner (e.g. prove, pytest-tap, or any TAP consumer):
+#     prove ./verify-tm-isexcluded
+#     ./verify-tm-isexcluded | prove -
+#
+# Requires: tmutil, Ruby (macOS default) for YAML parsing, or set PARSE_YAML_CMD.
+# YAML file: tm-exclude-include.yaml in script directory, or pass as first argument.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+YAML_FILE="${1:-$SCRIPT_DIR/tm-exclude-include.yaml}"
+
+if [[ ! -f "$YAML_FILE" ]]; then
+  echo "Bail out! YAML file not found: $YAML_FILE"
+  exit 1
+fi
+
+# Parse YAML list for key (must_include or must_exclude). Override with PARSE_YAML_CMD if needed.
+parse_list() {
+  local key="$1"
+  if [[ -n "${PARSE_YAML_CMD:-}" ]]; then
+    eval "$PARSE_YAML_CMD" "$YAML_FILE" "$key"
+  else
+    ruby -r yaml -e "
+      data = YAML.load_file('$YAML_FILE')
+      list = data['$key'] || []
+      list.each { |p| puts p }
+    " 2>/dev/null
+  fi
+}
+
+# Verify each path in must_include is reported as Included by tmutil. Outputs TAP lines; updates global n.
+verify_inclusions() {
+  local path
+  while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    if tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Included\]'; then
+      echo "ok $n - $path is included"
+    else
+      echo "not ok $n - $path is included"
+    fi
+    n=$((n + 1))
+  done < <(parse_list must_include)
+}
+
+# Verify each path in must_exclude is reported as Excluded by tmutil. Outputs TAP lines; updates global n.
+verify_exclusions() {
+  local path
+  while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    if tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Excluded\]'; then
+      echo "ok $n - $path is excluded"
+    else
+      echo "not ok $n - $path is excluded"
+    fi
+    n=$((n + 1))
+  done < <(parse_list must_exclude)
+}
+
+# Count entries for TAP plan
+count_includes() { parse_list must_include | grep -c . || true; }
+count_excludes() { parse_list must_exclude | grep -c . || true; }
+total=$(($(count_includes) + $(count_excludes)))
+if [[ "$total" -eq 0 ]]; then
+  echo "Bail out! No must_include or must_exclude entries in $YAML_FILE"
+  exit 1
+fi
+
+echo "TAP version 13"
+echo "1..$total"
+n=1
+verify_inclusions
+verify_exclusions

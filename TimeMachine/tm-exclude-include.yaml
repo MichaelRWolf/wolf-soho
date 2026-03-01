@@ -1,0 +1,18 @@
+# Time Machine include/exclude lists for verify-tm-isexcluded
+# Paths that must be INCLUDED in backups (tmutil should report "Included")
+must_include:
+  - /Users/michael/Library/Preferences
+  - /Users/michael/Library/Fonts
+  - /Users/michael/Library/Keychains
+  - /Users/michael/Library/LaunchAgents
+  - /Users/michael/Documents
+  - /Users/michael/Desktop
+
+# Paths that must be EXCLUDED from backups (tmutil should report "Excluded")
+must_exclude:
+  - /Users/michael/Library/Application Support
+  - /Users/michael/Library/Containers
+  - /Users/michael/Library/Group Containers
+  - /Users/michael/Downloads
+  - /Users/michael/.Trash
+  - /Users/michael/repos
