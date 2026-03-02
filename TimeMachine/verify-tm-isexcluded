@@ -75,8 +75,8 @@ verify_inclusions() {
     if [[ ! -e "$path" ]]; then
       skip "No such file or directory" "$path is included"
     else
-      tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Included\]'
-      ok $? "$path is included"
+      tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Included\]' && result=0 || result=1
+      ok $result "$path is included"
     fi
   done < <(parse_list must_include)
 }
@@ -90,8 +90,8 @@ verify_exclusions() {
     if [[ ! -e "$path" ]]; then
       skip "No such file or directory" "$path is excluded"
     else
-      tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Excluded\]'
-      ok $? "$path is excluded"
+      tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Excluded\]' && result=0 || result=1
+      ok $result "$path is excluded"
     fi
   done < <(parse_list must_exclude)
 }
