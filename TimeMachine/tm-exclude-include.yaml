@@ -1,29 +1,29 @@
 # Time Machine include/exclude lists for verify-tm-isexcluded
 # Paths that must be INCLUDED in backups (tmutil should report "Included")
 must_include:
-  - /Users/michael/Library/Preferences
-  - /Users/michael/Library/Fonts
-  - /Users/michael/Library/Keychains
-  - /Users/michael/Library/LaunchAgents
-  - /Users/michael/Documents
-  - /Users/michael/Desktop
+  - ~/Library/Preferences
+  - ~/Library/Fonts
+  - ~/Library/Keychains
+  - ~/Library/LaunchAgents
+  - ~/Documents
+  - ~/Desktop
   - /fake/path/to/include
 
 # Paths that must be EXCLUDED from backups (tmutil should report "Excluded")
 must_exclude:
-  - /Users/michael/Library/Application Support
-  - /Users/michael/Library/Containers
-  - /Users/michael/Library/Group Containers
-  - /Users/michael/Downloads
-  - /Users/michael/.Trash
-  - /Users/michael/repos
-  - /Users/michael/Pictures
-  - /Users/michael/.gem
-  - /Users/michael/.npm
   - /Applications
-  - /Users/michael/Library/Dropbox
-  - /Users/michael/Library/Mobile Documents/com~apple~CloudDocs
-  - /Users/michael/.cpan
-  - /Users/michael/Library/CloudStorage
-  - /Users/michael/Library/CloudStorage/Dropbox
+  - ~/Library/Application Support
+  - ~/Library/Containers
+  - ~/Library/Group Containers
+  - ~/Downloads
+  - ~/.Trash
+  - ~/repos
+  - ~/Pictures
+  - ~/.gem
+  - ~/.npm
+  - ~/Library/Dropbox
+  - ~/Library/Mobile Documents/com~apple~CloudDocs
+  - ~/.cpan
+  - ~/Library/CloudStorage
+  - ~/Library/CloudStorage/Dropbox
   - /fake/path/to/exclude

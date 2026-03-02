@@ -52,6 +52,13 @@ todo() {
   _tap_test_number=$((_tap_test_number + 1))
 }
 
+# Normalize path to absolute form for comparison (~ and ~user expanded, no trailing slash).
+normalize_path() {
+  local path="$1"
+  [[ -z "$path" ]] && return
+  ruby -e "puts File.expand_path(ARGV[0])" "$path" 2>/dev/null || echo "$path"
+}
+
 # Parse YAML list for key (must_include or must_exclude). Override with PARSE_YAML_CMD if needed.
 parse_list() {
   local key="$1"
@@ -68,9 +75,12 @@ parse_list() {
 
 # Verify each path in must_include is reported as Included by tmutil.
 # Skips with # skip if the location does not exist (e.g. No such file or directory).
+# Paths from YAML are normalized so ~ and ~user work.
 verify_inclusions() {
   local path
   while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    path=$(normalize_path "$path")
     [[ -z "$path" ]] && continue
     if [[ ! -e "$path" ]]; then
       skip "No such file or directory" "$path is included"
@@ -83,9 +93,12 @@ verify_inclusions() {
 
 # Verify each path in must_exclude is reported as Excluded by tmutil.
 # Skips with # skip if the location does not exist (e.g. No such file or directory).
+# Paths from YAML are normalized so ~ and ~user work.
 verify_exclusions() {
   local path
   while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    path=$(normalize_path "$path")
     [[ -z "$path" ]] && continue
     if [[ ! -e "$path" ]]; then
       skip "No such file or directory" "$path is excluded"
@@ -112,12 +125,16 @@ get_system_exclusions() {
 }
 
 # Paths in system but not in must_exclude (inconsistent). One path per line.
+# Compares normalized absolute paths so ~/repos, ~michael/repos, /Users/michael/repos match.
 get_inconsistent_exclusions() {
-  local declared
-  declared=$(parse_list must_exclude | sort -u)
+  local declared_normalized
+  declared_normalized=$(parse_list must_exclude | while IFS= read -r p; do
+    [[ -z "$p" ]] && continue
+    normalize_path "$p"
+  done | sort -u)
   get_system_exclusions | while IFS= read -r path; do
     [[ -z "$path" ]] && continue
-    if ! echo "$declared" | grep -Fqx "$path"; then
+    if ! echo "$declared_normalized" | grep -Fqx "$(normalize_path "$path")"; then
       echo "$path"
     fi
   done
@@ -141,3 +158,23 @@ while IFS= read -r path; do
   [[ -z "$path" ]] && continue
   todo 1 "$path" "Remove from system or add to declaration file"
 done < <(get_inconsistent_exclusions)
+
+# Final report (TAP comments; invisible to prove, visible to reader)
+echo "#"
+echo "# --- Time Machine report ---"
+echo "# must_include (from $YAML_FILE):"
+parse_list must_include | while IFS= read -r p; do
+  [[ -z "$p" ]] && continue
+  echo "#   $(normalize_path "$p")"
+done
+echo "# must_exclude (from $YAML_FILE):"
+parse_list must_exclude | while IFS= read -r p; do
+  [[ -z "$p" ]] && continue
+  echo "#   $(normalize_path "$p")"
+done
+echo "# SkipPaths (system plist):"
+get_system_exclusions | while IFS= read -r path; do
+  [[ -z "$path" ]] && continue
+  echo "#   $path"
+done
+echo "# ---"
