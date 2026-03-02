@@ -6,7 +6,7 @@ INSTALL_BIN_DIR := $(HOME)/bin
 UPLINK_COMMANDS := uplink-describe uplink-org uplink-monitor
 UPLINK_LIB := uplink-lib.sh
 
-.PHONY: all symlink_bin install uninstall install_uplink uninstall_uplink clean todo help
+.PHONY: all symlink_bin install uninstall install_uplink uninstall_uplink clean todo help verify_TM_exclusions
 
 # Default target - show help
 all: help
@@ -72,6 +72,9 @@ uninstall_uplink:
 clean:
 	@echo "Nothing to clean."
 
+verify_TM_exclusions:
+	cd TimeMachine && prove -v ./verify-tm-isexcluded
+
 help:
 	@echo "Wolf-SOHO Project Makefile"
 	@echo ""
@@ -82,6 +85,7 @@ help:
 	@echo "  install_uplink - Install uplink monitoring commands"
 	@echo "  uninstall_uplink - Remove uplink monitoring commands"
 	@echo "  clean         - Clean project files"
+	@echo "  verify_TM_exclusions - Run Time Machine exclusion verification tests"
 	@echo "  todo          - Show project todos"
 	@echo "  help          - Show this help message"
 	@echo ""
