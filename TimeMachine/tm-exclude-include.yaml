@@ -1,29 +1,29 @@
 # Time Machine include/exclude lists for verify-tm-isexcluded
 # Paths that must be INCLUDED in backups (tmutil should report "Included")
 must_include:
-  - ~/Library/Preferences
+  - ~/Desktop
+  - ~/Documents
   - ~/Library/Fonts
   - ~/Library/Keychains
   - ~/Library/LaunchAgents
-  - ~/Documents
-  - ~/Desktop
+  - ~/Library/Preferences
   - /fake/path/to/include
 
 # Paths that must be EXCLUDED from backups (tmutil should report "Excluded")
 must_exclude:
   - /Applications
-  - ~/Library/Application Support
-  - ~/Library/Containers
-  - ~/Library/Group Containers
-  - ~/Downloads
-  - ~/.Trash
-  - ~/repos
-  - ~/Pictures
+  - ~/.cpan
   - ~/.gem
   - ~/.npm
-  - ~/Library/Dropbox
-  - ~/Library/Mobile Documents/com~apple~CloudDocs
-  - ~/.cpan
+  - ~/.Trash
+  - ~/Downloads
+  - ~/Library/Application Support
   - ~/Library/CloudStorage
   - ~/Library/CloudStorage/Dropbox
+  - ~/Library/Containers
+  - ~/Library/Dropbox
+  - ~/Library/Group Containers
+  - ~/Library/Mobile Documents/com~apple~CloudDocs
+  - ~/Pictures
+  - ~/repos
   - /fake/path/to/exclude
