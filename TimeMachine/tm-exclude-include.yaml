@@ -7,6 +7,7 @@ must_include:
   - /Users/michael/Library/LaunchAgents
   - /Users/michael/Documents
   - /Users/michael/Desktop
+  - /fake/path/to/include
 
 # Paths that must be EXCLUDED from backups (tmutil should report "Excluded")
 must_exclude:
@@ -16,3 +17,13 @@ must_exclude:
   - /Users/michael/Downloads
   - /Users/michael/.Trash
   - /Users/michael/repos
+  - /Users/michael/Pictures
+  - /Users/michael/.gem
+  - /Users/michael/.npm
+  - /Applications
+  - /Users/michael/Library/Dropbox
+  - /Users/michael/Library/Mobile Documents/com~apple~CloudDocs
+  - /Users/michael/.cpan
+  - /Users/michael/Library/CloudStorage
+  - /Users/michael/Library/CloudStorage/Dropbox
+  - /fake/path/to/exclude

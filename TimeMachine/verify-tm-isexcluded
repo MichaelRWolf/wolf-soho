@@ -26,6 +26,32 @@ if [[ ! -f "$YAML_FILE" ]]; then
   exit 1
 fi
 
+# TAP helpers. Use _tap_test_number (global); ok/skip/todo increment it.
+tap_plan() { echo "TAP version 13"; echo "1..$1"; }
+ok() {
+  local result=$1 desc=$2
+  if [[ "${result:-1}" -eq 0 ]]; then
+    echo "ok $_tap_test_number - $desc"
+  else
+    echo "not ok $_tap_test_number - $desc"
+  fi
+  _tap_test_number=$((_tap_test_number + 1))
+}
+skip() {
+  local reason=$1 desc=$2
+  echo "ok $_tap_test_number - $desc # skip $reason"
+  _tap_test_number=$((_tap_test_number + 1))
+}
+todo() {
+  local result=$1 desc=$2 reason=${3:-}
+  if [[ "${result:-1}" -eq 0 ]]; then
+    echo "ok $_tap_test_number - $desc # TODO $reason"
+  else
+    echo "not ok $_tap_test_number - $desc # TODO $reason"
+  fi
+  _tap_test_number=$((_tap_test_number + 1))
+}
+
 # Parse YAML list for key (must_include or must_exclude). Override with PARSE_YAML_CMD if needed.
 parse_list() {
   local key="$1"
@@ -40,45 +66,78 @@ parse_list() {
   fi
 }
 
-# Verify each path in must_include is reported as Included by tmutil. Outputs TAP lines; updates global n.
+# Verify each path in must_include is reported as Included by tmutil.
+# Skips with # skip if the location does not exist (e.g. No such file or directory).
 verify_inclusions() {
   local path
   while IFS= read -r path; do
     [[ -z "$path" ]] && continue
-    if tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Included\]'; then
-      echo "ok $n - $path is included"
+    if [[ ! -e "$path" ]]; then
+      skip "No such file or directory" "$path is included"
     else
-      echo "not ok $n - $path is included"
+      tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Included\]'
+      ok $? "$path is included"
     fi
-    n=$((n + 1))
   done < <(parse_list must_include)
 }
 
-# Verify each path in must_exclude is reported as Excluded by tmutil. Outputs TAP lines; updates global n.
+# Verify each path in must_exclude is reported as Excluded by tmutil.
+# Skips with # skip if the location does not exist (e.g. No such file or directory).
 verify_exclusions() {
   local path
   while IFS= read -r path; do
     [[ -z "$path" ]] && continue
-    if tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Excluded\]'; then
-      echo "ok $n - $path is excluded"
+    if [[ ! -e "$path" ]]; then
+      skip "No such file or directory" "$path is excluded"
     else
-      echo "not ok $n - $path is excluded"
+      tmutil isexcluded "$path" 2>/dev/null | grep -q '\[Excluded\]'
+      ok $? "$path is excluded"
     fi
-    n=$((n + 1))
   done < <(parse_list must_exclude)
 }
 
 # Count entries for TAP plan
 count_includes() { parse_list must_include | grep -c . || true; }
 count_excludes() { parse_list must_exclude | grep -c . || true; }
+
+# System exclusions (SkipPaths from TM plist). One path per line; empty if unreadable.
+get_system_exclusions() {
+  local i=0
+  local path
+  while true; do
+    path=$(/usr/libexec/PlistBuddy -c "Print SkipPaths:$i" /Library/Preferences/com.apple.TimeMachine.plist 2>/dev/null) || break
+    [[ -n "$path" ]] && echo "$path"
+    ((i++)) || true
+  done
+}
+
+# Paths in system but not in must_exclude (inconsistent). One path per line.
+get_inconsistent_exclusions() {
+  local declared
+  declared=$(parse_list must_exclude | sort -u)
+  get_system_exclusions | while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    if ! echo "$declared" | grep -Fqx "$path"; then
+      echo "$path"
+    fi
+  done
+}
+
 total=$(($(count_includes) + $(count_excludes)))
+inconsistent_count=$(get_inconsistent_exclusions | grep -c . || true)
+total=$((total + inconsistent_count))
 if [[ "$total" -eq 0 ]]; then
   echo "Bail out! No must_include or must_exclude entries in $YAML_FILE"
   exit 1
 fi
 
-echo "TAP version 13"
-echo "1..$total"
-n=1
+tap_plan "$total"
+_tap_test_number=1
 verify_inclusions
 verify_exclusions
+
+# Warn for each system exclusion not in declaration file (TAP TODO)
+while IFS= read -r path; do
+  [[ -z "$path" ]] && continue
+  todo 1 "$path" "Remove from system or add to declaration file"
+done < <(get_inconsistent_exclusions)
