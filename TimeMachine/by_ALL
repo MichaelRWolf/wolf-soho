@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Run all GrandPerspective summarizers and write a combined report.
+# Usage: by_ALL <export.tsv>
+
+if [[ -z "${1:-}" || ! -f "$1" ]]; then
+  echo "Usage: $0 <path/to/export.tsv>" >&2
+  exit 1
+fi
+
+EXPORT="$1"
+
+if [[ "$EXPORT" != *.tsv ]]; then
+  echo "Error: input must be a *.tsv file: $EXPORT" >&2
+  exit 1
+fi
+
+REPORT="${EXPORT%.tsv}_report.txt"
+
+SCRIPT_DIR="$(
+  cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1
+  pwd
+)"
+
+run_one() {
+  local name="$1"
+  local script="$2"
+
+  echo "Starting $name" >&2
+  local tmp
+  tmp="$(mktemp "${TMPDIR:-/tmp}/by_ALL.${name}.XXXXXX")"
+  trap 'rm -f "$tmp"' RETURN
+
+  if ! "$script" "$EXPORT" >"$tmp"; then
+    local rc=$?
+    echo "Error: $name failed (exit $rc)" >&2
+    exit "$rc"
+  fi
+
+  {
+    echo "================================================================"
+    echo "$name"
+    echo "================================================================"
+    head -n 80 "$tmp"
+    echo
+  } >>"$REPORT"
+
+  rm -f "$tmp"
+  trap - RETURN
+  echo "Ending $name" >&2
+}
+
+: >"$REPORT"
+
+run_one "by_directory" "$SCRIPT_DIR/by_directory"
+run_one "by_application" "$SCRIPT_DIR/by_application"
+run_one "by_filetype" "$SCRIPT_DIR/by_filetype"
+
+echo "Wrote report: $REPORT" >&2
