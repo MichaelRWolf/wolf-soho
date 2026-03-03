@@ -124,7 +124,7 @@ get_system_exclusions() {
   done
 }
 
-# Time Machine backup-exclude xattr (value "1" = excluded). Same on Monterey and Sequoia.
+# Time Machine backup-exclude xattr (presence = excluded; value is bplist or "1"). Same on Monterey and Sequoia.
 TM_BACKUP_EXCLUDE_XATTR="com.apple.metadata:com_apple_backup_excludeItem"
 
 # Get normalized SkipPaths (one per line) for comparison.
@@ -163,7 +163,7 @@ get_exclusion_source_annotation() {
   if [[ -e "$norm_path" ]]; then
     local check="$norm_path"
     while [[ -n "$check" ]]; do
-      if xattr -p "$TM_BACKUP_EXCLUDE_XATTR" "$check" 2>/dev/null | grep -q '^1$'; then
+      if xattr -p "$TM_BACKUP_EXCLUDE_XATTR" "$check" &>/dev/null; then
         if [[ "$check" == "$norm_path" ]]; then
           xattr_exact=1
         else
