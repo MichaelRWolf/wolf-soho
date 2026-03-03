@@ -1,0 +1,227 @@
+================================================================
+by_directory
+================================================================
+16528715776 Library
+1452003328 Downloads
+992370688 .local
+499470336 repos
+358809600 .Trash
+197328896 Pictures
+194666496 .cursor
+33501184 .cache
+31924224 .emacs.d
+21413888 lib
+11464704 go
+536576 Applications
+471040 .bash_sessions
+237568 Desktop
+73728 .ssh
+49152 .tramp_history
+20480 bin
+20480 .zsh_history
+12288 Music
+12288 Movies
+12288 Documents
+12288 .bash_history
+12288 .DS_Store
+8192 .config
+8192 .bash_history_ttys000
+4096 .viminfo
+4096 .python_history
+4096 .lesshst
+4096 .bash_profile.macports-saved_2026-01-18_at_16
+4096 .bash_history_ttys032
+4096 .bash_history_ttys031
+4096 .bash_history_ttys025
+4096 .bash_history_ttys024
+4096 .bash_history_ttys023
+4096 .bash_history_ttys020
+4096 .bash_history_ttys018
+4096 .bash_history_ttys017
+4096 .bash_history_ttys016
+4096 .bash_history_ttys015
+4096 .bash_history_ttys014
+4096 .bash_history_ttys013
+4096 .bash_history_ttys012
+4096 .bash_history_ttys011
+4096 .bash_history_ttys010
+4096 .bash_history_ttys009
+4096 .bash_history_ttys008
+4096 .bash_history_ttys007
+4096 .bash_history_ttys006
+4096 .bash_history_ttys005
+4096 .bash_history_ttys004
+4096 .bash_history_ttys003
+4096 .bash_history_ttys002
+4096 .bash_history_ttys001
+4096 .CFUserTextEncoding
+4096 *message*-20260113-181823
+
+================================================================
+by_application
+================================================================
+2595115008 Application Support/Google
+1654525952 Caches/Homebrew
+1351196672 Caches/Google
+1171234816 Caches/com.todesktop.230313mzl4w4u92.ShipIt
+720048128 Application Support/Cursor
+679256064 Application Support/discord
+298201088 Caches/CloudKit
+188665856 Caches/com.apple.Safari
+108244992 Caches/go-build
+93700096 Application Support/AddressBook
+84922368 Application Support/zoom.us
+82804736 Caches/pip
+77561856 Caches/com.apple.MobileSMS
+65286144 Caches/com.apple.python
+44294144 Caches/GeoServices
+42627072 Caches/com.apple.AvatarKit
+33497088 Application Support/1Password
+32460800 Containers/com.apple.Safari
+26169344 Application Support/CloudDocs
+23736320 Caches/com.apple.helpd
+23085056 Application Support/virtualenv
+22511616 Caches/com.apple.geod
+21438464 Containers/com.apple.mediastream.mstreamd
+17510400 Caches/com.apple.parsecd
+14012416 Containers/com.apple.Notes
+13172736 Caches/com.apple.AppleMediaServices
+11694080 Application Support/Knowledge
+11100160 Caches/com.apple.AppStore
+11030528 Caches/com.apple.appstoreagent
+4464640 Caches/widget-assets-assetstore
+4386816 Caches/com.apple.ctcategories.service
+4341760 Caches/com.apple.ap.adprivacyd
+4243456 Caches/com.apple.news.public-production-143441
+4206592 Application Support/GitHub Desktop
+4198400 Caches/sparkline-database-wal
+4038656 Caches/com.apple.podcasts
+3813376 Caches/com.apple.news.widget
+3719168 Caches/PFSceneTaxonomyData.index
+3592192 Caches/com.apple.stocks.widget
+3428352 Caches/com.apple.AMPLibraryAgent
+3272704 Caches/com.apple.ScreenTimeWidgetApplication.ScreenTimeWidgetExtension
+3248128 Caches/familycircled
+3248128 Caches/com.apple.iCloudNotificationAgent
+3047424 Application Support/com.apple.ProtectedCloudStorage
+3018752 Caches/GameKit
+2961408 Caches/com.apple.amsengagementd
+2711552 Caches/com.apple.Spotlight
+2686976 Caches/com.apple.passd
+2605056 Containers/com.apple.corerecents.recentsd
+2547712 Caches/WebKit
+2490368 Containers/com.apple.podcasts
+2445312 Caches/com.apple.itunescloudd
+2441216 Caches/com.apple.newsd
+2420736 Caches/shared-assets-assetstore
+2383872 Containers/com.apple.mobiletimer.WorldClockWidget
+2338816 Caches/PassKit
+2215936 Containers/com.apple.news.widget
+2199552 Caches/com.apple.findmy
+2183168 Caches/com.apple.assistantd
+2183168 Caches/com.apple.amsaccountsd
+2179072 Containers/com.apple.AppStore
+2162688 Caches/cache-database-wal
+1970176 Application Support/com.apple.sbd
+1949696 Caches/com.apple.SetupAssistant
+1597440 Caches/com.apple.systempreferences
+1507328 Caches/cursor-compile-cache
+1331200 Caches/Animoji
+1146880 Application Support/Animoji
+1069056 Caches/com.todesktop.230313mzl4w4u92
+1003520 Application Support/iTerm2
+974848 Application Support/com.apple.transparencyd
+905216 Caches/com.apple.iTunes
+892928 Containers/com.apple.stocks.widget
+880640 Containers/com.apple.Maps
+819200 Application Support/CallHistoryDB
+782336 Caches/com.apple.accountsd
+741376 Caches/com.apple.nbagent
+724992 Caches/com.apple.helpviewer
+704512 Caches/com.apple.akd
+667648 Containers/com.apple.weather.widget
+
+================================================================
+by_filetype
+================================================================
+6849110016 (no ext)
+2892038144 .mp3
+1498652672 .dmg
+1351950336 .png
+901976064 .zip
+812548096 .heic
+582311936 .js
+560369664 .gz
+300433408 .db
+218333184 .fst
+217772032 .bin
+210071552 .node
+199966720 .dylib
+186605568 .map
+174018560 .xz
+173461504 .pack
+158076928 .JPG
+154251264 .MOV
+148643840 .json
+144142336 .pkg
+135766016 .jpeg
+130351104 .sqlite
+124887040 .nnet
+115617792 .wasm
+110743552 .ldb
+109748224 .pdf
+109109248 .log
+94318592 .mov
+87879680 .tgz
+84975616 .vscdb
+83378176 .pyc
+82034688 .py
+77471744 .ktx
+72970240 .body
+68161536 .backup
+56909824 .tflite
+53530624 .pak
+47661056 .doc
+42627072 .osddata
+41766912 .pluginPayloadAttachment
+40312832 .abcdp
+39718912 .jpg
+34238464 .pyi
+34009088 .so
+33591296 .abcddb
+27320320 .kef
+24739840 .HEIC
+23846912 .whl
+22487040 .icondatapack
+21061632 .cjs
+20955136 .css
+19578880 .4_13417038949947771
+18866176 .ics
+17571840 .html
+17338368 .docx
+16326656 .ithmb
+15204352 .pdb
+15101952 .indexArrays
+13533184 .txt
+12881920 .plist
+11681792 .el
+11649024 .c
+11341824 .svg
+11083776 .elc
+10903552 .cts
+10862592 .dat
+10584064 .icloud
+10485760 .pma
+10432512 .iconconfigpack
+9920512 .pages
+9576448 .asar
+8503296 .ttf
+7950336 .010fcf564e21fb5fc54fbf057d1e788e2c2f22bbbf
+7528448 .JPEG
+7258112 .014f4de2acda278a20e61a25593b449a437bd2ec90
+6934528 .md
+6733824 .sqlite3
+6676480 .symmap
+5947392 .exe
+5840896 .indexPostings
+
