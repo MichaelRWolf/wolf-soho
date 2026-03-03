@@ -1,0 +1,252 @@
+================================================================
+by_directory
+================================================================
+287438422016 Pictures
+175129731072 Library
+169478061991 .Trash
+14687068160 Music
+13287530496 repos
+9272659968 Downloads
+8325595136 Activated_LLC
+3679440896 Archive
+2162286592 .npm
+2128240640 Videos_ScreenFlow
+1781022720 .cursor
+1582137344 .vscode
+1426026496 .local
+1338118144 Scrum_Alliance
+1180692480 .rustup
+1006170112 .cache
+947998720 iCloud Drive (Archive) - 1
+849743872 .gradle
+815443968 .ollama
+775147520 java_error_in_idea.hprof
+718041088 Agile_Fluency_Model_Game
+702468096 .cpan
+495132672 .m2
+448782336 2012_Better_Software_Conference_East-2012
+416980992 iCloud Drive (Archive) - 2
+352837632 .cargo
+325591040 src
+320655360 BNG_(Ballard_Neighborhood_Greenway)
+292880384 eros
+275353600 https---gitlab.com-open-source-ventilator
+263950336 Emdeon
+249610240 .dropbox
+214917120 Audiobooks
+210100224 .vibe-kanban
+210055168 Firefox Data - Old
+206413824 .gem
+200282112 Desktop
+192516096 .emacs.d
+187379712 Movies
+169598976 Costa_Rica_Family_Vacation
+164364288 Medical
+126537728 Group_Works_Card_Deck
+121352192 .rubies
+109211648 jupyter_notebooks
+92565504 Devguard_archive
+88977408 Cprime
+83030016 mmac
+68939776 ScanSnapPictures
+64180224 Dojo_Academy
+60293120 Foggy morning in Pisgah NF near Hot Springs NC.mov
+59076608 Cloudy afternoon in Pisgah NF near Hot Springs NC.mov
+58236928 Calibre Library
+52588544 .dropbox_bi
+51683328 AWS_Technical_Trainer
+50442240 m_and_m_hungarian
+49242112 TDD_for_Embedded_C
+44036096 michael_home.gpscan
+37830656 dot.cpan
+34541568 FIEG_(Fidelity_Investments_Eliassen_Group)
+33374208 bin
+30375936 obsidian-vault
+30228480 Documents
+27836416 LinkedIn
+25526272 Baltimore_C++
+22700032 .bundle
+22663168 Duet
+21946368 Hillrom
+21090304 Wendy
+19468288 Maps
+18026496 .docker
+16936960 BeyondAgile
+16027648 .venvs
+15642624 CorpU
+13975552 Management_3.0
+12972032 Emdeon_no_backup
+12759040 .lein
+11653120 Downloads-precious
+10670080 docker
+10592256 getting-started
+10473472 LeadingAgile
+
+================================================================
+by_application
+================================================================
+17964777472 Containers/com.docker.docker
+17715572736 Containers/com.apple.mail
+10827964416 Caches/JetBrains
+10759667712 Application Support/JetBrains
+9656483840 Application Support/Google
+7150448640 Caches/Homebrew
+4746833920 Caches/com.marketcircle.daylite
+4581433344 Application Support/Evernote
+3951308800 Caches/vscode-cpptools
+2677035008 Caches/Google
+2323472384 Containers/com.apple.MobileSMS
+2226794496 Containers/com.apple.iChat
+2169954304 Application Support/Cursor
+1833545728 Application Support/Java
+1819066368 Application Support/WebEx Folder
+1682919424 Application Support/com.apple.voicememos
+1472282624 Caches/pip
+1449197568 Application Support/com.marketcircle.Daylite4
+1278627840 Application Support/Code
+1171316736 Caches/com.todesktop.230313mzl4w4u92.ShipIt
+1115484160 Application Support/discord
+1109041152 Caches/Google Earth
+1089966080 Application Support/Microsoft
+928018432 Application Support/com.skitch.skitch
+918687744 Application Support/Skype
+830869504 Application Support/RealtimeBoard
+736653312 Application Support/Notion
+671178752 Application Support/AddressBook
+665538560 Application Support/Spark Desktop
+541065216 Caches/2FA25F33-6172-497D-AD7C-61FEB50EA115
+540467200 Application Support/com.glacierpeakstudios.topomaps
+487084032 Caches/icloudmailagent
+474202112 Application Support/Caches
+463089664 Caches/com.hnc.Discord.ShipIt
+376717312 Caches/com.google.SoftwareUpdate
+362352640 Application Support/Dropbox
+353173504 Application Support/Kindle
+344907776 Application Support/Gimp
+320217088 Containers/com.apple.messages.ShareExtension
+315977728 Application Support/Firefox
+295223296 Application Support/Slack
+294404096 Application Support/Cobook
+287506432 Containers/com.apple.BKAgentService
+275279872 Application Support/SynologyDrive
+271745024 Application Support/Cody-nodejs
+263081984 Application Support/zoom.us
+222216192 Caches/com.apple.mail
+208715776 Application Support/virtualenv
+206356480 Containers/com.apple.geod
+194502656 Caches/PFSceneGeographyData.index
+184918016 Application Support/SourceTree
+166322176 Caches/CLSBusinessCategoryCache.sqlite
+162607104 Caches/Firefox
+161660928 Application Support/history.plist
+160083968 Application Support/Gather
+132694016 Application Support/Adobe
+123248640 Application Support/Cultured Code
+107872256 Application Support/iPhone Simulator
+103981056 Caches/ollama
+103247872 Containers/com.apple.Maps
+98283520 Caches/Placeholders-v2.noindex
+89825280 Caches/GeoServices
+88584192 Application Support/Amazon
+77799424 Caches/GraphService
+72871936 Application Support/FileProvider
+71049216 Containers/com.apple.photolibraryd
+68464640 Caches/com.apple.avkit.thumbnailCache
+65130496 Application Support/1Password
+63856640 Caches/com.apple.iLifeSlideshow
+59224064 Containers/com.apple.Safari
+58191872 Caches/com.apple.Music
+57688064 Caches/com.apple.geod
+57499648 Application Support/HipChat
+48144384 Application Support/Logs
+45408256 Caches/go-build
+45199360 Caches/abnerworks.Typora
+43343872 Application Support/obs-studio
+41406464 Containers/com.amazon.Lassen
+37425152 Caches/com.apple.helpd
+36835328 Application Support/OnDemandCache
+
+================================================================
+by_filetype
+================================================================
+187115106304 .txt
+113573965824 .jpeg
+102928568320 .mov
+44815949824 (no ext)
+40658309120 .JPG
+24369082368 .heic
+18466721792 .jpg
+17830019072 .raw
+13984468992 .MOV
+11328430080 .png
+10010136576 .ipa
+8473956352 .tar
+8250978304 .zip
+5547065344 .jar
+4612296704 .pdf
+4313165824 .m4a
+4214272000 .sqlite
+3833622528 .ipch
+3676463104 .ipsw
+3653808128 .gz
+3646058496 .db
+2864836608 .pack
+2818441216 .js
+2770460672 .ithmb
+2618241024 .mp4
+2450759680 .dat
+2226438144 .ichat
+2133393408 .dmg
+2013978624 .ktx
+1797423104 .pptx
+1749000192 .mp3
+1746055168 .pkg
+1612464128 .dylib
+1428455424 .log
+1426591744 .HEIC
+1417891840 .py
+1325953024 .emlx
+1309487104 .html
+1151979520 .sst
+1093099520 .exe
+1031536640 .values
+999833600 .body
+925954048 .json
+808816640 .ppt
+775147520 .hprof
+733642752 .map
+638111744 .plist
+623906816 .docx
+621969408 .pyc
+566173696 .so
+564326400 .vscdb
+555958272 .wasm
+547315712 .backup
+531611648 .mpg
+531603456 .MPG
+515432448 .avi
+490008576 .pluginPayloadAttachment
+487768064 .bnnsir
+479670272 .data
+448966656 .tiff
+444801024 .xml
+431337472 .ldb
+422629376 .plj
+421707776 .MP3
+384602112 .node
+376717312 .6545
+370737152 .journal
+360062976 .nib
+348573696 .model
+334909440 .csv
+332046336 .97f9d3b417233305c638f143521e1f0d615ac9f8abf7fb76da89d0e6949f2473
+330969088 .69689
+313044992 .pyi
+297443328 .ts
+287440896 .aax
+284372992 .index
+278200320 .usr
+265420800 .storage_i
+264413184 .xcf
+260046848 .fast
+
