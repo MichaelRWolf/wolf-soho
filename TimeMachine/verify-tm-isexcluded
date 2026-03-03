@@ -136,7 +136,7 @@ get_normalized_skip_paths() {
   done < <(get_system_exclusions)
 }
 
-# Output exclusion-source annotation for path: "TM list", "TM list via parent", "xattr", "xattr via parent", or "*NEITHER*" (1 or 2 tokens).
+# Output exclusion-source annotation for path: "TM list", "TM list via parent", "xattr", "xattr via parent", "*NEITHER*", or "DoesNotExist" (if path does not exist).
 # Path may appear in both must_exclude and SkipPaths sections; each section shows its own annotation.
 # Uses _cached_normalized_skip_paths if set (call set_cached_normalized_skip_paths once before report).
 get_exclusion_source_annotation() {
@@ -144,6 +144,7 @@ get_exclusion_source_annotation() {
   local norm_path
   norm_path=$(normalize_path "$path")
   [[ -z "$norm_path" ]] && echo "*NEITHER*" && return
+  [[ ! -e "$norm_path" ]] && echo "DoesNotExist" && return
 
   local tm_exact=0 tm_via_parent=0
   local sp
@@ -241,14 +242,14 @@ parse_list must_include | while IFS= read -r p; do
   [[ -z "$p" ]] && continue
   echo "#   $(normalize_path "$p")"
 done
-echo "# must_exclude (from $YAML_FILE); source = TM list, xattr, or *NEITHER*:"
+echo "# must_exclude (from $YAML_FILE); source = TM list, xattr, *NEITHER*, or DoesNotExist:"
 parse_list must_exclude | while IFS= read -r p; do
   [[ -z "$p" ]] && continue
   norm=$(normalize_path "$p")
   ann=$(get_exclusion_source_annotation "$p")
   echo "#   $norm   ($ann)"
 done
-echo "# SkipPaths (system plist); source = TM list, xattr, or *NEITHER*:"
+echo "# SkipPaths (system plist); source = TM list, xattr, *NEITHER*, or DoesNotExist:"
 get_system_exclusions | while IFS= read -r path; do
   [[ -z "$path" ]] && continue
   norm=$(normalize_path "$path")
