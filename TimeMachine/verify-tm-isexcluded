@@ -124,6 +124,78 @@ get_system_exclusions() {
   done
 }
 
+# Time Machine backup-exclude xattr (value "1" = excluded). Same on Monterey and Sequoia.
+TM_BACKUP_EXCLUDE_XATTR="com.apple.metadata:com_apple_backup_excludeItem"
+
+# Get normalized SkipPaths (one per line) for comparison.
+get_normalized_skip_paths() {
+  local path
+  while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    normalize_path "$path"
+  done < <(get_system_exclusions)
+}
+
+# Output exclusion-source annotation for path: "TM list", "TM list via parent", "xattr", "xattr via parent", or "*NEITHER*" (1 or 2 tokens).
+# Path may appear in both must_exclude and SkipPaths sections; each section shows its own annotation.
+# Uses _cached_normalized_skip_paths if set (call set_cached_normalized_skip_paths once before report).
+get_exclusion_source_annotation() {
+  local path="$1"
+  local norm_path
+  norm_path=$(normalize_path "$path")
+  [[ -z "$norm_path" ]] && echo "*NEITHER*" && return
+
+  local tm_exact=0 tm_via_parent=0
+  local sp
+  while IFS= read -r sp; do
+    [[ -z "$sp" ]] && continue
+    if [[ "$norm_path" == "$sp" ]]; then
+      tm_exact=1
+      break
+    fi
+    if [[ "$norm_path" == "$sp"/* ]]; then
+      tm_via_parent=1
+      break
+    fi
+  done <<< "${_cached_normalized_skip_paths:-$(get_normalized_skip_paths)}"
+
+  local xattr_exact=0 xattr_via_parent=0
+  if [[ -e "$norm_path" ]]; then
+    local check="$norm_path"
+    while [[ -n "$check" ]]; do
+      if xattr -p "$TM_BACKUP_EXCLUDE_XATTR" "$check" 2>/dev/null | grep -q '^1$'; then
+        if [[ "$check" == "$norm_path" ]]; then
+          xattr_exact=1
+        else
+          xattr_via_parent=1
+        fi
+        break
+      fi
+      [[ "$check" == "/" ]] && break
+      local parent
+      parent=$(dirname "$check")
+      [[ "$parent" == "$check" ]] && break
+      check="$parent"
+    done
+  fi
+
+  local tokens=""
+  if [[ "$tm_exact" -eq 1 ]]; then
+    tokens="TM list"
+  elif [[ "$tm_via_parent" -eq 1 ]]; then
+    tokens="TM list via parent"
+  fi
+  if [[ "$xattr_exact" -eq 1 ]]; then
+    [[ -n "$tokens" ]] && tokens="$tokens, xattr" || tokens="xattr"
+  elif [[ "$xattr_via_parent" -eq 1 ]]; then
+    [[ -n "$tokens" ]] && tokens="$tokens, xattr via parent" || tokens="xattr via parent"
+  fi
+  if [[ -z "$tokens" ]]; then
+    tokens="*NEITHER*"
+  fi
+  echo "$tokens"
+}
+
 # Paths in system but not in must_exclude (inconsistent). One path per line.
 # Compares normalized absolute paths so ~/repos, ~michael/repos, /Users/michael/repos match.
 get_inconsistent_exclusions() {
@@ -159,7 +231,9 @@ while IFS= read -r path; do
   todo 1 "$path" "Remove from system or add to declaration file"
 done < <(get_inconsistent_exclusions)
 
-# Final report (TAP comments; invisible to prove, visible to reader)
+# Final report (TAP comments; invisible to prove, visible to reader).
+# A path may appear in both must_exclude and SkipPaths; each section shows its own annotation.
+_cached_normalized_skip_paths=$(get_normalized_skip_paths)
 echo "#"
 echo "# --- Time Machine report ---"
 echo "# must_include (from $YAML_FILE):"
@@ -167,14 +241,18 @@ parse_list must_include | while IFS= read -r p; do
   [[ -z "$p" ]] && continue
   echo "#   $(normalize_path "$p")"
 done
-echo "# must_exclude (from $YAML_FILE):"
+echo "# must_exclude (from $YAML_FILE); source = TM list, xattr, or *NEITHER*:"
 parse_list must_exclude | while IFS= read -r p; do
   [[ -z "$p" ]] && continue
-  echo "#   $(normalize_path "$p")"
+  norm=$(normalize_path "$p")
+  ann=$(get_exclusion_source_annotation "$p")
+  echo "#   $norm   ($ann)"
 done
-echo "# SkipPaths (system plist):"
+echo "# SkipPaths (system plist); source = TM list, xattr, or *NEITHER*:"
 get_system_exclusions | while IFS= read -r path; do
   [[ -z "$path" ]] && continue
-  echo "#   $path"
+  norm=$(normalize_path "$path")
+  ann=$(get_exclusion_source_annotation "$path")
+  echo "#   $norm   ($ann)"
 done
 echo "# ---"
