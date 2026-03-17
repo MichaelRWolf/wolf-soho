@@ -170,8 +170,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Cursor IDE
-.cursor/plans/
-
 # GrandPerspective exports (large, regenerated)
 TimeMachine/GrandPerspective_Reports/*.tsv

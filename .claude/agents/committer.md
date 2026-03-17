@@ -1,1 +1,0 @@
-../../committer-agent/.claude/agents/committer.md
