@@ -923,6 +923,48 @@ This is NOT fixable client-side
 
 ---
 
+## Free Customer Service Contact Info
+
+### AT&T
+
+Good luck. They will run you through everything you already did.
+
+| Channel | Info |
+|---|---|
+| Wireless (from cell) | 611 |
+| Wireless (any phone) | 800-331-0500 |
+| Home/DSL/general | 800-288-2020 |
+| Email (payments/account) | <shm-support@att.com> |
+| Contact page | <https://www.att.com/support/contact-us/> |
+
+### Yahoo
+
+There is no free phone support. Yahoo charges for phone access. Options:
+
+| Channel | Info |
+|---|---|
+| Help center / chat bot | <https://help.yahoo.com/kb/yahoo-customer-support-sln6349.html> |
+| Paid phone support | <https://www.yahoo.com/subscriptions/products/yahoo-plus-support-help> |
+| X/Twitter (sometimes faster) | @YahooCare |
+
+### Yahoo Plus Support — Paid Phone Option
+
+**$4.99/month** — 24/7 live agent, stays on the phone until resolved.
+
+Includes: account recovery, password reset, email issues, Yahoo Sports/Finance.
+Also bundles LastPass Premium (a password manager you don't need).
+
+Sign up: <https://www.yahoo.com/subscriptions/products/yahoo-plus-support-help>
+
+> Note: You will be paying Yahoo $4.99/month to help you fix an AT&T identity problem
+> that AT&T caused and that Yahoo did not cause.
+> This is the state of the art in 2026 for a free email account from 1999.
+
+👉 For this problem, call **AT&T** — they own the identity system.
+Yahoo is just the mailbox tenant.
+
+---
+
 ## What to say to ATT (precise language)
 
 > “My AT&T Access ID authenticates, but any account-level page returns ‘It’s not you, it’s us.’ The session cannot resolve to a single account. I believe multiple identities are linked to this Access ID.”
@@ -1007,7 +1049,7 @@ In plain English:
 
 ---
 
-### Stop point for today
+### Stop point for today (2026-03-17)
 
 Do **not** spend more time today on:
 
