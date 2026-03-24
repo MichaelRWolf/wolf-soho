@@ -1,0 +1,127 @@
+#!/usr/bin/env bash
+# Export ALL Confluence Cloud spaces to XML and HTML zip archives.
+#
+# Space keys are fetched live from the Confluence API (authoritative).
+# Each space is exported by calling export_confluence_space.
+#
+# Usage: export_confluence_spaces_all [OUTPUT_DIR]
+#
+# See export_confluence_space for token setup instructions.
+
+set -euo pipefail
+
+SITE="wolfenterprises.atlassian.net"
+EMAIL="michaelrwolf@att.net"
+KEYCHAIN_SERVICE="atlassian-api-token"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+EXPORT_ONE="${SCRIPT_DIR}/export_confluence_space"
+OUTPUT_DIR="${1:-${HOME}/confluence_exports}"
+
+# --------------------------------------------------------------------------- #
+# Dependency check
+# --------------------------------------------------------------------------- #
+need() { command -v "$1" >/dev/null 2>&1 || { echo "ERROR: missing dependency: $1" >&2; exit 1; }; }
+need curl
+need jq
+
+[[ -x "$EXPORT_ONE" ]] || {
+    echo "ERROR: ${EXPORT_ONE} not found or not executable" >&2
+    exit 1
+}
+
+# --------------------------------------------------------------------------- #
+# Token resolution (same logic as export_confluence_space)
+# Resolved once here, passed to child via env var to avoid repeated prompts.
+# --------------------------------------------------------------------------- #
+TOKEN=""
+if TOKEN=$(security find-generic-password -a "$EMAIL" -s "$KEYCHAIN_SERVICE" -w 2>/dev/null) && [[ -n "$TOKEN" ]]; then
+    :
+elif [[ -n "${ATLASSIAN_API_TOKEN:-}" ]]; then
+    TOKEN="$ATLASSIAN_API_TOKEN"
+else
+    echo "ERROR: No API token. See 'export_confluence_space' for setup instructions." >&2
+    exit 1
+fi
+export ATLASSIAN_API_TOKEN="$TOKEN"   # child scripts pick this up
+
+# --------------------------------------------------------------------------- #
+# Space keys — confirmed from Confluence UI (image, 2026-03-23)
+# Personal space key uses ~numericID format, which works in all export URLs.
+# --------------------------------------------------------------------------- #
+KNOWN_KEYS=(
+    ALIGN         # BLOOM
+    Projects      # BLOOM Projects
+    COAC          # Coaching
+    FIEG          # Fidelity Investment & Eliassen Group
+    FIN           # Finances
+    HR            # Hillrom
+    IC            # Impact Circle
+    LnD           # Learning & Development
+    LIV           # Living
+    ~651898979    # Michael's Personal Space
+    MOM           # MOM
+    RAD           # (below fold in image — from repo)
+    SEP           # (below fold in image — from repo)
+    WE            # (below fold in image — from repo)
+)
+
+# Optionally augment with live API list (catches any spaces added since above list).
+echo "Fetching live space list from ${SITE} to catch any additions ..."
+
+API_KEYS=()
+START=0
+LIMIT=50
+while true; do
+    response=$(curl -s \
+        -u "${EMAIL}:${TOKEN}" \
+        "https://${SITE}/wiki/rest/api/space?limit=${LIMIT}&start=${START}")
+    batch=$(echo "$response" | jq -r '.results[].key // empty')
+    size=$(echo "$response"  | jq '.results | length')
+    while IFS= read -r key; do
+        [[ -n "$key" ]] && API_KEYS+=("$key")
+    done <<< "$batch"
+    [[ "$size" -lt "$LIMIT" ]] && break
+    START=$((START + LIMIT))
+done
+
+# Merge: KNOWN_KEYS first, then any API keys not already listed
+ALL_KEYS=("${KNOWN_KEYS[@]}")
+for key in "${API_KEYS[@]}"; do
+    already=false
+    for k in "${ALL_KEYS[@]}"; do [[ "$k" == "$key" ]] && already=true && break; done
+    $already || ALL_KEYS+=("$key")
+done
+
+echo "Spaces to export (${#ALL_KEYS[@]}): ${ALL_KEYS[*]}"
+echo ""
+mkdir -p "$OUTPUT_DIR"
+
+# --------------------------------------------------------------------------- #
+# Export each space
+# --------------------------------------------------------------------------- #
+FAILED=()
+
+for key in "${ALL_KEYS[@]}"; do
+    echo "════════════════════════════════"
+    echo "Space: ${key}"
+    echo "════════════════════════════════"
+    if ! "$EXPORT_ONE" "$key" "$OUTPUT_DIR"; then
+        FAILED+=("$key")
+        echo "WARNING: ${key} failed — continuing with remaining spaces" >&2
+    fi
+    echo ""
+done
+
+# --------------------------------------------------------------------------- #
+# Summary
+# --------------------------------------------------------------------------- #
+echo "════════════════════════════════"
+echo "Export complete"
+echo "Output directory: ${OUTPUT_DIR}"
+echo "Spaces attempted: ${#ALL_KEYS[@]}"
+echo "Spaces succeeded: $(( ${#ALL_KEYS[@]} - ${#FAILED[@]} ))"
+
+if [[ ${#FAILED[@]} -gt 0 ]]; then
+    echo "Spaces FAILED:    ${FAILED[*]}" >&2
+    exit 1
+fi
