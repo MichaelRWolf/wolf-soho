@@ -1,6 +1,13 @@
 repos:
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.39.0
+    rev: v0.45.0
     hooks:
       - id: markdownlint-fix
 
+  - repo: local
+    hooks:
+      - id: prettier-markdown
+        name: prettier (markdown tables)
+        entry: npx prettier --write
+        language: system
+        types: [markdown]
