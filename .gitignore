@@ -188,9 +188,3 @@ __MACOSX/
 # GrandPerspective exports (large, regenerated)
 TimeMachine/GrandPerspective_Reports/*.tsv
 
-# Claude project config — commit everything except local overrides
-!.claude/
-!.claude/**
-**/.claude/settings.local.json
-.claude/.DS_Store
-.claude/**/.DS_Store
