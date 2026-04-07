@@ -192,3 +192,5 @@ TimeMachine/GrandPerspective_Reports/*.tsv
 !.claude/
 !.claude/**
 **/.claude/settings.local.json
+.claude/.DS_Store
+.claude/**/.DS_Store
