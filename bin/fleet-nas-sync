@@ -5,9 +5,13 @@ NAS_HOST="wolfden-nas"
 NAS_PORT=22
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/fleet-nas-sync"
 STATE_FILE="$STATE_DIR/last-success"
-ULS_TAG="com.wolfenterprises.fleet-nas-sync"
+LOG_FILE="$HOME/Library/Logs/fleet-nas-sync.log"
 VERBOSE=0
 [[ "${1:-}" == "--verbose" ]] && VERBOSE=1
+
+# Always tee to log file -- consistent output whether run ad-hoc or via launchd
+mkdir -p "$(dirname "$LOG_FILE")"
+exec > >(tee -a "$LOG_FILE") 2>&1
 
 # Bootstrap shlib
 _libload="${SHELL_LIB_PATH:+${SHELL_LIB_PATH%%:*}/libload.sh}"
@@ -15,8 +19,8 @@ _libload="${SHELL_LIB_PATH:+${SHELL_LIB_PATH%%:*}/libload.sh}"
 # shellcheck disable=SC1090
 source "$_libload" 2>/dev/null && libload log.sh 2>/dev/null || true
 
-log_info()    { info "$*";    logger -t "$ULS_TAG" -p user.info    "$*"; }
-log_warning() { warn "$*";    logger -t "$ULS_TAG" -p user.warning "$*"; }
+log_info()    { info "$*"; }
+log_warning() { warn "$*"; }
 
 # Connectivity guard -- explicit TCP check, no per-repo SSH timeouts
 nc -z -w 2 "$NAS_HOST" "$NAS_PORT" 2>/dev/null || {
