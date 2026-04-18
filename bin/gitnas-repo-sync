@@ -4,6 +4,12 @@ set -euo pipefail
 REMOTE_NAME="nas"
 HOST=$(hostname -s)
 
+# Bootstrap shlib
+_libload="${SHELL_LIB_PATH:+${SHELL_LIB_PATH%%:*}/libload.sh}"
+[[ ! -f "$_libload" ]] && _libload="$HOME/repos/Portable_Profile/shlib/libload.sh"
+# shellcheck disable=SC1090
+source "$_libload" 2>/dev/null && libload log.sh 2>/dev/null || true
+
 push_canonical() {
     git -C "$REPO_ROOT" push "$REMOTE_NAME" "$branch" 2>/dev/null
 }
@@ -16,9 +22,9 @@ push_per_host_namespaced_branch() {
     # Nothing is overwritten; both machines' work coexists until origin becomes
     # the reconciliation point and a future canonical push succeeds.
     if git -C "$REPO_ROOT" push "$REMOTE_NAME" "HEAD:refs/heads/${HOST}/${branch}"; then
-        echo "safety-net push succeeded: ${HOST}/${branch}"
+        info "safety-net push succeeded: ${HOST}/${branch}"
     else
-        echo "safety-net push FAILED: ${HOST}/${branch}" >&2
+        warn "safety-net push FAILED: ${HOST}/${branch}"
         return 1
     fi
 }
@@ -36,20 +42,20 @@ cleanup_stale_safety_branch() {
     git -C "$REPO_ROOT" fetch "$REMOTE_NAME" 2>/dev/null || true
     if canonical_branch_contains_all_commits_of_safety_branch; then
         git -C "$REPO_ROOT" push "$REMOTE_NAME" --delete "${HOST}/${branch}"
-        echo "cleanup succeeded: removed stale safety branch ${HOST}/${branch}"
+        info "cleanup succeeded: removed stale safety branch ${HOST}/${branch}"
     fi
 }
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 branch=$(git -C "$REPO_ROOT" symbolic-ref --short HEAD 2>/dev/null) \
-    || { echo "SKIP (detached HEAD): $REPO_ROOT" >&2; exit 1; }
-echo "=== $(gh repo view --json name --jq '.name') ($branch) ==="
+    || { warn "SKIP (detached HEAD): $REPO_ROOT"; exit 1; }
+info "=== $(gh repo view --json name --jq '.name') ($branch) ==="
 
 if push_canonical; then
-    echo "canonical push succeeded: ${branch}"
+    info "canonical push succeeded: ${branch}"
     # Clean up any namespaced safety-net branch left from a prior diverged run.
     cleanup_stale_safety_branch
 else
-    echo "canonical push failed (diverged) -- falling back to safety-net branch" >&2
+    warn "canonical push failed (diverged) -- falling back to safety-net branch"
     push_per_host_namespaced_branch
 fi
