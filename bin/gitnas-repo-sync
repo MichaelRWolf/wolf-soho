@@ -2,8 +2,33 @@
 set -euo pipefail
 
 REMOTE_NAME="nas"
+HOST=$(hostname -s)
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
-branch=$(git -C "$REPO_ROOT" symbolic-ref --short HEAD 2>/dev/null) || { echo "SKIP (detached HEAD): $REPO_ROOT" >&2; exit 1; }
+branch=$(git -C "$REPO_ROOT" symbolic-ref --short HEAD 2>/dev/null) \
+    || { echo "SKIP (detached HEAD): $REPO_ROOT" >&2; exit 1; }
 echo "=== $(gh repo view --json name --jq '.name') ($branch) ==="
-git -C "$REPO_ROOT" push "$REMOTE_NAME" "$branch"
+
+if git -C "$REPO_ROOT" push "$REMOTE_NAME" "$branch" 2>/dev/null; then
+    # Canonical push succeeded: NAS is now a sync hub for this branch.
+    #
+    # Clean up any namespaced safety-net branch this machine left on NAS from
+    # a prior diverged run. We only delete it if every commit it contains is
+    # already reachable via the canonical branch -- i.e. it adds nothing new.
+    git -C "$REPO_ROOT" fetch "$REMOTE_NAME" 2>/dev/null || true
+    ns_ref="refs/remotes/${REMOTE_NAME}/${HOST}/${branch}"
+    canon_ref="refs/remotes/${REMOTE_NAME}/${branch}"
+    if git -C "$REPO_ROOT" rev-parse --verify "$ns_ref" &>/dev/null && \
+       git -C "$REPO_ROOT" merge-base --is-ancestor "$ns_ref" "$canon_ref" 2>/dev/null; then
+        git -C "$REPO_ROOT" push "$REMOTE_NAME" --delete "${HOST}/${branch}"
+    fi
+else
+    # Canonical push failed (non-fast-forward): this machine has diverged from
+    # whatever another machine already pushed to NAS. Rather than fail and lose
+    # this machine's work, push to a per-host namespaced branch
+    # (e.g. wolf-air/main) so the commits are safely stored on NAS.
+    # Nothing is overwritten; both machines' work coexists until origin becomes
+    # the reconciliation point and a future canonical push succeeds.
+    git -C "$REPO_ROOT" push "$REMOTE_NAME" \
+        "HEAD:refs/heads/${HOST}/${branch}"
+fi
