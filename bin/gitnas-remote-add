@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+
+NAS_USER="git-svc"
+NAS_HOST="wolfden-nas"
+NAS_REPOS_DIR="git-repos"
+REMOTE_NAME="nas"
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT"
+
+NAME=$(gh repo view --json name --jq '.name')
+
+if git remote get-url "$REMOTE_NAME" &>/dev/null; then
+    echo "$REMOTE_NAME remote already exists: $(git remote get-url "$REMOTE_NAME")"
+    exit 0
+fi
+
+git remote add "$REMOTE_NAME" "$NAS_USER@$NAS_HOST:$NAS_REPOS_DIR/${NAME}.git"
+echo "Added remote '$REMOTE_NAME': $NAS_USER@$NAS_HOST:$NAS_REPOS_DIR/${NAME}.git"

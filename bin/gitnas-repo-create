@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+
+NAS_USER="git-svc"
+NAS_HOST="wolfden-nas"
+NAS_REPOS_DIR="git-repos"
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT"
+
+ME=$(gh api user --jq '.login')
+OWNER=$(gh repo view --json owner --jq '.owner.login')
+NAME=$(gh repo view --json name --jq '.name')
+
+if [[ "$OWNER" != "$ME" ]]; then
+    echo "ERROR: repo owner ($OWNER) != authenticated user ($ME) -- aborting" >&2
+    exit 1
+fi
+
+ssh "$NAS_USER@$NAS_HOST" "git init --bare ~/$NAS_REPOS_DIR/${NAME}.git"
+echo "Created: $NAS_USER@$NAS_HOST:$NAS_REPOS_DIR/${NAME}.git"

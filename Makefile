@@ -1,5 +1,7 @@
 SOURCE_BIN_DIR := bin
-BIN_FILES := bin/network_location bin/beryl_sqm bin/networkCurl
+BIN_FILES := bin/network_location bin/beryl_sqm bin/networkCurl \
+             bin/gitnas-repo-create bin/gitnas-remote-add \
+             bin/gitnas-repo-setup bin/gitnas-repo-sync
 INSTALL_BIN_DIR := $(HOME)/bin
 
 # Uplink commands configuration
@@ -79,8 +81,8 @@ help:
 	@echo "Wolf-SOHO Project Makefile"
 	@echo ""
 	@echo "Targets:"
-	@echo "  install       - Install all project tools (symlinks + uplink commands)"
-	@echo "  uninstall     - Remove all project tools (symlinks + uplink commands)"
+	@echo "  install       - Install all project tools (symlinks + uplink + gitnas commands)"
+	@echo "  uninstall     - Remove all project tools (symlinks + uplink + gitnas commands)"
 	@echo "  symlink_bin   - Create symlinks for project binaries"
 	@echo "  install_uplink - Install uplink monitoring commands"
 	@echo "  uninstall_uplink - Remove uplink monitoring commands"
@@ -88,6 +90,12 @@ help:
 	@echo "  verify_TM_exclusions - Run Time Machine exclusion verification tests"
 	@echo "  todo          - Show project todos"
 	@echo "  help          - Show this help message"
+	@echo ""
+	@echo "gitnas commands (installed to ~/bin/ via make install):"
+	@echo "  gitnas-repo-create  - Create bare repo on NAS (gh-derivative)"
+	@echo "  gitnas-remote-add   - Add 'nas' remote to local repo (git-derivative)"
+	@echo "  gitnas-repo-setup   - Create + add remote in one step (gh+git)"
+	@echo "  gitnas-repo-sync    - Push to nas remote; --all for fleet push (gh-derivative)"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make           - Show this help (default)"
