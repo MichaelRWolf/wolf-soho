@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+# fleet-status — summarize git status for a list of dirs
+# Usage: fleet-status [options] [dir ...]
+#   cd ~/repos && fleet-status
+#
+# Options (fd(1)-style):
+#   --within Nd   only repos with a commit in the last N days (default: --within 30d)
+#   --before Nd   only repos with no commit in the last N days
+#   --all         show all repos regardless of age
+#   --fetch       run git fetch per repo before checking status (makes ↓ accurate)
+#   --with-nas    fetch nas remote per repo; add nas column to output
+
+set -euo pipefail
+
+RED=$'\033[0;31m'
+GREEN=$'\033[0;32m'
+RESET=$'\033[0m'
+
+usage() {
+    printf 'error: unknown option: %s\n\nUsage: fleet-status [options] [dir ...]\n\nOptions (fd(1)-style):\n  --within Nd   only repos with a commit in the last N days (default: --within 30d)\n  --before Nd   only repos with no commit in the last N days\n  --all         show all repos regardless of age\n  --fetch       run git fetch per repo before checking status (makes ↓ accurate)\n  --with-nas    fetch nas remote per repo; add nas column to output\n' "$1" >&2
+    exit 1
+}
+
+parse_args() {
+    filter_days=30
+    filter_mode=within   # "within" | "before" | "all"
+    do_fetch=0
+    with_nas=0
+    original_flags=()
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --within)   original_flags+=(--within "$2"); filter_mode=within; filter_days="${2%d}"; shift 2 ;;
+            --before)   original_flags+=(--before "$2"); filter_mode=before; filter_days="${2%d}"; shift 2 ;;
+            --all)      original_flags+=(--all);          filter_mode=all;                          shift   ;;
+            --fetch)    original_flags+=(--fetch);        do_fetch=1;                               shift   ;;
+            --with-nas) original_flags+=(--with-nas);     with_nas=1;                               shift   ;;
+            --) shift; break ;;
+            -*) usage "$1" ;;
+            *) break ;;
+        esac
+    done
+    dirs=("$@")
+}
+
+prefetch_all() {
+    [[ "$do_fetch" -eq 1 || "$with_nas" -eq 1 ]] || return 0
+    for arg in "$@"; do
+        [[ -d "$arg" ]] || continue
+        local toplevel
+        toplevel=$(git -C "$arg" rev-parse --show-toplevel 2>/dev/null) || continue
+        [[ "$do_fetch" -eq 1 ]] && git -C "$toplevel" fetch -q --no-tags 2>/dev/null &
+        [[ "$with_nas" -eq 1 ]] && git -C "$toplevel" fetch -q nas 2>/dev/null &
+    done
+    wait
+}
+
+scan_repos() {
+    clean=()  # "ISO8601_DATE|DAYS|display branch_suffix nas_col"
+    dirty=()  # "ISO8601_DATE|DAYS|display branch symbols nas_col"
+    local now_ts
+    now_ts=$(date +%s)
+
+    for arg in "$@"; do
+        [[ -d "$arg" ]] || continue
+
+        local toplevel
+        toplevel=$(git -C "$arg" rev-parse --show-toplevel 2>/dev/null) || continue
+
+        local display="${toplevel/#$HOME/\~}"
+
+        local commit_ts
+        commit_ts=$(git -C "$toplevel" log -1 --format="%ct" 2>/dev/null)
+
+        if [[ "$filter_mode" != "all" && -n "$commit_ts" ]]; then
+            local threshold
+            threshold=$(( now_ts - filter_days * 86400 ))
+            case "$filter_mode" in
+                within) [[ "$commit_ts" -lt "$threshold" ]] && continue ;;
+                before) [[ "$commit_ts" -gt "$threshold" ]] && continue ;;
+            esac
+        fi
+
+        local branch
+        local raw_branch
+        raw_branch=$(starship module git_branch -p "$toplevel" 2>/dev/null)
+        branch="${raw_branch@P}"
+        local symbols raw_symbols
+        raw_symbols=$(starship module git_status -p "$toplevel" 2>/dev/null)
+        symbols="${raw_symbols@P}"
+
+        local age
+        age=$(git -C "$toplevel" log -1 --format="%ci" 2>/dev/null | cut -c1-10)
+        [[ -z "$age" ]] && age="0000-00-00"
+
+        local days=0
+        if [[ -n "$commit_ts" ]]; then
+            local diff_secs
+            diff_secs=$(( now_ts - commit_ts ))
+            days=$(( (diff_secs + 86399) / 86400 ))
+        fi
+
+        local nas_col=""
+        if [[ "$with_nas" -eq 1 ]]; then
+            if git -C "$toplevel" remote get-url nas &>/dev/null 2>&1; then
+                local branch_name ahead
+                branch_name=$(git -C "$toplevel" symbolic-ref --short HEAD 2>/dev/null)
+                ahead=$(git -C "$toplevel" rev-list --count "nas/${branch_name}..HEAD" 2>/dev/null || echo "?")
+                if [[ "$ahead" == "0" ]]; then
+                    nas_col=" nas:✓"
+                else
+                    nas_col=" nas:↑${ahead}"
+                fi
+            else
+                nas_col=" nas:—"
+            fi
+        fi
+
+        if [[ -z "$symbols" ]]; then
+            clean+=("${age}|${days}|${display}${branch}${nas_col}")
+        else
+            dirty+=("${age}|${days}|${display}${branch} ${symbols}${nas_col}")
+        fi
+    done
+}
+
+print_entry() { printf "%4dd %s %s\n" "$@"; }
+
+_print_list() {
+    local title="$1" none_display="$2"; local -n _arr="$3"
+    echo "$title"
+    if [[ ${#_arr[@]} -gt 0 ]]; then
+        mapfile -t sorted < <(printf '%s\n' "${_arr[@]}" | sort)
+        for entry in "${sorted[@]}"; do
+            date="${entry%%|*}"
+            tail="${entry#*|}"
+            days="${tail%%|*}"
+            rest="${tail#*|}"
+            print_entry "$days" "$date" "$rest"
+        done
+    else
+        print_entry 0 "$(date +%Y-%m-%d)" "$none_display"
+    fi
+}
+
+print_clean_list() { _print_list "=== Clean ===" "NONE" clean; }
+
+print_dirty_list() {
+    local title none_display
+    if [[ ${#dirty[@]} -gt 0 ]]; then
+        title="${RED}=== Dirty ===${RESET}"
+        none_display="NONE"
+    else
+        title="=== Dirty ==="
+        none_display="${GREEN}NONE${RESET}"
+    fi
+    _print_list "$title" "$none_display" dirty
+}
+
+print_results() {
+    print_clean_list
+    echo ""
+    print_dirty_list
+}
+
+main() {
+    parse_args "$@"
+    if [[ ${#dirs[@]} -eq 0 ]]; then
+        cd ~/repos && exec fleet-status "${original_flags[@]}" ./*
+    fi
+    prefetch_all "${dirs[@]}"
+    scan_repos "${dirs[@]}"
+    print_results
+    [[ ${#dirty[@]} -eq 0 ]]
+}
+
+main "$@"

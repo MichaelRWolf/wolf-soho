@@ -1,7 +1,8 @@
 SOURCE_BIN_DIR := bin
 BIN_FILES := bin/network_location bin/beryl_sqm bin/networkCurl \
              bin/gitnas-repo-create bin/gitnas-remote-add \
-             bin/gitnas-repo-setup bin/gitnas-repo-sync
+             bin/gitnas-repo-setup bin/gitnas-repo-sync \
+             bin/fleet-status bin/git-status-summary
 INSTALL_BIN_DIR := $(HOME)/bin
 
 # Uplink commands configuration
@@ -96,6 +97,10 @@ help:
 	@echo "  gitnas-remote-add   - Add 'nas' remote to local repo (git-derivative)"
 	@echo "  gitnas-repo-setup   - Create + add remote in one step (gh+git)"
 	@echo "  gitnas-repo-sync    - Push to nas remote; --all for fleet push (gh-derivative)"
+	@echo ""
+	@echo "fleet commands (installed to ~/bin/ via make install):"
+	@echo "  fleet-status        - Summarize git status across ~/repos/*; --with-nas adds nas column"
+	@echo "  git-status-summary  - Alias for fleet-status (legacy name)"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make           - Show this help (default)"
