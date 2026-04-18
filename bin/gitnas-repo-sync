@@ -2,30 +2,8 @@
 set -euo pipefail
 
 REMOTE_NAME="nas"
-MODE="${1:-single}"
 
-push_repo() {
-    local repo="$1"
-    local branch
-    branch=$(git -C "$repo" symbolic-ref --short HEAD 2>/dev/null) || { echo "SKIP (detached HEAD): $repo"; return; }
-    echo "=== $(basename "$repo") ($branch) ==="
-    git -C "$repo" push "$REMOTE_NAME" "$branch"
-}
-
-case "$MODE" in
-    --all)
-        for repo in ~/repos/*/; do
-            [[ -d "${repo}.git" ]] || continue
-            git -C "$repo" remote get-url "$REMOTE_NAME" &>/dev/null || continue
-            push_repo "$repo"
-        done
-        ;;
-    single)
-        REPO_ROOT=$(git rev-parse --show-toplevel)
-        push_repo "$REPO_ROOT"
-        ;;
-    *)
-        echo "Usage: gitnas-repo-sync [--all]" >&2
-        exit 1
-        ;;
-esac
+REPO_ROOT=$(git rev-parse --show-toplevel)
+branch=$(git -C "$REPO_ROOT" symbolic-ref --short HEAD 2>/dev/null) || { echo "SKIP (detached HEAD): $REPO_ROOT" >&2; exit 1; }
+echo "=== $(gh repo view --json name --jq '.name') ($branch) ==="
+git -C "$REPO_ROOT" push "$REMOTE_NAME" "$branch"
