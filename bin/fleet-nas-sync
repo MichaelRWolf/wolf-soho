@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 NAS_HOST="wolfden-nas"
 NAS_PORT=22
@@ -14,10 +15,8 @@ _libload="${SHELL_LIB_PATH:+${SHELL_LIB_PATH%%:*}/libload.sh}"
 # shellcheck disable=SC1090
 source "$_libload" 2>/dev/null && libload log.sh 2>/dev/null || true
 
-set -euo pipefail
-
-log_info()    { ( set +u; info    "$*" ); logger -t "$ULS_TAG" -p user.info    "$*"; }
-log_warning() { ( set +u; warn    "$*" ); logger -t "$ULS_TAG" -p user.warning "$*"; }
+log_info()    { info "$*";    logger -t "$ULS_TAG" -p user.info    "$*"; }
+log_warning() { warn "$*";    logger -t "$ULS_TAG" -p user.warning "$*"; }
 
 # Connectivity guard -- explicit TCP check, no per-repo SSH timeouts
 nc -z -w 2 "$NAS_HOST" "$NAS_PORT" 2>/dev/null || {
