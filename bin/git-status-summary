@@ -1,2 +1,9 @@
 #!/bin/bash
+# shellcheck disable=SC1090
+_libload="${SHELL_LIB_PATH%%:*}/libload.sh"
+[[ ! -f "$_libload" ]] && _libload="$HOME/repos/Portable_Profile/shlib/libload.sh"
+source "$_libload" 2>/dev/null && libload log.sh 2>/dev/null || true
+if declare -f info &>/dev/null; then
+    LOG_TIMESTAMP=0 info "git-status-summary is deprecated -- use fleet-status instead"
+fi
 exec "$(dirname "$0")/fleet-status" "$@"
