@@ -1,11 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_SOURCE="${BASH_SOURCE[0]}"
+SCRIPT_NAME=$(basename "${SCRIPT_SOURCE}")
+
 NAS_HOST="wolfden-nas"
 NAS_PORT=22
-STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/fleet-nas-sync"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/${SCRIPT_NAME}"
 STATE_FILE="$STATE_DIR/last-success"
-LOG_FILE="$HOME/Library/Logs/fleet-nas-sync.log"
+LOG_FILE="$HOME/Library/Logs/${SCRIPT_NAME}.log"
 VERBOSE=0
 [[ "${1:-}" == "--verbose" ]] && VERBOSE=1
 
@@ -22,9 +25,11 @@ source "$_libload" 2>/dev/null && libload log.sh 2>/dev/null || true
 log_info()    { info "$*"; }
 log_warning() { warn "$*"; }
 
+log_info "Begin ${SCRIPT_NAME}"
+
 # Connectivity guard -- explicit TCP check, no per-repo SSH timeouts
-nc -z -w 2 "$NAS_HOST" "$NAS_PORT" 2>/dev/null || {
-    log_info "NAS unreachable ($NAS_HOST:$NAS_PORT) -- skipping"
+timeout 2 nc -z -w 2 "$NAS_HOST" "$NAS_PORT" 2>/dev/null || {
+    log_info "NAS unreachable ($NAS_HOST:$NAS_PORT) - exiting"
     exit 0
 }
 
@@ -43,11 +48,12 @@ for repo in ~/repos/*/; do
         [[ "$VERBOSE" -eq 1 ]] && log_info "skip (no nas remote): $(basename "$repo")"
         continue
     }
-    if (cd "$repo" && gitnas-repo-sync) 2>/tmp/fleet-nas-sync-err; then
+    GITNAS_ERROR_FILE="/tmp/${SCRIPT_NAME}-err"
+    if (cd "$repo" && gitnas-repo-sync) 2> "${GITNAS_ERROR_FILE}"; then
         [[ "$VERBOSE" -eq 1 ]] && log_info "synced: $(basename "$repo")"
     else
         log_warning "FAILED: $(basename "$repo")"
-        cat /tmp/fleet-nas-sync-err >&2
+        cat "${GITNAS_ERROR_FILE}" >&2
         (( failures++ )) || true
     fi
 done
@@ -56,4 +62,5 @@ if [[ "$failures" -eq 0 ]]; then
     date -u '+%Y-%m-%dT%H:%M:%SZ' > "$STATE_FILE"
 fi
 
+log_info "End ${SCRIPT_NAME}"
 [[ "$failures" -eq 0 ]]
