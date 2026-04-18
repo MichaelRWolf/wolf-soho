@@ -111,7 +111,7 @@ scan_repos() {
                     nas_col="nas:↑${ahead}"
                 fi
             else
-                nas_col="nas:—"
+                nas_col="nas: "
             fi
         fi
 
