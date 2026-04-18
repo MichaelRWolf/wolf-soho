@@ -1,0 +1,56 @@
+#!/bin/bash
+
+NAS_HOST="wolfden-nas"
+NAS_PORT=22
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/fleet-nas-sync"
+STATE_FILE="$STATE_DIR/last-success"
+ULS_TAG="com.wolfenterprises.fleet-nas-sync"
+VERBOSE=0
+[[ "${1:-}" == "--verbose" ]] && VERBOSE=1
+
+# Bootstrap shlib
+_libload="${SHELL_LIB_PATH:+${SHELL_LIB_PATH%%:*}/libload.sh}"
+[[ ! -f "$_libload" ]] && _libload="$HOME/repos/Portable_Profile/shlib/libload.sh"
+# shellcheck disable=SC1090
+source "$_libload" 2>/dev/null && libload log.sh 2>/dev/null || true
+
+set -euo pipefail
+
+log_info()    { ( set +u; info    "$*" ); logger -t "$ULS_TAG" -p user.info    "$*"; }
+log_warning() { ( set +u; warn    "$*" ); logger -t "$ULS_TAG" -p user.warning "$*"; }
+
+# Connectivity guard -- explicit TCP check, no per-repo SSH timeouts
+nc -z -w 2 "$NAS_HOST" "$NAS_PORT" 2>/dev/null || {
+    log_info "NAS unreachable ($NAS_HOST:$NAS_PORT) -- skipping"
+    exit 0
+}
+
+# Staleness warning
+mkdir -p "$STATE_DIR"
+if [[ ! -f "$STATE_FILE" ]] || \
+   find "$STATE_FILE" -mtime +14 -print 2>/dev/null | grep -q .; then
+    log_warning "No successful NAS sync in 14+ days"
+fi
+
+failures=0
+
+for repo in ~/repos/*/; do
+    [[ -d "${repo}.git" ]] || continue
+    git -C "$repo" remote get-url nas &>/dev/null || {
+        [[ "$VERBOSE" -eq 1 ]] && log_info "skip (no nas remote): $(basename "$repo")"
+        continue
+    }
+    if (cd "$repo" && gitnas-repo-sync) 2>/tmp/fleet-nas-sync-err; then
+        [[ "$VERBOSE" -eq 1 ]] && log_info "synced: $(basename "$repo")"
+    else
+        log_warning "FAILED: $(basename "$repo")"
+        cat /tmp/fleet-nas-sync-err >&2
+        (( failures++ )) || true
+    fi
+done
+
+if [[ "$failures" -eq 0 ]]; then
+    date -u '+%Y-%m-%dT%H:%M:%SZ' > "$STATE_FILE"
+fi
+
+[[ "$failures" -eq 0 ]]

@@ -2,14 +2,17 @@ SOURCE_BIN_DIR := bin
 BIN_FILES := bin/network_location bin/beryl_sqm bin/networkCurl \
              bin/gitnas-repo-create bin/gitnas-remote-add \
              bin/gitnas-repo-setup bin/gitnas-repo-sync \
-             bin/fleet-status bin/git-status-summary
+             bin/fleet-status bin/git-status-summary \
+             bin/fleet-nas-sync
 INSTALL_BIN_DIR := $(HOME)/bin
+LAUNCHD_DIR := $(HOME)/Library/LaunchAgents
+LAUNCHD_PLISTS := launchd/com.wolfenterprises.fleet-nas-sync.plist
 
 # Uplink commands configuration
 UPLINK_COMMANDS := uplink-describe uplink-org uplink-monitor
 UPLINK_LIB := uplink-lib.sh
 
-.PHONY: all symlink_bin install uninstall install_uplink uninstall_uplink clean todo help verify_TM_exclusions
+.PHONY: all symlink_bin install uninstall install_uplink uninstall_uplink install_launchd uninstall_launchd clean todo help verify_TM_exclusions
 
 # Default target - show help
 all: help
@@ -72,6 +75,21 @@ uninstall_uplink:
 	fi
 	@echo "Uplink uninstallation complete!"
 
+install_launchd:
+	@mkdir -p $(LAUNCHD_DIR)
+	@for plist in $(LAUNCHD_PLISTS); do \
+		cp $$plist $(LAUNCHD_DIR)/; \
+		launchctl load $(LAUNCHD_DIR)/$$(basename $$plist); \
+		echo "Loaded: $$(basename $$plist)"; \
+	done
+
+uninstall_launchd:
+	@for plist in $(LAUNCHD_PLISTS); do \
+		launchctl unload $(LAUNCHD_DIR)/$$(basename $$plist) 2>/dev/null || true; \
+		rm -f $(LAUNCHD_DIR)/$$(basename $$plist); \
+		echo "Unloaded: $$(basename $$plist)"; \
+	done
+
 clean:
 	@echo "Nothing to clean."
 
@@ -100,7 +118,11 @@ help:
 	@echo ""
 	@echo "fleet commands (installed to ~/bin/ via make install):"
 	@echo "  fleet-status        - Summarize git status across ~/repos/*; --with-nas adds nas column"
+	@echo "  fleet-nas-sync      - Push all nas-remote repos; connectivity guard + staleness warn"
 	@echo "  git-status-summary  - Alias for fleet-status (legacy name)"
+	@echo ""
+	@echo "launchd agents (install via make install_launchd):"
+	@echo "  fleet-nas-sync      - Daily 16:00 NAS sync; logs to ~/Library/Logs/fleet-nas-sync.log"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make           - Show this help (default)"
