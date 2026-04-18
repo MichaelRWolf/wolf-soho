@@ -106,24 +106,31 @@ scan_repos() {
                 branch_name=$(git -C "$toplevel" symbolic-ref --short HEAD 2>/dev/null)
                 ahead=$(git -C "$toplevel" rev-list --count "nas/${branch_name}..HEAD" 2>/dev/null || echo "?")
                 if [[ "$ahead" == "0" ]]; then
-                    nas_col=" nas:✓"
+                    nas_col="nas:✓"
                 else
-                    nas_col=" nas:↑${ahead}"
+                    nas_col="nas:↑${ahead}"
                 fi
             else
-                nas_col=" nas:—"
+                nas_col="nas:—"
             fi
         fi
 
         if [[ -z "$symbols" ]]; then
-            clean+=("${age}|${days}|${display}${branch}${nas_col}")
+            clean+=("${age}|${days}|${nas_col}|${display}${branch}")
         else
-            dirty+=("${age}|${days}|${display}${branch} ${symbols}${nas_col}")
+            dirty+=("${age}|${days}|${nas_col}|${display}${branch} ${symbols}")
         fi
     done
 }
 
-print_entry() { printf "%4dd %s %s\n" "$@"; }
+print_entry() {
+    local days="$1" date="$2" nas_col="$3" rest="$4"
+    if [[ -n "$nas_col" ]]; then
+        printf "%4dd %s {%s} %s\n" "$days" "$date" "$nas_col" "$rest"
+    else
+        printf "%4dd %s %s\n" "$days" "$date" "$rest"
+    fi
+}
 
 _print_list() {
     local title="$1" none_display="$2"; local -n _arr="$3"
@@ -134,11 +141,13 @@ _print_list() {
             date="${entry%%|*}"
             tail="${entry#*|}"
             days="${tail%%|*}"
+            tail="${tail#*|}"
+            nas_col="${tail%%|*}"
             rest="${tail#*|}"
-            print_entry "$days" "$date" "$rest"
+            print_entry "$days" "$date" "$nas_col" "$rest"
         done
     else
-        print_entry 0 "$(date +%Y-%m-%d)" "$none_display"
+        print_entry 0 "$(date +%Y-%m-%d)" "" "$none_display"
     fi
 }
 
