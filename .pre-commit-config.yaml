@@ -8,6 +8,6 @@ repos:
     hooks:
       - id: prettier-markdown
         name: prettier (markdown tables)
-        entry: npx prettier --write
+        entry: npx prettier --write --prose-wrap never
         language: system
         types: [markdown]
