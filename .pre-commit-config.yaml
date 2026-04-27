@@ -1,13 +1,65 @@
 repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.45.0
+    rev: v0.48.0
     hooks:
       - id: markdownlint-fix
 
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=102400"] # 100MB
+
+  - repo: https://github.com/sirosen/texthooks
+    rev: 0.7.1
+    hooks:
+      - id: fix-ligatures
+        types: [markdown]
+      - id: fix-smartquotes
+        types: [markdown]
+      - id: fix-unicode-dashes
+        types: [markdown]
+
   - repo: local
     hooks:
-      - id: prettier-markdown
-        name: prettier (markdown tables)
-        entry: npx prettier --write --prose-wrap never
+      # Warning: Following check will prevent staging of already-committed .org files (count: 3)
+      - id: forbid-org-files
+        name: forbid org-mode files
+        entry: bash -c 'echo "Do not commit .org files." >&2; exit 1'
+        language: system
+        files: \.org$
+
+      - id: markdown-table-formatter
+        name: markdown-table-formatter (align columns)
+        entry: npx markdown-table-formatter
         language: system
         types: [markdown]
+
+      # Disabled: 2026-04-27 - Not applicable (no shell startup files)
+      # - id: shellcheck-bash-startup
+      #   name: shellcheck (startup files not typed as shell)
+      #   entry: shellcheck
+      #   language: system
+      #   files: '^home/(\.aliases|\.bash_login|\.bash_prompt)$'
+      #   args: [--shell=bash, -x]
+      #
+      # - id: shellcheck-profile
+      #   name: shellcheck (home/.profile)
+      #   entry: shellcheck
+      #   language: system
+      #   files: '^home/(\.profile|\.cargo/env|\.api_key_rc|\.rubyrc)$'
+      #   args: [--shell=sh, -x]
+      #
+      # - id: shellcheck-shell
+      #   name: shellcheck (shell files by type)
+      #   entry: shellcheck
+      #   language: system
+      #   types_or: [shell, bash, ksh]
+      #   args: [-x]
