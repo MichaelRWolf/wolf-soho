@@ -184,9 +184,11 @@ After installing, sign in with your 1Password account credentials.
 |--------------------------------------------|--------------------------------------------------|
 | View items in Shared-BLOOM                 | Yes                                              |
 | Use autofill for shared logins             | Yes                                              |
-| Add new items to Shared-BLOOM              | No (read-only unless admin grants edit access)   |
 | See Michael & Wendy's Private vaults       | No                                               |
 | Change your Master Password                | Yes (your account, your password)                |
 | Share your guest account with someone else | No -- each person needs their own invitation     |
 | Reveal a password in plain text            | Yes -- click the eye icon on any item to show it |
 | Copy a password to clipboard               | Yes -- available on any item                     |
+| Edit or change an existing password        | No by default; Yes if admin grants Edit Items permission -- changes sync immediately to all guests |
+| Add a new item to Shared-BLOOM             | No by default; Yes if admin grants Edit Items permission -- new items sync immediately to all guests |
+| Get edit permission                        | Contact Michael or Wendy -- admin adjusts your vault permission from View to Edit |
