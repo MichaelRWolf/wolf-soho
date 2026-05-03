@@ -12,7 +12,12 @@ LAUNCHD_PLISTS := launchd/com.wolfenterprises.fleet-nas-sync.plist
 UPLINK_COMMANDS := uplink-describe uplink-org uplink-monitor
 UPLINK_LIB := uplink-lib.sh
 
-.PHONY: all symlink_bin install uninstall install_uplink uninstall_uplink install_launchd uninstall_launchd clean todo help verify_TM_exclusions
+.PHONY: setup-hooks all symlink_bin install uninstall install_uplink uninstall_uplink install_launchd uninstall_launchd clean todo help verify_TM_exclusions
+
+setup-hooks:
+	pre-commit install
+
+
 
 # Default target - show help
 all: help
