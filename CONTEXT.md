@@ -5,21 +5,22 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Network Infrastructure -- RV Side
 
-| Name              | Device                                            | IP                    | Notes                                                 |
-|-------------------|---------------------------------------------------|-----------------------|-------------------------------------------------------|
-| `beryl`           | GL.iNet Beryl GL-MT1300 (hostname: GL-MT1300-cd7) | 192.168.8.1           | RV primary router; NAT + DHCP for running-wolf-router |
-| `loco-station`    | Ubiquiti NanoStation Loco5AC                      | 192.168.1.21          | PtP station (client), RV side; 10/100 Mbps Ethernet   |
-| `wolfden-hotspot` | Netgear Nighthawk M1                              | varies                | Cellular/LTE hotspot; backup internet                 |
-| `wolfden-nas`     | Synology DS220j (MAC 00:11:32:EA:25:1B)           | 192.168.8.129         | NAS; Time Machine; SMB shares                         |
-| `wolfden-mesh`    | Ubiquiti UAP-AC-M-US (MAC D8:B3:70:CC:AA:7C)      | 192.168.8.130 planned | WiFi AP; integration pending                          |
-| `cheapo-extender` | Generic USB WiFi repeater (Amazon B0DCBYCHR7)     | 192.168.11.1          | Portable campground WiFi backup                       |
+| Name              | Device                                               | IP                    | Notes                                                 |
+|-------------------|------------------------------------------------------|-----------------------|-------------------------------------------------------|
+| `beryl`           | GL.iNet Beryl GL-MT1300 (hostname: GL-MT1300-cd7)    | 192.168.8.1           | RV primary router; NAT + DHCP for running-wolf-router |
+| `loco-station`    | Ubiquiti NanoStation Loco5AC (MAC 1C:6A:1B:C6:E5:A3) | 192.168.1.21          | PtP station (client), RV side; 10/100 Mbps Ethernet   |
+| `wolfden-hotspot` | Netgear Nighthawk M1                                 | varies                | Cellular/LTE hotspot; backup internet                 |
+| `wolfden-nas`     | Synology DS220j (MAC 00:11:32:EA:25:1B)              | 192.168.8.129         | NAS; Time Machine; SMB shares                         |
+| `wolfden-mesh`    | Ubiquiti UAP-AC-M-US (MAC D8:B3:70:CC:AA:7C)         | 192.168.8.130 planned | WiFi AP; integration pending                          |
+| `cheapo-extender` | Generic USB WiFi repeater (Amazon B0DCBYCHR7)        | 192.168.11.1          | Portable campground WiFi backup                       |
 
 ## Network Infrastructure -- Moe's House Side
 
-| Name              | Device                       | IP                               | Notes                                                       |
-|-------------------|------------------------------|----------------------------------|-------------------------------------------------------------|
-| `loco-ap`         | Ubiquiti NanoStation Loco5AC | 192.168.1.20                     | PtP access point (master), house side; 10/100 Mbps Ethernet |
-| `spectrum-router` | Spectrum SAC2V1A             | LAN IP unknown (not 192.168.1.1) | ISP router/modem at Moe's house                             |
+| Name              | Device                                               | IP           | Notes                                                         |
+|-------------------|------------------------------------------------------|--------------|---------------------------------------------------------------|
+| `loco-ap`         | Ubiquiti NanoStation Loco5AC (MAC 1C:6A:1B:CA:EF:9B) | 192.168.1.20 | PtP access point (master), house side; 10/100 Mbps Ethernet   |
+| `spectrum-router` | Spectrum SAC2V1A (S/N A5L4H956C14029)                | 192.168.1.1  | ISP router/modem; WAN IPv4 50.89.8.254; MAC A8:97:CD:70:61:D0 |
+| `moes-roomba`     | iRobot Roomba i7 (model RVB-Y1)                      | DHCP         | Robot vacuum; WiFi 2.4 GHz; FCC ID ZW9AXCY1                   |
 
 ## Computing Devices
 
@@ -41,15 +42,15 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## SSIDs
 
-| Canonical name           | Actual SSID              | Device                         | Band      |
-|--------------------------|--------------------------|--------------------------------|-----------|
-| `running-wolf-router`    | Running Wolf Router      | beryl                          | 2.4 GHz   |
-| `running-wolf-router-5g` | Running Wolf Router - 5G | beryl                          | 5 GHz     |
-| `running-wolf-guest`     | Running Wolf Guest       | beryl                          | 2.4 GHz   |
-| `running-wolf-guest-5g`  | Running Wolf Guest - 5G  | beryl                          | 5 GHz     |
-| `running-wolf-hotspot`   | Running Wolf Hot Spot    | wolfden-hotspot (Nighthawk M1) | 2.4/5 GHz |
-| `running-wolf-ptp`       | Running Wolf PtP         | loco-ap ↔ loco-station RF link | 5 GHz     |
-| `spectrum-wifi`          | SpectrumSetup-DO         | spectrum-router                | 2.4/5 GHz |
+| Canonical name           | Actual SSID              | Device                         | Band      | Notes                            |
+|--------------------------|--------------------------|--------------------------------|-----------|----------------------------------|
+| `running-wolf-router`    | Running Wolf Router      | beryl                          | 2.4 GHz   |                                  |
+| `running-wolf-router-5g` | Running Wolf Router - 5G | beryl                          | 5 GHz     |                                  |
+| `running-wolf-guest`     | Running Wolf Guest       | beryl                          | 2.4 GHz   |                                  |
+| `running-wolf-guest-5g`  | Running Wolf Guest - 5G  | beryl                          | 5 GHz     |                                  |
+| `running-wolf-hotspot`   | Running Wolf Hot Spot    | wolfden-hotspot (Nighthawk M1) | 2.4/5 GHz |                                  |
+| `running-wolf-ptp`       | Running Wolf PtP         | loco-ap ↔ loco-station RF link | 5 GHz     |                                  |
+| `spectrum-wifi`          | SpectrumSetup-D0         | spectrum-router                | 2.4/5 GHz | default password: mediumriver064 |
 
 ## RV Cable Inventory -- Rascally Raccoon Site
 
@@ -65,7 +66,7 @@ Cables verified by: michael-pro → anker-dongle → [cable] → wolfden-hotspot
 
 ## Normal Data Path -- Rascally Raccoon Site
 
-```
+```text
 internet
   → spectrum-router  (LAN IP unknown)
   → [Ethernet: indoor + outdoor run at Moe's house]

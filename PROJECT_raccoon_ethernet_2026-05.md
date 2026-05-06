@@ -1,4 +1,4 @@
-# Project: Rascally Raccoon Ethernet Outage — 2026-05
+# Project: Rascally Raccoon Ethernet Outage -- 2026-05
 
 ## Context
 
@@ -12,7 +12,7 @@ Normal data path: see CONTEXT.md
 
 ---
 
-## CLI Quick Reference — michael-pro Anker Adapter
+## CLI Quick Reference -- michael-pro Anker Adapter
 
 Network service name: `USB 10/100/1000 LAN`
 
@@ -43,42 +43,49 @@ ping -c 4 1.1.1.1
   pass network signal individually
 - Confirmed poe-rv and poe-moe both pass network signal inline (tested with and without
   injector powered)
-- Confirmed loco-station alive and reachable at 192.168.1.21 — direct connection test
-- Confirmed loco-ap alive and reachable at 192.168.1.20 — via RF bridge
-- Confirmed PtP RF link healthy — 302 Mbps capacity, signal -55 dBm, noise -87 dBm (32 dB SNR)
-- Confirmed loco-ap configuration correct — ACCESS POINT: On, PTP MODE: On
-- Confirmed loco-station configuration correct — ACCESS POINT: Off, PTP MODE: On
-- Confirmed spectrum-router WAN port active (green LED — internet present at Moe's house)
-- Confirmed loco-ap Ethernet physically connected to spectrum-router — port 1 shows yellow
+- Confirmed loco-station alive and reachable at 192.168.1.21 -- direct connection test
+- Confirmed loco-ap alive and reachable at 192.168.1.20 -- via RF bridge
+- Confirmed PtP RF link healthy -- 302 Mbps capacity, signal -55 dBm, noise -87 dBm (32 dB SNR)
+- Confirmed loco-ap configuration correct -- ACCESS POINT: On, PTP MODE: On
+- Confirmed loco-station configuration correct -- ACCESS POINT: Off, PTP MODE: On
+- Confirmed spectrum-router WAN port active (green LED -- internet present at Moe's house)
+- Confirmed loco-ap Ethernet physically connected to spectrum-router -- port 1 shows yellow
   blinking (100 Mbps active; yellow vs green is expected for loco-ap's 10/100 port)
 - Confirmed poe-moe installed at Moe's house powering loco-ap (Michael walked it up)
-- Ordered tp-link-switch (TP-Link TL-SF1005D, 5-port 10/100) from Amazon — 2026-05-04
+- Ordered tp-link-switch (TP-Link TL-SF1005D, 5-port 10/100) from Amazon -- 2026-05-04
+- Confirmed spectrum-router LAN IP is 192.168.1.1 -- accessed admin UI from Moe's side
+  2026-05-06; WAN IPv4 50.89.8.254; model SAC2V1A; S/N A5L4H956C14029; MAC A8:97:CD:70:61:D0
+- **ROOT CAUSE FOUND 2026-05-06**: outdoor cable between poe-moe PoE port and loco-ap had
+  animal chew damage (hawk/rooster incident site, feathers present near chew marks). Outer
+  jacket nicked. Data pairs compromised; power pairs intact → loco-ap had power (blue LED)
+  but no Ethernet data path. Replaced with new white cable + coupler. Cable test confirmed:
+  michael-pro dongle → white cable → coupler → short black cable → spectrum-router passed data.
+- **loco-ap fully restored** -- sub-10ms pings to 192.168.1.20 from Moe's WiFi confirmed.
+  loco-ap was unreachable because cable broke its Ethernet data path -- not a firmware crash.
+- **Full system restored 2026-05-06** -- internet confirmed working end-to-end:
+  michael-pro WiFi → beryl → poe-rv → loco-station → RF → loco-ap → new cable → poe-moe →
+  spectrum-router. wolf-air also confirmed. tp-link-switch not needed.
+- Note: openwrt.lan at 192.168.1.55 present on Moe's LAN (Moe's own device, unrelated)
 
 ---
 
 ## WAITING
 
-- **tp-link-switch delivery** — Amazon, ordered 2026-05-04
+- ~~tp-link-switch delivery~~ -- system fully working without it; switch may still arrive
 
 ---
 
 ## TODO
 
-After tp-link-switch arrives:
-
-1. Insert tp-link-switch between injector LAN port and beryl WAN port
-2. Confirm beryl WAN shows cable detected
-3. Confirm beryl WAN gets DHCP/WAN IP from spectrum-router through PtP bridge
-4. Ping 1.1.1.1 from RV device on running-wolf-router
-5. Confirm 192.168.1.20 and 192.168.1.21 accessible from michael-pro via beryl (normal
-   management path)
-6. Reassemble full production chain and monitor for 24 hours
+- Monitor for 24 hours -- confirm link remains stable
+- Protect new white cable + coupler from weather/animals (cable is now the critical run)
+- When tp-link-switch arrives: keep as spare; beryl WAN may still have marginal magnetics
 
 ---
 
 ## Known
 
-### Cables — all verified good
+### Cables -- all verified good
 
 Test method for each: michael-pro → anker-dongle → [cable under test] → wolfden-hotspot →
 internet; pinged 1.1.1.1.
@@ -88,7 +95,7 @@ internet; pinged 1.1.1.1.
 - **cable-green-3ft-b** passes network ✓
 - **cable-outdoor-50ft** passes network ✓
 
-### PoE Injectors — both verified functional as pass-through
+### PoE Injectors -- both verified functional as pass-through
 
 Test method: wolfden-hotspot → cable → injector LAN → injector PoE → cable → anker-dongle →
 michael-pro; pinged 1.1.1.1. Tested both with injector powered and unpowered.
@@ -99,76 +106,99 @@ michael-pro; pinged 1.1.1.1. Tested both with injector powered and unpowered.
 
 ### loco-station
 
-- **Alive and reachable at 192.168.1.21** — test: michael-pro (manual IP 192.168.1.100/24) →
-  anker-dongle → injector LAN → injector PoE → loco-station; pinged 192.168.1.21 ✓
-- **anker-dongle detects cable from injector/loco-station chain** — link established, ping
-  worked ✓
-- **beryl does NOT detect cable from injector/loco-station chain** — tested on both beryl WAN
-  and beryl LAN ports; neither showed cable detected. wolfden-hotspot does show cable on beryl
-  using the same cables. The variable is the device on the far end of the cable from beryl.
+- **Alive and reachable at 192.168.1.21** -- confirmed ✓
+- **beryl detects cable from loco-station chain** -- confirmed working 2026-05-06 after cable
+  fix on Moe's side; no tp-link-switch required ✓
 
 ### loco-ap
 
 - **Reachable at 192.168.1.20** via RF bridge from michael-pro at 192.168.1.100 ✓
-- **airOS web UI accessible** at http://192.168.1.20 in Safari ✓
-- **PtP RF link: Connected** — 302 Mbps capacity, -55 dBm signal, -87 dBm noise, 32 dB SNR
-- **Ethernet physically connected to spectrum-router** — port 1 on spectrum-router shows yellow
+- **airOS web UI accessible** at <http://192.168.1.20> in Safari ✓
+- **PtP RF link: Connected** -- 302 Mbps capacity, -55 dBm signal, -87 dBm noise, 32 dB SNR
+- **Ethernet physically connected to spectrum-router** -- port 1 on spectrum-router shows yellow
   blinking (100 Mbps active) ✓
-- **Management radio temporarily active** — ~3-hour countdown timer in airOS; triggered during
+- **Management radio temporarily active** -- ~3-hour countdown timer in airOS; triggered during
   today's diagnosis; will expire automatically; not a configuration error; does not affect PtP
   operation
-- **airView disabled on loco-ap** (red "i" bubble) — expected: loco-ap has ACCESS POINT On and
+- **airView disabled on loco-ap** (red "i" bubble) -- expected: loco-ap has ACCESS POINT On and
   is actively transmitting; passive scanning cannot run while transmitting. loco-station shows
   blue/green airView spectrum because it has ACCESS POINT Off (passive).
 
 ### beryl
 
-- **LAN functional** — michael-pro received 192.168.8.249 from beryl DHCP ✓
-- **WAN does not detect cable from loco-station via injector** (see loco-station section above)
-- **WAN does detect cable from wolfden-hotspot** — same cable-green-3ft used in both tests
+- **LAN functional** ✓
+- **WAN detects cable from loco-station via injector** -- confirmed working 2026-05-06 ✓
+- **Internet confirmed** -- wolf-air and michael-pro both routing through beryl → PtP → spectrum ✓
 
 ### spectrum-router
 
-- **Internet port active** — green LED on WAN port ✓
-- **LAN IP is not 192.168.1.1** — could not ping 192.168.1.1 from michael-pro at
-  192.168.1.100/24; actual LAN IP unknown
-- **Port 1 (to loco-ap) active at 100 Mbps** — yellow blinking LED ✓
+- **Internet port active** -- green LED on WAN port ✓
+- **LAN IP confirmed 192.168.1.1** -- accessed admin UI from Moe's side 2026-05-06 ✓
+- **WAN IPv4 50.89.8.254** -- internet connected ✓
+- **Model SAC2V1A, S/N A5L4H956C14029, MAC A8:97:CD:70:61:D0**
+- **Port 1 (to loco-ap) active at 100 Mbps** -- yellow blinking LED ✓ (as of 2026-05-04)
 
 ---
 
-## Root Cause Hypothesis
+## Root Cause -- Confirmed
 
-**beryl WAN port magnetics degraded by accidental passive PoE exposure.**
+**Chewed cable between poe-moe PoE port and loco-ap broke Ethernet data pairs.**
 
-A few days before the outage, the injector PoE output port was accidentally connected to beryl
-WAN (cables swapped at the injector). Passive 24V PoE has no device detection — it puts 24V
-unconditionally on pins 4,5,7,8 (spare pairs). The beryl WAN port is gigabit; gigabit PHYs
-drive signals on all 4 pairs including spare pairs. The transformer magnetics in Ethernet ports
-are rated for millivolt-level DC; 24V can saturate or permanently damage them.
+An animal (likely a hawk -- feathers and chew marks found at same location near where a hawk
+caught a rooster months earlier) chewed the outdoor cable running from poe-moe's PoE output
+to loco-ap. The outer jacket was nicked but not deeply. The data pairs (pins 1,2,3,6) were
+compromised; the power pairs (pins 4,5,7,8) remained intact.
 
-The beryl WAN continued working for a few days after the accident. The Sunday power event at
-Moe's (loco-ap flapping or down) likely caused loco-station to crash, producing a transient
-that pushed the already-degraded beryl WAN below threshold.
+Result: loco-ap received 24V passive PoE and stayed powered (blue LED present), but had no
+Ethernet data path to spectrum-router. The bridge was broken at the Ethernet layer.
+loco-station's RF association with loco-ap stayed up (RF layer is independent of Ethernet),
+but loco-station had no live bridge to sustain proper Ethernet output toward beryl. beryl WAN
+-- which may already have slightly weaker magnetics from an earlier passive PoE incident --
+could not detect loco-station's weakened/inactive signal, though it could detect wolfden-hotspot
+(stronger gigabit signal).
 
-Result: strong signals (wolfden-hotspot gigabit) still register on beryl WAN; weak signals
-(loco-station 100 Mbps through injector) do not.
+**Fix:** replaced chewed cable with new white cable + coupler. Full chain restored immediately.
+tp-link-switch was not needed.
 
-**Fix:** tp-link-switch (10/100 only) inserted between injector LAN and beryl WAN. The switch
-regenerates a clean, strong signal on the beryl side. Because the switch is 10/100-only, it
-never drives signals on spare pairs (4,5,7,8) on the injector side, avoiding the PoE voltage
-entirely.
+## Prior Hypothesis (superseded)
+
+The earlier hypothesis (beryl WAN magnetics degraded by accidental passive PoE exposure) was
+plausible and consistent with observed data at the time, but was not the primary cause.
+beryl WAN may still be marginally weaker than spec -- keep tp-link-switch as a spare.
+
+**Conflicting / uncertain data (documented honestly):**
+
+- RF link showed 302 Mbps / -55 dBm even when cable was broken -- not conflicting, RF metrics
+  are independent of Ethernet; loco-ap's radio ran fine with broken Ethernet
+- beryl detected loco-station without tp-link-switch once cable was fixed -- suggests beryl WAN
+  is functional, but signal margin is unknown
+- From Ethernet dongle (.100/24), could not reach iPhone at .8 (WiFi client, same /24) --
+  possibly real spectrum-router behavior, possibly macOS dongle initialization issue; unresolved
 
 ---
 
-## Unknown
+## End-of-Day Health Check -- 2026-05-06 17:15 EDT
 
-- Whether tp-link-switch fully resolves beryl WAN detection (expected: yes)
-- Whether beryl WAN port is permanently degraded or marginal (tp-link-switch test will reveal)
+All systems nominal. Full PtP internet path verified from RV (wolf-air on beryl).
+
+```text
+ping 192.168.1.20  →  loco-ap      0% loss  avg 14 ms  (RF bridge hop -- normal)
+ping 192.168.1.21  →  loco-station 0% loss  avg  3 ms  (local Ethernet hop -- normal)
+ping 1.1.1.1       →  internet     0% loss  avg 27 ms  (normal for Spectrum ISP)
+```
+
+Data path confirmed: wolf-air → beryl → poe-rv → loco-station → RF → loco-ap → poe-moe → spectrum-router → internet
+
+---
+
+## Unknown / Unresolved
+
 - Exact nature of Sunday power event at Moe's house
-- Whether loco-station firmware crashed Sunday due to RF link instability, or loco-station
-  Ethernet degraded independently
-- spectrum-router LAN IP (not 192.168.1.1)
 - Whether Moe's devices had internet Sunday AM (never confirmed)
 - Whether poe-rv is degraded vs normal behavior (buzz observed; not load-tested independently)
-- Current physical state of full RV chain (system partially disassembled for testing as of
-  2026-05-04)
+- Whether beryl WAN magnetics are marginally degraded -- functional now, but signal margin
+  unknown; tp-link-switch kept as spare in case it becomes an issue again
+- **Why loco-station's Ethernet output was insufficient for beryl to detect** when loco-ap's
+  cable was broken -- RF association between locos was maintained throughout; mechanism by which
+  loco-ap's broken Ethernet affected loco-station's Ethernet output is unresolved (see Root
+  Cause section)

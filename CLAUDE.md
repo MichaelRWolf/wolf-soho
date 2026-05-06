@@ -9,5 +9,9 @@ radio").
 
 ## Active Projects
 
-- [PROJECT_raccoon_ethernet_2026-05.md](PROJECT_raccoon_ethernet_2026-05.md) — PtP internet
-  outage at Rascally Raccoon site; switch ordered, pending delivery
+- [PROJECT_raccoon_ethernet_2026-05.md](PROJECT_raccoon_ethernet_2026-05.md) -- PtP internet
+  outage RESOLVED 2026-05-06; root cause was animal-chewed cable between poe-moe and loco-ap;
+  replaced with white cable + coupler; system fully restored; tp-link-switch returned unused
+- [PROJECT_moes_roomba_2026-05.md](PROJECT_moes_roomba_2026-05.md) -- Moe's Roomba i7 needs
+  standalone operation (press CLEAN, clean, dock) while Sonia is away; basic button operation
+  confirmed working; WiFi disconnect plan documented if scheduling conflicts arise
