@@ -140,6 +140,56 @@ michael-pro; pinged 1.1.1.1. Tested both with injector powered and unpowered.
 
 ---
 
+## Forensic Post-Mortem -- 2026-05-08
+
+### Physical Inspection
+
+Cable cut open after replacement. Found: **solid green wire (pin 6) nicked** by animal.
+Outer jacket had visible chew mark; inner damage was to the solid green conductor only.
+
+### Animal Identification (Revised)
+
+Moe believes **mouse or squirrel**, not hawk. Prior note listed hawk as likely culprit based
+on feathers at the site. Feathers were from the earlier hawk/rooster incident; the cable chew
+is a separate event by a different animal.
+
+### Why Solid Green = Fatal for Data
+
+T568B wiring (North American standard):
+
+| Pins     | Wires                         | Function                |
+|----------|-------------------------------|-------------------------|
+| 1, 2     | white/orange + solid orange   | TX+ / TX- (transmit)    |
+| **3, 6** | **white/green + solid green** | **RX+ / RX- (receive)** |
+| 4, 5     | blue + white/blue             | PoE power               |
+| 7, 8     | white/brown + solid brown     | PoE power               |
+
+10/100 Mbps uses only pins 1,2,3,6 for data. PoE rides on 4,5,7,8.
+Solid green = pin 6 = RX-. Nicking one wire of a differential pair destroys the pair.
+
+Result: **receive pair dead → no Ethernet data. Power pairs intact → loco-ap stayed powered
+(blue LED).** RF radio runs on PoE → RF link to loco-station unaffected. Exactly matches
+observed symptoms.
+
+### Why the Groundhog Test Failed
+
+General principle (animals won't chew cable for fun/food) held for scent-neutral environments.
+Failure mode here: cable ran through the hawk/rooster kill site. Fat, blood, and feather
+residue contaminated the area. Mouse or squirrel investigating food scent gnawed whatever was
+in the way. **Scent contamination is the confounding variable** the test doesn't cover.
+
+### Splice Options Considered
+
+Wire nuts and solder work for DC but fail at 100 MHz (100BASE-TX uses 100 MHz differential
+signaling). Impedance discontinuities from untwisted wire at splice points cause reflections
+that corrupt data. Wire nuts require ~1-2" of untwisted wire -- spec allows ≤0.5" at
+termination. Soldering with careful staggering might survive at 10 Mbps; unlikely at 100 Mbps.
+
+**Correct repair: RJ45 coupler** (which is what was done). Two properly crimped ends joined
+by a coupler maintains impedance geometry. Spec-legal field repair for this scenario.
+
+---
+
 ## Root Cause -- Confirmed
 
 **Chewed cable between poe-moe PoE port and loco-ap broke Ethernet data pairs.**
