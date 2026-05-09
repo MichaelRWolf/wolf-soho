@@ -44,6 +44,13 @@ repos:
         language: system
         types: [markdown]
 
+      - id: shellcheck-shell
+        name: shellcheck (shell files by type)
+        entry: shellcheck
+        language: system
+        types_or: [shell, bash, ksh]
+        args: [-x]
+
       # Disabled: 2026-04-27 - Not applicable (no shell startup files)
       # - id: shellcheck-bash-startup
       #   name: shellcheck (startup files not typed as shell)
@@ -58,10 +65,3 @@ repos:
       #   language: system
       #   files: '^home/(\.profile|\.cargo/env|\.api_key_rc|\.rubyrc)$'
       #   args: [--shell=sh, -x]
-      #
-      # - id: shellcheck-shell
-      #   name: shellcheck (shell files by type)
-      #   entry: shellcheck
-      #   language: system
-      #   types_or: [shell, bash, ksh]
-      #   args: [-x]
