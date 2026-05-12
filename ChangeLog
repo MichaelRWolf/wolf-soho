@@ -7,7 +7,7 @@
   - michael-pro required manual Network → Add Service; renamed from "Belkin USB-C LAN 2" via `networksetup -renamenetworkservice`
   - macOS uses built-in Realtek driver; no system extension approval needed
 
-## 2025-08-25
+## 2025-08-25	
 
 ### Email Setup: From Domain Dreams to 2015 Reality
 
