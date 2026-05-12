@@ -25,7 +25,8 @@
 
 ## `michael-iphone` -- iPhone (Michael's)
 
-- Model: iPhone SE 3rd generation
+- Model: iPhone SE (3rd generation) -- MNAF3LL/A
+- Serial: LWCGXJFWLP
 - mDNS name: tigger-iphone.local
 - MAC: 2a:10:66:ad:ee:f9 (tentative -- confirm via Beryl web UI)
 
