@@ -5,14 +5,14 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Network Infrastructure -- RV Side
 
-| Name              | Device                       |
-|-------------------|------------------------------|
-| `beryl`           | GL.iNet Beryl GL-MT1300      |
-| `loco-station`    | Ubiquiti NanoStation Loco5AC |
-| `wolfden-hotspot` | Netgear Nighthawk M1         |
-| `wolfden-nas`     | Synology DS220j              |
-| `wolfden-mesh`    | Ubiquiti UAP-AC-M-US         |
-| `cheapo-extender` | Generic USB WiFi repeater    |
+| Name                   | Device                       |
+|------------------------|------------------------------|
+| `beryl`                | GL.iNet Beryl GL-MT1300      |
+| `loco-station`         | Ubiquiti NanoStation Loco5AC |
+| `running-wolf-hotspot` | Netgear Nighthawk M1         |
+| `wolfden-nas`          | Synology DS220j              |
+| `wolfden-mesh`         | Ubiquiti UAP-AC-M-US         |
+| `cheapo-extender`      | Generic USB WiFi repeater    |
 
 ## Network Infrastructure -- Moe's House Side
 
@@ -34,24 +34,26 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Accessories
 
-| Name             | Device                                     |
-|------------------|--------------------------------------------|
-| `anker-dongle`   | Anker USB-C to Gigabit Ethernet adapter    |
-| `belkin-dongle`  | Belkin USB-C to Gigabit Ethernet adapter   |
-| `poe-rv`         | Ubiquiti POE-24-12W passive PoE injector   |
-| `poe-moe`        | Ubiquiti POE-24-12W passive PoE injector   |
-| `tp-link-switch` | TP-Link TL-SF1005D 5-port 10/100 unmanaged |
+| Name            | Device                                   |
+|-----------------|------------------------------------------|
+| `anker-dongle`  | Anker USB-C to Gigabit Ethernet adapter  |
+| `belkin-dongle` | Belkin USB-C to Gigabit Ethernet adapter |
+| `poe-rv`        | Ubiquiti POE-24-12W passive PoE injector |
+| `poe-moe`       | Ubiquiti POE-24-12W passive PoE injector |
 
 ## SSIDs
 
-| Canonical name           | Actual SSID              | Device                         | Band      |
-|--------------------------|--------------------------|--------------------------------|-----------|
-| `running-wolf-router`    | Running Wolf Router      | beryl                          | 2.4 GHz   |
-| `running-wolf-router-5g` | Running Wolf Router - 5G | beryl                          | 5 GHz     |
-| `running-wolf-guest`     | Running Wolf Guest       | beryl                          | 2.4 GHz   |
-| `running-wolf-guest-5g`  | Running Wolf Guest - 5G  | beryl                          | 5 GHz     |
-| `running-wolf-hotspot`   | Running Wolf Hot Spot    | wolfden-hotspot (Nighthawk M1) | 2.4/5 GHz |
-| `running-wolf-ptp`       | Running Wolf PtP         | loco-ap ↔ loco-station RF link | 5 GHz     |
+| Canonical name             | Actual SSID                | Device                                | Band   | (GHz)   |
+|----------------------------|----------------------------|---------------------------------------|--------|---------|
+| `running-wolf-router`      | Running Wolf Router        | beryl                                 | 2.4    |         |
+| `running-wolf-router-5g`   | Running Wolf Router - 5G   | beryl                                 |        | 5.0     |
+| `running-wolf-guest`       | Running Wolf Guest         | beryl                                 | 2.4    |         |
+| `running-wolf-guest-5g`    | Running Wolf Guest - 5G    | beryl                                 |        | 5.0     |
+| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- |
+| `running-wolf-hotspot`     | Running Wolf Hot Spot      | running-wolf-hotspot (Nighthawk M1)   | 2.4    | 5.0     |
+| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- |
+| `running-wolf-ptp`         | Running Wolf PtP           | loco-ap ↔ loco-station RF link        |        | 5.0     |
+| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- |
 
 ## Reference Docs
 

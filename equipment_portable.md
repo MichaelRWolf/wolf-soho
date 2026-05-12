@@ -46,4 +46,4 @@
 | `cable-green-3ft-b`  | Green Cat6, 3 ft, indoor RV        | Yes           |
 | `cable-outdoor-50ft` | Cat6, 50 ft, exterior run, RV side | Yes           |
 
-Verified by: michael-pro → anker-dongle → [cable] → wolfden-hotspot → internet (ping 1.1.1.1)
+Verified by: michael-pro → anker-dongle → [cable] → running-wolf-hotspot → internet (ping 1.1.1.1)

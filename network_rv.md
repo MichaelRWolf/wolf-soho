@@ -9,7 +9,6 @@ WAN uplink configurations (variants) used at different locations.
 beryl LAN (192.168.8.0/24)
   wolfden-nas   192.168.8.129
   wolfden-mesh  192.168.8.130 (planned)
-  wolf-air      192.168.8.167
   → RV devices via running-wolf-router / running-wolf-router-5g
 ```
 
@@ -22,12 +21,17 @@ WAN source: Spectrum ISP at Moe's house via Ubiquiti PtP link (~460 ft, 5 GHz).
 ```text
 internet
   → spectrum-router (192.168.1.1)
-  → [Ethernet: indoor + outdoor run at Moe's house]
-  → loco-ap (192.168.1.20)
-  ))) Running Wolf PtP  RF ~460 ft @ 5 GHz )))
-  loco-station (192.168.1.21)
+  -> indoor cable
+  -> poe-moe 
+  -> flat cable
+  -> coupler
+  -> outdoor cable
+  → loco-ap (192.168.1.20) (Moe's porch)
+  → RF ~460 ft @ 5 GHz (SSID: Running Wolf PtP)
+  → loco-station (192.168.1.21) (Tree near RV
+  → cable-outdoor-50ft
   → poe-rv (PoE in → LAN out)
-  → cable-outdoor-50ft + indoor cables
+  → indoor cables
   → beryl WAN (192.168.8.1)
 ```
 
@@ -73,23 +77,23 @@ Docs: [Trails_End/](Trails_End/)
 
 ## Variant: On The Road
 
-WAN source: cellular -- michael-iphone or wendy-iphone hotspot, or wolfden-hotspot
+WAN source: cellular -- michael-iphone or wendy-iphone hotspot, or running-wolf-hotspot
 (Netgear Nighthawk M1). Used while driving interstate, Cracker Barrel stops, etc.
 
 ### Data Path Options
 
 ```text
-Option A -- iPhone tethering:
+Netgear hotspot:
+  running-wolf-hotspot (Nighthawk M1, LTE)
+  → beryl WAN (WiFi uplink; wired future option)
+
+iPhone tethering:
   michael-iphone or wendy-iphone (Personal Hotspot)
   → beryl WAN (WiFi uplink or USB tether)
-
-Option B -- Netgear hotspot:
-  wolfden-hotspot (Nighthawk M1, LTE)
-  → beryl WAN (WiFi uplink; wired future option)
 ```
 
 ### Notes
 
 - No fixed IPs; all DHCP from cellular carrier
 - iPhone hotspot SSID and password set on device
-- wolfden-hotspot may overheat on long drives; ice pack workaround
+- running-wolf-hotspot may overheat on long drives; ice pack workaround
