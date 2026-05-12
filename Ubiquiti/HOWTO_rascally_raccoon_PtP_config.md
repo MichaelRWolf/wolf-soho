@@ -26,12 +26,12 @@ Bench configuration of Ubiquiti airMAX PtP link (NanoStation Loco 5AC) for the *
 
 1. System Settings → Network → Location → **Add Location**
 2. Name: `Ubiquiti-Setup`
-3. Enable only **Belkin USB‑C LAN / Thunderbolt Ethernet**
+3. Enable only **Belkin USB-C LAN / Thunderbolt Ethernet**
 4. IPv4: **Configure Manually**
    * IP Address: `192.168.1.100`
    * Subnet Mask: `255.255.255.0`
    * Router: *(leave blank)*
-5. Wi‑Fi: Off
+5. Wi-Fi: Off
 
 *Note: The Loco5AC radios are managed via static IPs in `192.168.1.0/24` (AP: `192.168.1.20`, Station: `192.168.1.21`). Manual IP is required for bench setup.*
 
@@ -40,7 +40,7 @@ Bench configuration of Ubiquiti airMAX PtP link (NanoStation Loco 5AC) for the *
 ## Wiring (Bench)
 
 ```text
-MacBook → USB‑C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
+MacBook → USB-C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
 ```
 
 * Use the **LAN/⚡** port for the Mac
@@ -68,12 +68,12 @@ MacBook → USB‑C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → Loco
 
 In a Point-to-Point link, one radio is the **AP (master)** and the other is the **Station (client)**.
 
-|                          | AP (Access Point)            | Station                   |
-|--------------------------|------------------------------|---------------------------|
-| **Role**                 | Master / Hub                 | Client / Spoke            |
-| **Creates the network**  | Yes — broadcasts SSID        | No — joins SSID           |
-| **Waits for connection** | Yes                          | No — initiates connection |
-| **Typical location**     | Fixed infrastructure (House) | Mobile/remote end (RV)    |
+|                          | AP (Access Point)            | Station                    |
+|--------------------------|------------------------------|----------------------------|
+| **Role**                 | Master / Hub                 | Client / Spoke             |
+| **Creates the network**  | Yes -- broadcasts SSID       | No -- joins SSID           |
+| **Waits for connection** | Yes                          | No -- initiates connection |
+| **Typical location**     | Fixed infrastructure (House) | Mobile/remote end (RV)     |
 
 **UI Settings (Wireless → Basic Wireless Settings):**
 
@@ -103,7 +103,7 @@ In a Point-to-Point link, one radio is the **AP (master)** and the other is the 
 * PTP MODE: **On**
 * SSID: `Running Wolf PtP`
 * WPA SECURITY: **Personal**
-* WPA2 PRESHARED KEY: *(see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)*
+* WPA2 PRESHARED KEY: *(see 1Password: Wolfden - Ubiquiti Running Wolf PtP - WPA2 Link Key)*
 * CHANNEL WIDTH: **40 MHz**
 * FREQUENCY: Manual (avoid DFS initially)
 
@@ -128,8 +128,8 @@ In a Point-to-Point link, one radio is the **AP (master)** and the other is the 
 * PTP MODE: **On**
 * SSID: `Running Wolf PtP`
 * WPA SECURITY: **Personal**
-* WPA2 PRESHARED KEY: *(see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)*
-* LOCK TO AP MAC: **1C:6A:1B:CA:EF:9B** *(House AP — prevents connecting to rogue APs)*
+* WPA2 PRESHARED KEY: *(see 1Password: Wolfden - Ubiquiti Running Wolf PtP - WPA2 Link Key)*
+* LOCK TO AP MAC: **1C:6A:1B:CA:EF:9B** *(House AP -- prevents connecting to rogue APs)*
 
 ---
 
@@ -189,20 +189,20 @@ reboot
 
 Three 1Password entries:
 
-1. **Wolfden – Ubiquiti Loco5AC – House PtP (AP)**
-2. **Wolfden – Ubiquiti Loco5AC – RV PtP (Station)**
-3. **Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key** (linked from #1 and #2)
+1. **Wolfden - Ubiquiti Loco5AC - House PtP (AP)**
+2. **Wolfden - Ubiquiti Loco5AC - RV PtP (Station)**
+3. **Wolfden - Ubiquiti Running Wolf PtP - WPA2 Link Key** (linked from #1 and #2)
 
-### Wolfden – Ubiquiti Loco5AC – House PtP (AP)
+### Wolfden - Ubiquiti Loco5AC - House PtP (AP)
 
 ```text
-Role: Point-to-Point bridge – Access Point (AP)
+Role: Point-to-Point bridge - Access Point (AP)
 Location: House
 Physical Mount: TBD (house-facing RV direction)
 Power: 24V passive PoE (POE-24-12W injector)
 
 MAC Address: 1C:6A:1B:CA:EF:9B
-Firmware: airMAX (factory)
+Firmware: WA.ar934x.v8.7.11.46972.220614.0420
 Band: 5 GHz
 Peer: RV-side Loco5AC (Station)
 
@@ -219,7 +219,7 @@ UI Settings (Wireless → Basic Wireless Settings):
   PTP MODE: On
   SSID: Running Wolf PtP
   WPA SECURITY: Personal
-  WPA2 PRESHARED KEY: (see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)
+  WPA2 PRESHARED KEY: (see 1Password: Wolfden - Ubiquiti Running Wolf PtP - WPA2 Link Key)
   CHANNEL WIDTH: 40 MHz
   FREQUENCY: Manual (avoid DFS initially)
 
@@ -228,16 +228,16 @@ Access:
   Web UI: http://192.168.1.20 (Safari only)
 ```
 
-### Wolfden – Ubiquiti Loco5AC – RV PtP (Station)
+### Wolfden - Ubiquiti Loco5AC - RV PtP (Station)
 
 ```text
-Role: Point-to-Point bridge – Station
+Role: Point-to-Point bridge - Station
 Location: RV
 Physical Mount: TBD (RV-facing house direction)
 Power: 24V passive PoE (POE-24-12W injector)
 
 MAC Address: 1C:6A:1B:C6:E5:A3
-Firmware: airMAX (factory)
+Firmware: WA.ar934x.v8.7.11.46972.220614.0420
 Band: 5 GHz
 Peer: House-side Loco5AC (AP)
 
@@ -254,8 +254,8 @@ UI Settings (Wireless → Basic Wireless Settings):
   PTP MODE: On
   SSID: Running Wolf PtP
   WPA SECURITY: Personal
-  WPA2 PRESHARED KEY: (see 1Password: Wolfden – Ubiquiti Running Wolf PtP – WPA2 Link Key)
-  LOCK TO AP MAC: 1C:6A:1B:CA:EF:9B (House AP — prevents connecting to rogue APs)
+  WPA2 PRESHARED KEY: (see 1Password: Wolfden - Ubiquiti Running Wolf PtP - WPA2 Link Key)
+  LOCK TO AP MAC: 1C:6A:1B:CA:EF:9B (House AP -- prevents connecting to rogue APs)
 
 Access:
   SSH: ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc admin@192.168.1.21

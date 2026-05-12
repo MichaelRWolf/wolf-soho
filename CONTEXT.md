@@ -33,21 +33,13 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Accessories
 
-| Name             | Device                                      | Notes                                                   |
-|------------------|---------------------------------------------|---------------------------------------------------------|
-| `anker-dongle`   | Anker USB-C to Gigabit Ethernet adapter     | Used with michael-pro for direct Ethernet access        |
-| `poe-rv`         | Ubiquiti POE-24-12W passive PoE injector    | Originally at RV; emitted buzz during 2026-05 diagnosis |
-| `poe-moe`        | Ubiquiti POE-24-12W passive PoE injector    | Originally at Moe's house                               |
-| `tp-link-switch` | TP-Link TL-SF1005D, 5-port 10/100 unmanaged | Ordered 2026-05-04; not yet installed                   |
-
-## Backpack -- Portable Accessories
-
-Items that travel for field use (cable testing, direct Ethernet, diagnostics).
-
-| Name            | Device                                   | Chip            | USB Speed  | Serial     | Notes                                                                           |
-|-----------------|------------------------------------------|-----------------|------------|------------|---------------------------------------------------------------------------------|
-| `anker-dongle`  | Anker USB-C to Gigabit Ethernet adapter  | unknown         | unknown    | unknown    | Used to verify cables at Rascally Raccoon 2026-05                               |
-| `belkin-dongle` | Belkin USB-C to Gigabit Ethernet adapter | Realtek RTL8153 | USB 3.1 5G | 0013000001 | Works on michael-pro and wendy-pro; macOS built-in driver (no extension needed) |
+| Name             | Device                                      | Notes                                                     |
+|------------------|---------------------------------------------|-----------------------------------------------------------|
+| `anker-dongle`   | Anker USB-C to Gigabit Ethernet adapter     | Used with michael-pro for direct Ethernet access          |
+| `belkin-dongle`  | Belkin USB-C to Gigabit Ethernet adapter    | Works on michael-pro and wendy-pro; MAC 80:69:1a:8d:ea:8a |
+| `poe-rv`         | Ubiquiti POE-24-12W passive PoE injector    | Originally at RV; emitted buzz during 2026-05 diagnosis   |
+| `poe-moe`        | Ubiquiti POE-24-12W passive PoE injector    | Originally at Moe's house                                 |
+| `tp-link-switch` | TP-Link TL-SF1005D, 5-port 10/100 unmanaged | Ordered 2026-05-04; not yet installed                     |
 
 ## SSIDs
 

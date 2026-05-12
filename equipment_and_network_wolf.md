@@ -36,6 +36,22 @@
 - `wolf-pro` (MacBook, newer)
 - `wolf-air` (MacBook Air)
 
+## Briefcase & Backpack
+
+Portable accessories that travel for field use (cable testing, direct Ethernet, diagnostics).
+
+- **`anker-dongle`**: Anker USB-C to Gigabit Ethernet adapter
+  - Used with `michael-pro` for direct Ethernet connections
+  - Chip: unknown; used to verify cables at Rascally Raccoon 2026-05
+
+- **`belkin-dongle`**: Belkin USB-C to Gigabit Ethernet adapter
+  - Chip: Realtek RTL8153 (VID 0x0bda / PID 0x8153)
+  - USB speed: USB 3.1 Gen 1 (5 Gb/s); Ethernet: 1 Gbps
+  - Serial: 0013000001; MAC: 80:69:1a:8d:ea:8a (en13 on michael-pro)
+  - Works on `michael-pro` and `wendy-pro`; macOS built-in driver (no system extension needed)
+  - Setup on michael-pro: Network → Add Service → selected "Belkin USB-C LAN"; renamed via
+    `networksetup -renamenetworkservice "Belkin USB-C LAN 2" "Belkin USB-C LAN"`
+
 ## Services
 
 - Time Machine backups (quotas discussed)
