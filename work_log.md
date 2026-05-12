@@ -2,6 +2,13 @@
 
 ## Work Log
 
+### 2026-05-12: Added Belkin USB-C Ethernet Adapter to michael-pro
+
+- New Belkin USB-C Gigabit Ethernet adapter acquired; confirmed working on both michael-pro and wendy-pro
+- michael-pro required manual Network → Add Service (no auto-popup); renamed from "Belkin USB-C LAN 2" via `networksetup -renamenetworkservice`
+- USB chip: Realtek RTL8153 (VID 0x0bda / PID 0x8153); USB 3.1 Gen 1 (5 Gb/s); serial 0013000001; macOS uses built-in driver, no system extension needed
+- Added to CONTEXT.md as `belkin-dongle` in new Backpack section
+
 ### 2025-08-25: Email Setup Journey - From Domain Dreams to 2015 Reality
 
 **Progress Made:**
