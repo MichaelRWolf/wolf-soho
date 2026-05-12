@@ -2,14 +2,18 @@
 
 ## `michael-pro` -- MacBook Pro (Michael's primary)
 
-- Model: MacBook Pro
-- Specs: TBD (offline at time of writing)
+- Model: MacBook Pro (MacBookPro16,2)
+- Chip: Intel Core i5, Quad-Core, 2 GHz
+- RAM: 16 GB
+- macOS: 15.7.3 Sequoia (build 24G419) (2026-05-12)
 - Notes: [Battery Replacement Project](michael-pro_battery.md)
 
 ## `wendy-pro` -- MacBook Pro (Wendy's)
 
-- Model: MacBook Pro
-- Specs: TBD (offline at time of writing)
+- Model: MacBook Pro (MacBookPro17,1)
+- Chip: Apple M1 (8-core: 4 performance + 4 efficiency)
+- RAM: 8 GB
+- macOS: 15.7.5 Sequoia (build 24G624) (2026-05-12)
 
 ## `wolf-air` -- MacBook Air
 
