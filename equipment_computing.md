@@ -31,6 +31,7 @@
 
 ## `wendy-iphone` -- iPhone (Wendy's)
 
-- Model: iPhone SE 3rd generation (same as michael-iphone; confirmed by owner 2026-05-12)
+- Model: iPhone SE (3rd generation) -- MNAF3LL/A
+- Serial: HP19392DKK
 - mDNS name: smiley.local
 - MAC: 82:45:fa:e3:77:c4 (tentative -- private/random MAC; confirm via Beryl web UI)
