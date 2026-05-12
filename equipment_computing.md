@@ -25,14 +25,24 @@
 
 ## `michael-iphone` -- iPhone (Michael's)
 
-- Model: iPhone SE (3rd generation) -- MNAF3LL/A
+- Model: iPhone SE (3rd generation), 64 GB, Midnight -- MNAF3LL/A
+- Chip: Apple A15 Bionic (6-core: 2 performance + 4 efficiency)
+- Display: 4.7-inch Retina HD
+- Camera: 12 MP rear, 7 MP front
+- Connectivity: 5G, Wi-Fi 6 (802.11ax), Bluetooth 5.0, NFC
+- Released: March 2022
 - Serial: LWCGXJFWLP
 - mDNS name: tigger-iphone.local
 - MAC: 2a:10:66:ad:ee:f9 (tentative -- confirm via Beryl web UI)
 
 ## `wendy-iphone` -- iPhone (Wendy's)
 
-- Model: iPhone SE (3rd generation) -- MNAF3LL/A
+- Model: iPhone SE (3rd generation), 64 GB, Midnight -- MNAF3LL/A
+- Chip: Apple A15 Bionic (6-core: 2 performance + 4 efficiency)
+- Display: 4.7-inch Retina HD
+- Camera: 12 MP rear, 7 MP front
+- Connectivity: 5G, Wi-Fi 6 (802.11ax), Bluetooth 5.0, NFC
+- Released: March 2022
 - Serial: HP19392DKK
 - mDNS name: smiley.local
 - MAC: 82:45:fa:e3:77:c4 (tentative -- private/random MAC; confirm via Beryl web UI)
