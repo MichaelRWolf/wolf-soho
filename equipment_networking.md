@@ -60,10 +60,22 @@
 
 ## `running-wolf-hotspot` -- Netgear Nighthawk M1
 
+- Model: Nighthawk M1 (AT&T; full model number TBD -- may be MR1100)
+- IMEI: 015240000553847
+- MAC (Ethernet LAN): 44:a5:6e:e9:59:26
+- Admin IP: 192.168.1.1 (when connected via Ethernet; web UI at <http://192.168.1.1>)
+- Firmware: TBD (requires admin HTTPS; API reports verMajor=42, verMinor=0)
 - Role: Cellular/LTE hotspot; backup/travel internet
-- Interfaces: USB tethering and Wi-Fi
+- Interfaces: Wi-Fi (2.4 + 5 GHz) and Ethernet LAN port (also USB tethering)
+- SSID (primary, 2.4 GHz): Running Wolf Hot Spot
+- SSID (5 GHz): Running Wolf Hot Spot - 5G (confirmed from device API)
+- Carrier: AT&T (confirmed)
+- SIM ICCID: 89014103334557770959
+- SIM IMSI: 310410455780010
+- SIM phone number: +1 (984) 381-5800
+- LTE IPs (dynamic): IPv4 10.x.x.x / IPv6 2600::/28 block (AT&T)
 - Known issue: overheats; workaround is ice pack
-- Specs: TBD (offline at time of writing)
+- Thermal data (observed): device ~61 °C, battery ~54 °C; battery state reports "Hot" -- confirms overheating
 
 ## `wolfden-mesh` -- Ubiquiti UAP-AC-M-US
 
