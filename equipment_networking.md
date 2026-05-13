@@ -64,7 +64,8 @@
 - IMEI: 015240000553847
 - MAC (Ethernet LAN): 44:a5:6e:e9:59:26
 - Admin IP: 192.168.1.1 (when connected via Ethernet; web UI at <http://192.168.1.1>)
-- Firmware: TBD (requires admin HTTPS; API reports verMajor=42, verMinor=0)
+- Firmware: TBD -- browser login to <http://192.168.1.1> → Settings → About needed
+- Firmware clues: API verMajor=42 verMinor=0; server banner `httpd/2.7 (Netgear; D86)` (D86 = hardware variant)
 - Role: Cellular/LTE hotspot; backup/travel internet
 - Interfaces: Wi-Fi (2.4 + 5 GHz) and Ethernet LAN port (also USB tethering)
 - SSID (primary, 2.4 GHz): Running Wolf Hot Spot
