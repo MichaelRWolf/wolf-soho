@@ -6,7 +6,18 @@
 - Chip: Intel Core i5, Quad-Core, 2 GHz
 - RAM: 16 GB
 - macOS: 15.7.3 Sequoia (build 24G419) (2026-05-12)
+- macOS 26 Tahoe: **Compatible** -- last Intel-supported macOS
 - Notes: [Battery Replacement Project](michael-pro_battery.md)
+
+### Tahoe Upgrade Recommendation
+
+Eligible but proceed with caution given hardware state:
+
+- Battery is at 1,501 cycles (50% over Apple's 1,000-cycle threshold), already showing thermal throttling under load
+- Tahoe is optimized for Apple Silicon; Intel Macs carry more of its background services as CPU work → more heat → more throttling
+- A degraded battery compounds this: the machine draws harder from a weakened cell, increasing thermal stress and shortening unplugged runtime further
+- **Recommended order:** replace battery first, then evaluate Tahoe -- or accept that sustained-load performance will degrade noticeably on Tahoe without a fresh battery
+- Tahoe is the end of the Intel road; staying on Sequoia 15.x remains a valid lower-risk option until the battery is replaced
 
 ## `wendy-pro` -- MacBook Pro (Wendy's)
 
@@ -14,6 +25,7 @@
 - Chip: Apple M1 (8-core: 4 performance + 4 efficiency)
 - RAM: 8 GB
 - macOS: 15.7.5 Sequoia (build 24G624) (2026-05-12)
+- macOS 26 Tahoe: **Compatible**
 
 ## `wolf-air` -- MacBook Air
 
@@ -21,6 +33,7 @@
 - Chip: Intel Core i5, 1.8 GHz, dual-core
 - RAM: 8 GB
 - macOS: 12.7.6 Monterey (build 21H1320) (2026-05-12)
+- macOS 26 Tahoe: **Not compatible** (max: macOS 12 Monterey)
 - mDNS name: wolf-air.local
 
 ## `michael-iphone` -- iPhone (Michael's)
