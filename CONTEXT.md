@@ -32,6 +32,12 @@ ambiguous language. Read this file at the start of any network-related session.
 | `michael-iphone` | iPhone (Michael's)              |
 | `wendy-iphone`   | iPhone (Wendy's)                |
 
+## Test & Measurement
+
+| Name       | Device                          |
+|------------|---------------------------------|
+| `tds340a`  | Tektronix TDS 340A oscilloscope |
+
 ## Accessories
 
 | Name            | Device                                   |
