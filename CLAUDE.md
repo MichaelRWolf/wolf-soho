@@ -15,3 +15,6 @@ radio").
 - [PROJECT_moes_roomba_2026-05.md](PROJECT_moes_roomba_2026-05.md) -- Moe's Roomba i7 needs
   standalone operation (press CLEAN, clean, dock) while Sonia is away; basic button operation
   confirmed working; WiFi disconnect plan documented if scheduling conflicts arise
+- [2026-06-18_michael-pro_water-damage.md](2026-06-18_michael-pro_water-damage.md) -- michael-pro
+  (MacBook Pro A2251) rain-soaked 2026-06-18; battery disconnected; fan drying begun ~09:30;
+  target power-on 2026-06-21 ~09:30; Mail.app and working environment need replication on wolf-air

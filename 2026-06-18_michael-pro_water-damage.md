@@ -57,6 +57,39 @@ Once inside:
 
 ---
 
+## TODO: Working Environment on wolf-air
+
+### Email (ATT/Yahoo -- fragile, do in this order)
+
+- [ ] Open Chrome incognito: `open -a "Google Chrome" --args --incognito "https://mail.yahoo.com/"`
+- [ ] Sign in with `michaelrwolf@att.net` + ATT password (NOT Secure Mail Key)
+- [ ] Confirm inbox loads -- if "It's not you, it's us" see `ATT/password_fuckery.md` for escalation wording
+- [ ] Navigate to ATT security settings: `open "https://www.att.com/my/#/profile/security"`
+- [ ] Generate a new Secure Mail Key for wolf-air; store in 1Password
+- [ ] Open Mail.app on wolf-air -- Add Account -- Yahoo
+  - Email: `michaelrwolf@att.net`
+  - Password: **Secure Mail Key** (not ATT password)
+- [ ] Confirm mail syncing in Mail.app
+
+### Environment Parity (wolf-air vs michael-pro)
+
+- [ ] Audit SSH keys -- confirm wolf-air has keys for GitHub and any servers michael-pro had
+- [ ] Check shell config -- `~/.zshrc`, `~/.bashrc`, Portable_Profile repo up to date
+- [ ] Verify Homebrew packages match (compare `brew list` outputs)
+- [ ] Check dev repos -- confirm all active repos are cloned and up to date on wolf-air
+- [ ] Identify any other apps that were michael-pro-exclusive
+
+---
+
+## TODO: Prepare for Pinnacle Interview
+
+- [ ] Find Zoom link for Pinnacle interview
+- [ ] Verify Zoom link in calendar event (Google Calendar or Apple Calendar)
+- [ ] Verify Zoom link in notes file (Job_Search repo)
+- [ ] Create opportunity entry in Job_Search repo for Pinnacle
+
+---
+
 ## Status Log
 
 | Time              | Action                                                                               |
