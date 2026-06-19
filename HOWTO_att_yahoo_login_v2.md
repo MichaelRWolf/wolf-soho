@@ -1,4 +1,4 @@
-# ATT Yahoo Mail Login — Clean HOWTO
+# ATT Yahoo Mail Login -- Clean HOWTO
 
 ## Concept Overview
 
@@ -17,6 +17,14 @@ There are **two credential modes**:
 
 Goal: **one 1Password item + one Secure Mail Key** → works everywhere.
 
+### Secure Mail Key -- what it encodes
+
+- Scoped to: **account** (`michaelrwolf@att.net`) only
+- NOT bound to a specific app or machine -- the nickname is your label, not a technical constraint
+- One SMK can work on multiple devices/apps, but create one per device/app so you can revoke individually
+- SMKs never expire; survive ATT password changes
+- Generate/manage at: <https://www.att.com/support/article/email-support/KM1240308/>
+
 ---
 
 ## Tools
@@ -28,7 +36,7 @@ Goal: **one 1Password item + one Secure Mail Key** → works everywhere.
 
 ---
 
-## Workflow A — Browser (Chrome on macOS)
+## Workflow A -- Browser (Chrome on macOS)
 
 1. Go to:
    <https://currently.att.yahoo.com/>
@@ -89,7 +97,7 @@ Result: Chrome stops presenting choices entirely. 1Password becomes the only key
 
 ### Avoid macOS Keychain storage
 
-- Do NOT allow apps to “Save password to Keychain”
+- Do NOT allow apps to "Save password to Keychain"
 - In Mail setup, paste the **Secure Mail Key** manually
 - Store all credentials only in 1Password
 
@@ -97,14 +105,14 @@ Result: No credentials live in Keychain or browser.
 
 ---
 
-## Workflow B — iPhone Mail App
+## Workflow B -- iPhone Mail App
 
 ATT/Yahoo **will NOT accept your normal password** here.
 
 You must create a **Secure Mail Key**:
 
 1. Go to ATT profile/security settings
-2. Create “Secure Mail Key”
+2. Create "Secure Mail Key"
 3. Copy it
 
 ### Configure iPhone
@@ -118,12 +126,12 @@ You must create a **Secure Mail Key**:
 
 Add to same item:
 
-- Section: “Secure Mail Key”
+- Section: "Secure Mail Key"
 - Value: generated key
 
 ---
 
-## Workflow C — macOS Mail App
+## Workflow C -- macOS Mail App
 
 Same as iPhone:
 
@@ -146,18 +154,18 @@ So:
 
 ## Common Failure Modes
 
-### Browser says “Incorrect user ID or password”
+### Browser says "Incorrect user ID or password"
 
 → Your real ATT password is wrong/outdated (Mail.app may still work via Secure Mail Key or cached token)
 
-### “It’s not you, it’s us.” (ATT error page)
+### "It's not you, it's us." (ATT error page)
 
 → Backend glitch or bad session
 → Retry in fresh incognito or different entry path (see Reset Password below)
 
 ### Infinite redirects / weird URLs
 
-→ Normal. That’s ATT ↔ Yahoo handshake
+→ Normal. That's ATT ↔ Yahoo handshake
 
 ### Chrome asking to save password
 
@@ -181,7 +189,7 @@ open -a "Google Chrome" --args --incognito "https://signin.att.com/"
 1. Enter your ID (e.g., <michaelrwolf@att.net>)
 2. Click **Forgot password**
 
-If you hit “It’s not you, it’s us.”:
+If you hit "It's not you, it's us.":
 
 - Retry via myAT&T entry:
 
@@ -209,7 +217,7 @@ open "https://www.att.com/acctmgmt/fpwd/"
 
 ---
 
-## Reset “Other Thing” (Secure Mail Key)
+## Reset "Other Thing" (Secure Mail Key)
 
 Use this if Mail.app stops working or you want to standardize.
 
@@ -235,13 +243,13 @@ open "https://www.att.com/my/#/profile/security"
 
 ---
 
-### “Password doesn’t work” in Mail app
+### "Password doesn't work" in Mail app
 
 → You used your real password instead of Secure Mail Key
 
 ### Infinite redirects / weird URLs (Secure Mail Key)
 
-→ Normal. That’s ATT ↔ Yahoo handshake
+→ Normal. That's ATT ↔ Yahoo handshake
 
 ### Chrome asking to save password (Secure Mail Key)
 
@@ -281,7 +289,7 @@ A passkey is tied to **where it is stored**:
 
 ---
 
-## Google Password Manager — what it is doing
+## Google Password Manager -- what it is doing
 
 Google Password Manager stores:
 
@@ -322,7 +330,7 @@ This is the **ground truth list** of what Google controls.
 
 ---
 
-## Log Entry — 2026-03-17
+## Log Entry -- 2026-03-17
 
 ![Google Password Manager Empty State (small)](image)
 
@@ -330,15 +338,15 @@ OCR Extracted Text:
 
 Welcome to your Password Manager
 
-You haven’t saved any passwords in your Google Account yet. Add saved passwords from Android or Chrome to strengthen your password security.
+You haven't saved any passwords in your Google Account yet. Add saved passwords from Android or Chrome to strengthen your password security.
 
 Learn more
 
 ---
 
-## Is it safe to “Delete all Google Password Manager data”?
+## Is it safe to "Delete all Google Password Manager data"?
 
-Yes — **IF** you confirm BOTH:
+Yes -- **IF** you confirm BOTH:
 
 - [ ] Every login exists in 1Password
 - [ ] Any passkeys you care about are ALSO in 1Password
@@ -501,7 +509,7 @@ Result = archaeological dig site 🏺
 
 ## What you should do (clean strategy)
 
-### Step 1 — Pick ONE canonical login
+### Step 1 -- Pick ONE canonical login
 
 Choose ONE:
 
@@ -513,7 +521,7 @@ Everything else becomes secondary.
 
 ---
 
-### Step 2 — Verify linkage (SAFE METHOD — do NOT break anything)
+### Step 2 -- Verify linkage (SAFE METHOD -- do NOT break anything)
 
 You are correct to be cautious. Do NOT assume they are unified.
 
@@ -586,7 +594,7 @@ open "https://currently.att.yahoo.com/"
 
 ---
 
-#### D. Only AFTER this — choose canonical
+#### D. Only AFTER this -- choose canonical
 
 You only collapse to ONE identity if:
 
@@ -595,7 +603,7 @@ You only collapse to ONE identity if:
 - [ ] Same email inbox
 
 If ANY of those differ:
-👉 Keep multiple identities (document them, don’t merge them)
+👉 Keep multiple identities (document them, don't merge them)
 
 ---
 
@@ -612,7 +620,7 @@ Only then:
 
 ---
 
-### Key Insight (this is the trap you’re avoiding)
+### Key Insight (this is the trap you're avoiding)
 
 AT&T sometimes:
 
@@ -628,7 +636,7 @@ Prove equivalence BEFORE consolidation
 
 ---
 
-### Step 3 — Clean 1Password
+### Step 3 -- Clean 1Password
 
 Keep:
 
@@ -647,7 +655,7 @@ Delete:
 
 ---
 
-### Step 4 — Clean Keychain (optional but recommended)
+### Step 4 -- Clean Keychain (optional but recommended)
 
 Search for:
 
@@ -660,7 +668,7 @@ Delete anything not actively used.
 
 ---
 
-### Step 5 — Accept Mail.app behavior
+### Step 5 -- Accept Mail.app behavior
 
 Mail.app stores:
 
@@ -680,7 +688,7 @@ You do NOT have 10 accounts.
 
 You have:
 👉 1 account
-👉 6–10 historical identifiers
+👉 6-10 historical identifiers
 👉 20 years of residue
 
 Your job is not to "manage them all"
@@ -698,14 +706,14 @@ Your job is to:
 
 - Login to att.com works ✅
 - Redirect to mail (currently.att.yahoo.com) fails ❌
-- Error: “It’s not you, it’s us.”
+- Error: "It's not you, it's us."
 
 👉 This is NOT your password
 👉 This is a broken **ATT ↔ Yahoo session handoff**
 
 ---
 
-### What’s actually happening
+### What's actually happening
 
 Flow:
 
@@ -714,13 +722,13 @@ Flow:
 3. Yahoo rejects it or session breaks
 
 Result:
-👉 You are logged in… but can’t reach mail
+👉 You are logged in… but can't reach mail
 
 ---
 
-### Fix (clean session reset — this usually works)
+### Fix (clean session reset -- this usually works)
 
-#### Step 1 — hard reset cookies (targeted)
+#### Step 1 -- hard reset cookies (targeted)
 
 In Chrome:
 
@@ -738,7 +746,7 @@ open -a "Google Chrome" --args --incognito "https://mail.yahoo.com/"
 
 ---
 
-#### Step 2 — enter from Yahoo side (NOT ATT side)
+#### Step 2 -- enter from Yahoo side (NOT ATT side)
 
 Go directly to:
 
@@ -755,7 +763,7 @@ Then:
 
 ---
 
-#### Step 3 — if still broken (common edge case)
+#### Step 3 -- if still broken (common edge case)
 
 Force relink:
 
@@ -766,8 +774,8 @@ open "https://www.att.com/my/#/profile/security"
 ```
 
 1. Look for:
-   - “Linked accounts”
-   - “Email accounts”
+   - "Linked accounts"
+   - "Email accounts"
 2. Confirm att.net email is present
 
 If missing or odd:
@@ -824,7 +832,7 @@ Otherwise:
 
 ---
 
-## ATT ↔ Yahoo Failure — V2 (Session Corruption Edition)
+## ATT ↔ Yahoo Failure -- V2 (Session Corruption Edition)
 
 ### What we discovered (new)
 
@@ -839,7 +847,7 @@ There are TWO distinct failure classes:
 
 - ATT login appears to work
 - ANY ATT page (profile, etc.) fails immediately
-- Error: “It’s not you, it’s us.”
+- Error: "It's not you, it's us."
 
 👉 This means:
 **ATT cannot resolve your session to an account**
@@ -866,9 +874,9 @@ ATT fails to resolve
 
 ---
 
-## Fix — Session Layer Reset (REQUIRED FIRST)
+## Fix -- Session Layer Reset (REQUIRED FIRST)
 
-### Step 1 — Delete ALL site data (not optional)
+### Step 1 -- Delete ALL site data (not optional)
 
 ```bash
 open -a "Google Chrome" "chrome://settings/siteData"
@@ -883,7 +891,7 @@ Delete EVERYTHING for:
 
 ---
 
-### Step 2 — Kill browser completely
+### Step 2 -- Kill browser completely
 
 ```bash
 killall "Google Chrome"
@@ -893,7 +901,7 @@ Reopen Chrome
 
 ---
 
-### Step 3 — Enter from Yahoo (clean path)
+### Step 3 -- Enter from Yahoo (clean path)
 
 ```bash
 open -a "Google Chrome" --args --incognito "https://mail.yahoo.com/"
@@ -929,27 +937,27 @@ This is NOT fixable client-side
 
 Good luck. They will run you through everything you already did.
 
-| Channel | Info |
-|---|---|
-| Wireless (from cell) | 611 |
-| Wireless (any phone) | 800-331-0500 |
-| Home/DSL/general | 800-288-2020 |
-| Email (payments/account) | <shm-support@att.com> |
-| Contact page | <https://www.att.com/support/contact-us/> |
+| Channel                  | Info                                      |
+|--------------------------|-------------------------------------------|
+| Wireless (from cell)     | 611                                       |
+| Wireless (any phone)     | 800-331-0500                              |
+| Home/DSL/general         | 800-288-2020                              |
+| Email (payments/account) | <shm-support@att.com>                     |
+| Contact page             | <https://www.att.com/support/contact-us/> |
 
 ### Yahoo
 
 There is no free phone support. Yahoo charges for phone access. Options:
 
-| Channel | Info |
-|---|---|
-| Help center / chat bot | <https://help.yahoo.com/kb/yahoo-customer-support-sln6349.html> |
-| Paid phone support | <https://www.yahoo.com/subscriptions/products/yahoo-plus-support-help> |
-| X/Twitter (sometimes faster) | @YahooCare |
+| Channel                      | Info                                                                   |
+|------------------------------|------------------------------------------------------------------------|
+| Help center / chat bot       | <https://help.yahoo.com/kb/yahoo-customer-support-sln6349.html>        |
+| Paid phone support           | <https://www.yahoo.com/subscriptions/products/yahoo-plus-support-help> |
+| X/Twitter (sometimes faster) | @YahooCare                                                             |
 
-### Yahoo Plus Support — Paid Phone Option
+### Yahoo Plus Support -- Paid Phone Option
 
-**$4.99/month** — 24/7 live agent, stays on the phone until resolved.
+**$4.99/month** -- 24/7 live agent, stays on the phone until resolved.
 
 Includes: account recovery, password reset, email issues, Yahoo Sports/Finance.
 Also bundles LastPass Premium (a password manager you don't need).
@@ -960,14 +968,14 @@ Sign up: <https://www.yahoo.com/subscriptions/products/yahoo-plus-support-help>
 > that AT&T caused and that Yahoo did not cause.
 > This is the state of the art in 2026 for a free email account from 1999.
 
-👉 For this problem, call **AT&T** — they own the identity system.
+👉 For this problem, call **AT&T** -- they own the identity system.
 Yahoo is just the mailbox tenant.
 
 ---
 
 ## What to say to ATT (precise language)
 
-> “My AT&T Access ID authenticates, but any account-level page returns ‘It’s not you, it’s us.’ The session cannot resolve to a single account. I believe multiple identities are linked to this Access ID.”
+> "My AT&T Access ID authenticates, but any account-level page returns 'It's not you, it's us.' The session cannot resolve to a single account. I believe multiple identities are linked to this Access ID."
 
 Key words that matter:
 
@@ -1002,7 +1010,7 @@ You have:
 
 ---
 
-## Voodoo Fuckery — Not credentials, Account resolution failure
+## Voodoo Fuckery -- Not credentials, Account resolution failure
 
 ### What this means
 
@@ -1031,7 +1039,7 @@ These facts are already proven:
 - SMS verification to `...7941` succeeded
 - Mail.app still works for this mailbox
 - browser login can succeed far enough to show account-related pages
-- web flows then die with **“It’s not you, it’s us.”**
+- web flows then die with **"It's not you, it's us."**
 - Yahoo direct and ATT direct both eventually hit the same failure
 
 ### Working diagnosis
@@ -1112,7 +1120,7 @@ At that point the next action is:
 
 Use this wording:
 
-> My AT&T Access ID authenticates and password reset succeeds, but any account-level or Yahoo mail web flow eventually fails with “It’s not you, it’s us.” Mail.app still works. The session appears unable to resolve to a single account, and I believe multiple historical identities are linked.
+> My AT&T Access ID authenticates and password reset succeeds, but any account-level or Yahoo mail web flow eventually fails with "It's not you, it's us." Mail.app still works. The session appears unable to resolve to a single account, and I believe multiple historical identities are linked.
 
 Keywords that matter:
 
@@ -1126,7 +1134,7 @@ Keywords that matter:
 
 - screenshot of successful password reset / verification flow
 - screenshot of ATT account home page
-- screenshot of “It’s not you, it’s us.”
+- screenshot of "It's not you, it's us."
 - known identifiers:
   - `michaelrwolf@att.net`
   - `mbalenger@att.net`
@@ -1139,7 +1147,7 @@ Keywords that matter:
 
 If later you say:
 
-“What is next to unfuck AT&T?”
+"What is next to unfuck AT&T?"
 
 pick up here:
 
