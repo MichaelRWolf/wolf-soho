@@ -55,6 +55,25 @@ Once inside:
 - Allow extended drying time (48-72 hours minimum) before reconnecting battery or powering on
 - Consider silica gel packs or dry enclosure
 
+## Drying Notes (2026-06-20, mid-72h)
+
+### Heat
+
+- Fan alone won't help water under keyboard gaskets or speaker covers -- fan air can't reach there
+- Heat conducts through chassis and warms trapped water; vapor pressure builds and pushes out through seals
+- Target 100--120°F (38--49°C) -- well below adhesive softening (~140°F+)
+- Use heat source in open box (airflow but not a direct cooling breeze on the board)
+- Fan and heat together fight each other -- alternate: 45 min heat, 15 min fan to flush vapor
+- Ambient 75°F / 65% RH (2026-06-20) -- decent vapor pressure deficit; fan effective for open surfaces
+
+### IPA (2026-06-20, ~36h in)
+
+- Good time: bulk water gone, mineral residue forming -- IPA displaces before corrosion sets
+- Use 90%+ IPA only (91% drugstore or 99%); 70% has too much water
+- Douse and brush visually affected areas; IPA's low surface tension reaches crevices
+- Tilt board to let IPA run off carrying dissolved minerals
+- Turn fan on after -- IPA evaporates in minutes, no added wait time needed
+
 ---
 
 ## TODO: Working Environment on wolf-air
