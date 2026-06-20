@@ -57,65 +57,175 @@
 - After failure: OTP field resets to empty; "Be sure to enter a 6-digit verification code" shown --
   this is the post-rejection reset state, not a pre-submission validation warning
 
-### Hypothesis: Chrome loses session state during OTP step
+### Critical baseline: this is a server-side rejection
 
-ATT's login is a multi-hop OAuth/OIDC flow:
+`errorCode=908` appears in ATT's redirect URL back to the OTP page. This means:
 
-```text
-email input → password page → OTP page → cross-origin redirect to att-yahoo.att.net → Yahoo inbox
+- Chrome **did** submit the OTP form (no client-side form failure)
+- ATT's server **received** the submitted code
+- ATT's server could **not validate** it and redirected back with errorCode=908
+- The OTP field resets empty -- this is the post-rejection state, not a pre-submission warning
+
+Any hypothesis must explain why ATT's server rejects a correct code submitted from Chrome
+but not from Safari. Client-side form problems are eliminated.
+
+### Hypothesis audit
+
+#### H1 -- Chrome storage partitioning (CHIPS) breaks session continuity
+
+ATT's login flow crosses multiple top-level sites (the redirect chain goes:
+att.com → signin.att.com → oidc.idp.clogin.att.com → att-yahoo.att.net → yahoo.com).
+Chrome's CHIPS (Cookies Having Independent Partitioned State) isolates cookies by top-level
+site context. If the session cookie used to identify the OTP challenge was set in one
+top-level context and the OTP submission happens in another, Chrome presents a different
+cookie jar and ATT cannot find the session.
+
+|                  |                                                                                                                      |
+|------------------|----------------------------------------------------------------------------------------------------------------------|
+| Evidence FOR     | Chrome has CHIPS; Safari does not; the ATT flow spans multiple domains                                               |
+| Evidence AGAINST | The OTP form action appears to be on signin.att.com; if both pages are same-origin the partitioning should not apply |
+| Weakness         | Cannot confirm or deny without reading Chrome DevTools Network/Cookie tabs during the flow                           |
+| Confirms if      | Allowing all cookies in Chrome → OTP succeeds                                                                        |
+| Invalidates if   | Allowing all cookies in Chrome → OTP still fails                                                                     |
+
+---
+
+#### H2 -- OTP code already consumed by Safari session
+
+User tried Safari first (it worked). ATT then sent the Chrome session's OTP challenge. If ATT
+rate-limits OTP issuance per phone number (won't send a fresh code while one is still active),
+the Chrome session may be trying to validate an OTP that the Safari session already consumed or
+that was issued to a different session. errorCode=908 = "session not found or code already used."
+
+|                  |                                                                                                                                                                   |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Evidence FOR     | Safari succeeded first; Chrome immediately followed; SMS OTPs are often one-time-use                                                                              |
+| Evidence AGAINST | Chrome showed the "We sent a verification code" page, implying it received its own challenge; user says "same thing on Chrome" suggesting a full independent flow |
+| Weakness         | Unknown whether ATT sends a new code per session or rate-limits per phone number                                                                                  |
+| Confirms if      | Waiting 10+ minutes after Safari success then repeating full Chrome flow → OTP succeeds                                                                           |
+| Invalidates if   | Chrome still fails with a fresh session started long after Safari                                                                                                 |
+
+Highest-priority alternative to test -- requires no Chrome changes, just timing.
+
+---
+
+#### H3 -- Chrome extension interferes with OTP submission
+
+A Chrome extension (1Password, ad blocker, tracker blocker) could modify the OTP form POST:
+add/remove headers, alter field values, or intercept the request.
+
+|                  |                                                                                                                                                     |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Evidence FOR     | Chrome was the failing browser; extensions run in Chrome only                                                                                       |
+| Evidence AGAINST | errorCode=908 implies ATT received something; extension interference would more likely cause a network error or client-side form validation failure |
+| Confirms if      | Chrome incognito (extensions disabled) → OTP succeeds                                                                                               |
+| Invalidates if   | Chrome incognito → OTP still fails                                                                                                                  |
+
+Easiest test to run -- incognito takes 30 seconds.
+
+---
+
+#### H4 -- SameSite=Strict or Lax cookie attribute blocking
+
+ATT sets the session cookie without a modern SameSite attribute (or with Strict). Chrome defaults
+missing SameSite cookies to Lax. If any part of the OTP submission is classified as a cross-site
+POST (e.g., form action on a different subdomain than the page), Chrome drops the cookie.
+Safari did not enforce SameSite=Lax as aggressively during its rollout.
+
+|                  |                                                                                                                                       |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| Evidence FOR     | Chrome enforces SameSite since Chrome 80 (2020); the ATT flow uses multiple subdomains                                                |
+| Evidence AGAINST | If the OTP form POSTs to signin.att.com and the session cookie is on signin.att.com, it is same-site; SameSite=Lax would not block it |
+| Overlap with H1  | Both are cookie-blocking mechanisms; H1 (CHIPS) is the more modern and more likely Chrome-specific variant                            |
+| Confirms if      | Same test as H1: allow all cookies in Chrome                                                                                          |
+| Invalidates if   | Same test as H1: allow all cookies and OTP still fails                                                                                |
+
+---
+
+#### H5 -- ATT behavior differs by User-Agent / browser fingerprint
+
+ATT's server treats Chrome's User-Agent differently, applying stricter security checks that
+produce errorCode=908 even for a correct code.
+
+|                  |                                                                                |
+|------------------|--------------------------------------------------------------------------------|
+| Evidence FOR     | ATT's platform is old and has known browser-specific bugs                      |
+| Evidence AGAINST | Chrome is the world's most common browser; explicit rejection is very unlikely |
+| Low probability  | Would be an unusual and specific ATT decision                                  |
+| Confirms if      | Spoofing Safari UA in Chrome → OTP succeeds                                    |
+| Invalidates if   | UA spoofing has no effect                                                      |
+
+---
+
+### Ranked likelihood
+
+1. **H2 (OTP already consumed)** -- highest priority to test; explains everything without needing Chrome-specific behavior; requires only timing
+2. **H1/H4 (Chrome cookie partitioning/SameSite)** -- mechanically plausible; consistent with Chrome's known security trajectory; one test covers both
+3. **H3 (Chrome extension)** -- easiest to test (incognito); low prior probability
+4. **H5 (User-Agent fingerprinting)** -- low probability; test only if others ruled out
+
+---
+
+### Diagnostic tests (in order of priority)
+
+#### Test A -- Timing (targets H2)
+
+Wait at least 15 minutes after the Safari success. Start a completely fresh Chrome session.
+Complete the full login flow. Enter the fresh OTP code within 30 seconds of receiving it.
+
+- Passes → H2 confirmed (prior OTP consumed; fresh session works)
+- Fails → H2 eliminated; proceed to Test B
+
+#### Test B -- Chrome incognito (targets H3)
+
+```bash
+open -a "Google Chrome" --args --incognito "https://mail.yahoo.com/"
 ```
 
-Between password-auth and OTP verification, ATT's backend ties the pending authentication to a
-session cookie or hidden state token. If Chrome discards or isolates that cookie between steps
-(SameSite enforcement, cross-origin isolation, third-party cookie blocking), the OTP is submitted
-against a session ATT can no longer locate -- validation fails with errorCode=908 even though the
-6-digit code is correct.
+Complete the full flow. No extensions active in incognito.
 
-Safari (WebKit) either handles the cross-origin session cookie more permissively for federated
-login flows, or ATT's domain structure happens to satisfy WebKit's same-origin model. Either way,
-the session state survives the OTP step under Safari.
+- Passes → H3 confirmed (extension interference)
+- Fails → H3 eliminated; extensions are not the cause
 
-### Consistency check against prior hypotheses
+#### Test C -- Allow all cookies in Chrome (targets H1/H4)
 
-| Prior diagnosis                                          | Consistent?           | Notes                                                                                                                   |
-|----------------------------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------|
-| "It's not you, it's us" (ATT ↔ Yahoo federation failure) | Separate failure mode | Prior = post-auth handoff; this = mid-auth OTP step                                                                     |
-| Session corruption / identity collision                  | Not applicable        | 2026-06-20: auth reaches OTP, meaning identity was found and SMS was sent                                               |
-| Account resolution failure                               | Not applicable        | OTP delivery implies ATT resolved the account                                                                           |
-| Chrome password manager interference                     | Possible overlap      | Chrome PM may also interfere with session cookies; not directly relevant at OTP stage since OTP has no saved credential |
+Chrome → Settings → Privacy and security → Third-party cookies → Allow all.
+Retry full login flow. Restore setting afterward.
 
-**New failure mode**: OTP validation rejected by ATT server (errorCode=908) specifically in Chrome.
-Not seen in Safari. Not seen in any prior documented sessions.
+- Passes → H1 or H4 confirmed (Chrome cookie policy blocking ATT session)
+- Fails → H1 and H4 eliminated; look to H2 or H5
 
-### What changed (probable cause)
+#### Test D -- DevTools inspection (definitive for H1/H4)
 
-Chrome has progressively tightened third-party cookie and cross-origin session handling:
+During the Chrome login flow: DevTools → Application → Cookies → signin.att.com.
+Note which cookies are set after password entry. Confirm they are still present when
+the OTP page loads and when the OTP form is submitted (check Network tab for POST headers).
+Console may show "SameSite" warnings if cookie blocking is occurring.
 
-- Chrome 80 (2020): SameSite=Lax default; cross-site cookies require `SameSite=None; Secure`
-- Chrome 115+ (2023): third-party cookie deprecation trial phase-in
-- Chrome Privacy Sandbox: cross-origin session isolation
+#### Test E -- User-Agent spoof (targets H5, last resort)
 
-ATT's OAuth flow was designed before these restrictions. The OTP step likely relies on a session
-cookie that Chrome now treats as cross-site and blocks or isolates. Safari has not enforced the
-same deprecation timeline, so it still allows the session to persist across the flow.
+In Chrome DevTools → Network conditions → set UA to Safari/WebKit UA string. Retry login.
 
-This is consistent with ATT's pattern of not updating their auth implementation as browser
-security evolves -- the same root cause as prior "voodoo fuckery" incidents.
+- Passes → H5 confirmed
+- Fails → H5 eliminated
 
-### Implication for HOWTO_att_yahoo_login_v2.md
+---
 
-Workflow A in `HOWTO_att_yahoo_login_v2.md` specifies Chrome. As of 2026-06-20, Chrome fails
-at OTP. Safari is the working browser path. The HOWTO should be updated to reflect Safari as
-the recommended browser for browser-based att.net login.
+### Consistency with prior documented failures
 
-### Actionable options if Chrome is required
+| Prior diagnosis                                           | Consistent?           | Notes                                                                           |
+|-----------------------------------------------------------|-----------------------|---------------------------------------------------------------------------------|
+| "It's not you, it's us" -- ATT ↔ Yahoo federation failure | Separate failure mode | Prior failure = post-auth handoff; 2026-06-20 failure = mid-auth OTP validation |
+| Session corruption / identity collision                   | Not applicable        | Reaching OTP means ATT resolved the identity and sent an SMS                    |
+| Account resolution failure                                | Not applicable        | OTP delivery is proof the account was resolved                                  |
+| Chrome password manager saves wrong credential            | Not applicable        | OTP page has no saved credential; Chrome PM is irrelevant at this step          |
 
-1. Chrome → Settings → Privacy and security → Cookies → Allow all cookies
-   (disables SameSite / third-party enforcement; try for ATT sessions only)
-2. Add specific cross-site exception for `att.com` and `yahoo.com` in Chrome cookie settings
-3. Use Chrome incognito -- sometimes behaves differently than a regular session with accumulated
-   site data; worth one attempt before escalating
-4. OR accept Safari as canonical att.net browser and update setup checklists
+**New distinct failure mode**: server-side OTP validation failure (errorCode=908) in Chrome only.
+
+### Implication for HOWTO
+
+`HOWTO_att_yahoo_login_v2.md` updated 2026-06-20 to recommend Safari as Workflow A.
+Chrome is now a known-broken fallback with diagnostic steps.
 
 ### Context
 

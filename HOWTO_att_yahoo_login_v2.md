@@ -36,64 +36,47 @@ Goal: **one 1Password item + one Secure Mail Key** → works everywhere.
 
 ---
 
-## Workflow A -- Browser (Chrome on macOS)
+## Workflow A -- Browser (Safari on macOS)
 
-1. Go to:
+> **2026-06-20**: Safari is the confirmed working browser for att.net web login.
+> Chrome fails at the SMS OTP step (errorCode=908). See `ATT/password_fuckery.md` for analysis.
+> Chrome workarounds are at the end of this section.
+
+1. Open Safari and go to:
    <https://currently.att.yahoo.com/>
 
 ```bash
-open "https://currently.att.yahoo.com/"
+open -a Safari "https://currently.att.yahoo.com/"
 ```
 
 1. Click **Mail**
-2. You will be redirected to:
-   <https://signin.att.com/>... (this is correct)
-
-```bash
-open "https://signin.att.com/"
-```
+2. You will be redirected to signin.att.com (this is correct)
+3. Enter email: `michaelrwolf@att.net` → RETURN
+4. Enter **ATT password** (NOT Secure Mail Key) → RETURN
+5. Enter 6-digit SMS code sent to ...7941
+6. Inbox loads
 
 ### What is presenting the login?
 
-- The **page = ATT**
-- Chrome only offers to fill/save passwords
+- The **page = ATT** (signin.att.com)
+- Safari offers to fill/save passwords -- decline; use 1Password only
 
-### Login
+### Login credentials
 
-- Username: your ATT email
-- Password: your **ATT password** (NOT Secure Mail Key)
+- Username: `michaelrwolf@att.net`
+- Password: **ATT password** (NOT Secure Mail Key)
 
 ### 1Password setup
 
 Create ONE item:
 
 - Title: `ATT Yahoo Mail`
-- Username: your email
+- Username: `michaelrwolf@att.net`
 - Password: ATT password
 - URL: <https://signin.att.com>
 
-Turn OFF Chrome password manager so it stays out of the way.
-
-### Disable Chrome Password Manager (macOS)
-
-1. Open Chrome
-2. Settings → Autofill & Passwords → Password Manager
-3. Turn OFF:
-   - Offer to save passwords
-   - Auto Sign-in
-4. Go to: `chrome://password-manager/passwords`
-
-```bash
-# NOTE: chrome:// URLs require Chrome explicitly
-open -a "Google Chrome" "chrome://password-manager/passwords"
-```
-
-1. Delete any entries for:
-   - att.com
-   - yahoo.com
-   - att.yahoo.com
-
-Result: Chrome stops presenting choices entirely. 1Password becomes the only key source.
+Turn OFF Safari's built-in password saving so 1Password stays in control:
+Safari → Settings → Passwords → uncheck "AutoFill Passwords"
 
 ### Avoid macOS Keychain storage
 
@@ -102,6 +85,17 @@ Result: Chrome stops presenting choices entirely. 1Password becomes the only key
 - Store all credentials only in 1Password
 
 Result: No credentials live in Keychain or browser.
+
+### Chrome (known broken as of 2026-06-20)
+
+Chrome fails at the SMS OTP step -- correct code accepted, errorCode=908 returned.
+See `ATT/password_fuckery.md` for diagnosis and workarounds to try if Chrome is required.
+
+If you must use Chrome, try in order:
+
+1. Chrome incognito (rules out extension interference)
+2. Chrome → Settings → Privacy and security → Cookies → Allow all cookies
+3. If those fail: use Safari
 
 ---
 
