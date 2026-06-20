@@ -80,7 +80,12 @@ Once inside:
 
 ### Email (ATT/Yahoo -- fragile, do in this order)
 
-- [ ] Open Chrome incognito: `open -a "Google Chrome" --args --incognito "https://mail.yahoo.com/"`
+> **2026-06-20 finding**: Safari completes full browser login (email → password → SMS OTP → inbox).
+> Chrome fails at OTP step -- correct 6-digit code entered, page reloads with errorCode=908 (OTP
+> rejected server-side). Use Safari for browser-based att.net login until Chrome is resolved.
+> See [ATT/password_fuckery.md](ATT/password_fuckery.md) for hypothesis and analysis.
+
+- [ ] Open **Safari** (Chrome fails at OTP as of 2026-06-20): `open -a Safari "https://mail.yahoo.com/"`
 - [ ] Sign in with `michaelrwolf@att.net` + ATT password (NOT Secure Mail Key)
 - [ ] Confirm inbox loads -- if "It's not you, it's us" see `ATT/password_fuckery.md` for escalation wording
 - [ ] Navigate to ATT security settings: `open "https://www.att.com/my/#/profile/security"`
