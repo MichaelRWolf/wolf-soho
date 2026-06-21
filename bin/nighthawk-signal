@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+HOST=192.168.1.1
+
+# Guard: confirm Server header identifies this as a Netgear device.
+# Failure here means wrong network or wrong IP -- bail fast.
+server_header=$(curl -sI --max-time 5 "http://$HOST/" 2>/dev/null \
+  | grep -i '^Server:' || true)
+
+if ! echo "$server_header" | grep -qi 'netgear'; then
+    echo "ERROR: $HOST does not look like a Netgear device (Server: ${server_header:-no response})" >&2
+    exit 1
+fi
+
+# Fetch the full model -- one call, follows session-redirect automatically.
+model=$(curl -sL --max-time 10 "http://$HOST/model.json")
+
+python3 - "$model" <<'EOF'
+import sys, json
+
+raw = sys.argv[1]
+d = json.loads(raw)
+
+def get(obj, dotpath, default='—'):
+    for key in dotpath.split('.'):
+        if isinstance(obj, dict) and key in obj:
+            obj = obj[key]
+        else:
+            return default
+    return obj
+
+sig   = get(d, 'wwan.signalStrength', {})
+wwan  = get(d, 'wwan', {})
+adv   = get(d, 'wwanadv', {})
+gen   = get(d, 'general', {})
+
+bars  = sig.get('bars', '—')
+rssi  = sig.get('rssi',  '—')
+rsrp  = sig.get('rsrp',  '—')
+rsrq  = sig.get('rsrq',  '—')
+sinr  = sig.get('sinr',  '—')
+
+band      = adv.get('curBand', '—')
+cell_id   = adv.get('cellId',  '—')
+mcc       = adv.get('MCC',     '—')
+mnc       = adv.get('MNC',     '—')
+svc_type  = wwan.get('currentNWserviceType', '—')
+carrier   = wwan.get('registerNetworkDisplay', '—')
+ca_count  = get(d, 'wwan.ca.SCCcount', '—')
+dev_name  = gen.get('deviceName', '—')
+
+# Decode eNB + sector from Cell ID if numeric
+enb = sector = '—'
+if isinstance(cell_id, int):
+    enb    = cell_id >> 8
+    sector = cell_id & 0xFF
+
+print(f"Device:   {dev_name}")
+print(f"Network:  {carrier}  ({svc_type})  band {band}")
+print()
+print(f"Signal:")
+print(f"  bars    {bars}/5")
+print(f"  RSSI    {rssi} dBm")
+print(f"  RSRP    {rsrp} dBm   (good > -80, ok -80..-100, poor < -100)")
+print(f"  RSRQ    {rsrq} dB    (good > -10, ok -10..-15,  poor < -15)")
+print(f"  SINR    {sinr} dB    (good > 20,  ok 0..20,     poor < 0)")
+print()
+print(f"Cell tower:")
+print(f"  MCC/MNC    {mcc}/{mnc}")
+print(f"  Cell ID    {cell_id}  (eNB {enb}, sector {sector})")
+print(f"  CA (SCC)   {ca_count} secondary carriers")
+print()
+print(f"Lookup: https://opencellid.org/#zoom=14&lat=&lon=  MCC={mcc} MNC={mnc} Cell={cell_id}")
+EOF
