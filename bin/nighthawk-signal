@@ -30,16 +30,49 @@ def get(obj, dotpath, default='—'):
             return default
     return obj
 
+def bar(n, total=5):
+    n = max(0, min(total, n))
+    return '█' * n + '░' * (total - n)
+
+LABELS = ['', 'poor', 'fair', 'ok', 'good', 'excellent']
+
+def rsrp_score(v):
+    if not isinstance(v, (int, float)): return 0
+    if v >= -80:  return 5
+    if v >= -90:  return 4
+    if v >= -100: return 3
+    if v >= -110: return 2
+    if v >= -120: return 1
+    return 0
+
+def rsrq_score(v):
+    if not isinstance(v, (int, float)): return 0
+    if v >= -9:   return 5
+    if v >= -11:  return 4
+    if v >= -13:  return 3
+    if v >= -15:  return 2
+    if v >= -20:  return 1
+    return 0
+
+def sinr_score(v):
+    if not isinstance(v, (int, float)): return 0
+    if v >= 20:  return 5
+    if v >= 13:  return 4
+    if v >= 5:   return 3
+    if v >= 0:   return 2
+    if v >= -3:  return 1
+    return 0
+
 sig   = get(d, 'wwan.signalStrength', {})
 wwan  = get(d, 'wwan', {})
 adv   = get(d, 'wwanadv', {})
 gen   = get(d, 'general', {})
 
-bars  = sig.get('bars', '—')
-rssi  = sig.get('rssi',  '—')
-rsrp  = sig.get('rsrp',  '—')
-rsrq  = sig.get('rsrq',  '—')
-sinr  = sig.get('sinr',  '—')
+rssi     = sig.get('rssi',  '—')
+rsrp     = sig.get('rsrp',  '—')
+rsrq     = sig.get('rsrq',  '—')
+sinr     = sig.get('sinr',  '—')
+hw_bars  = sig.get('bars',  '—')
 
 band      = adv.get('curBand', '—')
 cell_id   = adv.get('cellId',  '—')
@@ -50,21 +83,48 @@ carrier   = wwan.get('registerNetworkDisplay', '—')
 ca_count  = get(d, 'wwan.ca.SCCcount', '—')
 dev_name  = gen.get('deviceName', '—')
 
-# Decode eNB + sector from Cell ID if numeric
 enb = sector = '—'
 if isinstance(cell_id, int):
     enb    = cell_id >> 8
     sector = cell_id & 0xFF
 
+rp = rsrp_score(rsrp)
+rq = rsrq_score(rsrq)
+sn = sinr_score(sinr)
+
+# Use-case scores: limited by the weakest relevant metric
+web_score   = min(rp, sn)
+video_score = min(rp, sn)
+zoom_score  = min(rp, rq, sn)
+
+USE_LABELS = {
+    0: 'no signal',
+    1: 'poor',
+    2: 'marginal',
+    3: 'ok',
+    4: 'good',
+    5: 'excellent',
+}
+USE_NOTES = {
+    'web':   ['', 'pages may not load', 'slow loads',      'usable',        'fast',          'very fast'  ],
+    'video': ['', 'will not play',      'buffering likely', 'SD ok',        '720p ok',       '1080p+ ok'  ],
+    'zoom':  ['', 'unusable',           'drops likely',    'ok, may degrade','good quality', 'HD quality' ],
+}
+
 print(f"Device:   {dev_name}")
 print(f"Network:  {carrier}  ({svc_type})  band {band}")
 print()
-print(f"Signal:")
-print(f"  bars    {bars}/5")
-print(f"  RSSI    {rssi} dBm")
-print(f"  RSRP    {rsrp} dBm   (good > -80, ok -80..-100, poor < -100)")
-print(f"  RSRQ    {rsrq} dB    (good > -10, ok -10..-15,  poor < -15)")
-print(f"  SINR    {sinr} dB    (good > 20,  ok 0..20,     poor < 0)")
+print(f"Signal:                  poor ←————→ good")
+print(f"  RSSI  {rssi:>5} dBm")
+print(f"  RSRP  {rsrp:>5} dBm   [{bar(rp)}] {LABELS[rp]:<9}  (poor < -100, ok -100..-80, good > -80)")
+print(f"  RSRQ  {rsrq:>5} dB    [{bar(rq)}] {LABELS[rq]:<9}  (poor < -15,  ok -15..-10,  good > -10)")
+print(f"  SINR  {sinr:>5} dB    [{bar(sn)}] {LABELS[sn]:<9}  (poor < 0,    ok 0..20,     good > 20)")
+print(f"  hw    {hw_bars:>5}/5")
+print()
+print(f"Use:                     poor ←————→ good")
+print(f"  Web browse    [{bar(web_score)}] {USE_LABELS[web_score]:<9}  {USE_NOTES['web'][web_score]}")
+print(f"  Video stream  [{bar(video_score)}] {USE_LABELS[video_score]:<9}  {USE_NOTES['video'][video_score]}")
+print(f"  Zoom call     [{bar(zoom_score)}] {USE_LABELS[zoom_score]:<9}  {USE_NOTES['zoom'][zoom_score]}")
 print()
 print(f"Cell tower:")
 print(f"  MCC/MNC    {mcc}/{mnc}")
