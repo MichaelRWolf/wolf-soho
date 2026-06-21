@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
+# nighthawk-signal -- live cell signal stats for Netgear Nighthawk M1
+#
+# TODO:
+#   - OpenCellID API: use Keychain token to resolve Cell ID → GPS coordinates
+#       security add-generic-password -s opencellid -a api-token -w TOKEN
+#       API: https://opencellid.org/cell/get?key=TOKEN&mcc=MCC&mnc=MNC&cellid=ID&lac=TAC
+#       (need TAC -- not yet found in model.json; may require USB/AT commands)
+#   - USB/AT commands: deeper tower info (TAC, PCI, EARFCN, neighbor cells)
+#       screen /dev/cu.usbmodem* 115200
+#       AT+QENG="servingcell"
+#   - Watch mode: poll every N seconds, show delta from baseline
+#   - Log mode: append timestamped readings to a CSV for trend analysis
+#   - Tower direction/distance: once GPS coords known, compute bearing from current location
+
 set -euo pipefail
 
 HOST=192.168.1.1
@@ -114,14 +128,14 @@ USE_NOTES = {
 print(f"Device:   {dev_name}")
 print(f"Network:  {carrier}  ({svc_type})  band {band}")
 print()
-print(f"Signal:                  poor ←————→ good")
+print(f"Signal:")
 print(f"  RSSI  {rssi:>5} dBm")
-print(f"  RSRP  {rsrp:>5} dBm   [{bar(rp)}] {LABELS[rp]:<9}  (poor < -100, ok -100..-80, good > -80)")
-print(f"  RSRQ  {rsrq:>5} dB    [{bar(rq)}] {LABELS[rq]:<9}  (poor < -15,  ok -15..-10,  good > -10)")
-print(f"  SINR  {sinr:>5} dB    [{bar(sn)}] {LABELS[sn]:<9}  (poor < 0,    ok 0..20,     good > 20)")
+print(f"  RSRP  {rsrp:>5} dBm   [{bar(rp)}] {LABELS[rp]:<9}  ok: [-100, -80]")
+print(f"  RSRQ  {rsrq:>5} dB    [{bar(rq)}] {LABELS[rq]:<9}  ok: [-15, -10]")
+print(f"  SINR  {sinr:>5} dB    [{bar(sn)}] {LABELS[sn]:<9}  ok: [0, 20]")
 print(f"  hw    {hw_bars:>5}/5")
 print()
-print(f"Use:                     poor ←————→ good")
+print(f"Use:")
 print(f"  Web browse    [{bar(web_score)}] {USE_LABELS[web_score]:<9}  {USE_NOTES['web'][web_score]}")
 print(f"  Video stream  [{bar(video_score)}] {USE_LABELS[video_score]:<9}  {USE_NOTES['video'][video_score]}")
 print(f"  Zoom call     [{bar(zoom_score)}] {USE_LABELS[zoom_score]:<9}  {USE_NOTES['zoom'][zoom_score]}")
@@ -131,5 +145,6 @@ print(f"  MCC/MNC    {mcc}/{mnc}")
 print(f"  Cell ID    {cell_id}  (eNB {enb}, sector {sector})")
 print(f"  CA (SCC)   {ca_count} secondary carriers")
 print()
-print(f"Lookup: https://opencellid.org/#zoom=14&lat=&lon=  MCC={mcc} MNC={mnc} Cell={cell_id}")
+print(f"Lookup: https://www.cellmapper.net/map?MCC={mcc}&MNC={mnc}&type=LTE")
+print(f"        search eNB: {enb}  (sector {sector})")
 EOF
