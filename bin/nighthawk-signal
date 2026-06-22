@@ -81,6 +81,10 @@ def hw_bar_score(v):
     if not isinstance(v, (int, float)): return 0
     return max(0, min(5, int(v)))
 
+def battery_bar_score(v):
+    if not isinstance(v, (int, float)): return 0
+    return min(5, int(v) // 20)
+
 sig   = get(d, 'wwan.signalStrength', {})
 wwan  = get(d, 'wwan', {})
 adv   = get(d, 'wwanadv', {})
@@ -112,6 +116,7 @@ rp = rsrp_score(rsrp)
 rq = rsrq_score(rsrq)
 sn = sinr_score(sinr)
 hw = hw_bar_score(hw_bars)
+bat = battery_bar_score(battery)
 
 # Use-case scores: limited by the weakest relevant metric
 web_score   = min(rp, sn)
@@ -132,15 +137,18 @@ USE_NOTES = {
     'zoom':  ['', 'unusable',           'drops likely',    'ok, may degrade','good quality', 'HD quality' ],
 }
 
-print(f"Device:   {dev_name}  battery {battery}%")
+print(f"Device:   {dev_name}")
 print(f"Network:  {carrier}  ({svc_type})  band {band}")
+print()
+print(f"Overview:")
+print(f"  Battery   {battery:>3}%    [{bar(bat)}] {LABELS[bat]:<9}")
+print(f"  Signal    {hw_bars:>3}/5    [{bar(hw)}] {LABELS[hw]:<9}")
 print()
 print(f"Signal:")
 print(f"  RSSI  {rssi:>5} dBm")
 print(f"  RSRP  {rsrp:>5} dBm   [{bar(rp)}] {LABELS[rp]:<9}  ok: [-100, -80]")
 print(f"  RSRQ  {rsrq:>5} dB    [{bar(rq)}] {LABELS[rq]:<9}  ok: [-15, -10]")
 print(f"  SINR  {sinr:>5} dB    [{bar(sn)}] {LABELS[sn]:<9}  ok: [0, 20]")
-print(f"  Bars  {hw_bars:>5}/5     [{bar(hw)}] {LABELS[hw]:<9}")
 print()
 print(f"Use:")
 print(f"  Web browse    [{bar(web_score)}] {USE_LABELS[web_score]:<9}  {USE_NOTES['web'][web_score]}")
