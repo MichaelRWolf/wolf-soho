@@ -101,7 +101,7 @@ svc_type  = wwan.get('currentNWserviceType', '—')
 carrier   = wwan.get('registerNetworkDisplay', '—')
 ca_count  = get(d, 'wwan.ca.SCCcount', '—')
 dev_name  = gen.get('deviceName', '—')
-battery   = pwr.get('battery', '—')
+battery   = pwr.get('battChargeLevel', '—')
 
 enb = sector = '—'
 if isinstance(cell_id, int):
