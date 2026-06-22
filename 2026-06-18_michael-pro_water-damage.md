@@ -116,14 +116,15 @@ Once inside:
 
 ## Status Log
 
-| Time              | Action                                                                               |
-|-------------------|--------------------------------------------------------------------------------------|
-| 2026-06-18        | Incident discovered; machine wet, appears off                                        |
-| 2026-06-18        | Back screws removed (6 of 6); panel not yet free                                     |
-| 2026-06-18        | Front edge (opposite hinge) lifting; hinge corners still seated                      |
-| 2026-06-18        | Panel removed                                                                        |
-| 2026-06-18        | Battery disconnected; electrical tape between connector and socket                   |
-| 2026-06-18 ~09:30 | Drying begun -- fan blowing across open interior, hinge-down V-orientation, open box |
-|                   | Drying complete (target: 2026-06-21 ~09:30)                                          |
-|                   | Board inspected for mineral deposits/corrosion                                       |
-|                   | Battery reconnected; power-on attempted                                              |
+| Time              | Action                                                                                                                                                     |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2026-06-18        | Incident discovered; machine wet, appears off                                                                                                              |
+| 2026-06-18        | Back screws removed (6 of 6); panel not yet free                                                                                                           |
+| 2026-06-18        | Front edge (opposite hinge) lifting; hinge corners still seated                                                                                            |
+| 2026-06-18        | Panel removed                                                                                                                                              |
+| 2026-06-18        | Battery disconnected; electrical tape between connector and socket                                                                                         |
+| 2026-06-18 ~09:30 | Drying begun -- fan blowing across open interior, hinge-down V-orientation, open box                                                                       |
+| 2026-06-21 18:00  | Switched to heat: removed fan; placed 30W incandescent bulb 8 inches from back                                                                             |
+| 2026-06-22 12:30  | Removed light/heat source; inspected board bottom; found 4 locations of white corrosion                                                                    |
+| 2026-06-22 13:30  | Board in strong sun (back black components >110°F); applied 70% IPA; small fan running                                                                     |
+| 2026-06-22 ~14:00 | Discovered IPA was ear drops (50/50 vinegar + 70% IPA); rinsed with well water; moved to shade with fan in driver seat; awaiting distilled water + 91% IPA |
