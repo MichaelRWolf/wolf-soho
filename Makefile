@@ -1,5 +1,6 @@
 SOURCE_BIN_DIR := bin
 BIN_FILES := bin/network_location bin/beryl_sqm bin/networkCurl \
+             bin/nighthawk-signal \
              bin/gitnas-repo-create bin/gitnas-remote-add \
              bin/gitnas-repo-setup bin/gitnas-repo-sync \
              bin/fleet-status bin/git-status-summary \

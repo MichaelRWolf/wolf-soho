@@ -77,10 +77,15 @@ def sinr_score(v):
     if v >= -3:  return 1
     return 0
 
+def hw_bar_score(v):
+    if not isinstance(v, (int, float)): return 0
+    return max(0, min(5, int(v)))
+
 sig   = get(d, 'wwan.signalStrength', {})
 wwan  = get(d, 'wwan', {})
 adv   = get(d, 'wwanadv', {})
 gen   = get(d, 'general', {})
+pwr   = get(d, 'power', {})
 
 rssi     = sig.get('rssi',  '—')
 rsrp     = sig.get('rsrp',  '—')
@@ -96,6 +101,7 @@ svc_type  = wwan.get('currentNWserviceType', '—')
 carrier   = wwan.get('registerNetworkDisplay', '—')
 ca_count  = get(d, 'wwan.ca.SCCcount', '—')
 dev_name  = gen.get('deviceName', '—')
+battery   = pwr.get('battery', '—')
 
 enb = sector = '—'
 if isinstance(cell_id, int):
@@ -105,6 +111,7 @@ if isinstance(cell_id, int):
 rp = rsrp_score(rsrp)
 rq = rsrq_score(rsrq)
 sn = sinr_score(sinr)
+hw = hw_bar_score(hw_bars)
 
 # Use-case scores: limited by the weakest relevant metric
 web_score   = min(rp, sn)
@@ -125,7 +132,7 @@ USE_NOTES = {
     'zoom':  ['', 'unusable',           'drops likely',    'ok, may degrade','good quality', 'HD quality' ],
 }
 
-print(f"Device:   {dev_name}")
+print(f"Device:   {dev_name}  battery {battery}%")
 print(f"Network:  {carrier}  ({svc_type})  band {band}")
 print()
 print(f"Signal:")
@@ -133,7 +140,7 @@ print(f"  RSSI  {rssi:>5} dBm")
 print(f"  RSRP  {rsrp:>5} dBm   [{bar(rp)}] {LABELS[rp]:<9}  ok: [-100, -80]")
 print(f"  RSRQ  {rsrq:>5} dB    [{bar(rq)}] {LABELS[rq]:<9}  ok: [-15, -10]")
 print(f"  SINR  {sinr:>5} dB    [{bar(sn)}] {LABELS[sn]:<9}  ok: [0, 20]")
-print(f"  hw    {hw_bars:>5}/5")
+print(f"  Bars  {hw_bars:>5}/5     [{bar(hw)}] {LABELS[hw]:<9}")
 print()
 print(f"Use:")
 print(f"  Web browse    [{bar(web_score)}] {USE_LABELS[web_score]:<9}  {USE_NOTES['web'][web_score]}")
