@@ -87,6 +87,12 @@ Once inside:
 - [MacBook Pro 13" Four Thunderbolt Ports 2020 Screen Replacement - iFixit](https://www.ifixit.com/Guide/MacBook+Pro+13-Inch+Four+Thunderbolt+Ports+2020+Screen+Replacement/143619)
 - [MacBook Pro 13" Four Thunderbolt Ports 2020 Device Page - iFixit](https://www.ifixit.com/Device/MacBook_Pro_13%22_Four_Thunderbolt_Ports_2020)
 
+## Resources
+
+**Video**:
+
+TechChandan. (2024). MacBook Pro A2251 complete disassembly [Video]. YouTube. Retrieved from <https://www.youtube.com/watch?v=D_j3S74jyek>
+
 ### Remove Components Blocking Motherboard Access
 
 Before the motherboard can be lifted free, several components must be disconnected/removed:
@@ -225,18 +231,31 @@ Once board is completely dry and corrosion is cleaned:
 
 ---
 
+## Blocker: Logic Board Extraction (2026-06-23)
+
+Found and disconnected 4-6 flex cable connectors; board still held by 2 unknown connectors or thermal adhesive. Possible locations:
+
+- Thermal pad adhesive under board (try gently prying with plastic spudger along edges, not hinge end)
+- Connector under a bracket or component you haven't identified yet
+- Connector routed under SSD or power delivery area
+
+**Next attempt:** Review TechChandan video at suspect locations; consult iFixit steps 8-12 for exact screw/connector inventory.
+
+---
+
 ## Status Log
 
-| Time              | Action                                                                                                                                                                  |
-|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2026-06-18        | Incident discovered; machine wet, appears off                                                                                                                           |
-| 2026-06-18        | Back screws removed (6 of 6); panel not yet free                                                                                                                        |
-| 2026-06-18        | Front edge (opposite hinge) lifting; hinge corners still seated                                                                                                         |
-| 2026-06-18        | Panel removed                                                                                                                                                           |
-| 2026-06-18        | Battery disconnected; electrical tape between connector and socket                                                                                                      |
-| 2026-06-18 ~09:30 | Drying begun -- fan blowing across open interior, hinge-down V-orientation, open box                                                                                    |
-| 2026-06-21 18:00  | Switched to heat: removed fan; placed 30W incandescent bulb 8 inches from back                                                                                          |
-| 2026-06-22 12:30  | Removed light/heat source; inspected board bottom; found 4 locations of white corrosion                                                                                 |
-| 2026-06-22 13:30  | Board in strong sun (back black components >110°F); applied 70% IPA; small fan running                                                                                  |
-| 2026-06-22 ~14:00 | Discovered IPA was ear drops (50/50 vinegar + 70% IPA); rinsed with well water; moved to shade with fan in driver seat; awaiting distilled water + 91% IPA              |
-| 2026-06-22 ~16:30 | Added Step 4 motherboard removal & corrosion cleaning procedure; iFixit references documented; ready for motherboard extraction once distilled water + 91% IPA acquired |
+| Time              | Action                                                                                                                                                                                    |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2026-06-18        | Incident discovered; machine wet, appears off                                                                                                                                             |
+| 2026-06-18        | Back screws removed (6 of 6); panel not yet free                                                                                                                                          |
+| 2026-06-18        | Front edge (opposite hinge) lifting; hinge corners still seated                                                                                                                           |
+| 2026-06-18        | Panel removed                                                                                                                                                                             |
+| 2026-06-18        | Battery disconnected; electrical tape between connector and socket                                                                                                                        |
+| 2026-06-18 ~09:30 | Drying begun -- fan blowing across open interior, hinge-down V-orientation, open box                                                                                                      |
+| 2026-06-21 18:00  | Switched to heat: removed fan; placed 30W incandescent bulb 8 inches from back                                                                                                            |
+| 2026-06-22 12:30  | Removed light/heat source; inspected board bottom; found 4 locations of white corrosion                                                                                                   |
+| 2026-06-22 13:30  | Board in strong sun (back black components >110°F); applied 70% IPA; small fan running                                                                                                    |
+| 2026-06-22 ~14:00 | Discovered IPA was ear drops (50/50 vinegar + 70% IPA); rinsed with well water; moved to shade with fan in driver seat; awaiting distilled water + 91% IPA                                |
+| 2026-06-22 ~16:30 | Added Step 4 motherboard removal & corrosion cleaning procedure; iFixit references documented; ready for motherboard extraction once distilled water + 91% IPA acquired                   |
+| 2026-06-23        | Logic board extraction attempt (3 hrs): located and disconnected 4-6 flex cable connectors successfully; unable to locate 2 remaining connectors preventing board lift; packed up; paused |
