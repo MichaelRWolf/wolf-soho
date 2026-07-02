@@ -18,6 +18,9 @@ repos:
     hooks:
       - id: check-added-large-files
         args: ["--maxkb=102400"] # 100MB
+      - id: pretty-format-json
+        args: ["--autofix"]
+        files: '(^|/)\.markdownlint\.json$'
 
   - repo: https://github.com/sirosen/texthooks
     rev: 0.7.1
