@@ -1,0 +1,269 @@
+# HOWTO: Campground WiFi Repeater Setup (NanoStation Loco5AC)
+
+Bridges "Trails End Wifi" from the mesh cone zone back to RV via Cat5 + Beryl local broadcast.
+
+---
+
+## Overview
+
+**Topology:**
+
+```text
+Ubiquiti Mesh (20 ft up, ~100 ft away)
+        ↓ (WiFi signal into cone zone)
+        ↓ 
+NanoStation Loco5AC [Station mode, Bridge]
+        ↓ (PoE-powered, Cat5 100 ft back to RV)
+        ↓
+Beryl [in RV]
+        ↓ (broadcasts locally via WiFi)
+        → RV interior ground-level coverage
+```
+
+**Hardware Required:**
+
+- 1× NanoStation Loco5AC (configured in Station mode, will join "Trails End Wifi")
+- 1× POE-24-12W injector (PoE power for NanoStation)
+- Cat5/Cat6 cable, ~100 feet (from cone zone to RV)
+- 1× Beryl (in RV, acts as local AP)
+- MacBook with USB-C Ethernet adapter (for bench config)
+
+---
+
+## Bench Setup (Before Deployment)
+
+### macOS Network Configuration
+
+1. System Settings → Network → Location → **Add Location**
+2. Name: `Ubiquiti-Setup`
+3. Enable only **Belkin USB-C LAN / Thunderbolt Ethernet**
+4. IPv4: **Configure Manually**
+   - IP Address: `192.168.1.100`
+   - Subnet Mask: `255.255.255.0`
+   - Router: *(leave blank)*
+5. Wi-Fi: Off
+
+### Wiring (Bench)
+
+```text
+MacBook → USB-C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → NanoStation Loco5AC
+```
+
+- **LAN/⚡ port:** Connect to Mac
+- **PoE/⇄ port:** Connect to NanoStation
+
+### Access the Device
+
+- **SSH:** `ssh admin@192.168.1.20`
+- **Web UI:** `http://192.168.1.20` (Safari only; Chrome blocks HTTP)
+- **Default password:** ubiquiti
+
+---
+
+## NanoStation Configuration (Station Mode)
+
+### UI Settings: Network
+
+Navigate to: **System → Network**
+
+| Setting               | Value           |
+|-----------------------|-----------------|
+| NETWORK MODE          | **Bridge**      |
+| MANAGEMENT IP ADDRESS | **Static**      |
+| IP ADDRESS            | `192.168.1.20`  |
+| NETMASK               | `255.255.255.0` |
+| GATEWAY               | *(leave blank)* |
+| DNS                   | *(leave blank)* |
+
+### UI Settings: Wireless → Basic Wireless Settings
+
+Navigate to: **Wireless → Basic Wireless Settings**
+
+| Setting       | Value                                                       |
+|---------------|-------------------------------------------------------------|
+| ACCESS POINT  | **Off** *(Off means Station mode, not AP)*                  |
+| PTP MODE      | **Off** *(using WiFi client mode, not PtP)*                 |
+| SSID          | `Trails End Wifi` *(exactly as broadcast by Ubiquiti mesh)* |
+| WIRELESS MODE | **802.11ac**                                                |
+| CHANNEL WIDTH | **40 MHz**                                                  |
+| FREQUENCY     | Auto *(or manual if Ubiquiti is on fixed channel)*          |
+
+### UI Settings: Wireless → Security
+
+Navigate to: **Wireless → Security**
+
+| Setting            | Value                                  |
+|--------------------|----------------------------------------|
+| SECURITY           | **WPA2 Personal**                      |
+| WPA2 PRESHARED KEY | *(same passphrase as Trails End Wifi)* |
+| WPA VERSION        | **WPA2 only**                          |
+
+### UI Settings: Advanced Wireless
+
+Navigate to: **Wireless → Advanced**
+
+| Setting        | Value                                  |
+|----------------|----------------------------------------|
+| TRANSMIT POWER | **24 dBm** *(standard; reduces noise)* |
+| ANTENNA GAIN   | Leave default                          |
+| TX/RX CHAINS   | Leave default                          |
+
+---
+
+## Validation (Bench)
+
+1. Power cycle the NanoStation
+2. Wait 30 seconds for boot
+3. SSH into `192.168.1.20` and check status:
+
+```bash
+ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 \
+    -o HostKeyAlgorithms=+ssh-rsa \
+    -o Ciphers=+aes128-cbc \
+    admin@192.168.1.20
+```
+
+1. Once connected via SSH:
+
+```bash
+# Check device info
+cat /etc/board.info
+
+# Check wireless status
+cat /tmp/system.cfg | grep wireless
+
+# Check if "Trails End Wifi" is visible
+iwlist wlan0 scan | grep -i "trails"
+```
+
+1. Via Web UI (**<http://192.168.1.20>**):
+   - Go to **Main / Status**
+   - **Wireless** section should show:
+     - **Mode:** Station
+     - **SSID:** Trails End Wifi
+     - **Signal Strength:** visible (dBm, negative number)
+     - **Link State:** Connected or Connecting
+
+---
+
+## Field Deployment
+
+### Cone Zone Setup (100 feet from Ubiquiti pole)
+
+1. **Mount NanoStation:**
+   - Position on tripod or temporary mount in the cone zone (ground level)
+   - **Aim antenna upward 15-20°** into the cone (directional antenna, not omnidirectional)
+   - This is critical -- the antenna pattern is narrow
+
+2. **Power:**
+   - Connect PoE injector
+   - Plug Mac or portable battery into PoE LAN port
+   - Wait for boot (30 seconds)
+
+3. **Verify Signal:**
+   - SSH into `192.168.1.20` (via the temporary PoE connection)
+   - Check signal strength: `cat /tmp/system.cfg | grep rssi`
+   - Should be **-50 to -60 dBm** in the cone zone
+   - If weaker, adjust antenna angle slightly
+
+4. **Run Cat5 Cable:**
+   - From NanoStation PoE PoE port to RV
+   - Secure for weather (conduit, clips)
+   - Run 100 feet back to RV
+
+### RV Setup
+
+1. **Connect PoE at RV end:**
+   - Run Cat5 into RV
+   - Connect to PoE LAN port
+   - Plug PoE LAN port into wall power
+
+2. **Separate PoE at RV:**
+   - Connect Cat5 from PoE PoE port to Beryl WAN port (or LAN, depending on Beryl mode)
+
+3. **Configure Beryl:**
+   - Beryl should pick up network from NanoStation
+   - Configure Beryl to **broadcast locally as access point**
+   - SSID: "Wolf repeating TE" or "Trails End Wifi" (your choice)
+   - Broadcast to cover RV interior and ground level
+
+### Antenna Alignment (Fine-Tuning)
+
+Walk the cone zone with your laptop running NetSpot:
+
+- Adjust NanoStation antenna angle for maximum signal strength
+- Small angle changes (5-10°) can mean 10+ dBm difference
+- Lock mount once optimal angle is found
+
+---
+
+## Troubleshooting
+
+### NanoStation won't connect to "Trails End Wifi"
+
+- Verify SSID spelling exactly matches (case-sensitive in some configs)
+- Verify WPA2 passphrase is correct
+- Check if Trails End Wifi is broadcasting on 5 GHz (not 2.4 GHz)
+- Try **WIRELESS MODE: 802.11ac + 802.11n** if stuck
+
+### Signal is very weak (-70 dBm or worse)
+
+- **Antenna angle:** Re-aim antenna upward into cone (15-20° elevation)
+- **Antenna height:** Move NanoStation higher if possible
+- **Location:** Move closer to Ubiquiti pole (cone is ~30 ft diameter)
+- **Frequency interference:** Try manually setting to a different 5 GHz channel
+
+### Beryl won't connect to NanoStation via Cat5
+
+- Check PoE injector powers on (LED lights)
+- Verify Cat5 cable continuity (test with another device)
+- Check Beryl network settings (may need to set WAN port manually)
+- Swap LAN/PoE port connections if unclear
+
+### Poor speeds despite good signal
+
+- Check for interference (use NetSpot to scan 5 GHz band)
+- Try different channel width (20 MHz instead of 40 MHz)
+- Verify no other devices are congesting the link
+- Check if Trails End Wifi mesh is congested (time of day dependent)
+
+---
+
+## Performance Expectations
+
+- **Signal in cone zone:** -50 to -60 dBm (excellent)
+- **Signal at RV (after Beryl):** Depends on RV obstruction, expect -60 to -70 dBm locally
+- **Throughput:** 20-50 Mbps over 100 ft Cat5 link (should be sufficient for texting, email, light browsing)
+- **Latency:** 50-100 ms (acceptable for most uses)
+
+---
+
+## One-Minute Health Check (Weekly)
+
+1. SSH into `192.168.1.20` and run:
+
+   ```bash
+   cat /tmp/system.cfg | grep -E "rssi|mode|ssid"
+   ```
+
+2. Verify:
+   - Mode: Station
+   - SSID: Trails End Wifi
+   - Signal (rssi): -50 to -65 dBm
+
+3. If signal degrades:
+   - Check antenna angle hasn't shifted
+   - Re-run NetSpot to spot interference
+   - Consider seasonal foliage changes affecting signal
+
+---
+
+## References
+
+- NanoStation Loco5AC User Guide: [Ubiquiti Docs](https://dl.ubnt.com/)
+- PtP setup (for reference): `HOWTO_rascally_raccoon_PtP_config.md`
+- Equipment specs: `equipment_networking.md`
+
+---
+
+END
