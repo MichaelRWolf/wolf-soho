@@ -3,7 +3,7 @@
 Standard names for all devices. Use these names in project files and session notes to prevent
 ambiguous language. Read this file at the start of any network-related session.
 
-## Network Infrastructure -- RV Side
+## Network Infrastructure -- Rascally Raccoon PtP (Winter 2025-2026)
 
 | Name                   | Device                       |
 |------------------------|------------------------------|
@@ -14,13 +14,19 @@ ambiguous language. Read this file at the start of any network-related session.
 | `wolfden-mesh`         | Ubiquiti UAP-AC-M-US         |
 | `cheapo-extender`      | Generic USB WiFi repeater    |
 
-## Network Infrastructure -- Moe's House Side
+## Network Infrastructure -- Rascally Raccoon PtP (Winter 2025-2026) -- Moe's House Side
 
 | Name              | Device                       |
 |-------------------|------------------------------|
 | `loco-ap`         | Ubiquiti NanoStation Loco5AC |
 | `spectrum-router` | Spectrum SAC2V1A             |
 | `moes-roomba`     | iRobot Roomba i7             |
+
+## Network Infrastructure -- Trails End Campground (Summer 2026)
+
+| Name          | Device                       |
+|---------------|------------------------------|
+| `loco-bridge` | Ubiquiti NanoStation Loco5AC |
 
 ## Computing Devices
 
@@ -34,18 +40,19 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Test & Measurement
 
-| Name       | Device                          |
-|------------|---------------------------------|
-| `tds340a`  | Tektronix TDS 340A oscilloscope |
+| Name      | Device                          |
+|-----------|---------------------------------|
+| `tds340a` | Tektronix TDS 340A oscilloscope |
 
 ## Accessories
 
-| Name            | Device                                   |
-|-----------------|------------------------------------------|
-| `anker-dongle`  | Anker USB-C to Gigabit Ethernet adapter  |
-| `belkin-dongle` | Belkin USB-C to Gigabit Ethernet adapter |
-| `poe-rv`        | Ubiquiti POE-24-12W passive PoE injector |
-| `poe-moe`       | Ubiquiti POE-24-12W passive PoE injector |
+| Name             | Device                                   |
+|------------------|------------------------------------------|
+| `anker-dongle`   | Anker USB-C to Gigabit Ethernet adapter  |
+| `belkin-dongle`  | Belkin USB-C to Gigabit Ethernet adapter |
+| `poe-rv`         | Ubiquiti POE-24-12W passive PoE injector |
+| `poe-moe`        | Ubiquiti POE-24-12W passive PoE injector |
+| `poe-trails-end` | Ubiquiti POE-24-12W passive PoE injector |
 
 ## SSIDs
 

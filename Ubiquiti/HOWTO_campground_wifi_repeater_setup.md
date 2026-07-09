@@ -22,26 +22,75 @@ Beryl [in RV]
 
 **Hardware Required:**
 
-- 1× NanoStation Loco5AC (configured in Station mode, will join "Trails End Wifi")
-- 1× POE-24-12W injector (PoE power for NanoStation)
+- 1× `loco-bridge` (Ubiquiti NanoStation Loco5AC, configured in Station mode to join "Trails End Wifi")
+- 1× `poe-trails-end` (Ubiquiti POE-24-12W injector, PoE power for loco-bridge)
 - Cat5/Cat6 cable, ~100 feet (from cone zone to RV)
-- 1× Beryl (in RV, acts as local AP)
-- MacBook with USB-C Ethernet adapter (for bench config)
+- 1× `beryl` (in RV, acts as local AP)
+- `michael-pro` or `wolf-air` with `belkin-dongle` (USB-C Ethernet adapter, for bench config)
+
+*See CONTEXT.md for device registry.*
+
+---
+
+## Config Backup & Recovery
+
+**Before modifying loco-bridge for Trails End**, save its current configuration in case you need to restore it later (returning to winter setup at Moe's or RV).
+
+### Export Config via Web UI
+
+1. Navigate to **System → Backup** in the NanoStation web UI
+2. Click **Download Configuration Backup**
+3. Save the `.tar.gz` file to your laptop with a descriptive name:
+
+   ```bash
+   loco-bridge-trails-end-backup-2026-07-09.tar.gz
+   ```
+
+### Import Config via Web UI
+
+When returning to the previous setup:
+
+1. Navigate to **System → Backup**
+2. Click **Choose File** and select your saved `.tar.gz` backup
+3. Click **Upload & Restore**
+4. Device reboots and restores all previous settings
+
+### Default IP After Factory Reset
+
+If you factory reset loco-bridge and need to access it:
+
+- Default IP address is typically **192.168.1.20** (may vary by firmware)
+- Try accessing via SSH: `ssh admin@192.168.1.20` (password: `ubiquiti`)
+- Or access via web UI: `http://192.168.1.20` (Safari only)
+- If neither works, check device logs or try mDNS: `ssh admin@nanostation.local`
 
 ---
 
 ## Bench Setup (Before Deployment)
 
-### macOS Network Configuration
+### System WiFi Configuration (System-Wide)
+
+Before starting bench setup, disable WiFi globally. This setting applies to **all locations**, not just the Ubiquiti-Setup location.
+
+- **Menu bar:** Click WiFi icon → **Turn WiFi Off**
+- *(It stays off across location switches until you toggle it back on)*
+
+### Network Location Configuration (Location-Specific)
+
+Create and configure a new network location. These settings are saved **per location** -- switching locations changes them automatically.
 
 1. System Settings → Network → Location → **Add Location**
 2. Name: `Ubiquiti-Setup`
-3. Enable only **Belkin USB-C LAN / Thunderbolt Ethernet**
-4. IPv4: **Configure Manually**
+3. In the right pane, configure services:
+   - **Belkin USB-C LAN / Thunderbolt Ethernet:** Enabled (selected in list)
+   - All other services: Disabled (not in list or unselected)
+4. Click **Belkin USB-C LAN** to edit its IPv4 settings:
+   - IPv4 Configuration: **Configure Manually**
    - IP Address: `192.168.1.100`
    - Subnet Mask: `255.255.255.0`
    - Router: *(leave blank)*
-5. Wi-Fi: Off
+   - DNS: *(leave blank)*
+5. Apply and save location
 
 ### Wiring (Bench)
 
@@ -56,7 +105,7 @@ MacBook → USB-C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → NanoStation L
 
 - **SSH:** `ssh admin@192.168.1.20`
 - **Web UI:** `http://192.168.1.20` (Safari only; Chrome blocks HTTP)
-- **Default password:** ubiquiti
+- **Password:** *(See 1Password)*
 
 ---
 
@@ -70,7 +119,7 @@ Navigate to: **System → Network**
 |-----------------------|-----------------|
 | NETWORK MODE          | **Bridge**      |
 | MANAGEMENT IP ADDRESS | **Static**      |
-| IP ADDRESS            | `192.168.1.20`  |
+| IP ADDRESS            | `192.168.1.22`  |
 | NETMASK               | `255.255.255.0` |
 | GATEWAY               | *(leave blank)* |
 | DNS                   | *(leave blank)* |
@@ -92,25 +141,69 @@ Navigate to: **Wireless → Basic Wireless Settings**
 
 Navigate to: **Wireless → Security**
 
+**If "Trails End Wifi" is open/unencrypted** (no password):
+
+The web UI does not expose an "Open" security option -- you must disable WPA2 via CLI first.
+
+#### Disable WPA2 via Telnet (Required for Open SSID)
+
+1. From your macOS terminal:
+
+   ```bash
+   telnet 192.168.1.22
+   ```
+
+2. Once connected (prompt: `BusyBox v1.00`), run either:
+
+   **sed (text replacement) -- confirmed for NanoStation Loco5AC**
+
+   ```bash
+   sed -i 's/aaa.1.wpa.mode=2/aaa.1.wpa.mode=0/g' /tmp/system.cfg
+   ```
+
+   *(uci config tool not available on this model)*
+
+3. Reboot the device:
+
+   ```bash
+   reboot
+   ```
+
+4. Wait 30 seconds for boot, then return to web UI. SECURITY should now show **Open** option.
+
+#### Configure Web UI After WPA2 Disabled
+
+| Setting  | Value                |
+|----------|----------------------|
+| SECURITY | **Open** or **None** |
+
+**If "Trails End Wifi" is encrypted with WPA2:**
+
 | Setting            | Value                                  |
 |--------------------|----------------------------------------|
 | SECURITY           | **WPA2 Personal**                      |
 | WPA2 PRESHARED KEY | *(same passphrase as Trails End Wifi)* |
-| WPA VERSION        | **WPA2 only**                          |
 
-### UI Settings: Advanced Wireless
+### UI Settings: Transmit Power
 
-Navigate to: **Wireless → Advanced**
+Navigate to: **Wireless** (may be under **Advanced** in some firmware versions)
 
-| Setting        | Value                                  |
-|----------------|----------------------------------------|
-| TRANSMIT POWER | **24 dBm** *(standard; reduces noise)* |
-| ANTENNA GAIN   | Leave default                          |
-| TX/RX CHAINS   | Leave default                          |
+| Setting        | Value                                                                   |
+|----------------|-------------------------------------------------------------------------|
+| TRANSMIT POWER | Leave at **default or maximum** for field deployment *(+20 to +24 dBm)* |
+|                | Slider range typically -4 to +25 dBm depending on firmware              |
+|                | *(Lower power useful for bench testing; increase for 100 ft+ distance)* |
+
+**Other settings:**
+
+- **ANTENNA GAIN:** Leave default
+- **TX/RX CHAINS:** Leave default
 
 ---
 
 ## Validation (Bench)
+
+**Before starting:** Confirm you're using the `Ubiquiti-Setup` network location (System Settings → Network → Location dropdown shows `Ubiquiti-Setup`). This activates the Belkin USB-C LAN configuration.
 
 1. Power cycle the NanoStation
 2. Wait 30 seconds for boot
@@ -161,7 +254,8 @@ iwlist wlan0 scan | grep -i "trails"
    - Wait for boot (30 seconds)
 
 3. **Verify Signal:**
-   - SSH into `192.168.1.20` (via the temporary PoE connection)
+   - **Location:** Switch to `Ubiquiti-Setup` location (System Settings → Network → Location)
+   - SSH into `192.168.1.20` (via the temporary PoE connection through Belkin USB-C LAN)
    - Check signal strength: `cat /tmp/system.cfg | grep rssi`
    - Should be **-50 to -60 dBm** in the cone zone
    - If weaker, adjust antenna angle slightly
