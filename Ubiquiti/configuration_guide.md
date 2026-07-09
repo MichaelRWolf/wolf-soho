@@ -1,5 +1,15 @@
 # Ubiquiti Configuration Guide
 
+**Context:** This guide uses the factory-default IP (192.168.1.20). In wolf-soho deployments, Ubiquiti devices are assigned specific static IPs:
+
+- **loco-ap** (Moe's house, PtP): 192.168.1.20
+- **loco-station** (RV, PtP): 192.168.1.21
+- **loco-bridge** (Trails End campground, repeater): 192.168.1.22
+
+Adjust IP addresses in the steps below based on which device you're configuring. See CONTEXT.md for the full device registry.
+
+---
+
 ## Initial Setup Process
 
 ### Step 1: Power and Network Connection
