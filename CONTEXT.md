@@ -5,28 +5,28 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Network Infrastructure -- Rascally Raccoon PtP (Winter 2025-2026)
 
-| Name                   | Device                       |
-|------------------------|------------------------------|
-| `beryl`                | GL.iNet Beryl GL-MT1300      |
-| `loco-station`         | Ubiquiti NanoStation Loco5AC |
-| `running-wolf-hotspot` | Netgear Nighthawk M1         |
-| `wolfden-nas`          | Synology DS220j              |
-| `wolfden-mesh`         | Ubiquiti UAP-AC-M-US         |
-| `cheapo-extender`      | Generic USB WiFi repeater    |
+| Name                   | Device                       | IP (Static)  |
+|------------------------|------------------------------|--------------|
+| `beryl`                | GL.iNet Beryl GL-MT1300      |              |
+| `loco-station`         | Ubiquiti NanoStation Loco5AC | 192.168.1.21 |
+| `running-wolf-hotspot` | Netgear Nighthawk M1         |              |
+| `wolfden-nas`          | Synology DS220j              |              |
+| `wolfden-mesh`         | Ubiquiti UAP-AC-M-US         |              |
+| `cheapo-extender`      | Generic USB WiFi repeater    |              |
 
 ## Network Infrastructure -- Rascally Raccoon PtP (Winter 2025-2026) -- Moe's House Side
 
-| Name              | Device                       |
-|-------------------|------------------------------|
-| `loco-ap`         | Ubiquiti NanoStation Loco5AC |
-| `spectrum-router` | Spectrum SAC2V1A             |
-| `moes-roomba`     | iRobot Roomba i7             |
+| Name              | Device                       | IP (Static)  |
+|-------------------|------------------------------|--------------|
+| `loco-ap`         | Ubiquiti NanoStation Loco5AC | 192.168.1.20 |
+| `spectrum-router` | Spectrum SAC2V1A             |              |
+| `moes-roomba`     | iRobot Roomba i7             |              |
 
 ## Network Infrastructure -- Trails End Campground (Summer 2026)
 
-| Name          | Device                       |
-|---------------|------------------------------|
-| `loco-bridge` | Ubiquiti NanoStation Loco5AC |
+| Name          | Device                       | IP (Static)  |
+|---------------|------------------------------|--------------|
+| `loco-bridge` | Ubiquiti NanoStation Loco5AC | 192.168.1.22 |
 
 ## Computing Devices
 
