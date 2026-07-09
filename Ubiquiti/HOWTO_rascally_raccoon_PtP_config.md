@@ -266,7 +266,7 @@ Access:
 
 ## Validation (Bench)
 
-* Both radios reachable at 192.168.1.20 (one at a time)
+* Both radios reachable via Ethernet (loco-ap: 192.168.1.20, loco-station: 192.168.1.21)
 * Station sees AP (check Main/Status page)
 * Signal strength visible (dBm)
 * Peer MAC matches expected

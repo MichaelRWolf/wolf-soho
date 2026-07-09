@@ -57,12 +57,17 @@ When returning to the previous setup:
 
 ### Default IP After Factory Reset
 
-If you factory reset loco-bridge and need to access it:
+If you factory reset loco-bridge and need to access it during recovery:
 
-- Default IP address is typically **192.168.1.20** (may vary by firmware)
-- Try accessing via SSH: `ssh admin@192.168.1.20` (password: `ubiquiti`)
+- **Ubiquiti factory default IP** is **192.168.1.20** (may vary by firmware)
+- **In this setup**, loco-bridge is configured at **192.168.1.22** (not the factory default)
+- After factory reset, the device will be at **192.168.1.20** temporarily
+- Once you reconfigure it to 192.168.1.22, use: `ssh admin@192.168.1.22` (or `ssh loco-bridge`)
+- For recovery/diagnosis at factory default: `ssh admin@192.168.1.20` (password: `ubiquiti`)
 - Or access via web UI: `http://192.168.1.20` (Safari only)
 - If neither works, check device logs or try mDNS: `ssh admin@nanostation.local`
+
+**Note:** Avoid confusing loco-bridge (192.168.1.22, Trails End repeater) with loco-ap (192.168.1.20, Moe's PtP) or loco-station (192.168.1.21, RV PtP).
 
 ---
 
