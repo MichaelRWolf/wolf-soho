@@ -98,3 +98,50 @@
 - Firmware: 7.0.1-1-795640-g202508082008-SAC2V1A-prod (verified 2026-05-12)
 - Location: Moe's house; upstream ISP gateway
 - Admin: Moe (credentials in 1Password if shared)
+
+## Trails End Campground (Summer 2026)
+
+### `loco-bridge` -- Ubiquiti NanoStation Loco5AC
+
+- Model: NanoStation Loco5AC (5 GHz only)
+- Role: WiFi client (Station mode); bridges "Trails End Wifi" mesh → Cat5 → Beryl (RV)
+- IP: 192.168.1.22 (static, no gateway)
+- MAC: TBD (confirm via web UI at <http://192.168.1.22>)
+- Power: poe-trails-end (24V passive PoE)
+- Web UI: <http://192.168.1.22> (Safari only)
+- SSH: legacy algorithm flags required -- see [HOWTO_campground_wifi_repeater_setup.md](Ubiquiti/HOWTO_campground_wifi_repeater_setup.md)
+- Docs: [HOWTO_campground_wifi_repeater_setup.md](Ubiquiti/HOWTO_campground_wifi_repeater_setup.md)
+
+### Trails End Mesh Antenna Registry (RF Scan + Google Maps 2026-07-10)
+
+**Zero Point Reference:** Welcome Antenna (MAC suffix :38)
+
+**Confirmed Antennas:**
+
+| Antenna              | MAC Suffix | Distance (ft) | Bearing (°) | Channels (5 GHz) | Status                            |
+|----------------------|------------|---------------|-------------|------------------|-----------------------------------|
+| Welcome Antenna      | :38        | 0             | --          | 36, 44           | ✅ Outdoor, primary                |
+| Barn North Antenna   | :C1        | 200           | 45          | 44               | ✅ Outdoor ridge, north roof       |
+| Barn Equipment Panel | :93        | 227           | 15          | 149              | ✅ Inside barn, north side, window |
+
+**Unconfirmed Candidate Locations:**
+
+| Site              | Distance (ft) | Bearing (°) | Status         | Notes                               |
+|-------------------|---------------|-------------|----------------|-------------------------------------|
+| Site 3            | 210           | 0           | ⚠️ Unconfirmed | Visible in RF scan, location TBD    |
+| Dirt Circus       | 657           | 135         | ⚠️ Unconfirmed | Visible in RF scan, location TBD    |
+| Pump House        | 1,392         | 270         | ⚠️ Unconfirmed | Visible in RF scan, location TBD    |
+| Barn Farm Antenna | --            | --          | ⚠️ Reserved    | Inside barn (south side), if exists |
+
+**PtP Link Candidate:** Site 3 ↔ Pump House (distance 1,254 ft, bearing ~260°)
+
+**Key Characteristics:**
+
+- **All APs are 5 GHz only** -- loco-bridge cannot connect to 2.4 GHz SSIDs (no firmware mode exists)
+- Barn is Faraday cage (metal exterior) except windows; Barn Equipment Panel (:93) penetrates via north window
+- **Siting loco-bridge:** Verify 5 GHz signal at candidate location using dual-band client (MacBook Air, MacBook Pro); do not chase 2.4 GHz signal
+- Barn dimensions: ~100 ft (N-S) × 75 ft (E-W)
+
+### PoE Injector
+
+- `poe-trails-end`: Ubiquiti POE-24-12W; at Trails End cone zone; powers loco-bridge

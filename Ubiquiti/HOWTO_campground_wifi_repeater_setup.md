@@ -192,7 +192,7 @@ Navigate to: **Wireless → Basic Wireless Settings**
 | SSID          | `Trails End Wifi` *(exactly as broadcast by Ubiquiti mesh)* |
 | CHANNEL WIDTH | **40 MHz** *(options: Auto, 20/40, 30, 10)*                 |
 
-**Firmware Note:** "Wireless Mode" setting is not exposed in this firmware (defaults to 802.11ac). "Frequency" setting replaced by "Control Frequency Scan List" (Advanced section) -- leave **Off** unless troubleshooting channel detection.
+**NanoStation Loco5AC is 5 GHz band only.** No firmware setting exposes band selection because the device cannot operate on 2.4 GHz under any configuration. "Wireless Mode" defaults to 802.11ac (5 GHz only). "Frequency" setting replaced by "Control Frequency Scan List" (Advanced section) -- leave **Off** unless troubleshooting channel detection.
 
 ### UI Settings: Wireless → Security
 
@@ -381,8 +381,17 @@ Walk the cone zone with your laptop running NetSpot:
 
 - Verify SSID spelling exactly matches (case-sensitive in some configs)
 - Verify WPA2 passphrase is correct
-- Check if Trails End Wifi is broadcasting on 5 GHz (not 2.4 GHz)
-- Try **WIRELESS MODE: 802.11ac + 802.11n** if stuck
+- **Verify the target SSID is broadcasting on 5 GHz.** Loco5AC cannot connect to 2.4 GHz SSIDs under any configuration. If only 2.4 GHz is available, this device cannot bridge that network.
+
+#### Why 5 GHz Only? Implications for Siting
+
+NanoStation Loco5AC is a **5 GHz single-band device** (802.11ac). There is no firmware mode, configuration option, or workaround to enable 2.4 GHz operation.
+
+**For site reconnaissance:**
+
+- Use dual-band clients (MacBook Air, MacBook Pro, iPhones) to scout candidate locations with NetSpot
+- Once a strong 5 GHz SSID is confirmed, loco-bridge can connect
+- **Never attempt to site loco-bridge by chasing 2.4 GHz signal strength** -- if the mesh has 2.4 GHz coverage but weak 5 GHz at your location, loco-bridge will not work there
 
 ### Signal is very weak (-70 dBm or worse)
 

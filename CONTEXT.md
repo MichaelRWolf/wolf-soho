@@ -28,6 +28,22 @@ ambiguous language. Read this file at the start of any network-related session.
 |---------------|------------------------------|--------------|
 | `loco-bridge` | Ubiquiti NanoStation Loco5AC | 192.168.1.22 |
 
+### Antenna Location Standard Names & Distances
+
+**Zero Point Reference:** Welcome Antenna (MAC suffix :38)
+
+| Antenna              | MAC Suffix | Distance (ft) | Bearing (°) | Status                                           |
+|----------------------|------------|---------------|-------------|--------------------------------------------------|
+| Welcome Antenna      | :38        | 0             | --          | ✅ Confirmed                                      |
+| Barn North Antenna   | :C1        | 200           | 45          | ✅ Confirmed (outdoor ridge, north roof edge)     |
+| Barn Equipment Panel | :93        | 227           | 15          | ✅ Confirmed (inside barn, north side, window)    |
+| Site 3               | TBD        | 210           | 0           | ⚠️ Unconfirmed                                   |
+| Dirt Circus          | TBD        | 657           | 135         | ⚠️ Unconfirmed                                   |
+| Pump House           | TBD        | 1,392         | 270         | ⚠️ Unconfirmed                                   |
+| Barn Farm Antenna    | TBD        | --            | --          | ⚠️ Reserved (inside barn, south side, if exists) |
+
+**PtP Candidate Link:** Site 3 ↔ Pump House (1,254 ft, bearing 260°)
+
 ## Computing Devices
 
 | Name             | Device                          |
