@@ -112,28 +112,21 @@
 - SSH: legacy algorithm flags required -- see [HOWTO_campground_wifi_repeater_setup.md](Ubiquiti/HOWTO_campground_wifi_repeater_setup.md)
 - Docs: [HOWTO_campground_wifi_repeater_setup.md](Ubiquiti/HOWTO_campground_wifi_repeater_setup.md)
 
-### Trails End Mesh Antenna Registry (RF Scan + Google Maps 2026-07-10)
+### Trails End Mesh Antenna Registry
 
-**Zero Point Reference:** Welcome Antenna (MAC suffix :38)
+**Authoritative Source:** [Trails_End/antenna_survey.md](../Trails_End/antenna_survey.md)
 
-**Confirmed Antennas:**
+**Quick Reference:**
 
-| Antenna              | MAC Suffix | Distance (ft) | Bearing (°) | Channels (5 GHz) | Status                            |
-|----------------------|------------|---------------|-------------|------------------|-----------------------------------|
-| Welcome Antenna      | :38        | 0             | --          | 36, 44           | ✅ Outdoor, primary                |
-| Barn North Antenna   | :C1        | 200           | 45          | 44               | ✅ Outdoor ridge, north roof       |
-| Barn Equipment Panel | :93        | 227           | 15          | 149              | ✅ Inside barn, north side, window |
+| Antenna              | MAC Suffix | Distance (ft) | Bearing (°) | Status                    |
+|----------------------|------------|---------------|-------------|---------------------------|
+| Welcome Antenna      | :38        | 0             | --          | ✅ Outdoor, primary        |
+| Barn North Antenna   | :C1        | 200           | 45          | ✅ Outdoor ridge           |
+| Barn Equipment Panel | :93        | 227           | 15          | ✅ Inside barn, north side |
 
-**Unconfirmed Candidate Locations:**
+**Unconfirmed:** Site 3 (210 ft, 0°), Dirt Circus (657 ft, 135°), Pump House (1,392 ft, 270°)
 
-| Site              | Distance (ft) | Bearing (°) | Status         | Notes                               |
-|-------------------|---------------|-------------|----------------|-------------------------------------|
-| Site 3            | 210           | 0           | ⚠️ Unconfirmed | Visible in RF scan, location TBD    |
-| Dirt Circus       | 657           | 135         | ⚠️ Unconfirmed | Visible in RF scan, location TBD    |
-| Pump House        | 1,392         | 270         | ⚠️ Unconfirmed | Visible in RF scan, location TBD    |
-| Barn Farm Antenna | --            | --          | ⚠️ Reserved    | Inside barn (south side), if exists |
-
-**PtP Link Candidate:** Site 3 ↔ Pump House (distance 1,254 ft, bearing ~260°)
+**PtP Link Candidate:** Site 3 ↔ Pump House (1,254 ft, bearing 260°)
 
 **Key Characteristics:**
 

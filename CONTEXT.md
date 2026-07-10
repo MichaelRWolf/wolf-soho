@@ -28,21 +28,26 @@ ambiguous language. Read this file at the start of any network-related session.
 |---------------|------------------------------|--------------|
 | `loco-bridge` | Ubiquiti NanoStation Loco5AC | 192.168.1.22 |
 
-### Antenna Location Standard Names & Distances
+### Antenna Survey & Location Registry
+
+**Authoritative Source:** [Trails_End/antenna_survey.md](Trails_End/antenna_survey.md)
 
 **Zero Point Reference:** Welcome Antenna (MAC suffix :38)
 
-| Antenna              | MAC Suffix | Distance (ft) | Bearing (°) | Status                                           |
-|----------------------|------------|---------------|-------------|--------------------------------------------------|
-| Welcome Antenna      | :38        | 0             | --          | ✅ Confirmed                                      |
-| Barn North Antenna   | :C1        | 200           | 45          | ✅ Confirmed (outdoor ridge, north roof edge)     |
-| Barn Equipment Panel | :93        | 227           | 15          | ✅ Confirmed (inside barn, north side, window)    |
-| Site 3               | TBD        | 210           | 0           | ⚠️ Unconfirmed                                   |
-| Dirt Circus          | TBD        | 657           | 135         | ⚠️ Unconfirmed                                   |
-| Pump House           | TBD        | 1,392         | 270         | ⚠️ Unconfirmed                                   |
-| Barn Farm Antenna    | TBD        | --            | --          | ⚠️ Reserved (inside barn, south side, if exists) |
+**Confirmed Antennas:**
 
-**PtP Candidate Link:** Site 3 ↔ Pump House (1,254 ft, bearing 260°)
+- Welcome Antenna (:38) -- 0 ft, primary outdoor reception (channels 36, 44)
+- Barn North Antenna (:C1) -- 200 ft, bearing 45° (outdoor ridge, north roof)
+- Barn Equipment Panel (:93) -- 227 ft, bearing 15° (inside barn, north window)
+
+**Unconfirmed Candidates (need field verification):**
+
+- Site 3 -- 210 ft, bearing 0°
+- Dirt Circus -- 657 ft, bearing 135°
+- Pump House -- 1,392 ft, bearing 270°
+- Barn Farm Antenna (reserved for south-side inside barn, if exists)
+
+**PtP Link Candidate:** Site 3 ↔ Pump House (1,254 ft, bearing 260°)
 
 ## Computing Devices
 
