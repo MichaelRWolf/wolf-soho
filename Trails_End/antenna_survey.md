@@ -45,23 +45,11 @@
 
 - **Dimensions:** ~100 ft (N-S) × 75 ft (E-W)
 - **Construction:** Metal exterior (Faraday cage effect)
-- **Windows:** North and south sides (signal penetration points)
-- **Effect on Signal:** Welcome Antenna (:38) broadcasts 5 GHz primary; Barn Equipment Panel (:93) penetrates via north window with reduced signal (-45 to -72 dBm variability due to window proximity and metal shielding)
+- **Windows:** North and West sides (signal penetration points)
+- **Garage Doors:** North and South sides (signal penetration points)
+- **Effect on Signal:** Barn Equipment Panel (:93) only detected inside the barn
 
 ### Bearing Convention
-
-Bearings are measured from Welcome Antenna in the standard compass convention:
-
-- 0° = North (N)
-- 45° = Northeast (NE)
-- 90° = East (E)
-- 135° = Southeast (SE)
-- 180° = South (S)
-- 225° = Southwest (SW)
-- 270° = West (W)
-- 315° = Northwest (NW)
-
----
 
 ## Siting Considerations for loco-bridge
 
@@ -80,9 +68,36 @@ Bearings are measured from Welcome Antenna in the standard compass convention:
 
 ---
 
+## Testing Ground-Level Coverage
+
+To verify which antenna actually reaches ground level at your loco-bridge location, use MAC locks to test individual APs:
+
+### Test 1: Welcome Antenna (:38)
+
+Connect loco-bridge to Trails End Crew with MAC lock to one of:
+
+- `7E:AC:B9:CA:36:38` (channels 36, 44)
+- `7E:AC:B9:CB:36:38` (channels 36, 44)
+
+**Measure at ground level:** Signal strength, stability, latency
+
+### Test 2: Barn North Antenna (:C1)
+
+Connect loco-bridge to Trails End Crew with MAC lock to one of:
+
+- `7E:AC:B9:CA:3B:C1` (channel 44)
+- `7E:AC:B9:CB:3B:C1` (channel 44)
+
+**Measure at ground level:** Signal strength, stability, latency
+
+**Compare results** to identify which antenna provides reliable coverage at your siting location (ground level, not elevated).
+
+---
+
 ## Next Steps
 
-1. **Site Visit:** Locate Site 3, Dirt Circus, Pump House antennas physically
-2. **MAC Mapping:** Confirm MAC addresses for each antenna found
-3. **PtP Verification:** If Site 3 ↔ Pump House PtP link is intended, verify both locations and confirm LoS
-4. **loco-bridge Siting:** Once locations confirmed, choose optimal 5 GHz AP target for loco-bridge connection
+1. **Ground-Level Testing:** Use MAC locks above to verify actual coverage at loco-bridge location
+2. **Site Visit:** Locate Site 3, Dirt Circus, Pump House antennas physically
+3. **MAC Mapping:** Confirm MAC addresses for each antenna found
+4. **PtP Verification:** If Site 3 ↔ Pump House PtP link is intended, verify both locations and confirm LoS
+5. **loco-bridge Siting:** Once locations confirmed, choose optimal 5 GHz AP target for loco-bridge connection
