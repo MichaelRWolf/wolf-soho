@@ -108,9 +108,61 @@ MacBook → USB-C Ethernet → PoE LAN (⚡) → PoE PoE (⇄) → NanoStation L
 
 ### Access the Device
 
-- **SSH:** `ssh admin@192.168.1.20`
-- **Web UI:** `http://192.168.1.20` (Safari only; Chrome blocks HTTP)
-- **Password:** *(See 1Password)*
+**SSH (during bench setup at factory default 192.168.1.20):**
+
+```bash
+ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 \
+    -o HostKeyAlgorithms=+ssh-rsa \
+    -o Ciphers=+aes128-cbc \
+    admin@192.168.1.20
+```
+
+**SSH (after deployment at configured IP 192.168.1.22):**
+
+```bash
+ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 \
+    -o HostKeyAlgorithms=+ssh-rsa \
+    -o Ciphers=+aes128-cbc \
+    admin@192.168.1.22
+```
+
+Or use SSH config alias: `ssh loco-bridge`
+
+**Web UI:**
+
+- URL: `http://192.168.1.20` (during bench setup, factory default)
+- URL: `http://192.168.1.22` (after deployment at configured IP)
+- Browser: Safari only (Chrome blocks HTTP)
+
+**Password:** `ubiquiti` (factory default; change after initial config)
+
+### Useful SSH Commands (loco-bridge)
+
+```bash
+# Show device info
+cat /etc/board.info
+
+# Show wireless config
+cat /tmp/system.cfg | grep wireless
+
+# Show network config
+cat /tmp/system.cfg | grep netconf
+
+# Check if "Trails End Wifi" is visible
+iwlist wlan0 scan | grep -i "trails"
+
+# Check signal strength (RSSI)
+cat /tmp/system.cfg | grep rssi
+
+# Backup config
+cat /tmp/system.cfg > loco-bridge-backup.cfg
+
+# Apply changes after editing
+cfgmtd -w -p /etc/
+
+# Reboot device
+reboot
+```
 
 ---
 
@@ -138,9 +190,9 @@ Navigate to: **Wireless → Basic Wireless Settings**
 | ACCESS POINT  | **Off** *(Off means Station mode, not AP)*                  |
 | PTP MODE      | **Off** *(using WiFi client mode, not PtP)*                 |
 | SSID          | `Trails End Wifi` *(exactly as broadcast by Ubiquiti mesh)* |
-| WIRELESS MODE | **802.11ac**                                                |
-| CHANNEL WIDTH | **40 MHz**                                                  |
-| FREQUENCY     | Auto *(or manual if Ubiquiti is on fixed channel)*          |
+| CHANNEL WIDTH | **40 MHz** *(options: Auto, 20/40, 30, 10)*                 |
+
+**Firmware Note:** "Wireless Mode" setting is not exposed in this firmware (defaults to 802.11ac). "Frequency" setting replaced by "Control Frequency Scan List" (Advanced section) -- leave **Off** unless troubleshooting channel detection.
 
 ### UI Settings: Wireless → Security
 
@@ -150,23 +202,32 @@ Navigate to: **Wireless → Security**
 
 The web UI does not expose an "Open" security option -- you must disable WPA2 via CLI first.
 
-#### Disable WPA2 via Telnet (Required for Open SSID)
+#### Disable WPA2 via SSH (Required for Open SSID)
 
-1. From your macOS terminal:
-
-   ```bash
-   telnet 192.168.1.22
-   ```
-
-2. Once connected (prompt: `BusyBox v1.00`), run either:
-
-   **sed (text replacement) -- confirmed for NanoStation Loco5AC**
+1. SSH into the device:
 
    ```bash
-   sed -i 's/aaa.1.wpa.mode=2/aaa.1.wpa.mode=0/g' /tmp/system.cfg
+   ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 \
+       -o HostKeyAlgorithms=+ssh-rsa \
+       -o Ciphers=+aes128-cbc \
+       admin@192.168.1.22
    ```
 
-   *(uci config tool not available on this model)*
+   Or via alias: `ssh loco-bridge`
+
+2. Check current security configuration:
+
+   ```bash
+   grep -i -E '\.(wpa|security|auth)' /tmp/system.cfg
+   ```
+
+   **Expected output:** `wireless.1.security.type=none` (already open/disabled)
+
+   If WPA is enabled (e.g., `wireless.1.security.type=wpa2`), disable it:
+
+   ```bash
+   sed -i 's/wireless.1.security.type=.*/wireless.1.security.type=none/g' /tmp/system.cfg
+   ```
 
 3. Reboot the device:
 
@@ -174,7 +235,7 @@ The web UI does not expose an "Open" security option -- you must disable WPA2 vi
    reboot
    ```
 
-4. Wait 30 seconds for boot, then return to web UI. SECURITY should now show **Open** option.
+4. Wait 30 seconds for boot. The web UI SECURITY setting should now allow **Open** mode.
 
 #### Configure Web UI After WPA2 Disabled
 
@@ -210,9 +271,11 @@ Navigate to: **Wireless** (may be under **Advanced** in some firmware versions)
 
 **Before starting:** Confirm you're using the `Ubiquiti-Setup` network location (System Settings → Network → Location dropdown shows `Ubiquiti-Setup`). This activates the Belkin USB-C LAN configuration.
 
+### Bench Validation Steps
+
 1. Power cycle the NanoStation
 2. Wait 30 seconds for boot
-3. SSH into `192.168.1.20` and check status:
+3. SSH into `192.168.1.20` (factory default, bench setup):
 
 ```bash
 ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 \
@@ -221,7 +284,7 @@ ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 \
     admin@192.168.1.20
 ```
 
-1. Once connected via SSH:
+1. Once connected via SSH, verify configuration:
 
 ```bash
 # Check device info
@@ -232,15 +295,31 @@ cat /tmp/system.cfg | grep wireless
 
 # Check if "Trails End Wifi" is visible
 iwlist wlan0 scan | grep -i "trails"
+
+# Check signal strength
+cat /tmp/system.cfg | grep rssi
 ```
 
-1. Via Web UI (**<http://192.168.1.20>**):
+1. Via Web UI (**<http://192.168.1.20>**, Safari only):
    - Go to **Main / Status**
    - **Wireless** section should show:
      - **Mode:** Station
      - **SSID:** Trails End Wifi
      - **Signal Strength:** visible (dBm, negative number)
      - **Link State:** Connected or Connecting
+
+### After Reconfiguration to 192.168.1.22
+
+Once loco-bridge is deployed and configured at static IP `192.168.1.22`, use:
+
+```bash
+ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 \
+    -o HostKeyAlgorithms=+ssh-rsa \
+    -o Ciphers=+aes128-cbc \
+    admin@192.168.1.22
+```
+
+Or via SSH config alias: `ssh loco-bridge`
 
 ---
 
