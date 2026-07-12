@@ -88,7 +88,7 @@ Loco5AC's 5-GHz-only limitation is *why* it doesn't work at Trails End. Welcome 
 | **PoE standard**           | 802.3af (15.4 W available)       | Passive PoE (12 W typical)                | Passive PoE (12 W typical)                |
 | **Cat5 distance (200 ft)** | ✓ Reliable (4.9 W headroom)      | ⚠ Marginal (voltage drop risk)            | ⚠ Marginal (voltage drop risk)            |
 | **Cat5 distance (300 ft)** | ✓ Reliable (standards-compliant) | ✗ Risky (passive voltage drop ~3-5V loss) | ✗ Risky (passive voltage drop ~3-5V loss) |
-| **Injector included**      | ✓ Yes                            | ✓ Yes (Gigabit Ethernet PoE Injector)     | ✓ Yes (POE-24-12W)                        |
+| **Injector included**      | ✓ Yes                            | ✓ Yes                                     | ✓ Yes                                     |
 
 **Verdict:**  
 
