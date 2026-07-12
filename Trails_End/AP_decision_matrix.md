@@ -215,10 +215,9 @@ Choosing Loco5AC at Trails End commits you to hoping Trails End staff adopt it i
 | **Device cost**                         | $70-180 (B&H sale: $69.99)      | $88-99                               | ~$100-120 (used, since discontinued)           |
 | **PoE injector**                        | Included                        | Included (Gigabit Ethernet PoE)      | ~$15-20 (may be included or extra)             |
 | **Mounting hardware**                   | Included                        | Included (Pole Mounting Hardware)    | ~$10-20 (usually extra)                        |
-| **Outdoor Cat5 cable**                  | ~$30-50 (any vendor)            | ~$30-50 (any vendor)                 | ~$30-50 (any vendor)                           |
 | **Learning time**                       | ~30 min (HTML web UI)           | ~2-4 hrs (RouterOS)                  | ~1-2 hrs (minimal setup)                       |
 | **Troubleshooting time (if it breaks)** | Low (standard WiFi tools apply) | Medium (RouterOS-specific debugging) | **High** (airMAX is proprietary; limited docs) |
-| **Total cost of ownership (1-year)**    | $100-230 + minimal overhead     | $118-150 + learning overhead         | $100-200 + **high troubleshooting risk**       |
+| **Total cost of ownership (1-year)**    | $70-180 + minimal overhead      | $88-99 + learning overhead           | $100-120 + **high troubleshooting risk**       |
 
 **Verdict:**  
 
