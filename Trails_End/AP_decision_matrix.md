@@ -88,7 +88,7 @@ Loco5AC's 5-GHz-only limitation is *why* it doesn't work at Trails End. Welcome 
 | **PoE standard**           | 802.3af (15.4 W available)       | Passive PoE (12 W typical)                | Passive PoE (12 W typical)                |
 | **Cat5 distance (200 ft)** | ✓ Reliable (4.9 W headroom)      | ⚠ Marginal (voltage drop risk)            | ⚠ Marginal (voltage drop risk)            |
 | **Cat5 distance (300 ft)** | ✓ Reliable (standards-compliant) | ✗ Risky (passive voltage drop ~3-5V loss) | ✗ Risky (passive voltage drop ~3-5V loss) |
-| **Injector included**      | ✓ Yes                            | ✗ Extra cost (~$15-20)                    | ✓ Yes (POE-24-12W)                        |
+| **Injector included**      | ✓ Yes                            | ✓ Yes (Gigabit Ethernet PoE Injector)     | ✓ Yes (POE-24-12W)                        |
 
 **Verdict:**  
 
@@ -214,21 +214,21 @@ Choosing Loco5AC at Trails End commits you to hoping Trails End staff adopt it i
 | Aspect                                  | TP-Link EAP225                  | MikroTik GrooveA                     | Ubiquiti Loco5AC                               |
 |-----------------------------------------|---------------------------------|--------------------------------------|------------------------------------------------|
 | **Device cost**                         | $70-180 (B&H sale: $69.99)      | $88-99                               | ~$100-120 (used, since discontinued)           |
-| **PoE injector**                        | Included                        | ~$15-20 extra                        | ~$15-20 (may be included or extra)             |
-| **Mounting hardware**                   | Included                        | ~$15-30 extra                        | ~$10-20 (usually extra)                        |
+| **PoE injector**                        | Included                        | Included (Gigabit Ethernet PoE)      | ~$15-20 (may be included or extra)             |
+| **Mounting hardware**                   | Included                        | Included (Pole Mounting Hardware)    | ~$10-20 (usually extra)                        |
 | **Outdoor Cat5 cable**                  | ~$30-50 (any vendor)            | ~$30-50 (any vendor)                 | ~$30-50 (any vendor)                           |
 | **Learning time**                       | ~30 min (HTML web UI)           | ~2-4 hrs (RouterOS)                  | ~1-2 hrs (minimal setup)                       |
 | **Troubleshooting time (if it breaks)** | Low (standard WiFi tools apply) | Medium (RouterOS-specific debugging) | **High** (airMAX is proprietary; limited docs) |
-| **Total cost of ownership (1-year)**    | $100-250 + minimal overhead     | $130-200 + learning overhead         | $100-200 + **high troubleshooting risk**       |
+| **Total cost of ownership (1-year)**    | $100-230 + minimal overhead     | $118-150 + learning overhead         | $100-200 + **high troubleshooting risk**       |
 
 **Verdict:**  
 
-- **EAP225:** Best total cost of ownership. Setup is fast; troubleshooting uses standard tools.
-- **GrooveA:** Middle ground. Hardware is cheaper; learning curve adds cost.
-- **Loco5AC:** Lowest hardware cost, but highest long-term risk. If airMAX doesn't work at Trails End (likely), you're stuck with an expensive paperweight or forced fallback to standard WiFi mode (losing proprietary benefits).
+- **EAP225:** Best total cost of ownership (accounting for learning curve). Setup is fast; troubleshooting uses standard WiFi tools (portable knowledge).
+- **GrooveA:** Competitive hardware cost ($88-99 + included PoE/mounting); learning curve and RouterOS lock-in add long-term overhead.
+- **Loco5AC:** Lowest upfront cost, but highest long-term risk. If airMAX doesn't work at Trails End (likely), you're stuck with an expensive paperweight or forced fallback to standard WiFi mode (losing proprietary benefits).
 
 **Implication:**  
-Loco5AC *appears* to be a bargain (you already own one). In reality, the cost of troubleshooting a failed Loco5AC deployment at Trails End--or discovering it can't work without Ubiquiti mesh adoption--far exceeds the EAP225 purchase price. EAP225 is the economically rational choice.
+GrooveA's included PoE injector and mounting hardware close the cost gap ($88-99 device is cheaper than EAP225's $70-180 range, but includes accessories). However, learning RouterOS adds 2-4 hours of friction vs EAP225's 30 min setup. If you value your time at >$10/hr, EAP225's lower learning curve pays for itself. Loco5AC *appears* to be a bargain (you already own one), but troubleshooting a failed airMAX deployment far exceeds the EAP225 purchase price.
 
 ---
 
