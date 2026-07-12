@@ -337,6 +337,52 @@ Phase 1 Assessment
 
 ---
 
-**Last Updated:** 2026-07-12 (Post-bike-ride summary)  
+---
+
+## Equipment Research -- TP-Link EAP225-Outdoor vs MikroTik GrooveA 52 ac
+
+**Updated:** 2026-07-12 (B&H copypaste specs)
+
+See **Trails_End/2026_summer_log.md** for full comparison table.
+
+### Quick Take
+
+**TP-Link EAP225-Outdoor** (recommended for Strategy C):
+
+- IP65 (vs GrooveA IP54)
+- 15.4W PoE (vs GrooveA 5W) → better for long Cat5 runs
+- Modular antennas → directional pointing at Trails End Crew mesh
+- Omada management (familiar)
+- AP mode only (limitation if router functions needed)
+- Price: ~$70-180 depending on sale/retailer
+
+**MikroTik GrooveA 52 ac** (backup option):
+
+- Lower cost ($88-99)
+- Full RouterOS bridge/client/routing modes
+- IP54 (adequate for most deployment)
+- Passive PoE only (tight power budget)
+- Fixed omni antenna (less flexible)
+
+### Plan
+
+**Phase 2C Strategy (hot-zone router):**
+
+1. Acquire EAP225-Outdoor and identify hot zone with strong 5 GHz signal
+2. Position modular antennas toward Trails End Crew AP; run Cat5 backhaul to Beryl
+3. Test Omada controller transparent bridge mode
+4. Measure sustained throughput (target: ≥5 Mbps down, ≥2 Mbps up)
+5. If EAP225 insufficient, trial GrooveA 52 ac as comparison
+
+**Procurement:**
+
+- TP-Link EAP225-Outdoor (1x) -- $70-180
+- Outdoor PoE Cat5 cable, armored, 100-300 ft run -- ~$30-50
+- Weatherproof RJ45 connectors -- ~$10
+- Mounting hardware (pole, wall bracket) -- included or ~$20
+
+---
+
+**Last Updated:** 2026-07-12 (Equipment comparison added)  
 **Owner:** Michael R. Wolf  
-**Status:** Evaluating MikroTik GrooveA 52 ac + TP-Link options; decision pending trial/comparison
+**Status:** Ready to trial TP-Link EAP225-Outdoor for Strategy C hot-zone deployment
