@@ -124,22 +124,23 @@ At Trails End's Welcome Antenna or Barn ridge (exposed, winter temps -10°C to -
 
 ### 6. Antennas (Included & Extendable)
 
-| Aspect                             | TP-Link EAP225                                   | MikroTik GrooveA               | Ubiquiti Loco5AC                           |
-|------------------------------------|--------------------------------------------------|--------------------------------|--------------------------------------------|
-| **Included antenna type**          | 2x external detachable, 3-4 dBi omni             | 1x fixed omni (6/8 dBi)        | 1x fixed omni (8 dBi 5 GHz, 9 dBi 2.4 GHz) |
-| **Connector type**                 | RP-SMA (standard, widely available)              | N/A (internal)                 | N/A (internal)                             |
-| **Upgrade path**                   | Replace with Yagi, directional antenna (~$15-30) | Cannot replace (sealed device) | Cannot replace (sealed device)             |
-| **Directionality tuning**          | Aim antennas toward Crew mesh AP                 | Mount device compass direction | Mount device compass direction             |
-| **Gain improvement (if upgraded)** | 3-4 dBi → 6-8 dBi (Yagi) possible                | Fixed 6/8 dBi (no upgrade)     | Fixed 8/9 dBi (no upgrade)                 |
+| Aspect                             | TP-Link EAP225                                      | MikroTik GrooveA                                   | Ubiquiti Loco5AC                         |
+|------------------------------------|-----------------------------------------------------|----------------------------------------------------|------------------------------------------|
+| **Included antenna type**          | 2x external pigtail, 3-4 dBi omni                   | 1x body-mounted external, 6/8 dBi omni             | 1x body-mounted (sealed), 8/9 dBi omni   |
+| **Connector type**                 | RP-SMA (standard, ubiquitous replacements)          | N-type (less common, limited options)              | Fixed; no replacement possible           |
+| **Antenna positioning**            | Independent cables; aim each antenna separately     | Single antenna; orientation tied to device body    | Single antenna; orientation tied to body |
+| **Upgrade path**                   | Swap to Yagi, directional (~$15-30, standard RPSMA) | Replace with N-type antenna (specialty item, $50+) | Cannot replace; sealed device            |
+| **MIMO capability**                | 2x antenna MIMO diversity                           | Single antenna (no MIMO)                           | Single antenna (no MIMO)                 |
+| **Gain improvement (if upgraded)** | 3-4 dBi → 6-8 dBi (Yagi) easily available           | 6/8 dBi → 9-12 dBi (Yagi N-type rare, costly)      | Fixed 8/9 dBi (no upgrade)               |
 
 **Verdict:**  
 
-- **EAP225:** Best flexibility. External detachable antennas; upgrade path exists.
-- **GrooveA:** Fixed antenna; no upgrade. Compass orientation is only tuning lever.
-- **Loco5AC:** Fixed antenna; no upgrade. Same limitation as GrooveA.
+- **EAP225:** Best flexibility. Pigtail antennas on standard RP-SMA; cheap, easy upgrade. Dual antennas = MIMO diversity.
+- **GrooveA:** Moderate flexibility. Body-mounted antenna detachable but N-type connector limits options. Single antenna = no MIMO.
+- **Loco5AC:** No flexibility. Body-mounted and sealed; no replacement path.
 
 **Implication:**  
-If hot-zone Crew mesh signal is weak from mounting location, EAP225 lets you swap to directional antenna without replacing device. Loco5AC and GrooveA force you to relocate the entire device or accept weak signal. Flexibility matters in real deployments.
+EAP225's pigtail design (cables attached to device) lets you position antennas away from device, aim at Crew mesh AP without moving whole unit. You can also upgrade to directional antenna for $15-30. GrooveA's body-mount means device orientation controls antenna direction--poor azimuth alignment limits options. If you need N-type replacement antennas, they're specialty ($50+) vs ubiquitous RP-SMA ($15-30). Flexibility and economics favor EAP225.
 
 ---
 
