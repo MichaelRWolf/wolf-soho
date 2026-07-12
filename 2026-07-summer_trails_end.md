@@ -301,6 +301,42 @@ Phase 1 Assessment
 
 ---
 
-**Last Updated:** 2026-07-11 (Saturday afternoon, starting fresh after frustration pause)  
+## Learned (2026-07-11)
+
+- **Trails End uplink is unstable:** 0-6.4 Mbps variance within 30-minute window; ISP path hopping between multiple carriers/routes (Ontario, Ohio, Michigan)
+- **Local WiFi optimization won't fix upstream instability:** Repeater/bridge/hot-zone router all downstream of campground uplink problem
+- **Cheapo repeater ($20) works:** Successfully repeated "Trails End Wifi" as "Trails End Wifi-Site 1"; iPhone connected; MacBook can connect via "Other Networks" (not manual entry)
+- **MacBook WiFi selector limitation:** Many devices don't show in macOS WiFi menu but ARE discoverable via network scans and "Other Networks" picker
+- **loco-bridge maintenance mode (Repeater-XXXXXX) is viable 10-minute config path:** No bench setup, USB dongle, or second computer needed; iPhone access only
+- **Ubiquiti airMAX and mesh protocols create lock-in:** NanoStation Loco5AC (loco-bridge, loco-ap, loco-station) + UAP-AC-M-US require Ubiquiti controller adoption or cannot interoperate with standard WiFi APs
+- **Keweenaw County has zero cellular coverage forever:** Nighthawk M1 is useless; all infrastructure must be WiFi-based
+
+## Decided (2026-07-11)
+
+**Decision: No single-band devices. No vendor-proprietary protocols.**
+
+**Ruling out:**
+
+- **NanoStation Loco5AC** (loco-bridge, loco-ap, loco-station) -- 5 GHz only + airMAX proprietary
+- **NanoStation M5 Loco** (airMAX) -- 5 GHz only + airMAX proprietary
+- **UAP-AC-M-US** (wolfden-mesh) -- Requires Ubiquiti mesh controller adoption; cannot operate standalone without admin access to Trails End mesh
+- **TP-Link CPE210** -- 2.4 GHz only
+- **Cheapo repeater** (interim only) -- Low throughput (halved), repeater architecture fragile
+
+**Viable candidates (dual-band, standard WiFi):**
+
+- **MikroTik GrooveA 52 ac** -- WiFi 5 (802.11ac), dual-band (2.4 + 5 GHz), standard WiFi client/AP/bridge, RouterOS (powerful but learning curve)
+- **Awaiting:** TP-Link and other dual-band outdoor AP/bridge options
+
+**Rationale:** At Trails End, must use devices that can access standard WiFi on both bands. Cannot rely on Ubiquiti-only frequencies or proprietary protocols (airMAX, mesh adoption) because:
+
+1. Trails End mesh is managed by staff; adoption not guaranteed
+2. Standalone Ubiquiti modes don't work (documented in `device_modes.md`)
+3. Need vendor-independent solution; can't be locked to Ubiquiti ecosystem
+4. Single-band (5 GHz only) exposes ground-level coverage gap; dual-band provides fallback
+
+---
+
+**Last Updated:** 2026-07-12 (Post-bike-ride summary)  
 **Owner:** Michael R. Wolf  
-**Status:** Planning phase; awaiting Phase 1 assessment results
+**Status:** Evaluating MikroTik GrooveA 52 ac + TP-Link options; decision pending trial/comparison
