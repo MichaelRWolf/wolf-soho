@@ -103,22 +103,21 @@ For 200+ ft backhaul (hot zone to RV), passive PoE becomes unreliable. EAP225's 
 
 ### 5. IP Rating (Weatherproofing)
 
-| Aspect                     | TP-Link EAP225                         | MikroTik GrooveA                       | Ubiquiti Loco5AC                       |
-|----------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
-| **IP rating**              | IP65 (dust-tight, water-jet resistant) | IP54 (splash-resistant)                | IP54 (splash-resistant)                |
-| **What it means**          | Direct water spray OK (garden hose)    | Rain/splash OK; prolonged wet is risky | Rain/splash OK; prolonged wet is risky |
-| **Operating temp range**   | -30°C to +70°C                         | -20°C to +60°C                         | -10°C to +55°C                         |
-| **Keweenaw County winter** | ✓ Suitable                             | ✓ Adequate                             | ⚠ Marginal (-10°C min)                 |
-| **Connector sealing**      | ✓ Sealed RJ45 & antenna                | ✓ Sealed antenna                       | ⚠ Standard connectors                  |
+| Aspect                 | TP-Link EAP225                         | MikroTik GrooveA        | Ubiquiti Loco5AC        |
+|------------------------|----------------------------------------|-------------------------|-------------------------|
+| **IP rating**          | IP65 (dust-tight, water-jet resistant) | IP54 (splash-resistant) | IP54 (splash-resistant) |
+| **What it means**      | Direct water spray OK (garden hose)    | Rain/splash OK          | Rain/splash OK          |
+| **Seasonal operation** | Not relevant (migrate before extremes) | Not relevant (migrate)  | Not relevant (migrate)  |
+| **Connector sealing**  | ✓ Sealed RJ45 & antenna                | ✓ Sealed antenna        | ⚠ Standard connectors   |
 
 **Verdict:**  
 
-- **EAP225:** Best weatherproofing. Designed for outdoor mounting.
-- **GrooveA:** Adequate for most outdoor use; lower margin in harsh conditions.
-- **Loco5AC:** Adequate; slightly narrower temp range.
+- **EAP225:** Best weatherproofing (IP65 = dust-tight, direct spray resistant).
+- **GrooveA:** Adequate weatherproofing (IP54 = rain/splash resistant).
+- **Loco5AC:** Adequate weatherproofing (IP54).
 
 **Implication:**  
-At Trails End's Welcome Antenna or Barn ridge (exposed, winter temps -10°C to -30°C), EAP225's IP65 and wider temp range provide confidence. Loco5AC's -10°C min is a concern for December-February.
+Seasonal migration means extreme temperature ranges don't matter. Focus: rain/spray resistance during spring/fall shoulder seasons and summer. EAP225's IP65 handles direct water spray (heavy rain, nearby irrigation); GrooveA and Loco5AC's IP54 handle rain/splash but are riskier if mounting location is exposed to direct runoff.
 
 ---
 
