@@ -84,7 +84,7 @@ Loco5AC's 5-GHz-only limitation is *why* it doesn't work at Trails End. Welcome 
 
 | Aspect                     | TP-Link EAP225                   | MikroTik GrooveA                          | Ubiquiti Loco5AC                          |
 |----------------------------|----------------------------------|-------------------------------------------|-------------------------------------------|
-| **Power draw**             | 10.5 W                           | ~5 W                                      | ~8 W                                      |
+| **Power draw**             | ~10.5 W                          | ~5 W                                      | ~8 W                                      |
 | **PoE standard**           | 802.3af (15.4 W available)       | Passive PoE (12 W typical)                | Passive PoE (12 W typical)                |
 | **Cat5 distance (200 ft)** | ✓ Reliable (4.9 W headroom)      | ⚠ Marginal (voltage drop risk)            | ⚠ Marginal (voltage drop risk)            |
 | **Cat5 distance (300 ft)** | ✓ Reliable (standards-compliant) | ✗ Risky (passive voltage drop ~3-5V loss) | ✗ Risky (passive voltage drop ~3-5V loss) |
@@ -103,12 +103,12 @@ For 200+ ft backhaul (hot zone to RV), passive PoE becomes unreliable. EAP225's 
 
 ### 5. IP Rating (Weatherproofing)
 
-| Aspect                 | TP-Link EAP225                         | MikroTik GrooveA        | Ubiquiti Loco5AC        |
-|------------------------|----------------------------------------|-------------------------|-------------------------|
-| **IP rating**          | IP65 (dust-tight, water-jet resistant) | IP54 (splash-resistant) | IP54 (splash-resistant) |
-| **What it means**      | Direct water spray OK (garden hose)    | Rain/splash OK          | Rain/splash OK          |
-| **Seasonal operation** | Not relevant (migrate before extremes) | Not relevant (migrate)  | Not relevant (migrate)  |
-| **Connector sealing**  | ✓ Sealed RJ45 & antenna                | ✓ Sealed antenna        | ⚠ Standard connectors   |
+| Aspect                 | TP-Link EAP225                      | MikroTik GrooveA        | Ubiquiti Loco5AC        |
+|------------------------|-------------------------------------|-------------------------|-------------------------|
+| **IP rating**          | IP65 (dust-tight, direct spray)     | IP54 (splash-resistant) | IP54 (splash-resistant) |
+| **What it means**      | Direct water spray OK (garden hose) | Rain/splash OK          | Rain/splash OK          |
+| **Seasonal operation** | Not relevant (migrate)              | Not relevant (migrate)  | Not relevant (migrate)  |
+| **Connector sealing**  | ✓ Sealed RJ45 & antenna             | ✓ Sealed antenna        | ⚠ Standard connectors   |
 
 **Verdict:**  
 
@@ -123,14 +123,14 @@ Seasonal migration means extreme temperature ranges don't matter. Focus: rain/sp
 
 ### 6. Antennas (Included & Extendable)
 
-| Aspect                             | TP-Link EAP225                                      | MikroTik GrooveA                                   | Ubiquiti Loco5AC                         |
-|------------------------------------|-----------------------------------------------------|----------------------------------------------------|------------------------------------------|
-| **Included antenna type**          | 2x external pigtail, 3-4 dBi omni                   | 1x body-mounted external, 6/8 dBi omni             | 1x body-mounted (sealed), 8/9 dBi omni   |
-| **Connector type**                 | RP-SMA (standard, ubiquitous replacements)          | N-type (less common, limited options)              | Fixed; no replacement possible           |
-| **Antenna positioning**            | Independent cables; aim each antenna separately     | Single antenna; orientation tied to device body    | Single antenna; orientation tied to body |
-| **Upgrade path**                   | Swap to Yagi, directional (~$15-30, standard RPSMA) | Replace with N-type antenna (specialty item, $50+) | Cannot replace; sealed device            |
-| **MIMO capability**                | 2x antenna MIMO diversity                           | Single antenna (no MIMO)                           | Single antenna (no MIMO)                 |
-| **Gain improvement (if upgraded)** | 3-4 dBi → 6-8 dBi (Yagi) easily available           | 6/8 dBi → 9-12 dBi (Yagi N-type rare, costly)      | Fixed 8/9 dBi (no upgrade)               |
+| Aspect                             | TP-Link EAP225                                      | MikroTik GrooveA                                   | Ubiquiti Loco5AC                                |
+|------------------------------------|-----------------------------------------------------|----------------------------------------------------|-------------------------------------------------|
+| **Included antenna type**          | 2x external pigtail, 3-4 dBi omni                   | 1x body-mounted external, 6/8 dBi omni             | 1x body-mounted (sealed), 8/9 dBi omni          |
+| **Connector type**                 | RP-SMA (standard, ubiquitous replacements)          | N-type (less common, limited options)              | Fixed; no replacement possible                  |
+| **Antenna positioning**            | Independent cables; aim each antenna separately     | Single antenna; orientation tied to device body    | Single antenna; orientation tied to device body |
+| **Upgrade path**                   | Swap to Yagi, directional (~$15-30, standard RPSMA) | Replace with N-type antenna (specialty item, $50+) | Cannot replace; sealed device                   |
+| **MIMO capability**                | 2x antenna MIMO diversity                           | Single antenna (no MIMO)                           | Single antenna (no MIMO)                        |
+| **Gain improvement (if upgraded)** | 3-4 dBi → 6-8 dBi (Yagi) easily available           | 6/8 dBi → 9-12 dBi (Yagi N-type rare, costly)      | Fixed 8/9 dBi (no upgrade)                      |
 
 **Verdict:**  
 
@@ -239,7 +239,7 @@ GrooveA's included PoE injector and mounting hardware close the cost gap ($88-99
 | **Ease of Use**                                | ✓ Web UI                | ⚠ RouterOS               | ✗ Limited docs           | EAP225           |
 | **Dual-Band**                                  | ✓ Simultaneous          | ⚠ Selectable             | ✗ 5 GHz only             | EAP225           |
 | **PoE (200+ ft)**                              | ✓ 802.3af (15.4W)       | ⚠ Passive (voltage drop) | ⚠ Passive (voltage drop) | EAP225           |
-| **IP Rating**                                  | ✓ IP65                  | ✓ IP54                   | ⚠ IP54                   | EAP225           |
+| **IP Rating**                                  | ✓ IP65                  | ✓ IP54                   | ✓ IP54                   | EAP225           |
 | **Antennas (upgradeable)**                     | ✓ Detachable            | ✗ Fixed                  | ✗ Fixed                  | EAP225           |
 | **Operating Modes at Trails End**              | ✓ All work              | ✓ All work (RouterOS)    | ✗ Proprietary issue      | EAP225 / GrooveA |
 | **Technical Knowledge (transferable)**         | ✓ WiFi portable         | ⚠ MikroTik-specific      | ✗ airMAX dead-end        | EAP225           |
