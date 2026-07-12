@@ -147,12 +147,12 @@ EAP225's pigtail design (cables attached to device) lets you position antennas a
 
 **Scenario:** Hot-zone device positioned 100-200 ft from Welcome Antenna; must bridge Crew mesh (5 GHz client connection) to Beryl (via Cat5 backhaul) while broadcasting WiFi to RV interior.
 
-| Mode                                   | TP-Link EAP225                            | MikroTik GrooveA                     | Ubiquiti Loco5AC                                                                       |
-|----------------------------------------|-------------------------------------------|--------------------------------------|----------------------------------------------------------------------------------------|
-| **Client mode (connect to Crew mesh)** | ✓ Connect to Crew mesh SSID (any band)    | ✓ Connect to Crew mesh (802.11ac)    | ✓ *Only if* Crew mesh has Ubiquiti AP in mesh; cannot directly connect to generic WiFi |
-| **AP mode (broadcast to RV)**          | ✓ Broadcast 2.4 + 5 GHz to Beryl, clients | ✓ Broadcast 1 band to Beryl, clients | ✓ airMAX mode (Ubiquiti only) or standard SSID (fallback)                              |
-| **Bridge mode (transparent backhaul)** | ✓ Yes (standard 802.11ac bridge)          | ✓ Yes (RouterOS bridge)              | ⚠ Partial (requires Ubiquiti mesh controller)                                          |
-| **Remote troubleshooting**             | ✓ Web UI via SSH/HTTPS tunnel from RV     | ✓ Winbox SSH from RV                 | ✗ Minimal; telnet only if network already up                                           |
+| Mode                                   | TP-Link EAP225                             | MikroTik GrooveA                           | Ubiquiti Loco5AC                                                                       |
+|----------------------------------------|--------------------------------------------|--------------------------------------------|----------------------------------------------------------------------------------------|
+| **Client mode (connect to Crew mesh)** | ✓ Connect to Crew mesh (802.11ac standard) | ✓ Connect to Crew mesh (802.11ac standard) | ✗ *Only if* Crew mesh has Ubiquiti AP in mesh; cannot directly connect to generic WiFi |
+| **AP mode (broadcast to RV)**          | ✓ Broadcast 2.4 + 5 GHz to Beryl, clients  | ✓ Broadcast 1 band to Beryl, clients       | ✓ airMAX mode (Ubiquiti only) or standard SSID (fallback)                              |
+| **Bridge mode (transparent backhaul)** | ✓ Yes (standard 802.11ac bridge)           | ✓ Yes (RouterOS bridge)                    | ⚠ Partial (requires Ubiquiti mesh controller)                                          |
+| **Remote troubleshooting**             | ✓ Web UI via SSH/HTTPS tunnel from RV      | ✓ Winbox SSH from RV                       | ✗ Minimal; telnet only if network already up                                           |
 
 **Verdict:**  
 
