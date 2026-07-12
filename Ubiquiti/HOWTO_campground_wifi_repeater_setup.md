@@ -4,6 +4,34 @@ Bridges "Trails End Wifi" from the mesh cone zone back to RV via Cat5 + Beryl lo
 
 ---
 
+## Maintenance Mode (Recommended Path -- No Bench Setup Needed)
+
+**After rebooting loco-bridge, it broadcasts a temporary maintenance SSID for ~8 hours.**
+
+This is the **fastest way to configure** without bench setup, USB-Ethernet dongle, or second computer.
+
+### Steps
+
+1. **Power cycle loco-bridge** (POE injector or web UI reboot)
+2. **Wait 60 seconds** for boot
+3. **Scan for SSID:** Look for `Repeater-XXXXXX` (last 6 chars = MAC)
+   - Example: `Repeater-2827f1`
+   - Signal: -28 to -35 dBm typical
+   - **Note:** May not show in macOS WiFi selector; visible in network scans
+4. **Connect from iPhone** (recommended; macOS may not see it)
+   - No password; open network
+   - Auto-redirect to setup page (or visit `192.168.11.1`)
+5. **Configure:**
+   - Select source AP: **`Trails End Wifi`**
+   - Enter password if needed
+   - Rename rebroadcast SSID (optional): e.g., `Trails End Wifi-Cone`
+   - Click FINISH
+6. **Device reboots.** Maintenance SSID disappears; new SSID appears within 60 seconds.
+
+**That's it.** No Cat5 cables, no dongle, no bench. Done in 10 minutes on your phone.
+
+---
+
 ## Overview
 
 **Topology:**
@@ -12,7 +40,7 @@ Bridges "Trails End Wifi" from the mesh cone zone back to RV via Cat5 + Beryl lo
 Ubiquiti Mesh (20 ft up, ~100 ft away)
         ↓ (WiFi signal into cone zone)
         ↓ 
-NanoStation Loco5AC [Station mode, Bridge]
+NanoStation Loco5AC [Station mode]
         ↓ (PoE-powered, Cat5 100 ft back to RV)
         ↓
 Beryl [in RV]

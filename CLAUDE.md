@@ -146,6 +146,14 @@ Project provides tools for managing a fleet of git repos across multiple machine
 - **No .org files**: Pre-commit hook forbids org-mode files (3 already committed; do not add more)
 - **Ligature/smartquote/dash**: Auto-normalized on commit (texthooks)
 
+## Critical Constraint: Keweenaw County (Copper Harbor) -- Zero Cellular Coverage
+
+**Keweenaw County has NO cellular coverage. NO LTE, NO 4G, NO emergency cell service. This is permanent.**
+
+All internet at Trails End must be WiFi-based (Trails End Crew mesh, Beryl bridge, or PtP links). **Do NOT plan infrastructure around cellular hotspots or cell modems.** Devices like Netgear Nighthawk M1 are useless in Copper Harbor.
+
+Infrastructure decisions must assume: WiFi-only, no cellular fallback, no mobile internet ever.
+
 ## Common Gotchas
 
 1. **Pre-commit hook: markdown-table-formatter requires npm locally**. If `npx markdown-table-formatter` fails, install Node.js and re-run.
@@ -153,6 +161,7 @@ Project provides tools for managing a fleet of git repos across multiple machine
 3. **Device names in CONTEXT.md are the source of truth.** Don't create aliases or shorthand -- use canonical names everywhere.
 4. **beryl router is GL.iNet, not Ubiquiti.** It runs OpenWrt and uses UCI, not Ubiquiti's web UI. See GL-iNet/beryl-cheat-sheet.md.
 5. **Time Machine exclusion tests require Perl prove framework.** `make verify_TM_exclusions` checks symlink resolution for TimeMachine/ entries.
+6. **Keweenaw County has ZERO cell coverage.** Never assume cellular internet; it will never be available in Copper Harbor. All infrastructure must be WiFi-based.
 
 ## When to Ask About
 
