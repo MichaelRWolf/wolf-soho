@@ -135,6 +135,27 @@
 - **Siting loco-bridge:** Verify 5 GHz signal at candidate location using dual-band client (MacBook Air, MacBook Pro); do not chase 2.4 GHz signal
 - Barn dimensions: ~100 ft (N-S) × 75 ft (E-W)
 
+### `eap225-outdoor` -- TP-Link EAP225-Outdoor Wireless AC1200
+
+- Model: EAP225-Outdoor
+- Role: Outdoor AP for Strategy C hot-zone deployment
+- Power: 15.4W PoE (passive or active)
+- Band: Dual-band (2.4 GHz + 5 GHz)
+- Standard: WiFi 5 (802.11ac)
+- Rating: IP65 (weather-sealed)
+- Antenna: Modular (directional pointing toward Trails End Crew mesh)
+- Purchased: 2026-07-13 (B&H order #1130629306)
+- Expected delivery: 2026-07-15
+- Status: On order
+
+### Surge Protectors (Trails End)
+
+- `surge-protector-01`, `surge-protector-02`: Ubiquiti Outdoor Ethernet Surge Protector (10kA, ETH-SP-G2)
+- Role: Protect outdoor Cat5 backhaul and device inputs from lightning strikes
+- Purchased: 2026-07-13 (B&H order #1130629306, qty 2)
+- Expected delivery: 2026-07-15
+- Status: On order
+
 ### PoE Injector
 
 - `poe-trails-end`: Ubiquiti POE-24-12W; at Trails End cone zone; powers loco-bridge

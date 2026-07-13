@@ -24,9 +24,12 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Network Infrastructure -- Trails End Campground (Summer 2026)
 
-| Name          | Device                       | IP (Static)  |
-|---------------|------------------------------|--------------|
-| `loco-bridge` | Ubiquiti NanoStation Loco5AC | 192.168.1.22 |
+| Name                 | Device                                           | IP (Static)  |
+|----------------------|--------------------------------------------------|--------------|
+| `loco-bridge`        | Ubiquiti NanoStation Loco5AC                     | 192.168.1.22 |
+| `eap225-outdoor`     | TP-Link EAP225-Outdoor Wireless AC1200           |              |
+| `surge-protector-01` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |              |
+| `surge-protector-02` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |              |
 
 ### Antenna Survey & Location Registry
 

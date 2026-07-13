@@ -376,13 +376,14 @@ See **Trails_End/2026_summer_log.md** for full comparison table.
 
 **Procurement:**
 
-- TP-Link EAP225-Outdoor (1x) -- $70-180
+- TP-Link EAP225-Outdoor (1x) -- **ORDERED 2026-07-13** (B&H order #1130629306; expected 2026-07-15; $69.99)
+- Ubiquiti Outdoor Ethernet Surge Protector (2x) -- **ORDERED 2026-07-13** (B&H order #1130629306; expected 2026-07-15; $12.50 each)
 - Outdoor PoE Cat5 cable, armored, 100-300 ft run -- ~$30-50
 - Weatherproof RJ45 connectors -- ~$10
 - Mounting hardware (pole, wall bracket) -- included or ~$20
 
 ---
 
-**Last Updated:** 2026-07-12 (Equipment comparison added)  
+**Last Updated:** 2026-07-13 (EAP225-Outdoor + surge protectors ordered from B&H)  
 **Owner:** Michael R. Wolf  
-**Status:** Ready to trial TP-Link EAP225-Outdoor for Strategy C hot-zone deployment
+**Status:** Equipment on order; expected delivery 2026-07-15. Next: unbox and field-test at hot zone.
