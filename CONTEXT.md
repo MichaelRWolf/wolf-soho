@@ -24,12 +24,12 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Network Infrastructure -- Trails End Campground (Summer 2026)
 
-| Name                 | Device                                           | IP (Static)  |
-|----------------------|--------------------------------------------------|--------------|
-| `loco-bridge`        | Ubiquiti NanoStation Loco5AC                     | 192.168.1.22 |
-| `eap225-outdoor`     | TP-Link EAP225-Outdoor Wireless AC1200           |              |
-| `surge-protector-01` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |              |
-| `surge-protector-02` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |              |
+| Name                 | Device                                           | IP (Static)   |
+|----------------------|--------------------------------------------------|---------------|
+| `loco-bridge`        | Ubiquiti NanoStation Loco5AC                     | 192.168.1.22  |
+| `eap225-outdoor`     | TP-Link EAP225-Outdoor Wireless AC1200           | 192.168.8.130 |
+| `surge-protector-01` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |               |
+| `surge-protector-02` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |               |
 
 ### Antenna Survey & Location Registry
 
@@ -80,17 +80,17 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## SSIDs
 
-| Canonical name             | Actual SSID                | Device                                | Band   | (GHz)   |
-|----------------------------|----------------------------|---------------------------------------|--------|---------|
-| `running-wolf-router`      | Running Wolf Router        | beryl                                 | 2.4    |         |
-| `running-wolf-router-5g`   | Running Wolf Router - 5G   | beryl                                 |        | 5.0     |
-| `running-wolf-guest`       | Running Wolf Guest         | beryl                                 | 2.4    |         |
-| `running-wolf-guest-5g`    | Running Wolf Guest - 5G    | beryl                                 |        | 5.0     |
-| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- |
-| `running-wolf-hotspot`     | Running Wolf Hot Spot      | running-wolf-hotspot (Nighthawk M1)   | 2.4    | 5.0     |
-| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- |
-| `running-wolf-ptp`         | Running Wolf PtP           | loco-ap ↔ loco-station RF link        |        | 5.0     |
-| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- |
+| Canonical name             | Actual SSID                | Device                                | Band   | (GHz)   | BSSID                  |
+|----------------------------|----------------------------|---------------------------------------|--------|---------|------------------------|
+| `running-wolf-router`      | Running Wolf Router        | beryl                                 | 2.4    |         | *disabled*             |
+| `running-wolf-router-5g`   | Running Wolf Router - 5G   | beryl                                 |        | 5.0     | 94:83:C4:11:9C:DA      |
+| `running-wolf-guest`       | Running Wolf Guest         | beryl                                 | 2.4    |         | *disabled*             |
+| `running-wolf-guest-5g`    | Running Wolf Guest - 5G    | beryl                                 |        | 5.0     | *disabled*             |
+| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- | ---------------------- |
+| `running-wolf-hotspot`     | Running Wolf Hot Spot      | running-wolf-hotspot (Nighthawk M1)   | 2.4    | 5.0     | see equipment_*        |
+| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- | ---------------------- |
+| `running-wolf-ptp`         | Running Wolf PtP           | loco-ap ↔ loco-station RF link        |        | 5.0     | airMAX link            |
+| -------------------------- | -------------------------- | ------------------------------------- | ------ | ------- | ---------------------- |
 
 ## Reference Docs
 

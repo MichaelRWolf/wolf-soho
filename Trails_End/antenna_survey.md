@@ -18,12 +18,15 @@
 
 ## Unconfirmed Candidate Locations
 
-| Site              | MAC Suffix | Distance (ft) | Bearing (°) | Observed Channels | Status         | Notes                                             |
-|-------------------|------------|---------------|-------------|-------------------|----------------|---------------------------------------------------|
-| Site 3            | TBD        | 210           | 0           | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit    |
-| Dirt Circus       | TBD        | 657           | 135         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit    |
-| Pump House        | TBD        | 1,392         | 270         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit    |
-| Barn Farm Antenna | TBD        | --            | --          | --                | ⚠️ Reserved    | Inside barn (south side), if exists; location TBD |
+| Site               | MAC Suffix | Distance (ft) | Bearing (°) | Observed Channels | Status         | Notes                                               |
+|--------------------|------------|---------------|-------------|-------------------|----------------|-----------------------------------------------------|
+| Site 3             | TBD        | 210           | 0           | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit      |
+| Dirt Circus        | TBD        | 657           | 135         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit      |
+| Pump House         | TBD        | 1,392         | 270         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit      |
+| Unknown Site (:A1) | A1         | ?             | ?           | 2.4 GHz (ch 1)    | ⚠️ Unconfirmed | NetSpot 2026-07-18 found this site; not yet located |
+| Barn Farm Antenna  | TBD        | --            | --          | --                | ⚠️ Reserved    | Inside barn (south side), if exists; location TBD   |
+
+**BSSID Details:** See [Trails_End/network_topology.md](network_topology.md) for complete SSID→BSSID→site mapping table (preferred reference going forward).
 
 ---
 

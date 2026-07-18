@@ -8,6 +8,9 @@
 - IP: 192.168.8.1 (LAN gateway)
 - Role: RV primary router; NAT + DHCP
 - SSIDs: running-wolf-router, running-wolf-router-5g, running-wolf-guest, running-wolf-guest-5g
+- **5 GHz BSSID** (Running Wolf Router - 5G): `94:83:c4:11:9c:da` (confirmed live, ch 44)
+- **2.4 GHz BSSID** (Running Wolf Router): *radio currently disabled in config*
+- **Guest SSIDs**: both currently disabled
 - Docs: [beryl-cheat-sheet.md](GL-iNet/beryl-cheat-sheet.md)
 
 ## `Running Wolf PtP` - Ubiquiti PtP Link
@@ -138,15 +141,25 @@
 ### `eap225-outdoor` -- TP-Link EAP225-Outdoor Wireless AC1200
 
 - Model: EAP225-Outdoor
-- Role: Outdoor AP for Strategy C hot-zone deployment
-- Power: 15.4W PoE (passive or active)
-- Band: Dual-band (2.4 GHz + 5 GHz)
+- Hardware: v3.0
+- Firmware: 5.2.4 Build 20251024 Rel. 63790(5553)
+- MAC: 18:69:45:38:A2:F2
+- S/N: Y263210002286
+- Management IP: 192.168.8.130 (static reservation on Beryl)
+- Role: WiFi repeater; bridges Trails End Crew mesh → Cat5 → Beryl
+- Power: 15.4W PoE (via poe-trails-end injector)
+- Band: Dual-band (2.4 GHz + 5 GHz); 1200 Mbps aggregate
 - Standard: WiFi 5 (802.11ac)
 - Rating: IP65 (weather-sealed)
-- Antenna: Modular (directional pointing toward Trails End Crew mesh)
+- Antenna: Modular (directional toward Trails End Crew mesh)
+- Operating Mode: Repeater (connects to Trails End Wifi, bridges via Cat5)
+- **Broadcast SSIDs**: Trails End Wifi - Site 1, Trails End Wifi - Site 1 - 5G
+- **2.4 GHz BSSID** (Trails End Wifi - Site 1): `18:69:45:38:a2:f2` (ch 11)
+- **5 GHz BSSID** (Trails End Wifi - Site 1 - 5G): `18:69:45:38:a2:f3` (ch 157)
+- LAN Port: 1000Mbps FD (Gigabit)
 - Purchased: 2026-07-13 (B&H order #1130629306)
-- Expected delivery: 2026-07-15
-- Status: On order
+- Received: 2026-07-16
+- Status: Repeater mode configured; bridging Trails End Wifi to Beryl via Cat5. Unit recovered after brief unresponsiveness; hardware reset effective (2026-07-16 PM).
 
 ### Surge Protectors (Trails End)
 
