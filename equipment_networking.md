@@ -11,7 +11,7 @@
 - **5 GHz BSSID** (Running Wolf Router - 5G): `94:83:c4:11:9c:da` (confirmed live, ch 44)
 - **2.4 GHz BSSID** (Running Wolf Router): *radio currently disabled in config*
 - **Guest SSIDs**: both currently disabled
-- Docs: [beryl-cheat-sheet.md](GL-iNet/beryl-cheat-sheet.md)
+- Docs: [beryl-cheat-sheet.md](./GL-iNet/beryl-cheat-sheet.md)
 
 ## `Running Wolf PtP` - Ubiquiti PtP Link
 
@@ -32,7 +32,7 @@
 - Firmware: WA.ar934x.v8.7.11.46972.220614.0420 (verified 2026-05-12)
 - Power: poe-moe (24V passive PoE)
 - Web UI: <http://192.168.1.20> (Safari only)
-- SSH: legacy algorithm flags required -- see [HOWTO_rascally_raccoon_PtP_config.md](Ubiquiti/HOWTO_rascally_raccoon_PtP_config.md)
+- SSH: legacy algorithm flags required -- see [HOWTO_rascally_raccoon_PtP_config.md](./Ubiquiti/HOWTO_rascally_raccoon_PtP_config.md)
 
 ### `loco-station` -- Ubiquiti NanoStation Loco5AC
 
@@ -43,7 +43,7 @@
 - Firmware: WA.ar934x.v8.7.11.46972.220614.0420 (verified 2026-05-12)
 - Power: poe-rv (24V passive PoE)
 - Web UI: <http://192.168.1.21> (Safari only)
-- SSH: legacy algorithm flags required -- see [HOWTO_rascally_raccoon_PtP_config.md](Ubiquiti/HOWTO_rascally_raccoon_PtP_config.md)
+- SSH: legacy algorithm flags required -- see [HOWTO_rascally_raccoon_PtP_config.md](./Ubiquiti/HOWTO_rascally_raccoon_PtP_config.md)
 
 ### PoE Injectors
 
@@ -113,11 +113,11 @@
 - Power: poe-trails-end (24V passive PoE)
 - Web UI: <http://192.168.1.22> (Safari only)
 - SSH: legacy algorithm flags required -- see [HOWTO_campground_wifi_repeater_setup.md](Ubiquiti/HOWTO_campground_wifi_repeater_setup.md)
-- Docs: [HOWTO_campground_wifi_repeater_setup.md](Ubiquiti/HOWTO_campground_wifi_repeater_setup.md)
+- Docs: [HOWTO_campground_wifi_repeater_setup.md](./Ubiquiti/HOWTO_campground_wifi_repeater_setup.md)
 
 ### Trails End Mesh Antenna Registry
 
-**Authoritative Source:** [Trails_End/antenna_survey.md](../Trails_End/antenna_survey.md)
+**Authoritative Source:** [antenna_survey.md](../Trails_End/antenna_survey.md)
 
 **Quick Reference:**
 

@@ -26,7 +26,7 @@
 | Unknown Site (:A1) | A1         | ?             | ?           | 2.4 GHz (ch 1)    | ⚠️ Unconfirmed | NetSpot 2026-07-18 found this site; not yet located |
 | Barn Farm Antenna  | TBD        | --            | --          | --                | ⚠️ Reserved    | Inside barn (south side), if exists; location TBD   |
 
-**BSSID Details:** See [Trails_End/network_topology.md](network_topology.md) for complete SSID→BSSID→site mapping table (preferred reference going forward).
+**BSSID Details:** See [network_topology.md](network_topology.md) for complete SSID→BSSID→site mapping table (preferred reference going forward).
 
 ---
 

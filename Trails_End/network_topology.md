@@ -20,28 +20,33 @@ These are distinguished by SSID name only; they share identical BSSID prefix (MA
 
 ## SSID → BSSID Lookup Table
 
-| Site                           | SSID                          | BSSID             | Band    | Channel | Notes                                                           |
-|--------------------------------|-------------------------------|-------------------|---------|---------|-----------------------------------------------------------------|
-| **Welcome Antenna (:38)**      | Trails End Wifi               | 7A:AC:B9:CB:36:38 | 5 GHz   | 44      | Primary outdoor AP                                              |
-| Welcome Antenna (:38)          | Trails End Wifi               | 7A:AC:B9:CA:36:38 | 2.4 GHz | 11      |                                                                 |
-| Welcome Antenna (:38)          | Trails End Crew               | 7E:AC:B9:CB:36:38 | 5 GHz   | 44      |                                                                 |
-| Welcome Antenna (:38)          | Trails End Crew               | 7E:AC:B9:CA:36:38 | 2.4 GHz | --      | Not observed in this scan                                       |
-| Welcome Antenna (:38)          | Lake Effect Farm              | 74:AC:B9:CB:36:38 | 5 GHz   | 44      |                                                                 |
-| Welcome Antenna (:38)          | Lake Effect Farm              | 74:AC:B9:CA:36:38 | 2.4 GHz | 11      |                                                                 |
-| **Barn North Antenna (:C1)**   | Trails End Wifi               | 7A:AC:B9:CB:3B:C1 | 5 GHz   | 44      | Outdoor ridge, north roof                                       |
-| Barn North Antenna (:C1)       | Trails End Wifi               | 7A:AC:B9:CA:3B:C1 | 2.4 GHz | 1       |                                                                 |
-| Barn North Antenna (:C1)       | Trails End Crew               | 7E:AC:B9:CB:3B:C1 | 5 GHz   | 44      |                                                                 |
-| Barn North Antenna (:C1)       | Trails End Crew               | 7E:AC:B9:CA:3B:C1 | 2.4 GHz | 1       |                                                                 |
-| Barn North Antenna (:C1)       | Lake Effect Farm              | 74:AC:B9:CB:3B:C1 | 5 GHz   | 44      |                                                                 |
-| Barn North Antenna (:C1)       | Lake Effect Farm              | 74:AC:B9:CA:3B:C1 | 2.4 GHz | 1       |                                                                 |
-| **Barn Equipment Panel (:93)** | (all three)                   | unconfirmed       | --      | --      | Inside barn, north window; needs in-barn scan                   |
-| **Unconfirmed Site (:A1)**     | Trails End Wifi               | FA:E2:C6:24:B3:A1 | 2.4 GHz | 1       | Unknown location; candidates: Site 3 / Dirt Circus / Pump House |
-| Unconfirmed Site (:A1)         | Trails End Crew               | FE:E2:C6:24:B3:A1 | 2.4 GHz | 1       |                                                                 |
-| Unconfirmed Site (:A1)         | Lake Effect Farm              | F4:E2:C6:24:B3:A1 | 2.4 GHz | 1       |                                                                 |
-| **Beryl (RV)**                 | Running Wolf Router - 5G      | 94:83:C4:11:9C:DA | 5 GHz   | 44      | Michael's RV gateway; 2.4G radio currently disabled             |
-| Beryl (RV)                     | Running Wolf Router           | *radio disabled*  | 2.4 GHz | --      | Disabled in current config                                      |
-| **EAP225 Repeater**            | Trails End Wifi - Site 1 - 5G | 18:69:45:38:A2:F3 | 5 GHz   | 157     | Position varies during field testing                            |
-| EAP225 Repeater                | Trails End Wifi - Site 1      | 18:69:45:38:A2:F2 | 2.4 GHz | 11      | Position varies during field testing                            |
+| Site                         | SSID                            | BSSID               | Band      | Channel   | Notes                                                             |
+|------------------------------|---------------------------------|---------------------|-----------|-----------|-------------------------------------------------------------------|
+| Welcome Antenna (:38)        | Trails End Wifi                 | 7A:AC:B9:CB:36:38   | 5 GHz     | 44        | Primary outdoor AP                                                |
+| Welcome Antenna (:38)        | Trails End Wifi                 | 7A:AC:B9:CA:36:38   | 2.4 GHz   | 11        |                                                                   |
+| Welcome Antenna (:38)        | Trails End Crew                 | 7E:AC:B9:CB:36:38   | 5 GHz     | 44        |                                                                   |
+| Welcome Antenna (:38)        | Trails End Crew                 | 7E:AC:B9:CA:36:38   | 2.4 GHz   | --        | Not observed in this scan                                         |
+| Welcome Antenna (:38)        | Lake Effect Farm                | 74:AC:B9:CB:36:38   | 5 GHz     | 44        |                                                                   |
+| Welcome Antenna (:38)        | Lake Effect Farm                | 74:AC:B9:CA:36:38   | 2.4 GHz   | 11        |                                                                   |
+| ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
+| Barn North Antenna (:C1)     | Trails End Wifi                 | 7A:AC:B9:CB:3B:C1   | 5 GHz     | 44        | Outdoor ridge, north roof                                         |
+| Barn North Antenna (:C1)     | Trails End Wifi                 | 7A:AC:B9:CA:3B:C1   | 2.4 GHz   | 1         |                                                                   |
+| Barn North Antenna (:C1)     | Trails End Crew                 | 7E:AC:B9:CB:3B:C1   | 5 GHz     | 44        |                                                                   |
+| Barn North Antenna (:C1)     | Trails End Crew                 | 7E:AC:B9:CA:3B:C1   | 2.4 GHz   | 1         |                                                                   |
+| Barn North Antenna (:C1)     | Lake Effect Farm                | 74:AC:B9:CB:3B:C1   | 5 GHz     | 44        |                                                                   |
+| Barn North Antenna (:C1)     | Lake Effect Farm                | 74:AC:B9:CA:3B:C1   | 2.4 GHz   | 1         |                                                                   |
+| ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
+| Barn Equipment Panel (:93)   | (all three)                     | unconfirmed         | --        | --        | Inside barn, north window; needs in-barn scan                     |
+| ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
+| Unconfirmed Site (:A1)       | Trails End Wifi                 | FA:E2:C6:24:B3:A1   | 2.4 GHz   | 1         | Unknown location; candidates: Site 3 / Dirt Circus / Pump House   |
+| Unconfirmed Site (:A1)       | Trails End Crew                 | FE:E2:C6:24:B3:A1   | 2.4 GHz   | 1         |                                                                   |
+| Unconfirmed Site (:A1)       | Lake Effect Farm                | F4:E2:C6:24:B3:A1   | 2.4 GHz   | 1         |                                                                   |
+| ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
+| Beryl (RV)                   | Running Wolf Router - 5G        | 94:83:C4:11:9C:DA   | 5 GHz     | 44        | Michael's RV gateway; 2.4G radio currently disabled               |
+| Beryl (RV)                   | Running Wolf Router             | *radio disabled*    | 2.4 GHz   | --        | Disabled in current config                                        |
+| ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
+| EAP225 Repeater              | Trails End Wifi - Site 1 - 5G   | 18:69:45:38:A2:F3   | 5 GHz     | 157       | Position varies during field testing                              |
+| EAP225 Repeater              | Trails End Wifi - Site 1        | 18:69:45:38:A2:F2   | 2.4 GHz   | 11        | Position varies during field testing                              |
 
 ---
 
@@ -57,6 +62,6 @@ These are distinguished by SSID name only; they share identical BSSID prefix (MA
 
 ## Related Files
 
-- `antenna_survey.md` -- Physical location reference (distance, bearing, confirmed antennas)
-- `wifi_field_test.py` -- Field test script (uses KNOWN_BSSIDS seeded from this table)
-- `equipment_networking.md` -- Device specs (Beryl, EAP225-Outdoor, loco-bridge)
+- [antenna_survey.md](antenna_survey.md) -- Physical location reference (distance, bearing, confirmed antennas)
+- [wifi_field_test.py](wifi_field_test.py) -- Field test script (uses KNOWN_BSSIDS seeded from this table)
+- [equipment_networking.md](../equipment_networking.md) -- Device specs (Beryl, EAP225-Outdoor, loco-bridge)

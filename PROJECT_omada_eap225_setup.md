@@ -46,12 +46,12 @@ EAP225 connects to Trails End WiFi mesh and bridges connection via Cat5 to Beryl
 - [ ] Connect to Trails End network
 - [ ] Test WiFi coverage and performance
 - [ ] Link to existing infrastructure (beryl, loco-bridge, etc.)
-- [ ] Document new SSID and access credentials in CONTEXT.md
+- [ ] Document new SSID and access credentials in [CONTEXT.md](../CONTEXT.md)
 
 ### Phase 4: Documentation
 
 - [ ] Create Trails_End/omada_setup.md with operational procedures
-- [ ] Add to CONTEXT.md device registry
+- [ ] Add to [CONTEXT.md](../CONTEXT.md) device registry
 - [ ] Document PoE/power layout
 - [ ] Add monitoring/health check procedures if needed
 
@@ -78,6 +78,6 @@ TP-Link Systems Inc. (n.d.). *Quick Setup Guide for Standalone Omada EAPs*. Retr
 
 ## Related Files
 
-- CONTEXT.md -- Device registry (to be updated)
-- Trails_End/ -- Device-specific documentation
-- equipment_networking.md -- Network equipment specs
+- [CONTEXT.md](../CONTEXT.md) -- Device registry
+- [Trails_End/](./Trails_End/) -- Device-specific documentation
+- [equipment_networking.md](../equipment_networking.md) -- Network equipment specs
