@@ -63,14 +63,14 @@ pre-commit run -k markdownlint-fix  # Run only markdown linting
 ### Testing
 
 ```bash
-make verify_TM_exclusions  # Test Time Machine exclusion list (Perl prove framework)
+make verify-TM-exclusions  # Test Time Machine exclusion list (Perl prove framework)
 ```
 
 ### Uninstall
 
 ```bash
 make uninstall             # Remove all installed tools
-uninstall_launchd          # Unload macOS scheduled agents
+make uninstall-launchd     # Unload macOS scheduled agents
 ```
 
 ## High-Level Architecture
@@ -160,7 +160,7 @@ Infrastructure decisions must assume: WiFi-only, no cellular fallback, no mobile
 2. **Ubiquiti PtP link setup is picky about RF alignment.** See Ubiquiti/HOWTO_* docs before attempting physical install.
 3. **Device names in CONTEXT.md are the source of truth.** Don't create aliases or shorthand -- use canonical names everywhere.
 4. **beryl router is GL.iNet, not Ubiquiti.** It runs OpenWrt and uses UCI, not Ubiquiti's web UI. See GL-iNet/beryl-cheat-sheet.md.
-5. **Time Machine exclusion tests require Perl prove framework.** `make verify_TM_exclusions` checks symlink resolution for TimeMachine/ entries.
+5. **Time Machine exclusion tests require Perl prove framework.** `make verify-TM-exclusions` checks symlink resolution for TimeMachine/ entries.
 6. **Keweenaw County has ZERO cell coverage.** Never assume cellular internet; it will never be available in Copper Harbor. All infrastructure must be WiFi-based.
 
 ## When to Ask About

@@ -13,7 +13,7 @@ LAUNCHD_PLISTS := launchd/com.wolfenterprises.fleet-nas-sync.plist
 UPLINK_COMMANDS := uplink-describe uplink-org uplink-monitor
 UPLINK_LIB := uplink-lib.sh
 
-.PHONY: setup-hooks all symlink_bin install uninstall install_uplink uninstall_uplink install_launchd uninstall_launchd clean todo help verify_TM_exclusions
+.PHONY: setup-hooks all symlink-bin install uninstall install-uplink uninstall-uplink install-launchd uninstall-launchd clean todo help verify-TM-exclusions
 
 setup-hooks:
 	pre-commit install
@@ -24,10 +24,10 @@ setup-hooks:
 all: help
 
 # Install all project tools
-install: symlink_bin install_uplink
+install: symlink-bin install-uplink
 
 # Uninstall all project tools
-uninstall: uninstall_uplink
+uninstall: uninstall-uplink
 	@echo "Removing symlinks from $(INSTALL_BIN_DIR)/"
 	@for bin_file in $(BIN_FILES); do \
 		if [ -L $(INSTALL_BIN_DIR)/$$(basename $$bin_file) ]; then \
@@ -37,14 +37,14 @@ uninstall: uninstall_uplink
 	done
 	@echo "Uninstall complete!"
 
-symlink_bin:
+symlink-bin:
 	@mkdir -p $(INSTALL_BIN_DIR)
 	@for bin_file in $(BIN_FILES); do \
 		ln -sfv $(PWD)/$$bin_file $(INSTALL_BIN_DIR); \
 	done
 
 # Install uplink commands and library
-install_uplink: $(INSTALL_BIN_DIR)
+install-uplink: $(INSTALL_BIN_DIR)
 	@echo "Installing uplink commands to $(INSTALL_BIN_DIR)/"
 	@# Install library
 	@ln -sfv $(PWD)/bin/$(UPLINK_LIB) $(INSTALL_BIN_DIR)/$(UPLINK_LIB)
@@ -67,7 +67,7 @@ $(INSTALL_BIN_DIR):
 	@mkdir -p $(INSTALL_BIN_DIR)
 
 # Uninstall uplink commands and library
-uninstall_uplink:
+uninstall-uplink:
 	@echo "Removing uplink commands from $(INSTALL_BIN_DIR)/"
 	@for cmd in $(UPLINK_COMMANDS); do \
 		if [ -L $(INSTALL_BIN_DIR)/$$cmd ]; then \
@@ -81,7 +81,7 @@ uninstall_uplink:
 	fi
 	@echo "Uplink uninstallation complete!"
 
-install_launchd:
+install-launchd:
 	@mkdir -p $(LAUNCHD_DIR)
 	@for plist in $(LAUNCHD_PLISTS); do \
 		cp $$plist $(LAUNCHD_DIR)/; \
@@ -89,7 +89,7 @@ install_launchd:
 		echo "Loaded: $$(basename $$plist)"; \
 	done
 
-uninstall_launchd:
+uninstall-launchd:
 	@for plist in $(LAUNCHD_PLISTS); do \
 		launchctl unload $(LAUNCHD_DIR)/$$(basename $$plist) 2>/dev/null || true; \
 		rm -f $(LAUNCHD_DIR)/$$(basename $$plist); \
@@ -99,7 +99,7 @@ uninstall_launchd:
 clean:
 	@echo "Nothing to clean."
 
-verify_TM_exclusions:
+verify-TM-exclusions:
 	cd TimeMachine && prove -v ./verify-tm-isexcluded
 
 help:
@@ -108,11 +108,11 @@ help:
 	@echo "Targets:"
 	@echo "  install       - Install all project tools (symlinks + uplink + gitnas commands)"
 	@echo "  uninstall     - Remove all project tools (symlinks + uplink + gitnas commands)"
-	@echo "  symlink_bin   - Create symlinks for project binaries"
-	@echo "  install_uplink - Install uplink monitoring commands"
-	@echo "  uninstall_uplink - Remove uplink monitoring commands"
+	@echo "  symlink-bin   - Create symlinks for project binaries"
+	@echo "  install-uplink - Install uplink monitoring commands"
+	@echo "  uninstall-uplink - Remove uplink monitoring commands"
 	@echo "  clean         - Clean project files"
-	@echo "  verify_TM_exclusions - Run Time Machine exclusion verification tests"
+	@echo "  verify-TM-exclusions - Run Time Machine exclusion verification tests"
 	@echo "  todo          - Show project todos"
 	@echo "  help          - Show this help message"
 	@echo ""
@@ -127,7 +127,7 @@ help:
 	@echo "  fleet-nas-sync      - Push all nas-remote repos; connectivity guard + staleness warn"
 	@echo "  git-status-summary  - Alias for fleet-status (legacy name)"
 	@echo ""
-	@echo "launchd agents (install via make install_launchd):"
+	@echo "launchd agents (install via make install-launchd):"
 	@echo "  fleet-nas-sync      - Daily 16:00 NAS sync; logs to ~/Library/Logs/fleet-nas-sync.log"
 	@echo ""
 	@echo "Usage:"
