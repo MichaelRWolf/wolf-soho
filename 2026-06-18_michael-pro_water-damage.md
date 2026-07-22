@@ -215,7 +215,7 @@ Once board is completely dry and corrosion is cleaned:
 ### Environment Parity (wolf-air vs michael-pro)
 
 - [ ] Audit SSH keys -- confirm wolf-air has keys for GitHub and any servers michael-pro had
-- [ ] Check shell config -- `~/.zshrc`, `~/.bashrc`, Portable_Profile repo up to date
+- [ ] Check shell config -- `~/.zshrc`, `~/.bashrc`, portable-profile repo up to date
 - [ ] Verify Homebrew packages match (compare `brew list` outputs)
 - [ ] Check dev repos -- confirm all active repos are cloned and up to date on wolf-air
 - [ ] Identify any other apps that were michael-pro-exclusive
@@ -226,8 +226,8 @@ Once board is completely dry and corrosion is cleaned:
 
 - [ ] Find Zoom link for Pinnacle interview
 - [ ] Verify Zoom link in calendar event (Google Calendar or Apple Calendar)
-- [ ] Verify Zoom link in notes file (Job_Search repo)
-- [ ] Create opportunity entry in Job_Search repo for Pinnacle
+- [ ] Verify Zoom link in notes file (job-search repo)
+- [ ] Create opportunity entry in job-search repo for Pinnacle
 
 ---
 

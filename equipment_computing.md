@@ -69,24 +69,24 @@ Eligible but proceed with caution given hardware state:
 2-channel 100 MHz digital real-time oscilloscope (Tektronix, Beaverton OR, ~1998).
 Nameplate confirmed from photo (IMG_0823.heic, 2026-05-20).
 
-| Spec             | Value                                    |
-|------------------|------------------------------------------|
-| Channels         | 2                                        |
-| Bandwidth        | 100 MHz                                  |
-| Sample rate      | 500 MS/s per channel                     |
-| Sensitivity      | 2 mV to 10 V/div                         |
-| Time base        | 5 ns to 5 s/div                          |
-| Max input        | 400V (x10 probe) / 40V (x1 probe)        |
-| Auto measurements| 21 built-in                              |
-| Analysis         | FFT                                      |
-| Storage          | 3.5" floppy (DOS-compatible)             |
-| Power            | 65W max, 120VA max                       |
-| Voltage range    | 90-132V (47-440 Hz) / 90-250V (47-63 Hz) |
-| Fuse             | 3A slow (UL 198G) / 3.15A T (IEC 127)   |
-| Power switch     | None -- cord is main power disconnect    |
+| Spec              | Value                                    |
+|-------------------|------------------------------------------|
+| Channels          | 2                                        |
+| Bandwidth         | 100 MHz                                  |
+| Sample rate       | 500 MS/s per channel                     |
+| Sensitivity       | 2 mV to 10 V/div                         |
+| Time base         | 5 ns to 5 s/div                          |
+| Max input         | 400V (x10 probe) / 40V (x1 probe)        |
+| Auto measurements | 21 built-in                              |
+| Analysis          | FFT                                      |
+| Storage           | 3.5" floppy (DOS-compatible)             |
+| Power             | 65W max, 120VA max                       |
+| Voltage range     | 90-132V (47-440 Hz) / 90-250V (47-63 Hz) |
+| Fuse              | 3A slow (UL 198G) / 3.15A T (IEC 127)    |
+| Power switch      | None -- cord is main power disconnect    |
 
 **Usage note:** Scope ground = chassis ground. Avoid floating ground on DC circuits.
 Use x10 probe for signals above 40V.
 
 **Used for:** Bluetti EB70 water damage diagnosis -- see
-`../RV_2003_Dutchman/PROJECT_bluetti_water_damage_2025/CLAUDE.md`
+`../rv-2003-dutchman/PROJECT_bluetti_water_damage_2025/CLAUDE.md`
