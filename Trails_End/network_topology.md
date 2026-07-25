@@ -25,7 +25,7 @@ These are distinguished by SSID name only; they share identical BSSID prefix (MA
 | Welcome Antenna (:38)        | Trails End Wifi                 | 7A:AC:B9:CB:36:38   | 5 GHz     | 44        | Primary outdoor AP                                                |
 | Welcome Antenna (:38)        | Trails End Wifi                 | 7A:AC:B9:CA:36:38   | 2.4 GHz   | 11        |                                                                   |
 | Welcome Antenna (:38)        | Trails End Crew                 | 7E:AC:B9:CB:36:38   | 5 GHz     | 44        |                                                                   |
-| Welcome Antenna (:38)        | Trails End Crew                 | 7E:AC:B9:CA:36:38   | 2.4 GHz   | --        | Not observed in this scan                                         |
+| Welcome Antenna (:38)        | Trails End Crew                 | 7E:AC:B9:CA:36:38   | 2.4 GHz   | 11        | Observed 2026-07-25 scan                                          |
 | Welcome Antenna (:38)        | Lake Effect Farm                | 74:AC:B9:CB:36:38   | 5 GHz     | 44        |                                                                   |
 | Welcome Antenna (:38)        | Lake Effect Farm                | 74:AC:B9:CA:36:38   | 2.4 GHz   | 11        |                                                                   |
 | ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
@@ -38,9 +38,17 @@ These are distinguished by SSID name only; they share identical BSSID prefix (MA
 | ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
 | Barn Equipment Panel (:93)   | (all three)                     | unconfirmed         | --        | --        | Inside barn, north window; needs in-barn scan                     |
 | ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
-| Unconfirmed Site (:A1)       | Trails End Wifi                 | FA:E2:C6:24:B3:A1   | 2.4 GHz   | 1         | Unknown location; candidates: Site 3 / Dirt Circus / Pump House   |
-| Unconfirmed Site (:A1)       | Trails End Crew                 | FE:E2:C6:24:B3:A1   | 2.4 GHz   | 1         |                                                                   |
-| Unconfirmed Site (:A1)       | Lake Effect Farm                | F4:E2:C6:24:B3:A1   | 2.4 GHz   | 1         |                                                                   |
+| Site 3 (:A1)                 | Trails End Wifi                 | FA:E2:C6:24:B3:A1   | 2.4 GHz   | 1         | Likely location based on signal strength (2026-07-25)             |
+| Site 3 (:A1)                 | Trails End Crew                 | FE:E2:C6:24:B3:A1   | 2.4 GHz   | 1         |                                                                   |
+| Site 3 (:A1)                 | Lake Effect Farm                | F4:E2:C6:24:B3:A1   | 2.4 GHz   | 1         |                                                                   |
+| ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
+| Pump House (:F7)             | Trails End Crew                 | 6E:D7:9A:84:86:F7   | 2.4 GHz   | 11        | Suspected location (2026-07-25)                                   |
+| Pump House (:F7)             | TEC Event                       | 72:D7:9A:84:86:F7   | 2.4 GHz   | 11        | Suspected location (2026-07-25)                                   |
+| Pump House (:F7)             | Lake Effect Farm                | 68:D7:9A:84:86:F7   | 2.4 GHz   | 11        | Suspected location (2026-07-25)                                   |
+| Dirt Circus - Mini           | Mini                            | CE:E3:9F:20:C6:B0   | 2.4 GHz   | 1         | El-cheapo AP; suspected north across lake (2026-07-25)            |
+| Dirt Circus - Mini           | Mini                            | CE:E3:9F:30:C6:B0   | 5 GHz     | 149       | Second radio on same device (2026-07-25)                          |
+| John Manders Tower (:D4)     | ch_pasty_289-8068               | 68:72:51:42:F9:D4   | 2.4 GHz   | 6         | Copper Harbor Pasty Net; south of Welcome (2026-07-25)            |
+| LEF_Uplink_AP-1              | LEF_Uplink_AP-1                 | E4:38:83:B4:F5:29   | 2.4 GHz   | 11        | Ubiquiti; suspected Site 3 PtP (2026-07-25)                       |
 | ---------------------------- | ------------------------------- | ------------------- | --------- | --------- | ----------------------------------------------------------------- |
 | Beryl (RV)                   | Running Wolf Router - 5G        | 94:83:C4:11:9C:DA   | 5 GHz     | 44        | Michael's RV gateway; 2.4G radio currently disabled               |
 | Beryl (RV)                   | Running Wolf Router             | *radio disabled*    | 2.4 GHz   | --        | Disabled in current config                                        |

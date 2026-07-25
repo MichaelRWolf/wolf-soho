@@ -18,13 +18,14 @@
 
 ## Unconfirmed Candidate Locations
 
-| Site               | MAC Suffix | Distance (ft) | Bearing (°) | Observed Channels | Status         | Notes                                               |
-|--------------------|------------|---------------|-------------|-------------------|----------------|-----------------------------------------------------|
-| Site 3             | TBD        | 210           | 0           | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit      |
-| Dirt Circus        | TBD        | 657           | 135         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit      |
-| Pump House         | TBD        | 1,392         | 270         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit      |
-| Unknown Site (:A1) | A1         | ?             | ?           | 2.4 GHz (ch 1)    | ⚠️ Unconfirmed | NetSpot 2026-07-18 found this site; not yet located |
-| Barn Farm Antenna  | TBD        | --            | --          | --                | ⚠️ Reserved    | Inside barn (south side), if exists; location TBD   |
+| Site                     | MAC Suffix        | Distance (ft) | Bearing (°) | Observed Channels | Status         | Notes                                                        |
+|--------------------------|-------------------|---------------|-------------|-------------------|----------------|--------------------------------------------------------------|
+| Cabin 13                 | TBD               | 579           | 90          | --                | ⚠️ Surveyed    | RV siting; distance measured 2026-07-25                      |
+| Site 3 (:A1)             | A1                | ~210          | 0           | 2.4 GHz (ch 1)    | ⚠️ Likely      | Signal strength consistent with Site 3 (2026-07-25)          |
+| Site 3 - LEF_Uplink_AP-1 | E4:38:83:B4:F5:29 | ~210          | 0           | 2.4 GHz (ch 11)   | ⚠️ Likely PtP  | Ubiquiti; rounded rectangle facing lake; -77 dBm at Cabin 13 |
+| Dirt Circus              | TBD               | 657           | 135         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit               |
+| Pump House               | TBD               | 1,392         | 270         | Multiple (5 GHz)  | ⚠️ Unconfirmed | Visible in RF scan; location needs field visit               |
+| Barn Farm Antenna        | TBD               | --            | --          | --                | ⚠️ Reserved    | Inside barn (south side), if exists; location TBD            |
 
 **BSSID Details:** See [network_topology.md](network_topology.md) for complete SSID→BSSID→site mapping table (preferred reference going forward).
 

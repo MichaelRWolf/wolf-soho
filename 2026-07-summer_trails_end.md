@@ -1,7 +1,7 @@
 # Trails End Summer 2026 -- Infrastructure Connectivity Plan
 
 **Active Period:** 2026-07-08 through October 2026  
-**Location:** Trails End Campground, Site 1 (RV)  
+**Location:** Trails End Campground, Cabin 13 (RV, moved 2026-07-20 from Site 1)  
 **Status:** In progress; major blocker = loco-bridge siting for stable 5 GHz connection
 
 ---

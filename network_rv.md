@@ -80,11 +80,11 @@ Docs: [Trails_End/](Trails_End/)
 
 ## Variant: Trails End 2026 Summer
 
-**Current Location:** Site 1 (moved from barn area Monday, July 7)
+**Current Location:** Cabin 13 (moved from Site 1 Monday, July 20)
 
 **Status:** Signal mapping in progress; uncertain antenna configuration.
 
-### Site 1 Geographic Layout (Google Maps measurements)
+### Cabin 13 Geographic Layout (Google Maps measurements)
 
 ```text
                         Barn
