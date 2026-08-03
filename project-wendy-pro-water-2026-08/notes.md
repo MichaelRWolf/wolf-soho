@@ -46,31 +46,14 @@ After IPA treatment, continue sun + fan drying to evaporate any residual moistur
 
 **Why this works:** Heat builds vapor pressure inside chassis, pushing residual moisture out through seals and vents. Combined with IPA displacement, this prevents corrosion formation on the motherboard.
 
-**Materials:**
+## Critical Decision: Battery Disconnection Before IPA
 
-- 90%+ IPA only (91% drugstore or 99% lab grade; avoid 70% IPA--too much water)
-- Soft brush or cotton swabs
-- Lint-free cloth
+**Should battery be disconnected before IPA treatment (right now)?**
 
-**Process:**
+- **Option 1 (simpler):** Battery safe to leave connected during IPA. Machine is off; IPA is non-conductive at 90%+; process is quick (minutes). No electrical risk.
+- **Option 2 (safest):** Disconnect battery first. Takes 2 minutes (pentalobe P5 + plastic spudger). Eliminates all electrical concerns if IPA seeps into unexpected places.
 
-1. Douse areas visibly affected by water (around fan, air port, keyboard edges)
-2. Brush gently to displace water and break up mineral deposits
-3. Tilt machine to let IPA drain off (evaporates in ~5 min)
-4. Run fan for 10-15 min after to accelerate evaporation
-
-**Why:** IPA's low surface tension reaches crevices. Crucially, it displaces water and prevents mineral residue (calcium, magnesium salts from tap water) from forming white/blue corrosion deposits on solder joints and component legs. This is what would require motherboard extraction and cleaning if neglected.
-
-**Timeline:** michael-pro was treated at ~36h into drying and it worked. Don't wait too long--mineral corrosion deposits start forming immediately.
-
-## Critical Decision: Battery Disconnection
-
-**Should battery be disconnected before IPA treatment?**
-
-- **If `wendy-pro` powers on after drying:** Battery is safe to leave connected during IPA treatment (alcohol won't harm sealed Li+ cells).
-- **If `wendy-pro` won't power on:** Consider disconnecting battery before IPA to prevent any risk of shorts during cleanup.
-
-**Recommendation:** Test power after 48h drying. If it boots, no further disassembly needed. If not, refer to michael-pro procedure for battery disconnect (Step 2 in incident log).
+**Recommendation:** Option 2. Battery is already accessible with back panel off. Zero cost to disconnect; maximum safety during IPA treatment.
 
 ## Recovery Checklist
 
