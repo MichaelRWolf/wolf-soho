@@ -21,11 +21,14 @@ Eligible but proceed with caution given hardware state:
 
 ## `wendy-pro` -- MacBook Pro (Wendy's)
 
-- Model: MacBook Pro (MacBookPro17,1)
-- Chip: Apple M1 (8-core: 4 performance + 4 efficiency)
+- Model: MacBook Pro 13-inch 2022 M2 (A2338)
+- Serial: CO2H519BQ05F
+- Chip: Apple M2 (8-core: 4 performance + 4 efficiency)
 - RAM: 8 GB
 - macOS: 15.7.5 Sequoia (build 24G624) (2026-05-12)
 - macOS 26 Tahoe: **Compatible**
+- Battery connector: ZIF (iFixit guide [WEN2022])
+- Notes: Water damage incident 2026-08-03; recovery in progress (see [2026-08-03_wendy-pro_water-damage.md](2026-08-03_wendy-pro_water-damage.md))
 
 ## `wolf-air` -- MacBook Air
 
@@ -90,3 +93,11 @@ Use x10 probe for signals above 40V.
 
 **Used for:** Bluetti EB70 water damage diagnosis -- see
 `../rv-2003-dutchman/PROJECT_bluetti_water_damage_2025/CLAUDE.md`
+
+---
+
+## References
+
+### [WEN2022]
+
+iFixit. (2022). MacBook Pro 13-Inch M2 2022 Battery Replacement. Retrieved from <https://www.ifixit.com/Guide/MacBook+Pro+13-Inch+M2+2022+Battery+Replacement/149829>
