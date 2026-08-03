@@ -10,7 +10,7 @@
 #   --fetch       run git fetch per repo before checking status (makes ↓ accurate)
 #   --with-nas    fetch nas remote per repo; add nas column to output
 
-set -euo pipefail
+set -eo pipefail
 
 RED=$'\033[0;31m'
 GREEN=$'\033[0;32m'
