@@ -2,12 +2,13 @@
 
 ## `michael-pro` -- MacBook Pro (Michael's primary)
 
-- Model: MacBook Pro (MacBookPro16,2)
+- Model: MacBook Pro 13-inch Late 2020 (A2251) -- MacBookPro16,2
 - Chip: Intel Core i5, Quad-Core, 2 GHz
 - RAM: 16 GB
 - macOS: 15.7.3 Sequoia (build 24G419) (2026-05-12)
 - macOS 26 Tahoe: **Compatible** -- last Intel-supported macOS
-- Notes: [Battery Replacement Project](michael-pro_battery.md)
+- Battery connector: ZIF (iFixit guide [MIC2020])
+- Notes: [Battery Replacement Project](michael-pro_battery.md); Water damage incident 2026-06-18 (see [2026-06-18_michael-pro_water-damage.md](2026-06-18_michael-pro_water-damage.md))
 
 ### Tahoe Upgrade Recommendation
 
@@ -97,6 +98,10 @@ Use x10 probe for signals above 40V.
 ---
 
 ## References
+
+### [MIC2020]
+
+iFixit. (2020). MacBook Pro 13-Inch Two Thunderbolt Ports Late 2020 Battery Replacement. Retrieved from <https://www.ifixit.com/Guide/MacBook+Pro+13-Inch+Two+Thunderbolt+Ports+Late+2020+Battery+Replacement/143286>
 
 ### [WEN2022]
 
