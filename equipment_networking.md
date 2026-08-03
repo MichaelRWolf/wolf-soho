@@ -161,6 +161,20 @@
 - Received: 2026-07-16
 - Status: Repeater mode configured; bridging Trails End Wifi to Beryl via Cat5. Unit recovered after brief unresponsiveness; hardware reset effective (2026-07-16 PM).
 
+#### IP Configuration
+
+- **DHCP**: Dynamic (enabled)
+- **DHCP Fallback**: Enabled
+- **Fallback IP**: 192.168.0.254
+- **Fallback Netmask**: 255.255.255.0
+- **Fallback Gateway**: 192.168.1.1 (upstream router `unifi`; route remains valid even if DHCP server fails)
+
+#### AP Preference (Omada Controller)
+
+- **Preferred Uplink AP**: `:A1` (Site 3, ~210 ft north) -- prioritized over Welcome Antenna `:38` (0 ft) for stronger 2.4 GHz signal at ground level
+- **Reason**: Welcome Antenna `:38` is primary outdoor AP but signal weak at repeater ground-level location; Site 3 `:A1` provides more reliable 2.4 GHz uplink
+- **Date set**: 2026-08-03
+
 ### Surge Protectors (Trails End)
 
 - `surge-protector-01`, `surge-protector-02`: Ubiquiti Outdoor Ethernet Surge Protector (10kA, ETH-SP-G2)
