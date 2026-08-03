@@ -13,7 +13,9 @@ Water bottle broke in briefcase → liquid contacted laptop → opened back pane
 - Power: Off (safe)
 - Battery: Assumed connected (unknown if disconnected yet)
 - Drying method: Sun + fan
-- Timeline: Started 2026-08-03 afternoon
+- **IPA applied: 2026-08-03 ~14:30-15:00 (just completed)**
+- **Extended drying started: 2026-08-03 ~15:00-15:15 (after IPA evaporated)**
+- **Target power-on test: 2026-08-04 to 2026-08-05** (after 24-48h post-IPA drying)
 
 ## Drying Strategy
 
@@ -42,7 +44,17 @@ After IPA treatment, continue sun + fan drying to evaporate any residual moistur
 
 **Setup:** Sun provides gentle heat (target 100-120°F; prevents adhesive damage above ~140°F). Fan accelerates evaporation of moisture reaching open surfaces. Thermal cycling (sun ↔ shade over hours) helps push out pockets trapped near components.
 
-**Monitor:** Feel air vent exhaust. If still noticeably humid after 24h of post-IPA drying, continue another 12-24h.
+**Humidity Monitoring (How to tell if it's dry):**
+
+1. **Feel the air vents** (speaker grilles, fan exhaust ports):
+   - **Still humid?** Air feels cool/damp when you hold your hand near vent. → Water still evaporating. Continue drying.
+   - **Dry?** Air feels warm/dry, no moisture sensation. → Case is dry. Ready to power on.
+
+2. **Timeline guide** (post-IPA):
+   - **After 24h:** Check vents. For localized water intrusion (wendy-pro) → likely dry. Vent air should feel warm/dry.
+   - **If vent air still damp after 24h:** Continue to 48h. Deeper pockets still drying.
+   - **After 48h:** Should definitely be dry unless there was bulk water. Vent air warm/dry = safe to power on.
+   - **72h:** Safety margin only (michael-pro had ~2 inches of pooled water; wendy-pro is localized, so 48h likely sufficient).
 
 **Why this works:** Heat builds vapor pressure inside chassis, pushing residual moisture out through seals and vents. Combined with IPA displacement, this prevents corrosion formation on the motherboard.
 
@@ -57,10 +69,10 @@ After IPA treatment, continue sun + fan drying to evaporate any residual moistur
 
 ## Recovery Checklist
 
-- [ ] **NOW (2026-08-03):** Apply 90% IPA to water-affected areas (around fan, air port edges, keyboard); brush gently; let drain and evaporate
-- [ ] **After IPA (2026-08-03 evening):** Run fan for 10-15 min, then begin sun + fan drying
-- [ ] **After 24 hours of post-IPA drying (2026-08-04 afternoon):** Check case exterior--should feel completely dry to touch (not cool/damp); continue drying if humid
-- [ ] **After 24-72 hours of post-IPA drying (2026-08-04 to 2026-08-05):** Case should be fully dry; attempt power-on
+- [x] **2026-08-03 ~14:30-15:00:** IPA applied to water-affected areas (around fan, air port edges, keyboard); brushed gently; drained and evaporated
+- [x] **2026-08-03 ~15:00-15:15:** Extended drying begun (sun + breeze, IPA fully evaporated)
+- [ ] **2026-08-04 ~14:30-15:15 (24h post-IPA):** Check air vents: feel exhaust for humidity. If dry/warm → ready for power-on test. If damp/cool → continue to 48h.
+- [ ] **2026-08-05 ~14:30-15:15 (48h post-IPA):** If not tested yet, check vents again. Should definitely be dry. Attempt power-on.
 - [ ] **If powers on successfully:** Boot into system, run Disk Utility and Activity Monitor to confirm no hardware errors
 - [ ] **If does not power on:** Refer to michael-pro procedure for battery disconnection and motherboard inspection
 
