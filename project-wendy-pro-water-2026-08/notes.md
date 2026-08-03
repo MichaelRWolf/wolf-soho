@@ -1,54 +1,86 @@
-# wendy-pro Water Damage -- Recovery Notes
+# wendy-pro Water Damage -- Recovery Project
 
-**Incident Date:** 2026-08-03 (Trails End)
+**Device**: `wendy-pro` -- MacBook Pro
+**Incident Date:** 2026-08-03 (Trails End Campground, Copper Harbor MI)
+**Status**: Drying in progress
 
-## What Happened
+## Incident Summary
 
-Water bottle broke in briefcase → liquid contacted laptop → opened back panel → found water intrusion around fan, likely through air port → already dried with canned air → now sitting in sun with fan.
+Water bottle broke in briefcase → liquid contacted laptop → opened back panel → found water intrusion centered around fan (likely air port ingress) → applied canned air → now drying in sun with fan.
 
-## Answers to Your Questions
+**Current state:**
 
-### How long to sit in sun?
+- Power: Off (safe)
+- Battery: Assumed connected (unknown if disconnected yet)
+- Drying method: Sun + fan
+- Timeline: Started 2026-08-03 afternoon
 
-**48-72 hours minimum.**
+## Drying Strategy (48-72 hours total)
 
-- First 24-48h: bulk moisture removal (sun + fan combo is ideal)
-- After 48h: inspect case -- should feel completely dry to touch
-- Continue to 72h if still cool/damp inside vents
+### Phase 1: Bulk Moisture Removal (24-48 hours)
 
-Thermal cycling (moving between sun and shade) helps push moisture from pockets trapped near components.
+**Current setup:** Sun + fan is ideal.
 
-### Will 90% isopropyl alcohol help (like michael-pro)?
+- Sun provides gentle heat (target 100-120°F; prevents adhesive damage above ~140°F)
+- Fan accelerates evaporation of moisture reaching open surfaces
+- Canned air already removed surface water
+- Thermal cycling (sun ↔ shade over hours) helps push out pockets trapped near components
 
-**Yes, absolutely.** Same process that saved michael-pro's logic board.
+**Monitor:** Feel air vent exhaust. If still noticeably humid after 24h, continue another 12-24h.
 
-**Timeline:**
+**Why this works:** Heat builds vapor pressure inside chassis, pushing trapped moisture out through seals and vents. Together with fan, prevents corrosion formation on the motherboard.
 
-- Let machine dry 48h first (bulk water gone, mineral deposits forming now)
-- Apply 90% IPA to water-affected areas (around fan, air port, keyboard edges)
-- Brush gently; let IPA drain and evaporate (~5 min)
-- Run fan after to accelerate evaporation
-- IPA displaces water and prevents corrosion deposits on solder joints
+### Phase 2: Mineral Deposit Prevention (~48h onward)
 
-**Key point:** michael-pro was treated at ~36h into drying with the same 90%+ IPA and it worked. Don't wait too long -- mineral corrosion deposits start forming immediately.
+Once case feels dry to the touch, apply 90% isopropyl alcohol:
 
-**90% is fine** (drugstore isopropyl works; 99% lab grade also works). Avoid 70% IPA (too much water).
+**Materials:**
 
-## Quick Action Plan
+- 90%+ IPA only (91% drugstore or 99% lab grade; avoid 70% IPA--too much water)
+- Soft brush or cotton swabs
+- Lint-free cloth
 
-1. **Now through 2026-08-05 (48h):** Sun + fan, no intervention
-2. **2026-08-05 evening:** Check case feels dry; if still damp, continue another 12-24h
-3. **2026-08-05 to 2026-08-06:** Apply 90% IPA to affected areas
-4. **After IPA:** Run fan 10-15 min, wait 5 min, attempt power-on
-5. **If boots:** Run Disk Utility / Activity Monitor to confirm no hardware errors
-6. **If no boot:** Refer to michael-pro procedure for battery disconnect and motherboard inspection
+**Process:**
 
-## Files
+1. Douse areas visibly affected by water (around fan, air port, keyboard edges)
+2. Brush gently to displace water and break up mineral deposits
+3. Tilt machine to let IPA drain off (evaporates in ~5 min)
+4. Run fan for 10-15 min after to accelerate evaporation
 
-- [2026-08-03_wendy-pro_water-damage.md](../2026-08-03_wendy-pro_water-damage.md) -- Main incident log with full recovery procedure
-- [2026-06-18_michael-pro_water-damage.md](../2026-06-18_michael-pro_water-damage.md) -- Reference: battery disconnect, disassembly, IPA treatment, corrosion cleaning
+**Why:** IPA's low surface tension reaches crevices. Crucially, it displaces water and prevents mineral residue (calcium, magnesium salts from tap water) from forming white/blue corrosion deposits on solder joints and component legs. This is what would require motherboard extraction and cleaning if neglected.
 
----
+**Timeline:** michael-pro was treated at ~36h into drying and it worked. Don't wait too long--mineral corrosion deposits start forming immediately.
 
-**Started:** 2026-08-03 ~afternoon (exact time TBD)
-**Next check:** 2026-08-05 evening (48h mark)
+## Critical Decision: Battery Disconnection
+
+**Should battery be disconnected before IPA treatment?**
+
+- **If `wendy-pro` powers on after drying:** Battery is safe to leave connected during IPA treatment (alcohol won't harm sealed Li+ cells).
+- **If `wendy-pro` won't power on:** Consider disconnecting battery before IPA to prevent any risk of shorts during cleanup.
+
+**Recommendation:** Test power after 48h drying. If it boots, no further disassembly needed. If not, refer to michael-pro procedure for battery disconnect (Step 2 in incident log).
+
+## Recovery Checklist
+
+- [ ] **After 48 hours (2026-08-05 evening):** Check case exterior--should feel completely dry to touch (not cool/damp)
+- [ ] **After 48-72 hours (2026-08-05 to 2026-08-06):** Apply 90% IPA to water-affected areas (around fan, air port edges, keyboard)
+- [ ] **After IPA treatment:** Run fan for 10-15 min, let machine rest 5 minutes, then attempt power-on
+- [ ] **If powers on successfully:** Boot into system, run Disk Utility and Activity Monitor to confirm no hardware errors
+- [ ] **If does not power on:** Refer to michael-pro procedure for battery disconnection and motherboard inspection
+
+## Comparison to michael-pro Recovery
+
+| Factor         | michael-pro (2026-06-18)      | wendy-pro (2026-08-03)              |
+|----------------|-------------------------------|-------------------------------------|
+| Water source   | Rain + bag (~2 inches pooled) | Bottle burst (localized)            |
+| Amount         | Large (bulk + seepage)        | Smaller, concentrated around fan    |
+| Discovery time | ~1.5 hours after incident     | <1 hour (estimated)                 |
+| Current drying | Fan + open air (no heat)      | Sun + fan (better; adds heat)       |
+| Total timeline | 72 hours (safety margin)      | 48 hours likely sufficient; 72 pref |
+| IPA treatment  | 91% at ~36h mark (worked)     | 90% will work identically           |
+
+## References
+
+- [2026-08-03_wendy-pro_water-damage.md](2026-08-03_wendy-pro_water-damage.md) -- Full incident log (redundant with this file; keep for archive)
+- [2026-06-18_michael-pro_water-damage.md](../2026-06-18_michael-pro_water-damage.md) -- Reference procedures: battery disconnect, motherboard extraction, corrosion cleaning
+- [CONTEXT.md](../CONTEXT.md) -- Device registry (wendy-pro specs)
