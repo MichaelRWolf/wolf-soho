@@ -44,17 +44,14 @@ After IPA treatment, continue sun + fan drying to evaporate any residual moistur
 
 **Setup:** Sun provides gentle heat (target 100-120°F; prevents adhesive damage above ~140°F). Fan accelerates evaporation of moisture reaching open surfaces. Thermal cycling (sun ↔ shade over hours) helps push out pockets trapped near components.
 
-**Humidity Monitoring (How to tell if it's dry):**
+**Timeline (post-IPA):**
 
-1. **Feel the air vents** (speaker grilles, fan exhaust ports):
-   - **Still humid?** Air feels cool/damp when you hold your hand near vent. → Water still evaporating. Continue drying.
-   - **Dry?** Air feels warm/dry, no moisture sensation. → Case is dry. Ready to power on.
+The last 2-3 drops of water in deep pockets are undetectable by human senses or conventional monitoring. The IPA displacement was the critical step; residual slow evaporation is not a boot-prevention problem.
 
-2. **Timeline guide** (post-IPA):
-   - **After 24h:** Check vents. For localized water intrusion (wendy-pro) → likely dry. Vent air should feel warm/dry.
-   - **If vent air still damp after 24h:** Continue to 48h. Deeper pockets still drying.
-   - **After 48h:** Should definitely be dry unless there was bulk water. Vent air warm/dry = safe to power on.
-   - **72h:** Safety margin only (michael-pro had ~2 inches of pooled water; wendy-pro is localized, so 48h likely sufficient).
+- **After 24h (2026-08-04):** Localized intrusion like wendy-pro likely fully dry by this point. Test power-on.
+- **If no boot at 24h:** Problem is not "residual moisture still evaporating"--it's specific damage (corrosion, connector contamination, logic board short). Waiting to 48h won't help. Proceed to diagnosis: disconnect battery, inspect for corrosion, check connectors, consider motherboard extraction + cleaning.
+- **After 48h (2026-08-05):** If you chose to wait, absolute latest safe point before assuming the machine won't boot due to water damage. Power on and test.
+- **72h:** Only for bulk water scenarios (michael-pro's ~2 inches). Wendy-pro localized → 24-48h sufficient.
 
 **Why this works:** Heat builds vapor pressure inside chassis, pushing residual moisture out through seals and vents. Combined with IPA displacement, this prevents corrosion formation on the motherboard.
 
@@ -90,6 +87,5 @@ After IPA treatment, continue sun + fan drying to evaporate any residual moistur
 
 ## References
 
-- [2026-08-03_wendy-pro_water-damage.md](2026-08-03_wendy-pro_water-damage.md) -- Full incident log (redundant with this file; keep for archive)
 - [2026-06-18_michael-pro_water-damage.md](../2026-06-18_michael-pro_water-damage.md) -- Reference procedures: battery disconnect, motherboard extraction, corrosion cleaning
 - [CONTEXT.md](../CONTEXT.md) -- Device registry (wendy-pro specs)
