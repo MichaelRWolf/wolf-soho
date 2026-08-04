@@ -70,14 +70,23 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 - [x] **2026-08-03 ~14:30-15:00:** IPA applied to water-affected areas (around fan, air port edges, keyboard); brushed gently; drained and evaporated
 - [x] **2026-08-03 ~15:00-15:15:** Extended drying begun (sun + breeze, IPA fully evaporated)
 - [x] **2026-08-04 (24h post-IPA):** Machine reassembled (batteries reconnected, bottom panel screwed); air vents feel dry
-- [x] **2026-08-04 power-on test:** Machine boots on USB and battery (both work); fan on high, keyboard lights; no display output, no Apple logo, no sound.
-- [x] **Battery status:** Confirmed working (stops fan when unplugged, restarts when replugged); water on bottom not fully inspected
-- [ ] Test external display (confirms whether display connector/cable vs. GPU issue)
-- [ ] Clean display cable connectors with IPA + soft brush (address corrosion)
-- [ ] SMC reset (may address fan/power state)
-- [ ] If external display works: display assembly replacement likely needed
+- [x] **2026-08-04 power-on test:** Machine boots on USB and battery (both work); fan on high, keyboard lights; no display output on internal screen.
+- [x] **Battery status:** Confirmed working (stops fan when unplugged, restarts when replugged); water on bottom not fully inspected.
+- [x] **External USB display test:** Recovery Assistant renders perfectly (graphics, battery indicator, WiFi indicator all functional). Logic board + GPU 100% working.
+- [x] **Internal display observation:** Brief red/orange splash seen when powering off (~1/4 second). Signal reaching display but connection intermittent/degraded.
+- [ ] Clean display cable connectors with 90% IPA + soft brush (address corrosion on hinge-side connectors)
+- [ ] Power on and test internal display after connector cleaning
+- [ ] If still no display: display cable or assembly replacement needed
 
 ## Troubleshooting: No Display (2026-08-04)
+
+### External Display Testing (2026-08-04, afternoon)
+
+**Connected USB-C external display:** Machine boots to Recovery Assistant on external display (full graphics, battery indicator, WiFi indicator, keyboard indicator all functional). Logic board and GPU confirmed working.
+
+**Internal display behavior:** Completely dark during normal boot, but brief red/orange color splash observed when powering off (~1/4 second). Suggests display is receiving signal from logic board but connection is intermittent or degraded.
+
+**Conclusion:** Display connector corrosion on logic board → display cable interface most likely. Water observed on fan side near hinge edge (close to display connectors) during initial inspection.
 
 **Symptoms:**
 
