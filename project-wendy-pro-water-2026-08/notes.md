@@ -1,8 +1,8 @@
 # wendy-pro Water Damage -- Recovery Project
 
-**Device**: `wendy-pro` -- MacBook Pro
+**Device**: `wendy-pro` -- MacBook Pro 13-inch 2022 M2 (A2338)
 **Incident Date:** 2026-08-03 (Trails End Campground, Copper Harbor MI)
-**Status**: Drying in progress
+**Status**: Partial boot, no display; diagnostics in progress
 
 ## Incident Summary
 
@@ -10,12 +10,13 @@ Water bottle broke in briefcase → liquid contacted laptop → opened back pane
 
 **Current state:**
 
-- Power: USB-powered (partial boot, no display)
-- Battery: Connected; does NOT power machine on its own
+- Power: Both USB and battery power machine (confirmed 2026-08-04)
+- Battery: Connected; powers machine (has water on bottom, not fully inspected)
+- Display: Completely dark, no output on built-in screen
 - Drying method: Sun (2026-08-03), overnight indoors, fan 2-3h (2026-08-04)
 - **IPA applied: 2026-08-03 ~14:30-15:00 (completed)**
 - **Reassembled: 2026-08-04 (batteries reconnected, bottom panel screwed)**
-- **Power-on test: 2026-08-04 (24h post-IPA)** -- USB powers on, battery does not
+- **Power-on test: 2026-08-04 (24h post-IPA)** -- USB and battery both power machine
 
 ## Drying Strategy
 
@@ -69,34 +70,38 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 - [x] **2026-08-03 ~14:30-15:00:** IPA applied to water-affected areas (around fan, air port edges, keyboard); brushed gently; drained and evaporated
 - [x] **2026-08-03 ~15:00-15:15:** Extended drying begun (sun + breeze, IPA fully evaporated)
 - [x] **2026-08-04 (24h post-IPA):** Machine reassembled (batteries reconnected, bottom panel screwed); air vents feel dry
-- [x] **2026-08-04 power-on test:** USB power: machine boots partially (fan on high, keyboard lights); no display output, no Apple logo, no sound. Battery does NOT power machine on.
-- [ ] **Pending diagnostics:** Display connector issue vs. GPU damage vs. battery failure
-- [ ] **Pending:** SMC reset, display connector inspection, battery diagnostics
+- [x] **2026-08-04 power-on test:** Machine boots on USB and battery (both work); fan on high, keyboard lights; no display output, no Apple logo, no sound.
+- [x] **Battery status:** Confirmed working (stops fan when unplugged, restarts when replugged); water on bottom not fully inspected
+- [ ] Test external display (confirms whether display connector/cable vs. GPU issue)
+- [ ] Clean display cable connectors with IPA + soft brush (address corrosion)
+- [ ] SMC reset (may address fan/power state)
+- [ ] If external display works: display assembly replacement likely needed
 
 ## Troubleshooting: No Display (2026-08-04)
 
 **Symptoms:**
 
-- USB power: machine boots (fan on high immediately, keyboard backlight lights up)
-- Battery power: no power at all
+- Power: machine boots on both USB and battery (fan stops when USB unplugged, restarts when replugged)
+- Keyboard: backlight lights up
 - Display: completely black, no Apple logo, no output of any kind
 - Audio: no startup sound/chime
 - Abnormal fan behavior: starts high after 2-4 seconds (typical boot does not do this)
+- Battery: has water on bottom but functions (not fully inspected)
 
 **Likely causes (priority):**
 
-1. Display connector corroded or loose → water intrusion near display ribbon connector
-2. GPU/display subsystem damaged by water
-3. Battery damaged/failed (explains no battery power)
-4. SMC/firmware state from water exposure (less likely given USB power works)
+1. Display cable connector corrosion (most common post-water-damage symptom)
+2. Display cable (flex cable) internal damage from water exposure
+3. Display assembly requiring replacement (if cable is clean but still no display)
+4. Logic board display-management IC chips corroded
 
-**Next steps:**
+**Diagnostic steps (order matters):**
 
-1. Try SMC reset (Shift+Control+Option+Power for 10s, then power on) -- may reset fan/power behavior
-2. Inspect display connector on logic board (visible with back panel off) for corrosion/moisture
-3. If connector looks corroded: disconnect, clean with 90% IPA on cotton swab
-4. Check battery connector for corrosion (may explain battery power failure)
-5. If still no display: may need motherboard extraction for detailed inspection (reference michael-pro June recovery for procedure)
+1. **External display test:** Connect external USB-C/Thunderbolt display (available) → if external display works, confirms logic board is functional and display/cable is the issue
+2. **SMC reset:** Shift+Control+Option+Power for 10s (may reset fan/power state and display driver)
+3. **Clean display connectors:** Open back panel, disconnect display cable, use 90% IPA + soft toothbrush to gently clean both connectors (motherboard side + cable side), reconnect and test
+4. **If external display works but internal doesn't:** Display cable or assembly replacement needed (iFixit or Apple Authorized Service)
+5. **If external display also fails:** Logic board damage; consider professional service
 
 ## Comparison to michael-pro Recovery
 
