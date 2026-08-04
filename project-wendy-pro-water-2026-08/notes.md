@@ -74,9 +74,12 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 - [x] **Battery status:** Confirmed working (stops fan when unplugged, restarts when replugged); water on bottom not fully inspected.
 - [x] **External USB display test:** Recovery Assistant renders perfectly (graphics, battery indicator, WiFi indicator all functional). Logic board + GPU 100% working.
 - [x] **Display behavior on power-off:** Brief red/orange splash observed on external USB display (~1/4 second). Internal Retina display remained completely dark. Splash indicates normal graphics output during shutdown sequence.
-- [ ] Clean display cable connectors with 90% IPA + soft brush (address corrosion on hinge-side connectors)
-- [ ] Power on and test internal display after connector cleaning
-- [ ] If still no display: display cable or assembly replacement needed
+- [x] Clean display cable connectors with 90% IPA + soft brush (steps 15-17: bracket, cover, disconnect)
+- [x] Power on and test internal display after connector cleaning → DP signal detected briefly, no graphics rendered
+- [x] Test with external display: Cmd+V (verbose boot) → blank. Cmd+S (single-user mode) → blank.
+- [x] Network check via Beryl: wendy-pro not reaching WiFi (system stuck early in boot)
+- [ ] **Phase 3: Display assembly disassembly** -- inspect display panel connector for corrosion; test panel isolation
+- [ ] If panel is corroded/damaged: plan display replacement
 
 ## Troubleshooting: No Display (2026-08-04)
 
@@ -120,13 +123,35 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 
 **Note:** Step 22 (display board cable covers) is structural only; not needed for this inspection.
 
-### Phase 3: Display Assembly Disassembly (LAST RESORT - must power display to test)
+### Phase 3: Display Assembly Disassembly (2026-08-04, evening)
 
-- Only if connectors + cable are clean and display still shows nothing
-- Display panel must be powered to verify it's receiving/responding to signal
-- **Disconnect display cable (iFixit [A2338] Step 17):** Use spudger to pry and disconnect the display cable from the panel side
-- Once separated, can safely power display (limited test: brief power pulse to confirm response)
-- Inspect display connector on panel side for water damage, corrosion, bent pins
+**Diagnosis to date:**
+
+- Cable visually perfect (bright gold contacts, no corrosion, no damage)
+- Logic board + GPU proven functional (Recovery Assistant rendered before)
+- Display panel not responding to any signal (DP indicator only, no graphics/text output)
+- System not reaching network initialization (stuck early in boot)
+
+**Conclusion:** Display panel is water-damaged internally or panel-side connector is corroded.
+
+**Disassembly procedure (iFixit [A2338]):**
+
+- Steps 15-17 already completed (bracket, cover, cable disconnected from logic board)
+- Continue with hinge disassembly to fully separate display from chassis
+- Once separated: inspect display panel connector for corrosion, water residue, bent pins
+- Take photos of connector condition before attempting any cleaning
+
+**Display connector inspection:**
+
+- Look for mineral deposits, oxidation, bent/broken pins on both sides
+- If corroded: attempt 90% IPA + soft brush cleaning on panel-side connector only (do NOT soak)
+- If visibly damaged (bent pins, broken traces): panel requires replacement
+
+**Testing isolated panel (optional):**
+
+- Once disconnected: can apply limited power directly to panel (brief test) to confirm response
+- Risks: potential short if there's internal water damage; only proceed if you want to know definitively
+- Safer: assume panel is damaged if connector is corroded and plan replacement
 
 **Safety principle:** Only power the display after confirming connector/cable are clean and undamaged. If display is powered before cleaning, corrosion may create short circuits or permanent damage to the display IC chips.
 
