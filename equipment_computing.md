@@ -96,26 +96,24 @@ Use x10 probe for signals above 40V.
 **Used for:** Bluetti EB70 water damage diagnosis -- see
 `../rv-2003-dutchman/PROJECT_bluetti_water_damage_2025/CLAUDE.md`
 
-### ThinkVision E24-10 -- Lenovo USB-C Display
+### ThinkVision E24-10 -- Lenovo 24" Display
 
-24-inch external monitor with USB-C and power delivery (65W).
+24-inch external monitor with DisplayPort and VGA inputs.
 Manufactured 2019-04-22.
 
-| Spec           | Value                                            |
-|----------------|--------------------------------------------------|
-| Model          | ThinkVision E24-10                               |
-| Type Code      | D17238FE0                                        |
-| MFM            | 61B7-JAR6-WW                                     |
-| FRU            | 61B7JAR6WVV904EH75                               |
-| Serial         | V9-04EH75                                        |
-| Chassis        | 790NY1300D00R01                                  |
-| Display size   | 24 inches                                        |
-| Connectivity   | USB-C (DP Alt Mode, 65W PD)                      |
-| Video inputs   | USB-C (primary), DisplayPort, VGA (D-SUB 15-pin) |
-| Power delivery | USB-C 65W                                        |
-| Date of Mfg    | 2019-04-22                                       |
+| Spec         | Value                              |
+|--------------|------------------------------------|
+| Model        | ThinkVision E24-10                 |
+| Type Code    | D17238FE0                          |
+| MFM          | 61B7-JAR6-WW                       |
+| FRU          | 61B7JAR6WVV904EH75                 |
+| Serial       | V9-04EH75                          |
+| Chassis      | 790NY1300D00R01                    |
+| Display size | 24 inches                          |
+| Video inputs | DisplayPort (primary), VGA (D-SUB) |
+| Date of Mfg  | 2019-04-22                         |
 
-**Connectors:** USB-C input (D-shaped, primary video + power), DisplayPort input (flat rectangular connector), VGA (15-pin D-SUB, legacy analog).
+**Connectors:** DisplayPort input (flat rectangular, corner cut off), VGA (15-pin D-SUB legacy analog). No USB-C input -- video via DisplayPort only.
 
 **Used for:** wendy-pro water damage diagnostics (2026-08-04) -- confirmed logic board + GPU functionality via external display testing.
 
