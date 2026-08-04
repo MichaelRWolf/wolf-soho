@@ -131,7 +131,7 @@ Manufactured by Anker Innovations Limited, China.
 | Compliance   | CAN ICES-3 (B)/NMB-3(B)                  |
 | Manufacturer | Anker Innovations Limited (China)        |
 
-**Note:** Does not have DisplayPort Alt Mode USB-C output; HDMI output available. Not compatible for driving Lenovo E24-10 display (which requires USB-C DP Alt Mode input).
+**Note:** HDMI output only. Not compatible for driving Lenovo E24-10 display (which requires DisplayPort input). Wolf-air needs Thunderbolt 2 to DisplayPort adapter to drive Lenovo.
 
 ---
 
