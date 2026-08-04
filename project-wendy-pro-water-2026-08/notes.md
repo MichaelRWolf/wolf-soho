@@ -78,8 +78,25 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 - [x] Power on and test internal display after connector cleaning → DP signal detected briefly, no graphics rendered
 - [x] Test with external display: Cmd+V (verbose boot) → blank. Cmd+S (single-user mode) → blank.
 - [x] Network check via Beryl: wendy-pro not reaching WiFi (system stuck early in boot)
+- [x] **Critical test: boot with display cable disconnected** (2026-08-04, evening) → Nothing on Retina or external display. System not reaching boot/WiFi.
 - [ ] **Phase 3: Display assembly disassembly** -- inspect display panel connector for corrosion; test panel isolation
-- [ ] If panel is corroded/damaged: plan display replacement
+- [ ] **Diagnostic goal:** Confirm display is the single point of failure; verify logic board is fully functional
+
+## Critical Finding: Boot Fails Even Without Display Cable (2026-08-04, evening)
+
+**Test:** Disconnected display cable completely at logic board, booted with external display (ThinkVision E24-10) only.
+
+**Result:** Nothing on either internal Retina or external display. System does not reach boot output.
+
+**Implication:** Disconnecting the display cable did NOT restore boot. This suggests:
+
+- Display short-circuit is not blocking boot (or short is deeper in logic board)
+- Something else on logic board may be failing (unlikely but possible)
+- Repeated power cycles may have caused secondary damage beyond display connector
+
+**Next diagnostic step:** Inspect display panel connector for evidence of water damage. If connector is corroded, display replacement is the answer. If connector looks clean, the problem may be deeper (logic board IC, not just display).
+
+---
 
 ## Troubleshooting: No Display (2026-08-04)
 
@@ -195,6 +212,35 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 
 Display has been powered on multiple times during diagnostic phase (2026-08-04). If water-corrosion damage was to occur, repeated cycles likely would have triggered it already. Proceeding with connector cleaning and testing carries minimal additional risk.
 
+## Display Panel Disassembly & Diagnostics
+
+**Objective:** Determine if display panel connector corrosion is the single point of failure, or if logic board damage extends beyond display subsystem.
+
+**Disassembly sequence (iFixit [A2338] full guide):**
+
+1. Steps 15-17 already completed (bracket, cover, cable disconnected from logic board side)
+2. **Next: Hinge disassembly** -- iFixit steps follow the display down to full separation
+   - Involves unspooling additional flex cables (antenna, etc.)
+   - Handle flex cables carefully (they're fragile when wet)
+   - Take photos at each stage showing cable routing
+3. **Once display panel is separated:** Access panel-side connector for inspection
+
+**At the display panel connector, document:**
+
+- Corrosion presence/severity (white, green, or black oxidation = mineral deposits)
+- Water residue or moisture inside connector
+- Bent or broken pins
+- Connector contact cleanliness (bright gold vs. tarnished)
+- Any visible cracks or delamination on circuit traces
+
+**Decision tree:**
+
+- **If connector is heavily corroded:** Confirm display is the culprit. Order replacement display assembly. Cost: ~$200-400. Proceed with replacement.
+- **If connector looks clean:** Problem may be internal display IC damage (harder to fix) or logic board display interface damage (indicates broader water damage). Consider professional service or replacement.
+- **If unsure:** Clean panel-side connector with 90% IPA + soft brush, attempt to reconnect and test with external display. One more data point.
+
+**Important:** Do NOT power the display panel directly unless you've confirmed connector is clean and corrosion-free. Risk of short circuits causing permanent damage.
+
 ## References
 
 - [A2338] iFixit. (2022). MacBook Pro 13-Inch 2022 (M2) Display Assembly Replacement. Retrieved from <https://www.ifixit.com/Guide/MacBook+Pro+13-Inch+2022+(M2)+Display+Assembly+Replacement/156445>
@@ -203,5 +249,6 @@ Display has been powered on multiple times during diagnostic phase (2026-08-04).
   - **Step 17:** Disconnect the display cable (spudger to pry and disconnect)
   - **Step 22:** Remove display board cable covers (structural only, not connector-related)
   - **Antenna steps (18-21):** Not needed for cable inspection/cleaning
+  - **Steps 18+:** Hinge disassembly to full display separation (follow guide for details)
 - [2026-06-18_michael-pro_water-damage.md](../2026-06-18_michael-pro_water-damage.md) -- Reference procedures: battery disconnect, motherboard extraction, corrosion cleaning
 - [CONTEXT.md](../CONTEXT.md) -- Device registry (wendy-pro specs)
