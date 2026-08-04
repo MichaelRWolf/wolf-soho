@@ -20,16 +20,15 @@ Eligible but proceed with caution given hardware state:
 - **Recommended order:** replace battery first, then evaluate Tahoe -- or accept that sustained-load performance will degrade noticeably on Tahoe without a fresh battery
 - Tahoe is the end of the Intel road; staying on Sequoia 15.x remains a valid lower-risk option until the battery is replaced
 
-## `wendy-pro` -- MacBook Pro (Wendy's)
+## `wendy-pro` -- MacBook Pro (Wendy's) -- ABANDONED
 
 - Model: MacBook Pro 13-inch 2022 M2 (A2338)
 - Serial: CO2H519BQ05F
 - Chip: Apple M2 (8-core: 4 performance + 4 efficiency)
 - RAM: 8 GB
 - macOS: 15.7.5 Sequoia (build 24G624) (2026-05-12)
-- macOS 26 Tahoe: **Compatible**
-- Battery connector: ZIF (iFixit guide [WEN2022])
-- Notes: Water damage incident 2026-08-03; recovery in progress (see [2026-08-03_wendy-pro_water-damage.md](2026-08-03_wendy-pro_water-damage.md))
+- Status: **Water damage 2026-08-03; logic board failure; not viable for recovery**
+- Notes: Logic board damage prevents network boot. Repair cost ($200-$1,100) approaches replacement. See [project-wendy-pro-water-2026-08/notes.md](project-wendy-pro-water-2026-08/notes.md)
 
 ## `wolf-air` -- MacBook Air
 

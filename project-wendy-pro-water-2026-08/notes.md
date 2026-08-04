@@ -2,7 +2,7 @@
 
 **Device**: `wendy-pro` -- MacBook Pro 13-inch 2022 M2 (A2338)
 **Incident Date:** 2026-08-03 (Trails End Campground, Copper Harbor MI)
-**Status**: Partial boot, no display; diagnostics in progress
+**Status**: Almost abandoned. Logic board damage; not viable for recovery.
 
 ## Incident Summary
 
@@ -240,6 +240,52 @@ Display has been powered on multiple times during diagnostic phase (2026-08-04).
 - **If unsure:** Clean panel-side connector with 90% IPA + soft brush, attempt to reconnect and test with external display. One more data point.
 
 **Important:** Do NOT power the display panel directly unless you've confirmed connector is clean and corrosion-free. Risk of short circuits causing permanent damage.
+
+## Final Diagnosis: Logic Board Failure (2026-08-04, evening)
+
+**Observed behavior:**
+
+- Fan spins high for 0-5 seconds, then stops
+- Keyboard backlights on
+- External display briefly wakes from power save when DP cable touched (indicates GPU attempting output)
+- Pink flash on external display (~1/4 second) before power-off completes
+- **System never reaches network boot stage** (WiFi unavailable even with external display)
+
+**Diagnosis:**
+Not a display issue. Display cable was already cleaned. System is stuck in early boot before reaching network initialization, suggesting logic board damage beyond display connector. The pink flash indicates GPU is functional, but power management and core boot logic are compromised.
+
+**Conclusion:**
+Logic board is water-damaged and not viable for field repair. Full motherboard replacement or component-level repair required.
+
+## Logic Board Replacement: Cost Analysis (2026-08-04)
+
+### Option 1: Apple Authorized Service
+
+- Out-of-warranty cost: **$500-$1,100** (logic board replacement + labor)
+- Timeline: 5-7 business days
+- Includes diagnostics and warranty on repair
+
+### Option 2: Independent Micro-Soldering Repair
+
+- Component-level repair: **$200-$350**
+- Targets specific corroded IC chips or solder joints instead of full board replacement
+- Timeline: 3-5 business days
+- No data loss; original board preserved
+- Trade-off: quality varies by shop; need vetted local or mail-in service
+
+### Option 3: Used/Refurbished Logic Board (DIY)
+
+- Replacement board: **$300-$600** (eBay, specialty retailers)
+- DIY labor: High risk (soldering connector, thermal paste application)
+- Not recommended without equipment/experience
+
+**Reality Check:**
+Even at the low end ($200 repair OR $300 used board), total cost for recovery is approaching **$300-$600**. Machine itself is 2022 (good specs: M2, 8GB). At current market rates (Aug 2026), a refurbished 2024 M4 or used 2023 M3 MacBook Pro or Air is **$500-$800**, offering newer silicon + warranty + no risk.
+
+**Recommendation:**
+Logic board repair/replacement is not cost-effective given Wendy's experience with recent MacBooks (both her 2022 and michael's 2020 have failed). Replace with a **proven used model (M3 or M4)** or new entry-level M5 instead.
+
+---
 
 ## References
 
