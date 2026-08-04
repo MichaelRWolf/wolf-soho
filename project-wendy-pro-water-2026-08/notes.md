@@ -104,20 +104,29 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 
 ### Phase 2: Display Cable Inspection (SAFE - no power to display)
 
-- With back panel still open and machine powered on (external display in use for visibility):
+**Preparation (iFixit [A2338] Steps 15-16):**
+
+- Remove display cable bracket (T3 Torx)
+- Remove display cable cover (T3 Torx)
+- This exposes the cable and connector for visual inspection
+
+**Inspection (machine powered on with external display in use for visibility):**
+
 - Visually inspect the display cable from connector to hinge area
 - Look for: water residue, corrosion, bent/damaged pins, disconnected sections
 - Gently flex cable at hinge (where water was observed) while watching external display for any signal flicker
-- If cable looks corroded: clean with 90% IPA on Q-tip (do NOT soak)
-- Allow to dry, test again with external display
+- If cable shows corrosion: clean with 90% IPA on Q-tip (do NOT soak)
+- Allow to dry (5-10 min), replace covers, test again with external display
+
+**Note:** Step 22 (display board cable covers) is structural only; not needed for this inspection.
 
 ### Phase 3: Display Assembly Disassembly (LAST RESORT - must power display to test)
 
 - Only if connectors + cable are clean and display still shows nothing
 - Display panel must be powered to verify it's receiving/responding to signal
-- Requires: full hinge disassembly, display panel removal
+- **Disconnect display cable (iFixit [A2338] Step 17):** Use spudger to pry and disconnect the display cable from the panel side
 - Once separated, can safely power display (limited test: brief power pulse to confirm response)
-- Inspect display connector on panel side for water damage
+- Inspect display connector on panel side for water damage, corrosion, bent pins
 
 **Safety principle:** Only power the display after confirming connector/cable are clean and undamaged. If display is powered before cleaning, corrosion may create short circuits or permanent damage to the display IC chips.
 
@@ -157,7 +166,17 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 | Post-IPA drying | 72 hours (safety margin)        | 24-72 hours target               |
 | Improvement     | Waited → corrosion risk longer  | Displace trapped water first     |
 
+## Notes on Prior Power-On Testing
+
+Display has been powered on multiple times during diagnostic phase (2026-08-04). If water-corrosion damage was to occur, repeated cycles likely would have triggered it already. Proceeding with connector cleaning and testing carries minimal additional risk.
+
 ## References
 
+- [A2338] iFixit. (2022). MacBook Pro 13-Inch 2022 (M2) Display Assembly Replacement. Retrieved from <https://www.ifixit.com/Guide/MacBook+Pro+13-Inch+2022+(M2)+Display+Assembly+Replacement/156445>
+  - **Step 15:** Remove display cable bracket (T3 Torx)
+  - **Step 16:** Remove display cable cover (T3 Torx)
+  - **Step 17:** Disconnect the display cable (spudger to pry and disconnect)
+  - **Step 22:** Remove display board cable covers (structural only, not connector-related)
+  - **Antenna steps (18-21):** Not needed for cable inspection/cleaning
 - [2026-06-18_michael-pro_water-damage.md](../2026-06-18_michael-pro_water-damage.md) -- Reference procedures: battery disconnect, motherboard extraction, corrosion cleaning
 - [CONTEXT.md](../CONTEXT.md) -- Device registry (wendy-pro specs)
