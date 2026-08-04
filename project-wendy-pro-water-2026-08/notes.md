@@ -10,12 +10,12 @@ Water bottle broke in briefcase → liquid contacted laptop → opened back pane
 
 **Current state:**
 
-- Power: Off (safe)
-- Battery: Assumed connected (unknown if disconnected yet)
-- Drying method: Sun + fan
-- **IPA applied: 2026-08-03 ~14:30-15:00 (just completed)**
-- **Extended drying started: 2026-08-03 ~15:00-15:15 (after IPA evaporated)**
-- **Target power-on test: 2026-08-04 to 2026-08-05** (after 24-48h post-IPA drying)
+- Power: USB-powered (partial boot, no display)
+- Battery: Connected; does NOT power machine on its own
+- Drying method: Sun (2026-08-03), overnight indoors, fan 2-3h (2026-08-04)
+- **IPA applied: 2026-08-03 ~14:30-15:00 (completed)**
+- **Reassembled: 2026-08-04 (batteries reconnected, bottom panel screwed)**
+- **Power-on test: 2026-08-04 (24h post-IPA)** -- USB powers on, battery does not
 
 ## Drying Strategy
 
@@ -68,10 +68,35 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 
 - [x] **2026-08-03 ~14:30-15:00:** IPA applied to water-affected areas (around fan, air port edges, keyboard); brushed gently; drained and evaporated
 - [x] **2026-08-03 ~15:00-15:15:** Extended drying begun (sun + breeze, IPA fully evaporated)
-- [ ] **2026-08-04 ~14:30-15:15 (24h post-IPA):** Check air vents: feel exhaust for humidity. If dry/warm → ready for power-on test. If damp/cool → continue to 48h.
-- [ ] **2026-08-05 ~14:30-15:15 (48h post-IPA):** If not tested yet, check vents again. Should definitely be dry. Attempt power-on.
-- [ ] **If powers on successfully:** Boot into system, run Disk Utility and Activity Monitor to confirm no hardware errors
-- [ ] **If does not power on:** Refer to michael-pro procedure for battery disconnection and motherboard inspection
+- [x] **2026-08-04 (24h post-IPA):** Machine reassembled (batteries reconnected, bottom panel screwed); air vents feel dry
+- [x] **2026-08-04 power-on test:** USB power: machine boots partially (fan on high, keyboard lights); no display output, no Apple logo, no sound. Battery does NOT power machine on.
+- [ ] **Pending diagnostics:** Display connector issue vs. GPU damage vs. battery failure
+- [ ] **Pending:** SMC reset, display connector inspection, battery diagnostics
+
+## Troubleshooting: No Display (2026-08-04)
+
+**Symptoms:**
+
+- USB power: machine boots (fan on high immediately, keyboard backlight lights up)
+- Battery power: no power at all
+- Display: completely black, no Apple logo, no output of any kind
+- Audio: no startup sound/chime
+- Abnormal fan behavior: starts high after 2-4 seconds (typical boot does not do this)
+
+**Likely causes (priority):**
+
+1. Display connector corroded or loose → water intrusion near display ribbon connector
+2. GPU/display subsystem damaged by water
+3. Battery damaged/failed (explains no battery power)
+4. SMC/firmware state from water exposure (less likely given USB power works)
+
+**Next steps:**
+
+1. Try SMC reset (Shift+Control+Option+Power for 10s, then power on) -- may reset fan/power behavior
+2. Inspect display connector on logic board (visible with back panel off) for corrosion/moisture
+3. If connector looks corroded: disconnect, clean with 90% IPA on cotton swab
+4. Check battery connector for corrosion (may explain battery power failure)
+5. If still no display: may need motherboard extraction for detailed inspection (reference michael-pro June recovery for procedure)
 
 ## Comparison to michael-pro Recovery
 
