@@ -114,6 +114,22 @@ Manufactured 2019-04-22.
 
 **Used for:** wendy-pro water damage diagnostics (2026-08-04) -- confirmed logic board + GPU functionality via external display testing.
 
+### Anker Premium 7-in-1 USB-C Hub
+
+USB-C hub with multiple ports for connectivity and peripheral support.
+Manufactured by Anker Innovations Limited, China.
+
+| Spec         | Value                                    |
+|--------------|------------------------------------------|
+| Product name | Premium 7-in-1 USB-C Hub 1H2C2A1S1M      |
+| Model        | A8346                                    |
+| Serial       | AELQPN0A2430034                          |
+| Ports        | 1x HDMI, 2x USB-C, 2x USB-A, SD, microSD |
+| Compliance   | CAN ICES-3 (B)/NMB-3(B)                  |
+| Manufacturer | Anker Innovations Limited (China)        |
+
+**Note:** Does not have DisplayPort Alt Mode USB-C output; HDMI output available. Not compatible for driving Lenovo E24-10 display (which requires USB-C DP Alt Mode input).
+
 ---
 
 ## References
