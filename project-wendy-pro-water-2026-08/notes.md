@@ -73,7 +73,7 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 - [x] **2026-08-04 power-on test:** Machine boots on USB and battery (both work); fan on high, keyboard lights; no display output on internal screen.
 - [x] **Battery status:** Confirmed working (stops fan when unplugged, restarts when replugged); water on bottom not fully inspected.
 - [x] **External USB display test:** Recovery Assistant renders perfectly (graphics, battery indicator, WiFi indicator all functional). Logic board + GPU 100% working.
-- [x] **Internal display observation:** Brief red/orange splash seen when powering off (~1/4 second). Signal reaching display but connection intermittent/degraded.
+- [x] **Display behavior on power-off:** Brief red/orange splash observed on external USB display (~1/4 second). Internal Retina display remained completely dark. Splash indicates normal graphics output during shutdown sequence.
 - [ ] Clean display cable connectors with 90% IPA + soft brush (address corrosion on hinge-side connectors)
 - [ ] Power on and test internal display after connector cleaning
 - [ ] If still no display: display cable or assembly replacement needed
@@ -86,7 +86,40 @@ The last 2-3 drops of water in deep pockets are undetectable by human senses or 
 
 **Internal display behavior:** Completely dark during normal boot, but brief red/orange color splash observed when powering off (~1/4 second). Suggests display is receiving signal from logic board but connection is intermittent or degraded.
 
-**Conclusion:** Display connector corrosion on logic board → display cable interface most likely. Water observed on fan side near hinge edge (close to display connectors) during initial inspection.
+**Conclusion:** Logic board + GPU + USB display output all functional. Internal Retina display is receiving no signal (or signal is not reaching the panel). Issue is in the display connector, cable, or display assembly itself.
+
+### Diagnostic Strategy: Connector → Cable → Display (Safe Inspection)
+
+**Goal:** Determine root cause without powering a potentially water-damaged display.
+
+### Phase 1: Connector Cleaning (SAFE - no power to display)
+
+- Open back panel, locate display cable connector at hinge
+- Disconnect press connector (gentle lift, no screws)
+- Inspect connector pins visually (use magnifier) for corrosion, mineral deposits, water residue
+- Clean both sides: 90% IPA + soft toothbrush on connector pins and socket
+- Allow to dry completely (~5-10 min)
+- Reconnect carefully
+- Test protocol: Power on, connect external USB display, observe internal Retina display. If display works → problem solved. If not → proceed to Phase 2.
+
+### Phase 2: Display Cable Inspection (SAFE - no power to display)
+
+- With back panel still open and machine powered on (external display in use for visibility):
+- Visually inspect the display cable from connector to hinge area
+- Look for: water residue, corrosion, bent/damaged pins, disconnected sections
+- Gently flex cable at hinge (where water was observed) while watching external display for any signal flicker
+- If cable looks corroded: clean with 90% IPA on Q-tip (do NOT soak)
+- Allow to dry, test again with external display
+
+### Phase 3: Display Assembly Disassembly (LAST RESORT - must power display to test)
+
+- Only if connectors + cable are clean and display still shows nothing
+- Display panel must be powered to verify it's receiving/responding to signal
+- Requires: full hinge disassembly, display panel removal
+- Once separated, can safely power display (limited test: brief power pulse to confirm response)
+- Inspect display connector on panel side for water damage
+
+**Safety principle:** Only power the display after confirming connector/cable are clean and undamaged. If display is powered before cleaning, corrosion may create short circuits or permanent damage to the display IC chips.
 
 **Symptoms:**
 
