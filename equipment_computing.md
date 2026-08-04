@@ -39,6 +39,7 @@ Eligible but proceed with caution given hardware state:
 - macOS: 12.7.6 Monterey (build 21H1320) (2026-05-12)
 - macOS 26 Tahoe: **Not compatible** (max: macOS 12 Monterey)
 - mDNS name: wolf-air.local
+- Ports: MagSafe (power), Thunderbolt 2 (left), 2x USB-A (rectangular data/charging), 3.5mm headphone jack
 
 ## `michael-iphone` -- iPhone (Michael's)
 
@@ -100,17 +101,21 @@ Use x10 probe for signals above 40V.
 24-inch external monitor with USB-C and power delivery (65W).
 Manufactured 2019-04-22.
 
-| Spec         | Value                      |
-|--------------|----------------------------|
-| Model        | ThinkVision E24-10         |
-| Type Code    | D17238FE0                  |
-| MFM          | 61B7-JAR6-WW               |
-| FRU          | 61B7JAR6WVV904EH75         |
-| Serial       | V9-04EH75                  |
-| Chassis      | 790NY1300D00R01            |
-| Display size | 24 inches                  |
-| Connectivity | USB-C (power delivery 65W) |
-| Date of Mfg  | 2019-04-22                 |
+| Spec           | Value                                            |
+|----------------|--------------------------------------------------|
+| Model          | ThinkVision E24-10                               |
+| Type Code      | D17238FE0                                        |
+| MFM            | 61B7-JAR6-WW                                     |
+| FRU            | 61B7JAR6WVV904EH75                               |
+| Serial         | V9-04EH75                                        |
+| Chassis        | 790NY1300D00R01                                  |
+| Display size   | 24 inches                                        |
+| Connectivity   | USB-C (DP Alt Mode, 65W PD)                      |
+| Video inputs   | USB-C (primary), DisplayPort, VGA (D-SUB 15-pin) |
+| Power delivery | USB-C 65W                                        |
+| Date of Mfg    | 2019-04-22                                       |
+
+**Connectors:** USB-C input (D-shaped, primary video + power), DisplayPort input (flat rectangular connector), VGA (15-pin D-SUB, legacy analog).
 
 **Used for:** wendy-pro water damage diagnostics (2026-08-04) -- confirmed logic board + GPU functionality via external display testing.
 
