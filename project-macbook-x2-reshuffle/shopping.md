@@ -135,18 +135,6 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 
 ---
 
-## Top Contenders (Active Hunt)
-
-**#43 and #44 are the high runners (both gadgetpickup Open Box, M3 Air 13" 16GB).** #3 is ideal fallback when restocked.
-
-| #   | Offering              | CPU + Model + Screen | RAM | Disk | Price | Status              |
-|-----|-----------------------|----------------------|----:|-----:|------:|---------------------|
-| #43 | gadgetpickup Open Box | M3 Air 13            |  16 |  256 |  $750 | 🟢 Available now    |
-| #44 | gadgetpickup Open Box | M3 Air 13            |  16 |  512 |  $850 | 🟢 Available now    |
-| #3  | M3 (Out of stock)     | M3 Air 13            |  16 |  ??? |   TBD | Waiting for restock |
-
----
-
 ## Active Listings
 
 ### Quick Comparison (Candidates)
