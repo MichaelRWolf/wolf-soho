@@ -132,3 +132,72 @@ This project has **no build system, no tests, no CI/CD**. Quality is enforced th
 - Verification that numbers (cost, timeline, success probability) match across files
 
 Do NOT add build scripts, tests, or CI pipelines unless explicitly requested.
+
+---
+
+## Shopping File Naming and Structure (eBay Hunt Snapshots)
+
+### File Organization
+
+**@shopping.md** = Single source of truth for active top contenders. Summary of the best options currently under consideration, with strikethrough used to mark items no longer viable (never delete rows).
+
+**shopping-YYYY-MM-DDTHH:MM.md** = Timestamped snapshots of eBay search results. Each file captures a specific search/view on a given date+time. Useful for tracking how market inventory evolves over hours/days.
+
+### Table Format (All Files)
+
+All shopping files (both @shopping.md and snapshot files) use identical table format:
+
+```markdown
+| #     | Offering          | CPU + Model + Screen | RAM | Disk | Price | OS/EOL        | Video    | Batt | MDM | Cond        | Status       |
+|-------|-------------------|----------------------|-----|------|-------|---------------|----------|------|-----|-------------|--------------|
+| 0     | wolf-air          | i5 1.8 dual          | 8   | 128  |       | Monterey/2026 | 1440×900 | 630  | No  | Good        | Interim      |
+| 3     | #3                | M3 Air 13            | 16  | ???  |       | Sonoma/2028   | 1080p+   | ???  | ??? | ???         | Out of stock |
+| ~~1~~ | ~~#1 (archived)~~ | M2 Air 13            | 16  | 512  | 615   | Sonoma/2028   | 1080p+   | ???  | ??? | eBay Refurb | Superseded   |
+```
+
+### Offering ID (Cross-Snapshot Numbering)
+
+Numbers increment **across all snapshot files** to create a persistent offering ID. This allows referencing the same listing consistently, even as it appears in different snapshots or time periods.
+
+**Example:** #43, #44, #45 are unique IDs that stay the same whether you find them in shopping.md or shopping-2026-08-05T14:55.md.
+
+### Strikethrough (No Deletion)
+
+When an offering is no longer viable:
+
+- ~~Strikethrough the entire row~~ (never delete)
+- Update the Status column (e.g., "Sold out", "Superseded", "Seller unresponsive")
+- Add brief explanation in parentheses (e.g., `~~#1 (archived)~~` or `~~#2 (unavailable)~~`)
+
+This preserves history and context for future reference.
+
+### Sub-Headings (Detailed Offering Info)
+
+Each offering with a summary row also has a detailed sub-heading section:
+
+```markdown
+### #43 --- gadgetpickup M3 Open Box 256GB (🟢 AVAILABLE NOW)
+
+**Status:** Active listing; awaiting seller response on MagSafe 3 adapter
+
+- **Link:** [eBay Listing #307108920696](https://www.ebay.com/itm/307108920696)
+- **Seller:** gadgetpickup (99.9% positive, 17.4K ratings)
+- **Price:** $749.99
+- **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 256GB SSD, Space Gray
+- **Condition:** Open Box (brand new, box opened, never used)
+- ... [more details]
+```
+
+**URL Preservation:** Once a URL is captured (from eBay or other source), **preserve it in future edits**. This allows navigating back to the exact listing for verification, tracking price changes, or confirming availability.
+
+If URL is not available (e.g., text/image scrape of search results without direct link), note "TBD" or omit the Link field. Once a URL is found later, add it and preserve it.
+
+### Snapshot Usage
+
+Create a new snapshot file when:
+
+- Hunting a specific segment (e.g., "M3 16GB on eBay," "refurbished M2 options")
+- Capturing market inventory at a specific time (useful for tracking price trends, stock rotation)
+- Organizing search results into the common table format
+
+Snapshots complement @shopping.md; they don't replace it. The main file stays focused on top contenders.
