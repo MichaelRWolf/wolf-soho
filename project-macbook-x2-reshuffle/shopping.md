@@ -122,9 +122,9 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 | #   | Offering      | CPU           |   RAM | Disk   | OS/EOL          | Video      | Batt   | MDM   | Cond          | Status              |
 |-----|---------------|---------------|------:|--------|-----------------|------------|--------|-------|---------------|---------------------|
-| 0   | wolf-air      | i5 1.8 dual   |     8 | ???    | Monterey/2026   | 1440×900   |        | N/A   | Good          | Interim (Wendy)     |
-| 0   | michael-pro   | i5 2.0 quad   |    16 | ???    | Sequoia/2027    | Retina     | 150%   | N/A   | Damaged       | Water damage        |
-| 0   | wendy-pro     | M2 (8-core)   |     8 | ???    | Sequoia/2027    | Retina     | ???    | N/A   | Abandoned     | Water damage        |
+| 0   | wolf-air      | i5 1.8 dual   |     8 | 128    | Monterey/2026   | 1440×900   |        | N/A   | Good          | Interim (Wendy)     |
+| 0   | michael-pro   | i5 2.0 quad   |    16 | 256    | Sequoia/2027    | Retina     | 150%   | N/A   | Damaged       | Water damage        |
+| 0   | wendy-pro     | M2 (8-core)   |     8 | 256    | Sequoia/2027    | Retina     | ???    | N/A   | Abandoned     | Water damage        |
 | --- | ------------- | ------------- | ----: | ------ | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
 | 1   | Apple         | M2            |    16 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
 | 2   | Bilberry      | M2            |     8 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |

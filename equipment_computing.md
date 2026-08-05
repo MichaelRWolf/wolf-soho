@@ -5,6 +5,7 @@
 - Model: MacBook Pro 13-inch Late 2020 (A2251) -- MacBookPro16,2
 - Chip: Intel Core i5, Quad-Core, 2 GHz
 - RAM: 16 GB
+- Storage: 256GB SSD (estimated; 2020 Intel Pro baseline)
 - macOS: 15.7.3 Sequoia (build 24G419) (2026-05-12)
 - macOS 26 Tahoe: **Compatible** -- last Intel-supported macOS
 - Battery connector: ZIF (iFixit guide [MIC2020])
@@ -26,6 +27,7 @@ Eligible but proceed with caution given hardware state:
 - Serial: CO2H519BQ05F
 - Chip: Apple M2 (8-core: 4 performance + 4 efficiency)
 - RAM: 8 GB
+- Storage: 256GB SSD (estimated; 2022 M2 baseline)
 - macOS: 15.7.5 Sequoia (build 24G624) (2026-05-12)
 - Status: **Water damage 2026-08-03; logic board failure; not viable for recovery**
 - Notes: Logic board damage prevents network boot. Repair cost ($200-$1,100) approaches replacement. See [project-wendy-pro-water-2026-08/notes.md](project-wendy-pro-water-2026-08/notes.md)
@@ -35,6 +37,7 @@ Eligible but proceed with caution given hardware state:
 - Model: MacBook Air (MacBookAir7,2)
 - Chip: Intel Core i5, 1.8 GHz, dual-core
 - RAM: 8 GB
+- Storage: 128GB SSD (confirmed via system_profiler 2026-08-05)
 - macOS: 12.7.6 Monterey (build 21H1320) (2026-05-12)
 - macOS 26 Tahoe: **Not compatible** (max: macOS 12 Monterey)
 - mDNS name: wolf-air.local
