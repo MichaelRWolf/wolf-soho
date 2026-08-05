@@ -21,7 +21,9 @@
 
 **Why these matter:** Claude Code is cloud-based (low local load). Git is pure CLI. M-series avoids Homebrew nag. 16GB RAM provides headroom for multi-file analysis.
 
-**Not needed:** Native IDEs, compilers, video editing, GPU acceleration.
+**AI/Claude Code specific:** Stable WiFi/ethernet, low latency API calls. No GPU needed (cloud inference). Browser memory for large context windows (16GB headroom).
+
+**Not needed:** Native IDEs, compilers, video editing, GPU acceleration, high local CPU.
 
 ---
 
@@ -42,6 +44,8 @@
 | **Warranty**        | Preferred | 1-year+ coverage; return policy valuable for peace of mind          |
 
 **Why these matter:** RAM is the limiter for 50+ Safari tabs. CPU is irrelevant (cloud-first user). Display quality for video streaming and web comfort. Battery health ensures machine doesn't fail mid-day.
+
+**Zoom calls specific:** Built-in mic/camera sufficient (1080p+ video). Thermal management (quiet fan or fanless). Stable WiFi. No special GPU needed. Audio codec support (Opus, H.264 video).
 
 **Not needed:** High CPU, GPU, compilers, development tools, large local storage.
 
