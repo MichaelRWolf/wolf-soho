@@ -53,16 +53,17 @@
 
 ## CPU Comparison: Intel vs M1-M5
 
-| Chip   | Year | Incremental Value vs. Previous                           |
-|--------|------|----------------------------------------------------------|
-| Intel  | 2015 | Baseline; Homebrew deprecation nags; Monterey capped     |
-| M1     | 2020 | 8x leap; fanless; can run Claude Code; still solid used  |
-| M2     | 2021 | +15% speed; same core count; good refurb value           |
-| **M3** | 2023 | +25% speed; efficiency bump; **recommended for Michael** |
-| M4     | 2024 | +15% speed; overkill for light development; cost jump    |
-| M5     | 2025 | +20% speed; longest OS support; expensive; not needed    |
+| Chip                                         | Year | Details                                                              |
+|----------------------------------------------|------|----------------------------------------------------------------------|
+| **Intel i5 1.8 GHz dual-core** (wolf-air)    | 2015 | Baseline; Homebrew nags; Monterey capped; aging display (1440×900)   |
+| **Intel i5 2.0 GHz quad-core** (michael-pro) | 2020 | Sequoia support; Tahoe-compatible but aging; thermal throttling risk |
+| M1                                           | 2020 | 8x leap over Intel; fanless; can run Claude Code; still solid used   |
+| M2                                           | 2021 | +15% speed; same core count; good refurb value                       |
+| **M3**                                       | 2023 | +25% speed; efficiency bump; **recommended for Michael**             |
+| M4                                           | 2024 | +15% speed; overkill for light development; cost jump                |
+| M5                                           | 2025 | +20% speed; longest OS support; expensive; not needed                |
 
-**Practical takeaway:** M3 is the sweet spot for Michael (git + Claude Code). M2 acceptable if found cheap. Intel or M1 used = risky (aging). M4/M5 = you'll never use the extra performance.
+**Practical takeaway:** M3 is the sweet spot for Michael (git + Claude Code). M2 acceptable if found cheap. Intel (wolf-air/michael-pro) = risky (aging, thermal issues). M4/M5 = wasted performance for your use case.
 
 ---
 
@@ -80,9 +81,56 @@ When asking sellers for battery health, they can check this way without Terminal
 
 ---
 
+## Air vs Pro: Does It Matter?
+
+**Short answer:** Not for Michael or Wendy. Air is perfectly adequate and cheaper.
+
+| Factor          | MacBook Air                               | MacBook Pro (13-16")                  |
+|-----------------|-------------------------------------------|---------------------------------------|
+| **Target**      | Consumers, light work                     | Professionals, compute-heavy work     |
+| **Weight**      | ~2.7-3.1 lbs                              | ~3.4-4.7 lbs (heavier)                |
+| **Display**     | 13.3-15.3" (2560×1600+)                   | 14-16" (3072×1920+); ProMotion on Pro |
+| **Thermals**    | Passive or single fan (quiet)             | Multiple fans (more cooling capacity) |
+| **Speakers**    | Good stereo                               | Six speakers (overkill for SaaS)      |
+| **GPU cores**   | M3: 8; M4: 10                             | M3 Pro: 16+; M3 Max: 20               |
+| **Price**       | $1,199-$1,499 (M3/M4)                     | $1,999-$3,499+ (Pro/Max)              |
+| **For Michael** | ✅ **SUFFICIENT** (Claude Code, git, bash) | ❌ Overkill; wastes $800+              |
+| **For Wendy**   | ✅ **SUFFICIENT** (Safari, SaaS)           | ❌ Overkill; unnecessary expense       |
+
+**Historical context:** Wendy had a Pro (wendy-pro M2 8GB), which was overkill and also underpowered (8GB RAM). An Air 16GB would have been better value. Michael should stick with Air.
+
+---
+
+## Display Resolution Evolution
+
+When did 1080p+ (1920×1080+) become standard for MacBook Air?
+
+| Generation          | Year  | Resolution | Status                                 |
+|---------------------|-------|------------|----------------------------------------|
+| MacBook Air 11"/13" | 2015  | 1440×900   | Below 1080p; considered obsolete today |
+| MacBook Air 13"     | 2018  | 2560×1600  | **Retina;** first 1080p+ standard      |
+| MacBook Air M1      | 2020  | 2560×1600  | Retina maintained; above 1080p         |
+| MacBook Air M2/M3   | 2022+ | 2560×1600  | Retina standard; no upgrades needed    |
+
+**Practical:** wolf-air (2015, 1440×900) has a substandard display by today's standards. Candidate machines (M2/M3, 2560×1600) all meet modern expectations. Wendy will notice the display quality jump immediately.
+
+---
+
 ## Active Listings
 
-### Quick Comparison
+### Baseline Machines (# = 0)
+
+Known machines for reference and comparison:
+
+| # | Name        | CPU               | RAM  | Disk | OS/EOL       | Video    | Batt      | MDM | Cond      | Status          |
+|---|-------------|-------------------|------|------|--------------|----------|-----------|-----|-----------|-----------------|
+| 0 | wolf-air    | Intel i5 1.8 dual | 8GB  | ???  | Monterey/∞*  | 1440×900 | Very worn | N/A | Good      | Interim (Wendy) |
+| 0 | michael-pro | Intel i5 2.0 quad | 16GB | ???  | Sequoia/2027 | Retina   | ???       | N/A | Damaged   | Water damage    |
+| 0 | wendy-pro   | M2 (8-core)       | 8GB  | ???  | Sequoia/2027 | Retina   | ???       | N/A | Abandoned | Water damage    |
+
+**\* Monterey EOL: mid-2026 (machine stuck there forever; incompatible with Tahoe+)**
+
+### Quick Comparison (Candidates)
 
 | # | Offering | CPU | RAM  | Disk  | OS/EOL      | Video  | Batt | MDM | Cond        | Status            |
 |---|----------|-----|------|-------|-------------|--------|------|-----|-------------|-------------------|
