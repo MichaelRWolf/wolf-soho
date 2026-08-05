@@ -129,12 +129,13 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ## Top Contenders (Active Hunt)
 
-**#3 and #43 are the high runners.** Both M3 Air 13" 16GB. #3 awaiting restock; #43 available now at gadgetpickup.
+**#43 and #44 are the high runners (both gadgetpickup Open Box, M3 Air 13" 16GB).** #3 is ideal fallback when restocked.
 
 | #   | Offering              | CPU + Model + Screen | RAM | Disk | Price | Status              |
 |-----|-----------------------|----------------------|----:|-----:|------:|---------------------|
-| #3  | M3 (Out of stock)     | M3 Air 13            |  16 |  ??? |   TBD | Waiting for restock |
 | #43 | gadgetpickup Open Box | M3 Air 13            |  16 |  256 |  $750 | 🟢 Available now    |
+| #44 | gadgetpickup Open Box | M3 Air 13            |  16 |  512 |  $850 | 🟢 Available now    |
+| #3  | M3 (Out of stock)     | M3 Air 13            |  16 |  ??? |   TBD | Waiting for restock |
 
 ---
 
@@ -142,16 +143,17 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ### Quick Comparison (Candidates)
 
-| #       | Offering          | CPU + Model + Screen   |   RAM |   Disk |   Price | OS/EOL          | Video      | Batt   | MDM   | Cond          | Status              |
-|---------|-------------------|------------------------|------:|-------:|--------:|-----------------|------------|--------|-------|---------------|---------------------|
-| 0       | wolf-air          | i5 1.8 dual            |     8 |    128 |         | Monterey/2026   | 1440×900   | 630    | No    | Good          | Interim (Shared)    |
-| 0       | michael-pro       | i5 2.0 quad            |    16 |    256 |         | Sequoia/2027    | Retina     | 150%   | No    | Damaged       | Water damage        |
-| 0       | wendy-pro         | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina     | ???    | No    | Abandoned     | Water damage        |
-| ------- | --------------    | ---------------------- | ----: | -----: | ------: | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
-| ~~1~~   | ~~#1 (archived)~~ | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
-| ~~2~~   | ~~#2 (archived)~~ | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
-| 3       | #3                | M3 Air 13              |    16 |    ??? |         | Sonoma/2028     | 1080p+     | ???    | ???   | ???           | Out of stock        |
-| 43      | #43               | M3 Air 13              |    16 |    256 |     750 | Sonoma/2028     | 1080p+     | ???    | ???   | Open Box      | Buy It Now          |
+| #       | Offering          | CPU + Model + Screen   |   RAM |   Disk |   Price | OS/EOL          | Video        | Batt   | MDM   | Cond          | Status              |
+|---------|-------------------|------------------------|------:|-------:|--------:|-----------------|--------------|--------|-------|---------------|---------------------|
+| 0       | wolf-air          | i5 1.8 dual            |     8 |    128 |         | Monterey/2026   | 1440×900     | 630    | No    | Good          | Interim (Shared)    |
+| 0       | michael-pro       | i5 2.0 quad            |    16 |    256 |         | Sequoia/2027    | Retina       | 150%   | No    | Damaged       | Water damage        |
+| 0       | wendy-pro         | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina       | ???    | No    | Abandoned     | Water damage        |
+| ------- | --------------    | ---------------------- | ----: | -----: | ------: | --------------- | ------------ | ------ | ----- | ------------- | ------------------- |
+| ~~1~~   | ~~#1 (archived)~~ | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+       | ???    | ???   | eBay Refurb   | Awaiting reply      |
+| ~~2~~   | ~~#2 (archived)~~ | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+       | ???    | ???   | F5 Refurb     | Negotiable; risky   |
+| 3       | #3                | M3 Air 13              |    16 |    ??? |         | Sonoma/2028     | 1080p+       | ???    | ???   | ???           | Out of stock        |
+| 43      | #43               | M3 Air 13              |    16 |    256 |     750 | Sonoma/2028     | 2560×1600    | ???    | ???   | Open Box      | Buy It Now          |
+| 44      | #44               | M3 Air 13              |    16 |    512 |     850 | Sequoia/2027    | 2560×1664    | ???    | ???   | Open Box      | Buy It Now          |
 
 ---
 
@@ -196,49 +198,79 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ---
 
-### #43 --- gadgetpickup M3 Open Box (🟢 AVAILABLE NOW)
+### #43 --- gadgetpickup M3 Open Box 256GB (🟢 AVAILABLE NOW)
 
 **Status:** Active listing; awaiting seller response on MagSafe 3 adapter
 
 - **Link:** [eBay Listing #307108920696](https://www.ebay.com/itm/307108920696)
 - **Seller:** gadgetpickup (99.9% positive, 17.4K ratings)
 - **Price:** $749.99
-- **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 256GB SSD
+- **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 256GB SSD, Space Gray
 - **Condition:** Open Box (brand new, box opened, never used)
 - **Returns:** Free 30-day returns
 - **Warranty:** None stated (but Open Box condition = effectively new hardware)
 - **Seller communication:** Sent message 2026-08-05 @ 15:15 asking seller to include MagSafe 3 power adapter (listing photo showed USB adapter, which is incompatible with M3 Air). Awaiting response.
-- **Assessment:** ✅ Best current value. M3 16GB, brand new condition, top-tier seller, lowest price in active hunt.
+- **Assessment:** ✅ Best value. M3 16GB, brand new condition, top-tier seller, lowest price in active hunt.
 - **Fit for Michael:** ✅ **EXCELLENT** --- M3 + 16GB RAM + brand new condition. Preferred option.
 - **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM meets Safari requirement; modern M3 future-proofed through 2030.
 
 ---
 
+### #44 --- gadgetpickup M3 Open Box 512GB (🟢 AVAILABLE NOW)
+
+**Status:** Active listing; same seller as #43
+
+- **Link:** [eBay Listing #307108922937](https://www.ebay.com/itm/307108922937)
+- **Seller:** gadgetpickup (99.9% positive, 17.4K ratings) -- same top-tier seller as #43
+- **Price:** $849.99
+- **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 512GB SSD, Space Gray
+- **Condition:** Open Box (brand new, box opened, 100% fully functional)
+- **OS:** macOS Sequoia (15.7)
+- **Display:** 13 in, 2560 × 1664
+- **GPU:** Apple 10-Core (M3)
+- **Returns:** Free 30-day returns
+- **Warranty:** None stated (but Open Box condition = effectively new hardware)
+- **Assessment:** ✅ Excellent alternative to #43. Same seller, same M3 16GB, but double storage (512GB vs 256GB) for $100 more.
+- **Storage tradeoff:** 256GB (#43) is sufficient for Michael (cloud-first user, code repos remote); 512GB (#44) adds peace-of-mind margin.
+- **Fit for Michael:** ✅ **EXCELLENT** --- M3 + 16GB RAM + 512GB storage. Premium option if storage peace-of-mind matters.
+- **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM + 512GB storage; modern M3 future-proofed through 2030.
+
+---
+
 ## Summary & Next Steps
 
-### Top Contenders: #43 (active now) and #3 (when restocked)
+### Top Contenders: #43 & #44 (gadgetpickup) and #3 (fallback)
 
-#### #43 -- gadgetpickup M3 Open Box @ $750
+#### #43 -- gadgetpickup M3 Open Box 256GB @ $750
 
 - ✅ Available now
 - ✅ Brand new (Open Box condition)
-- ✅ M3 16GB (exceeds requirements)
+- ✅ M3 16GB 256GB (meets requirements)
 - ✅ Top seller (99.9%, 17.4K ratings)
-- **Action:** Monitor daily; stock rotates fast. This is the primary target.
+- **Action:** PRIMARY TARGET. Monitor daily; stock rotates fast.
+
+#### #44 -- gadgetpickup M3 Open Box 512GB @ $850
+
+- ✅ Available now
+- ✅ Brand new (Open Box condition)
+- ✅ M3 16GB 512GB (same seller as #43, double storage)
+- ✅ Top seller (99.9%, 17.4K ratings)
+- **Action:** ALTERNATIVE. $100 more for 2x storage (512GB vs 256GB).
 
 #### #3 -- M3 Air (Out of stock)
 
 - ✅ Ideal specs (M3 16GB)
 - ⏳ Waiting for restock
-- **Action:** Set price alert; fallback if #43 sells out.
+- **Action:** Fallback if #43/#44 sell out.
 
-**For Michael:** #43 is the best current option. Brand new M3 16GB at $750 from trusted seller.
+**For Michael:** #43 (lowest price, 256GB sufficient) is best value. #44 (512GB) if storage peace-of-mind matters.
 
-**For Wendy:** #43 or #3 both excellent (16GB RAM + M3 future-proofing).
+**For Wendy:** Both #43 and #44 excellent (16GB RAM + M3 future-proofing through 2030).
 
 **Next steps:**
 
-1. **Priority:** Monitor #43 (gadgetpickup) daily -- lowest price, Open Box stock rotates
-2. **If #43 sells:** Escalate to #3 when it restocks, or check shopping-2026-08-05T14:55.md for fallback refurb options (#45 reviveit.io @ $805)
-3. **Before purchase:** Ask #43 seller for battery cycle count (should be <50 for never-used Open Box)
-4. **Verify Activation Lock** -- confirm clean status with seller
+1. **Priority:** Monitor #43 (gadgetpickup 256GB @ $750) daily -- lowest price, Open Box stock rotates
+2. **Alternative:** #44 (gadgetpickup 512GB @ $850) -- same trusted seller, double storage
+3. **Before purchase:** Ask seller for MagSafe 3 adapter (don't accept USB adapter shown in photo)
+4. **Verify:** Battery cycle count (<50 for never-used Open Box) + Activation Lock (must be clean)
+5. **Fallback:** If both gadgetpickup listings sell, check #3 for restock or shopping-2026-08-05T14:55.md for refurb options (#45 @ $805)
