@@ -126,12 +126,12 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 | 0   | michael-pro   | i5 2.0 quad   |    16 | 256    | Sequoia/2027    | Retina     | 150%   | N/A   | Damaged       | Water damage        |
 | 0   | wendy-pro     | M2 (8-core)   |     8 | 256    | Sequoia/2027    | Retina     | ???    | N/A   | Abandoned     | Water damage        |
 | --- | ------------- | ------------- | ----: | ------ | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
-| 1   | Apple         | M2            |    16 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
+| 1   | Apricot       | M2            |    16 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
 | 2   | Bilberry      | M2            |     8 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
 
 ---
 
-### 1. Apple --- A-Offering (Wisetek Market M2 Refurb)
+### 1. Apricot --- A-Offering (Wisetek Market M2 Refurb)
 
 **Status:** Awaiting seller message return
 
@@ -168,13 +168,13 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ## Summary & Next Steps
 
-**For Michael:** Option 1 (Apple) is preferred if battery health > 80%. Option 2 (Bilberry) is budget alternative but 8GB is tight.
+**For Michael:** Option 1 (Apricot) is preferred if battery health > 80%. Option 2 (Bilberry) is budget alternative but 8GB is tight.
 
-**For Wendy:** Option 1 (Apple) meets 16GB requirement. Option 2 (Bilberry) is insufficient.
+**For Wendy:** Option 1 (Apricot) meets 16GB requirement. Option 2 (Bilberry) is insufficient.
 
 **Next steps:**
 
-1. Wait for Wisetek response on Apple (1) battery health and Activation Lock
-2. If Apple (1) confirms good battery (>80%) and clean lock status, **proceed with 1**
+1. Wait for Wisetek response on Apricot (1) battery health and Activation Lock
+2. If Apricot (1) confirms good battery (>80%) and clean lock status, **proceed with 1**
 3. If Wisetek silent or poor battery report, escalate Bilberry (2) with negotiation ("$500 max; 8GB is tight for our use case")
 4. If both fail, continue hunting M3 options (better value long-term than M2)
