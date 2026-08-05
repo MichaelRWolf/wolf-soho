@@ -84,10 +84,10 @@ When asking sellers for battery health, they can check this way without Terminal
 
 ### Quick Comparison
 
-| # | Offering | CPU | RAM  | Disk  | OS/EOL      | Video  | Batt    | MDM | Cond        | Status            |
-|---|----------|-----|------|-------|-------------|--------|---------|-----|-------------|-------------------|
-| 1 | Apple    | M2  | 16GB | 512GB | Sonoma/2028 | 1080p+ | TBD     | TBD | eBay Refurb | Awaiting reply    |
-| 2 | Bilberry | M2  | 8GB  | 512GB | Sonoma/2028 | 1080p+ | Unknown | N/A | F5 Refurb   | Negotiable; risky |
+| # | Offering | CPU | RAM  | Disk  | OS/EOL      | Video  | Batt | MDM | Cond        | Status            |
+|---|----------|-----|------|-------|-------------|--------|------|-----|-------------|-------------------|
+| 1 | Apple    | M2  | 16GB | 512GB | Sonoma/2028 | 1080p+ | ???  | ??? | eBay Refurb | Awaiting reply    |
+| 2 | Bilberry | M2  | 8GB  | 512GB | Sonoma/2028 | 1080p+ | ???  | N/A | F5 Refurb   | Negotiable; risky |
 
 ---
 
