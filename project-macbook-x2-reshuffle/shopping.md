@@ -51,26 +51,17 @@
 
 ---
 
-## Fruit Reference
+## How to Find Battery Cycle Count (GUI)
 
-### 1. Apple (with Apricot alternative)
+When asking sellers for battery health, they can check this way without Terminal:
 
-**1. Apple:** Most common, neutral choice.
-**Alternative:** Apricot (orange stone fruit; 3 syllables).
+1. Click **Apple menu** (top-left) → **About This Mac**
+2. Click **System Report...** button
+3. In the left sidebar, click **Power**
+4. Look for **Cycle Count** in the right pane (e.g., "452 cycles")
+5. Send you a screenshot or the cycle count number
 
----
-
-### 2. Bilberry (with Buckthorn alternative)
-
-**2. Bilberry:** Small dark berries (blue-black); sometimes called blueberry's British cousin.
-**Alternative:** Buckthorn (thorny shrub with small berries; uncommon but technically 2-syllable).
-
----
-
-### 3. Currant (with Cherry, Citron alternatives)
-
-**3. Currant:** Small dried berries (black, red, white); distinct from berry.
-**Alternatives:** Cherry (sweet or sour stone fruits; most familiar), Citron (large citrus fruit, thick pith; less common but clearly 2-syllable).
+**Rule of thumb:** Under 300 cycles = excellent (new); 300-700 = good (refurb baseline); 700-1000 = acceptable (used); >1000 = worn (avoid unless heavily discounted).
 
 ---
 
@@ -78,10 +69,10 @@
 
 ### Quick Comparison
 
-| # | Offering | CPU | RAM  | Disk  | Price   | Condition        | Status                            |
-|---|----------|-----|------|-------|---------|------------------|-----------------------------------|
-| 1 | Apple    | M2  | 16GB | 512GB | $614.50 | eBay Refurbished | Awaiting seller battery/lock info |
-| 2 | Bilberry | M2  | 8GB  | 512GB | $549.99 | Used/F5 Refurb   | Risky: 8GB below 16GB minimum     |
+| # | Offering | CPU | RAM  | Disk  | OS/EOL      | Video  | Batt    | MDM | Cond        | Status            |
+|---|----------|-----|------|-------|-------------|--------|---------|-----|-------------|-------------------|
+| 1 | Apple    | M2  | 16GB | 512GB | Sonoma/2028 | 1080p+ | TBD     | TBD | eBay Refurb | Awaiting reply    |
+| 2 | Bilberry | M2  | 8GB  | 512GB | Sonoma/2028 | 1080p+ | Unknown | N/A | F5 Refurb   | Negotiable; risky |
 
 ---
 
