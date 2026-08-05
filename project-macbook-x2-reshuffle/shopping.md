@@ -198,7 +198,7 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ### #43 --- gadgetpickup M3 Open Box (🟢 AVAILABLE NOW)
 
-**Status:** Active listing; monitor stock
+**Status:** Active listing; awaiting seller response on MagSafe 3 adapter
 
 - **Link:** [eBay Listing #307108920696](https://www.ebay.com/itm/307108920696)
 - **Seller:** gadgetpickup (99.9% positive, 17.4K ratings)
@@ -207,6 +207,7 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 - **Condition:** Open Box (brand new, box opened, never used)
 - **Returns:** Free 30-day returns
 - **Warranty:** None stated (but Open Box condition = effectively new hardware)
+- **Seller communication:** Sent message 2026-08-05 @ 15:15 asking seller to include MagSafe 3 power adapter (listing photo showed USB adapter, which is incompatible with M3 Air). Awaiting response.
 - **Assessment:** ✅ Best current value. M3 16GB, brand new condition, top-tier seller, lowest price in active hunt.
 - **Fit for Michael:** ✅ **EXCELLENT** --- M3 + 16GB RAM + brand new condition. Preferred option.
 - **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM meets Safari requirement; modern M3 future-proofed through 2030.
