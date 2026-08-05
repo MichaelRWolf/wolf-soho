@@ -75,15 +75,20 @@ When asking sellers for battery health, they can check this way without Terminal
 2. Click **System Report...** button
 3. In the left sidebar, click **Power**
 
-**What to look for:** The Power section shows Health Information with Cycle Count and Condition:
+**What to look for:** The Power section shows Health Information with Cycle Count and Condition.  In this example, Cycle Count is "628" and Condition is "Normal"
 
 ![Battery System Report](images/battery-system-report.png)
 
 1. Look for **Cycle Count** in the Health Information section (e.g., "628 cycles")
 2. Look for **Condition** (should be "Normal" or "Good"; avoid "Fair" or "Replace Soon")
-3. Send you a screenshot or report the cycle count + condition
+3. Send you a screenshot, or photo, or simple text with the two values
 
-**Rule of thumb:** Under 300 cycles = excellent (new); 300-700 = good (refurb baseline); 700-1000 = acceptable (used); >1000 = worn (avoid unless heavily discounted).
+**Rule of thumb:**
+
+- Under 300 cycles = excellent (new);
+- 300-700 = good (refurb baseline);
+- 700-1000 = acceptable (used);
+- >1000 = worn (avoid unless heavily discounted).
 
 ---
 
@@ -122,86 +127,117 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ---
 
+## Top Contenders (Active Hunt)
+
+**#3 and #43 are the high runners.** Both M3 Air 13" 16GB. #3 awaiting restock; #43 available now at gadgetpickup.
+
+| #   | Offering              | CPU + Model + Screen | RAM | Disk | Price | Status              |
+|-----|-----------------------|----------------------|----:|-----:|------:|---------------------|
+| #3  | M3 (Out of stock)     | M3 Air 13            |  16 |  ??? |   TBD | Waiting for restock |
+| #43 | gadgetpickup Open Box | M3 Air 13            |  16 |  256 |  $750 | 🟢 Available now    |
+
+---
+
 ## Active Listings
 
 ### Quick Comparison (Candidates)
 
-| #       | Offering       | CPU + Model + Screen   |   RAM |   Disk |   Price | OS/EOL          | Video      | Batt   | MDM   | Cond          | Status              |
-|---------|----------------|------------------------|------:|-------:|--------:|-----------------|------------|--------|-------|---------------|---------------------|
-| 0       | wolf-air       | i5 1.8 dual            |     8 |    128 |         | Monterey/2026   | 1440×900   | 630    | No    | Good          | Interim (Shared)    |
-| 0       | michael-pro    | i5 2.0 quad            |    16 |    256 |         | Sequoia/2027    | Retina     | 150%   | No    | Damaged       | Water damage        |
-| 0       | wendy-pro      | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina     | ???    | No    | Abandoned     | Water damage        |
-| ------- | -------------- | ---------------------- | ----: | -----: | ------: | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
-| ~~1~~   | ~~Apricot~~    | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
-| ~~2~~   | ~~Bilberry~~   | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+     | ???    | ???   | ITAD Refurb   | Negotiable; risky   |
-| 3       | Cherry         | M3 Air 13              |    16 |    ??? |         | Sonoma/2028     | 1080p+     | ???    | ???   | ???           | Out of stock        |
+| #       | Offering          | CPU + Model + Screen   |   RAM |   Disk |   Price | OS/EOL          | Video      | Batt   | MDM   | Cond          | Status              |
+|---------|-------------------|------------------------|------:|-------:|--------:|-----------------|------------|--------|-------|---------------|---------------------|
+| 0       | wolf-air          | i5 1.8 dual            |     8 |    128 |         | Monterey/2026   | 1440×900   | 630    | No    | Good          | Interim (Shared)    |
+| 0       | michael-pro       | i5 2.0 quad            |    16 |    256 |         | Sequoia/2027    | Retina     | 150%   | No    | Damaged       | Water damage        |
+| 0       | wendy-pro         | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina     | ???    | No    | Abandoned     | Water damage        |
+| ------- | --------------    | ---------------------- | ----: | -----: | ------: | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
+| ~~1~~   | ~~#1 (archived)~~ | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
+| ~~2~~   | ~~#2 (archived)~~ | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
+| 3       | #3                | M3 Air 13              |    16 |    ??? |         | Sonoma/2028     | 1080p+     | ???    | ???   | ???           | Out of stock        |
+| 43      | #43               | M3 Air 13              |    16 |    256 |     750 | Sonoma/2028     | 1080p+     | ???    | ???   | Open Box      | Buy It Now          |
 
 ---
 
-### 1. Apricot --- A-Offering (Wisetek Market M2 Refurb)
+### #1 (Archived) --- Wisetek Market M2 Refurb
 
-**Status:** Awaiting seller message return
+**Status:** Archived (superseded by #43)
 
 - **Link:** [eBay Listing #800079144456](https://www.ebay.com/itm/800079144456)
-- **Price:** $614.50 (free shipping)
+- **Price:** $614.50
 - **Machine:** Apple MacBook Air (M2, 2022), 13.6", 16GB RAM, Space Gray
 - **Condition:** eBay Refurbished
-- **Warranty:** 1-year included
-- **Seller:** Wisetek Market (99.1% positive; 15482 ratings)
-- **Specs claimed:** 18 hrs battery life
-- **Your question:** Requested battery health %, cycle count, original Apple battery status, Activation Lock / MDM enrollment status
-- **Assessment:** Higher-tier refurb rating; awaiting detailed battery/lock response
-- **Fit for Michael:** ✅ **YES** --- M2 + 16GB RAM meets all requirements; solid choice if battery > 80%
-- **Fit for Wendy:** ✅ **YES** --- 16GB RAM is exactly what Wendy needs for Safari tab management
+- **Note:** M2 refurb. #43 (M3 Open Box) is better value at $750 (newer chip, brand new condition).
 
 ---
 
-### 2. Bilberry --- B-Offering (ITAD Technologies M2, 8GB)
+### #2 (Archived) --- ITAD Technologies M2, 8GB
 
-**Status:** In second place; price negotiable
+**Status:** Archived (insufficient RAM)
 
 - **Link:** [eBay Listing #128000806739](https://www.ebay.com/itm/128000806739)
-- **Price:** $549.99 or Best Offer (~$49.38/mo financing available)
-- **Machine:** Apple MacBook Air 13" (M2), 8GB LPDDR5, 512GB SSD, macOS Sonoma (MLY43LL/A)
+- **Price:** $549.99
+- **Machine:** Apple MacBook Air 13" (M2), 8GB LPDDR5, 512GB SSD
 - **Condition:** Refurbished by ITAD Technologies
-- **Returns:** 30-day return policy on 8GB variant
-- **Seller:** ITAD Technologies (9578 ratings)
-- **Assessment:** Lower price; used condition; only 8GB RAM (tight for multi-file work); no warranty mentioned yet
-- **Risk:** 8GB is at lower end of Michael's comfort zone (16GB recommended); battery status unknown
-- **Fit for Michael:** ⚠️ **TIGHT** --- 8GB RAM is below recommended 16GB; would work but no headroom for multi-file sessions
-- **Fit for Wendy:** ❌ **NO** --- 8GB RAM is inadequate for 50+ Safari tabs; would cause lag and crashes
+- **Note:** Only 8GB RAM (below recommended). #43 or #3 are better choices.
 
 ---
 
-### 3. Cherry --- C-Offering (eBay M3 MacBook Air)
+### #3 --- M3 MacBook Air (Out of Stock)
 
-**Status:** Out of stock. Waiting.
+**Status:** Waiting for restock
 
 - **Link:** [eBay Listing #800050023010](https://www.ebay.com/itm/800050023010?var=&stype=1&widget_ver=artemis&media=SMS)
 - **Machine:** Apple MacBook Air (13-inch, M3, 2024), 16GB RAM, Space Gray
 - **CPU:** M3 (8-core: 4 performance + 4 efficiency)
 - **RAM:** 16GB
-- **Storage:** TBD (standard M3 Air is 512GB; verify when relisted)
-- **Condition:** TBD (check when available)
-- **Warranty:** TBD
-- **Seller:** TBD
+- **Storage:** TBD (standard M3 Air is 512GB)
+- **Condition:** TBD
 - **Price:** TBD
 - **Assessment:** M3 16GB is ideal for Michael. Waiting for restock and full details.
 - **Fit for Michael:** ✅ **EXCELLENT** --- M3 + 16GB RAM exceeds all requirements; modern chip with long OS support
-- **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM meets critical Safari requirement; M3 overkill but clean solution
+- **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM meets critical Safari requirement
+
+---
+
+### #43 --- gadgetpickup M3 Open Box (🟢 AVAILABLE NOW)
+
+**Status:** Active listing; monitor stock
+
+- **Link:** [eBay Listing #307108920696](https://www.ebay.com/itm/307108920696)
+- **Seller:** gadgetpickup (99.9% positive, 17.4K ratings)
+- **Price:** $749.99
+- **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 256GB SSD
+- **Condition:** Open Box (brand new, box opened, never used)
+- **Returns:** Free 30-day returns
+- **Warranty:** None stated (but Open Box condition = effectively new hardware)
+- **Assessment:** ✅ Best current value. M3 16GB, brand new condition, top-tier seller, lowest price in active hunt.
+- **Fit for Michael:** ✅ **EXCELLENT** --- M3 + 16GB RAM + brand new condition. Preferred option.
+- **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM meets Safari requirement; modern M3 future-proofed through 2030.
 
 ---
 
 ## Summary & Next Steps
 
-**For Michael:** Option 1 (Apricot, M2 16GB) is solid if battery health > 80%. Option 3 (Cherry, M3 16GB) is ideal but waiting for restock. Option 2 (Bilberry, M2 8GB) is budget fallback but tight on RAM.
+### Top Contenders: #43 (active now) and #3 (when restocked)
 
-**For Wendy:** Option 1 (Apricot, M2 16GB) meets 16GB requirement. Option 3 (Cherry, M3 16GB) is excellent but may be overkill. Option 2 (Bilberry, M2 8GB) is insufficient.
+#### #43 -- gadgetpickup M3 Open Box @ $750
+
+- ✅ Available now
+- ✅ Brand new (Open Box condition)
+- ✅ M3 16GB (exceeds requirements)
+- ✅ Top seller (99.9%, 17.4K ratings)
+- **Action:** Monitor daily; stock rotates fast. This is the primary target.
+
+#### #3 -- M3 Air (Out of stock)
+
+- ✅ Ideal specs (M3 16GB)
+- ⏳ Waiting for restock
+- **Action:** Set price alert; fallback if #43 sells out.
+
+**For Michael:** #43 is the best current option. Brand new M3 16GB at $750 from trusted seller.
+
+**For Wendy:** #43 or #3 both excellent (16GB RAM + M3 future-proofing).
 
 **Next steps:**
 
-1. Wait for Wisetek response on Apricot (1) battery health and Activation Lock
-2. If Apricot (1) confirms good battery (>80%) and clean lock status, **proceed with 1** (available now)
-3. Monitor Cherry (3) for restock; if available at reasonable price ($600-800), prioritize for Michael (M3 is future-proof)
-4. If Wisetek silent or poor battery report, escalate Bilberry (2) with negotiation ("$500 max; 8GB is tight for our use case")
-5. If all three options fail, continue hunting M3 options on eBay/Marketplace
+1. **Priority:** Monitor #43 (gadgetpickup) daily -- lowest price, Open Box stock rotates
+2. **If #43 sells:** Escalate to #3 when it restocks, or check shopping-2026-08-05T14:55.md for fallback refurb options (#45 reviveit.io @ $805)
+3. **Before purchase:** Ask #43 seller for battery cycle count (should be <50 for never-used Open Box)
+4. **Verify Activation Lock** -- confirm clean status with seller
