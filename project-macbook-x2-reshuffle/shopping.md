@@ -74,8 +74,14 @@ When asking sellers for battery health, they can check this way without Terminal
 1. Click **Apple menu** (top-left) → **About This Mac**
 2. Click **System Report...** button
 3. In the left sidebar, click **Power**
-4. Look for **Cycle Count** in the right pane (e.g., "452 cycles")
-5. Send you a screenshot or the cycle count number
+
+**What to look for:** The Power section shows Health Information with Cycle Count and Condition:
+
+![Battery System Report](images/battery-system-report.png)
+
+1. Look for **Cycle Count** in the Health Information section (e.g., "628 cycles")
+2. Look for **Condition** (should be "Normal" or "Good"; avoid "Fair" or "Replace Soon")
+3. Send you a screenshot or report the cycle count + condition
 
 **Rule of thumb:** Under 300 cycles = excellent (new); 300-700 = good (refurb baseline); 700-1000 = acceptable (used); >1000 = worn (avoid unless heavily discounted).
 
@@ -120,15 +126,15 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ### Quick Comparison (Candidates)
 
-| #   | Offering      | CPU           |   RAM | Disk   | OS/EOL          | Video      | Batt   | MDM   | Cond          | Status              |
-|-----|---------------|---------------|------:|--------|-----------------|------------|--------|-------|---------------|---------------------|
-| 0   | wolf-air      | i5 1.8 dual   |     8 | 128    | Monterey/2026   | 1440×900   |        | N/A   | Good          | Interim (Wendy)     |
-| 0   | michael-pro   | i5 2.0 quad   |    16 | 256    | Sequoia/2027    | Retina     | 150%   | N/A   | Damaged       | Water damage        |
-| 0   | wendy-pro     | M2 (8-core)   |     8 | 256    | Sequoia/2027    | Retina     | ???    | N/A   | Abandoned     | Water damage        |
-| --- | ------------- | ------------- | ----: | ------ | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
-| 1   | Apricot       | M2            |    16 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
-| 2   | Bilberry      | M2            |     8 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
-| 3   | Cherry        | M3            |    16 | ???    | Sonoma/2028     | 1080p+     | ???    | ???   | ???           | Out of stock        |
+| #       | Offering       | CPU + Model + Screen   |   RAM |   Disk |   Price | OS/EOL          | Video      | Batt   | MDM   | Cond          | Status              |
+|---------|----------------|------------------------|------:|-------:|--------:|-----------------|------------|--------|-------|---------------|---------------------|
+| 0       | wolf-air       | i5 1.8 dual            |     8 |    128 |         | Monterey/2026   | 1440×900   | 630    | No    | Good          | Interim (Shared)    |
+| 0       | michael-pro    | i5 2.0 quad            |    16 |    256 |         | Sequoia/2027    | Retina     | 150%   | No    | Damaged       | Water damage        |
+| 0       | wendy-pro      | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina     | ???    | No    | Abandoned     | Water damage        |
+| ------- | -------------- | ---------------------- | ----: | -----: | ------: | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
+| ~~1~~   | ~~Apricot~~    | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
+| ~~2~~   | ~~Bilberry~~   | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
+| 3       | Cherry         | M3 Air 13              |    16 |    ??? |         | Sonoma/2028     | 1080p+     | ???    | ???   | ???           | Out of stock        |
 
 ---
 
