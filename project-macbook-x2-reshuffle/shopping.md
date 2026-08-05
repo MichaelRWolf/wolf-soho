@@ -128,6 +128,7 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 | --- | ------------- | ------------- | ----: | ------ | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
 | 1   | Apricot       | M2            |    16 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
 | 2   | Bilberry      | M2            |     8 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
+| 3   | Cherry        | M3            |    16 | ???    | Sonoma/2028     | 1080p+     | ???    | ???   | ???           | Out of stock        |
 
 ---
 
@@ -166,15 +167,35 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ---
 
+### 3. Cherry --- C-Offering (eBay M3 MacBook Air)
+
+**Status:** Out of stock. Waiting.
+
+- **Link:** [eBay Listing #800050023010](https://www.ebay.com/itm/800050023010?var=&stype=1&widget_ver=artemis&media=SMS)
+- **Machine:** Apple MacBook Air (13-inch, M3, 2024), 16GB RAM, Space Gray
+- **CPU:** M3 (8-core: 4 performance + 4 efficiency)
+- **RAM:** 16GB
+- **Storage:** TBD (standard M3 Air is 512GB; verify when relisted)
+- **Condition:** TBD (check when available)
+- **Warranty:** TBD
+- **Seller:** TBD
+- **Price:** TBD
+- **Assessment:** M3 16GB is ideal for Michael. Waiting for restock and full details.
+- **Fit for Michael:** ✅ **EXCELLENT** --- M3 + 16GB RAM exceeds all requirements; modern chip with long OS support
+- **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM meets critical Safari requirement; M3 overkill but clean solution
+
+---
+
 ## Summary & Next Steps
 
-**For Michael:** Option 1 (Apricot) is preferred if battery health > 80%. Option 2 (Bilberry) is budget alternative but 8GB is tight.
+**For Michael:** Option 1 (Apricot, M2 16GB) is solid if battery health > 80%. Option 3 (Cherry, M3 16GB) is ideal but waiting for restock. Option 2 (Bilberry, M2 8GB) is budget fallback but tight on RAM.
 
-**For Wendy:** Option 1 (Apricot) meets 16GB requirement. Option 2 (Bilberry) is insufficient.
+**For Wendy:** Option 1 (Apricot, M2 16GB) meets 16GB requirement. Option 3 (Cherry, M3 16GB) is excellent but may be overkill. Option 2 (Bilberry, M2 8GB) is insufficient.
 
 **Next steps:**
 
 1. Wait for Wisetek response on Apricot (1) battery health and Activation Lock
-2. If Apricot (1) confirms good battery (>80%) and clean lock status, **proceed with 1**
-3. If Wisetek silent or poor battery report, escalate Bilberry (2) with negotiation ("$500 max; 8GB is tight for our use case")
-4. If both fail, continue hunting M3 options (better value long-term than M2)
+2. If Apricot (1) confirms good battery (>80%) and clean lock status, **proceed with 1** (available now)
+3. Monitor Cherry (3) for restock; if available at reasonable price ($600-800), prioritize for Michael (M3 is future-proof)
+4. If Wisetek silent or poor battery report, escalate Bilberry (2) with negotiation ("$500 max; 8GB is tight for our use case")
+5. If all three options fail, continue hunting M3 options on eBay/Marketplace
