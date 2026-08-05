@@ -118,24 +118,16 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 
 ## Active Listings
 
-### Baseline Machines (# = 0)
-
-Known machines for reference and comparison:
-
-| # | Name        | CPU               | RAM  | Disk | OS/EOL       | Video    | Batt      | MDM | Cond      | Status          |
-|---|-------------|-------------------|------|------|--------------|----------|-----------|-----|-----------|-----------------|
-| 0 | wolf-air    | Intel i5 1.8 dual | 8GB  | ???  | Monterey/∞*  | 1440×900 | Very worn | N/A | Good      | Interim (Wendy) |
-| 0 | michael-pro | Intel i5 2.0 quad | 16GB | ???  | Sequoia/2027 | Retina   | ???       | N/A | Damaged   | Water damage    |
-| 0 | wendy-pro   | M2 (8-core)       | 8GB  | ???  | Sequoia/2027 | Retina   | ???       | N/A | Abandoned | Water damage    |
-
-**\* Monterey EOL: mid-2026 (machine stuck there forever; incompatible with Tahoe+)**
-
 ### Quick Comparison (Candidates)
 
-| # | Offering | CPU | RAM  | Disk  | OS/EOL      | Video  | Batt | MDM | Cond        | Status            |
-|---|----------|-----|------|-------|-------------|--------|------|-----|-------------|-------------------|
-| 1 | Apple    | M2  | 16GB | 512GB | Sonoma/2028 | 1080p+ | ???  | ??? | eBay Refurb | Awaiting reply    |
-| 2 | Bilberry | M2  | 8GB  | 512GB | Sonoma/2028 | 1080p+ | ???  | N/A | F5 Refurb   | Negotiable; risky |
+| #   | Offering      | CPU           |   RAM | Disk   | OS/EOL          | Video      | Batt   | MDM   | Cond          | Status              |
+|-----|---------------|---------------|------:|--------|-----------------|------------|--------|-------|---------------|---------------------|
+| 0   | wolf-air      | i5 1.8 dual   |     8 | ???    | Monterey/2026   | 1440×900   |        | N/A   | Good          | Interim (Wendy)     |
+| 0   | michael-pro   | i5 2.0 quad   |    16 | ???    | Sequoia/2027    | Retina     | 150%   | N/A   | Damaged       | Water damage        |
+| 0   | wendy-pro     | M2 (8-core)   |     8 | ???    | Sequoia/2027    | Retina     | ???    | N/A   | Abandoned     | Water damage        |
+| --- | ------------- | ------------- | ----: | ------ | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
+| 1   | Apple         | M2            |    16 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
+| 2   | Bilberry      | M2            |     8 | 512    | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
 
 ---
 
