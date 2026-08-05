@@ -114,16 +114,24 @@ When asking sellers for battery health, they can check this way without Terminal
 
 ## Display Resolution Evolution
 
-When did 1080p+ (1920×1080+) become standard for MacBook Air?
+When did 1080p+ become standard for MacBook Air? And what do these resolutions mean?
 
-| Generation          | Year  | Resolution | Status                                 |
-|---------------------|-------|------------|----------------------------------------|
-| MacBook Air 11"/13" | 2015  | 1440×900   | Below 1080p; considered obsolete today |
-| MacBook Air 13"     | 2018  | 2560×1600  | **Retina;** first 1080p+ standard      |
-| MacBook Air M1      | 2020  | 2560×1600  | Retina maintained; above 1080p         |
-| MacBook Air M2/M3   | 2022+ | 2560×1600  | Retina standard; no upgrades needed    |
+**Resolution reference:**
 
-**Practical:** wolf-air (2015, 1440×900) has a substandard display by today's standards. Candidate machines (M2/M3, 2560×1600) all meet modern expectations. Wendy will notice the display quality jump immediately.
+- **1080p** = 1920×1080 (1080 vertical pixels = baseline HD standard)
+- **1080p+** = anything with >1080 vertical pixels (width doesn't matter for "1080p" naming)
+- **2560×1600** = 2560 wide, 1600 tall = qualifies as 1080p+ (520 pixels taller than 1080p baseline)
+- **2560×1664** = 2560 wide, 1664 tall = qualifies as 1080p+ (584 pixels taller than 1080p baseline)
+
+| Generation          | Year | Resolution | Vertical pixels | Status                                |
+|---------------------|------|------------|-----------------|---------------------------------------|
+| MacBook Air 11"/13" | 2015 | 1440×900   | 900             | **Below 1080p;** considered obsolete  |
+| MacBook Air 13"     | 2018 | 2560×1600  | 1600            | **1080p+ standard;** first Retina     |
+| MacBook Air M1      | 2020 | 2560×1600  | 1600            | Retina maintained; above 1080p        |
+| MacBook Air M2      | 2022 | 2560×1600  | 1600            | 1080p+ Retina standard                |
+| MacBook Air M3      | 2024 | 2560×1664  | 1664            | 1080p+ Retina; slightly taller aspect |
+
+**Practical:** wolf-air (2015, 1440×900, 900 vertical) has a substandard display. Candidate machines (M2/M3, 1600-1664 vertical) all meet modern 1080p+ expectations. Wendy will notice the display quality jump immediately.
 
 ---
 
