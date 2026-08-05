@@ -23,7 +23,7 @@
 
 **AI/Claude Code specific:** Stable WiFi/ethernet, low latency API calls. No GPU needed (cloud inference). Browser memory for large context windows (16GB headroom).
 
-**Not needed:** Native IDEs, compilers, video editing, GPU acceleration, high local CPU.
+**Not needed:** Native IDEs, compilers, video editing, GPU (integrated is sufficient), high local CPU, native LLM training.
 
 ---
 
@@ -45,9 +45,9 @@
 
 **Why these matter:** RAM is the limiter for 50+ Safari tabs. CPU is irrelevant (cloud-first user). Display quality for video streaming and web comfort. Battery health ensures machine doesn't fail mid-day.
 
-**Zoom calls specific:** Built-in mic/camera sufficient (1080p+ video). Thermal management (quiet fan or fanless). Stable WiFi. No special GPU needed. Audio codec support (Opus, H.264 video).
+**Zoom calls specific:** Built-in mic/camera sufficient (1080p+ video). Thermal management (quiet fan or fanless). Stable WiFi. Audio codec support (Opus, H.264 video).
 
-**Not needed:** High CPU, GPU, compilers, development tools, large local storage.
+**Not needed:** High CPU, discrete GPU (integrated is sufficient), compilers, development tools, large local storage, gaming/3D capabilities.
 
 ---
 
