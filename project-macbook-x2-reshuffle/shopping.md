@@ -133,7 +133,7 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 | 0       | wendy-pro      | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina     | ???    | No    | Abandoned     | Water damage        |
 | ------- | -------------- | ---------------------- | ----: | -----: | ------: | --------------- | ---------- | ------ | ----- | ------------- | ------------------- |
 | ~~1~~   | ~~Apricot~~    | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+     | ???    | ???   | eBay Refurb   | Awaiting reply      |
-| ~~2~~   | ~~Bilberry~~   | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+     | ???    | ???   | F5 Refurb     | Negotiable; risky   |
+| ~~2~~   | ~~Bilberry~~   | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+     | ???    | ???   | ITAD Refurb   | Negotiable; risky   |
 | 3       | Cherry         | M3 Air 13              |    16 |    ??? |         | Sonoma/2028     | 1080p+     | ???    | ???   | ???           | Out of stock        |
 
 ---
@@ -163,7 +163,7 @@ When did 1080p+ (1920×1080+) become standard for MacBook Air?
 - **Link:** [eBay Listing #128000806739](https://www.ebay.com/itm/128000806739)
 - **Price:** $549.99 or Best Offer (~$49.38/mo financing available)
 - **Machine:** Apple MacBook Air 13" (M2), 8GB LPDDR5, 512GB SSD, macOS Sonoma (MLY43LL/A)
-- **Condition:** Used; "F5 Refurbished"
+- **Condition:** Refurbished by ITAD Technologies
 - **Returns:** 30-day return policy on 8GB variant
 - **Seller:** ITAD Technologies (9578 ratings)
 - **Assessment:** Lower price; used condition; only 8GB RAM (tight for multi-file work); no warranty mentioned yet
