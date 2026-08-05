@@ -51,6 +51,21 @@
 
 ---
 
+## CPU Comparison: Intel vs M1-M5
+
+| Chip   | Year | Incremental Value vs. Previous                           |
+|--------|------|----------------------------------------------------------|
+| Intel  | 2015 | Baseline; Homebrew deprecation nags; Monterey capped     |
+| M1     | 2020 | 8x leap; fanless; can run Claude Code; still solid used  |
+| M2     | 2021 | +15% speed; same core count; good refurb value           |
+| **M3** | 2023 | +25% speed; efficiency bump; **recommended for Michael** |
+| M4     | 2024 | +15% speed; overkill for light development; cost jump    |
+| M5     | 2025 | +20% speed; longest OS support; expensive; not needed    |
+
+**Practical takeaway:** M3 is the sweet spot for Michael (git + Claude Code). M2 acceptable if found cheap. Intel or M1 used = risky (aging). M4/M5 = you'll never use the extra performance.
+
+---
+
 ## How to Find Battery Cycle Count (GUI)
 
 When asking sellers for battery health, they can check this way without Terminal:
