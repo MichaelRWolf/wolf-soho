@@ -147,8 +147,8 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 | ------- | --------------    | ---------------------- | ----: | -----: | ------: | --------------- | ------------ | ------ | ----- | ------------- | ------------------- |
 | ~~1~~   | ~~#1 (archived)~~ | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+       | ???    | ???   | eBay Refurb   | Awaiting reply      |
 | ~~2~~   | ~~#2 (archived)~~ | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+       | ???    | ???   | F5 Refurb     | Negotiable; risky   |
-| 3       | #3                | M3 Air 13              |    16 |    ??? |         | Sonoma/2028     | 1080p+       | ???    | ???   | ???           | Out of stock        |
-| 43      | #43               | M3 Air 13              |    16 |    256 |     750 | Sonoma/2028     | 2560×1600    | ???    | ???   | Open Box      | Buy It Now          |
+| 3       | #3                | M3 Air 13              |    16 |    ??? |     777 | Sonoma/2028     | 1080p+       | ???    | ???   | ???           | Out of stock        |
+| 43      | #43               | M3 Air 13              |    16 |    256 |     750 | Sonoma/2028     | 2560×1600    | ???    | ???   | Open Box      | ✅ PURCHASED         |
 | 44      | #44               | M3 Air 13              |    16 |    512 |     850 | Sequoia/2027    | 2560×1664    | ???    | ???   | Open Box      | Buy It Now          |
 
 ---
@@ -194,9 +194,9 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 
 ---
 
-### #43 --- gadgetpickup M3 Open Box 256GB (🟢 AVAILABLE NOW)
+### #43 --- gadgetpickup M3 Open Box 256GB (✅ PURCHASED)
 
-**Status:** Active listing; awaiting seller response on MagSafe 3 adapter
+**Status:** PURCHASED 2026-08-10; Order: [24-14983-18990](https://order.ebay.com/ord/show?orderId=24-14983-18990&purchaseOrderId=24-1498-318989#/); Tracking: 1Z1R96V24298428353
 
 - **Link:** [eBay Listing #307108920696](https://www.ebay.com/itm/307108920696)
 - **Seller:** gadgetpickup (99.9% positive, 17.4K ratings)

@@ -4,6 +4,8 @@
 
 **Scope:** Both users need functional machines by EOY 2026. Constraint: Price-sensitive. Preference: Used/refurbished M-series over expensive repairs.
 
+**Project links:** [Shopping tracker](shopping.md) | [michael-air build project](../project-michael-air/notes.md)
+
 ---
 
 ## Requirements
