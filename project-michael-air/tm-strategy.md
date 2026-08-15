@@ -1,10 +1,12 @@
-# Time Machine Audit: michael-air Recovery Value Framework
+# Time Machine Efficiency Strategy: michael-air
 
 **Purpose:** Measure what was restored from Time Machine backup and decide what to exclude from future backups based on recovery value, regeneration cost, and file-count impact.
 
+**Related:** [setup.md](setup.md) (migration process & issues) | [GitHub issue #8](https://github.com/MichaelRWolf/wolf-soho/issues/8) (Intel x86_64 audit)
+
 **Key insight:** Both **GB and file count** matter. A 2 GB cache with 250K files may be far more expensive to restore than a 50 GB archive with 20 large files.
 
-**Status:** In progress as of 2026-08-15
+**Status:** Framework ready; measurements in progress (2026-08-15+)
 
 ## What Was Restored (2026-08-13/14)
 
