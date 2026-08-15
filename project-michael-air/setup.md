@@ -225,10 +225,47 @@ file $(which python3) $(which ruby) $(which node) 2>/dev/null
 
 ---
 
+## Progress Log
+
+### Friday, 2026-08-15
+
+**Completed:**
+- [x] Skipped macOS update (deferred: time & bandwidth constraints)
+- [x] Retained bash shell (chsh REJECTED: too fragile to change underlying shell)
+- [x] Homebrew installed and verified working (2026-08-15)
+  - `make install_brew_thingies` from portable-profile repo using Brewfile (as altered)
+  - All expected packages installed and functional
+- [x] Intel x86_64 audit started as background process (see `x86_64-audit.log`)
+- [x] Created TCC tools × permissions matrix (below)
+- [x] Created GitHub issue #9: Machine rename (michael-pro → michael-air)
+- [x] Created GitHub issue #10: Stabilize Time Machine backups (michael-pro → michael-air)
+
+**In Progress:**
+- [ ] TCC permission audit (proactive, matrix-based approach)
+- [ ] Intel x86_64 binary audit (background process)
+
+## TCC Permissions Matrix: Tools vs. Required Access
+
+| Tool/App | Full Disk Access | Downloads | Documents | Desktop | Photos | Mail | Calendar | Contacts | Camera | Microphone | Location | Local Network |
+|----------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Terminal | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ? | ? | ? | ✓ |
+| Xcode | ✓ | ✓ | ✓ | ✓ | ✓ | ? | ? | ? | ? | ? | ? | ✓ |
+| VS Code | ✓ | ✓ | ✓ | ✓ | ? | ? | ? | ? | ? | ? | ? | ✓ |
+| Emacs | ✓ | ✓ | ✓ | ✓ | ? | ? | ? | ? | ? | ? | ? | ? |
+| Python (scripts) | ✓ | ✓ | ✓ | ✓ | ? | ? | ? | ? | ? | ? | ? | ✓ |
+| Mail.app | ? | ? | ? | ? | ✓ | ✓ | ✓ | ? | ? | ✓ | ? | ? |
+| Spotlight (indexing) | ✓ | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
+| Backup tools (Time Machine) | ✓ | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
+| SSH/Git operations | ✓ | ✓ | ✓ | ✓ | ? | ? | ? | ? | ? | ? | ? | ✓ |
+
+**Legend:** ✓ = needed, ? = investigate, blank = not needed
+
+**Status:** Framework ready; to be applied all at once post-decision.
+
 ## Next Session Priorities
 
-1. **Update macOS** (get stable base)
-2. **Rebuild Homebrew** (unlock CLI development)
-3. **Audit for Intel binaries** (find hidden x86_64 stumbling blocks)
-4. **TCC permission audit** (fix privacy/access issues)
-5. **Time Machine efficiency** (audit and decide exclusions for future backups)
+1. **TCC permission matrix review** (grant all at once, systematically)
+2. **Intel x86_64 audit** (review background output)
+3. **Machine rename** (after Homebrew stable; see issue #9)
+4. **Time Machine stabilization** (see issue #10)
+5. **Time Machine efficiency audit** (ongoing, lower priority)
