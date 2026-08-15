@@ -41,9 +41,14 @@ Project to build up new MacBook Air replacing michael-pro.
 
 ## Project Progress
 
-- [ ] Unit arrives
-- [ ] Verify specs and condition
-- [ ] Initial setup
-- [ ] Configuration
-- [ ] Data migration
-- [ ] michael-pro restoration/repurposing
+- [x] Unit arrives (2026-08-13)
+- [x] Verify specs and condition (2026-08-13) — 100% fully functional, no damage
+- [x] Initial setup (2026-08-13) — Setup Assistant + Time Machine restore from NAS
+- [ ] Configuration — In progress (see [plan.md](plan.md) and [migration-todos.md](migration-todos.md))
+  - Shell/Homebrew rebuild (high priority)
+  - TCC/privacy remediation
+  - Time Machine efficiency audit
+  - Launcher/shortcuts recovery
+- [ ] Data validation — Audit restored data, account for 23.42 GB unaccounted
+- [x] Data migration — Time Machine restore completed (2026-08-13/14)
+- [ ] michael-pro restoration/repurposing — Status TBD (water damage, paused 2026-06-23)

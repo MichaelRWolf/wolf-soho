@@ -1,15 +1,53 @@
 # michael-air Setup Plan
 
-## TODO
+## Migration & Restore (Completed 2026-08-13/14)
 
-### Time Machine Configuration
+- [x] Time Machine restore from NAS via Setup Assistant (2026-08-13/14)
+  - Restored ~106 GB from Synology NAS backup of michael-pro
+  - Selected accounts: Michael R. Wolf (75.95 GB), mmac-shared (10.4 MB), Annie Nomous (20.6 MB)
+  - Applications (17.6 GB), System & Network settings, Other Files & Folders (23.42 GB unaccounted)
+  - See [migration-log.md](migration-log.md) for full details
 
-- [ ] Retrieve TM exclusion rules from NAS backup of michael-pro
-  - **NAS location:** Check `/Volumes/[nas-name]/[backup-name].sparsebundle` for Time Machine backup data
-  - **Settings file:** `~/Library/Preferences/com.apple.TimeMachine.plist` (user level)
-  - **System settings:** `/Library/Preferences/com.apple.TimeMachine.plist` (system level)
-  - **Note on ~/Library:** Time Machine automatically includes `~/Library` by default. This creates a bind-22: it backs up configuration (gold), but also backs up cache/state that may not be portable across OS versions and can confound configuration restoration. Monitor for config creep from old machine state.
-  - **michael-pro status:** Dead (water damage, no SSH access). Only option is manual extraction from NAS backup or manual reconstruction from current machine rules.
+## High Priority: Shell & Development Environment
+
+- [ ] Update macOS to latest version (from 15.7 Sequoia)
+- [ ] Fix login shell (currently Intel `/usr/local/bin/bash`, causes Terminal failure)
+  - Immediate: `chsh -s /bin/zsh`
+  - Permanent: Link to `/opt/homebrew/bin/bash` after ARM Homebrew installed
+- [ ] Inventory Intel Homebrew (before deletion)
+  - `find /usr/local/Cellar -maxdepth 1 -mindepth 1 -type d -exec basename {} \; | sort`
+- [ ] Install native ARM Homebrew under `/opt/homebrew`
+- [ ] Update PATH and shell startup files for ARM Homebrew
+- [ ] Remove Intel Homebrew tree after validation
+  
+## Medium Priority: Privacy & Permissions
+
+- [ ] Fix ~/Downloads TCC/privacy issue (Migration Assistant damaged access)
+  - System Settings → Privacy & Security → Files & Folders → Terminal → Downloads
+- [ ] Audit full TCC permissions restored from migration
+  - Check Full Disk Access, Spotlight indexing, Calendar/Contacts access
+
+## Medium Priority: Account Investigation
+
+- [ ] Investigate mmac-shared account (10.4 MB, unknown origin)
+- [ ] Investigate Annie Nomous account (20.6 MB, unknown origin)
+- [ ] Delete or repurpose these accounts based on findings
+
+## Time Machine Efficiency Audit
+
+See [tm-audit.md](tm-audit.md) for full framework.
+
+- [ ] Account for "Other Files & Folders" (23.42 GB) from migration
+- [ ] Measure ~/Library by size and file count
+- [ ] Classify caches, logs, IDE state, package caches by recovery value
+- [ ] Identify high-file-count, low-value directories (major restore bottleneck)
+- [ ] Decide Time Machine exclusions based on measured data + regeneration cost
+- [ ] Document all decisions for next machine migration
+
+## Launcher & Shortcuts Recovery
+
+- [ ] Verify Command-Space binding (Spotlight vs. third-party launcher)
+- [ ] Restore launcher preferences from migrated state
 
 ## Log
 
