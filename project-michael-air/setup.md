@@ -245,6 +245,14 @@ Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15
 - [x] Created TCC tools × permissions matrix (below)
 - [x] Created GitHub issue #9: Machine rename (michael-pro → michael-air)
 - [x] Created GitHub issue #10: Stabilize Time Machine backups (michael-pro → michael-air)
+- [x] Rust rebuilt: ARM64 native installed via Homebrew (1.97.1, 2026-08-15)
+  - Verified: `rustc`, `cargo` both ARM64 from `/opt/homebrew/bin/`
+- [x] UV rebuilt: ARM64 native installed via Homebrew (0.12.5, 2026-08-15)
+  - Verified: `uv` ARM64 from `/opt/homebrew/bin/`
+- [x] x86_64 binaries inventory & categorization (2026-08-15)
+  - /opt/local/bin: 497 binaries (412 have Homebrew equivalents, 85 legacy)
+  - /opt/X11/bin: 123 binaries (deprecated; XQuartz alternative available)
+  - See [x86_64-binaries-inventory.md](x86_64-binaries-inventory.md)
 
 **In Progress:**
 - [ ] TCC permission audit (proactive, matrix-based approach)
