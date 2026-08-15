@@ -209,19 +209,21 @@ dscl . -read /Users/mmac-shared
 
 ---
 
-## Finding Intel x86_64 Binaries (Issue #8)
+## Intel x86_64 Binary Audit & Remediation (Issue #8)
 
-Apple silently migrated incompatible x86_64 binaries. See [GitHub issue #8](https://github.com/MichaelRWolf/wolf-soho/issues/8) for full audit strategy and search commands.
+Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15.
 
-**Quick search:**
-```sh
-# Find x86_64 executables
-find /usr/local -type f -executable 2>/dev/null | xargs file | grep x86_64
-find ~/.local -type f -executable 2>/dev/null | xargs file | grep x86_64
+**Audit results:** See [x86_64-remediation.md](x86_64-remediation.md) for:
+- Complete findings (Universal binaries, Rust toolchain, MacPorts, X11, uv)
+- Replacement strategy (how to install ARM equivalents)
+- PATH & dotfiles updates
+- File removal checklist (reclaim 2-5 GB)
+- Time Machine exclusion strategy
 
-# Check Python/Ruby/Node
-file $(which python3) $(which ruby) $(which node) 2>/dev/null
-```
+**Remediation priorities:**
+1. **Immediate:** Rebuild Rust & UV
+2. **Short-term:** Remove MacPorts (or keep if needed)
+3. **Cleanup:** PATH references, Time Machine exclusions
 
 ---
 
@@ -235,14 +237,18 @@ file $(which python3) $(which ruby) $(which node) 2>/dev/null
 - [x] Homebrew installed and verified working (2026-08-15)
   - `make install_brew_thingies` from portable-profile repo using Brewfile (as altered)
   - All expected packages installed and functional
-- [x] Intel x86_64 audit started as background process (see `x86_64-audit.log`)
+- [x] Intel x86_64 audit completed (2026-08-15)
+  - Comprehensive scan: 289 KB log, 9-part audit
+  - Findings: Rust toolchain (x86_64-only), MacPorts tree (300+ binaries), X11, uv
+  - Universal binaries (Ruby, Perl, Python extensions) safe to keep
+  - See [x86_64-remediation.md](x86_64-remediation.md) for detailed action plan
 - [x] Created TCC tools × permissions matrix (below)
 - [x] Created GitHub issue #9: Machine rename (michael-pro → michael-air)
 - [x] Created GitHub issue #10: Stabilize Time Machine backups (michael-pro → michael-air)
 
 **In Progress:**
 - [ ] TCC permission audit (proactive, matrix-based approach)
-- [ ] Intel x86_64 binary audit (background process)
+- [ ] x86_64 remediation: Rust rebuild, MacPorts/X11 removal, PATH cleanup (see [x86_64-remediation.md](x86_64-remediation.md))
 
 ## TCC Permissions Matrix: Tools vs. Required Access
 
