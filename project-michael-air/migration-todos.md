@@ -121,10 +121,10 @@
 
 ## Launcher Recovery
 
-- [ ] Verify Command-Space binding
-  - Check System Settings → Keyboard → Keyboard Shortcuts → Spotlight
-  - May be Spotlight, may be third-party launcher
-  - Don't assume Quicksilver; check preferences
+- [x] Verify Command-Space binding (2026-08-15)
+  - **Result:** Quicksilver (qsapp.com) installed and configured
+  - Command-Space invokes Quicksilver (not Spotlight)
+  - No further action needed; working as intended
 
 ## Future TM Efficiency
 
