@@ -272,27 +272,18 @@ echo "=== Remediation complete ==="
 
 ### Option B: Integrate into portable-profile Brewfile
 
-**Future consideration:** Add to Brewfile or setup script
+**Status:** ✓ DONE (2026-08-15)
 
-```bash
-# In portable-profile/Brewfile or equivalent:
+**Changes made:**
+- Added `brew "rust"` to Brewfile (precompiled stable, not nightly/rustup)
+- Added `"michael-air"` to when clause: `when "michael-pro", "wendy-pro", "michael-air"`
+- `brew "uv"` already present in Brewfile for michael-pro/wendy-pro (now includes michael-air)
+- Wolf-air continues to use Makefile `install_rust` and `install_uv` (MacPorts workflow)
 
-# Rust (via Homebrew)
-brew "rustup-init"  # or rustup direct
-
-# UV (via Homebrew)
-brew "uv"
-
-# Python dev tools
-brew "python@3.14"
-```
-
-Then add post-install script:
-```bash
-# Run after brew install
-/opt/homebrew/bin/rustup self update
-/opt/homebrew/bin/rustup component add rustfmt clippy
-```
+**Implication for future michael-air setups:**
+- When running `make install_brew_thingies`, both `rust` and `uv` install automatically
+- Precompiled ARM64 bottles, no compilation, no nightly complexity
+- Post-install script not needed (unlike rustup approach)
 
 ---
 
@@ -347,9 +338,16 @@ echo "Time Machine exclusions configured"
 
 ### Immediate (Today)
 
+**Option A (Current, before portable-profile updated):**
 1. [ ] Rebuild Rust: `rm -rf ~/.cargo ~/.rustup && curl https://sh.rustup.rs | sh`
 2. [ ] Rebuild UV: `rm -f ~/.local/bin/uv && brew install uv`
 3. [ ] Verify: `rustc --version && uv --version`
+
+**Option B (Future, using updated portable-profile):**
+1. [ ] Run: `make install_brew_thingies` (installs rust + uv automatically)
+2. [ ] Verify: `rustc --version && uv --version`
+
+**Recommended:** Option B (cleaner, automatic via Homebrew)
 
 ### Short-term (This week)
 
