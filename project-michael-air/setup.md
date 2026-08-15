@@ -254,9 +254,14 @@ Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15
   - /opt/X11/bin: 123 binaries (deprecated; XQuartz alternative available)
   - See [x86_64-binaries-inventory.md](x86_64-binaries-inventory.md)
 
+**Completed (x86_64 cleanup):**
+- [x] Removed /opt/local (MacPorts x86_64 tree, 2-3 GB, 2026-08-15)
+- [x] Removed /opt/X11 (X11 x86_64 tools, 100-500 MB, 2026-08-15)
+- [x] Cleaned PATH: Removed MacPorts entries from portable-profile/.profile (2026-08-15)
+- [x] Created X11 migration documentation for future wolf-air retirement (2026-08-15)
+
 **In Progress:**
 - [ ] TCC permission audit (proactive, matrix-based approach)
-- [ ] x86_64 remediation: Rust rebuild, MacPorts/X11 removal, PATH cleanup (see [x86_64-remediation.md](x86_64-remediation.md))
 
 ## TCC Permissions Matrix: Tools vs. Required Access
 
