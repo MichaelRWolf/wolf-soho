@@ -138,11 +138,11 @@ unset _port_prefix
 
 This strategy handles all scenarios:
 
-| Machine | Scenario | Result |
-|---------|----------|--------|
-| **wolf-air** (macOS 12) | MacPorts installed, working | `port --version` succeeds → PATH updated |
-| **michael-air** (ARM) | /opt/local removed | `port --version` fails → PATH skipped |
-| **Future** (any arch) | Legacy tool broken/incompatible | Command test catches it → PATH stays clean |
+| Machine                 | Scenario                        | Result                                     |
+|-------------------------|---------------------------------|--------------------------------------------|
+| **wolf-air** (macOS 12) | MacPorts installed, working     | `port --version` succeeds → PATH updated   |
+| **michael-air** (ARM)   | /opt/local removed              | `port --version` fails → PATH skipped      |
+| **Future** (any arch)   | Legacy tool broken/incompatible | Command test catches it → PATH stays clean |
 
 ---
 
