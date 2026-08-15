@@ -172,7 +172,21 @@ dscl . -read /Users/mmac-shared
 
 - [ ] Fix login shell (completed immediate fix, needs permanent)
   - Current: `chsh -s /bin/zsh` (system zsh, working)
-  - Later: `chsh -s /opt/homebrew/bin/bash` (post-Homebrew rebuild)
+  - Permanent fix: Switch to Homebrew bash
+    ```bash
+    # 1. Verify Homebrew bash is installed
+    brew install bash
+    
+    # 2. Add to /etc/shells if needed (skip if already present)
+    grep /opt/homebrew/bin/bash /etc/shells || echo /opt/homebrew/bin/bash | sudo tee -a /etc/shells
+    
+    # 3. Change login shell
+    chsh -s /opt/homebrew/bin/bash
+    
+    # 4. Verify (close and reopen Terminal for change to take effect)
+    echo $SHELL        # Should show /opt/homebrew/bin/bash
+    bash --version     # Should show Homebrew version
+    ```
 
 - [ ] Inventory Intel Homebrew (non-destructive)
   - `find /usr/local/Cellar -maxdepth 1 -mindepth 1 -type d -exec basename {} \; | sort`
