@@ -30,17 +30,17 @@ Migration Assistant warned that backup was created with macOS 15.7.3; destinatio
 
 Migration Assistant discovered these account-like entries:
 
-| Entry | Selected | Size | Notes |
-|-------|----------|------|-------|
-| Applications | Yes | 17.6 GB | Standard apps from old Mac |
-| MacPorts | No | — | Legacy package manager |
-| Message Bus | No | — | System service |
-| mmac-shared | Yes | 10.4 MB | Unknown origin; retained to investigate |
-| Test User | No | — | Legacy test account |
-| Annie Nomous | Yes | 20.6 MB | Legacy account |
-| Michael R. Wolf | Yes | 75.95 GB | Main user account |
-| Other Files & Folders | Yes | 23.42 GB | **Unaccounted; needs audit** |
-| System & Network | Partial | 1.6 MB | Settings + Network only (no Printers) |
+| Entry                 | Selected | Size     | Notes                                   |
+|-----------------------|----------|----------|-----------------------------------------|
+| Applications          | Yes      | 17.6 GB  | Standard apps from old Mac              |
+| MacPorts              | No       | —        | Legacy package manager                  |
+| Message Bus           | No       | —        | System service                          |
+| mmac-shared           | Yes      | 10.4 MB  | Unknown origin; retained to investigate |
+| Test User             | No       | —        | Legacy test account                     |
+| Annie Nomous          | Yes      | 20.6 MB  | Legacy account                          |
+| Michael R. Wolf       | Yes      | 75.95 GB | Main user account                       |
+| Other Files & Folders | Yes      | 23.42 GB | **Unaccounted; needs audit**            |
+| System & Network      | Partial  | 1.6 MB   | Settings + Network only (no Printers)   |
 
 **Total selected:** 117 GB | **Reported available after transfer:** 106.22 GB
 
@@ -52,6 +52,10 @@ Migration Assistant discovered these account-like entries:
 Bottleneck shift: large-file network throughput → small-file metadata + SMB round trips. Interpretation: Time Machine/SMB handles small-file bulk poorly.
 
 ## Intel → ARM Issues Discovered
+
+**Tracking:** See [GitHub issue #8](https://github.com/MichaelRWolf/wolf-soho/issues/8) for full audit of Intel x86_64 binaries migrated to michael-air. That issue stays open for ongoing cleanup.
+
+---
 
 ### 1. Terminal Startup Failure
 
