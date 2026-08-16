@@ -6,41 +6,56 @@
 
 ---
 
-## Directory Reference by Architecture & Tool
+## Tool Prefix Reference: Homebrew vs MacPorts
 
 **See also:** [Complete prefix map artifact](https://claude.ai/code/artifact/f2e3a0cf-7ed9-495c-8fb0-a2e7fb1dd095) for detailed breakdown.
 
-### ARM64 (Active — Keep)
+### Prefix by Tool (Homebrew vs MacPorts)
 
-| Tool | Prefix | Status |
-|------|--------|--------|
-| **Homebrew** (primary) | `/opt/homebrew/bin` | ✓ ARM64 ACTIVE |
-| **System (Apple)** | `/usr/bin` | ✓ Universal (arm64e + x86_64) |
-| **Rust** | `/opt/homebrew/bin/` | ✓ ARM64 ACTIVE |
-| **Rust env** | `~/.cargo/` | ✓ MINIMAL |
-| **Python (venv)** | `~/.local/share/virtualenvs/*/bin/` | ✓ ARM64 REGENERABLE |
-| **UV cache** | `~/.cache/uv/` | ✓ FRESH (62 MB, 2026-08-16) |
+| Tool                   | Homebrew Prefix         | MacPorts Prefix | Status                       |
+|------------------------|-------------------------|-----------------|------------------------------|
+| **brew**               | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **node**               | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **npm**                | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **python3**            | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP (2.6/2.7) |
+| **perl**               | `/usr` (system)         | `/opt/local`    | ✓ SYSTEM / ✗ MP (5.8/5.12)   |
+| **ruby**               | `/usr` (system)         | `/opt/local`    | ✓ SYSTEM UNIVERSAL / ✗ MP    |
+| **git**                | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **rustc, cargo**       | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **uv**                 | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **gcc, llvm**          | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **autoconf, automake** | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **libtool**            | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **dbus**               | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **graphviz**           | `/opt/homebrew`         | `/opt/local`    | ✓ HB ACTIVE / ✗ MP REMOVED   |
+| **dia**                | —                       | `/opt/local`    | ✗ NOT USED                   |
+| **postgresql**         | `/opt/homebrew` (avail) | `/opt/local`    | ✗ NOT INSTALLED              |
+| **subversion**         | `/opt/homebrew` (avail) | `/opt/local`    | ✗ NOT INSTALLED              |
 
-**Binaries available:**
+**Legend:** HB = Homebrew (ARM64 ACTIVE), MP = MacPorts (x86_64, REMOVED 2026-08-16)
 
-**Homebrew** (`/opt/homebrew/bin`): brew, node, npm, python3, rustc, cargo, uv, git, gcc, llvm, autoconf, automake, libtool, dbus, graphviz
+### Special Paths (Non-Tool Prefixes)
 
-**System** (`/usr/bin`): ruby, perl, zsh, python (legacy), git (older)
+| Location | Purpose | Status |
+|----------|---------|--------|
+| `/usr/bin` | System binaries (ruby, perl, zsh, git—older) | ✓ Universal (arm64e + x86_64) |
+| `~/.cargo/` | Rust toolchain env | ✓ MINIMAL (symlink to portable-profile) |
+| `~/.local/share/virtualenvs/*/` | Python venv binaries (per-project) | ✓ ARM64 REGENERABLE |
+| `~/.cache/uv/` | UV Python cache | ✓ FRESH (62 MB, ARM64) |
+| `/opt/X11/` | X11 (legacy) | ✗ REMOVED 2026-08-16 (154 MB) |
 
-**Rust** (via `brew install rust`): rustc, cargo
+### Cleanup Status: x86_64 Artifacts (All Removed)
 
-**Python (venv)**: pip, wheel, virtualenv (per-project)
+| Item | Size | Status | Details |
+|------|------|--------|---------|
+| **MacPorts tree** (`/opt/local/`) | 1.4 GB | ✓ REMOVED 2026-08-16 | 497 binaries; all Homebrew equivalents verified installed |
+| **X11 legacy** (`/opt/X11/`) | 154 MB | ✓ REMOVED 2026-08-16 | xdotool, xdpyinfo, X11 libs (x86_64); not used |
+| **UV (old binary)** (`~/.local/bin/uv`) | 1-2 MB | ✓ CLEANED 2026-08-16 | x86_64; replaced by Homebrew uv |
+| **UV cache (old)** (`~/.local/share/uv/python/cpython-3.{10,11,12}-x86_64-none/`) | — | ✓ CLEANED 2026-08-16 | x86_64 Python interpreters; regenerated as ARM64 |
+| **Claude Code** (`~/.local/share/claude/versions/2.1.11*`) | — | ✓ CLEANED 2026-08-16 | x86_64 bundles; auto-redownloads ARM64 on launch |
+| **Cursor agent** (`~/.local/share/cursor-agent/versions/2026.02.13-41ac335/`) | — | ✓ CLEANED 2026-08-16 | x86_64 binaries; auto-redownloads ARM64 on launch |
 
-### x86_64 (Broken — All Removed)
-
-| Tool               | Prefix                                                       | Status                  | Details                                                            |
-|--------------------|--------------------------------------------------------------|-------------------------|--------------------------------------------------------------------|
-| **MacPorts**       | `/opt/local/`                                                | ✓ **REMOVED 2026-08-16** | 1.4 GB, 497 binaries; all Homebrew equivalents installed; not used |
-| **X11 (legacy)**   | `/opt/X11/`                                                  | ✓ **REMOVED 2026-08-16**   | 154 MB; xdotool, xdpyinfo, X11 libs (x86_64)                       |
-| **UV (old)**       | `~/.local/bin/uv`                                            | ✓ **CLEANED 2026-08-16**   | x86_64 binary; replaced by Homebrew uv                             |
-| **UV cache (old)** | `~/.local/share/uv/python/cpython-3.{10,11,12}-x86_64-none/` | ✓ **CLEANED 2026-08-16**   | x86_64 Python interpreters; regenerated as ARM64                   |
-| **Claude Code**    | `~/.local/share/claude/versions/2.1.11*`                     | ✓ **CLEANED 2026-08-16**   | x86_64 bundles; auto-redownloads ARM64 on launch                   |
-| **Cursor agent**   | `~/.local/share/cursor-agent/versions/2026.02.13-41ac335/`   | ✓ **CLEANED 2026-08-16**   | x86_64 binaries; auto-redownloads ARM64 on launch                  |
+**Total x86_64 space reclaimed: 1.554 GB** (MacPorts 1.4 GB + X11 154 MB)
 
 ---
 
