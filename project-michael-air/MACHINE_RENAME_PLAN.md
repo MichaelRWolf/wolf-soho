@@ -241,6 +241,61 @@ After:
 
 ---
 
+---
+
+## Appendix: Complete Audit of 'michael-pro' References
+
+**Scan Date:** 2026-08-16  
+**Total:** 60+ references across 36 files (wolf-soho: 35+ in 23 files; portable-profile: 25+ in 13 files)
+
+### Blocking Updates (2 files — implement when NAS accessible)
+1. **wolf-soho/CONTEXT.md** — Device registry (add michael-air entry with "(active)"; keep michael-pro with water damage note)
+2. **wolf-soho/equipment_computing.md** — Device specs (add michael-air section; keep michael-pro unchanged)
+
+### Recommended Updates (7 files — do for completeness)
+- **portable-profile/Makefile** — Comments (add michael-air to examples)
+- **portable-profile/README.md** — Tables (add michael-air rows; copy from michael-pro)
+- **portable-profile/PLAN_claude_tools.md** — Planning docs (update examples)
+- **wolf-soho/equipment_portable.md** — Networking specs (add michael-air interfaces)
+- **wolf-soho/power_consumption.md** — Power baseline (add michael-air if measured)
+- **portable-profile/TODO_unified_Python.md** — Machine list (add michael-air)
+- **wolf-soho/Identity Strategy** — Service accounts (add tm-michael-air)
+
+### Keep As-Is (27+ files — historical records & audit trails)
+**Water damage incidents:**
+- `2026-06-18_michael-pro_water-damage.md` (500+ lines, recovery procedure)
+- `2026-08-03_wendy-pro_water-damage.md` (cross-references michael-pro for comparison)
+
+**Maintenance & project records:**
+- `michael-pro_battery.md` (battery replacement project)
+- `project_compare_network_responsiveness_(wolf-air_v_michael-pro).md` (40+ data points)
+- `experiment_2025-12-27.md` (network testing log)
+- `PROJECT_raccoon_ethernet_2026-05.md` (test procedure docs)
+- All Dropbox metadata files (`michael-pro.sparsebundle`)
+- All planning docs using michael-pro as examples (PLAN_claude_tools.md, etc.)
+
+**Already correct (no action needed):**
+- `portable-profile/homebrew/Brewfile` (line 75: all three machines included) ✓
+- `portable-profile/homebrew/README.md` (all three machines included) ✓
+- `portable-profile/Makefile` (references already include michael-air) ✓
+
+### Edge Cases
+- **portable-profile/REQUIREMENTS_bash_prompt.md** — Suppresses hostname when `== michael-pro`; verify if michael-air should get same treatment
+
+### Verification Commands
+```bash
+# Count all michael-pro references
+cd /Users/michael/repos && grep -r "michael-pro" wolf-soho portable-profile --include="*.md" --include="Makefile" --include="Brewfile" 2>/dev/null | grep -v ".git" | wc -l
+
+# Find all affected files
+cd /Users/michael/repos && grep -r "michael-pro" wolf-soho portable-profile --include="*.md" --include="Makefile" --include="Brewfile" 2>/dev/null | grep -v ".git" | cut -d: -f1 | sort -u
+
+# Confirm machine conditionals are all three names in one line
+grep -n "michael-pro.*wendy-pro.*michael-air" /path/to/Brewfile
+```
+
+---
+
 ## References
 
 - **GitHub Issue #9:** Machine rename (michael-pro → michael-air)
