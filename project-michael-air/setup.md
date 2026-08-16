@@ -170,9 +170,9 @@ dscl . -read /Users/mmac-shared
   - Current: 15.7 Sequoia
   - Do: System Settings → Software Update → reboot
 
-- [ ] Fix login shell (completed immediate fix, needs permanent)
-  - Current: `chsh -s /bin/zsh` (system zsh, working)
-  - Permanent fix: Switch to Homebrew bash
+- [x] Fix login shell (2026-08-15)
+  - [x] Immediate fix: `chsh -s /bin/zsh` (system zsh, working) (2026-08-15)
+  - [x] Permanent fix: Switch to Homebrew bash (2026-08-15)
     ```bash
     # 1. Verify Homebrew bash is installed
     brew install bash
