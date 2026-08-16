@@ -1,8 +1,96 @@
 # Plan: Names, Networks, Backups (Hostname + NAS + TM Setup)
 
 **Date:** 2026-08-16  
-**Status:** Planning phase (ready for execution)  
+**Status:** Execution phase (Phases 1-4 complete; Phase 5 configured; Phase 6 ready to start)  
 **Scope:** Machine naming, NAS service account creation, Time Machine configuration, Keychain/SMB authentication
+
+---
+
+## Execution Status (2026-08-16)
+
+### ✓ COMPLETED
+
+**Phase 1: NAS Configuration**
+- ✓ NAS service account created: `tm-michael-air` (password stored in 1Password)
+- ✓ NAS share created: `Backups-TM-Michael-Air` (1.98 TB available)
+- ✓ SMB credentials tested and mounted successfully
+- ✓ Keychain entry added: `wolfden_NAS._smb._tcp.local.` (Account: `tm-michael-air`)
+
+**Phase 2: 1Password Entry**
+- ✓ Entry created: "NAS - TM - tm-michael-air" (Shared-Wolf Den vault)
+- ✓ Fields: username, password, website, tags (NAS, wolfden, backup)
+
+**Phase 3: Keychain & SMB**
+- ✓ System Keychain entry added (auto-populated during SMB mount)
+- ✓ Unattended SMB access verified
+
+**Phase 4: Machine Naming**
+- ✓ Hostname changed: `michael-pro` → `michael-air`
+- ✓ Verified: `scutil --get ComputerName` shows `michael-air`
+
+**Phase 5: Time Machine Configuration**
+- ✓ TM destination set: `Backups-TM-Michael-Air – 192.168.8.129`
+- ✓ Encryption: Disabled (intentional per security model)
+- ✓ Backup frequency: Automatically Every Hour
+- ✓ Back up on battery power: OFF (AC power only)
+- ✓ Exclusion list verified and cleaned (see below)
+
+### ✓ DECIDED
+
+**Naming & Identity**
+- Service account: `tm-michael-air` (per Identity Strategy)
+- NAS share: `Backups-TM-Michael-Air` (semantic, machine-specific)
+- Legacy backup: `Backups-TM-Michael` PRESERVED (not deleted; fallback for first 2-4 weeks)
+
+**Time Machine Scope**
+- User-focused backup (no system files)
+- Exclude: /Applications, /Library, /private, /System, /usr, /usr/local, /Developer
+- Exclude: ~/repos, ~/Downloads, ~/Pictures, ~/.npm, ~/.gem, ~/.cpan, ~/.cache
+- Exclude: ~/Library/Application Support, ~/Library/Containers, ~/Library/Group Containers, ~/Library/CloudStorage
+- Exclude: /opt/homebrew/bin, /opt/homebrew/opt, ~/.cargo, ~/go, ~/Library/Developer/Xcode
+
+**Network**
+- Use WiFi for now (WiFi → EAP → CG mesh for internet; WiFi → Beryl → NAS for local access)
+- Note: USB-C Ethernet dongle not recognized by macOS (will troubleshoot later for large backups)
+
+**Audit Findings**
+- x86_64 binaries identified but minimal impact (Python venvs, gcloud SDK, Emacs modules)
+- IncludeByPath field exists but appears unused in Sequoia 15.3.1 (legacy)
+- /usr/local is empty (old Intel Homebrew already cleaned)
+
+### ⏳ PENDING (Ready to Execute)
+
+**Phase 6: Initial Backup**
+- [ ] Start backup: `tmutil startbackup` or wait for automatic hourly trigger
+- [ ] Monitor progress: `tmutil status` (watch Percent increase, Running = 1)
+- [ ] Interrupt for power management as needed: `tmutil stopbackup`
+- [ ] Resume: `tmutil startbackup` (continues from checkpoint, not restart)
+
+**Post-Backup Monitoring**
+- [ ] Verify first snapshot created: `tmutil latestbackup`
+- [ ] Monitor TM logs for errors: `log stream --predicate 'process == "backupd"'`
+- [ ] Confirm hourly backups run automatically without intervention
+- [ ] After 1-2 weeks of stable backups: decide on legacy `Backups-TM-Michael` (keep vs. delete)
+
+### ❓ UNCERTAIN / DEFERRED
+
+**Ethernet Dongle**
+- USB-C Ethernet dongle shows power/activity lights but macOS doesn't recognize it
+- Impact: Initial backup will use WiFi (slower, ~6-12 hours for 50-60GB)
+- Plan: Troubleshoot dongle later (driver, replug, different dongle)
+- Recommendation: For future large backups, get working Ethernet for speed
+
+**Old michael-pro Backup**
+- Location: `Backups-TM-Michael` on NAS (436GB, 25 snapshots, Intel-based)
+- Decision deferred: Keep as archive or delete after michael-air proves stable
+- Rationale: Insurance against configuration mistakes; delete after 2-4 weeks of successful michael-air backups
+
+**IncludeByPath Field**
+- Status: Exists in plist (legacy from michael-pro setup)
+- Behavior: Appears unused in Sequoia 15.3.1 (contradicts tmutil isexcluded)
+- Decision: Monitor; delete if it interferes with TM behavior
+
+---
 
 ---
 
