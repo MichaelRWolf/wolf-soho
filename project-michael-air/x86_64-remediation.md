@@ -6,6 +6,30 @@
 
 ---
 
+## ⚡ Quick Reference: What's Worth Checking in Future Migrations
+
+**For future Intel→ARM migrations, check ONLY these (ignore the rest):**
+
+| Location | Check | Action | Worth Time? |
+|----------|-------|--------|-------------|
+| **~/.cargo/bin/** | `file $(which rustc)` — is it arm64? | If x86_64: `rm -rf ~/.cargo ~/.rustup` + reinstall | ✓ YES (dev tool) |
+| **~/.local/bin/uv** | `file ~/.local/bin/uv` — is it arm64? | If x86_64: `rm ~/.local/bin/uv*` + `brew install uv` | ✓ YES (dev tool) |
+| **~/.local/share/uv/python/** | `ls ~/.local/share/uv/python/` — x86_64 subdirs? | If present: `rm -rf ~/.local/share/uv/python/` (will regenerate ARM64) | ✓ YES (saves space) |
+| **~/.local/share/claude/versions/** | `ls ~/.local/share/claude/versions/` | If x86_64: delete (auto-redownloads ARM64 on next launch) | ⚠️ SKIP (handles itself) |
+| **/opt/local/** | `ls -la /opt/local/bin/ \| wc -l` | If >10 entries: `sudo rm -rf /opt/local` | ✓ YES (1.4 GB saved) |
+| **/opt/X11/** | `[ -d /opt/X11 ] && echo "exists"` | If exists: `sudo rm -rf /opt/X11` | ✓ YES (154 MB saved) |
+| **/usr/bin/ruby, /usr/bin/perl** | `file /usr/bin/ruby` — is it universal? | If universal (has arm64): keep as-is | ✗ SKIP (safe) |
+
+**NOT WORTH CHECKING:**
+- `/usr/local/bin` (usually empty after Homebrew migration)
+- Individual Python extensions (all reinstalled fresh via Homebrew)
+- Application bundles in `/Applications` (auto-redownload)
+- LaunchAgents/Daemons (rare to have x86_64 binaries)
+
+**Total time savings from focused audit: ~30 min → ~5 min**
+
+---
+
 ## Tool Prefix Reference: Homebrew vs MacPorts
 
 **See also:** [Complete prefix map artifact](https://claude.ai/code/artifact/f2e3a0cf-7ed9-495c-8fb0-a2e7fb1dd095) for detailed breakdown.

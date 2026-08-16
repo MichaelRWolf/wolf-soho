@@ -166,9 +166,10 @@ dscl . -read /Users/mmac-shared
 
 ### ⏳ High Priority (Shell & Development Environment)
 
-- [ ] Update macOS to latest version
-  - Current: 15.7 Sequoia
-  - Do: System Settings → Software Update → reboot
+- [ ] Update macOS to latest version — **DEFERRED (2026-08-16): Bandwidth constraints + low ROI**
+  - Current: 15.7 Sequoia (stable, no blockers)
+  - Target: Tahoe (14 GB download, ~30 min at 7 MB/s; prior attempt failed mid-download)
+  - Decision: Defer to stable WiFi. No critical bugs in 15.7; upgrade is "nice to have"
 
 - [x] Fix login shell (2026-08-15)
   - [x] Immediate fix: `chsh -s /bin/zsh` (system zsh, working) (2026-08-15)
@@ -206,14 +207,18 @@ dscl . -read /Users/mmac-shared
 
 ### ⏳ Medium Priority (Privacy & Permissions)
 
-- [ ] Fix ~/Downloads TCC/privacy (see Issue 3 above)
-- [ ] Audit other TCC permissions (Full Disk Access, Spotlight, Calendar, Contacts, etc.)
+- [ ] Fix ~/Downloads TCC/privacy (see Issue 3 above) — **DEFERRED: YAGNI (lazy TCC as needed)**
+- [ ] Audit other TCC permissions (Full Disk Access, Spotlight, Calendar, Contacts, etc.) — **DECISION: Grant only on demand, not proactively**
+
+**Rationale:** Terminal mostly works; permissions fail visible → fix when needed. Proactive grant burden > reactive fix burden.
 
 ### ⏳ Medium Priority (Account Investigation)
 
-- [ ] Investigate mmac-shared account
-- [ ] Investigate Annie Nomous account
-- [ ] Decide: keep or delete each (currently 10.4 MB + 20.6 MB)
+- [x] Investigate mmac-shared account — **SKIP (2026-08-16): ROI not worth audit time**
+- [x] Investigate Annie Nomous account — **SKIP (2026-08-16): ROI not worth audit time**
+- [x] Decide: keep or delete each (currently 10.4 MB + 20.6 MB) — **DECISION: KEEP both (too small to matter)**
+
+**Rationale:** 31 MB total < 1% of storage; investigation/decision overhead > benefit. Keep as-is.
 
 ### ⏳ Low Priority (Data Accounting & Cleanup)
 
@@ -225,19 +230,28 @@ dscl . -read /Users/mmac-shared
 
 ## Intel x86_64 Binary Audit & Remediation (Issue #8)
 
-Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15.
+Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15; remediation completed 2026-08-16.
 
 **Audit results:** See [x86_64-remediation.md](x86_64-remediation.md) for:
 - Complete findings (Universal binaries, Rust toolchain, MacPorts, X11, uv)
+- **NEW: Quick Reference table** for future Intel→ARM migrations (what's worth checking, what to skip)
 - Replacement strategy (how to install ARM equivalents)
 - PATH & dotfiles updates
 - File removal checklist (reclaim 2-5 GB)
 - Time Machine exclusion strategy
 
-**Remediation priorities:**
-1. **Immediate:** Rebuild Rust & UV
-2. **Short-term:** Remove MacPorts (or keep if needed)
-3. **Cleanup:** PATH references, Time Machine exclusions
+**Remediation completed (2026-08-16):**
+1. ✓ Rust rebuilt (ARM64)
+2. ✓ UV rebuilt (ARM64)
+3. ✓ /opt/local removed (1.4 GB)
+4. ✓ /opt/X11 removed (154 MB)
+5. ✓ PATH cleaned
+
+**Strategic decision: PATH Verification Strategy (deferred)**
+- [PATH-verification-proposal.md](PATH-verification-proposal.md) proposed execution-test approach (prevent broken binaries in PATH)
+- **Decision (2026-08-16): DEFER (low ROI post-cleanup)**
+- Rationale: Problem is already solved (/opt/local removed); benefits only future migrations. Implement only if pattern recurs or portable-profile requires universal defensiveness.
+- Revisit: Only if PATH pollution observed in future machines
 
 ---
 
