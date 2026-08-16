@@ -38,7 +38,7 @@
 
 | Location                        | Purpose                                      | Status                                  |
 |---------------------------------|----------------------------------------------|-----------------------------------------|
-| `/usr/bin`                      | System binaries (ruby, perl, zsh, git—older) | ✓ Universal (arm64e + x86_64)           |
+| `/usr/bin`                      | System binaries (ruby, perl, git—older) | ✓ Universal (arm64e + x86_64)           |
 | `~/.cargo/`                     | Rust toolchain env                           | ✓ MINIMAL (symlink to portable-profile) |
 | `~/.local/share/virtualenvs/*/` | Python venv binaries (per-project)           | ✓ ARM64 REGENERABLE                     |
 | `~/.cache/uv/`                  | UV Python cache                              | ✓ FRESH (62 MB, ARM64)                  |
@@ -235,7 +235,7 @@ echo $PATH
 # Example: ~/.cargo/bin:/opt/local/bin:/opt/local/sbin:/opt/X11/bin:...
 ```
 
-### Action: Update ~/.zshrc, ~/.bashrc, ~/.profile
+### Action: Update ~/.bashrc, ~/.profile
 
 **Search for and remove references to:**
 - `~/.cargo/bin` (will reinstall, add back automatically)
@@ -246,16 +246,18 @@ echo $PATH
 
 ```bash
 # Backup first
-cp ~/.zshrc ~/.zshrc.backup-2026-08-15
+cp ~/.bashrc ~/.bashrc.backup-2026-08-15
+cp ~/.profile ~/.profile.backup-2026-08-15
 
 # Remove x86_64 paths
-grep -v "/opt/local\|/opt/X11\|~/.cargo" ~/.zshrc > ~/.zshrc.tmp && mv ~/.zshrc.tmp ~/.zshrc
+grep -v "/opt/local\|/opt/X11\|~/.cargo" ~/.bashrc > ~/.bashrc.tmp && mv ~/.bashrc.tmp ~/.bashrc
+grep -v "/opt/local\|/opt/X11" ~/.profile > ~/.profile.tmp && mv ~/.profile.tmp ~/.profile
 
 # Verify (check for any remaining x86_64-only paths)
-grep "opt/local\|opt/X11\|\.cargo" ~/.zshrc && echo "WARNING: Found remaining x86_64 paths"
+grep "opt/local\|opt/X11" ~/.bashrc ~/.profile && echo "WARNING: Found remaining x86_64 paths"
 
 # Source and test
-source ~/.zshrc
+source ~/.bashrc
 echo $PATH  # Should not contain /opt/local, /opt/X11
 ```
 
@@ -336,7 +338,7 @@ fi
 
 # Clean PATH
 echo "Cleaning PATH references..."
-for shell_rc in ~/.zshrc ~/.bashrc ~/.profile; do
+for shell_rc in ~/.bashrc ~/.profile; do
   if [ -f "$shell_rc" ]; then
     grep -v "/opt/local\|/opt/X11" "$shell_rc" > "$shell_rc.tmp" && mv "$shell_rc.tmp" "$shell_rc"
   fi
@@ -428,7 +430,7 @@ echo "Time Machine exclusions configured"
 
 4. [ ] Decide on MacPorts: remove or keep?
 5. [ ] Decide on X11: remove or keep?
-6. [ ] Clean PATH dotfiles: `grep -v "/opt/local\|/opt/X11" ~/.zshrc > ~/.zshrc.tmp`
+6. [ ] Clean PATH dotfiles: `grep -v "/opt/local\|/opt/X11" ~/.bashrc > ~/.bashrc.tmp`
 7. [ ] Configure Time Machine exclusions
 
 ### Integration (Parallel)
