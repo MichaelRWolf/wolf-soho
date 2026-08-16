@@ -2,7 +2,7 @@
 
 **Audit Date:** 2026-08-15  
 **Log:** `x86_64-audit.log` (289 KB, comprehensive scan)  
-**Status Update:** 2026-08-16 (X11 removed 154 MB; /opt/local deleted 1.4 GB)
+**Status Update:** 2026-08-16 (X11 removed 154 MB; /opt/local removed 1.4 GB)
 
 ---
 
@@ -12,25 +12,35 @@
 
 ### ARM64 (Active — Keep)
 
-| Tool                   | Prefix                              | Binaries                                                                                                | Status                        |
-|------------------------|-------------------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------|
-| **Homebrew** (primary) | `/opt/homebrew/bin`                 | brew, node, npm, python3, rustc, cargo, uv, git, gcc, llvm, autoconf, automake, libtool, dbus, graphviz | ✓ ARM64 ACTIVE                |
-| **System (Apple)**     | `/usr/bin`                          | ruby, perl, zsh, python (legacy), git (older)                                                           | ✓ Universal (arm64e + x86_64) |
-| **Rust**               | `/opt/homebrew/bin/`                | rustc, cargo (via `brew install rust`)                                                                  | ✓ ARM64 ACTIVE                |
-| **Rust env**           | `~/.cargo/`                         | env symlink (→ portable-profile), settings.toml                                                         | ✓ MINIMAL                     |
-| **Python (venv)**      | `~/.local/share/virtualenvs/*/bin/` | pip, wheel, virtualenv                                                                                  | ✓ ARM64 REGENERABLE           |
-| **UV cache**           | `~/.cache/uv/`                      | Python 3.12.7+ ARM64 versions                                                                           | ✓ FRESH (62 MB, 2026-08-16)   |
+| Tool | Prefix | Status |
+|------|--------|--------|
+| **Homebrew** (primary) | `/opt/homebrew/bin` | ✓ ARM64 ACTIVE |
+| **System (Apple)** | `/usr/bin` | ✓ Universal (arm64e + x86_64) |
+| **Rust** | `/opt/homebrew/bin/` | ✓ ARM64 ACTIVE |
+| **Rust env** | `~/.cargo/` | ✓ MINIMAL |
+| **Python (venv)** | `~/.local/share/virtualenvs/*/bin/` | ✓ ARM64 REGENERABLE |
+| **UV cache** | `~/.cache/uv/` | ✓ FRESH (62 MB, 2026-08-16) |
 
-### x86_64 (Broken — All Removed or Pending Delete)
+**Binaries available:**
 
-| Tool | Prefix | Status | Details |
-|------|--------|--------|---------|
-| **MacPorts** | `/opt/local/` | ⏳ **APPROVED FOR DELETE** | 1.4 GB, 497 binaries; all Homebrew equivalents installed; not used |
-| **X11 (legacy)** | `/opt/X11/` | ✓ **REMOVED 2026-08-16** | 154 MB; xdotool, xdpyinfo, X11 libs (x86_64) |
-| **UV (old)** | `~/.local/bin/uv` | ✓ **CLEANED 2026-08-16** | x86_64 binary; replaced by Homebrew uv |
-| **UV cache (old)** | `~/.local/share/uv/python/cpython-3.{10,11,12}-x86_64-none/` | ✓ **CLEANED 2026-08-16** | x86_64 Python interpreters; regenerated as ARM64 |
-| **Claude Code** | `~/.local/share/claude/versions/2.1.11*` | ✓ **CLEANED 2026-08-16** | x86_64 bundles; auto-redownloads ARM64 on launch |
-| **Cursor agent** | `~/.local/share/cursor-agent/versions/2026.02.13-41ac335/` | ✓ **CLEANED 2026-08-16** | x86_64 binaries; auto-redownloads ARM64 on launch |
+**Homebrew** (`/opt/homebrew/bin`): brew, node, npm, python3, rustc, cargo, uv, git, gcc, llvm, autoconf, automake, libtool, dbus, graphviz
+
+**System** (`/usr/bin`): ruby, perl, zsh, python (legacy), git (older)
+
+**Rust** (via `brew install rust`): rustc, cargo
+
+**Python (venv)**: pip, wheel, virtualenv (per-project)
+
+### x86_64 (Broken — All Removed)
+
+| Tool               | Prefix                                                       | Status                  | Details                                                            |
+|--------------------|--------------------------------------------------------------|-------------------------|--------------------------------------------------------------------|
+| **MacPorts**       | `/opt/local/`                                                | ✓ **REMOVED 2026-08-16** | 1.4 GB, 497 binaries; all Homebrew equivalents installed; not used |
+| **X11 (legacy)**   | `/opt/X11/`                                                  | ✓ **REMOVED 2026-08-16**   | 154 MB; xdotool, xdpyinfo, X11 libs (x86_64)                       |
+| **UV (old)**       | `~/.local/bin/uv`                                            | ✓ **CLEANED 2026-08-16**   | x86_64 binary; replaced by Homebrew uv                             |
+| **UV cache (old)** | `~/.local/share/uv/python/cpython-3.{10,11,12}-x86_64-none/` | ✓ **CLEANED 2026-08-16**   | x86_64 Python interpreters; regenerated as ARM64                   |
+| **Claude Code**    | `~/.local/share/claude/versions/2.1.11*`                     | ✓ **CLEANED 2026-08-16**   | x86_64 bundles; auto-redownloads ARM64 on launch                   |
+| **Cursor agent**   | `~/.local/share/cursor-agent/versions/2026.02.13-41ac335/`   | ✓ **CLEANED 2026-08-16**   | x86_64 binaries; auto-redownloads ARM64 on launch                  |
 
 ---
 
@@ -472,15 +482,13 @@ Decision: Not needed; native macOS frameworks preferred
 Status: ✓ REMOVED
 ```
 
-### MacPorts Cleanup (✓ APPROVED FOR DELETION)
+### MacPorts Cleanup (✓ COMPLETED)
 
-**Status:** 2026-08-16 — Decision: **DELETE /opt/local (NOT USED)**
+**Status:** 2026-08-16 — **REMOVED /opt/local (1.4 GB)**
 
-**Finding:** `/opt/local` is 1.4 GB (not 3-4 GB estimate)
+**Finding:** `/opt/local` was 1.4 GB, 497 binaries (all x86_64)
 
-**Inventory:** 497 binaries verified as x86_64
-
-**Homebrew Equivalents Verified & Installed:**
+**Homebrew Equivalents Verified & Installed Before Removal:**
 - ✓ autoconf, automake, libtool (build tools)
 - ✓ dbus (message bus)
 - ✓ graphviz (graph layout)
@@ -489,12 +497,12 @@ Status: ✓ REMOVED
 - ✓ ruby (system universal)
 - ✓ git (Homebrew)
 
-**Tools Not Used:**
-- ✗ dia (diagram editor) — not used
-- ✗ postgresql — not used
-- ✗ subversion — not used
+**Tools Confirmed Not Used:**
+- ✗ dia (diagram editor)
+- ✗ postgresql
+- ✗ subversion
 
-**Action:** User confirmed non-usage. Run: `sudo rm -rf /opt/local` (requires terminal sudo password)
+**Result:** `sudo rm -rf /opt/local` executed successfully. Reclaimed 1.4 GB.
 
 ### Cache Cleanup (✓ COMPLETED)
 
