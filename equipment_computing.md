@@ -1,25 +1,37 @@
 # Computing Devices
 
-## `michael-pro` -- MacBook Pro (Michael's primary)
+## `michael-pro` -- MacBook Pro (Michael's primary) [WATER DAMAGED 2026-06-18]
 
 - Model: MacBook Pro 13-inch Late 2020 (A2251) -- MacBookPro16,2
 - Chip: Intel Core i5, Quad-Core, 2 GHz
 - RAM: 16 GB
-- Storage: 256GB SSD (estimated; 2020 Intel Pro baseline)
-- macOS: 15.7.3 Sequoia (build 24G419) (2026-05-12)
+- Storage: 256GB SSD
+- Serial: Unknown (device destroyed)
+- Hardware UUID: `3D9DF3C9-1B29-5FAA-A9E9-859D7316915A`
+- macOS: 15.7.3 Sequoia (build 24G419) (2026-05-12, last known state)
 - macOS 26 Tahoe: **Compatible** -- last Intel-supported macOS
 - Battery connector: ZIF (iFixit guide [MIC2020])
-- Notes: [Battery Replacement Project](michael-pro_battery.md); Water damage incident 2026-06-18 (see [2026-06-18_michael-pro_water-damage.md](2026-06-18_michael-pro_water-damage.md))
+- Notes: [Battery Replacement Project](michael-pro_battery.md); [Water damage incident 2026-06-18](2026-06-18_michael-pro_water-damage.md); Device: unrecoverable; Time Machine backup preserved as `Backups-TM-Michael` on NAS (436GB, do not delete without explicit decision)
 
-### Tahoe Upgrade Recommendation
+## `michael-air` -- MacBook Air (Michael's replacement) [M3, 2024]
 
-Eligible but proceed with caution given hardware state:
+- Model: MacBook Air 13-inch M3 (2024, A3383) -- Mac15,12
+- Chip: Apple M3 (8-core: 4 performance + 4 efficiency)
+- RAM: 16 GB
+- Storage: 256GB SSD
+- Serial: LFGJ62QR3W
+- Hardware UUID: `58ED3E12-7C1A-5473-BD8A-89246A584DCC`
+- macOS: 15.3.1 Sequoia (build 24D70) (2026-08-16)
+- macOS 26 Tahoe: **Compatible**
+- Status: **Active replacement** for water-damaged michael-pro; Migration Assistant restore completed 2026-08-13/14
+- Network: Primary interface en0 (Ethernet via USB-C dongle when needed)
+- MAC addresses: (documented under Network Interfaces section below)
+- Notes: Replacing michael-pro (Intel) following 2026-06-18 water damage. See [project-michael-air/](../project-michael-air/) for setup status and Time Machine strategy. Time Machine backup in progress: `Backups-TM-Michael-Air` (fresh start, separate from legacy `Backups-TM-Michael`)
 
-- Battery is at 1,501 cycles (50% over Apple's 1,000-cycle threshold), already showing thermal throttling under load
-- Tahoe is optimized for Apple Silicon; Intel Macs carry more of its background services as CPU work → more heat → more throttling
-- A degraded battery compounds this: the machine draws harder from a weakened cell, increasing thermal stress and shortening unplugged runtime further
-- **Recommended order:** replace battery first, then evaluate Tahoe -- or accept that sustained-load performance will degrade noticeably on Tahoe without a fresh battery
-- Tahoe is the end of the Intel road; staying on Sequoia 15.x remains a valid lower-risk option until the battery is replaced
+### Time Machine: michael-pro vs michael-air
+
+- **michael-pro TM backup**: `Backups-TM-Michael` on NAS (436GB, 25 snapshots April 2025–Aug 13 2026) — **PRESERVED; do not delete** without explicit decision
+- **michael-air TM backup**: `Backups-TM-Michael-Air` on NAS (fresh start Aug 2026+) — user-focused, excludes system files and Intel binaries
 
 ## `wendy-pro` -- MacBook Pro (Wendy's) -- ABANDONED
 
@@ -134,6 +146,29 @@ Manufactured by Anker Innovations Limited, China.
 | Manufacturer | Anker Innovations Limited (China)        |
 
 **Note:** HDMI output only. Not compatible for driving Lenovo E24-10 display (which requires DisplayPort input). Wolf-air needs Thunderbolt 2 to DisplayPort adapter to drive Lenovo.
+
+---
+
+## Network Interfaces & MAC Addresses
+
+### `michael-air` Network Configuration
+
+Primary interface:
+- **en0** (WiFi): `d2:9e:b1:7e:ff:97`
+
+Secondary/virtual interfaces (as of 2026-08-16):
+- en1: `36:20:e9:d4:3e:00` (virtual/bridge)
+- en2: `36:20:e9:d4:3e:04` (virtual/bridge)
+- en3: `36:23:4b:77:f4:92`
+- en4: `36:23:4b:77:f4:93`
+
+Provisioning UDID: `00008122-0006143411F1001C`
+
+**Note:** Multiple virtual interfaces are created during network configuration. Primary data interface is en0. Document actual usage post-setup if specific interfaces are used for network operations.
+
+### `michael-pro` Network Configuration
+
+**To be documented** — water-damaged device; TM backup does not contain network configuration reference.
 
 ---
 
