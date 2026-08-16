@@ -36,24 +36,24 @@
 
 ### Special Paths (Non-Tool Prefixes)
 
-| Location | Purpose | Status |
-|----------|---------|--------|
-| `/usr/bin` | System binaries (ruby, perl, zsh, git—older) | ✓ Universal (arm64e + x86_64) |
-| `~/.cargo/` | Rust toolchain env | ✓ MINIMAL (symlink to portable-profile) |
-| `~/.local/share/virtualenvs/*/` | Python venv binaries (per-project) | ✓ ARM64 REGENERABLE |
-| `~/.cache/uv/` | UV Python cache | ✓ FRESH (62 MB, ARM64) |
-| `/opt/X11/` | X11 (legacy) | ✗ REMOVED 2026-08-16 (154 MB) |
+| Location                        | Purpose                                      | Status                                  |
+|---------------------------------|----------------------------------------------|-----------------------------------------|
+| `/usr/bin`                      | System binaries (ruby, perl, zsh, git—older) | ✓ Universal (arm64e + x86_64)           |
+| `~/.cargo/`                     | Rust toolchain env                           | ✓ MINIMAL (symlink to portable-profile) |
+| `~/.local/share/virtualenvs/*/` | Python venv binaries (per-project)           | ✓ ARM64 REGENERABLE                     |
+| `~/.cache/uv/`                  | UV Python cache                              | ✓ FRESH (62 MB, ARM64)                  |
+| `/opt/X11/`                     | X11 (legacy)                                 | ✗ REMOVED 2026-08-16 (154 MB)           |
 
 ### Cleanup Status: x86_64 Artifacts (All Removed)
 
-| Item | Size | Status | Details |
-|------|------|--------|---------|
-| **MacPorts tree** (`/opt/local/`) | 1.4 GB | ✓ REMOVED 2026-08-16 | 497 binaries; all Homebrew equivalents verified installed |
-| **X11 legacy** (`/opt/X11/`) | 154 MB | ✓ REMOVED 2026-08-16 | xdotool, xdpyinfo, X11 libs (x86_64); not used |
-| **UV (old binary)** (`~/.local/bin/uv`) | 1-2 MB | ✓ CLEANED 2026-08-16 | x86_64; replaced by Homebrew uv |
-| **UV cache (old)** (`~/.local/share/uv/python/cpython-3.{10,11,12}-x86_64-none/`) | — | ✓ CLEANED 2026-08-16 | x86_64 Python interpreters; regenerated as ARM64 |
-| **Claude Code** (`~/.local/share/claude/versions/2.1.11*`) | — | ✓ CLEANED 2026-08-16 | x86_64 bundles; auto-redownloads ARM64 on launch |
-| **Cursor agent** (`~/.local/share/cursor-agent/versions/2026.02.13-41ac335/`) | — | ✓ CLEANED 2026-08-16 | x86_64 binaries; auto-redownloads ARM64 on launch |
+| Item                                                                              | Size   | Status               | Details                                                   |
+|-----------------------------------------------------------------------------------|--------|----------------------|-----------------------------------------------------------|
+| **MacPorts tree** (`/opt/local/`)                                                 | 1.4 GB | ✓ REMOVED 2026-08-16 | 497 binaries; all Homebrew equivalents verified installed |
+| **X11 legacy** (`/opt/X11/`)                                                      | 154 MB | ✓ REMOVED 2026-08-16 | xdotool, xdpyinfo, X11 libs (x86_64); not used            |
+| **UV (old binary)** (`~/.local/bin/uv`)                                           | 1-2 MB | ✓ CLEANED 2026-08-16 | x86_64; replaced by Homebrew uv                           |
+| **UV cache (old)** (`~/.local/share/uv/python/cpython-3.{10,11,12}-x86_64-none/`) | —      | ✓ CLEANED 2026-08-16 | x86_64 Python interpreters; regenerated as ARM64          |
+| **Claude Code** (`~/.local/share/claude/versions/2.1.11*`)                        | —      | ✓ CLEANED 2026-08-16 | x86_64 bundles; auto-redownloads ARM64 on launch          |
+| **Cursor agent** (`~/.local/share/cursor-agent/versions/2026.02.13-41ac335/`)     | —      | ✓ CLEANED 2026-08-16 | x86_64 binaries; auto-redownloads ARM64 on launch         |
 
 **Total x86_64 space reclaimed: 1.554 GB** (MacPorts 1.4 GB + X11 154 MB)
 
