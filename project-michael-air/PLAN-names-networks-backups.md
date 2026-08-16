@@ -1,0 +1,511 @@
+# Plan: Names, Networks, Backups (Hostname + NAS + TM Setup)
+
+**Date:** 2026-08-16  
+**Status:** Planning phase (ready for execution)  
+**Scope:** Machine naming, NAS service account creation, Time Machine configuration, Keychain/SMB authentication
+
+---
+
+## Strategy Reference
+
+**Source:** 1Password "Identity Strategy - NAS + MB - Human+Service Accounts"  
+**UUID:** `z264ew5xvmndlg5aliwmgl3cam`  
+**Vault:** Shared-Wolf Den  
+**Retrieve:** `op item get z264ew5xvmndlg5aliwmgl3cam`
+
+**Key principles:**
+- Human accounts (`michael`, `wendy`) consistent across Macs + NAS
+- Service accounts (`tm-<hostname>`) machine-scoped, automated only
+- Keychain stores network credentials for unattended backups
+
+---
+
+## Naming & Identity Decisions
+
+| Component | Current | Target | Rationale |
+|-----------|---------|--------|-----------|
+| Machine ComputerName | `michael-pro` | `michael-air` | Matches hardware (M3 2024); SSI consistency |
+| Machine LocalHostName | `michael-pro` | `michael-air` | Enables mDNS: `michael-air.local` |
+| Human account | `michael` | `michael` | Already consistent (no change needed) |
+| NAS TM service account | `tm-michael-pro` | `tm-michael-air` | Service account per Identity Strategy |
+| NAS share name | `Backups-TM-Michael` | `Backups-TM-Michael-Air` | Semantic, machine-specific |
+| 1Password vault entry | "NAS - TM - tm-michael-pro" | "NAS - TM - tm-michael-air" | Mirrors service account name |
+| Keychain entry | `wolfden_NAS._smb._tcp.local.` (tm-michael-pro) | `wolfden_NAS._smb._tcp.local.` (tm-michael-air) | Updated for new credential |
+
+---
+
+## Phase 1: NAS Configuration
+
+### Prerequisites
+
+- SSH access to Synology NAS as admin user
+- NAS IP: `192.168.8.129`
+- NAS mDNS: `wolfden_NAS._smb._tcp.local.` or `wolfden-nas.local`
+
+### 1.1: Create NAS Service Account (`tm-michael-air`)
+
+**SSH to NAS:**
+```bash
+ssh admin@192.168.8.129
+# Or: ssh admin@wolfden-nas.local
+```
+
+**Via Synology DSM web UI (easier):**
+1. Open `https://192.168.8.129:5001`
+2. Control Panel → User
+3. Create → Local User
+   - Username: `tm-michael-air`
+   - Password: Generate strong password (will store in 1Password)
+   - Privilege: Leave unchecked; grant permissions to specific folder only (next step)
+   - Confirm create
+
+**OR via CLI (if web UI unavailable):**
+```bash
+# Create user (replace PASSWORD with actual password)
+sudo synouser --add tm-michael-air PASSWORD "TM Backup michael-air" 0
+
+# Verify creation
+sudo synouser --list
+```
+
+**Verify account was created:**
+```bash
+# From NAS terminal or via SSH
+synouser --list | grep tm-michael-air
+```
+
+---
+
+### 1.2: Create NAS Share (`Backups-TM-Michael-Air`)
+
+**Via Synology DSM web UI:**
+1. File Station → Home
+2. Create → Folder → Name: `Backups-TM-Michael-Air`
+3. Right-click → Properties → Permissions
+   - Remove: `guest` (if present)
+   - Add: `tm-michael-air` with "Read/Write" permission
+   - Owner: Set to `tm-michael-air` if possible
+
+**OR via CLI:**
+```bash
+# SSH to NAS
+ssh admin@192.168.8.129
+
+# Create share directory
+sudo mkdir -p /volume1/Backups-TM-Michael-Air
+
+# Set permissions (note: exact path/owner syntax varies by DSM version)
+sudo chown tm-michael-air:tm-michael-air /volume1/Backups-TM-Michael-Air
+sudo chmod 750 /volume1/Backups-TM-Michael-Air
+
+# Verify
+ls -ld /volume1/Backups-TM-Michael-Air
+```
+
+**Verify share is accessible:**
+```bash
+# From michael-air:
+open smb://tm-michael-air@192.168.8.129/Backups-TM-Michael-Air
+# Or: open smb://tm-michael-air@wolfden_NAS._smb._tcp.local./Backups-TM-Michael-Air
+# Prompt for password; enter tm-michael-air password
+```
+
+---
+
+### 1.3: Test SMB Access from michael-air
+
+```bash
+# Test mount (will prompt for password)
+mount_smbfs -o nosetuserid //tm-michael-air@192.168.8.129/Backups-TM-Michael-Air /tmp/tm-test
+
+# Check if mounted
+mount | grep Backups-TM-Michael-Air
+
+# Verify write access
+touch /tmp/tm-test/test-file.txt && rm /tmp/tm-test/test-file.txt
+
+# Unmount
+umount /tmp/tm-test
+```
+
+---
+
+## Phase 2: 1Password Entry Creation
+
+### 2.1: Create 1P Entry via `op` CLI
+
+**Prerequisites:**
+- 1Password CLI signed in: `op signin` (if not already authenticated)
+- Vault: "Shared-Wolf Den"
+
+**Create the entry:**
+```bash
+# Option A: Interactive creation
+op item create \
+  --category "LOGIN" \
+  --title "NAS - TM - tm-michael-air" \
+  --vault "Shared-Wolf Den" \
+  username="tm-michael-air" \
+  password="YOUR_GENERATED_PASSWORD" \
+  url="https://192.168.8.129:5001" \
+  --tags "NAS,wolfden,backup" \
+  'Name *'="tm-michael-air"
+```
+
+**Alternative: Copy from existing entry and edit**
+```bash
+# Get UUID of existing tm-michael-pro entry
+op item list --vault "Shared-Wolf Den" --format json | jq '.[] | select(.title | contains("tm-michael-pro")) | .id'
+
+# Copy it (note: `op item duplicate` not available in all versions; use web UI instead)
+# Via web: 1Password web → Find "NAS - TM - tm-michael-pro" → ⋯ → Duplicate
+# Then edit title/username/passwords in the duplicated entry
+```
+
+**Verify entry was created:**
+```bash
+op item get "NAS - TM - tm-michael-air" --vault "Shared-Wolf Den"
+# Should show: username, password, website, tags
+```
+
+**Store password locally (macOS) for later reference:**
+```bash
+# Retrieve password from 1P and copy to clipboard
+op item get "NAS - TM - tm-michael-air" --fields username,password --vault "Shared-Wolf Den" | pbcopy
+```
+
+---
+
+## Phase 3: Keychain & SMB Authentication
+
+### 3.1: Add Keychain Entry for Unattended Backups
+
+Time Machine needs credentials stored in System Keychain to connect to NAS without user interaction.
+
+**Option A: Manual (via Keychain Access)**
+1. Open Keychain Access (Applications → Utilities → Keychain Access)
+2. Click "Keychain" → "System Keychain" (left sidebar)
+3. File → New Password Item
+   - Keychain Item Name: `wolfden_NAS._smb._tcp.local.` (or `wolfden-nas.local`)
+   - Account Name: `tm-michael-air`
+   - Password: (paste from 1Password)
+   - Add to Keychain: Confirm
+4. Double-click the entry → "Access Control" tab
+   - Allow: `Finder`, `System Events`, `/usr/libexec/authd`
+   - Click "Modify…" if needed to add permissions
+5. Close and verify entry appears in Keychain list
+
+**Option B: Command-line (faster, scriptable)**
+```bash
+# Add credential to System keychain
+security add-internet-password \
+  -a "tm-michael-air" \
+  -s "wolfden_NAS._smb._tcp.local." \
+  -p "PASSWORD_FROM_1P" \
+  -l "WolfDen NAS - Time Machine (michael-air)" \
+  -t smb \
+  -w \
+  /Library/Keychains/System.keychain
+
+# Verify it was added
+security find-internet-password -s "wolfden_NAS._smb._tcp.local." -a "tm-michael-air" /Library/Keychains/System.keychain
+```
+
+### 3.2: Test Unattended SMB Connection
+
+```bash
+# Use the credential from keychain (no interactive prompt)
+mount_smbfs -o nosetuserid,noowners //tm-michael-air@wolfden_NAS._smb._tcp.local./Backups-TM-Michael-Air /tmp/tm-test
+
+# Check mount
+mount | grep Backups-TM-Michael-Air
+
+# Unmount
+umount /tmp/tm-test
+```
+
+If this succeeds without prompting for password, the Keychain entry is correctly configured for TM.
+
+---
+
+## Phase 4: Machine Naming (Hostname Change)
+
+### Prerequisites
+- Have SSH access ready (if needed for troubleshooting)
+- Document current hostname: `michael-pro`
+- Target hostname: `michael-air`
+
+### 4.1: Change ComputerName, LocalHostName, and HostName
+
+```bash
+# Current state
+scutil --get ComputerName
+scutil --get LocalHostName
+scutil --get HostName
+
+# Change to michael-air (requires sudo)
+sudo scutil --set ComputerName "michael-air"
+sudo scutil --set LocalHostName "michael-air"
+sudo scutil --set HostName "michael-air"
+
+# Verify changes
+scutil --get ComputerName
+scutil --get LocalHostName
+scutil --get HostName
+
+# You may need to restart for full effect, or just restart System Preferences
+# Logout/login cycle is sufficient for most services
+```
+
+### 4.2: Verify Hostname Change
+
+```bash
+# Check Bonjour discovery
+hostname
+hostname -s
+hostname -f
+
+# Verify mDNS (should resolve to michael-air.local)
+ping michael-air.local
+
+# Verify SMB Bonjour mDNS name
+dns-sd -R "michael-air" _smb._tcp local 445 &
+```
+
+### 4.3: Update NAS/Bonjour Records (if applicable)
+
+If the NAS has cached hostname information for this machine, you may want to:
+1. Restart NAS: `sudo shutdown -r now` (from NAS SSH)
+2. Or manually clear cache on NAS (varies by DSM version)
+
+In practice, Bonjour auto-discovery should pick up the new name within minutes.
+
+---
+
+## Phase 5: Time Machine Configuration
+
+### 5.1: Verify TM is Not Running
+
+```bash
+tmutil status
+# Should show: Running = 0
+```
+
+### 5.2: Remove Old Backup Destination (Optional)
+
+```bash
+# Check current destination
+tmutil destinationinfo
+
+# Remove old destination if present (do NOT delete NAS share itself)
+sudo tmutil removeexclusion /Volumes/Backups-TM-Michael
+# OR via System Settings → Time Machine → Remove disk
+```
+
+### 5.3: Configure New Destination
+
+**Via System Settings (GUI):**
+1. Open System Settings → General → Time Machine
+2. Click "Turn Off" if currently on
+3. Wait a moment, then click "Turn On"
+4. Disk dialog appears; click "Add or Change Backup Disk"
+5. Select "Other Network Disks…"
+6. Enter: `smb://tm-michael-air@wolfden_NAS._smb._tcp.local./Backups-TM-Michael-Air`
+7. Authenticate with `tm-michael-air` password (from 1Password)
+8. Confirm selection
+
+**Via Command Line:**
+```bash
+# Create a bookmark for the destination
+tmutil setdestination smb://tm-michael-air@wolfden_NAS._smb._tcp.local./Backups-TM-Michael-Air
+```
+
+### 5.4: Verify Exclusions
+
+```bash
+# Check what's excluded (should NOT include /System, /usr, /bin, /sbin)
+defaults read /Library/Preferences/com.apple.TimeMachine SkipPaths
+
+# If IncludeByPath exists and includes system paths, remove it
+sudo defaults delete /Library/Preferences/com.apple.TimeMachine IncludeByPath
+```
+
+---
+
+## Phase 6: Initial Backup (Start, Interrupt, Resume)
+
+### 6.1: Start Backup
+
+```bash
+# Kick off initial backup
+tmutil startbackup
+
+# Monitor progress
+tmutil status
+# Watch for: Percent increasing, Running = 1
+```
+
+### 6.2: Interrupt When Ready (e.g., Low Battery)
+
+```bash
+# Stop the backup
+tmutil stopbackup
+
+# Verify it stopped
+tmutil status
+# Should show: Running = 0
+```
+
+### 6.3: Resume When Power Stable
+
+```bash
+# Resume (does NOT restart from scratch; continues from last checkpoint)
+tmutil startbackup
+```
+
+### 6.4: Verify First Snapshot Created
+
+```bash
+tmutil latestbackup
+# Should show path like: /Volumes/Backups-TM-Michael-Air/Backups.backupdb/michael-air/2026-08-16-HHMMSS
+```
+
+---
+
+## Execution Checklist
+
+### Pre-Flight
+
+- [ ] Have NAS admin credentials ready
+- [ ] Have 1Password vault access (Shared-Wolf Den)
+- [ ] Ethernet connection to NAS ready (USB-C dongle recommended)
+- [ ] Power adapter connected to michael-air
+- [ ] This document reviewed and understood
+
+### NAS Configuration
+
+- [ ] SSH to NAS and verify accessibility
+- [ ] Create service account `tm-michael-air` (NAS)
+- [ ] Create share `Backups-TM-Michael-Air` (NAS)
+- [ ] Set permissions: `tm-michael-air` → full read/write on share
+- [ ] Test SMB access from michael-air (manual mount)
+- [ ] Password stored securely
+
+### 1Password Entry
+
+- [ ] Create 1P entry "NAS - TM - tm-michael-air" in Shared-Wolf Den
+- [ ] Fields: username, password, website (https://192.168.8.129:5001), tags (NAS, wolfden, backup)
+- [ ] Entry is accessible via `op item get`
+
+### Keychain Setup
+
+- [ ] Add System Keychain entry for `wolfden_NAS._smb._tcp.local.` / `tm-michael-air`
+- [ ] Test unattended SMB mount (should not prompt for password)
+- [ ] Verify Keychain entry allows Finder/System Events access
+
+### Machine Configuration
+
+- [ ] Change hostname: `michael-pro` → `michael-air`
+- [ ] Verify hostname change with `scutil --get ComputerName`
+- [ ] Verify `michael-air.local` is resolvable via ping
+
+### Time Machine Setup
+
+- [ ] Stop current TM if running
+- [ ] Remove old destination (optional; preserves NAS share)
+- [ ] Add new destination: `smb://tm-michael-air@wolfden_NAS._smb._tcp.local./Backups-TM-Michael-Air`
+- [ ] Verify exclusions do NOT include system paths
+- [ ] Verify TM is set to automatic backup ON
+
+### Initial Backup
+
+- [ ] Start backup: `tmutil startbackup`
+- [ ] Monitor progress: `tmutil status` (watch Percent increase)
+- [ ] Interrupt when needed: `tmutil stopbackup`
+- [ ] Resume when power stable: `tmutil startbackup`
+- [ ] Verify first snapshot created: `tmutil latestbackup`
+
+---
+
+## Post-Execution
+
+- [ ] Monitor TM logs for errors: `log stream --predicate 'process == "backupd"'`
+- [ ] Verify automatic hourly backups start without intervention
+- [ ] After 1-2 weeks of stable backups, consider deleting legacy `Backups-TM-Michael` share (document decision)
+- [ ] Update [tm-strategy.md](tm-strategy.md) with actual measurements
+
+---
+
+## Related Documentation
+
+- [TM-SETUP-PLAN.md](TM-SETUP-PLAN.md) — Original Time Machine plan (superseded by this document)
+- [tm-strategy.md](tm-strategy.md) — TM efficiency audit framework and measurements
+- [setup.md](setup.md) — Migration process and Intel→ARM issues
+- [equipment_computing.md](../wolf-soho/equipment_computing.md) — Machine specs, UUIDs, serials, MAC addresses
+- 1Password Identity Strategy: `op://Shared-Wolf Den/z264ew5xvmndlg5aliwmgl3cam/`
+
+---
+
+## Troubleshooting
+
+### "No route to host" when mounting NAS share
+
+**Cause:** NAS not reachable (network disconnected, NAS down, wrong IP/hostname)
+
+**Fix:**
+```bash
+# Verify network connection
+ping 192.168.8.129
+ping wolfden_NAS._smb._tcp.local.
+# If both fail, check network / NAS status
+```
+
+### "Authentication failed" during TM backup
+
+**Cause:** Keychain entry missing or password incorrect
+
+**Fix:**
+```bash
+# Check Keychain entry exists and is correct
+security find-internet-password -s "wolfden_NAS._smb._tcp.local." /Library/Keychains/System.keychain
+
+# Re-add if missing
+security add-internet-password -a "tm-michael-air" -s "wolfden_NAS._smb._tcp.local." -p "PASSWORD" /Library/Keychains/System.keychain
+```
+
+### TM keeps attempting to backup but never completes
+
+**Cause:** Large initial backup hitting network timeouts; SMB round-trip latency
+
+**Fix:**
+```bash
+# Interrupt and resume iteratively
+tmutil stopbackup
+sleep 10
+tmutil startbackup
+
+# Or: wired ethernet connection recommended for large initial backup
+```
+
+### Machine hostname not updating after `scutil` commands
+
+**Cause:** Caching in System Preferences or Bonjour daemon
+
+**Fix:**
+```bash
+# Restart mDNS/Bonjour daemon
+sudo launchctl stop com.apple.mDNSResponder
+sudo launchctl start com.apple.mDNSResponder
+
+# Or full logout/login cycle
+```
+
+---
+
+## References
+
+- **Synology DSM CLI Reference:** https://kb.synology.com/en-us/DSM/tutorial/How_to_login_to_DSM_with_root_permission_by_using_SSH_Telnet
+- **macOS `scutil` hostname:** `man scutil`
+- **Keychain CLI:** `man security add-internet-password`
+- **Time Machine CLI:** `man tmutil`
+- **SMB/CIFS:** `man mount_smbfs`
