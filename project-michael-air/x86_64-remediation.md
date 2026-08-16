@@ -1,7 +1,26 @@
 # x86_64 Binary Remediation Plan for michael-air
 
 **Audit Date:** 2026-08-15  
-**Log:** `x86_64-audit.log` (289 KB, comprehensive scan)
+**Log:** `x86_64-audit.log` (289 KB, comprehensive scan)  
+**Status Update:** 2026-08-16 (X11 removed 154 MB; /opt/local held pending Homebrew verification)
+
+---
+
+## Prefix Directories Reference Table
+
+See [detailed prefix map](https://claude.ai/code/artifact/f2e3a0cf-7ed9-495c-8fb0-a2e7fb1dd095) for complete architecture & tool breakdown.
+
+### Quick Summary
+
+| Prefix          | Tool               | Arch      | Status    | Size                |
+|-----------------|--------------------|-----------|-----------|---------------------|
+| `/opt/homebrew` | Homebrew (primary) | arm64     | ✓ ACTIVE  | —                   |
+| `/usr/bin`      | System             | universal | ✓ SAFE    | —                   |
+| `~/.cargo`      | Rust env           | N/A       | ✓ MINIMAL | —                   |
+| `/opt/local`    | MacPorts           | x86_64    | ⚠️ HELD    | 1.4 GB              |
+| `/opt/X11`      | X11                | x86_64    | ✓ REMOVED | 154 MB (2026-08-16) |
+
+---
 
 ## Findings Summary
 
@@ -53,18 +72,37 @@ rustup component add rust-analyzer  # or via Homebrew: brew install rust-analyze
 
 ---
 
-### Category 3: MacPorts Tree (x86_64-only — Priority: Decide)
+### Category 3: MacPorts Tree (x86_64-only — Priority: Hold Pending Verification)
 
 **Location:** `/opt/local/` (entire tree)
 
-**Scale:** ~300+ binaries across bin/, sbin/, share/  
+**Scale:** 497 binaries in `/opt/local/bin/` alone; ~1.4 GB total  
 Examples: dbus, graphviz, dia, fonts, perl@5.8, perl@5.12, db46, graph tools, etc.
 
+**Status (2026-08-16 audit):**
+- All confirmed x86_64 architecture (broken on ARM)
+- Homebrew equivalents verified installed for major tools:
+  - ✓ autoconf, automake, libtool (build tools)
+  - ✓ dbus (message bus)
+  - ✓ graphviz (graph layout)
+  - ✓ python3 (Homebrew; replaces python2.6/2.7)
+  - ✓ perl (system 5.34; replaces perl5.8/5.12)
+  - ✓ ruby (system; universal binary)
+  - ✓ git (Homebrew)
+  - ⚠️ dia (diagram editor) — NOT in standard Homebrew (check if needed)
+  - ⚠️ postgresql — available in Homebrew but NOT currently installed
+  - ⚠️ subversion — available in Homebrew but NOT currently installed
+
+**Inventory Notes:**
+- 497 binaries = many are symlinks and variants (perl 5.8/5.12, python 2.6/2.7, autoconf-1.11/1.13, etc.)
+- Core tools (dbus, graphviz, autotools) have working ARM64 Homebrew equivalents
+- Legacy tools (perl 5.8, python 2.6) superseded by system/Homebrew versions
+
 **Assessment:**
-- Original Homebrew installation (from intel machine migration)
-- Rarely used on modern macOS (most tools available in Homebrew now)
-- Massive (likely several GB)
-- **Recommendation:** Remove (not rebuild)
+- Original MacPorts installation (from intel machine migration)
+- Most tools available in Homebrew with ARM64 support
+- **Decision pending:** Verify if dia, postgresql, subversion actually needed before removal
+- **Recommendation:** Hold removal; create inventory of any actual dependencies before deleting
 
 **Remediation:**
 
@@ -406,4 +444,69 @@ tar czf ~/Desktop/local-bin-backup-2026-08-15.tar.gz ~/.local/bin
 1. Restore from backup: `tar xzf ~/Desktop/cargo-backup-*.tar.gz`
 2. Reinstall via Homebrew: `brew install rust-analyzer uv`
 3. Check git history: portable-profile setup for canonical setup
+
+---
+
+## Progress Log (2026-08-16 Sunday)
+
+### X11 Cleanup (✓ COMPLETED)
+
+**Action:** User manually removed `/opt/X11` (X11 x86_64 binaries)
+
+```
+Space reclaimed: 154 MB
+Arch confirmed: All x86_64 (broken on ARM)
+Decision: Not needed; native macOS frameworks preferred
+Status: ✓ REMOVED
+```
+
+### MacPorts Verification (⏳ IN PROGRESS)
+
+**Finding:** `/opt/local` is 1.4 GB (not 3-4 GB estimate)
+
+**Inventory:** 497 binaries verified as x86_64
+
+**Homebrew Equivalents Verified:**
+- ✓ autoconf, automake, libtool (build tools installed)
+- ✓ dbus (message bus installed)
+- ✓ graphviz (graph layout installed)
+- ✓ python3 (Homebrew 3.14.7 installed; replaces python 2.6/2.7)
+- ✓ perl (system 5.34 installed; replaces perl 5.8/5.12)
+- ✓ ruby (system universal; replaces MacPorts ruby)
+- ✓ git (Homebrew installed)
+
+**Pending Verification:**
+- ⚠️ dia (diagram editor) — check if actually used
+- ⚠️ postgresql — available but not currently installed
+- ⚠️ subversion — available but not currently installed
+
+**Decision:** HOLD removal of `/opt/local` until confirmed that dia/postgresql/subversion are not needed or user explicitly approves.
+
+### Cache Cleanup (✓ COMPLETED)
+
+**Removed 2026-08-16:**
+- `~/.local/share/uv/python/cpython-3.10-*-x86_64-none`
+- `~/.local/share/uv/python/cpython-3.11-*-x86_64-none`
+- `~/.local/share/uv/python/cpython-3.12-*-x86_64-none`
+- `~/.cache/uv` (old x86_64 cache)
+- `~/.local/share/claude/versions/2.1.118` (x86_64 binary)
+- `~/.local/share/claude/versions/2.1.119` (x86_64 binary)
+- `~/.local/share/cursor-agent/versions/2026.02.13-41ac335` (x86_64 binaries)
+
+**Result:**
+- `make install-dependencies` now works (uv auto-downloads ARM64 Python)
+- Claude Code & Cursor auto-redownload ARM64 versions on next launch
+- Fresh uv cache created (62 MB ARM64)
+
+### Space Accounting
+
+| Directory | Size | Arch | Status |
+|-----------|------|------|--------|
+| `/opt/X11` | 154 MB | x86_64 | ✓ REMOVED (2026-08-16) |
+| `/opt/local` | 1.4 GB | x86_64 | ⏳ HELD (pending dia/postgresql/subversion check) |
+| `~/.cache/uv` | 62 MB | arm64 | ✓ FRESH (regenerated) |
+| **Total x86_64 still present:** | **1.4 GB** | | |
+| **Total x86_64 removed:** | **154 MB** | | |
+
+**Note:** Original estimate of 3.1-4.5 GB was conservative; actual /opt/local is 1.4 GB.
 
