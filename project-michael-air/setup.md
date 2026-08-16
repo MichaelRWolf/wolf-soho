@@ -295,6 +295,38 @@ Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15
 
 **Status:** Framework ready; to be applied all at once post-decision.
 
+---
+
+## Lessons Learned & Troubleshooting
+
+### macOS Installation Attempt (2026-08-14)
+
+**Issue:** Tahoe 26.6.1 upgrade stalled mid-download on saturated conference WiFi (10.88 GB). Reached "Ready to Restart" but rollback to Sequoia 15.3.1 occurred on next boot.
+
+**Root cause:** Network throughput bottleneck; time estimates jumped wildly (3h → 8h → 4h → 5h).
+
+**Lesson:** Do not upgrade OS on shared/saturated networks. Accept technical debt over 6-8 hour install grinds.
+
+**Status:** Tahoe upgrade deferred to post-conference with stable WiFi.
+
+### npm Configuration Pollution (2026-08-15)
+
+**Issue:** After `brew bundle install`, npm was still pointing to MacPorts `/opt/local/bin/npm` (v10.9.8) instead of Homebrew `/opt/homebrew/bin/npm`. `npm install -g` failed with EACCES permission errors.
+
+**Root cause:** Stale `~/.npmrc` with hard-coded `prefix=/usr/local` from previous MacBook setup. npm respects this config regardless of which npm binary is in PATH.
+
+**Fix:** Removed `~/.npmrc`, re-ran `brew bundle install`, verified `npm config get prefix` → `/opt/homebrew`.
+
+**Lesson:** Legacy dotfiles can silently override package manager behavior. Always audit `.npmrc`, `.pythonrc`, `.gemrc` when migrating machines.
+
+### Package Manager Fragmentation (wolf-air)
+
+**Current state:** wolf-air (M1) uses MacPorts; other machines (michael-air, michael-pro, wendy-pro) use Homebrew. This creates PATH conflicts when syncing dotfiles.
+
+**Future decision needed:** Migrate wolf-air from MacPorts → Homebrew (simplifies maintenance, breaks legacy workflows).
+
+---
+
 ## Next Session Priorities
 
 1. **TCC permission matrix review** (grant all at once, systematically)
@@ -302,3 +334,4 @@ Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15
 3. **Machine rename** (after Homebrew stable; see issue #9)
 4. **Time Machine stabilization** (see issue #10)
 5. **Time Machine efficiency audit** (ongoing, lower priority)
+6. **Xcode Command Line Tools** (run `xcode-select --install`)
