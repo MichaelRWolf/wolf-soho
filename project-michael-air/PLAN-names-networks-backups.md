@@ -42,12 +42,16 @@
 - NAS share: `Backups-TM-Michael-Air` (semantic, machine-specific)
 - Legacy backup: `Backups-TM-Michael` PRESERVED (not deleted; fallback for first 2-4 weeks)
 
-**Time Machine Scope**
+**Time Machine Scope (2026-08-17 APPROVED)**
 - User-focused backup (no system files)
-- Exclude: /Applications, /Library, /private, /System, /usr, /usr/local, /Developer
-- Exclude: ~/repos, ~/Downloads, ~/Pictures, ~/.npm, ~/.gem, ~/.cpan, ~/.cache
-- Exclude: ~/Library/Application Support, ~/Library/Containers, ~/Library/Group Containers, ~/Library/CloudStorage
-- Exclude: /opt/homebrew/bin, /opt/homebrew/opt, ~/.cargo, ~/go, ~/Library/Developer/Xcode
+- **Exclude (via GUI):** /Applications, ~/repos, ~/Downloads, ~/Pictures, ~/.cache
+- **Include:** /Library (contains valuable prefs, app data, credentials)
+- **Exclude (via CLI):** /opt/homebrew (regenerable package manager binaries)
+  - Command: `tmutil addexclusion /opt/homebrew`
+
+**Previous planned exclusions (superseded by GUI limits):**
+- Originally planned: /private, /System, /usr, /usr/local, /Developer, ~/Library/Application Support, ~/Library/Containers
+- **Decision:** Defer system-path exclusions to CLI commands only if/when they cause issues. User prefers simple GUI list.
 
 **Network**
 - Use WiFi for now (WiFi → EAP → CG mesh for internet; WiFi → Beryl → NAS for local access)
@@ -186,21 +190,30 @@ du -sh "$SNAP"/{System,Library,private,opt,usr,Applications,Users}
 
 ---
 
-**Phase 2: FIX exclusion configuration**
+**Phase 2: FIX exclusion configuration (2026-08-17 APPROVED)**
 
-**THEN FIX IncludeByPath (DO NOT RESUME BACKUP):**
+**Add /opt/homebrew to exclusions (GUI-inaccessible system path):**
 ```bash
-# 1. Delete IncludeByPath
-sudo defaults delete /Library/Preferences/com.apple.TimeMachine IncludeByPath
-
-# 2. Add explicit exclusions
-sudo tmutil addexclusion /Library /System /bin /sbin /usr /private /Developer /Applications
-
-# 3. Verify all show [Excluded]
-for path in /Library /System /bin /sbin /usr /private /Developer /Applications; do
-  tmutil isexcluded "$path"
-done
+tmutil addexclusion /opt/homebrew
+tmutil isexcluded /opt/homebrew
+# Expected: [Excluded]
 ```
+
+**Legacy: IncludeByPath cleanup (defer unless causing issues):**
+```bash
+# 1. Delete IncludeByPath if it interferes (currently appears inactive)
+# sudo defaults delete /Library/Preferences/com.apple.TimeMachine IncludeByPath
+
+# 2. Add other system exclusions only if needed:
+# sudo tmutil addexclusion /System /bin /sbin /usr /private /Developer
+
+# 3. Verify
+# for path in /System /bin /sbin /usr /private /Developer; do
+#   tmutil isexcluded "$path"
+# done
+```
+
+**Decision:** Start with minimal /opt/homebrew exclusion. User OK with /Library included. Defer aggressive system-path exclusions to CLI as needed.
 
 ---
 
