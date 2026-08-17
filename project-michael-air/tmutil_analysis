@@ -3,6 +3,25 @@
 
 set -euo pipefail
 
+echo "=== Time Machine Status ==="
+echo ""
+
+# Check if TM is enabled
+echo "TM Enabled:"
+defaults read /Library/Preferences/com.apple.TimeMachine AutoBackup 2>/dev/null || echo "  [not configured]"
+
+echo ""
+echo "TM Destination:"
+tmutil destinationinfo 2>/dev/null || echo "  [none configured]"
+
+echo ""
+echo "Full Time Machine plist:"
+defaults read /Library/Preferences/com.apple.TimeMachine 2>/dev/null || echo "  [plist not readable or empty]"
+
+echo ""
+echo "=== End Status ==="
+echo ""
+
 # Directories to check (comprehensive list from tm-strategy.md audit framework)
 # Organized by tier and category for easy reference
 

@@ -205,6 +205,10 @@ dscl . -read /Users/mmac-shared
 - [ ] Remove Intel Homebrew (after validation)
   - `sudo rm -rf /usr/local/Homebrew /usr/local/Cellar /usr/local/Caskroom`
 
+- [ ] Daylite operational
+  - Launch Daylite, verify database connectivity and sync
+  - Check for any missing data from migration
+
 ### ⏳ Medium Priority (Privacy & Permissions)
 
 - [ ] Fix ~/Downloads TCC/privacy (see Issue 3 above) — **DEFERRED: YAGNI (lazy TCC as needed)**
@@ -340,6 +344,32 @@ Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15
 **Current state:** wolf-air (M1) uses MacPorts; other machines (michael-air, michael-pro, wendy-pro) use Homebrew. This creates PATH conflicts when syncing dotfiles.
 
 **Future decision needed:** Migrate wolf-air from MacPorts → Homebrew (simplifies maintenance, breaks legacy workflows).
+
+---
+
+## Time Machine Status (2026-08-17 Audit)
+
+**Live plist audit (`tmutil_analysis` script):**
+- TM Enabled: `AutoBackup = 1` (hourly backups)
+- Destination: `Backups-TM-Michael-Air` at `192.168.8.129`
+- Backup attempts: 9 (2026-08-16 21:30:59 to 2026-08-17 22:28:52)
+- RESULT code: 19 (investigate if error)
+- SkipPaths: /Applications, ~/Downloads, ~/Pictures, ~/repos, ~/.cache ✓
+- ExcludeByPath: Legacy entries only (FLEXnet, Microsoft PlayReady)
+
+**tmutil isexcluded status (problematic):**
+- ✓ Excluded: /Applications, /System, ~/Downloads, ~/Pictures, ~/repos, ~/.cache
+- ✗ **STILL INCLUDED:** /Library, /opt/homebrew, /private, /private/var/log, /Users/Shared, LaunchDaemons, LaunchAgents
+- ✓ 65+ Apple auto-excluded via xattr (CloudKit, caches, language models)
+
+**Problem:** System-level directories still accumulating in backups despite SkipPaths.
+
+**Action (next session):**
+1. Delete `Backups-TM-Michael-Air` share on NAS via GUI
+2. Verify all system paths added to exclusions list
+3. Restart backup to clean share
+
+See [PLAN-names-networks-backups.md](PLAN-names-networks-backups.md) Phase 6 for detailed steps.
 
 ---
 
