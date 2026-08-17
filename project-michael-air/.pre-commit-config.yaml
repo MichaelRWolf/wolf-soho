@@ -1,0 +1,44 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=102400"] # 100MB
+
+  - repo: local
+    hooks:
+      - id: markdown-table-formatter
+        name: markdown-table-formatter (align columns)
+        entry: npx markdown-table-formatter
+        language: system
+        types: [markdown]
+
+      - id: shellcheck-shell
+        name: shellcheck (shell files by type)
+        entry: shellcheck
+        language: system
+        types_or: [shell, bash, ksh]
+        args: [-x]
+
+      - id: forbid-org-files
+        name: forbid org-mode files
+        entry: bash -c 'echo "Do not commit .org files." >&2; exit 1'
+        language: system
+        files: \.org$
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.49.1
+    hooks:
+      - id: markdownlint-fix
+        # companion: .markdownlint.json must include "MD060": false
+        # MD060 (table-column-style) conflicts with markdown-table-formatter output style
+
+  - repo: https://github.com/sirosen/texthooks
+    rev: 0.7.1
+    hooks:
+      - id: fix-ligatures
+        types: [markdown]
+      - id: fix-smartquotes
+        types: [markdown]
+      - id: fix-unicode-dashes
+        types: [markdown]

@@ -1,0 +1,31 @@
+# No line-ending conversion ever. Bytes in = bytes out.
+* -text diff
+
+# Binary files: no diff display, no conversion.
+*.jpeg binary
+*.jpg  binary
+*.png  binary
+*.gif  binary
+*.bmp  binary
+*.ico  binary
+*.zip  binary
+*.gz   binary
+*.tar  binary
+*.7z   binary
+*.pdf  binary
+*.docx binary
+*.doc  binary
+*.xlsx binary
+*.xls  binary
+*.pptx binary
+*.ppt  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.mp3  binary
+*.mp4  binary
+*.mov  binary
+*.sqlite binary
+*.sqlite3 binary
+*.db   binary
