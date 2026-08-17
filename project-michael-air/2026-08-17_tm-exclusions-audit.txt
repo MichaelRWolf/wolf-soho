@@ -1,0 +1,126 @@
+=== Time Machine Exclusion Status ===
+
+[Included]  /Users/michael/Documents
+[Included]  /Users/michael/Desktop
+[Excluded]  /Users/michael/Pictures
+[Excluded]  /Users/michael/Downloads
+[Included]  /Users/michael/Movies
+[Included]  /Users/michael/.ssh
+[Included]  /Users/michael/Library/Preferences
+[Included]  /Users/michael/Library/Application Support
+[Included]  /Users/michael/Library/Application Scripts
+[Included]  /Users/michael/Library/Cookies
+[Included]  /Users/michael/Library/HTTPStorages
+[Included]  /Users/michael/Library/Safari
+[Included]  /Users/michael/.config
+[Excluded]  /Users/michael/Library/Caches
+[Excluded]  /Users/michael/Library/Logs
+[Included]  /Users/michael/Library/WebKit
+[Included]  /Library/Caches
+[Included]  /Users/michael/Library/Developer
+[Included]  /Users/michael/Library/Developer/Xcode
+[Included]  /Users/michael/Library/Developer/Xcode/DerivedData
+[Included]  /Users/michael/.vscode
+[Included]  /Users/michael/.vscode/extensions
+[Excluded]  /Users/michael/.cache
+/Users/michael/.cache/pip                          [not found]
+/Users/michael/.cache/npm                          [not found]
+[Excluded]  /Users/michael/.cache/uv
+/Users/michael/.gem                                [not found]
+[Included]  /Users/michael/.cargo
+/Users/michael/.cargo/registry/cache               [not found]
+[Included]  /Users/michael/go/pkg/mod/cache
+[Excluded]  /Users/michael/Library/Caches/Homebrew
+/Library/Caches/Homebrew                           [not found]
+/usr/local/Homebrew                                [not found]
+[Included]  /Library
+[Included]  /Library/LaunchDaemons
+[Included]  /Library/LaunchAgents
+[Included]  /Library/StartupItems
+[Included]  /Users/Shared
+[Excluded]  /Applications
+[Excluded]  /System
+[Included]  /opt
+[Included]  /opt/homebrew
+/opt/local                                         [not found]
+/opt/X11                                           [not found]
+[Included]  /private
+[Included]  /private/var
+[Included]  /private/var/log
+[Included]  /private/tmp
+[Excluded]  /Users/michael/Downloads
+[Excluded]  /Users/michael/Pictures
+[Excluded]  /Users/michael/repos
+
+=== Directories with com.apple.metadata:com_apple_backup_excludeItem attribute ===
+(Apple's native backup exclude markers)
+
+/Users/michael/.cache                              (has backup exclude attribute)
+/Users/michael/Library/Accessibility/com.apple.RTTTranscripts_ckAssets (has backup exclude attribute)
+/Users/michael/Library/Accessibility/com.apple.personalaudio_ckAssets (has backup exclude attribute)
+/Users/michael/Library/Application Support/com.apple.RemoteManagementAgent (has backup exclude attribute)
+/Users/michael/Library/Biome                       (has backup exclude attribute)
+/Users/michael/Library/Biome/FlexibleStorage       (has backup exclude attribute)
+/Users/michael/Library/Biome/sync                  (has backup exclude attribute)
+/Users/michael/Library/Biome/tmp/setsMergeableDeltas (has backup exclude attribute)
+/Users/michael/Library/Finance                     (has backup exclude attribute)
+/Users/michael/Library/Group Containers/group.com.apple.PegasusConfiguration/local (has backup exclude attribute)
+/Users/michael/Library/Group Containers/group.com.apple.accessibility.voicebanking/TTSVoiceBanking (has backup exclude attribute)
+/Users/michael/Library/Group Containers/group.com.apple.energykit/homeenergyd (has backup exclude attribute)
+/Users/michael/Library/Group Containers/group.com.apple.storekit/Documents (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/abnerworks.Typora (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/askpermissiond (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.adobe.ARMDCHelper (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.anthropic.claudefordesktop (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.AMPLibraryAgent (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.AOSPushRelay (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.AddressBookSourceSync (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.Family-Settings.extension (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.MediaPlayer.RemotePlayerService (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.NewDeviceOutreach (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.SetupAssistant (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.Spotlight (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.accountsd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.akd  (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.amsaccountsd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.appleaccountd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.appstoreagent (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.appstorecomponentsd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.ctcategories.service (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.helpd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.iCloudHelper (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.iCloudNotificationAgent (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.installer.osinstallersetupd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.itunescloudd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.nbagent (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.newsd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.siri.SuggestionsBookkeepingService (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.siriknowledged (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.storekitagent (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.tipsd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.translationd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.apple.weatherd (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.blacktree.Quicksilver (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.google.GoogleUpdater (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.knollsoft.Rectangle (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/com.microsoft.autoupdate.fba (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/familycircled  (has backup exclude attribute)
+/Users/michael/Library/HTTPStorages/mbuseragent    (has backup exclude attribute)
+/Users/michael/Library/HomeKit/core-cloudkit-shared_ckAssets (has backup exclude attribute)
+/Users/michael/Library/HomeKit/core-cloudkit_ckAssets (has backup exclude attribute)
+/Users/michael/Library/LanguageModeling/en-dynamic.lm (has backup exclude attribute)
+/Users/michael/Library/LanguageModeling/es-dynamic.lm (has backup exclude attribute)
+/Users/michael/Library/LanguageModeling/mul-dynamic.lm (has backup exclude attribute)
+/Users/michael/Library/PersonalizationPortrait     (has backup exclude attribute)
+/Users/michael/Library/Photos/Libraries/Syndication.photoslibrary (has backup exclude attribute)
+/Users/michael/Library/ResponseKit/en-dynamic.lm   (has backup exclude attribute)
+/Users/michael/Library/Sharing/AirDropHashDB       (has backup exclude attribute)
+/Users/michael/Library/StatusKit/database/statuskit-cloud_ckAssets (has backup exclude attribute)
+/Users/michael/Library/Stickers/stickers_ckAssets  (has backup exclude attribute)
+/Users/michael/Library/Suggestions                 (has backup exclude attribute)
+/Users/michael/Library/Suggestions/Harvesting      (has backup exclude attribute)
+/Users/michael/Library/Trial                       (has backup exclude attribute)
+/Users/michael/Library/homeenergyd                 (has backup exclude attribute)
+/Users/michael/Library/homeenergyd/com.apple.homeenergyd (has backup exclude attribute)
+/Users/michael/Movies/iMovie Library.imovielibrary/2014-03-09/Render Files (has backup exclude attribute)
+/Users/michael/repos                               (has backup exclude attribute)
