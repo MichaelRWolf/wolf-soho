@@ -233,6 +233,50 @@ System Preferences → Time Machine → Options → Add `~/Downloads`, `~/Pictur
 
 ---
 
+## Managing Time Machine Exclusions via xattr
+
+When Time Machine GUI doesn't support adding certain paths (e.g., dotfiles), use `xattr` to set the backup exclude attribute directly.
+
+### Set Backup Exclude Attribute
+
+```bash
+# Mark a directory to be excluded from Time Machine backups
+xattr -w com.apple.metadata:com_apple_backup_excludeItem "bplist00_com.apple.backupd" <path>
+
+# Example: exclude ~/.cache
+xattr -w com.apple.metadata:com_apple_backup_excludeItem "bplist00_com.apple.backupd" ~/.cache
+```
+
+### Remove Backup Exclude Attribute
+
+```bash
+# Remove the exclusion attribute (includes in backup)
+xattr -d com.apple.metadata:com_apple_backup_excludeItem <path>
+
+# Example: stop excluding ~/.cache
+xattr -d com.apple.metadata:com_apple_backup_excludeItem ~/.cache
+```
+
+### Verify Attribute Status
+
+```bash
+# Check if a path has the attribute
+xattr -p com.apple.metadata:com_apple_backup_excludeItem <path>
+# Returns: bplist00_com.apple.backupd (if set)
+# Returns: error if not set
+
+# List all attributes on a path
+xattr -l <path>
+```
+
+### Script to Check All Excluded Paths
+
+Use `tmutil_analysis` script in project root to see both:
+1. Paths excluded via `tmutil` (CLI or GUI)
+2. Paths with `com.apple.metadata:com_apple_backup_excludeItem` attribute (Apple's native marker)
+
+---
+
 ## Previous Machine (michael-pro) Strategy
 
 **Goal:** Learn from previous backup decisions to avoid repeating inefficient patterns.
