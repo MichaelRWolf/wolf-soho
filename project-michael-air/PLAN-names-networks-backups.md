@@ -101,14 +101,35 @@ done
 
 ### ⚠️⚠️⚠️ CRITICAL: BACKUPS ARE CONTAMINATED (2026-08-17 AUDIT CONFIRMED)
 
-**STATUS (2026-08-17):** CONFIRMED CONTAMINATION via audit. Backups contain 470GB of system files (expected 50-60GB user data).
+**STATUS (2026-08-17):** CONTAMINATION CONFIRMED by inspecting snapshot contents.
 
-**Audit Results:**
-- Local snapshots (Mac): 3 snapshots created 2026-08-16, total **470GB** (157GB each)
-- Expected user-only data: 50-60GB
-- **Contamination: ~100GB per snapshot** (system files)
-- NAS transfer: In progress (1.8TB accumulated on NAS share)
-- Legacy michael-pro: 436GB (25 snapshots, preserved but inaccessible)
+**Audit Method:** Mounted and inspected actual snapshot contents at `/Volumes/com.apple.TimeMachine.localsnapshots/Backups.backupdb/michael-air/2026-08-16-121217/Macintosh HD - Data/`
+
+**Contamination Evidence (per snapshot):**
+
+| Directory | Size | Should Backup? | Status |
+|-----------|------|---|---|
+| Users/michael | 85GB | ✓ YES | Good (user data) |
+| System | 9.8GB | ✗ NO | **CONTAMINATED** |
+| Library | 16GB | PARTIAL | **CONTAMINATED** (system portion) |
+| opt | 9.3GB | ✗ NO | **CONTAMINATED** (Homebrew/tools) |
+| private | 4.0GB | ✗ NO | **CONTAMINATED** (logs/temps) |
+| Applications | 27GB | ✗ NO | **CONTAMINATED** (app binaries) |
+| usr | 3.1MB | ✗ NO | Minor |
+| **Total per snapshot** | **157GB** | Should be ~85GB | **72GB system cruft** |
+
+**Root Cause:** Backups started BEFORE IncludeByPath was deleted, and BEFORE exclusions were added. Default Apple behavior includes system paths.
+
+**Scale of Problem:**
+- 3 snapshots × 157GB = 470GB total
+- User data: 255GB (useful)
+- System cruft: 216GB (wasted, persists forever)
+- **Bloat factor: 72% of each snapshot is system files**
+
+**NAS Status:**
+- Transfer in progress (1.8TB accumulated)
+- Unknown if all 3 local snapshots transferred yet (need to verify)
+- Legacy michael-pro: 436GB (preserved, inaccessible)
 
 **REMEDIATION (Must execute in next session):**
 
@@ -125,6 +146,45 @@ rm -rf /Volumes/com.apple.TimeMachine.localsnapshots/Backups.backupdb/michael-ai
 ssh admin@192.168.8.129 "rm -rf /volume1/Backups-TM-Michael-Air"
 # Option B: Via Finder/SMB (mount and delete manually)
 ```
+
+**BEFORE DELETING: Verify NAS Transfer Status**
+
+To check if snapshots have been transferred from Mac to NAS:
+
+```bash
+# List dates in local snapshots
+ls /Volumes/com.apple.TimeMachine.localsnapshots/Backups.backupdb/michael-air/
+
+# Check NAS for matching snapshot dates
+# (Need to mount and inspect NAS Backups.backupdb/michael-air/)
+# If NAS has matching dates → snapshots already transferred → safe to delete
+# If NAS has NO dates → nothing transferred yet → deleting = losing data
+```
+
+**To inspect snapshot contents (read-only, safe):**
+
+```bash
+# Browse latest snapshot
+SNAP="/Volumes/com.apple.TimeMachine.localsnapshots/Backups.backupdb/michael-air/2026-08-16-132023/Macintosh HD - Data"
+
+# List top-level directories
+ls -la "$SNAP"
+
+# Check for system contamination
+du -sh "$SNAP"/{System,Library,private,opt,usr,Applications,Users}
+```
+
+**Decision Matrix:**
+
+| Scenario | Action | Risk |
+|----------|--------|------|
+| Snapshots transferred to NAS | Delete local snapshots | None (NAS has backup) |
+| Snapshots NOT transferred to NAS | Delete local snapshots | Data loss (72GB system files lost, but that's the point) |
+| Keep both local + NAS | None | 72% bloat persists forever in NAS |
+
+**Recommendation:** Verify NAS transfer, then delete local snapshots (even system bloat is better handled by deleting than by keeping permanently).
+
+---
 
 **Phase 2: FIX exclusion configuration**
 
