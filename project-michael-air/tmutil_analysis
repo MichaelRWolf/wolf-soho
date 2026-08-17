@@ -15,6 +15,45 @@ echo "TM Destination:"
 tmutil destinationinfo 2>/dev/null || echo "  [none configured]"
 
 echo ""
+echo "TM Destination Availability:"
+# Extract IP from destination URL if network backup
+DEST_INFO=$(tmutil destinationinfo 2>/dev/null)
+if echo "$DEST_INFO" | grep -q "smb://"; then
+  NAS_IP=$(echo "$DEST_INFO" | grep "smb://" | sed -E 's|.*@([0-9.]+)/.*|\1|')
+  if [ -n "$NAS_IP" ] && [ "$NAS_IP" != "192.168.8.129" ] && [ "$NAS_IP" != "smb" ]; then
+    echo "  NAS IP: $NAS_IP"
+    if timeout 2 ping -c 1 "$NAS_IP" >/dev/null 2>&1; then
+      echo "  Ping: ✓ Reachable"
+    else
+      echo "  Ping: ✗ Unreachable (offline or firewall blocked)"
+    fi
+  elif echo "$DEST_INFO" | grep -E "192\.168\.8\.129|wolfden" >/dev/null; then
+    NAS_IP="192.168.8.129"
+    echo "  NAS IP: $NAS_IP"
+    if timeout 2 ping -c 1 "$NAS_IP" >/dev/null 2>&1; then
+      echo "  Ping: ✓ Reachable"
+    else
+      echo "  Ping: ✗ Unreachable (offline or firewall blocked)"
+    fi
+  fi
+fi
+
+# Check if share is currently mounted
+if mount | grep -q "Backups-TM-Michael-Air"; then
+  echo "  Mount status: ✓ Currently mounted"
+  MOUNT_POINT=$(mount | grep "Backups-TM-Michael-Air" | awk '{print $3}')
+  echo "  Mount point: $MOUNT_POINT"
+else
+  echo "  Mount status: ✗ Not currently mounted"
+fi
+
+# Show last backup activity
+LAST_BACKUP=$(defaults read /Library/Preferences/com.apple.TimeMachine LastBackupActivity 2>/dev/null)
+if [ -n "$LAST_BACKUP" ]; then
+  echo "  Last backup: $LAST_BACKUP"
+fi
+
+echo ""
 echo "Full Time Machine plist:"
 defaults read /Library/Preferences/com.apple.TimeMachine 2>/dev/null || echo "  [plist not readable or empty]"
 

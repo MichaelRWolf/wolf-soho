@@ -211,25 +211,35 @@ For each category, fill in:
 
 ## Final Exclusion Decision (2026-08-17)
 
-**Summary:** Simplified to exclude only 3 high-impact, unambiguous categories.
+**Summary:** GUI-accessible exclusions only; system paths excluded via CLI.
+
+**User directories (via GUI):**
 
 | Path | Size | File Count | Rationale | Status |
 |------|------|-----------|-----------|--------|
 | `~/Downloads` | Ephemeral | — | Ephemeral workflow directory; contents cleared regularly. No recovery value. | ✓ Excluded |
 | `~/Pictures` | ~15–20 GB | ~50K+ | Stored on NAS; backed up separately. Redundant in Time Machine. | ✓ Excluded |
 | `~/repos` | ~30–50 GB | ~250K+ | GitHub-based project repos; no local data loss risk. Can be re-cloned. Huge file count (git metadata) makes restore slow. | ✓ Excluded |
+| `~/Library` | Mixed | High | Keep included (contains valuable prefs, app data, credentials). | ✓ Included |
+
+**System paths (CLI only — not available in GUI):**
+
+| Path | Rationale | Status |
+|------|-----------|--------|
+| `/private` | System logs, temps, ephemeral. Cannot select in TM GUI. | Use `tmutil addexclusion /private` |
+| `/opt/homebrew` | Package manager binaries, regenerable. Cannot select in TM GUI. | Use `tmutil addexclusion /opt/homebrew` |
+| `/System`, `/usr`, `/bin`, `/sbin`, `/Developer`, `/Applications` | System files. Already excluded or planned for exclusion. | Use `tmutil addexclusion` for each |
 
 **Reasoning:**
 
-This approach avoids over-engineering the exclusion list by focusing only on paths that are:
-1. **Already backed up elsewhere** (`~/Pictures` on NAS)
-2. **Regenerable without effort** (`~/repos` via `git clone`)
-3. **Genuinely ephemeral** (`~/Downloads`)
-
-Everything else in `~/Library`, `~/Documents`, `~/Desktop`, etc. remains in Time Machine. The cost of restoring these is low (fewer files, higher value), and they contain irreplaceable settings, preferences, and personal data.
+1. **GUI-accessible paths:** Only user directories (Downloads, Pictures, repos) + user choice to keep Library
+2. **System paths:** Not selectable in TM GUI; require `tmutil addexclusion` from Terminal
+3. **No over-engineering:** Focus on high-value, clearly regenerable categories
+4. **Irreplaceable data preserved:** ~/Library contains settings, preferences, credentials
 
 **Configuration:**
-System Preferences → Time Machine → Options → Add `~/Downloads`, `~/Pictures`, `~/repos`
+- System Preferences → Time Machine → Options → Add `~/Downloads`, `~/Pictures`, `~/repos`
+- Terminal: `tmutil addexclusion /private /opt/homebrew /System /usr /bin /sbin /Developer /Applications` (if desired)
 
 ---
 
