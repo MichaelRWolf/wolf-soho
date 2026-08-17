@@ -99,14 +99,87 @@ done
 
 ---
 
-### ⏳ PENDING (BLOCKED until IncludeByPath resolved)
+### ⏳ IMMEDIATE ACTION REQUIRED (BACKUP ALREADY RUNNING — POSSIBLY CONTAMINATED)
 
-**Phase 6: Initial Backup**
-- [ ] **BLOCKER:** Resolve IncludeByPath contradiction (see above)
-- [ ] Start backup: `tmutil startbackup` or wait for automatic hourly trigger
-- [ ] Monitor progress: `tmutil status` (watch Percent increase, Running = 1)
-- [ ] Interrupt for power management as needed: `tmutil stopbackup`
-- [ ] Resume: `tmutil startbackup` (continues from checkpoint, not restart)
+**STATUS (2026-08-17):** Backup started Aug 16/17 BEFORE IncludeByPath was deleted. RISK: First backup contains system files.
+
+**STOP BACKUP IMMEDIATELY:**
+```bash
+tmutil stopbackup
+# Verify stopped:
+tmutil status
+# Should show: Running = 0
+```
+
+**THEN FIX IncludeByPath (DO NOT RESUME BACKUP):**
+```bash
+# 1. Delete IncludeByPath
+sudo defaults delete /Library/Preferences/com.apple.TimeMachine IncludeByPath
+
+# 2. Add explicit exclusions
+sudo tmutil addexclusion /Library /System /bin /sbin /usr /private /Developer /Applications
+
+# 3. Verify all show [Excluded]
+for path in /Library /System /bin /sbin /usr /private /Developer /Applications; do
+  tmutil isexcluded "$path"
+done
+```
+
+---
+
+### ⏳ AUDIT: Inspect What's Already in Backup (Aug 13-17)
+
+**Before resuming backup, inspect what's in the existing snapshot:**
+
+**1. List backup snapshots:**
+```bash
+tmutil listbackups
+# Shows all snapshots. Note the dates.
+```
+
+**2. Mount the latest backup snapshot (read-only):**
+```bash
+# Get path to latest snapshot
+LATEST=$(tmutil latestbackup)
+echo "Latest backup: $LATEST"
+
+# Browse it (read-only, safe)
+ls -la "$LATEST/Volumes/Backups-TM-Michael-Air/Backups.backupdb/michael-air/"
+```
+
+**3. Check if contaminated (system files present):**
+```bash
+LATEST=$(tmutil latestbackup)
+echo "=== Checking for contaminated system files in backup ===" && \
+du -sh "$LATEST/System" 2>/dev/null && echo "CONTAMINATED: /System found" || echo "OK: /System not in backup" && \
+du -sh "$LATEST/Library" 2>/dev/null && echo "CONTAMINATED: /Library found" || echo "OK: /Library not in backup" && \
+du -sh "$LATEST/private" 2>/dev/null && echo "CONTAMINATED: /private found" || echo "OK: /private not in backup" && \
+du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications found" || echo "OK: /Applications not in backup"
+```
+
+**4. If CONTAMINATED (system files found):**
+- Option A: Delete the backup snapshot and start fresh
+  ```bash
+  # Delete entire first backup
+  rm -rf /Volumes/Backups-TM-Michael-Air/Backups.backupdb/michael-air/*
+  # OR unmount and delete via macOS UI
+  ```
+- Option B: Use `tmutil delete` to remove specific snapshot (if available in this macOS version)
+
+**5. If CLEAN (no system files):**
+- Resume backup with fixed exclusions: `tmutil startbackup`
+
+---
+
+### ⏳ Phase 6: Initial Backup (REVISED — Fix contamination first)
+
+- [ ] STOP running backup: `tmutil stopbackup`
+- [ ] DELETE IncludeByPath: `sudo defaults delete /Library/Preferences/com.apple.TimeMachine IncludeByPath`
+- [ ] ADD exclusions: `sudo tmutil addexclusion /Library /System /bin /sbin /usr /private /Developer /Applications`
+- [ ] AUDIT existing backup: Check if contaminated (see steps above)
+- [ ] If contaminated: DELETE snapshot and start fresh
+- [ ] If clean: RESUME backup: `tmutil startbackup`
+- [ ] Monitor progress: `tmutil status`
 
 **Post-Backup Monitoring**
 - [ ] Verify first snapshot created: `tmutil latestbackup`
