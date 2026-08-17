@@ -347,7 +347,7 @@ Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15
 
 ---
 
-## Time Machine Status (2026-08-17 Audit)
+## Time Machine Status (2026-08-17 FINAL)
 
 **Live plist audit (`tmutil_analysis` script):**
 - TM Enabled: `AutoBackup = 1` (hourly backups)
@@ -364,10 +364,15 @@ Apple silently migrated incompatible x86_64 binaries. Audit completed 2026-08-15
 
 **Problem:** System-level directories still accumulating in backups despite SkipPaths.
 
-**Action (next session):**
-1. Delete `Backups-TM-Michael-Air` share on NAS via GUI
-2. Verify all system paths added to exclusions list
-3. Restart backup to clean share
+**Exclusions configured (2026-08-17):**
+- ✓ GUI: /Applications, ~/.cache, ~/Downloads, ~/Pictures, ~/repos (set via System Settings)
+- ✓ CLI: /opt/homebrew (set via `tmutil addexclusion -p /opt/homebrew`)
+- ✓ Include: /Library (valuable prefs, app data, credentials)
+
+**Remaining action (next session):**
+1. Delete `Backups-TM-Michael-Air` share on NAS via GUI (remove contaminated backup)
+2. Stop TM, clear local snapshots
+3. Restart TM to clean share
 
 See [PLAN-names-networks-backups.md](PLAN-names-networks-backups.md) Phase 6 for detailed steps.
 

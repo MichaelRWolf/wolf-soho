@@ -209,7 +209,7 @@ For each category, fill in:
 
 ---
 
-## Final Exclusion Decision (2026-08-17)
+## Final Exclusion Decision (2026-08-17 ✓ IMPLEMENTED)
 
 **Summary:** GUI-accessible exclusions only; system paths excluded via CLI.
 
