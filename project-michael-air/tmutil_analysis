@@ -92,9 +92,26 @@ for dir in "${interesting_dirs[@]}"; do
 
   # Only check if path exists
   if [[ -e "$expanded_dir" ]] 2>/dev/null || [[ -L "$expanded_dir" ]] 2>/dev/null; then
-    status=$(tmutil isexcluded "$expanded_dir" 2>/dev/null)
-    printf "%-50s %s\n" "$dir" "$status"
+      tmutil isexcluded "$expanded_dir"
   else
-    printf "%-50s %s\n" "$dir" "[not found]"
+    printf "%-50s %s\n" "$dir" "[not found]" 2>&1
   fi
 done
+
+echo ""
+echo "=== Directories with com.apple.backup.excludeItem attribute ==="
+echo "(Apple's native backup exclude markers)"
+echo ""
+
+# Find directories with backup exclude attribute
+found_any=0
+while IFS= read -r dir; do
+  if [[ -n "$dir" ]]; then
+    printf "%-50s com.apple.backup.excludeItem\n" "$dir"
+    found_any=1
+  fi
+done < <(find ~ -maxdepth 3 -type d -exec sh -c 'xattr -p com.apple.backup.excludeItem "$1" 2>/dev/null && echo "$1"' _ {} \; 2>/dev/null | sort)
+
+if [[ $found_any -eq 0 ]]; then
+  echo "[none found]"
+fi
