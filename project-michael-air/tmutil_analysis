@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+# Analyze Time Machine exclusions for common system and user directories
+
+set -euo pipefail
+
+# Directories to check (comprehensive list from tm-strategy.md audit framework)
+# Organized by tier and category for easy reference
+
+interesting_dirs=(
+  # === TIER 1: High-Recovery-Value (Keep in TM) ===
+  ~/Documents
+  ~/Desktop
+  ~/Pictures
+  ~/Downloads
+  ~/Movies
+  ~/.ssh
+
+  # === TIER 2: Medium-Recovery-Value (Mixed) ===
+  ~/Library/Preferences
+  ~/Library/Application\ Support
+  ~/Library/Application\ Scripts
+  ~/Library/Cookies
+  ~/Library/HTTPStorages
+  ~/Library/Safari
+  ~/.config
+
+  # === TIER 3: Low-Recovery-Value, Regenerable (Candidates for Exclusion) ===
+  # Caches & Logs
+  ~/Library/Caches
+  ~/Library/Logs
+  ~/Library/WebKit
+  /Library/Caches
+
+  # IDE indexes and build artifacts
+  ~/Library/Developer
+  ~/Library/Developer/Xcode
+  ~/Library/Developer/Xcode/DerivedData
+  ~/.vscode
+  ~/.vscode/extensions
+
+  # Language-specific package caches
+  ~/.cache
+  ~/.cache/pip
+  ~/.cache/npm
+  ~/.cache/uv
+  ~/.gem
+  ~/.cargo
+  ~/.cargo/registry/cache
+  ~/go/pkg/mod/cache
+
+  # Homebrew caches
+  ~/Library/Caches/Homebrew
+  /Library/Caches/Homebrew
+  /usr/local/Homebrew
+
+  # === TIER 4: Unknown/Uncertain (System & Legacy) ===
+  /Library
+  /Library/LaunchDaemons
+  /Library/LaunchAgents
+  /Library/StartupItems
+  /Users/Shared
+
+  # === System Directories ===
+  /Applications
+  /System
+  /opt
+  /opt/homebrew
+  /opt/local
+  /opt/X11
+  /private
+  /private/var
+  /private/var/log
+  /private/tmp
+
+  # === Decision: Excluded (2026-08-17) ===
+  ~/Downloads
+  ~/Pictures
+  ~/repos
+)
+
+echo "=== Time Machine Exclusion Status ==="
+echo ""
+
+# Function to expand tilde
+expand_path() {
+  eval echo "$1"
+}
+
+# Check each directory
+for dir in "${interesting_dirs[@]}"; do
+  expanded_dir=$(expand_path "$dir")
+
+  # Only check if path exists
+  if [[ -e "$expanded_dir" ]] 2>/dev/null || [[ -L "$expanded_dir" ]] 2>/dev/null; then
+    status=$(tmutil isexcluded "$expanded_dir" 2>/dev/null)
+    printf "%-50s %s\n" "$dir" "$status"
+  else
+    printf "%-50s %s\n" "$dir" "[not found]"
+  fi
+done
