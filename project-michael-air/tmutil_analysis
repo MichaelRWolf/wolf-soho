@@ -99,7 +99,7 @@ for dir in "${interesting_dirs[@]}"; do
 done
 
 echo ""
-echo "=== Directories with com.apple.backup.excludeItem attribute ==="
+echo "=== Directories with com.apple.metadata:com_apple_backup_excludeItem attribute ==="
 echo "(Apple's native backup exclude markers)"
 echo ""
 
@@ -107,10 +107,12 @@ echo ""
 found_any=0
 while IFS= read -r dir; do
   if [[ -n "$dir" ]]; then
-    printf "%-50s com.apple.backup.excludeItem\n" "$dir"
+    printf "%-50s (has backup exclude attribute)\n" "$dir"
     found_any=1
   fi
-done < <(find ~ -maxdepth 3 -type d -exec sh -c 'xattr -p com.apple.backup.excludeItem "$1" 2>/dev/null && echo "$1"' _ {} \; 2>/dev/null | sort)
+done < <(find ~ -maxdepth 4 -type d 2>/dev/null | while read dir; do
+  xattr -p com.apple.metadata:com_apple_backup_excludeItem "$dir" >/dev/null 2>&1 && echo "$dir"
+done | sort)
 
 if [[ $found_any -eq 0 ]]; then
   echo "[none found]"
