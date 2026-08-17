@@ -99,17 +99,34 @@ done
 
 ---
 
-### ⏳ IMMEDIATE ACTION REQUIRED (BACKUP ALREADY RUNNING — POSSIBLY CONTAMINATED)
+### ⚠️⚠️⚠️ CRITICAL: BACKUPS ARE CONTAMINATED (2026-08-17 AUDIT CONFIRMED)
 
-**STATUS (2026-08-17):** Backup started Aug 16/17 BEFORE IncludeByPath was deleted. RISK: First backup contains system files.
+**STATUS (2026-08-17):** CONFIRMED CONTAMINATION via audit. Backups contain 470GB of system files (expected 50-60GB user data).
 
-**STOP BACKUP IMMEDIATELY:**
+**Audit Results:**
+- Local snapshots (Mac): 3 snapshots created 2026-08-16, total **470GB** (157GB each)
+- Expected user-only data: 50-60GB
+- **Contamination: ~100GB per snapshot** (system files)
+- NAS transfer: In progress (1.8TB accumulated on NAS share)
+- Legacy michael-pro: 436GB (25 snapshots, preserved but inaccessible)
+
+**REMEDIATION (Must execute in next session):**
+
+**Phase 1: STOP and DELETE contaminated backups**
 ```bash
+# 1. Stop running backup
 tmutil stopbackup
-# Verify stopped:
-tmutil status
-# Should show: Running = 0
+
+# 2. Delete local snapshots (all 3 are contaminated)
+rm -rf /Volumes/com.apple.TimeMachine.localsnapshots/Backups.backupdb/michael-air/*
+
+# 3. Delete NAS backup share (to be recreated clean)
+# Option A: Via SSH to NAS
+ssh admin@192.168.8.129 "rm -rf /volume1/Backups-TM-Michael-Air"
+# Option B: Via Finder/SMB (mount and delete manually)
 ```
+
+**Phase 2: FIX exclusion configuration**
 
 **THEN FIX IncludeByPath (DO NOT RESUME BACKUP):**
 ```bash
