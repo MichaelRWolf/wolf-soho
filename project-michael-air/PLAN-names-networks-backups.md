@@ -58,9 +58,51 @@
 - IncludeByPath field exists but appears unused in Sequoia 15.3.1 (legacy)
 - /usr/local is empty (old Intel Homebrew already cleaned)
 
-### ⏳ PENDING (Ready to Execute)
+### ⚠️⚠️⚠️ CRITICAL BLOCKER — RESOLVED (2026-08-17)
+
+**IncludeByPath IS ACTIVE — Forces System Files to Backup**
+
+**Findings (2026-08-16 research):**
+- IncludeByPath contains: `/Applications`, `/Developer`, `/Library`, `/System`, `/bin`, `/private`, `/sbin`, `/usr`
+- Test result: `/Library` shows `[Included]` (confirmed IncludeByPath OVERRIDES natural exclusions)
+- Impact: First backup WOULD include 150-200GB+ of system files:
+  - `/System`: 675GB (catastrophic)
+  - `/Library`: 16GB (system files, not user data)
+  - `/private`: 3.8GB (system logs, temps)
+  - Plus `/bin`, `/sbin`, `/usr`, `/Developer`, `/Applications`
+- Behavior: IncludeByPath takes precedence over defaults; must be DELETED to prevent inclusion
+
+**Fix (Execute before Phase 6):**
+
+```bash
+# 1. Delete IncludeByPath entirely
+sudo defaults delete /Library/Preferences/com.apple.TimeMachine IncludeByPath
+
+# 2. Add explicit exclusions for all paths that were in IncludeByPath
+sudo tmutil addexclusion /Library
+sudo tmutil addexclusion /System
+sudo tmutil addexclusion /bin
+sudo tmutil addexclusion /sbin
+sudo tmutil addexclusion /usr
+sudo tmutil addexclusion /private
+sudo tmutil addexclusion /Developer
+sudo tmutil addexclusion /Applications
+
+# 3. Verify ALL paths now show [Excluded]
+for path in /Library /System /bin /sbin /usr /private /Developer /Applications; do
+  tmutil isexcluded "$path"
+done
+# Expected: ALL should show [Excluded]
+```
+
+**Rationale:** IncludeByPath is a legacy setting from the old michael-pro backup (5-year history). In modern TM, it forces unnecessary system files to be backed up. Deleting it ensures only user data is backed up (estimated 50-60GB, not 150-200GB+).
+
+---
+
+### ⏳ PENDING (BLOCKED until IncludeByPath resolved)
 
 **Phase 6: Initial Backup**
+- [ ] **BLOCKER:** Resolve IncludeByPath contradiction (see above)
 - [ ] Start backup: `tmutil startbackup` or wait for automatic hourly trigger
 - [ ] Monitor progress: `tmutil status` (watch Percent increase, Running = 1)
 - [ ] Interrupt for power management as needed: `tmutil stopbackup`
