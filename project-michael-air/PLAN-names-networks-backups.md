@@ -650,6 +650,19 @@ tmutil latestbackup
 # Should show path like: /Volumes/Backups-TM-Michael-Air/Backups.backupdb/michael-air/2026-08-16-HHMMSS
 ```
 
+### 6.5: Verify Configuration (No IncludeByPath, Clean SkipPaths)
+
+```bash
+# View complete TM configuration plist
+defaults read /Library/Preferences/com.apple.TimeMachine
+
+# Key things to verify:
+# - No "IncludeByPath" member (contamination risk eliminated)
+# - SkipPaths contains ONLY: /Applications, ~/Downloads, ~/Pictures, ~/.cache, ~/repos
+# - Destinations shows NAS SMB URL: smb://tm-michael-air@192.168.8.129/Backups-TM-Michael-Air
+# - BytesAvailable and BytesUsed reflect actual backup size (~50-70 GB user data)
+```
+
 ---
 
 ## Execution Checklist
