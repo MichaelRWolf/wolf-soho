@@ -209,6 +209,30 @@ For each category, fill in:
 
 ---
 
+## Final Exclusion Decision (2026-08-17)
+
+**Summary:** Simplified to exclude only 3 high-impact, unambiguous categories.
+
+| Path | Size | File Count | Rationale | Status |
+|------|------|-----------|-----------|--------|
+| `~/Downloads` | Ephemeral | — | Ephemeral workflow directory; contents cleared regularly. No recovery value. | ✓ Excluded |
+| `~/Pictures` | ~15–20 GB | ~50K+ | Stored on NAS; backed up separately. Redundant in Time Machine. | ✓ Excluded |
+| `~/repos` | ~30–50 GB | ~250K+ | GitHub-based project repos; no local data loss risk. Can be re-cloned. Huge file count (git metadata) makes restore slow. | ✓ Excluded |
+
+**Reasoning:**
+
+This approach avoids over-engineering the exclusion list by focusing only on paths that are:
+1. **Already backed up elsewhere** (`~/Pictures` on NAS)
+2. **Regenerable without effort** (`~/repos` via `git clone`)
+3. **Genuinely ephemeral** (`~/Downloads`)
+
+Everything else in `~/Library`, `~/Documents`, `~/Desktop`, etc. remains in Time Machine. The cost of restoring these is low (fewer files, higher value), and they contain irreplaceable settings, preferences, and personal data.
+
+**Configuration:**
+System Preferences → Time Machine → Options → Add `~/Downloads`, `~/Pictures`, `~/repos`
+
+---
+
 ## Previous Machine (michael-pro) Strategy
 
 **Goal:** Learn from previous backup decisions to avoid repeating inefficient patterns.

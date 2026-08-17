@@ -224,7 +224,9 @@ dscl . -read /Users/mmac-shared
 
 - [ ] Account for 23.42 GB "Other Files & Folders" (see Issue 4)
 - [ ] Measure ~/Library by size and file count (see Issue 5)
-- [ ] Run Time Machine audit (see [tm-strategy.md](tm-strategy.md))
+- [x] Simplify Time Machine exclusions (2026-08-17) — **COMPLETED**
+  - Excluded: `~/Downloads` (ephemeral), `~/Pictures` (on NAS), `~/repos` (regenerable)
+  - See [tm-strategy.md](tm-strategy.md) → **Final Exclusion Decision** for rationale
 
 ---
 
