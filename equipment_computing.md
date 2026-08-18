@@ -16,22 +16,26 @@
 ## `michael-air` -- MacBook Air (Michael's replacement) [M3, 2024]
 
 - Model: MacBook Air 13-inch M3 (2024, A3383) -- Mac15,12
-- Chip: Apple M3 (8-core: 4 performance + 4 efficiency)
+- Model Number: MC8K4LL/A
+- Chip: Apple M3 (8-core: 4 performance + 4 efficiency) -- arm64e
 - RAM: 16 GB
-- Storage: 256GB SSD
+- Storage: 245.1 GB (available); 245.1 GB total (256 GB SSD)
 - Serial: LFGJ62QR3W
 - Hardware UUID: `58ED3E12-7C1A-5473-BD8A-89246A584DCC`
-- macOS: 15.3.1 Sequoia (build 24D70) (2026-08-16)
+- Platform UUID: `58ED3E12-7C1A-5473-BD8A-89246A584DCC`
+- Provisioning UDID: `00008122-0006143411F1001C`
+- Boot ROM version: 13822.61.10
+- macOS: 15.3.1 Sequoia (build 24D70) (2026-08-18)
 - macOS 26 Tahoe: **Compatible**
 - Status: **Active replacement** for water-damaged michael-pro; Migration Assistant restore completed 2026-08-13/14
-- Network: Primary interface en0 (Ethernet via USB-C dongle when needed)
+- Network: Primary interface en0 (Wi-Fi); secondary USB-C Ethernet dongles available
 - MAC addresses: (documented under Network Interfaces section below)
 - Notes: Replacing michael-pro (Intel) following 2026-06-18 water damage. See [project-michael-air/](../project-michael-air/) for setup status and Time Machine strategy. Time Machine backup in progress: `Backups-TM-Michael-Air` (fresh start, separate from legacy `Backups-TM-Michael`)
 
 ### Time Machine: michael-pro vs michael-air
 
-- **michael-pro TM backup**: `Backups-TM-Michael` on NAS (436GB, 25 snapshots April 2025–Aug 13 2026) — **PRESERVED; do not delete** without explicit decision
-- **michael-air TM backup**: `Backups-TM-Michael-Air` on NAS (fresh start Aug 2026+) — user-focused, excludes system files and Intel binaries
+- **michael-pro TM backup**: `Backups-TM-Michael` on NAS (436GB, 25 snapshots April 2025-Aug 13 2026) -- **PRESERVED; do not delete** without explicit decision
+- **michael-air TM backup**: `Backups-TM-Michael-Air` on NAS (fresh start Aug 2026+) -- user-focused, excludes system files and Intel binaries
 
 ## `wendy-pro` -- MacBook Pro (Wendy's) -- ABANDONED
 
@@ -153,22 +157,25 @@ Manufactured by Anker Innovations Limited, China.
 
 ### `michael-air` Network Configuration
 
-Primary interface:
-- **en0** (WiFi): `d2:9e:b1:7e:ff:97`
+Primary interface (as of 2026-08-18):
 
-Secondary/virtual interfaces (as of 2026-08-16):
-- en1: `36:20:e9:d4:3e:00` (virtual/bridge)
-- en2: `36:20:e9:d4:3e:04` (virtual/bridge)
-- en3: `36:23:4b:77:f4:92`
-- en4: `36:23:4b:77:f4:93`
+- **en0** (Wi-Fi/AirPort): `9c:58:84:6a:4b:30`
 
-Provisioning UDID: `00008122-0006143411F1001C`
+Secondary/virtual interfaces:
 
-**Note:** Multiple virtual interfaces are created during network configuration. Primary data interface is en0. Document actual usage post-setup if specific interfaces are used for network operations.
+- en1: `36:20:e9:d4:3e:00` (Thunderbolt 1 bridge)
+- en2: `36:20:e9:d4:3e:04` (Thunderbolt 2 bridge)
+- en3: `36:23:4b:77:f4:92` (Ethernet Adapter)
+- en4: `36:23:4b:77:f4:93` (Ethernet Adapter)
+- en6: USB 10/100/1000 LAN Ethernet
+- en12: Belkin USB-C LAN Ethernet
+- bridge0: `36:20:e9:d4:3e:00` (Thunderbolt Bridge)
+
+**Note:** Multiple virtual/USB interfaces are created during network configuration. Primary data interface is en0. USB Ethernet adapters (en6, en12) are available for wired connectivity via USB-C dock/adapters.
 
 ### `michael-pro` Network Configuration
 
-**To be documented** — water-damaged device; TM backup does not contain network configuration reference.
+**To be documented** -- water-damaged device; TM backup does not contain network configuration reference.
 
 ---
 
