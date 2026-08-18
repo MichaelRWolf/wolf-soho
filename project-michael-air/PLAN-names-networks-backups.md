@@ -931,7 +931,9 @@ Current: copying small files (avg 28 KB logical, 29 KB physical)
 
 **Network performance (screenshot 08:56):** Download 248.9 KB/s ↓ | 48.4 MB/s ↑
 
-**Expected completion:** WiFi bandwidth (⇡48 MB/s) → ~60 min for 168 GB = ~3 hours ETA (pending continued WiFi quality).
+**Progress update (08:52:37):** 12% done, 12.78 GB copied, 39.43 MB/s sustained speed.
+
+**Revised ETA:** 168.54 GB ÷ 39.43 MB/s = ~73 min remaining. Expected completion ~10:05 AM UTC.
 
 **Key observations:**
 
