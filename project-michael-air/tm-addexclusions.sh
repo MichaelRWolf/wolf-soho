@@ -56,6 +56,13 @@ manage_exclusion() {
 }
 
 declare -a EXCLUSIONS=(
+    # Michael's favorites
+    "/Applications"
+    "$HOME/.cache"
+    "$HOME/Downloads"
+    "$HOME/Pictures"
+    "$HOME/repos"
+
     # Package managers
     "/opt/homebrew"
     "$HOME/.cache/pip"
