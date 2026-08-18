@@ -31,6 +31,12 @@ ambiguous language. Read this file at the start of any network-related session.
 | `surge-protector-01` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |               |
 | `surge-protector-02` | Ubiquiti Outdoor Ethernet Surge Protector (10kA) |               |
 
+### EAP225 Dual-IP Configuration
+
+- **Bridged to Beryl**: 192.168.8.130 (static IP reservation on Beryl)
+- **Standalone mode**: 192.168.1.9 (via mDNS discovery at `omadaeap.net`)
+- **Access**: Both modes accessible via `omadaeap.net` or direct IP
+
 ### Antenna Survey & Location Registry
 
 **Authoritative Source:** [Trails_End/antenna_survey.md](Trails_End/antenna_survey.md)
