@@ -1,0 +1,23 @@
+#!/bin/bash
+# Sync Identity Strategy from GitHub to 1Password
+# Prerequisites: gh(1), op(1) authenticated; jq(1) installed
+# Usage: sync-identity-strategy-to-1p
+
+GITHUB_RAW_URL="https://raw.githubusercontent.com/MichaelRWolf/wolf-soho/main/Identity%20Strategy%20-%20NAS%20%2B%20MB%20-%20Human%2BService%20Accounts.md"
+OP_ITEM_UUID="z264ew5xvmndlg5aliwmgl3cam"
+OP_VAULT="Shared-Wolf Den"
+
+echo "Fetching Identity Strategy from GitHub..."
+CONTENT=$(curl -s "$GITHUB_RAW_URL")
+
+if [ -z "$CONTENT" ]; then
+  echo "Error: Failed to fetch file from GitHub"
+  exit 1
+fi
+
+echo "Syncing to 1Password..."
+op item get "$OP_ITEM_UUID" --vault "$OP_VAULT" --format json | \
+  jq --arg notes "$CONTENT" '.fields[] |= if .id == "notesPlain" then .value = $notes else . end' | \
+  op item edit "$OP_ITEM_UUID" --vault "$OP_VAULT" -
+
+echo "✓ Successfully synced Identity Strategy to 1Password"

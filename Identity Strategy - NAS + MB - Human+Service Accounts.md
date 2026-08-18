@@ -15,6 +15,14 @@ View in 1Password via CLI:
 op item get z264ew5xvmndlg5aliwmgl3cam --vault "Shared-Wolf Den"
 ```
 
+**To sync changes from GitHub → 1Password:**
+
+```bash
+~/repos/wolf-soho/bin/sync-identity-strategy-to-1p
+```
+
+Requirements: `op(1)` and `jq(1)` installed and authenticated.
+
 ## Account Classification
 
 | Type    | Definition                              | Examples            |
