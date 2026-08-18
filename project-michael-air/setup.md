@@ -101,6 +101,7 @@ chsh -s /opt/homebrew/bin/bash
 - Monitor hourly backups for errors: `log stream --predicate 'process == "backupd"'`
 - Verify snapshots contain only user data (no system files)
 - Decision on legacy `Backups-TM-Michael` share (keep or archive) -- deferred to 2-4 weeks of stable backups
+- ✓ Backup completed at 13:11 (2026-08-18)
 
 **Related:** [tm-reference.md](tm-reference.md) (commands and troubleshooting)
 
