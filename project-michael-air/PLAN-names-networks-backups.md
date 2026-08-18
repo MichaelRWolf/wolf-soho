@@ -909,6 +909,44 @@ sudo launchctl start com.apple.mDNSResponder
 
 ---
 
+## First TM Backup (2026-08-18 08:46+ UTC)
+
+**Status:** Running -- in progress.
+
+**Initiation:** User started backup via Time Machine menu on 2026-08-18 08:46.
+
+**Estimated scope:** 168.54 GB (1,208,623 files total).
+
+**Progress snapshot (08:47:36):**
+
+```text
+Progress: 1% done, -, - MB/s (avg: 0.00 MB/s), - items/s (avg: 0.00 items/s)
+  ByPhysicalSize: 1% (941.1 MB of 167.69 GB copied)
+  ByItemCount: 2% (27,173 of 1,191,653 items)
+Copied: 27,313 items (logical: 981.9 MB, physical: 941.1 MB)
+Tracker: 21,338 small files, 5,835 large files, 140 symlinks
+Backup Projected Stats: 1,208,623 items (physical: 168.54 GB)
+Current: copying small files (avg 28 KB logical, 29 KB physical)
+```
+
+**Network performance (screenshot 08:56):** Download 248.9 KB/s ↓ | 48.4 MB/s ↑
+
+**Expected completion:** WiFi bandwidth (⇡48 MB/s) → ~60 min for 168 GB = ~3 hours ETA (pending continued WiFi quality).
+
+**Key observations:**
+
+- File count (1.2M) is substantial; file-copy metadata overhead visible in early progress
+- Network throughput stable; no stalls observed
+- Backup running via WiFi (Ethernet dongle still not recognized; see Phase 6 notes)
+
+**Next steps:**
+
+- Monitor for errors: `log stream --predicate 'process == "backupd"'`
+- Verify snapshot contents (no system file contamination) once complete
+- Confirm auto-restart of hourly backups within 1 hour of completion
+
+---
+
 ## References
 
 - **Synology DSM CLI Reference:** <https://kb.synology.com/en-us/DSM/tutorial/How_to_login_to_DSM_with_root_permission_by_using_SSH_Telnet>
