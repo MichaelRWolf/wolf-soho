@@ -45,21 +45,27 @@ manage_exclusion() {
             ;;
         [Tt])
             # Toggle
-            if [[ "$status" == "Excluded" ]]; then
-                echo "  Will run: tmutil removeexclusion '$path'"
-                read -p "  Confirm? y/N: " -r confirm
-                if [[ "$confirm" =~ ^[Yy]$ ]]; then
-                    tmutil removeexclusion "$path"
-                    echo "  ✓ Removed exclusion"
-                fi
-            else
-                echo "  Will run: tmutil addexclusion -p '$path'"
-                read -p "  Confirm? y/N: " -r confirm
-                if [[ "$confirm" =~ ^[Yy]$ ]]; then
-                    tmutil addexclusion -p "$path"
-                    echo "  ✓ Added exclusion"
-                fi
-            fi
+            case "$status" in
+                Excluded)
+                    echo "  Will run: tmutil removeexclusion '$path'"
+                    read -p "  Confirm? y/N: " -r confirm
+                    if [[ "$confirm" =~ ^[Yy]$ ]]; then
+                        tmutil removeexclusion "$path"
+                        echo "  ✓ Removed exclusion"
+                    fi
+                    ;;
+                Included)
+                    echo "  Will run: tmutil addexclusion -p '$path'"
+                    read -p "  Confirm? y/N: " -r confirm
+                    if [[ "$confirm" =~ ^[Yy]$ ]]; then
+                        tmutil addexclusion -p "$path"
+                        echo "  ✓ Added exclusion"
+                    fi
+                    ;;
+                *)
+                    echo "  (status unknown, cannot toggle)"
+                    ;;
+            esac
             ;;
         *)
             echo "  (invalid response)"
