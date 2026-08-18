@@ -11,25 +11,30 @@
 ### ✓ COMPLETED
 
 **Phase 1: NAS Configuration**
+
 - ✓ NAS service account created: `tm-michael-air` (password stored in 1Password)
 - ✓ NAS share created: `Backups-TM-Michael-Air` (1.98 TB available)
 - ✓ SMB credentials tested and mounted successfully
 - ✓ Keychain entry added: `wolfden_NAS._smb._tcp.local.` (Account: `tm-michael-air`)
 
 **Phase 2: 1Password Entry**
+
 - ✓ Entry created: "NAS - TM - tm-michael-air" (Shared-Wolf Den vault)
 - ✓ Fields: username, password, website, tags (NAS, wolfden, backup)
 
 **Phase 3: Keychain & SMB**
+
 - ✓ System Keychain entry added (auto-populated during SMB mount)
 - ✓ Unattended SMB access verified
 
 **Phase 4: Machine Naming**
+
 - ✓ Hostname changed: `michael-pro` → `michael-air`
 - ✓ Verified: `scutil --get ComputerName` shows `michael-air`
 
 **Phase 5: Time Machine Configuration**
-- ✓ TM destination set: `Backups-TM-Michael-Air – 192.168.8.129`
+
+- ✓ TM destination set: `Backups-TM-Michael-Air - 192.168.8.129`
 - ✓ Encryption: Disabled (intentional per security model)
 - ✓ Backup frequency: Automatically Every Hour
 - ✓ Back up on battery power: OFF (AC power only)
@@ -38,35 +43,40 @@
 ### ✓ DECIDED
 
 **Naming & Identity**
+
 - Service account: `tm-michael-air` (per Identity Strategy)
 - NAS share: `Backups-TM-Michael-Air` (semantic, machine-specific)
 - Legacy backup: `Backups-TM-Michael` PRESERVED (not deleted; fallback for first 2-4 weeks)
 
 **Time Machine Scope (2026-08-17 APPROVED)**
+
 - User-focused backup (no system files)
 - **Exclude (via GUI):** /Applications, ~/repos, ~/Downloads, ~/Pictures, ~/.cache
 - **Include:** /Library (contains valuable prefs, app data, credentials)
 - **Exclude (via CLI):** /opt/homebrew (regenerable package manager binaries)
   - Command: `tmutil addexclusion /opt/homebrew`
 
-**Previous planned exclusions (superseded by GUI limits):**
+**Previous planned exclusions (superseded by GUI limits)**
+
 - Originally planned: /private, /System, /usr, /usr/local, /Developer, ~/Library/Application Support, ~/Library/Containers
 - **Decision:** Defer system-path exclusions to CLI commands only if/when they cause issues. User prefers simple GUI list.
 
 **Network**
+
 - Use WiFi for now (WiFi → EAP → CG mesh for internet; WiFi → Beryl → NAS for local access)
 - Note: USB-C Ethernet dongle not recognized by macOS (will troubleshoot later for large backups)
 
 **Audit Findings**
+
 - x86_64 binaries identified but minimal impact (Python venvs, gcloud SDK, Emacs modules)
 - IncludeByPath field exists but appears unused in Sequoia 15.3.1 (legacy)
 - /usr/local is empty (old Intel Homebrew already cleaned)
 
-### ⚠️⚠️⚠️ CRITICAL BLOCKER — RESOLVED (2026-08-17)
+### ⚠️⚠️⚠️ CRITICAL BLOCKER -- RESOLVED (2026-08-17)
 
-**IncludeByPath IS ACTIVE — Forces System Files to Backup**
+**IncludeByPath IS ACTIVE -- Forces System Files to Backup**
+**Findings (2026-08-16 research)**
 
-**Findings (2026-08-16 research):**
 - IncludeByPath contains: `/Applications`, `/Developer`, `/Library`, `/System`, `/bin`, `/private`, `/sbin`, `/usr`
 - Test result: `/Library` shows `[Included]` (confirmed IncludeByPath OVERRIDES natural exclusions)
 - Impact: First backup WOULD include 150-200GB+ of system files:
@@ -111,26 +121,28 @@ done
 
 **Contamination Evidence (per snapshot):**
 
-| Directory | Size | Should Backup? | Status |
-|-----------|------|---|---|
-| Users/michael | 85GB | ✓ YES | Good (user data) |
-| System | 9.8GB | ✗ NO | **CONTAMINATED** |
-| Library | 16GB | PARTIAL | **CONTAMINATED** (system portion) |
-| opt | 9.3GB | ✗ NO | **CONTAMINATED** (Homebrew/tools) |
-| private | 4.0GB | ✗ NO | **CONTAMINATED** (logs/temps) |
-| Applications | 27GB | ✗ NO | **CONTAMINATED** (app binaries) |
-| usr | 3.1MB | ✗ NO | Minor |
-| **Total per snapshot** | **157GB** | Should be ~85GB | **72GB system cruft** |
+| Directory              | Size      | Should Backup?  | Status                            |
+|------------------------|-----------|-----------------|-----------------------------------|
+| Users/michael          | 85GB      | ✓ YES           | Good (user data)                  |
+| System                 | 9.8GB     | ✗ NO            | **CONTAMINATED**                  |
+| Library                | 16GB      | PARTIAL         | **CONTAMINATED** (system portion) |
+| opt                    | 9.3GB     | ✗ NO            | **CONTAMINATED** (Homebrew/tools) |
+| private                | 4.0GB     | ✗ NO            | **CONTAMINATED** (logs/temps)     |
+| Applications           | 27GB      | ✗ NO            | **CONTAMINATED** (app binaries)   |
+| usr                    | 3.1MB     | ✗ NO            | Minor                             |
+| **Total per snapshot** | **157GB** | Should be ~85GB | **72GB system cruft**             |
 
 **Root Cause:** Backups started BEFORE IncludeByPath was deleted, and BEFORE exclusions were added. Default Apple behavior includes system paths.
 
 **Scale of Problem:**
+
 - 3 snapshots × 157GB = 470GB total
 - User data: 255GB (useful)
 - System cruft: 216GB (wasted, persists forever)
 - **Bloat factor: 72% of each snapshot is system files**
 
 **NAS Status:**
+
 - Transfer in progress (1.8TB accumulated)
 - Unknown if all 3 local snapshots transferred yet (need to verify)
 - Legacy michael-pro: 436GB (preserved, inaccessible)
@@ -138,6 +150,7 @@ done
 **REMEDIATION (Must execute in next session):**
 
 **Phase 1: STOP and DELETE contaminated backups**
+
 ```bash
 # 1. Stop running backup
 tmutil stopbackup
@@ -151,7 +164,7 @@ ssh admin@192.168.8.129 "rm -rf /volume1/Backups-TM-Michael-Air"
 # Option B: Via Finder/SMB (mount and delete manually)
 ```
 
-**BEFORE DELETING: Verify NAS Transfer Status**
+BEFORE DELETING: Verify NAS Transfer Status
 
 To check if snapshots have been transferred from Mac to NAS:
 
@@ -180,19 +193,19 @@ du -sh "$SNAP"/{System,Library,private,opt,usr,Applications,Users}
 
 **Decision Matrix:**
 
-| Scenario | Action | Risk |
-|----------|--------|------|
-| Snapshots transferred to NAS | Delete local snapshots | None (NAS has backup) |
+| Scenario                         | Action                 | Risk                                                     |
+|----------------------------------|------------------------|----------------------------------------------------------|
+| Snapshots transferred to NAS     | Delete local snapshots | None (NAS has backup)                                    |
 | Snapshots NOT transferred to NAS | Delete local snapshots | Data loss (72GB system files lost, but that's the point) |
-| Keep both local + NAS | None | 72% bloat persists forever in NAS |
+| Keep both local + NAS            | None                   | 72% bloat persists forever in NAS                        |
 
 **Recommendation:** Verify NAS transfer, then delete local snapshots (even system bloat is better handled by deleting than by keeping permanently).
 
 ---
 
 **Phase 2: FIX exclusion configuration ✓ COMPLETED (2026-08-17)**
-
 **GUI exclusions set (via System Settings → Time Machine → Options):**
+
 - ✓ /Applications
 - ✓ ~/.cache
 - ✓ ~/Downloads
@@ -200,13 +213,16 @@ du -sh "$SNAP"/{System,Library,private,opt,usr,Applications,Users}
 - ✓ ~/repos
 
 **CLI exclusions set (via tmutil):**
+
 ```bash
 tmutil addexclusion -p /opt/homebrew
 ```
+
 - ✓ /opt/homebrew (persistent, survives TM reconfiguration)
 - Verified: xattr set on directory (`com.apple.metadata:com_apple_backup_excludeItem`)
 
 **Legacy paths deferred:**
+
 - IncludeByPath: Not deleted (appears inactive; defer to CLI as needed)
 - /private, /System, /usr, /bin, /sbin, /Developer: Defer to CLI if issues arise
 
@@ -219,12 +235,14 @@ tmutil addexclusion -p /opt/homebrew
 **Before resuming backup, inspect what's in the existing snapshot:**
 
 **1. List backup snapshots:**
+
 ```bash
 tmutil listbackups
 # Shows all snapshots. Note the dates.
 ```
 
 **2. Mount the latest backup snapshot (read-only):**
+
 ```bash
 # Get path to latest snapshot
 LATEST=$(tmutil latestbackup)
@@ -235,6 +253,7 @@ ls -la "$LATEST/Volumes/Backups-TM-Michael-Air/Backups.backupdb/michael-air/"
 ```
 
 **3. Check if contaminated (system files present):**
+
 ```bash
 LATEST=$(tmutil latestbackup)
 echo "=== Checking for contaminated system files in backup ===" && \
@@ -245,20 +264,26 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 ```
 
 **4. If CONTAMINATED (system files found):**
+
 - Option A: Delete the backup snapshot and start fresh
+
   ```bash
   # Delete entire first backup
   rm -rf /Volumes/Backups-TM-Michael-Air/Backups.backupdb/michael-air/*
   # OR unmount and delete via macOS UI
   ```
+
 - Option B: Use `tmutil delete` to remove specific snapshot (if available in this macOS version)
 
 **5. If CLEAN (no system files):**
+
 - Resume backup with fixed exclusions: `tmutil startbackup`
 
 ---
 
-### ⏳ Phase 6: Initial Backup (REVISED — Fix contamination first)
+### ⏳ Phase 6: Initial Backup (REVISED -- Fix contamination first)
+
+Pre-backup inspection and cleanup:
 
 - [ ] STOP running backup: `tmutil stopbackup`
 - [ ] DELETE IncludeByPath: `sudo defaults delete /Library/Preferences/com.apple.TimeMachine IncludeByPath`
@@ -269,6 +294,7 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 - [ ] Monitor progress: `tmutil status`
 
 **Post-Backup Monitoring**
+
 - [ ] Verify first snapshot created: `tmutil latestbackup`
 - [ ] Monitor TM logs for errors: `log stream --predicate 'process == "backupd"'`
 - [ ] Confirm hourly backups run automatically without intervention
@@ -277,17 +303,20 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 ### ❓ UNCERTAIN / DEFERRED
 
 **Ethernet Dongle**
+
 - USB-C Ethernet dongle shows power/activity lights but macOS doesn't recognize it
 - Impact: Initial backup will use WiFi (slower, ~6-12 hours for 50-60GB)
 - Plan: Troubleshoot dongle later (driver, replug, different dongle)
 - Recommendation: For future large backups, get working Ethernet for speed
 
 **Old michael-pro Backup**
+
 - Location: `Backups-TM-Michael` on NAS (436GB, 25 snapshots, Intel-based)
 - Decision deferred: Keep as archive or delete after michael-air proves stable
 - Rationale: Insurance against configuration mistakes; delete after 2-4 weeks of successful michael-air backups
 
 **IncludeByPath Field**
+
 - Status: Exists in plist (legacy from michael-pro setup)
 - Behavior: Appears unused in Sequoia 15.3.1 (contradicts tmutil isexcluded)
 - Decision: Monitor; delete if it interferes with TM behavior
@@ -304,6 +333,7 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 **Retrieve:** `op item get z264ew5xvmndlg5aliwmgl3cam`
 
 **Key principles:**
+
 - Human accounts (`michael`, `wendy`) consistent across Macs + NAS
 - Service accounts (`tm-<hostname>`) machine-scoped, automated only
 - Keychain stores network credentials for unattended backups
@@ -312,21 +342,21 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 
 ## Naming & Identity Decisions
 
-| Component | Current | Target | Rationale |
-|-----------|---------|--------|-----------|
-| Machine ComputerName | `michael-pro` | `michael-air` | Matches hardware (M3 2024); SSI consistency |
-| Machine LocalHostName | `michael-pro` | `michael-air` | Enables mDNS: `michael-air.local` |
-| Human account | `michael` | `michael` | Already consistent (no change needed) |
-| NAS TM service account | `tm-michael-pro` | `tm-michael-air` | Service account per Identity Strategy |
-| NAS share name | `Backups-TM-Michael` | `Backups-TM-Michael-Air` | Semantic, machine-specific |
-| 1Password vault entry | "NAS - TM - tm-michael-pro" | "NAS - TM - tm-michael-air" | Mirrors service account name |
-| Keychain entry | `wolfden_NAS._smb._tcp.local.` (tm-michael-pro) | `wolfden_NAS._smb._tcp.local.` (tm-michael-air) | Updated for new credential |
+| Component              | Current                                         | Target                                          | Rationale                                   |
+|------------------------|-------------------------------------------------|-------------------------------------------------|---------------------------------------------|
+| Machine ComputerName   | `michael-pro`                                   | `michael-air`                                   | Matches hardware (M3 2024); SSI consistency |
+| Machine LocalHostName  | `michael-pro`                                   | `michael-air`                                   | Enables mDNS: `michael-air.local`           |
+| Human account          | `michael`                                       | `michael`                                       | Already consistent (no change needed)       |
+| NAS TM service account | `tm-michael-pro`                                | `tm-michael-air`                                | Service account per Identity Strategy       |
+| NAS share name         | `Backups-TM-Michael`                            | `Backups-TM-Michael-Air`                        | Semantic, machine-specific                  |
+| 1Password vault entry  | "NAS - TM - tm-michael-pro"                     | "NAS - TM - tm-michael-air"                     | Mirrors service account name                |
+| Keychain entry         | `wolfden_NAS._smb._tcp.local.` (tm-michael-pro) | `wolfden_NAS._smb._tcp.local.` (tm-michael-air) | Updated for new credential                  |
 
 ---
 
 ## Phase 1: NAS Configuration
 
-### Prerequisites
+### Prerequisites (NAS SSH Access)
 
 - SSH access to Synology NAS as admin user
 - NAS IP: `192.168.8.129`
@@ -335,12 +365,14 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 ### 1.1: Create NAS Service Account (`tm-michael-air`)
 
 **SSH to NAS:**
+
 ```bash
 ssh admin@192.168.8.129
 # Or: ssh admin@wolfden-nas.local
 ```
 
 **Via Synology DSM web UI (easier):**
+
 1. Open `https://192.168.8.129:5001`
 2. Control Panel → User
 3. Create → Local User
@@ -350,6 +382,7 @@ ssh admin@192.168.8.129
    - Confirm create
 
 **OR via CLI (if web UI unavailable):**
+
 ```bash
 # Create user (replace PASSWORD with actual password)
 sudo synouser --add tm-michael-air PASSWORD "TM Backup michael-air" 0
@@ -359,6 +392,7 @@ sudo synouser --list
 ```
 
 **Verify account was created:**
+
 ```bash
 # From NAS terminal or via SSH
 synouser --list | grep tm-michael-air
@@ -369,6 +403,7 @@ synouser --list | grep tm-michael-air
 ### 1.2: Create NAS Share (`Backups-TM-Michael-Air`)
 
 **Via Synology DSM web UI:**
+
 1. File Station → Home
 2. Create → Folder → Name: `Backups-TM-Michael-Air`
 3. Right-click → Properties → Permissions
@@ -377,6 +412,7 @@ synouser --list | grep tm-michael-air
    - Owner: Set to `tm-michael-air` if possible
 
 **OR via CLI:**
+
 ```bash
 # SSH to NAS
 ssh admin@192.168.8.129
@@ -393,6 +429,7 @@ ls -ld /volume1/Backups-TM-Michael-Air
 ```
 
 **Verify share is accessible:**
+
 ```bash
 # From michael-air:
 open smb://tm-michael-air@192.168.8.129/Backups-TM-Michael-Air
@@ -424,11 +461,13 @@ umount /tmp/tm-test
 
 ### 2.1: Create 1P Entry via `op` CLI
 
-**Prerequisites:**
+#### Prerequisites
+
 - 1Password CLI signed in: `op signin` (if not already authenticated)
 - Vault: "Shared-Wolf Den"
 
-**Create the entry:**
+#### Create the entry
+
 ```bash
 # Option A: Interactive creation
 op item create \
@@ -442,7 +481,8 @@ op item create \
   'Name *'="tm-michael-air"
 ```
 
-**Alternative: Copy from existing entry and edit**
+#### Alternative: Copy from existing entry and edit
+
 ```bash
 # Get UUID of existing tm-michael-pro entry
 op item list --vault "Shared-Wolf Den" --format json | jq '.[] | select(.title | contains("tm-michael-pro")) | .id'
@@ -452,13 +492,15 @@ op item list --vault "Shared-Wolf Den" --format json | jq '.[] | select(.title |
 # Then edit title/username/passwords in the duplicated entry
 ```
 
-**Verify entry was created:**
+#### Verify entry was created
+
 ```bash
 op item get "NAS - TM - tm-michael-air" --vault "Shared-Wolf Den"
 # Should show: username, password, website, tags
 ```
 
-**Store password locally (macOS) for later reference:**
+#### Store password locally (macOS) for later reference
+
 ```bash
 # Retrieve password from 1P and copy to clipboard
 op item get "NAS - TM - tm-michael-air" --fields username,password --vault "Shared-Wolf Den" | pbcopy
@@ -472,7 +514,8 @@ op item get "NAS - TM - tm-michael-air" --fields username,password --vault "Shar
 
 Time Machine needs credentials stored in System Keychain to connect to NAS without user interaction.
 
-**Option A: Manual (via Keychain Access)**
+#### Option A: Manual (via Keychain Access)
+
 1. Open Keychain Access (Applications → Utilities → Keychain Access)
 2. Click "Keychain" → "System Keychain" (left sidebar)
 3. File → New Password Item
@@ -485,7 +528,8 @@ Time Machine needs credentials stored in System Keychain to connect to NAS witho
    - Click "Modify…" if needed to add permissions
 5. Close and verify entry appears in Keychain list
 
-**Option B: Command-line (faster, scriptable)**
+#### Option B: Command-line (faster, scriptable)
+
 ```bash
 # Add credential to System keychain
 security add-internet-password \
@@ -520,7 +564,8 @@ If this succeeds without prompting for password, the Keychain entry is correctly
 
 ## Phase 4: Machine Naming (Hostname Change)
 
-### Prerequisites
+### Prerequisites (SSH + Hostname Documentation)
+
 - Have SSH access ready (if needed for troubleshooting)
 - Document current hostname: `michael-pro`
 - Target hostname: `michael-air`
@@ -565,6 +610,7 @@ dns-sd -R "michael-air" _smb._tcp local 445 &
 ### 4.3: Update NAS/Bonjour Records (if applicable)
 
 If the NAS has cached hostname information for this machine, you may want to:
+
 1. Restart NAS: `sudo shutdown -r now` (from NAS SSH)
 2. Or manually clear cache on NAS (varies by DSM version)
 
@@ -594,7 +640,8 @@ sudo tmutil removeexclusion /Volumes/Backups-TM-Michael
 
 ### 5.3: Configure New Destination
 
-**Via System Settings (GUI):**
+#### Via System Settings (GUI)
+
 1. Open System Settings → General → Time Machine
 2. Click "Turn Off" if currently on
 3. Wait a moment, then click "Turn On"
@@ -604,7 +651,8 @@ sudo tmutil removeexclusion /Volumes/Backups-TM-Michael
 7. Authenticate with `tm-michael-air` password (from 1Password)
 8. Confirm selection
 
-**Via Command Line:**
+#### Via Command Line
+
 ```bash
 # Create a bookmark for the destination
 tmutil setdestination smb://tm-michael-air@wolfden_NAS._smb._tcp.local./Backups-TM-Michael-Air
@@ -697,7 +745,7 @@ defaults read /Library/Preferences/com.apple.TimeMachine
 ### 1Password Entry
 
 - [ ] Create 1P entry "NAS - TM - tm-michael-air" in Shared-Wolf Den
-- [ ] Fields: username, password, website (https://192.168.8.129:5001), tags (NAS, wolfden, backup)
+- [ ] Fields: username, password, website (<https://192.168.8.129:5001>), tags (NAS, wolfden, backup)
 - [ ] Entry is accessible via `op item get`
 
 ### Keychain Setup
@@ -741,10 +789,10 @@ defaults read /Library/Preferences/com.apple.TimeMachine
 
 ## Related Documentation
 
-- [TM-SETUP-PLAN.md](TM-SETUP-PLAN.md) — Original Time Machine plan (superseded by this document)
-- [tm-strategy.md](tm-strategy.md) — TM efficiency audit framework and measurements
-- [setup.md](setup.md) — Migration process and Intel→ARM issues
-- [equipment_computing.md](../wolf-soho/equipment_computing.md) — Machine specs, UUIDs, serials, MAC addresses
+- [TM-SETUP-PLAN.md](TM-SETUP-PLAN.md) -- Original Time Machine plan (superseded by this document)
+- [tm-strategy.md](tm-strategy.md) -- TM efficiency audit framework and measurements
+- [setup.md](setup.md) -- Migration process and Intel→ARM issues
+- [equipment_computing.md](../wolf-soho/equipment_computing.md) -- Machine specs, UUIDs, serials, MAC addresses
 - 1Password Identity Strategy: `op://Shared-Wolf Den/z264ew5xvmndlg5aliwmgl3cam/`
 
 ---
@@ -756,6 +804,7 @@ defaults read /Library/Preferences/com.apple.TimeMachine
 **Cause:** NAS not reachable (network disconnected, NAS down, wrong IP/hostname)
 
 **Fix:**
+
 ```bash
 # Verify network connection
 ping 192.168.8.129
@@ -768,6 +817,7 @@ ping wolfden_NAS._smb._tcp.local.
 **Cause:** Keychain entry missing or password incorrect
 
 **Fix:**
+
 ```bash
 # Check Keychain entry exists and is correct
 security find-internet-password -s "wolfden_NAS._smb._tcp.local." /Library/Keychains/System.keychain
@@ -781,6 +831,7 @@ security add-internet-password -a "tm-michael-air" -s "wolfden_NAS._smb._tcp.loc
 **Cause:** Large initial backup hitting network timeouts; SMB round-trip latency
 
 **Fix:**
+
 ```bash
 # Interrupt and resume iteratively
 tmutil stopbackup
@@ -795,6 +846,7 @@ tmutil startbackup
 **Cause:** Caching in System Preferences or Bonjour daemon
 
 **Fix:**
+
 ```bash
 # Restart mDNS/Bonjour daemon
 sudo launchctl stop com.apple.mDNSResponder
@@ -807,7 +859,7 @@ sudo launchctl start com.apple.mDNSResponder
 
 ## References
 
-- **Synology DSM CLI Reference:** https://kb.synology.com/en-us/DSM/tutorial/How_to_login_to_DSM_with_root_permission_by_using_SSH_Telnet
+- **Synology DSM CLI Reference:** <https://kb.synology.com/en-us/DSM/tutorial/How_to_login_to_DSM_with_root_permission_by_using_SSH_Telnet>
 - **macOS `scutil` hostname:** `man scutil`
 - **Keychain CLI:** `man security add-internet-password`
 - **Time Machine CLI:** `man tmutil`
