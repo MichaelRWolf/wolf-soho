@@ -281,7 +281,7 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 
 ---
 
-### ⏳ Phase 6: Initial Backup (REVISED -- Fix contamination first)
+### 🔧 Phase 6: Initial Backup (WIP -- Started 2026-08-17 20:14 UTC)
 
 **Destination Info Capture (Before & After Recreation)**
 
@@ -746,6 +746,32 @@ defaults read /Library/Preferences/com.apple.TimeMachine
 # - Destinations shows NAS SMB URL: smb://tm-michael-air@192.168.8.129/Backups-TM-Michael-Air
 # - BytesAvailable and BytesUsed reflect actual backup size (~50-70 GB user data)
 ```
+
+### 6.6: Snapshot Validation (After First Backup Completes)
+
+**CRITICAL: Verify first snapshot contains ONLY user data (no system contamination)**
+
+```bash
+# Wait for first backup to complete (watch tmutil status)
+# Then validate:
+
+LATEST=$(tmutil latestbackup)
+echo "=== SNAPSHOT VALIDATION ===" && \
+echo "Snapshot: $LATEST" && \
+echo "Total size:" && du -sh "$LATEST" && \
+echo "" && \
+echo "Top-level contents:" && \
+du -sh "$LATEST"/* | sort -h && \
+echo "" && \
+echo "CRITICAL CHECK - should be ~50-70GB user data, NO system files:" && \
+du -sh "$LATEST/System" 2>/dev/null && echo "❌ CONTAMINATED: System files found" || echo "✓ OK: No /System" && \
+du -sh "$LATEST/Library" 2>/dev/null && echo "⚠️  Library found (OK if small, <2GB)" && \
+du -sh "$LATEST/Applications" 2>/dev/null && echo "❌ CONTAMINATED: Apps found" || echo "✓ OK: No /Applications" && \
+du -sh "$LATEST/opt" 2>/dev/null && echo "❌ CONTAMINATED: /opt found" || echo "✓ OK: No /opt"
+```
+
+**If CLEAN (only user data):** Phase 6 complete ✓  
+**If CONTAMINATED (system files found):** Escalate -- IncludeByPath may still be active
 
 ---
 
