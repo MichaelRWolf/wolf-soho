@@ -1,54 +1,76 @@
 #!/usr/bin/env bash
 # tm-addexclusions.sh - Batch add Time Machine exclusions
-# Comment out any lines you don't want to exclude
+# Only adds exclusions for paths that exist
 
-# Package managers
-tmutil addexclusion -p /opt/homebrew
-tmutil addexclusion -p "$HOME/.cache/pip"
-tmutil addexclusion -p "$HOME/.cache/npm"
-tmutil addexclusion -p "$HOME/.cache/uv"
-tmutil addexclusion -p "$HOME/.cargo/registry/cache"
-tmutil addexclusion -p "$HOME/.gem/cache"
-tmutil addexclusion -p "$HOME/go/pkg/mod/cache"
+set -euo pipefail
 
-# IDEs & build tools
-tmutil addexclusion -p "$HOME/Library/Developer/Xcode/DerivedData"
-tmutil addexclusion -p "$HOME/Library/Developer/Xcode/Archives"
-tmutil addexclusion -p "$HOME/Library/Caches/Xcode"
-tmutil addexclusion -p "$HOME/.vscode/extensions"
-tmutil addexclusion -p "$HOME/.cache/JetBrains"
-tmutil addexclusion -p "$HOME/.cache/gradle"
-tmutil addexclusion -p "$HOME/.cache/maven"
+declare -a EXCLUSIONS=(
+    # Package managers
+    "/opt/homebrew"
+    "$HOME/.cache/pip"
+    "$HOME/.cache/npm"
+    "$HOME/.cache/uv"
+    "$HOME/.cargo/registry/cache"
+    "$HOME/.gem/cache"
+    "$HOME/go/pkg/mod/cache"
 
-# System & app caches
-tmutil addexclusion -p "$HOME/Library/Caches"
-tmutil addexclusion -p "$HOME/.cache"
-tmutil addexclusion -p "$HOME/.cache/chromium"
-tmutil addexclusion -p "$HOME/.cache/fontconfig"
+    # IDEs & build tools
+    "$HOME/Library/Developer/Xcode/DerivedData"
+    "$HOME/Library/Developer/Xcode/Archives"
+    "$HOME/Library/Caches/Xcode"
+    "$HOME/.vscode/extensions"
+    "$HOME/.cache/JetBrains"
+    "$HOME/.cache/gradle"
+    "$HOME/.cache/maven"
 
-# Language version managers
-tmutil addexclusion -p "$HOME/.local/share/uv/python"
-tmutil addexclusion -p "$HOME/.pyenv/versions"
-tmutil addexclusion -p "$HOME/.nvm"
-tmutil addexclusion -p "$HOME/.rbenv/versions"
+    # System & app caches
+    "$HOME/Library/Caches"
+    "$HOME/.cache"
+    "$HOME/.cache/chromium"
+    "$HOME/.cache/fontconfig"
 
-# Browser caches
-tmutil addexclusion -p "$HOME/Library/Application Support/Google/Chrome/Default/Cache"
-tmutil addexclusion -p "$HOME/Library/Application Support/Arc/User Data/Default/Cache"
+    # Language version managers
+    "$HOME/.local/share/uv/python"
+    "$HOME/.pyenv/versions"
+    "$HOME/.nvm"
+    "$HOME/.rbenv/versions"
 
-# Development tools
-tmutil addexclusion -p "$HOME/.cache/pre-commit"
-tmutil addexclusion -p "$HOME/.cache/huggingface"
-tmutil addexclusion -p "$HOME/.cache/torch"
+    # Browser caches
+    "$HOME/Library/Application Support/Google/Chrome/Default/Cache"
+    "$HOME/Library/Application Support/Arc/User Data/Default/Cache"
 
-# System paths (high churn)
-tmutil addexclusion -p /private/var/db/diagnostics
-tmutil addexclusion -p /private/var/db/Persist
-tmutil addexclusion -p /private/var/log
-tmutil addexclusion -p /private/tmp
-tmutil addexclusion -p /private/var/tmp
+    # Development tools
+    "$HOME/.cache/pre-commit"
+    "$HOME/.cache/huggingface"
+    "$HOME/.cache/torch"
 
-# Application-specific
-tmutil addexclusion -p "$HOME/Library/Application Support/Malwarebytes/MBAM/Db/Update/Installer"
+    # System paths (high churn)
+    "/private/var/db/diagnostics"
+    "/private/var/db/Persist"
+    "/private/var/log"
+    "/private/tmp"
+    "/private/var/tmp"
 
-echo "✓ All exclusions added"
+    # Application-specific
+    "$HOME/Library/Application Support/Malwarebytes/MBAM/Db/Update/Installer"
+)
+
+echo "Adding Time Machine exclusions..."
+echo ""
+
+added=0
+skipped=0
+
+for path in "${EXCLUSIONS[@]}"; do
+    if [[ -e "$path" ]]; then
+        echo "✓ Adding: $path"
+        tmutil addexclusion -p "$path"
+        added=$((added + 1))
+    else
+        echo "  (skip, doesn't exist yet): $path"
+        skipped=$((skipped + 1))
+    fi
+done
+
+echo ""
+echo "Summary: $added exclusions added, $skipped skipped (path doesn't exist)"
