@@ -11,9 +11,9 @@ manage_exclusion() {
         return
     fi
 
-    # Get current status (tmutil output: "path: Excluded" or "path: Included")
+    # Get current status (tmutil output: "path: [Excluded]" or "path: [Included]")
     local status
-    status=$(tmutil isexcluded "$path" 2>/dev/null | grep -oE '(Excluded|Included)$' || echo "Unknown")
+    status=$(tmutil isexcluded "$path" 2>/dev/null | grep -oE '\[(Excluded|Included)\]' | tr -d '[]' || echo "Unknown")
 
     # Get size
     local size
