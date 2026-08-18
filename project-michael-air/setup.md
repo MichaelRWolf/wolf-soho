@@ -79,7 +79,7 @@ chsh -s /opt/homebrew/bin/bash
   - CONTEXT.md: device registry updated (michael-air primary; michael-pro/wendy-pro/wolf-air preserved)
   - Identity Strategy: merged GitHub + 1P, sync script added
   - portable-profile: Ethernet adapter interfaces updated
-- ⏳ Mail.app setup (ATT email: see wolf-soho/ATT/password_fuckery.md for browser/OTP workarounds)
+- ✓ Mail.app setup (ATT email: working; Safari/Chrome deferred) (2026-08-18)
 - ⏳ SSH NAS (Synology kex_exchange error; deferred)
 
 ### Low Priority (Optimization)
