@@ -73,10 +73,14 @@ chsh -s /opt/homebrew/bin/bash
 - ✓ Homebrew packages verified via Brewfile
 - ✓ Daylite operational (2026-08-15; login/sync complete 2026-08-18)
 - ✓ Launcher recovery (Quicksilver on Cmd-Space) (2026-08-18)
-- ⏳ Mail.app setup (ATT email: see wolf-soho/ATT/password_fuckery.md for browser/OTP workarounds)
 - ✓ SSH Beryl passwordless access (2026-08-18; working)
-- ⏳ SSH NAS passwordless (key deployment blocked by Synology SSH server -- connection reset during kex; needs investigation or manual setup)
-- ⏳ SSH EAN (device unclear -- not found in CONTEXT.md; clarification needed)
+- ✓ Device naming & identity strategy (2026-08-18)
+  - SSH key comments: michael@michael-air
+  - CONTEXT.md: device registry updated (michael-air primary; michael-pro/wendy-pro/wolf-air preserved)
+  - Identity Strategy: merged GitHub + 1P, sync script added
+  - portable-profile: Ethernet adapter interfaces updated
+- ⏳ Mail.app setup (ATT email: see wolf-soho/ATT/password_fuckery.md for browser/OTP workarounds)
+- ⏳ SSH NAS (Synology kex_exchange error; deferred)
 
 ### Low Priority (Optimization)
 
