@@ -972,6 +972,27 @@ Current: copying small files (avg 28 KB logical, 29 KB physical)
 
 ---
 
+## Second TM Backup (2026-08-18 11:30+ UTC) -- 3rd Share Incarnation
+
+**Status:** ✓ STARTED
+
+**Initiation:** User started backup on 3rd share incarnation at ~11:30.
+
+**Destination:**
+
+```text
+====================================================
+Name          : Backups-TM-Michael-Air
+Kind          : Network
+URL           : smb://tm-michael-pro@192.168.8.129/Backups-TM-Michael-Air
+ID            : A278E370-7AEB-4CE5-902B-A8732E00A739
+====================================================
+```
+
+**Context:** Clean rebuild (final iteration per user); first backup completed at 09:19; now running second snapshot with stable exclusions.
+
+---
+
 ## References
 
 - **Synology DSM CLI Reference:** <https://kb.synology.com/en-us/DSM/tutorial/How_to_login_to_DSM_with_root_permission_by_using_SSH_Telnet>
