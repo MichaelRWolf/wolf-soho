@@ -1,12 +1,19 @@
 # Identity Strategy -- NAS + Mac -- Human and Service Accounts
 
-**Cross-reference:** This document mirrors the 1Password entry in Shared-Wolf Den vault (UUID: z264ew5xvmndlg5aliwmgl3cam). View in 1P with
+## Cross-References
+
+This document is maintained in **two places** -- keep both in sync:
+
+**GitHub (source of truth):**
+<https://github.com/MichaelRWolf/wolf-soho/blob/main/Identity%20Strategy%20-%20NAS%20%2B%20MB%20-%20Human%2BService%20Accounts.md>
+
+**1Password:** Shared-Wolf Den vault, "Identity Strategy - NAS + MB - Human+Service Accounts" (UUID: z264ew5xvmndlg5aliwmgl3cam)
+
+View in 1Password via CLI:
 
 ```bash
 op item get z264ew5xvmndlg5aliwmgl3cam --vault "Shared-Wolf Den"
- ```
-
- or GitHub: <https://github.com/MichaelRWolf/wolf-soho/blob/main/Identity%20Strategy%20-%20NAS%20%2B%20MB%20-%20Human%2BService%20Accounts.md>
+```
 
 ## Account Classification
 
