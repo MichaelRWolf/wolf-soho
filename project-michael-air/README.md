@@ -1,51 +1,76 @@
-# michael-air Project
+# michael-air Project: MacBook Air (M3) Setup & Migration
 
-**Status:** Setup in progress (2026-08-13 to present)
+**Status:** High-priority tasks complete (2026-08-13 to 2026-08-17); ongoing validation.
 
 ## Overview
 
-Replacement for `michael-pro` (water damaged, recovered via Time Machine). New machine is a MacBook Air (M3, 13-inch, 2024, 16GB RAM, 256GB SSD, Space Gray).
+Replacement for `michael-pro` (water damaged, recovered via Time Machine). New machine is a MacBook Air (M3, 13-inch, 2024).
 
-**Source:** eBay, gadgetpickup, open-box condition. Free 30-day returns available.
+**Purpose:** This project serves as both a case study and reusable template for setting up ARM MacBook Air machines via Time Machine restore. See [TEMPLATE-macbook-air-setup.md](TEMPLATE-macbook-air-setup.md) for reusable flow; see [project-wendy-air](../project-wendy-air) for application to the second water-damaged machine.
 
 ## Quick Status
 
-- [x] Unit received & verified (2026-08-13) — 100% functional, no damage
-- [x] Time Machine restore from NAS (2026-08-13/14) — 106 GB transferred successfully
-- [ ] Shell & Homebrew rebuild (high priority) — See [setup.md](setup.md)
-- [ ] TCC/privacy remediation — See [setup.md](setup.md)
-- [ ] Time Machine efficiency audit — See [tm-strategy.md](tm-strategy.md)
+### ✓ Completed (2026-08-13 to 2026-08-16)
 
-## Files
+- Time Machine restore from NAS (106 GB)
+- Shell fixed (Intel bash → system zsh → Homebrew bash)
+- Intel Homebrew removed (/usr/local/Homebrew, /opt/local, /opt/X11: 1.6 GB reclaimed)
+- Rust & UV rebuilt (ARM64 native)
+- X86_64 audit completed; findings documented
+- Time Machine destination configured (NAS share: Backups-TM-Michael-Air)
+- Exclusions set (GUI: ~/Downloads, ~/Pictures, ~/repos, ~/.cache; CLI: /opt/homebrew)
 
-| File | Purpose |
-|------|---------|
-| [setup.md](setup.md) | Migration process, issues found, setup TODOs (migration → ARM cleanup) |
-| [tm-strategy.md](tm-strategy.md) | Time Machine efficiency audit & exclusion decisions (ongoing) |
-| [CLAUDE.md](CLAUDE.md) | Project guidance for Claude Code (codebase context) |
-| `images/` | Screenshots from Migration Assistant restore process |
-| `michael-air-migration.zip` | Original backup of ChatGPT iPhone session notes |
+### ⏳ Ongoing (Validation & Monitoring)
 
-## Related
+- Time Machine backups running hourly -- monitor for errors
+- Verify clean snapshots (user data only, no system files)
+- Legacy backup share decision (keep or archive `Backups-TM-Michael`)
 
-- [GitHub issue #6](https://github.com/MichaelRWolf/wolf-soho/issues/6) — michael-pro water damage incident
-- [GitHub issue #8](https://github.com/MichaelRWolf/wolf-soho/issues/8) — Intel x86_64 binary audit (stays open)
-- [wolf-soho](../) — Main SOHO infrastructure repo
+### 🔗 GitHub Issues
+
+- [#6](https://github.com/MichaelRWolf/wolf-soho/issues/6) -- michael-pro water damage incident (closed)
+- [#8](https://github.com/MichaelRWolf/wolf-soho/issues/8) -- x86_64 binary audit (reference)
+
+## File Guide
+
+### Setup & Migration (Use These for Future Machines)
+
+| File                                                               | Purpose                                                                   |
+|--------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **[TEMPLATE-macbook-air-setup.md](TEMPLATE-macbook-air-setup.md)** | **← START HERE** -- Reusable setup flow for wendy-air and future machines |
+| [setup.md](setup.md)                                               | Migration issues encountered and fixes applied (michael-air specific)     |
+| [x86_64-remediation.md](x86_64-remediation.md)                     | Intel binary audit, removal strategy, tool reference                      |
+| [x86_64-binaries-inventory.md](x86_64-binaries-inventory.md)       | Detailed inventory of x86_64 artifacts (reference)                        |
+
+### Time Machine (Configuration & Troubleshooting)
+
+| File                                                             | Purpose                                                     |
+|------------------------------------------------------------------|-------------------------------------------------------------|
+| **[tm-reference.md](tm-reference.md)**                           | Quick reference: TM commands, exclusions, troubleshooting   |
+| [tm-strategy.md](tm-strategy.md)                                 | Decision framework: what to backup, how to measure impact   |
+| [PLAN-names-networks-backups.md](PLAN-names-networks-backups.md) | Full setup: NAS account creation, Keychain, hostname change |
+
+### Project Metadata
+
+| File                   | Purpose                                     |
+|------------------------|---------------------------------------------|
+| [CLAUDE.md](CLAUDE.md) | Claude Code guidance for this project       |
+| `images/`              | Screenshots from Migration Assistant        |
+| `tmutil_analysis`      | Script: audit TM configuration & exclusions |
 
 ## Hardware Specs
 
 - **Model:** MacBook Air (13-inch, M3, 2024)
 - **MPN:** A3113
 - **Processor:** Apple M3 (8-Core GPU)
-- **RAM:** 16 GB
-- **Storage:** 256 GB SSD
-- **Display:** 13", 2560×1664, Liquid Retina
-- **Color:** Space Gray
+- **RAM:** 16 GB | **Storage:** 256 GB SSD
 - **OS:** macOS 15.7 Sequoia
-- **Connectivity:** USB-C (Thunderbolt 4), HDMI, DisplayPort, Wi-Fi 6E, Bluetooth
+- **Seller:** gadgetpickup (eBay, 99.9% feedback)
 
-## Seller Info
+## Quick Links
 
-- **Store:** gadgetpickup ([eBay](https://www.ebay.com/str/gadgetpickup))
-- **Feedback:** 99.9% positive (17.4K+ ratings)
-- **Returns:** Free 30-day returns
+- **Setting up next machine?** → Start with [TEMPLATE-macbook-air-setup.md](TEMPLATE-macbook-air-setup.md)
+- **TM troubleshooting?** → See [tm-reference.md](tm-reference.md)
+- **Intel binary issues?** → See [x86_64-remediation.md](x86_64-remediation.md)
+- **Full NAS + TM setup?** → See [PLAN-names-networks-backups.md](PLAN-names-networks-backups.md)
+- **Related:** [wolf-soho](../) main repo | [project-wendy-air](../project-wendy-air) (wendy-pro replacement)
