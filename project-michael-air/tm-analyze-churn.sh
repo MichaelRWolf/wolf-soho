@@ -25,7 +25,7 @@ echo "---"
 echo ""
 
 # High-churn paths (should be 0) — from tm-cache-exclusions.md
-declare -a CHURN=(
+declare -a HIGH_CHURN_PATHS=(
     # Package managers
     "opt/homebrew" ".cache/pip" ".cache/npm" ".cache/uv"
     ".cargo/registry/cache" ".gem/cache" "go/pkg/mod/cache"
@@ -55,7 +55,7 @@ declare -a SYSTEM=(
 )
 
 echo "## HIGH-CHURN PATHS (should be empty)"
-for path in "${CHURN[@]}"; do
+for path in "${HIGH_CHURN_PATHS[@]}"; do
     full_path="$BACKUP_PATH/$path"
     if [[ -e "$full_path" ]]; then
         bytes=$(du -s "$full_path" 2>/dev/null | awk '{print $1}' | tr -d ' \n' || echo "0")
