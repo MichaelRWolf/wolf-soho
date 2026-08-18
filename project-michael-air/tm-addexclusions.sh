@@ -3,6 +3,12 @@
 
 set -euo pipefail
 
+# ANSI color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'  # No Color
+
 manage_exclusion() {
     local path="$1"
 
@@ -19,8 +25,14 @@ manage_exclusion() {
     local size
     size=$(du -sh "$path" 2>/dev/null | awk '{print $1}' || echo "?")
 
-    # Display current state
-    printf "%-10s %8s  %s\n" "[$status]" "$size" "$path"
+    # Display current state with color based on status
+    local color="$YELLOW"  # Default: yellow for unknown
+    case "$status" in
+        Excluded) color="$RED" ;;      # Red: excluded from backup
+        Included) color="$GREEN" ;;    # Green: included in backup
+    esac
+
+    printf "${color}%-10s${NC} %8s  %s\n" "[$status]" "$size" "$path"
 
     # Prompt for action (default: Preserve)
     read -p "  [Preserve]/Toggle? (CR=Preserve): " -r response
