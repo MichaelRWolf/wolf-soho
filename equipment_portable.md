@@ -11,7 +11,7 @@
 - Serial: 000001
 - MAC: 00:e0:4c:00:00:93
 - Power draw: 288 mA
-- Interface: en7 on michael-pro
+- Interface: en7 on michael-pro (archived); en7 on michael-air (current)
 - Note: USB-C plug and RJ45 plug both have worn latches; cable and dongle taped together
 
 ### `belkin-dongle` -- Belkin USB-C to Gigabit Ethernet
@@ -23,7 +23,7 @@
 - Serial: 0013000001
 - MAC: 80:69:1a:8d:ea:8a
 - Power draw: 112 mA
-- Interface: en13 on michael-pro (when connected)
+- Interface: en13 on michael-pro (archived); TBD on michael-air (when connected)
 - macOS: built-in Realtek driver; no system extension needed
 - Setup: Network → Add Service on first use per machine
 
@@ -47,3 +47,4 @@
 | `cable-outdoor-50ft` | Cat6, 50 ft, exterior run, RV side | Yes           |
 
 Verified by: michael-pro → anker-dongle → [cable] → running-wolf-hotspot → internet (ping 1.1.1.1)
+To re-verify on michael-air: michael-air → [dongle] → [cable] → running-wolf-hotspot → internet

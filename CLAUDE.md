@@ -80,7 +80,7 @@ make uninstall-launchd     # Unload macOS scheduled agents
 All documentation uses canonical names from CONTEXT.md. This prevents ambiguity when discussing:
 
 - Network devices: `beryl` (GL.iNet router), `loco-ap` / `loco-station` (Ubiquiti PtP), `spectrum-router` (Moe's home)
-- Computing: `michael-pro`, `wolf-air`, `wendy-pro`
+- Computing: `michael-air` (primary), `michael-pro` (archived), `wendy-pro`, `wolf-air` (backup)
 - SSIDs: `running-wolf-router`, `running-wolf-ptp`, etc.
 
 **When writing or updating docs, use these names exactly -- do not invent alternatives.**

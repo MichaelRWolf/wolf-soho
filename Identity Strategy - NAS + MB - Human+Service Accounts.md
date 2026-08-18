@@ -1,9 +1,17 @@
 # Identity Strategy -- NAS + Mac -- Human and Service Accounts
 
+**Cross-reference:** This document mirrors the 1Password entry in Shared-Wolf Den vault (UUID: z264ew5xvmndlg5aliwmgl3cam). View in 1P with
+
+```bash
+op item get z264ew5xvmndlg5aliwmgl3cam --vault "Shared-Wolf Den"
+ ```
+
+ or GitHub: <https://github.com/MichaelRWolf/wolf-soho/blob/main/Identity%20Strategy%20-%20NAS%20%2B%20MB%20-%20Human%2BService%20Accounts.md>
+
 ## Account Classification
 
 | Type    | Definition                              | Examples            |
-| ------- | --------------------------------------- | ------------------- |
+|---------|-----------------------------------------|---------------------|
 | Human   | Interactive login + personal storage    | michael, wendy      |
 | Service | Automated role only, no interactive use | tm-michael-pro, git |
 
@@ -14,7 +22,7 @@
 ### Current state
 
 | System | Username     |
-| ------ | ------------ |
+|--------|--------------|
 | Mac    | michael      |
 | Mac    | wendy        |
 | NAS    | michaelrwolf |
@@ -52,8 +60,9 @@ quota and backup status.
 
 Examples:
 
-- `tm-michael-pro`
-- `tm-wolf-air`
+- `tm-michael-pro` (water damaged 2026-06; account retained for archive access)
+- `tm-michael-air` (primary backup account, created 2026-08)
+- `tm-wolf-air` (backup computer shared with Wendy)
 
 ### Pattern: Git service
 
@@ -83,10 +92,11 @@ No machine suffix needed.
 
 ## Summary Table
 
-| Account        | Type    | Scope         | Auth     | Purpose                     |
-| -------------- | ------- | ------------- | -------- | --------------------------- |
-| michael        | Human   | Mac + NAS     | password | Interactive, personal files |
-| wendy          | Human   | Mac + NAS     | password | Interactive, personal files |
-| tm-michael-pro | Service | NAS (per Mac) | SSH key  | TimeMachine backup          |
-| tm-wolf-air    | Service | NAS (per Mac) | SSH key  | TimeMachine backup          |
-| git            | Service | NAS           | SSH key  | Git bare repo hosting       |
+| Account        | Type    | Scope         | Auth     | Purpose                     | Status                 |
+|----------------|---------|---------------|----------|-----------------------------|------------------------|
+| michael        | Human   | Mac + NAS     | password | Interactive, personal files |                        |
+| wendy          | Human   | Mac + NAS     | password | Interactive, personal files |                        |
+| tm-michael-pro | Service | NAS (per Mac) | SSH key  | TimeMachine backup          | Archive (mac damaged)  |
+| tm-michael-air | Service | NAS (per Mac) | SSH key  | TimeMachine backup          | Active (primary)       |
+| tm-wolf-air    | Service | NAS (per Mac) | SSH key  | TimeMachine backup          | Active (backup shared) |
+| git            | Service | NAS           | SSH key  | Git bare repo hosting       |                        |
