@@ -911,13 +911,18 @@ sudo launchctl start com.apple.mDNSResponder
 
 ## First TM Backup (2026-08-18 08:46+ UTC)
 
-**Status:** Running -- in progress.
+**Status:** ✓ COMPLETED 2026-08-18 09:19 UTC (33 minutes elapsed)
 
 **Initiation:** User started backup via Time Machine menu on 2026-08-18 08:46.
 
-**Estimated scope:** 168.54 GB (1,208,623 files total).
+**Final Results:**
 
-**Progress snapshot (08:47:36):**
+- **Size:** 100.35 GB (physical) -- 40% smaller than estimated 168.54 GB
+- **Items:** 800,513 total (622,564 files, 139,068 directories, 38,523 symlinks)
+- **Duration:** 32 minutes, 19 seconds
+- **Speed:** Averaged ~52 MB/s (WiFi)
+
+**Progress snapshot (08:47:36 -- early phase):**
 
 ```text
 Progress: 1% done, -, - MB/s (avg: 0.00 MB/s), - items/s (avg: 0.00 items/s)
@@ -941,11 +946,29 @@ Current: copying small files (avg 28 KB logical, 29 KB physical)
 - Network throughput stable; no stalls observed
 - Backup running via WiFi (Ethernet dongle still not recognized; see Phase 6 notes)
 
-**Next steps:**
+**Snapshot Verification (Critical -- Do Now):**
 
-- Monitor for errors: `log stream --predicate 'process == "backupd"'`
-- Verify snapshot contents (no system file contamination) once complete
-- Confirm auto-restart of hourly backups within 1 hour of completion
+1. **Open in GrandPerspective:**
+
+   ```bash
+   LATEST=$(tmutil latestbackup)
+   open -a GrandPerspective "$LATEST"
+   ```
+
+   Check for `/System`, `/usr`, `/Library`, `/private` with large sizes. If present, snapshot is contaminated.
+
+2. **Or CLI verification:**
+
+   ```bash
+   LATEST=$(tmutil latestbackup)
+   du -sh "$LATEST/System" 2>/dev/null && echo "❌ CONTAMINATED" || echo "✓ OK"
+   du -sh "$LATEST/usr" 2>/dev/null && echo "❌ CONTAMINATED" || echo "✓ OK"
+   du -sh "$LATEST/private" 2>/dev/null && echo "❌ CONTAMINATED" || echo "✓ OK"
+   ```
+
+3. **Decision:**
+   - **If CLEAN:** Monitor next hourly backup; no action needed
+   - **If CONTAMINATED:** Delete snapshot + apply exclusions from [tm-cache-exclusions.md](tm-cache-exclusions.md) + restart backup
 
 ---
 
