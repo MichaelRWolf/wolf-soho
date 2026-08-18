@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-# tm-addexclusions.sh - Interactive batch add Time Machine exclusions
-# Prompts for each path, dry-run by just hitting CR on all prompts
+# tm-addexclusions.sh - Interactive TM exclusion manager with status display
 
 set -euo pipefail
 
-maybe_add_exclusion() {
+manage_exclusion() {
     local path="$1"
 
     # Skip if path doesn't exist
@@ -12,20 +11,74 @@ maybe_add_exclusion() {
         return
     fi
 
+    # Get current status
+    local status
+    status=$(tmutil isexcluded "$path" 2>/dev/null | awk '{print $NF}' || echo "Unknown")
+
     # Get size
     local size
     size=$(du -sh "$path" 2>/dev/null | awk '{print $1}' || echo "?")
 
-    # Prompt user (default: NO)
-    read -p "Add TM exclusion $path ($size)? y/N: " -r response
-    response="${response:-N}"  # Default to N if empty (carriage return)
+    # Display current state
+    printf "%-10s %8s  %s\n" "[$status]" "$size" "$path"
 
-    if [[ "$response" =~ ^[Yy]$ ]]; then
-        echo "  ✓ Adding: $path"
-        tmutil addexclusion -p "$path"
-    else
-        echo "  (skip): $path"
-    fi
+    # Prompt for action (default: Preserve)
+    read -p "  [Preserve]/Toggle/Include/Exclude? (CR=Preserve): " -r response
+    response="${response:-P}"  # Default to Preserve
+
+    case "$response" in
+        [Pp]|"")
+            # Preserve - no action
+            ;;
+        [Tt])
+            # Toggle
+            if [[ "$status" == "Excluded" ]]; then
+                echo "  Will run: tmutil removeexclusion '$path'"
+                read -p "  Confirm? y/N: " -r confirm
+                if [[ "$confirm" =~ ^[Yy]$ ]]; then
+                    tmutil removeexclusion "$path"
+                    echo "  ✓ Removed exclusion"
+                fi
+            else
+                echo "  Will run: tmutil addexclusion -p '$path'"
+                read -p "  Confirm? y/N: " -r confirm
+                if [[ "$confirm" =~ ^[Yy]$ ]]; then
+                    tmutil addexclusion -p "$path"
+                    echo "  ✓ Added exclusion"
+                fi
+            fi
+            ;;
+        [Ii])
+            # Include (exclude from backup)
+            if [[ "$status" != "Excluded" ]]; then
+                echo "  Will run: tmutil addexclusion -p '$path'"
+                read -p "  Confirm? y/N: " -r confirm
+                if [[ "$confirm" =~ ^[Yy]$ ]]; then
+                    tmutil addexclusion -p "$path"
+                    echo "  ✓ Added exclusion"
+                fi
+            else
+                echo "  Already excluded, nothing to do"
+            fi
+            ;;
+        [Ee])
+            # Exclude (include in backup, remove from exclusions)
+            if [[ "$status" == "Excluded" ]]; then
+                echo "  Will run: tmutil removeexclusion '$path'"
+                read -p "  Confirm? y/N: " -r confirm
+                if [[ "$confirm" =~ ^[Yy]$ ]]; then
+                    tmutil removeexclusion "$path"
+                    echo "  ✓ Removed exclusion"
+                fi
+            else
+                echo "  Already included, nothing to do"
+            fi
+            ;;
+        *)
+            echo "  (unknown action)"
+            ;;
+    esac
+    echo ""
 }
 
 declare -a EXCLUSIONS=(
@@ -80,22 +133,13 @@ declare -a EXCLUSIONS=(
 )
 
 echo "=== Time Machine Exclusion Manager ==="
-echo "Tip: Just hit CR on all prompts for a dry-run (shows sizes, adds nothing)"
 echo ""
-
-added=0
-skipped=0
+echo "[Status]   Size     Path"
+echo "─────────────────────────────────────────────────────────"
+echo ""
 
 for path in "${EXCLUSIONS[@]}"; do
-    maybe_add_exclusion "$path"
-    if [[ -e "$path" ]]; then
-        if tmutil isexcluded "$path" 2>/dev/null | grep -q "Excluded"; then
-            added=$((added + 1))
-        else
-            skipped=$((skipped + 1))
-        fi
-    fi
+    manage_exclusion "$path"
 done
 
-echo ""
-echo "Summary: $added exclusions added, $skipped skipped"
+echo "Done."
