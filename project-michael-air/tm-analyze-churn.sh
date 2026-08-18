@@ -24,11 +24,29 @@ echo "Format: BYTES_KB | HUMAN | PATH"
 echo "---"
 echo ""
 
-# High-churn paths (should be 0)
+# High-churn paths (should be 0) — from tm-cache-exclusions.md
 declare -a CHURN=(
-    ".cache" "opt/homebrew" "Library/Caches"
-    ".cache/pip" ".cache/npm" ".cache/uv" ".cache/JetBrains"
-    "Library/Developer/Xcode/DerivedData"
+    # Package managers
+    "opt/homebrew" ".cache/pip" ".cache/npm" ".cache/uv"
+    ".cargo/registry/cache" ".gem/cache" "go/pkg/mod/cache"
+
+    # IDEs & build tools
+    "Library/Developer/Xcode/DerivedData" "Library/Developer/Xcode/Archives"
+    "Library/Caches/Xcode" ".vscode/extensions" ".cache/JetBrains"
+    ".cache/gradle" ".cache/maven"
+
+    # System & app caches
+    "Library/Caches" ".cache" ".cache/chromium" ".cache/fontconfig"
+
+    # Language version managers
+    ".local/share/uv/python" ".pyenv/versions" ".nvm" ".rbenv/versions"
+
+    # Browser caches
+    "Library/Application Support/Google/Chrome/Default/Cache"
+    "Library/Application Support/Arc/User Data/Default/Cache"
+
+    # Development tools
+    ".cache/pre-commit" ".cache/huggingface" ".cache/torch"
 )
 
 # System paths (should be 0)
