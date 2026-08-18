@@ -283,7 +283,9 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 
 ### ⏳ Phase 6: Initial Backup (REVISED -- Fix contamination first)
 
-**Current Destination (2026-08-17 20:13 UTC) -- To Be Removed:**
+**Destination Info Capture (Before & After Recreation)**
+
+BEFORE (2026-08-17 20:13 UTC) -- Contaminated:
 
 ```text
 ====================================================
@@ -293,6 +295,19 @@ URL           : smb://tm-michael-air@192.168.8.129/Backups-TM-Michael-Air
 ID            : 328E8240-40A8-4BF9-919A-E843A5E87E07
 ====================================================
 ```
+
+AFTER (2026-08-17 20:14 UTC) -- Clean (Recreated):
+
+```text
+====================================================
+Name          : Backups-TM-Michael-Air
+Kind          : Network
+URL           : smb://tm-michael-air@192.168.8.129/Backups-TM-Michael-Air
+ID            : 8BF66976-9676-4A79-B701-9098B53CAF16
+====================================================
+```
+
+✓ **VERIFICATION SUCCESSFUL:** URL identical, UUID changed (proves new share)
 
 Pre-backup inspection and cleanup:
 
