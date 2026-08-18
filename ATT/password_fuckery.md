@@ -1,5 +1,11 @@
 # AT&T Loging Fuckery
 
+## Current Incidents
+
+- [2026-08-18_mail-otp-failure.md](./2026-08-18_mail-otp-failure.md) -- OTP SMS not being sent during michael-air Mail.app setup; browser auth blocked; SMK clarification
+
+---
+
 ## Exodus from att.net and Mail.app
 
 ### Email Service Alternatives (You Pay, You're the Customer)
