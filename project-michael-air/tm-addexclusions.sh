@@ -1,8 +1,32 @@
 #!/usr/bin/env bash
-# tm-addexclusions.sh - Batch add Time Machine exclusions
-# Only adds exclusions for paths that exist
+# tm-addexclusions.sh - Interactive batch add Time Machine exclusions
+# Prompts for each path, dry-run by just hitting CR on all prompts
 
 set -euo pipefail
+
+maybe_add_exclusion() {
+    local path="$1"
+
+    # Skip if path doesn't exist
+    if [[ ! -e "$path" ]]; then
+        return
+    fi
+
+    # Get size
+    local size
+    size=$(du -sh "$path" 2>/dev/null | awk '{print $1}' || echo "?")
+
+    # Prompt user (default: NO)
+    read -p "Add TM exclusion $path ($size)? y/N: " -r response
+    response="${response:-N}"  # Default to N if empty (carriage return)
+
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+        echo "  ✓ Adding: $path"
+        tmutil addexclusion -p "$path"
+    else
+        echo "  (skip): $path"
+    fi
+}
 
 declare -a EXCLUSIONS=(
     # Package managers
@@ -55,22 +79,23 @@ declare -a EXCLUSIONS=(
     "$HOME/Library/Application Support/Malwarebytes/MBAM/Db/Update/Installer"
 )
 
-echo "Adding Time Machine exclusions..."
+echo "=== Time Machine Exclusion Manager ==="
+echo "Tip: Just hit CR on all prompts for a dry-run (shows sizes, adds nothing)"
 echo ""
 
 added=0
 skipped=0
 
 for path in "${EXCLUSIONS[@]}"; do
+    maybe_add_exclusion "$path"
     if [[ -e "$path" ]]; then
-        echo "✓ Adding: $path"
-        tmutil addexclusion -p "$path"
-        added=$((added + 1))
-    else
-        echo "  (skip, doesn't exist yet): $path"
-        skipped=$((skipped + 1))
+        if tmutil isexcluded "$path" 2>/dev/null | grep -q "Excluded"; then
+            added=$((added + 1))
+        else
+            skipped=$((skipped + 1))
+        fi
     fi
 done
 
 echo ""
-echo "Summary: $added exclusions added, $skipped skipped (path doesn't exist)"
+echo "Summary: $added exclusions added, $skipped skipped"
