@@ -74,7 +74,9 @@ chsh -s /opt/homebrew/bin/bash
 - ✓ Daylite operational (2026-08-15; login/sync complete 2026-08-18)
 - ✓ Launcher recovery (Quicksilver on Cmd-Space) (2026-08-18)
 - ⏳ Mail.app setup (ATT email: see wolf-soho/ATT/password_fuckery.md for browser/OTP workarounds)
-- ⏳ SSH passwordless access (Beryl, EAN, wolf-air, NAS -- names preferred)
+- ✓ SSH Beryl passwordless access (2026-08-18; working)
+- ⏳ SSH NAS passwordless (key deployment blocked by Synology SSH server -- connection reset during kex; needs investigation or manual setup)
+- ⏳ SSH EAN (device unclear -- not found in CONTEXT.md; clarification needed)
 
 ### Low Priority (Optimization)
 
