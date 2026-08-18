@@ -60,7 +60,7 @@ for path in "${CHURN[@]}"; do
     if [[ -e "$full_path" ]]; then
         bytes=$(du -s "$full_path" 2>/dev/null | awk '{print $1}' | tr -d ' \n' || echo "0")
         bytes=${bytes:-0}
-        human=$(numfmt --to=iec-i --suffix=B "$((bytes * 1024))" 2>/dev/null | sed 's/\([0-9.]\)\([KMGT]i*B\)$/\1 \2/' || printf "%d KB" "$bytes")
+        human=$(numfmt --to=iec-i --unit-separator=' ' --suffix=B "$((bytes * 1024))" 2>/dev/null || printf "%d KB" "$bytes")
         printf "%10d | %9s | %s\n" "$bytes" "$human" "$path"
     fi
 done
@@ -74,7 +74,7 @@ for path in "${SYSTEM[@]}"; do
     if [[ -e "$full_path" ]]; then
         bytes=$(du -s "$full_path" 2>/dev/null | awk '{print $1}' | tr -d ' \n' || echo "0")
         bytes=${bytes:-0}
-        human=$(numfmt --to=iec-i --suffix=B "$((bytes * 1024))" 2>/dev/null | sed 's/\([0-9.]\)\([KMGT]i*B\)$/\1 \2/' || printf "%d KB" "$bytes")
+        human=$(numfmt --to=iec-i --unit-separator=' ' --suffix=B "$((bytes * 1024))" 2>/dev/null || printf "%d KB" "$bytes")
         if (( bytes > 0 )); then
             has_system=1
             total_system=$((total_system + bytes))
