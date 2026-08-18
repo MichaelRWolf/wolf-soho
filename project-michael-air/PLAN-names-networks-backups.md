@@ -283,6 +283,17 @@ du -sh "$LATEST/Applications" 2>/dev/null && echo "CONTAMINATED: /Applications f
 
 ### ⏳ Phase 6: Initial Backup (REVISED -- Fix contamination first)
 
+**Current Destination (2026-08-17 20:13 UTC) -- To Be Removed:**
+
+```text
+====================================================
+Name          : Backups-TM-Michael-Air
+Kind          : Network
+URL           : smb://tm-michael-air@192.168.8.129/Backups-TM-Michael-Air
+ID            : 328E8240-40A8-4BF9-919A-E843A5E87E07
+====================================================
+```
+
 Pre-backup inspection and cleanup:
 
 - [ ] STOP running backup: `tmutil stopbackup`
