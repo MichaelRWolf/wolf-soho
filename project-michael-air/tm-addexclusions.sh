@@ -26,10 +26,11 @@ manage_exclusion() {
     size=$(du -sh "$path" 2>/dev/null | awk '{print $1}' || echo "?")
 
     # Display current state with color based on status
-    local color="$YELLOW"  # Default: yellow for unknown
+    local color
     case "$status" in
         Excluded) color="$RED" ;;      # Red: excluded from backup
         Included) color="$GREEN" ;;    # Green: included in backup
+        *) color="$YELLOW" ;;          # Yellow: unknown/other
     esac
 
     printf "${color}%-10s${NC} %8s  %s\n" "[$status]" "$size" "$path"
