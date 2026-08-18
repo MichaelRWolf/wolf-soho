@@ -71,7 +71,7 @@ chsh -s /opt/homebrew/bin/bash
 
 - ✓ TCC permission matrix created (reference available)
 - ✓ Homebrew packages verified via Brewfile
-- ✓ Daylite operational (2026-08-15+)
+- ✓ Daylite operational (2026-08-15; login/sync complete 2026-08-18)
 - ✓ Launcher recovery (Quicksilver on Cmd-Space)
 
 ### Low Priority (Optimization)
