@@ -23,7 +23,7 @@ manage_exclusion() {
     printf "%-10s %8s  %s\n" "[$status]" "$size" "$path"
 
     # Prompt for action (default: Preserve)
-    read -p "  [Preserve]/Toggle/Include/Exclude? (CR=Preserve): " -r response
+    read -p "  [Preserve]/Toggle? (CR=Preserve): " -r response
     response="${response:-P}"  # Default to Preserve
 
     case "$response" in
@@ -48,34 +48,8 @@ manage_exclusion() {
                 fi
             fi
             ;;
-        [Ii])
-            # Include (exclude from backup)
-            if [[ "$status" != "Excluded" ]]; then
-                echo "  Will run: tmutil addexclusion -p '$path'"
-                read -p "  Confirm? y/N: " -r confirm
-                if [[ "$confirm" =~ ^[Yy]$ ]]; then
-                    tmutil addexclusion -p "$path"
-                    echo "  ✓ Added exclusion"
-                fi
-            else
-                echo "  Already excluded, nothing to do"
-            fi
-            ;;
-        [Ee])
-            # Exclude (include in backup, remove from exclusions)
-            if [[ "$status" == "Excluded" ]]; then
-                echo "  Will run: tmutil removeexclusion '$path'"
-                read -p "  Confirm? y/N: " -r confirm
-                if [[ "$confirm" =~ ^[Yy]$ ]]; then
-                    tmutil removeexclusion "$path"
-                    echo "  ✓ Removed exclusion"
-                fi
-            else
-                echo "  Already included, nothing to do"
-            fi
-            ;;
         *)
-            echo "  (unknown action)"
+            echo "  (invalid response)"
             ;;
     esac
     echo ""
