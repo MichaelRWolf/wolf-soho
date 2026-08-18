@@ -25,7 +25,7 @@ manage_exclusion() {
     local size
     size=$(du -sh "$path" 2>/dev/null | awk '{print $1}' || echo "?")
 
-    # Display current state with color based on status
+    # Display current state, color path based on status
     local color
     case "$status" in
         Excluded) color="$RED" ;;      # Red: excluded from backup
@@ -33,7 +33,7 @@ manage_exclusion() {
         *) color="$YELLOW" ;;          # Yellow: unknown/other
     esac
 
-    printf "${color}%-10s${NC} %8s  %s\n" "[$status]" "$size" "$path"
+    printf "%-10s %8s  ${color}%s${NC}\n" "[$status]" "$size" "$path"
 
     # Prompt for action (default: Preserve)
     read -p "  [Preserve]/Toggle? (CR=Preserve): " -r response
