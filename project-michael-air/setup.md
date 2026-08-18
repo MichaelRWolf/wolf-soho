@@ -72,7 +72,9 @@ chsh -s /opt/homebrew/bin/bash
 - ✓ TCC permission matrix created (reference available)
 - ✓ Homebrew packages verified via Brewfile
 - ✓ Daylite operational (2026-08-15; login/sync complete 2026-08-18)
-- ✓ Launcher recovery (Quicksilver on Cmd-Space)
+- ✓ Launcher recovery (Quicksilver on Cmd-Space) (2026-08-18)
+- ⏳ Mail.app setup (ATT email: see wolf-soho/ATT/password_fuckery.md for browser/OTP workarounds)
+- ⏳ SSH passwordless access (Beryl, EAN, wolf-air, NAS -- names preferred)
 
 ### Low Priority (Optimization)
 
