@@ -4,10 +4,11 @@ BIN_FILES := bin/network_location bin/beryl_sqm bin/networkCurl \
              bin/gitnas-repo-create bin/gitnas-remote-add \
              bin/gitnas-repo-setup bin/gitnas-repo-sync \
              bin/fleet-status bin/git-status-summary \
-             bin/fleet-nas-sync
+             bin/fleet-nas-sync bin/mount-tm-share
 INSTALL_BIN_DIR := $(HOME)/bin
 LAUNCHD_DIR := $(HOME)/Library/LaunchAgents
-LAUNCHD_PLISTS := launchd/com.wolfenterprises.fleet-nas-sync.plist
+LAUNCHD_PLISTS := launchd/com.wolfenterprises.fleet-nas-sync.plist \
+                   launchd/com.wolfenterprises.mount-tm-share.plist
 
 # Uplink commands configuration
 UPLINK_COMMANDS := uplink-describe uplink-org uplink-monitor
@@ -129,6 +130,7 @@ help:
 	@echo ""
 	@echo "launchd agents (install via make install-launchd):"
 	@echo "  fleet-nas-sync      - Daily 16:00 NAS sync; logs to ~/Library/Logs/fleet-nas-sync.log"
+	@echo "  mount-tm-share      - Auto-mount Backups-TM-Michael-Air at login + every 30 min"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make           - Show this help (default)"
