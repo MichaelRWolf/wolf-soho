@@ -81,6 +81,7 @@ chsh -s /opt/homebrew/bin/bash
   - portable-profile: Ethernet adapter interfaces updated
 - ✓ Mail.app setup (ATT email: working; Safari/Chrome deferred) (2026-08-18)
 - ⏳ SSH NAS (Synology kex_exchange error; deferred)
+- ⏳ Photos.app iCloud sync (started 2026-08-28 17:05; Optimize Mac Storage enabled; monitoring 55,606 items)
 
 ### Low Priority (Optimization)
 
