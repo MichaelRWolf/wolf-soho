@@ -1,7 +1,8 @@
 # michael-air: Post-Bringup Disk Pruning Plan
 
-**Status:** 2026-08-29 -- Disk at 95% capacity (233.79 GB / 245.11 GB), need 30+ GB freed  
-**Target:** Bring usable headroom to 50+ GB (20% free) to enable Photos sync and normal operations
+**Status:** 2026-08-29 13:38 -- Disk at 90% capacity (182 GB / 228 GB used), 22 GB free. Pruning in progress.  
+**Target:** Bring usable headroom to 50+ GB (22% free) for stable operations without thrashing  
+**Progress:** 15.8 GB recovered so far (5.8 + 8 + APFS reclamation)
 
 ---
 
@@ -15,7 +16,22 @@ michael-air was restored from michael-pro (water damaged, macOS 15.x) and upgrad
 
 ---
 
-## Immediate Actions (No Risk -- Caches Only)
+## ✅ COMPLETED (2026-08-29)
+
+### ✅ System Junk from /Users/Shared -- 5.8 GB
+
+**Deleted:** Previously Relocated Items (Malwarebytes quarantine), old Address Book 2012, Daylite backups  
+**Result:** 5.8 GB freed
+
+### ✅ Activated_LLC Archive -- 7.8 GB
+
+**Deleted:** Old job files (2018 employment/termination docs)  
+**Result:** 8 GB freed (with APFS reclamation)  
+**Disk status:** 182 GB used, 22 GB free (90%)
+
+---
+
+## Remaining Actions (No Risk -- Caches Only)
 
 ### ✅ 1. Homebrew Cache -- 6.6 GB (SAFE)
 
@@ -309,12 +325,14 @@ df -h /
 
 ## Status Tracking
 
-- [ ] Phase 1 complete
-- [ ] Phase 2 complete
-- [ ] Phase 3 complete
-- [ ] Free space verified (target: 50+ GB / 20%)
-- [ ] Photos sync resumed
-- [ ] iCloud Documents sync resumed (if desired)
+- [x] System junk cleanup (/Users/Shared) -- 5.8 GB freed (2026-08-29)
+- [x] Activated_LLC archive removal -- 8 GB freed (2026-08-29)
+- [ ] Phase 1 caches (Homebrew, Chrome, logs) -- ~17.6 GB available
+- [ ] Scrum_Alliance review -- move or delete? (1.2 GB)
+- [ ] Archive review -- move or delete? (3.4 GB)
+- [ ] Downloads cleanup -- delete old installers (1 GB)
+- [ ] Free space verified (current: 22 GB / 10%; target: 50+ GB / 22%)
+- [ ] Normal operations verified (no disk thrashing at 90%+)
 
 ---
 
