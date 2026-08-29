@@ -330,22 +330,39 @@ df -h /
 
 ---
 
+## System Data Analysis (2026-08-29 14:00)
+
+**Question:** Does 96 GB System Data seem normal?
+
+**Investigation:**
+
+- `/System/Library`: 16 GB (frameworks, fonts, language packs)
+- `/Library`: 9.6 GB (support, Java, Perl, printers, Developer)
+- Caches, logs, hibernation, APFS metadata
+- Xcode Command Line Tools installed (in-use)
+
+**Verdict:** Normal. Post-upgrade M3 Mac with CLT typically 80--100 GB. Not bloated. No actionable reclamation without removing CLT or language packs (not recommended).
+
+---
+
 ## Status Tracking
 
 - [x] System junk cleanup (/Users/Shared) -- 5.8 GB freed (2026-08-29)
 - [x] Activated_LLC archive removal -- 8 GB freed (2026-08-29)
-- [ ] Phase 1 caches (Homebrew, Chrome, logs) -- ~17.6 GB available
-- [ ] Scrum_Alliance review -- move or delete? (1.2 GB)
-- [ ] Archive review -- move or delete? (3.4 GB)
-- [ ] Downloads cleanup -- delete old installers (1 GB)
-- [ ] Free space verified (current: 22 GB / 10%; target: 50+ GB / 22%)
-- [ ] Normal operations verified (no disk thrashing at 90%+)
+- [x] Homebrew cache cleanup -- 2.6 GB freed (2026-08-29)
+- [x] System Data analysis -- confirmed normal, not bloated (2026-08-29)
+- [ ] **NEXT: Messages/Attachments cleanup -- 30 GB (deferred, HIGH PRIORITY)**
+- [ ] **NEXT: Archive review -- 3.4 GB (decide: keep/move/delete)**
+- [ ] Scrum_Alliance review -- 1.2 GB (decide: keep/move/delete)
+- [ ] Downloads cleanup -- ~1 GB (easy, low priority)
+
+**Current state:** 182 GB used, 23 GB free (89%). Suboptimal but functional. Messages/Attachments is the main lever for significant improvement (target: 60 GB free / 26% if cleaned).
 
 ---
 
-## Next Steps
+## Next Steps (Pick Up After Campground)
 
-1. Run Phase 1 immediately (safe, high ROI)
-2. Verify free space reaches 45 GB
-3. Resume Photos.app sync test
-4. Plan Phase 2 after confirming iTunes/Archive needs
+1. **Messages/Attachments** -- 30 GB awaits cleanup (safe to delete, backed by iCloud)
+2. **Archive** -- 3.4 GB, decide if archival or active
+3. **Scrum_Alliance** -- 1.2 GB, archival review
+4. Downloads cleanup -- minor but easy
