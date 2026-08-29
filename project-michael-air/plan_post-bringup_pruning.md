@@ -53,6 +53,12 @@ michael-air was restored from michael-pro (water damaged, macOS 15.x) and upgrad
 
 ## ⏳ Deferred: Archival Data (Review Before Acting)
 
+**Analyze Library breakdown:**
+
+```bash
+for d in ~/Library ~/Library/Messages /Library /System; do echo $d; du -xhd 1 "$d" 2>/dev/null | sort -rh | head -10; echo; done
+```
+
 These are historical/archival, not active work. Decide: keep locally, move to NAS, or delete.
 
 - **Messages/Attachments:** 30 GB (PRIORITY 1 -- iCloud-backed, safe to clean)
