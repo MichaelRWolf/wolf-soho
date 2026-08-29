@@ -101,6 +101,7 @@ These are historical/archival, not active work. Decide: keep locally, move to NA
 ## Next Steps (Pick Up After Campground)
 
 1. **Messages/Attachments** -- 30 GB awaits cleanup (safe to delete, backed by iCloud)
-2. **Archive** -- 3.4 GB, decide if archival or active
-3. **Scrum_Alliance** -- 1.2 GB, archival review
-4. Downloads cleanup -- minor but easy
+2. **iTunes Library** -- 14 GB (CONFIRMED ORPHANED 2026-08-29: Music.app opened, library empty; safe to delete ~/Music/iTunes)
+3. **Archive** -- 3.4 GB, decide if archival or active
+4. **Scrum_Alliance** -- 1.2 GB, archival review
+5. Downloads cleanup -- minor but easy
