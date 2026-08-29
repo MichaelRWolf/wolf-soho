@@ -1,8 +1,8 @@
 # michael-air: Post-Bringup Disk Pruning Plan
 
-**Status:** 2026-08-29 13:38 -- Disk at 90% capacity (182 GB / 228 GB used), 22 GB free. Pruning in progress.  
+**Status:** 2026-08-29 13:52 -- Disk at 89% capacity (181 GB / 228 GB used), 24 GB free. Pruning in progress.  
 **Target:** Bring usable headroom to 50+ GB (22% free) for stable operations without thrashing  
-**Progress:** 15.8 GB recovered so far (5.8 + 8 + APFS reclamation)
+**Progress:** 21.3 GB recovered (5.8 + 8 + 2.6 + APFS reclamation lag)
 
 ---
 
@@ -28,6 +28,13 @@ michael-air was restored from michael-pro (water damaged, macOS 15.x) and upgrad
 **Deleted:** Old job files (2018 employment/termination docs)  
 **Result:** 8 GB freed (with APFS reclamation)  
 **Disk status:** 182 GB used, 22 GB free (90%)
+
+### ✅ Homebrew Cache Cleanup -- 2.7 GB (2026-08-29 13:52)
+
+**Command:** `brew cleanup`  
+**Estimate:** 2.7 GB | **Actual:** 2.6 GB freed  
+**Cache after:** 4.0 GB (was 6.6 GB)  
+**Disk status:** 181 GB used, 24 GB free (89%)
 
 ---
 
