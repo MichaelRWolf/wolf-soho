@@ -9,6 +9,28 @@
 
 ---
 
+## ⚠️ BLOCKING CONSTRAINT: Migration Sequence
+
+**Wendy's migration cannot start until Michael completes his migration.**
+
+**Correct order:**
+
+1. **Michael:** Migrate from michael-air (M3, current, 256GB) → michael-air2 (M3, new, 512GB)
+   - Fresh Time Machine backup created on michael-air (clean M3 source)
+   - Restore to michael-air2 via Migration Assistant
+   - Status: [project-michael-air](../project-michael-air/) tracks this
+
+2. **Wendy:** Migrate from wendy-pro (M2, water damaged) → michael-air (M3, 256GB, renamed to wendy-air)
+   - Michael's current machine becomes Wendy's machine
+   - Wendy restores from her wendy-pro Time Machine backup (NAS)
+   - Rename to `wendy-air` per [CONTEXT.md](../CONTEXT.md)
+
+**Why this order matters:** Michael's migration must complete first so Wendy can adopt michael-air (clean M3 baseline) instead of waiting for a new machine. This avoids Intel artifact contamination and gives both users modern M3 hardware.
+
+**Status:** Awaiting michael-air2 acquisition and Michael's migration start.
+
+---
+
 ## TODO: Network & NAS Configuration
 
 **Before setup, document/confirm the following naming:**
