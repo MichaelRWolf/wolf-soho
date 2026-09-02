@@ -58,13 +58,25 @@ rel_prefix() {
     printf '%s' "$rel"
 }
 
+human_size() {
+    local bytes="$1"
+    awk -v b="$bytes" 'BEGIN {
+        split("B K M G T P", u, " ")
+        v = b; i = 1
+        while (v >= 1024 && i < 6) { v /= 1024; i++ }
+        printf "%.1f%s", v, u[i]
+    }'
+}
+
 rm -rf "$BY_SIZE_DIR"
 mkdir -p "$BY_SIZE_DIR"
 
 REL_PREFIX="$(rel_prefix "$BY_SIZE_DIR/placeholder" "$ATTACHMENTS_DIR")"
 
 declare -A BUCKET_COUNT
+declare -A BUCKET_BYTES
 TOTAL=0
+TOTAL_BYTES=0
 SKIPPED=0
 
 while IFS= read -r -d '' file; do
@@ -96,23 +108,26 @@ while IFS= read -r -d '' file; do
     fi
 
     BUCKET_COUNT["$bucket"]=$((${BUCKET_COUNT["$bucket"]:-0} + 1))
+    BUCKET_BYTES["$bucket"]=$((${BUCKET_BYTES["$bucket"]:-0} + size))
     ((TOTAL++))
+    ((TOTAL_BYTES += size))
 done < <(find "$ATTACHMENTS_DIR" -type f -print0)
 
 echo ""
 echo "=== Summary ==="
+printf '%-8s %8s %10s\n' "BUCKET" "COUNT" "SIZE"
 for ((i = 0; i < ${#THRESH_LABEL[@]}; i++)); do
     label="${THRESH_LABEL[$i]}"
     count="${BUCKET_COUNT[$label]:-0}"
     if ((count > 0)); then
-        echo "$label: $count"
+        printf '%-8s %8d %10s\n' "$label" "$count" "$(human_size "${BUCKET_BYTES[$label]:-0}")"
     fi
 done
 zero_count="${BUCKET_COUNT["0M+"]:-0}"
 if ((zero_count > 0)); then
-    echo "0M+: $zero_count"
+    printf '%-8s %8d %10s\n' "0M+" "$zero_count" "$(human_size "${BUCKET_BYTES["0M+"]:-0}")"
 fi
-echo "Total: $TOTAL files"
+printf '%-8s %8d %10s\n' "TOTAL" "$TOTAL" "$(human_size "$TOTAL_BYTES")"
 if ((SKIPPED > 0)); then
     echo "Skipped: $SKIPPED files (see warnings above)"
 fi
