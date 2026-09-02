@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+# Build a size-bucketed tree of relative symlinks into ~/Library/Messages/Attachments
+# so large attachments can be reviewed by opening a single folder.
+
+set -uo pipefail
+
+ATTACHMENTS_DIR="$HOME/Library/Messages/Attachments"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BY_SIZE_DIR="$SCRIPT_DIR/messages_attachments/by_size"
+MAX_NAME_BYTES=255
+
+# Ordered (descending) size thresholds: 100P,10P,1P,100T,10T,1T,100G,10G,1G,100M,10M,1M
+UNITS=(M G T P)
+MULTS=(100 10 1)
+THRESH_BYTES=()
+THRESH_LABEL=()
+for ((ui = ${#UNITS[@]} - 1; ui >= 0; ui--)); do
+    exp=$((ui + 2))
+    base=$((1024 ** exp))
+    for mult in "${MULTS[@]}"; do
+        THRESH_BYTES+=("$((base * mult))")
+        THRESH_LABEL+=("${mult}${UNITS[$ui]}+")
+    done
+done
+
+classify_bucket() {
+    local size="$1"
+    local i
+    for ((i = 0; i < ${#THRESH_BYTES[@]}; i++)); do
+        if ((size >= THRESH_BYTES[i])); then
+            printf '%s' "${THRESH_LABEL[$i]}"
+            return
+        fi
+    done
+    printf '0M+'
+}
+
+# Relative path prefix from any bucket dir (all sit at the same depth under
+# BY_SIZE_DIR) up to the common ancestor with ATTACHMENTS_DIR, then back down.
+rel_prefix() {
+    local from="$1" to="$2"
+    local -a from_parts to_parts
+    IFS='/' read -r -a from_parts <<<"$from"
+    IFS='/' read -r -a to_parts <<<"$to"
+    local i=0
+    while [[ $i -lt ${#from_parts[@]} && $i -lt ${#to_parts[@]} && "${from_parts[$i]}" == "${to_parts[$i]}" ]]; do
+        ((i++))
+    done
+    local up=$((${#from_parts[@]} - i))
+    local rel=""
+    local k
+    for ((k = 0; k < up; k++)); do
+        rel+="../"
+    done
+    for ((k = i; k < ${#to_parts[@]}; k++)); do
+        rel+="${to_parts[$k]}/"
+    done
+    printf '%s' "$rel"
+}
+
+rm -rf "$BY_SIZE_DIR"
+mkdir -p "$BY_SIZE_DIR"
+
+REL_PREFIX="$(rel_prefix "$BY_SIZE_DIR/placeholder" "$ATTACHMENTS_DIR")"
+
+declare -A BUCKET_COUNT
+TOTAL=0
+SKIPPED=0
+
+while IFS= read -r -d '' file; do
+    size="$(stat -f%z "$file")"
+    bucket="$(classify_bucket "$size")"
+    subpath="${file#"$ATTACHMENTS_DIR"/}"
+    encoded="${subpath//\//__}"
+
+    name_bytes="$(printf '%s' "$encoded" | wc -c | tr -d ' ')"
+    if ((name_bytes > MAX_NAME_BYTES)); then
+        echo "SKIP (encoded name exceeds ${MAX_NAME_BYTES} bytes): $file" >&2
+        ((SKIPPED++))
+        continue
+    fi
+
+    bucket_dir="$BY_SIZE_DIR/$bucket"
+    mkdir -p "$bucket_dir"
+    link_path="$bucket_dir/$encoded"
+    target="${REL_PREFIX}${subpath}"
+
+    if ! ln -s "$target" "$link_path" 2>/dev/null; then
+        echo "SKIP (ln -s failed): $file" >&2
+        ((SKIPPED++))
+        continue
+    fi
+
+    if ! touch -h -r "$file" "$link_path" 2>/dev/null; then
+        echo "WARN (could not set symlink mtime): $file" >&2
+    fi
+
+    BUCKET_COUNT["$bucket"]=$((${BUCKET_COUNT["$bucket"]:-0} + 1))
+    ((TOTAL++))
+done < <(find "$ATTACHMENTS_DIR" -type f -print0)
+
+echo ""
+echo "=== Summary ==="
+for ((i = 0; i < ${#THRESH_LABEL[@]}; i++)); do
+    label="${THRESH_LABEL[$i]}"
+    count="${BUCKET_COUNT[$label]:-0}"
+    if ((count > 0)); then
+        echo "$label: $count"
+    fi
+done
+zero_count="${BUCKET_COUNT["0M+"]:-0}"
+if ((zero_count > 0)); then
+    echo "0M+: $zero_count"
+fi
+echo "Total: $TOTAL files"
+if ((SKIPPED > 0)); then
+    echo "Skipped: $SKIPPED files (see warnings above)"
+fi
