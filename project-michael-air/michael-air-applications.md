@@ -54,10 +54,7 @@
 
 ### Code & Snippets
 
-| Application | Size   | Version | Last Modified | Source/Notes                 |
-|-------------|--------|---------|---------------|------------------------------|
-| Pieces OS   | 2.9 GB | 12.6.2  | 2026-09-18    | Code snippet manager (large) |
-| Pieces      | 297 MB | 6.1.0   | 2026-07-29    | Pieces companion app         |
+(None currently installed)
 
 ### Media & Reading
 
@@ -67,13 +64,22 @@
 
 ---
 
+## Removed / Cleaned (2026-09-28)
+
+| Application | Size   | Version | Removed    | Reason                                                       |
+|-------------|--------|---------|------------|--------------------------------------------------------------|
+| Pieces OS   | 2.9 GB | 12.6.2  | 2026-09-28 | Bloat; disabled in Brewfile 2026-09-18; unneeded (issue #13) |
+| Pieces      | 297 MB | 6.1.0   | 2026-09-28 | Bloat; disabled in Brewfile 2026-09-18; unneeded (issue #13) |
+
+---
+
 ## Summary
 
-| Metric               |  Count | Total Size |
-|----------------------|-------:|------------|
-| System apps          |      1 | (built-in) |
-| Personally installed |     21 | ~10 GB     |
-| **TOTAL**            | **22** | **~10 GB** |
+| Metric               |  Count | Total Size  |
+|----------------------|-------:|-------------|
+| System apps          |      1 | (built-in)  |
+| Personally installed |     19 | ~7.1 GB     |
+| **TOTAL**            | **20** | **~7.1 GB** |
 
 ---
 
@@ -113,7 +119,6 @@
    - **Direct downloads:** Check official download pages (no auto-update)
    - **CLI tools:** Check portable-profile repo and Makefile
 3. **Large apps to reconsider:**
-   - Pieces OS (2.9 GB) + Pieces (297 MB) -- Could use simpler snippet tool
    - ChatGPT (1.3 GB) -- Overlap with Claude Code CLI
    - Discord (479 MB) -- Web version often sufficient
 
