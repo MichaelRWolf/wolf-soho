@@ -40,9 +40,11 @@
 
 ### Current Spec Requirements
 
-**Machine:** M3 MacBook Air, 16GB RAM, **512GB preferred** (256GB fallback), Open Box or Very Good Refurb, **30-day returns required**.
+**Machine:** M3 MacBook Air, 16GB RAM, **512GB required** (video production workload), Open Box or Very Good Refurb, **30-day returns required**.
 
-**Price target:** $750-$900.
+**Rationale for 512GB:** wendy-pro had 256GB baseline (2022 M2). Video production scratch files + local project data need headroom. 512GB is non-negotiable.
+
+**Price target:** $800-$900.
 
 ---
 
@@ -55,31 +57,31 @@
 | Factor         | Value                         |
 |----------------|-------------------------------|
 | Price          | $764.99                       |
-| Specs          | M3 16GB 512GB                 |
+| Specs          | M3 16GB 512GB ✅               |
 | Condition      | Used (71 cycles, barely used) |
 | Returns        | ❌ **NO** (Risk)               |
-| Recommendation | ⚠️ **SKIP**                   |
+| Recommendation | ⚠️ **RISKY; SKIP**            |
 
-**Why:** Specs perfect, but no-return policy conflicts with "don't cheap out on Wendy." If machine arrives with defect, stuck with it.
+**Why:** Specs match (512GB required), but no-return policy is disqualifying. "Don't cheap out on Wendy" means protection, not just storage.
 
-**Mitigation:** Could add Allstate 1-year warranty ($74.99) → total $839.99 (still cheaper than #44), but not the same as free returns.
+**Mitigation rejected:** Allstate warranty ($74.99) doesn't replace free returns. If defect arrives, Wendy is stuck without recourse.
 
 ---
 
-#### #43 -- gadgetpickup M3 Open Box 256GB (Fallback Only)
+#### #43 -- gadgetpickup M3 Open Box 256GB (Below Spec -- Don't Use)
 
 **Link:** [eBay #307108920696](https://www.ebay.com/itm/307108920696) -- Purchased 2026-08-10 (Michael's machine, out of stock)
 
-| Factor         | Value                                |
-|----------------|--------------------------------------|
-| Price          | $749.99                              |
-| Specs          | M3 16GB **256GB**                    |
-| Condition      | Open Box (new)                       |
-| Returns        | ✅ **Free 30-day**                    |
-| Warranty       | 1-year included                      |
-| Recommendation | ⚠️ **Fallback if 512GB unavailable** |
+| Factor         | Value                  |
+|----------------|------------------------|
+| Price          | $749.99                |
+| Specs          | M3 16GB **256GB** ❌    |
+| Condition      | Open Box (new)         |
+| Returns        | ✅ **Free 30-day**      |
+| Warranty       | 1-year included        |
+| Recommendation | ❌ **Below spec; skip** |
 
-**Why:** Same trusted seller (gadgetpickup) as Michael's #43. But 256GB is tight for video production. Use only if 512GB unavailable.
+**Why:** 256GB is below the 512GB requirement for video production. Same trusted seller (gadgetpickup), but storage shortfall is disqualifying. Do not use as fallback.
 
 ---
 
@@ -120,13 +122,14 @@ When you find M3 16GB 512GB options, add them with date and link:
 
 ## Decision Rules
 
-| Condition                        | Action                                      |
-|----------------------------------|---------------------------------------------|
-| **M3 16GB 512GB + free returns** | 🟢 **BUY** (match)                          |
-| **M3 16GB 256GB + free returns** | 🟡 **ACCEPTABLE** (fallback, tight storage) |
-| **M3 16GB 512GB, no returns**    | 🔴 **SKIP** (risk too high)                 |
-| **M2 anything**                  | 🔴 **SKIP** (spec outdated)                 |
-| **M3 8GB anything**              | 🔴 **SKIP** (insufficient RAM)              |
+| Condition                        | Action                                 |
+|----------------------------------|----------------------------------------|
+| **M3 16GB 512GB + free returns** | 🟢 **BUY** (exact match)               |
+| **M3 16GB 256GB + free returns** | 🔴 **SKIP** (below 512GB requirement)  |
+| **M3 16GB 512GB, no returns**    | 🔴 **SKIP** (return risk too high)     |
+| **M2 anything**                  | 🔴 **SKIP** (outdated chip)            |
+| **M3 8GB anything**              | 🔴 **SKIP** (insufficient RAM)         |
+| **M4+ 16GB 512GB**               | 🟡 **ACCEPTABLE** (overkill but works) |
 
 ---
 
