@@ -304,6 +304,8 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 
 ## Wendy Air Candidates Summary (Updated: Oct 2026)
 
+📄 **See [shopping_wendy.md](shopping_wendy.md) for detailed Wendy-specific hunting guide.**
+
 ### Status: #44 SOLD OUT (gadgetpickup M3 512GB)
 
 ~~#44 was ideal (Open Box, 30-day returns, 512GB, $850) but sold.~~ **NEED NEW M3 16GB 512GB LISTING.**
