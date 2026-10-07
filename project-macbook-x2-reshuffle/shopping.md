@@ -31,17 +31,17 @@
 
 **Primary workload:** Safari browser with 10-50+ concurrent tabs + SaaS web services (ChatGPT, Sheets, Docs, MailChimp, webmail).
 
-| Requirement         | Must-have | Details                                                             |
-|---------------------|-----------|---------------------------------------------------------------------|
-| **CPU**             | ANY       | CPU is NOT the bottleneck; M2/M3/M4 all sufficient for web browsing |
-| **RAM**             | 16GB      | **CRITICAL.** Safari tab management requires 16GB minimum           |
-| **Storage**         | 256GB+    | SaaS data lives in cloud; local storage is minimal need             |
-| **macOS**           | Tahoe+    | Monterey acceptable short-term (EOL mid-2026); prefer Tahoe/Sonoma  |
-| **Display quality** | 1080p+    | For streaming video (Amazon Prime) and web browsing clarity         |
-| **Video codec**     | 1080p+    | Streaming playback support (H.264, VP9)                             |
-| **Battery health**  | >80%      | For used/refurbished; confirm cycle count                           |
-| **Activation Lock** | Clean     | Must be free of MDM enrollment                                      |
-| **Warranty**        | Preferred | 1-year+ coverage; return policy valuable for peace of mind          |
+| Requirement         | Must-have | Details                                                              |
+|---------------------|-----------|----------------------------------------------------------------------|
+| **CPU**             | M3+       | **M3 minimum** (M2 no longer available; M4+ acceptable but overkill) |
+| **RAM**             | 16GB      | **CRITICAL.** Safari tab management requires 16GB minimum            |
+| **Storage**         | 256GB+    | SaaS data lives in cloud; local storage is minimal need              |
+| **macOS**           | Tahoe+    | Monterey acceptable short-term (EOL mid-2026); prefer Tahoe/Sonoma   |
+| **Display quality** | 1080p+    | For streaming video (Amazon Prime) and web browsing clarity          |
+| **Video codec**     | 1080p+    | Streaming playback support (H.264, VP9)                              |
+| **Battery health**  | >80%      | For used/refurbished; confirm cycle count                            |
+| **Activation Lock** | Clean     | Must be free of MDM enrollment                                       |
+| **Warranty**        | Preferred | 1-year+ coverage; return policy valuable for peace of mind           |
 
 **Why these matter:** RAM is the limiter for 50+ Safari tabs. CPU is irrelevant (cloud-first user). Display quality for video streaming and web comfort. Battery health ensures machine doesn't fail mid-day.
 
@@ -63,7 +63,12 @@
 | M4                                           | 2024 | +15% speed; overkill for light development; cost jump                |
 | M5                                           | 2025 | +20% speed; longest OS support; expensive; not needed                |
 
-**Practical takeaway:** M3 is the sweet spot for Michael (git + Claude Code). M2 acceptable if found cheap. Intel (wolf-air/michael-pro) = risky (aging, thermal issues). M4/M5 = wasted performance for your use case.
+**Practical takeaway:**
+
+- M3 is the sweet spot for Michael (git + Claude Code).
+- M2 acceptable if found cheap.
+- Intel (wolf-air/michael-pro) = risky (aging, thermal issues).
+- M4/M5 = wasted performance for your use case.
 
 ---
 
@@ -139,17 +144,18 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 
 ### Quick Comparison (Candidates)
 
-| #       | Offering          | CPU + Model + Screen   |   RAM |   Disk |   Price | OS/EOL          | Video        | Batt   | MDM   | Cond          | Status              |
-|---------|-------------------|------------------------|------:|-------:|--------:|-----------------|--------------|--------|-------|---------------|---------------------|
-| 0       | wolf-air          | i5 1.8 dual            |     8 |    128 |         | Monterey/2026   | 1440×900     | 630    | No    | Good          | Interim (Shared)    |
-| 0       | michael-pro       | i5 2.0 quad            |    16 |    256 |         | Sequoia/2027    | Retina       | 150%   | No    | Damaged       | Water damage        |
-| 0       | wendy-pro         | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina       | ???    | No    | Abandoned     | Water damage        |
-| ------- | --------------    | ---------------------- | ----: | -----: | ------: | --------------- | ------------ | ------ | ----- | ------------- | ------------------- |
-| ~~1~~   | ~~#1 (archived)~~ | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+       | ???    | ???   | eBay Refurb   | Awaiting reply      |
-| ~~2~~   | ~~#2 (archived)~~ | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+       | ???    | ???   | F5 Refurb     | Negotiable; risky   |
-| 3       | #3                | M3 Air 13              |    16 |    ??? |     777 | Sonoma/2028     | 1080p+       | ???    | ???   | ???           | Out of stock        |
-| 43      | #43               | M3 Air 13              |    16 |    256 |     750 | Sonoma/2028     | 2560×1600    | ???    | ???   | Open Box      | ✅ PURCHASED         |
-| 44      | #44               | M3 Air 13              |    16 |    512 |     850 | Sequoia/2027    | 2560×1664    | ???    | ???   | Open Box      | Buy It Now          |
+| #       | Offering          | CPU + Model + Screen   |   RAM |   Disk |   Price | OS/EOL          | Video        | Batt   | MDM   | Cond          | Status                |
+|---------|-------------------|------------------------|------:|-------:|--------:|-----------------|--------------|--------|-------|---------------|-----------------------|
+| 0       | wolf-air          | i5 1.8 dual            |     8 |    128 |         | Monterey/2026   | 1440×900     | 630    | No    | Good          | Interim (Shared)      |
+| 0       | michael-pro       | i5 2.0 quad            |    16 |    256 |         | Sequoia/2027    | Retina       | 150%   | No    | Damaged       | Water damage          |
+| 0       | wendy-pro         | M2 (8-core)            |     8 |    256 |         | Sequoia/2027    | Retina       | ???    | No    | Abandoned     | Water damage          |
+| ------- | --------------    | ---------------------- | ----: | -----: | ------: | --------------- | ------------ | ------ | ----- | ------------- | -------------------   |
+| ~~1~~   | ~~#1 (archived)~~ | M2 Air 13              |    16 |    512 |     615 | Sonoma/2028     | 1080p+       | ???    | ???   | eBay Refurb   | Awaiting reply        |
+| ~~2~~   | ~~#2 (archived)~~ | M2 Air 13              |     8 |    512 |     550 | Sonoma/2028     | 1080p+       | ???    | ???   | F5 Refurb     | Negotiable; risky     |
+| 3       | #3                | M3 Air 13              |    16 |    ??? |     777 | Sonoma/2028     | 1080p+       | ???    | ???   | ???           | Out of stock          |
+| 43      | #43               | M3 Air 13              |    16 |    256 |     750 | Sonoma/2028     | 2560×1600    | ???    | ???   | Open Box      | ✅ PURCHASED (Michael) |
+| ~~44~~  | ~~#44 (gone)~~    | M3 Air 13              |    16 |    512 |     850 | Sequoia/2027    | 2560×1664    | ???    | ???   | Open Box      | ~~SOLD~~ (Oct 2026)   |
+| 49      | #49               | M3 Air 13              |    16 |    512 |     765 | Sonoma/2028     | 2560×1600    | 71     | No    | Used          | Jarts (⚠️ No returns) |
 
 ---
 
@@ -198,7 +204,7 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 
 **Status:** PURCHASED 2026-08-10; Order: [24-14983-18990](https://order.ebay.com/ord/show?orderId=24-14983-18990&purchaseOrderId=24-1498-318989#/); Tracking: 1Z1R96V24298428353
 
-- **Link:** [eBay Listing #307108920696](https://www.ebay.com/itm/307108920696)
+- **Link:** [eBay Listing #307108920696](https://www.ebay.com/itm/307108920696) -- Found 2026-08-05, purchased 2026-08-10
 - **Seller:** gadgetpickup (99.9% positive, 17.4K ratings)
 - **Price:** $749.99
 - **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 256GB SSD, Space Gray
@@ -212,11 +218,11 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 
 ---
 
-### #44 --- gadgetpickup M3 Open Box 512GB (🟢 AVAILABLE NOW)
+### #44 --- gadgetpickup M3 Open Box 512GB (~~✅ SOLD~~)
 
-**Status:** Active listing; same seller as #43
+**Status:** SOLD OUT as of 2026-10-07
 
-- **Link:** [eBay Listing #307108922937](https://www.ebay.com/itm/307108922937)
+- **Link:** [eBay Listing #307108922937](https://www.ebay.com/itm/307108922937) -- Listed 2026-08-05, sold by 2026-10-07
 - **Seller:** gadgetpickup (99.9% positive, 17.4K ratings) -- same top-tier seller as #43
 - **Price:** $849.99
 - **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 512GB SSD, Space Gray
@@ -225,11 +231,34 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 - **Display:** 13 in, 2560 × 1664
 - **GPU:** Apple 10-Core (M3)
 - **Returns:** Free 30-day returns
-- **Warranty:** None stated (but Open Box condition = effectively new hardware)
+- **Warranty:** 1-year Allstate Protection Plan included
 - **Assessment:** ✅ Excellent alternative to #43. Same seller, same M3 16GB, but double storage (512GB vs 256GB) for $100 more.
-- **Storage tradeoff:** 256GB (#43) is sufficient for Michael (cloud-first user, code repos remote); 512GB (#44) adds peace-of-mind margin.
+- **Storage tradeoff:** 256GB (#43) is sufficient for Michael (cloud-first user, code repos remote); 512GB (#44) adds peace-of-mind margin for video production.
 - **Fit for Michael:** ✅ **EXCELLENT** --- M3 + 16GB RAM + 512GB storage. Premium option if storage peace-of-mind matters.
-- **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM + 512GB storage; modern M3 future-proofed through 2030.
+- **Fit for Wendy:** ✅ **EXCELLENT** --- 16GB RAM + 512GB storage for video production; modern M3 future-proofed through 2030. **RECOMMENDED** (trusted seller, free returns, ample storage for video work).
+
+---
+
+### #49 --- Jarts Auto Parts M3 Used 512GB (⚠️ NO RETURNS RISK)
+
+**Status:** Active listing as of 2026-10-07; used but barely used condition
+
+- **Link:** [eBay Listing #257772522540](https://www.ebay.com/itm/257772522540) -- Found 2026-10-07
+- **Seller:** Jarts Auto Parts (186 feedback, 100% positive)
+- **Price:** $764.99 (was $899.99, 15% off)
+- **Machine:** Apple MacBook Air (13-inch, M3, 2024 model A3113), 16GB RAM, 512GB SSD, Silver
+- **Condition:** Used (Barely used; 71 cycle count on battery = practically new)
+- **OS:** macOS Sonoma
+- **Display:** 13 in, 2560 × 1600
+- **GPU:** Apple 10-Core (M3)
+- **Battery health:** 71 cycles, "Normal" condition (excellent; <100 cycles is like-new)
+- **Returns:** ❌ **SELLER DOES NOT ACCEPT RETURNS** (Risk factor)
+- **Warranty:** Optional Allstate 1-year plan available ($74.99 extra)
+- **Location:** Riverside, California
+- **Shipping:** $16.98 USPS to Michigan
+- **Assessment:** ✅ Specs are perfect (M3 16GB 512GB). Price is good ($765 vs $850 for #44). BUT **no return policy is a significant risk**. If machine has hidden issues, Wendy is stuck.
+- **Risk mitigation:** Could purchase Allstate 1-year warranty ($74.99) to reach $839.98 total (still cheaper than #44 but adds protection).
+- **Fit for Wendy:** ⚠️ **CAUTION** --- Specs excellent, but no-returns policy conflicts with "don't cheap out on Wendy" principle. Consider #44 (same specs, trusted seller, 30-day free returns) instead.
 
 ---
 
@@ -259,14 +288,76 @@ When did 1080p+ become standard for MacBook Air? And what do these resolutions m
 - ⏳ Waiting for restock
 - **Action:** Fallback if #43/#44 sell out.
 
-**For Michael:** #43 (lowest price, 256GB sufficient) is best value. #44 (512GB) if storage peace-of-mind matters.
+**For Michael:** #43 ✅ PURCHASED (M3 16GB 256GB, $750).
 
-**For Wendy:** Both #43 and #44 excellent (16GB RAM + M3 future-proofing through 2030).
+**For Wendy:** ⏳ **HUNTING M3 16GB 512GB** -- #44 sold out. Options: #49 (risky no-returns) or #43 (fallback, tight storage). **Need new trusted seller with free returns.**
 
-**Next steps:**
+**Next steps (Oct 2026 update):**
 
-1. **Priority:** Monitor #43 (gadgetpickup 256GB @ $750) daily -- lowest price, Open Box stock rotates
-2. **Alternative:** #44 (gadgetpickup 512GB @ $850) -- same trusted seller, double storage
-3. **Before purchase:** Ask seller for MagSafe 3 adapter (don't accept USB adapter shown in photo)
-4. **Verify:** Battery cycle count (<50 for never-used Open Box) + Activation Lock (must be clean)
-5. **Fallback:** If both gadgetpickup listings sell, check #3 for restock or shopping-2026-08-05T14:55.md for refurb options (#45 @ $805)
+1. **Wendy hunting:** Search eBay for M3 16GB 512GB (no M2, no M1) with free returns
+2. **Target sellers:** gadgetpickup (if #44 restocks), reviveit.io, itsworthmore, eBay Refurbished dealers
+3. **When purchasing:** Verify battery cycle count (<200 for refurb, <50 for Open Box), confirm Activation Lock is clean
+4. **Ask seller:** Confirm return policy (30+ days free returns preferred), battery health status, included warranty
+5. **Fallback:** If only 256GB available, use #43 (gadgetpickup Open Box); acceptable but tight for video production
+
+---
+
+## Wendy Air Candidates Summary (Updated: Oct 2026)
+
+### Status: #44 SOLD OUT (gadgetpickup M3 512GB)
+
+~~#44 was ideal (Open Box, 30-day returns, 512GB, $850) but sold.~~ **NEED NEW M3 16GB 512GB LISTING.**
+
+---
+
+### Current Requirement: M3 ONLY (No M2)
+
+**Wendy's machine:** M3 MacBook Air, 16GB RAM, **512GB preferred** (256GB fallback), Open Box or Very Good Refurb, **30-day returns required**.
+
+**Price target:** $750-$900.
+
+---
+
+### Available Options
+
+#### #49 -- Jarts Auto Parts M3 Used 512GB ⚠️ (No Returns)
+
+**Link:** [eBay #257772522540](https://www.ebay.com/itm/257772522540) -- Found 2026-10-07
+
+| Factor         | Value                         |
+|----------------|-------------------------------|
+| Price          | $764.99                       |
+| Specs          | M3 16GB 512GB                 |
+| Condition      | Used (71 cycles, barely used) |
+| Returns        | ❌ **NO** (Risk)               |
+| Recommendation | ⚠️ **SKIP**                   |
+
+**Why:** Specs perfect, but no-return policy conflicts with "don't cheap out on Wendy."
+
+---
+
+#### #43 -- gadgetpickup M3 Open Box 256GB (Fallback Only)
+
+**Link:** [eBay #307108920696](https://www.ebay.com/itm/307108920696) -- Purchased 2026-08-10 (Michael's machine, out of stock).
+
+| Factor         | Value                                |
+|----------------|--------------------------------------|
+| Price          | $749.99                              |
+| Specs          | M3 16GB **256GB**                    |
+| Condition      | Open Box (new)                       |
+| Returns        | ✅ **Free 30-day**                    |
+| Recommendation | ⚠️ **Fallback if 512GB unavailable** |
+
+**Why:** Same trusted seller as Michael's. But storage tight for video production.
+
+---
+
+### Hunt New M3 16GB 512GB Listings
+
+**Search:** `M3 MacBook Air 16GB 512GB -M2 -M1`
+
+**Target sellers:** gadgetpickup (proven), reviveit.io (Very Good refurb), itsworthmore (refurb tested)
+
+**Must-have:** Free returns (30+ days), 1-year warranty preferred, battery cycle count <200.
+
+**Add any new M3 512GB finds below with direct eBay links.**
