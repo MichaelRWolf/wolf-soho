@@ -23,22 +23,27 @@
 - **Applications/** -- Skip (reinstall fresh on new machine)
 - **bin/, sbin/, Michael/, tmp/** -- Config/system stuff (skip most)
 
-**Estimated sizes (actual content, not metadata):**
+**Actual sizes (measured 2026-10-07 via du -sh):**
 
-- Library: ~10-20GB (Mail, prefs, Keychain)
-- Documents: ~5-10GB
-- Downloads-precious: ~2-5GB
-- Desktop: <1GB
-- Pictures/photos: ~10-20GB
-- Movies/Music: ~0-2GB
-- **Total estimate: 40-60GB**
+| Directory          | Size      | Contents                        |
+|--------------------|-----------|---------------------------------|
+| Library            | 33G       | Mail, Keychain, prefs, app data |
+| Documents          | 1.1G      | Work files                      |
+| Pictures           | 1.2G      | Photo library                   |
+| fb pics 2010       | 1.7G      | Photo archive                   |
+| Desktop            | 431M      | Desktop files                   |
+| Downloads-precious | 60K       | Saved downloads                 |
+| **TOTAL**          | **37.5G** | Ready to restore                |
+
+Movies/Music: Empty or minimal (not measured)
 
 **Storage budget on new 512GB MBA:**
 
 - macOS Sonoma: ~20GB
 - Applications (fresh): ~30GB
-- Free space headroom: ~100GB (10GB per major app category)
-- **Available for restore: ~360GB** ✅ Comfortable
+- Restore: 37.5GB (Library + Documents + Pictures + Desktop + Downloads-precious)
+- **Total used: ~87.5GB**
+- **Free space available: ~424GB** ✅ Excellent (plenty of headroom for video work)
 
 ---
 
@@ -146,18 +151,17 @@ hdiutil eject /Volumes/Time\ Machine\ Backups/
 
 ## Space Accounting
 
-| Component                                  | Size      | Notes                                |
-|--------------------------------------------|-----------|--------------------------------------|
-| macOS Sonoma (clean install)               | 20GB      | Baseline                             |
-| App Store apps (Mail, Safari, Notes, etc.) | 10GB      | Pre-installed; minimal               |
-| Restore: Library/                          | 15GB      | Mail, Keychain, prefs                |
-| Restore: Documents/                        | 8GB       | Work files                           |
-| Restore: Downloads-precious/               | 3GB       | Important files                      |
-| Restore: Desktop/                          | 1GB       | Desktop files                        |
-| Restore: Pictures/ (optional)              | 15GB      | Photo archives                       |
-| **Subtotal (without Pictures)**            | **57GB**  | ✅ Safe                               |
-| **With Pictures**                          | **72GB**  | ✅ Still safe                         |
-| **Free space after**                       | **440GB** | Headroom for video projects, exports |
+| Component                    | Size       | Notes                                 |
+|------------------------------|------------|---------------------------------------|
+| macOS Sonoma (clean install) | 20GB       | Baseline                              |
+| App Store apps (Mail, etc.)  | 10GB       | Pre-installed; minimal                |
+| Restore: Library/            | 33G        | Mail, Keychain, prefs, app data       |
+| Restore: Documents/          | 1.1G       | Work files                            |
+| Restore: Desktop/            | 431M       | Desktop files                         |
+| Restore: Downloads-precious/ | 60K        | Saved downloads                       |
+| Restore: Pictures/ + fb pics | 2.9G       | Photo archives (1.2G + 1.7G)          |
+| **Total used**               | **~87.5G** | ✅ Safe                                |
+| **Free space remaining**     | **~424GB** | Excellent headroom for video projects |
 
 ---
 
