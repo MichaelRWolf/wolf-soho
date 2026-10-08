@@ -57,6 +57,18 @@ wendy    -- everywhere (Mac + NAS)
 - No mental translation layer (`michael` vs `michaelrwolf`)
 - Muscle memory stays simple
 
+### UID consistency
+
+| Account | UID | Machines confirmed    |
+|---------|-----|-----------------------|
+| michael | 506 | wolf-air, michael-air |
+| wendy   | 501 | wolf-air, michael-air |
+
+Convention: assign new Mac accounts for michael/wendy with these explicit UIDs
+(`sysadminctl -addUser ... -UID <n>`), not the GUI's auto-assigned next-available UID.
+Prevents file-ownership mismatches when exchanging files or restoring backups between
+machines where everyone independently landed on UID 501.
+
 ---
 
 ## Service Accounts

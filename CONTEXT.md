@@ -60,14 +60,14 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Computing Devices
 
-| Name             | Device                                    | Status                   |
-|------------------|-------------------------------------------|--------------------------|
-| `michael-air`    | MacBook Air (M3, 2024, 16GB/256GB)        | Primary (since 2026-08)  |
-| `michael-pro`    | MacBook Pro 13" (2020, A2251, 16GB/512GB) | Water damaged 2026-06    |
-| `wendy-pro`      | MacBook Pro (Wendy's)                     | Water damaged 2026-08    |
-| `wolf-air`       | MacBook Air                               | Backup for Michael/Wendy |
-| `michael-iphone` | iPhone (Michael's)                        |                          |
-| `wendy-iphone`   | iPhone (Wendy's)                          |                          |
+| Name             | Device                                    | Status                                                                            |
+|------------------|-------------------------------------------|-----------------------------------------------------------------------------------|
+| `michael-air`    | MacBook Air (M3, 2024, 16GB/256GB)        | Primary (since 2026-08); +wendy login (UID 501, admin, interim pending wendy-air) |
+| `michael-pro`    | MacBook Pro 13" (2020, A2251, 16GB/512GB) | Water damaged 2026-06                                                             |
+| `wendy-pro`      | MacBook Pro (Wendy's)                     | Water damaged 2026-08                                                             |
+| `wolf-air`       | MacBook Air                               | Backup for Michael/Wendy                                                          |
+| `michael-iphone` | iPhone (Michael's)                        |                                                                                   |
+| `wendy-iphone`   | iPhone (Wendy's)                          |                                                                                   |
 
 ## Test & Measurement
 
