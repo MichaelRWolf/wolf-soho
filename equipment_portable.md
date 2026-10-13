@@ -27,6 +27,27 @@
 - macOS: built-in Realtek driver; no system extension needed
 - Setup: Network → Add Service on first use per machine
 
+## 5G Mobile Hotspot
+
+### `nighthawk-m1` - Netgear Nighthawk M1 (MR1100) / AT&T 4G LTE - **NOT 5G**
+
+- Model: Nighthawk M1 (GUI version MR1100-100NAS_04.01.80.00)
+- Network: 4G LTE only (no 5G capability)
+- Hardware Version: 1.0
+- Firmware Version: NTG9X50C_12.06.11.00
+- Bootloader: NTG9X50C_12.06.11.00
+- PRI Version: 05.03
+- Build Date: 2020-01-24
+- IMEI: 015240000553847
+- IMEI SV: 13
+- Serial (FSN): 5K1511N850711
+- MAC Address: 44:A5:6E:E9:59:29
+- SIM Serial: 890141033345577095
+- Service Number: +1 (984) 381-5800
+- Status: Device deactivated 2026-10-12 in Cheboygan MI AT&T Store
+- Notes: Marginal performance in Crystal River area (used 2+ years). Was limping along on LTE before deactivation.
+- Credentials: Stored in 1Password as "wolfden-hotspot - Nighthawk/Netgear - 192.168.1.1"
+
 ## WiFi Extender
 
 ### `cheapo-extender` -- Generic USB WiFi Repeater

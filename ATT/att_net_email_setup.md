@@ -6,23 +6,21 @@ your regular password. This ensures a stable, secure, and OAuth-free
 setup.
 
 ---
-## 
 
+##
 
 SMKs
 
-| email account        | Name                                     | Date       | Device        |
-|----------------------|------------------------------------------|------------|---------------|
-| michaelrwolf@att.net | SMK - michaelrwolf@att.net iPhone SE 3rd | 2025-05-16 | iPhone SE 3/e |
-
-
+| email account          | Name                                       | Date       | Device        |
+|------------------------|--------------------------------------------|------------|---------------|
+| <michaelrwolf@att.net> | SMK - <michaelrwolf@att.net> iPhone SE 3rd | 2025-05-16 | iPhone SE 3/e |
 
 ## 🔍 Overview: Why Use "Other" Instead of "Yahoo"
 
-| Option         | Use SMK? | Reliable? | Avoid lockouts? | Recommendation |
-|----------------|----------|-----------|------------------|----------------|
-| Yahoo          | ❌        | ❌        | ❌                | **Avoid**      |
-| Other (IMAP)   | ✅        | ✅        | ✅                | **Use this**   |
+| Option       | Use SMK? | Reliable? | Avoid lockouts? | Recommendation |
+|--------------|----------|-----------|-----------------|----------------|
+| Yahoo        | ❌        | ❌         | ❌               | **Avoid**      |
+| Other (IMAP) | ✅        | ✅         | ✅               | **Use this**   |
 
 > **Reminder**: Selecting **Yahoo** triggers an **OAuth login flow**,
 > which bypasses Secure Mail Keys. This often causes login failures or
@@ -54,7 +52,7 @@ SMKs
 4. Click **Add Secure Mail Key**
    - Name it: `SMK - michaelrwolf@att.net iPhone SE 3rd Edition`
    - Click **Create Secure Mail Key**
-   - **Copy the 16-character key** immediately — it won’t be shown again.
+   - **Copy the 16-character key** immediately -- it won't be shown again.
 
 ---
 
@@ -63,7 +61,7 @@ SMKs
 ### If You Have a Login Item for AT&T
 
 - Edit the existing entry.
-- Add a new section (e.g., “Secure Mail Keys”).
+- Add a new section (e.g., "Secure Mail Keys").
 - Add a field labeled: `SMK - michaelrwolf@att.net iPhone SE 3rd`, and
   paste the key.
 
@@ -72,7 +70,7 @@ SMKs
 - Create a new **Login** item.
   - Title: `AT&T Secure Mail Keys`
   - Username: `yourname@att.net`
-  - Add a section: “Secure Mail Keys”
+  - Add a section: "Secure Mail Keys"
   - Add the SMK field and paste the key.
 
 ---

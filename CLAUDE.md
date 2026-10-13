@@ -139,6 +139,17 @@ Project provides tools for managing a fleet of git repos across multiple machine
 3. Link from relevant subsystem doc (e.g., equipment_computing.md)
 4. Commit with clear message
 
+### Update Identity Strategy doc (sync to 1Password)
+
+The Identity Strategy doc is maintained in two places: GitHub (source of truth) and 1Password (shared vault mirror).
+
+1. Edit `Identity Strategy - NAS + MB - Human+Service Accounts.md` locally
+2. Commit changes
+3. **Push to GitHub** (`git push`)
+4. Run `make sync-identity` to sync the updated doc from GitHub to 1Password
+
+The sync script reads from GitHub `main` (not local files) to ensure idempotence and consistency across machines and vaults. GitHub is the canonical version; 1Password mirrors it.
+
 ## Markdown Conventions
 
 - **Line length**: No hard limit (files use soft-wrap; emacs M-q unfills, not fills)

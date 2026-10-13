@@ -252,3 +252,67 @@ with a clear message.
 - After the next scheduled TM run, confirm `/Users/wendy` appears in the backup (browse
   the backup or check `tmutil listbackups` contents) without any NAS-side reconfiguration.
 - `CONTEXT.md` diff shows the new login line under michael-air.
+
+## Status Update (2026-10-08)
+
+**Execution: Complete.** The account has been created, FileVault-enabled, and all manual steps (Apple ID, iCloud sync, Touch ID) confirmed done by user.
+
+### What shipped
+
+- **Account creation (UID 501, admin)**
+
+  ```bash
+  sysadminctl -addUser wendy -fullName "Wendy" -password - -UID 501 -admin
+  ```
+
+- **FileVault unlock list** -- Required two steps. First, grant Secure Token:
+
+  ```bash
+  sudo sysadminctl -secureTokenOn wendy -password - -adminUser michael -adminPassword -
+  ```
+
+  Then add to FileVault:
+
+  ```bash
+  sudo fdesetup add -usertoadd wendy
+  ```
+
+  (Error `-69594` meant target user lacked Secure Token; not documented in original plan.)
+
+- **Apple ID sign-in** -- Wendy signed in to her own Apple ID inside `~wendy` (System Settings).
+- **Safari + iCloud Keychain** -- Toggled on; tabs/bookmarks/passwords now syncing.
+- **iCloud Drive (Desktop & Documents)** -- Toggled on; local Documents folder is now cloud-backed.
+- **Touch ID enrollment** -- Fingerprint enrolled for wendy's account on michael-air.
+- **UID consistency documented** -- Identity Strategy doc updated with UID convention (michael=506, wendy=501); committed in `57af7f5` along with CONTEXT.md note.
+
+### Gotchas discovered
+
+**FileVault add failure: `-69594` when user lacks Secure Token.** The original plan's Step 5 assumed Secure Token would be set by `sysadminctl -addUser`. In practice, creating an account via `sudo sysadminctl -addUser` (run as root) does not grant a Secure Token -- that requires authentication as an existing Secure Token holder. Fix: run `sudo sysadminctl -secureTokenOn wendy -password - -adminUser michael -adminPassword -` to grant the token, then `sudo fdesetup add -usertoadd wendy` succeeds.
+
+### Still open
+
+- 1Password sync of Identity Strategy doc: the script `~/repos/wolf-soho/bin/sync-identity-strategy-to-1p` pulls from **GitHub `main`**, not the local working copy. It was run before `57af7f5` was pushed, so 1Password got the pre-edit content. Needs a re-run after pushing.
+- Naming-strategy TODO ("evaluate whether machine names should be independent of user names") remains deferred; not part of this plan.
+
+### TM backup verification (2026-10-08)
+
+✅ **Confirmed:** Both user home directories are included in Time Machine backup:
+
+```bash
+tmutil isexcluded /Users/michael
+[Included]  /Users/michael
+
+tmutil isexcluded /Users/wendy
+[Included]  /Users/wendy
+```
+
+No further TM configuration needed. Both accounts will be backed up automatically in the next scheduled run.
+
+### UID convention established
+
+As documented in `Identity Strategy - NAS + MB - Human+Service Accounts.md`, the household UID convention is now:
+
+- **michael**: UID 506 (wolf-air, michael-air)
+- **wendy**: UID 501 (wolf-air, michael-air)
+
+Create future Mac accounts for michael/wendy with explicit UIDs via `sysadminctl -addUser ... -UID <n>`, not the GUI's auto-assigned next-available. This prevents file-ownership mismatches when exchanging files or restoring backups between machines.

@@ -13,7 +13,7 @@ LAUNCHD_PLISTS := launchd/com.wolfenterprises.fleet-nas-sync.plist
 UPLINK_COMMANDS := uplink-describe uplink-org uplink-monitor
 UPLINK_LIB := uplink-lib.sh
 
-.PHONY: setup-hooks all symlink-bin install uninstall install-uplink uninstall-uplink install-launchd uninstall-launchd clean todo help verify-TM-exclusions
+.PHONY: setup-hooks all symlink-bin install uninstall install-uplink uninstall-uplink install-launchd uninstall-launchd clean todo help verify-TM-exclusions sync-identity
 
 setup-hooks:
 	pre-commit install
@@ -111,6 +111,7 @@ help:
 	@echo "  symlink-bin   - Create symlinks for project binaries"
 	@echo "  install-uplink - Install uplink monitoring commands"
 	@echo "  uninstall-uplink - Remove uplink monitoring commands"
+	@echo "  sync-identity - Sync Identity Strategy doc from GitHub to 1Password"
 	@echo "  clean         - Clean project files"
 	@echo "  verify-TM-exclusions - Run Time Machine exclusion verification tests"
 	@echo "  todo          - Show project todos"
@@ -135,6 +136,9 @@ help:
 	@echo "  make install   - Install all project tools"
 	@echo "  make uninstall - Remove all project tools"
 	@echo "  make help      - Show this help message"
+
+sync-identity:
+	@./bin/sync-identity-strategy-to-1p
 
 todo:
 	@echo 1. Incorporate '~/repos/wolf-soho' into 'Portable-Profile'

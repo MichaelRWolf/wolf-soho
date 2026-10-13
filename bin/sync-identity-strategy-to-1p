@@ -3,6 +3,10 @@
 # Prerequisites: gh(1), op(1) authenticated; jq(1) installed
 # Usage: sync-identity-strategy-to-1p
 
+# Fetch from GitHub main (not local file) to ensure idempotence and consistency:
+# GitHub is the source of truth; 1Password mirrors it. This workflow guarantees that
+# any machine running this script gets the same canonical version (committed & pushed),
+# regardless of local work-in-progress state. Workflow: edit locally → commit → push → sync.
 GITHUB_RAW_URL="https://raw.githubusercontent.com/MichaelRWolf/wolf-soho/main/Identity%20Strategy%20-%20NAS%20%2B%20MB%20-%20Human%2BService%20Accounts.md"
 OP_ITEM_UUID="z264ew5xvmndlg5aliwmgl3cam"
 OP_VAULT="Shared-Wolf Den"
