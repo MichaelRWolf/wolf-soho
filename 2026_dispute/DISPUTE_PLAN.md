@@ -258,31 +258,73 @@ Dear AT&T:
 
 I am writing to formally notify AT&T of a material billing discrepancy on my wireless account spanning multiple months from January 2025 through October 2026, and to request a full reconciliation and refund of unauthorized charges.
 
-BILLING HISTORY:
-- June 2025 bill (attached): $212.24/month
-- August 2026 bill (attached): $267.98/month
-- Increase: $55.74/month (+26.3%)
+CUSTOMER PROFILE (26-Year Loyalty Context)
 
-UNAUTHORIZED CHANGES:
-1. Plan base rates increased from $50.99/$55.99 to $65.00/month per line without my authorization or notification (approximately $14-30 increase per line).
-2. Hotspot plan base increased from $70.99 to $100.99/month without authorization (approximately +$30/month).
-3. No written notice of material plan changes was provided prior to or concurrent with billing.
-4. October 8 call revealed IMEA number error in AT&T system for hotspot line (ending x5800), which was flagged as personal phone rather than hotspot, causing improper plan tier assignment.
+My wife and I have been AT&T customers since January 2000 (26 years). We are luddite users: we intentionally keep phones until they break, upgrade infrequently, and have owned three iPhone SE models over the years. We have zero interest in early-upgrade programs.
+
+CRITICAL FACT: On October 12, 2026, in the Cheboygan AT&T store, I explicitly told the sales associate that we do NOT want the "Next Up Anytime" feature -- not even for free. Despite this clear statement, the feature continues to be charged to both lines at $10/month ($20/month total), and appears on every bill since at least May 2025. This is $320+ in unauthorized charges to customers who explicitly rejected this feature.
+
+BILLING HISTORY & UNAUTHORIZED CHANGES
+
+- May 24, 2025 bill: $225.60/month (Foundation Account 00036089)
+- August 24, 2026 bill: $267.98/month (Foundation Account 64587913)
+- Increase: $42.38/month (+18.8%) over 15 months
+- Additional evidence: Foundation Account ID changed (indicates system reclassification or migration)
+
+SPECIFIC UNAUTHORIZED CHARGES:
+
+1. Plan Tier Upgrades (Silent, Undocumented)
+   - Michael's line: $50.99 to $65.00 base (+$14.01/month, +27.5%)
+   - Wendy's line: $55.99 to $65.00 base (+$9.01/month, +16.1%)
+   - Plan names changed from "Unlimited Starter SL - 3 Lines" to "AT&T 55+ 2 Lines" with no written notice
+   - Loyalty discount (-$5.00) that appeared in May 2025 vanished in August 2026 without explanation
+
+2. Hotspot Plan Reclassification Due to System Error (IMEA Misclassification)
+   - Hotspot base: $70.99 to $100.99 (+$30/month, +42.3%)
+   - Physical device unchanged: Netgear Nighthawk M1 (IMEI 015240000553847, Service #984-381-5800)
+   - Plan tier changed from "Unlimited Premium PL - 3 Lines" to "1 Line" without authorization
+   - Root cause: October 8 tech support confirmed IMEA number was "incorrectly flagged in AT&T system for a long time," causing device to be treated as personal phone rather than hotspot
+   - This billing error cascaded back months, inflating charges retroactively
+
+3. "Next Up Anytime" Unauthorized Feature Charges
+   - Both lines charged $10/month each = $20/month total
+   - Present on every bill since at least May 2025 (16+ months x $20 = $320+)
+   - User explicitly rejected this feature Oct 12 in-store and Oct 13 by phone
+   - No customer authorization documentation in system
+   - Incompatible with customer usage pattern (device retention 2+ years, zero interest in upgrades)
+
+4. Failure to Notify of Material Changes
+   - No written notice of plan tier changes mailed or emailed
+   - No written notice of loyalty discount removal
+   - No written notice of IMEA-driven plan reclassification
+   - Industry standard requires prior written notification for material changes
 
 REQUESTED REMEDY:
-- Full refund of unauthorized overcharges for January 2025 - October 2026 (estimated $450-825 based on $30-55/month average increase)
-- Detailed accounting of each month's charges and plan changes
-- Written explanation of authorization trail for plan modifications
-- Service credit equivalent to overcharge amount if refund not possible
 
-I have been a loyal AT&T customer since January 2000 (26 years) and expect AT&T to honor the duty of notification for material billing changes. While I acknowledge partial responsibility for not reviewing monthly statements as closely as I should have, the magnitude and duration of unauthorized increases justify full correction.
+- Full refund of unauthorized overcharges for January 2025 - October 2026 (estimated $600-900)
+  - Next Up Anytime: $320 (16 months x $20)
+  - Hotspot plan increase due to IMEA error: ~$420 (14 months x $30)
+  - Phone plan increases: ~$280 (14 months average x 2 lines)
+- Detailed accounting of each month's charges and authorization trail for each plan change
+- Written explanation of when/why Foundation Account ID changed and how it affected billing
+- Written apology acknowledging the IMEA classification error and its impact on billing
+- Removal of all "Next Up Anytime" charges as of January 2025 (retroactive)
 
-I request a response within 30 days. Please contact me at [phone] or [email].
+LEGAL CONTEXT:
+
+I am entitled to billing accuracy under the Communications Act and consumer protection law. The magnitude and duration of these unauthorized changes--nearly 2x my negotiated rate--combined with AT&T's failure to notify and continued billing despite my explicit rejection of features, constitute a material breach of good faith billing practices.
+
+CLOSURE TERMS:
+
+I have been a loyal 26-year customer and prefer to resolve this with AT&T directly. A service credit of $600-900 would be appropriate and would allow us to remain customers. If this dispute is not resolved to our satisfaction within 30 days, I will file a complaint with the North Carolina Public Utilities Commission, pursue small claims court action, and explore arbitration/class-action options with other customers similarly charged for unauthorized plan changes.
+
+I request a written response within 30 days. Please contact me at [phone] or [email].
 
 Respectfully,
 
 Michael Wolf
 Account # 293590230
+Foundation Account # 64587913 (current) / 00036089 (May 2025)
 ```
 
 ---
