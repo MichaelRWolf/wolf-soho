@@ -1,8 +1,8 @@
-# AT&T Billing Dispute Letter - Final for App Submission
+# AT&T Billing Dispute Letter - Final for Submission
 
 **Account:** 293590230 (Michael Wolf)  
 **Submitted:** 2026-10-13  
-**Status:** Ready to copy/paste into AT&T dispute portal
+**Status:** Ready to submit via att.com/dispute
 
 ---
 
