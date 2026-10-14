@@ -12,13 +12,13 @@ Tracking AT&T account billing dispute for account **293590230** (Michael Wolf). 
 
 | File                                 | Purpose                                                                       |
 |--------------------------------------|-------------------------------------------------------------------------------|
-| **DISPUTE_LETTER_FINAL.md**          | ✅ Ready-to-submit letter for AT&T app (copy/paste into dispute form)          |
-| **BILLING_SUMMARY_TABLE.md**         | Month-by-month billing analysis (May 2025 - Aug 2026) showing plan changes    |
-| **BILLING_DATA.jsonl**               | Structured data extract (all bills) for future analysis & reuse               |
-| **CALL_LOG_2026-10-13.md**           | Call notes: Danielle (support, LA), Oct 13 evening; April 24 event discussion |
-| **DISPUTE_PLAN.md**                  | Original dispute strategy & timeline                                          |
-| **CUSTOMER_PROFILE_AND_EVIDENCE.md** | Evidence supporting the dispute                                               |
-| **ANALYSIS_AUGUST_2026_BILL.md**     | Detailed breakdown of August 2026 bill                                        |
+| **dispute_letter_final.md**          | ✅ Ready-to-submit letter for AT&T app (copy/paste into dispute form)          |
+| **billing_summary_table.md**         | Month-by-month billing analysis (May 2025 - Aug 2026) showing plan changes    |
+| **billing_data.jsonl**               | Structured data extract (all bills) for future analysis & reuse               |
+| **call_log_2026-10-13.md**           | Call notes: Danielle (support, LA), Oct 13 evening; April 24 event discussion |
+| **dispute_plan.md**                  | Original dispute strategy & timeline                                          |
+| **customer_profile_and_evidence.md** | Evidence supporting the dispute                                               |
+| **analysis_august_2026_bill.md**     | Detailed breakdown of August 2026 bill                                        |
 | **README.md**                        | This file                                                                     |
 
 ---
