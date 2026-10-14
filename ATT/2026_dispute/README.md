@@ -71,27 +71,33 @@ Tracking AT&T account billing dispute for account **293590230** (Michael Wolf). 
 
 ---
 
-## Next Actions
+## Next Actions (Priority Order)
 
-### Immediate (This week)
+### MUST DO FIRST -- Before Filing Formal Dispute
+
+1. **Call 611: Request Feb-Apr 2026 bills** (URGENT)
+   - Fills timeline gap (shows when Foundation Account changed: 00036089 → 64587913)
+   - Confirms exact month(s) of plan increases
+   - Status: NOT STARTED
+
+2. **Find last bill with Disney discount** (Confirms Dunellen renegotiation ~June 2025)
+   - Status: NOT STARTED
+
+3. **Verify IMEA misclassification in AT&T billing data** (Currently hearsay from Oct 8 call)
+   - If unconfirmed: Remove from formal dispute
+   - Status: NOT STARTED
+
+### Once TODOs Complete
 
 1. Prepare formal dispute letter (template in DISPUTE_PLAN.md)
-2. Scan all available bills (Jun 2025, Aug 2026 confirmed; find Jul 2025 - Jul 2026)
-3. Request call transcripts from AT&T for Oct 8 & Oct 13
-4. Send dispute letter via certified mail to AT&T PO Box 5074, Carol Stream IL 60197-5074
+2. Print, sign, send via certified mail OR email to AT&T dispute dept
+3. Await AT&T response (30 days)
 
-### Medium-term (30-60 days)
+### If AT&T Denies/No Response
 
-1. Wait for AT&T response to formal dispute
-2. If denied: File complaint with NC Public Utilities Commission
-3. Investigate small claims court filing in Wake County NC
-4. Consult consumer attorney (free consultation)
-
-### Long-term
-
-1. Monitor Oct 13+ bills for correctness (should be ~$100-120/month for 2 phones only)
-2. Track Apple financing payoff (May 2027, ~9 months out)
-3. Consider switching carriers if AT&T settlement inadequate
+1. File complaint with NC Public Utilities Commission
+2. File small claims court action in Wake County NC
+3. Explore class-action potential (IMEA misclassification may affect other hotspot customers)
 
 ---
 
