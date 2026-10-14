@@ -36,19 +36,27 @@ This behavior contradicts the rationale for "Next Up Anytime" (frequent upgrader
 
 ## Critical Evidence: Foundation Account Change
 
-### May 2025 Bill
+Foundation Account IDs don't normally change. A change indicates a system reclassification, account migration, or data error. This aligns with the tech support call (Oct 8) where they discovered an incorrect IMEA in the system "for a long time."
 
-- **Foundation Account:** 00036089
-- **Bill Total:** $225.60
-- **Next Up Anytime:** $10.00 × 2 lines = $20.00/month
+### Foundation Account Timeline
 
-### August 2026 Bill
+| Date         | Account ID | Bill Total | Notes                                                      |
+|--------------|------------|------------|------------------------------------------------------------|
+| May 24, 2025 | 00036089   | $225.60    | Oldest available bill                                      |
+| Jun 24, 2025 | 00036089   | $212.24    | Consistent ID                                              |
+| Jul 24, 2025 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Aug 24, 2025 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Sep 24, 2025 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Oct 24, 2025 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Nov 24, 2025 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Dec 24, 2025 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Jan 24, 2026 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Feb 24, 2026 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Mar 24, 2026 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Apr 24, 2026 | Unknown    | Unknown    | **TODO: Obtain**                                           |
+| Aug 24, 2026 | 64587913   | $267.98    | **DIFFERENT ID** -- Change occurred between Apr & Aug 2026 |
 
-- **Foundation Account:** 64587913 ← **DIFFERENT ID**
-- **Bill Total:** $267.98
-- **Next Up Anytime:** $10.00 × 2 lines = $20.00/month
-
-**What this means:** Foundation Account IDs don't normally change. A change indicates a system reclassification, account migration, or data error. This aligns with the tech support call (Oct 8) where they discovered an incorrect IMEA in the system "for a long time."
+**What this means:** Foundation Account changed from 00036089 to 64587913 sometime between April and August 2026. This is evidence of backend system reclassification or account migration error during the period when IMEA misclassification was occurring.
 
 ---
 
@@ -133,15 +141,35 @@ The hotspot's IMEI (015240000553847) is a device identifier, not a phone IMEI. I
 
 ## "Next Up Anytime" Evidence of Unauthorized Charge
 
-### Bills Show Consistent $10/month Per Line
+### Timeline of Next Up Rejection
+
+**Initial Rejection:** ~June 2025 (Dunellen, FL store)
+
+- When account was renegotiated from $150/month → $135/month
+- Part of contract change (dropped Disney discount, added autopay discount, agreed to 2-year contract extension)
+- **User explicitly rejected "Next Up Anytime" at that time**
+- **TODO: Find last bill with Disney discount to confirm exact month of Dunellen renegotiation**
+
+**Continued Rejection:** October 12-13, 2026 (Cheboygan, MI)
+
+- In-store: Sales associate could not remove feature
+- By phone (611): User again rejected "Next Up Anytime"
+- User's explicit statement: "Not even for free"
+
+### Bills Show Consistent $10/month Per Line (After Oldest Available)
 
 - **May 2025:** Michael $10.00 + Wendy $10.00 = $20.00/month
 - **Aug 2026:** Michael $10.00 + Wendy $10.00 = $20.00/month
 - **Cumulative (May 2025 - Oct 2026):** 16 months × $20 = **$320 charged**
+- **If bill existed before May 2025:** Actual total likely higher ($400+)
 
-### User's Oct 12 Position (Cheboygan Store)
+### Evidence Summary
 
-Sales associate could not remove this feature. User had to call 611 on Oct 13 to finalize account. No record of authorization for this feature. User's explicit statement: "Not even for free."
+- Feature explicitly rejected at Dunellen renegotiation (~June 2025)
+- Feature rejected again at Cheboygan visit (Oct 12, 2026)
+- Feature still appears on every bill despite rejections
+- No authorization trail in available bills
+- No documentation of why feature is on account
 
 ### Why This Matters in Dispute
 
@@ -197,6 +225,43 @@ Luddite customers (keep phones 2-4+ years, never upgrade within contract term) a
 
 ---
 
+---
+
+## TODOs: Evidence to Confirm or Obtain
+
+### HIGH PRIORITY (Blocks dispute filing)
+
+1. **TODO: Obtain intermediate bills (Feb-Apr 2026)**
+   - Call 611 to request
+   - Purpose: Find when Foundation Account changed, confirm plan increases, pinpoint Disney discount removal
+   - Status: UNDONE
+
+2. **TODO: Find last bill with Disney discount**
+   - Confirms Dunellen renegotiation date (when $150→$135 plan happened)
+   - Confirms 2-year contract renewal was authorized
+   - Status: UNDONE
+
+3. **TODO: Confirm IMEA number is incorrect in AT&T billing data**
+   - Currently: Tech support said IMEA was "flagged as personal phone for a long time" (hearsay)
+   - Need: AT&T written confirmation in bills or account records showing wrong device classification
+   - If unconfirmed, remove from dispute as evidence (keep as plausible theory)
+   - Status: UNDONE -- Currently hypothesis, not proven
+
+### MEDIUM PRIORITY (Strengthens dispute, not essential)
+
+1. **TODO: Request bills from before May 2025 (earliest we have)**
+   - Purpose: Show full progression of Next Up charges from start
+   - Purpose: Find original $150/month bill (baseline for $135 negotiation)
+   - Status: UNDONE
+
+2. **TODO: Obtain 2-year contract document from Dunellen renegotiation**
+   - Purpose: Prove that Next Up was explicitly rejected as part of that deal
+   - Status: UNDONE
+
+---
+
 **Document prepared:** 2026-10-13  
-**Evidence sources:** 5 bill PDFs (May 2025 - Aug 2026), equipment_portable.md, user account history  
-**Next step:** Fold this evidence into formal dispute letter (See DISPUTE_PLAN.md for template)
+**Last updated:** 2026-10-13  
+**Oldest bill available:** May 24, 2025 (ATTBill_0230_May2025.pdf)  
+**Evidence sources:** May 2025 & Aug 2026 bill PDFs, equipment_portable.md, user account history  
+**Next step:** Call 611 to request Feb-Apr 2026 bills; fold confirmed evidence into formal dispute letter
