@@ -4,17 +4,22 @@
 
 Tracking AT&T account billing dispute for account **293590230** (Michael Wolf). Billing increased from expected **$135/month** to actual **$267.98/month** (2x expected), with unauthorized plan changes and device classification errors spanning January 2025 - October 2026.
 
-**Status:** Formal dispute requested Oct 13, 2026 (John, inbound support). Awaiting written response.
+**Status:** Formal dispute drafting in progress. Call with Danielle (Oct 13, 8:30 PM) confirmed plan change investigation needed for April 2026. Awaiting Wendy review of DISPUTE_LETTER_OUTLINE.md before app submission.
 
 ---
 
 ## Files in This Directory
 
-| File                             | Purpose                                                                         |
-|----------------------------------|---------------------------------------------------------------------------------|
-| **DISPUTE_PLAN.md**              | Full dispute strategy, timeline, and formal letter template                     |
-| **ANALYSIS_AUGUST_2026_BILL.md** | Detailed breakdown of the $267.98 August bill and cost comparison vs. June 2025 |
-| **README.md**                    | This file                                                                       |
+| File                                 | Purpose                                                                       |
+|--------------------------------------|-------------------------------------------------------------------------------|
+| **DISPUTE_LETTER_FINAL.md**          | ✅ Ready-to-submit letter for AT&T app (copy/paste into dispute form)          |
+| **BILLING_SUMMARY_TABLE.md**         | Month-by-month billing analysis (May 2025 - Aug 2026) showing plan changes    |
+| **BILLING_DATA.jsonl**               | Structured data extract (all bills) for future analysis & reuse               |
+| **CALL_LOG_2026-10-13.md**           | Call notes: Danielle (support, LA), Oct 13 evening; April 24 event discussion |
+| **DISPUTE_PLAN.md**                  | Original dispute strategy & timeline                                          |
+| **CUSTOMER_PROFILE_AND_EVIDENCE.md** | Evidence supporting the dispute                                               |
+| **ANALYSIS_AUGUST_2026_BILL.md**     | Detailed breakdown of August 2026 bill                                        |
+| **README.md**                        | This file                                                                     |
 
 ---
 
@@ -154,7 +159,37 @@ As new evidence is collected:
 
 ---
 
+---
+
+## Background Story (Chronological Rambling)
+
+**June 2025:** We negotiated a service plan in Dunellen, Florida at an AT&T store. We walked in expecting to pay ~$150/month, discussed options with store staff, and walked out satisfied with a negotiated rate of ~$135/month all-in (taxes included). Bill that month: $212.24 (base rates: Michael $50.99 + Wendy $55.99 + Hotspot $70.99 = $177.97 base + taxes/fees).
+
+**July 2025 onward:** Without notification, our plan names changed from STANDARD (phones) to "AT&T 55+ 2 Lines" and hotspot from HVYUSE to "Unlimited Premium PL." Base charges jumped: Michael $50.99→$65.00 (+$14), Wendy $55.99→$65.00 (+$9), Hotspot $70.99→$85.99 (+$15). Total overcharge: ~$50-55/month. We noticed nothing because we trusted AT&T and didn't monitor bills monthly.
+
+**October 2025:** Still unaware of rate creep.
+
+**January 2026:** Visited Dunellen store again; staff advised us to "call 611" about account issues. We didn't follow up (mistake).
+
+**April 24, 2026:** Visited local AT&T office in Cheboygan to explore satellite internet options. Spoke with an agent about potentially replacing our wireless service. Agent was unable to confirm whether satellite could serve as a mobile backup. We left without changing plans. However, our bill spiked the next month (May: $299.32, a jump of $34.70 from April's $264.62).
+
+**Danielle's observation (Oct 13, 2026):** When we discussed April 24, Danielle (Louisiana support, 19 years with AT&T) suggested that something may have happened in April 2026--either on the 24th or during that month--related to a plan modification. Wendy heard this as confirmation that a plan WAS changed; Michael wasn't sure.
+
+**October 8, 2026 (Monday):** Called technical support (Eliza) to troubleshoot hotspot. Eliza requested IMEA number, claimed it "didn't validate," and seemed to modify our plan. Michael asked her to ensure the plan was identical at the end of the call as it was at the beginning. Hotspot stopped working later that day.
+
+**October 12, 2026 (Saturday, Cheboygan):** Met with Theo in person. Obtained new 55+ plan quote: $50/month (down from $267.98). Cancelled hotspot line effective Oct 13.
+
+**October 13, 2026 (Sunday, TODAY):**
+
+- **8:30 AM-9:00 PM:** Spoke with John (billing support) via 611 callback.
+- **Later 4pm:** Eliza (tech support) called back.
+- **8:30 PM:** Called Danielle (Louisiana support). She explained AT&T's system only goes back 15 months, but policy allows 7 years. Offered to retrieve Jan 2025-May 2025 bills (1 free + $5/month for older ones). Danielle was gracious and pragmatic: "Just say what you say in the words you can say it. We have people who will review it." Both Michael and Wendy appreciated this iterative approach--no need for perfect precision in initial submission.
+
+**Key conclusion:** Multiple plan changes, no notifications, no authorizations. The April 24 event needs clarification. Danielle's support gives us a path forward: submit what we know, let AT&T's review team investigate the details.
+
+---
+
 **Created:** 2026-10-13  
 **Last updated:** 2026-10-13  
 **Prepared by:** Michael Wolf with Claude Code analysis  
-**Status:** Awaiting formal response from AT&T to Oct 13 dispute notice
+**Status:** Letter draft complete; awaiting Michael & Wendy review before app submission
