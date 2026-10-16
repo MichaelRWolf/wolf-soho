@@ -57,7 +57,7 @@
 - Service Number: +1 (984) 381-5800
 - Status: Device deactivated 2026-10-12 in Cheboygan MI AT&T Store
 - Notes: Marginal performance in Crystal River area (used 2+ years). Was limping along on LTE before deactivation.
-- eBay Listing: [Listed on eBay 2026-10-16](../nighthawk-m1-ebay-listing.md)
+- eBay Listing: [Listed on eBay 2026-10-16](nighthawk-m1-ebay-listing.md)
 - Credentials: Stored in 1Password as "wolfden-hotspot - Nighthawk/Netgear - 192.168.1.1"
 
 ## WiFi Extender
