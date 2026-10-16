@@ -26,8 +26,7 @@ We full-timed it in an RV for 4 years using this as our primary internet -- thro
 
 ## What's Included
 
-- Device + USB charging cable
-- Documentation
+- Device only
 
 ## Who Should Buy
 
