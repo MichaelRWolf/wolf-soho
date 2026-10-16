@@ -1,5 +1,7 @@
 # Netgear Nighthawk M1 -- 4-Year RV Internet Lifeline, Ready for Your Adventures
 
+![Netgear Nighthawk M1 in action](images/nighthawk-m1-lifestyle.jpg)
+
 ## The Story
 
 We full-timed it in an RV for 4 years using this as our primary internet -- through remote National Forests, small towns, and everywhere in between. It was far more reliable than tethering to our phones. Now we have 5G iPhones and no longer need it. Rather than toss it, we'd love for someone to give it a second life. Priced to re-gift, not recycle.
