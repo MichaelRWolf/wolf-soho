@@ -1,4 +1,4 @@
-# Netgear Nighthawk M1 Mobile Hotspot
+# Netgear Nighthawk M1 -- 4-Year RV Internet Lifeline, Ready for Your Adventures
 
 ## The Story
 
