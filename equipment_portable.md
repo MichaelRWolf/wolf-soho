@@ -31,13 +31,24 @@
 
 ### `nighthawk-m1` - Netgear Nighthawk M1 (MR1100) / AT&T 4G LTE - **NOT 5G**
 
+![Netgear Nighthawk M1 (MR1100)](images/nighthawk-m1-mr1100.png)
+
+[Product page](https://www.netgear.com/outlet/imperfect-box/hotspots/mr1100/)
+
 - Model: Nighthawk M1 (GUI version MR1100-100NAS_04.01.80.00)
 - Network: 4G LTE only (no 5G capability)
+- Max Speed: Up to 1 Gbps combined (Category 16 LTE Advanced Pro with 4-band carrier aggregation)
 - Hardware Version: 1.0
 - Firmware Version: NTG9X50C_12.06.11.00
 - Bootloader: NTG9X50C_12.06.11.00
 - PRI Version: 05.03
 - Build Date: 2020-01-24
+- Dimensions: 105.5 (L) × 105.5 (W) × 20.35 (H) mm
+- Weight: 240 g (with battery)
+- Battery: 5040 mAh; up to 11 hours continuous usage
+- WiFi: Dual-band 802.11ac (2.4 GHz b/g/n and 5 GHz a/n/ac)
+- LTE Bands: 1, 2, 3, 4, 5, 7, 12, 14, 29, 30, 66
+- 3G Bands: 1, 2, 5
 - IMEI: 015240000553847
 - IMEI SV: 13
 - Serial (FSN): 5K1511N850711
