@@ -4,7 +4,7 @@ BIN_FILES := bin/network_location bin/beryl_sqm bin/networkCurl \
              bin/gitnas-repo-create bin/gitnas-remote-add \
              bin/gitnas-repo-setup bin/gitnas-repo-sync \
              bin/fleet-status bin/git-status-summary \
-             bin/fleet-nas-sync
+             bin/fleet-nas-sync bin/x86-audit
 INSTALL_BIN_DIR := $(HOME)/bin
 LAUNCHD_DIR := $(HOME)/Library/LaunchAgents
 LAUNCHD_PLISTS := launchd/com.wolfenterprises.fleet-nas-sync.plist

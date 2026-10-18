@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+# x86-audit — find Intel-only (x86_64, no arm64) Mach-O files left by Migration Assistant
+# Usage: x86-audit [--all] [--out FILE] [dir ...]
+#   x86-audit                          # scan default user-readable locations
+#   x86-audit --out ~/x86-audit.tsv    # also save the report
+#   x86-audit --all                    # include allowlisted (expected) files
+#
+# Read-only: lists files, deletes nothing. Skips locations that need sudo.
+# Universal binaries (x86_64 + arm64) are NOT reported -- they run natively.
+# Output: owner<TAB>path<TAB>file(1) description, sorted by owner. Summary on stderr.
+# See GitHub issue #8.
+
+set -eo pipefail
+
+# file(1) output can hold non-UTF-8 bytes; awk/sort choke on them in a UTF-8 locale.
+export LC_ALL=C
+
+# Expected Intel slices: apps that ship per-arch files side by side, test fixtures.
+ALLOWLIST=(
+    '*/Emacs*.app/Contents/MacOS/*-x86_64-*'
+    '*/_platform_specific/mac_x64/*'
+    '*/Typora.app/*/x64/*'
+    '/opt/homebrew/Library/Homebrew/test/support/fixtures/*'
+    '*/Python.framework/Versions/*/bin/python3*-intel64'
+)
+
+usage() {
+    printf 'Usage: x86-audit [--all] [--out FILE] [dir ...]\n' >&2
+    exit 1
+}
+
+allowlisted() {
+    local path=$1 pattern
+    for pattern in "${ALLOWLIST[@]}"; do
+        # shellcheck disable=SC2053  # glob match is intended
+        [[ $path == $pattern ]] && return 0
+    done
+    return 1
+}
+
+default_roots() {
+    printf '%s\n' \
+        /usr/local \
+        /opt \
+        /Applications \
+        "$HOME/Applications" \
+        "$HOME/.local" \
+        "$HOME/.cargo" \
+        "$HOME/go" \
+        "$HOME/.gem" \
+        "$HOME/.npm" \
+        "$HOME/node_modules" \
+        "$HOME/.cache" \
+        "$HOME/Library/Application Support" \
+        "$HOME/Library/Developer/Xcode/DerivedData"
+}
+
+# Candidate files: executables plus loadable libraries/extensions (often not +x).
+# -perm +111 is the BSD spelling; macOS find has no -executable.
+find_candidates() {
+    find "$1" -type f \( -perm +111 -o -name '*.dylib' -o -name '*.so' -o -name '*.node' -o -name '*.bundle' \) \
+        -print0 2>/dev/null || true
+}
+
+# Keep Mach-O files that contain x86_64 and lack arm64 (thin Intel or x86_64-only fat).
+# file(1) prints fat binaries as one line per slice ("path (for architecture X):"),
+# so collect arches per path before deciding.
+intel_only() {
+    xargs -0 file -N -F $'\t' 2>/dev/null \
+        | awk -F'\t' '
+            $2 ~ /Mach-O/ {
+                p = $1; sub(/ \(for architecture [^)]*\):?$/, "", p)
+                d = $2; sub(/^ +/, "", d)
+                seen[p] = 1
+                if (d ~ /x86_64/) x86[p] = 1
+                if (d ~ /arm64/)  arm[p] = 1
+                if (!(p in desc)) desc[p] = d
+            }
+            END { for (p in seen) if ((p in x86) && !(p in arm)) print p "\t" desc[p] }' \
+        || true
+}
+
+owner_of() {
+    local path=$1
+    case "$path" in
+        /usr/local/*)                              echo homebrew-intel ;;
+        /opt/homebrew/*)                           echo homebrew-arm ;;
+        /opt/local/*)                              echo macports ;;
+        "$HOME"/.local/share/uv/*|"$HOME"/.cache/uv/*) echo uv ;;
+        "$HOME"/.local/share/claude/*)             echo claude-code ;;
+        "$HOME"/.local/share/cursor-agent/*)       echo cursor ;;
+        */site-packages/*)                         echo python ;;
+        "$HOME"/.gem/*)                            echo ruby-gems ;;
+        "$HOME"/.cargo/*)                          echo cargo ;;
+        "$HOME"/go/*)                              echo go ;;
+        *.node|"$HOME"/.npm/*|"$HOME"/node_modules/*) echo node ;;
+        */Applications/*.app/*)
+            local app=${path#*/Applications/}
+            echo "app:${app%%.app/*}" ;;
+        "$HOME"/Library/Developer/*)               echo xcode-derived ;;
+        "$HOME/Library/Application Support"/*)     echo app-support ;;
+        *)                                         echo other ;;
+    esac
+}
+
+main() {
+    local out="" show_all=0
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --all) show_all=1; shift ;;
+            --out) out=$2; shift 2 ;;
+            -h|--help) usage ;;
+            --) shift; break ;;
+            -*) usage ;;
+            *) break ;;
+        esac
+    done
+
+    local roots=()
+    if [[ $# -gt 0 ]]; then
+        roots=("$@")
+    else
+        while IFS= read -r r; do [[ -d $r ]] && roots+=("$r"); done < <(default_roots)
+    fi
+
+    local report
+    report=$(
+        for root in "${roots[@]}"; do
+            printf 'scanning %s\n' "$root" >&2
+            find_candidates "$root" | intel_only
+        done | while IFS=$'\t' read -r path desc; do
+            [[ $show_all == 0 ]] && allowlisted "$path" && continue
+            printf '%s\t%s\t%s\n' "$(owner_of "$path")" "$path" "$desc"
+        done | sort -t $'\t' -k1,1 -k2,2
+    )
+
+    if [[ -n $report ]]; then
+        printf '%s\n' "$report"
+        printf '\nIntel-only files by owner:\n' >&2
+        printf '%s\n' "$report" | cut -f1 | uniq -c | sort -rn >&2
+    else
+        printf '\nNo Intel-only Mach-O files found.\n' >&2
+    fi
+
+    if [[ -n $out ]]; then
+        printf '%s\n' "$report" > "$out"
+        printf 'report saved: %s\n' "$out" >&2
+    fi
+}
+
+main "$@"
