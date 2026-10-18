@@ -5,7 +5,7 @@
 #   x86-audit --out ~/x86-audit.tsv    # also save the report
 #   x86-audit --all                    # include allowlisted (expected) files
 #
-# Read-only: lists files, deletes nothing. Skips locations that need sudo.
+# Read-only: lists files, deletes nothing. Runs without sudo; unreadable dirs are skipped.
 # Universal binaries (x86_64 + arm64) are NOT reported -- they run natively.
 # Output: owner<TAB>path<TAB>file(1) description, sorted by owner. Summary on stderr.
 # See GitHub issue #8.
@@ -22,6 +22,8 @@ ALLOWLIST=(
     '*/Typora.app/*/x64/*'
     '/opt/homebrew/Library/Homebrew/test/support/fixtures/*'
     '*/Python.framework/Versions/*/bin/python3*-intel64'
+    '/Library/Developer/CommandLineTools/*'
+    '/Library/Apple/*'
 )
 
 usage() {
@@ -43,7 +45,10 @@ default_roots() {
         /usr/local \
         /opt \
         /Applications \
+        /Library \
         "$HOME/Applications" \
+        "$HOME/bin" \
+        "$HOME/repos" \
         "$HOME/.local" \
         "$HOME/.cargo" \
         "$HOME/go" \
@@ -51,8 +56,7 @@ default_roots() {
         "$HOME/.npm" \
         "$HOME/node_modules" \
         "$HOME/.cache" \
-        "$HOME/Library/Application Support" \
-        "$HOME/Library/Developer/Xcode/DerivedData"
+        "$HOME/Library"
 }
 
 # Candidate files: executables plus loadable libraries/extensions (often not +x).
@@ -98,6 +102,9 @@ owner_of() {
             local app=${path#*/Applications/}
             echo "app:${app%%.app/*}" ;;
         "$HOME"/Library/Developer/*)               echo xcode-derived ;;
+        /Library/Printers/*)                       echo printer-driver ;;
+        "/Library/Image Capture"/*)                echo scanner-driver ;;
+        /Library/Perl/*|/Library/Ruby/*)           echo system-perl-ruby ;;
         "$HOME/Library/Application Support"/*)     echo app-support ;;
         *)                                         echo other ;;
     esac
