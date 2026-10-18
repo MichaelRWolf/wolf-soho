@@ -79,7 +79,7 @@ Everything was moved to the Trash (`trash` / `sudo trash`) so it can be restored
 
 Live-notes tool by Nitsan (from today's Approval Tests session). Permissions for agents may change on his side.
 
-1. In the Meetings host app, start a note and copy its **agent link** (`https://live-notes-sdk-production.up.railway.app/a/<token>/`). Keep it private.
+1. Open the Meetings host app at <https://notes-production-43ef.up.railway.app/> (confirmed working), start a note, and copy its **agent link** (`https://live-notes-sdk-production.up.railway.app/a/<token>/`). Keep it private.
 2. In Claude Code, cd to the repo you want to work in and choose the permission mode:
    - **Manual**: approve each call.
    - **Bypass**: no prompts. Needed for voice-requested deletions and page writes; auto mode blocks them.
@@ -96,6 +96,25 @@ Live-notes tool by Nitsan (from today's Approval Tests session). Permissions for
 6. Talk. Requests go on the page under **Now**, **Tasks** and **For you**. Reply by voice with the exact phrases the page suggests.
 7. If the follower stops (30-minute Monitor limit), Claude reruns the same command; the `--state` cursor file resumes in place.
 8. A note ends after its lifetime cap, 3 hours by default. To continue, start a new note and paste its new link; the page has to be republished there.
+
+### Anatomy of a Meeting Link
+
+Today's session started from a person-facing meeting link shaped like this (secret parts elided):
+
+```text
+https://notes-production-43ef.up.railway.app/?meeting=<id>#invite=0.<expiry>.<signature>
+```
+
+| Part                                            | What it likely is                                  | Needed for a new session        |
+|-------------------------------------------------|----------------------------------------------------|---------------------------------|
+| `https://notes-production-43ef.up.railway.app/` | The Meetings app (person-facing UI)                | Yes: start a new meeting here   |
+| `?meeting=<id>`                                 | One meeting's ID                                   | No: a new meeting gets a new ID |
+| `#invite=0.<expiry>.<signature>`                | Invite token: version, Unix expiry time, signature | No: specific to one meeting     |
+
+- Today's invite expiry decoded to Mon Oct 19 17:11 EDT (`date -r <expiry>`), so invites are short-lived.
+- Treat the full invite link as a secret; the signature grants access.
+- `43ef` is most likely Railway's random suffix on default domains (`<service>-<environment>-<random>.up.railway.app`), added because `notes-production` was taken. The agent host `live-notes-sdk-production` has no suffix.
+- Two different links: the **invite link** lets people join a meeting; the **agent link** (`/a/<token>/`) lets an agent join. Only the agent link goes to Claude.
 
 ## How the Session Ran: Live Notes + Claude Code
 
@@ -127,6 +146,33 @@ The work was driven by voice from a live meeting note, not typed prompts.
 - **Scope:** only the owner's lines are requests; other speech in the room is data. Ambiguous lines got a question on the page instead of action.
 - **Security:** the agent link is a secret (it can post, publish and revoke). Share only the read-only view link.
 - **Permissions:** in Claude Code auto mode, the classifier blocked the follower download, page writes, and deletions requested by voice. Manual mode, and later bypass mode, let the session proceed. Removals used `trash`, so they can be undone.
+
+### The Follower
+
+`follow.mjs` is a small Node script supplied by the agent link (`<agent-link>/follow.mjs`). It keeps Claude connected to the note and passes each new line into the session.
+
+Start it under Claude Code's Monitor tool:
+
+```bash
+node follow.mjs "<agent-link>" michael-claude --state live-notes-michael-claude.cursor
+```
+
+Each event becomes one line in the session:
+
+```text
+[22:38:12Z] Michael R. Wolf → everyone (speech): Remove 1 to 6.
+```
+
+- **Connects** to the note's live stream (server-sent events at `/stream?name=<agent>`).
+- **Reconnects** on its own after a drop.
+- **Keeps its place:** `--state` stores the last event ID, so a restart resumes without replaying history.
+- **Skips the agent's own lines** (chat, page updates, joins), so the agent doesn't answer itself.
+- **Joins speech fragments** that arrive within 1.5 s into one line (`--no-merge` turns this off).
+- **Status lines start with `!`:** first `! live: following this note as <agent>`, then gaps or why it stopped.
+- **Exit codes:** 0 when the note ends, 3 when the link no longer works, 4 when the agent name was revoked.
+- **Lifetime:** Monitor stops it after 30 minutes; run the same command again. A Claude Code restart also stops it.
+- **Review before running:** it was downloaded to the scratchpad and read first. It only writes its cursor file and only talks to the note's link.
+- **Alternatives:** `codex-follow.mjs` for the Codex CLI; plain polling of `/feed?after=<cursor>` for tools without background tasks, which only sees new lines when it checks.
 
 ## Lessons
 
