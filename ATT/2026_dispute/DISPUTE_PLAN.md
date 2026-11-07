@@ -88,28 +88,28 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 ## Timeline of Events
 
-| Date             | Event                                                                    | Source                   |
-|------------------|--------------------------------------------------------------------------|--------------------------|
-| Jan 2000         | Account opened (26-year customer)                                        | Account history          |
-| Jan 11, 2025     | Apple 128GB financing established ($479.99 × 36 mo)                      | Aug 2026 bill detail     |
-| ~June 2025       | Bill: $212.24 (baseline with 3-line plan, hotspot included)              | ATTBill_0230_Jun2025.pdf |
-| Jun-Aug 2025     | Silent plan upgrades begin (unknown exact dates)                         | Comparison of bills      |
-| Aug 2025         | Bill: $240+ range (inferred from progression)                            | Not yet reviewed         |
-| ~Jan 2026        | Bill noticed approaching $210+ when customer expected $135               | User memory              |
-| Jan 2026         | Visited Dunellen FL AT&T store; store said unable to help                | User memory              |
-| Jan 2026         | Advised to call 611 (customer loyalty) for better deals                  | Store agent              |
-| Jan-Aug 2026     | **NO CHANGE MADE** -- advised to call, but did not follow up immediately | User memory              |
-| ~Aug 2026        | Bill reached $267.98 (2x expected amount)                                | ATTBill_0230_Aug2026.pdf |
-| Oct 8 (approx)   | Called 611; reached John (support); John noted IMEA issue                | Inbound callback         |
-| Oct 8 (approx)   | John: "IMEA number incorrect in system for long time"                    | Tech conversation        |
-| Oct 8 (approx)   | Tech support: Reset IMEA; applied unauthorized plan change               | User report              |
-| Oct 8-9 (approx) | Hotspot service fails in Au Train MI after tech call                     | Geographic indicator     |
-| Oct 12           | Visited Cheboygan AT&T store; negotiated new plan                        | In-person visit          |
-| Oct 12           | Store: Unable to disconnect hotspot; no authorization for debit discount | Store limitation         |
-| Oct 12 evening   | Wendy called 611 to schedule callback                                    | User action              |
-| Oct 13, 11:00 AM | Callback: Cancelled hotspot line effective immediately                   | Phone support            |
-| Oct 13, 11:00 AM | Added debit card discount ($10/line/month)                               | Phone support            |
-| Oct 13           | **Opened support case for billing dispute** (1-year lookback requested)  | John via inbound         |
+| Date             | Event                                                                    | Source                      |
+|------------------|--------------------------------------------------------------------------|-----------------------------|
+| Jan 2000         | Account opened (26-year customer)                                        | Account history             |
+| Jan 11, 2025     | Apple 128GB financing established ($479.99 × 36 mo)                      | Aug 2026 bill detail        |
+| ~June 2025       | Bill: $212.24 (baseline with 3-line plan, hotspot included)              | ATTBill_0230_2025-06-24.pdf |
+| Jun-Aug 2025     | Silent plan upgrades begin (unknown exact dates)                         | Comparison of bills         |
+| Aug 2025         | Bill: $240+ range (inferred from progression)                            | Not yet reviewed            |
+| ~Jan 2026        | Bill noticed approaching $210+ when customer expected $135               | User memory                 |
+| Jan 2026         | Visited Dunellen FL AT&T store; store said unable to help                | User memory                 |
+| Jan 2026         | Advised to call 611 (customer loyalty) for better deals                  | Store agent                 |
+| Jan-Aug 2026     | **NO CHANGE MADE** -- advised to call, but did not follow up immediately | User memory                 |
+| ~Aug 2026        | Bill reached $267.98 (2x expected amount)                                | ATTBill_0230_2026-08-24.pdf |
+| Oct 8 (approx)   | Called 611; reached John (support); John noted IMEA issue                | Inbound callback            |
+| Oct 8 (approx)   | John: "IMEA number incorrect in system for long time"                    | Tech conversation           |
+| Oct 8 (approx)   | Tech support: Reset IMEA; applied unauthorized plan change               | User report                 |
+| Oct 8-9 (approx) | Hotspot service fails in Au Train MI after tech call                     | Geographic indicator        |
+| Oct 12           | Visited Cheboygan AT&T store; negotiated new plan                        | In-person visit             |
+| Oct 12           | Store: Unable to disconnect hotspot; no authorization for debit discount | Store limitation            |
+| Oct 12 evening   | Wendy called 611 to schedule callback                                    | User action                 |
+| Oct 13, 11:00 AM | Callback: Cancelled hotspot line effective immediately                   | Phone support               |
+| Oct 13, 11:00 AM | Added debit card discount ($10/line/month)                               | Phone support               |
+| Oct 13           | **Opened support case for billing dispute** (1-year lookback requested)  | John via inbound            |
 
 ---
 

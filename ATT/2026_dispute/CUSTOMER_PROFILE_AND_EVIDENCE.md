@@ -262,6 +262,6 @@ Luddite customers (keep phones 2-4+ years, never upgrade within contract term) a
 
 **Document prepared:** 2026-10-13  
 **Last updated:** 2026-10-13  
-**Oldest bill available:** May 24, 2025 (ATTBill_0230_May2025.pdf)  
+**Oldest bill available:** May 24, 2025 (ATTBill_0230_2025-05-24.pdf)  
 **Evidence sources:** May 2025 & Aug 2026 bill PDFs, equipment_portable.md, user account history  
 **Next step:** Call 611 to request Feb-Apr 2026 bills; fold confirmed evidence into formal dispute letter
