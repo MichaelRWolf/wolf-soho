@@ -70,7 +70,7 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 - **What:** Plans changed from "Unlimited Starter SL - 3 Lines" to "AT&T 55+ 2 Lines"
 - **Authorization:** None documented in bills; no account correspondence available
 - **Impact:** +$30-40/month in base plan charges alone
-- **Question:** Did October 12 Cheboygan store visit trigger a retroactive system reclassification?
+- **Question:** Did October 12, 2026 Cheboygan store visit trigger a retroactive system reclassification?
 
 ### 3. Unauthorized Device Upgrade Charges
 
@@ -88,28 +88,28 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 ## Timeline of Events
 
-| Date             | Event                                                                    | Source                      |
-|------------------|--------------------------------------------------------------------------|-----------------------------|
-| Jan 2000         | Account opened (26-year customer)                                        | Account history             |
-| Jan 11, 2025     | Apple 128GB financing established ($479.99 × 36 mo)                      | Aug 2026 bill detail        |
-| ~June 2025       | Bill: $212.24 (baseline with 3-line plan, hotspot included)              | ATTBill_0230_2025-06-24.pdf |
-| Jun-Aug 2025     | Silent plan upgrades begin (unknown exact dates)                         | Comparison of bills         |
-| Aug 2025         | Bill: $240+ range (inferred from progression)                            | Not yet reviewed            |
-| ~Jan 2026        | Bill noticed approaching $210+ when customer expected $135               | User memory                 |
-| Jan 2026         | Visited Dunellen FL AT&T store; store said unable to help                | User memory                 |
-| Jan 2026         | Advised to call 611 (customer loyalty) for better deals                  | Store agent                 |
-| Jan-Aug 2026     | **NO CHANGE MADE** -- advised to call, but did not follow up immediately | User memory                 |
-| ~Aug 2026        | Bill reached $267.98 (2x expected amount)                                | ATTBill_0230_2026-08-24.pdf |
-| Oct 8 (approx)   | Called 611; reached John (support); John noted IMEA issue                | Inbound callback            |
-| Oct 8 (approx)   | John: "IMEA number incorrect in system for long time"                    | Tech conversation           |
-| Oct 8 (approx)   | Tech support: Reset IMEA; applied unauthorized plan change               | User report                 |
-| Oct 8-9 (approx) | Hotspot service fails in Au Train MI after tech call                     | Geographic indicator        |
-| Oct 12           | Visited Cheboygan AT&T store; negotiated new plan                        | In-person visit             |
-| Oct 12           | Store: Unable to disconnect hotspot; no authorization for debit discount | Store limitation            |
-| Oct 12 evening   | Wendy called 611 to schedule callback                                    | User action                 |
-| Oct 13, 11:00 AM | Callback: Cancelled hotspot line effective immediately                   | Phone support               |
-| Oct 13, 11:00 AM | Added debit card discount ($10/line/month)                               | Phone support               |
-| Oct 13           | **Opened support case for billing dispute** (1-year lookback requested)  | John via inbound            |
+| Date                   | Event                                                                    | Source                      |
+|------------------------|--------------------------------------------------------------------------|-----------------------------|
+| Jan 2000               | Account opened (26-year customer)                                        | Account history             |
+| Jan 11, 2025           | Apple 128GB financing established ($479.99 × 36 mo)                      | Aug 2026 bill detail        |
+| ~June 2025             | Bill: $212.24 (baseline with 3-line plan, hotspot included)              | ATTBill_0230_2025-06-24.pdf |
+| Jun-Aug 2025           | Silent plan upgrades begin (unknown exact dates)                         | Comparison of bills         |
+| Aug 2025               | Bill: $240+ range (inferred from progression)                            | Not yet reviewed            |
+| ~Jan 2026              | Bill noticed approaching $210+ when customer expected $135               | User memory                 |
+| Jan 2026               | Visited Dunellen FL AT&T store; store said unable to help                | User memory                 |
+| Jan 2026               | Advised to call 611 (customer loyalty) for better deals                  | Store agent                 |
+| Jan-Aug 2026           | **NO CHANGE MADE** -- advised to call, but did not follow up immediately | User memory                 |
+| ~Aug 2026              | Bill reached $267.98 (2x expected amount)                                | ATTBill_0230_2026-08-24.pdf |
+| Oct 8, 2026 (approx)   | Called 611; reached John (support); John noted IMEA issue                | Inbound callback            |
+| Oct 8, 2026 (approx)   | John: "IMEA number incorrect in system for long time"                    | Tech conversation           |
+| Oct 8, 2026 (approx)   | Tech support: Reset IMEA; applied unauthorized plan change               | User report                 |
+| Oct 8-9, 2026 (approx) | Hotspot service fails in Au Train MI after tech call                     | Geographic indicator        |
+| Oct 12, 2026           | Visited Cheboygan AT&T store; negotiated new plan                        | In-person visit             |
+| Oct 12, 2026           | Store: Unable to disconnect hotspot; no authorization for debit discount | Store limitation            |
+| Oct 12, 2026 evening   | Wendy called 611 to schedule callback                                    | User action                 |
+| Oct 13, 2026, 11:00 AM | Callback: Cancelled hotspot line effective immediately                   | Phone support               |
+| Oct 13, 2026, 11:00 AM | Added debit card discount ($10/line/month)                               | Phone support               |
+| Oct 13, 2026           | **Opened support case for billing dispute** (1-year lookback requested)  | John via inbound            |
 
 ---
 
@@ -143,14 +143,14 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 1. Bills for Jul 2025 - Aug 2026 (to trace exact month(s) of increases)
 2. Dunellen store visit notes/receipt (Jan ~2025, if available)
-3. Tech support call notes from Oct 8 (IMEA reset)
-4. Written confirmation of Cheboygan store visit (Oct 12, if receipt exists)
-5. Callback confirmation from Oct 13 (written order summary from 611)
+3. Tech support call notes from Oct 8, 2026 (IMEA reset)
+4. Written confirmation of Cheboygan store visit (Oct 12, 2026, if receipt exists)
+5. Callback confirmation from Oct 13, 2026 (written order summary from 611)
 6. Account terms (look up authorization for plan changes, arbitration clause)
 
 ### Process
 
-#### Phase 1: Formal Notice of Dispute (Due to John's suggestion -- Oct 13)
+#### Phase 1: Formal Notice of Dispute (Due to John's suggestion -- Oct 13, 2026)
 
 - Prepare written dispute letter on account letterhead
 - Cite: June 2025 ($212.24) vs. August 2026 ($267.98) as evidence of unauthorized increases
@@ -161,8 +161,8 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 #### Phase 2: Document Gathering
 
-- Request call transcript from Oct 8 tech support interaction
-- Request call transcript from Oct 13 loyalty callback
+- Request call transcript from Oct 8, 2026 tech support interaction
+- Request call transcript from Oct 13, 2026 loyalty callback
 - Retrieve Dunellen store receipt/notes if archived locally
 - Retrieve Cheboygan store receipt
 - Search email for any AT&T notifications about plan changes
@@ -193,15 +193,15 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 ---
 
-## Hotspot Situation (Oct 13 Resolution)
+## Hotspot Situation (Oct 13, 2026 Resolution)
 
-**Before Oct 13:**
+**Before Oct 13, 2026:**
 
 - Account had 3 separate groups:
   - Group 2: Hotspot (984.381.5800)
   - Group 3: 2 phones (Michael + Wendy)
 
-**After Oct 13 (per callback order):**
+**After Oct 13, 2026 (per callback order):**
 
 - Hotspot line cancelled effective Oct 13, 2026
 - Remaining: 2 phones only
@@ -213,16 +213,16 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 ## Next Steps
 
-### Immediate (This week, Oct 13-20)
+### Immediate (This week, Oct 13-20, 2026)
 
 1. **Create formal dispute letter** (see template below)
 2. **Scan/photograph all bills** (Jun 2025, all intermediate months if found, Aug 2026)
-3. **Gather call records:** Request transcripts for Oct 8 & Oct 13 calls from AT&T customer service
+3. **Gather call records:** Request transcripts for Oct 8, 2026 & Oct 13, 2026 calls from AT&T customer service
 4. **Check email:** Search for any AT&T notifications (plan changes, device purchases, billing alerts)
 5. **Verify state law:** NC statute of limitations for billing disputes (typically 3 years; varies)
 6. **Send dispute letter** via certified mail to AT&T dispute address
 
-### Medium-term (Oct 20 - Nov 10)
+### Medium-term (Oct 20, 2026 - Nov 10, 2026)
 
 1. **Wait for AT&T response** (typically 30-60 days)
 2. **If denied or no response:**
@@ -233,11 +233,62 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 ### Long-term
 
-1. **Monitor October 13 onwards bills** for correctness (should be ~$100-120 now, 2 phones only)
+1. **Monitor October 13, 2026 onwards bills** for correctness (should be ~$100-120 now, 2 phones only)
 2. **Document all interactions** going forward
 3. **Consider switching carriers** if AT&T settlement feels inadequate
 
 ---
+
+## Action Items
+
+Merged from TODO.md (last updated 2026-10-13) and the artifact review.
+
+### Before submission
+
+1. [ ] Wendy reviews `dispute_letter_final.md`.
+2. [ ] Decide: soften or strengthen escalation language (PUC, small claims, class action).
+3. [ ] Decide: request Oct 8, 2026 call transcript (Eliza, IMEA reset) in initial dispute.
+4. [ ] Verify April 24, 2026 office visit (any documentation from the Cheboygan visit).
+
+### Submission and follow-up
+
+1. [ ] Submit dispute via att.com/dispute.
+2. [ ] Request Jan 2025 - May 2025 bills from Danielle (1 free + $5/month for older).
+3. [ ] Wait for AT&T response (30-day window).
+
+### If AT&T denies or no response
+
+1. [ ] File complaint with NC Public Utilities Commission.
+2. [ ] Pursue small claims court action (Wake County, NC).
+3. [ ] Explore class-action potential (IMEA misclassification).
+
+### Evidence still needed
+
+ 1. [ ] Oct 8, 2026 tech support call transcript (Eliza, IMEA validation failure).
+ 2. [ ] Store receipt or notes from Cheboygan visit, Oct 12, 2026 (Theo).
+ 3. [ ] Store receipt or notes from Dunellen visit, Jan 2026.
+ 4. [ ] Account authorization records (device financing, plan changes).
+ 5. [ ] Hotspot device make and model registration info.
+ 6. [ ] Written order summary from the Oct 13, 2026 callback.
+
+### Bring artifacts up to date
+
+ 1. [ ] Plan-change date: bills show the change on 2026-04-28 (May 2026 bill), not Jun-Aug 2025. Fix Timeline, Root Causes #2, and the letter.
+ 2. [ ] Add Sep 2026 and Oct 2026 bills (`ATTBill_0230_2026-09-24.pdf`, `ATTBill_0230_2026-10-24.pdf`) to `billing_data.jsonl`, `billing_summary_table.md`, and the Bill Snapshot section.
+ 3. [ ] Fix plan names in `billing_data.jsonl`: 2025-07-24 through 2026-04-24 show Starter SL / Premium PL; the 55+ change is on the 2026-05-24 bill.
+ 4. [ ] Fix `README.md` line 83: Feb-Apr 2026 bills are already on file, not urgent.
+ 5. [ ] Fix weekdays in `README.md`: 2026-10-12 was a Monday and 2026-10-13 a Tuesday.
+ 6. [ ] Record Oct 8, 2026 as multiple calls (Eliza hung up; store visit followed days later) in the Timeline and `call_log`.
+ 7. [ ] Reconcile Oct 13, 2026 callback times: John at 11:00 AM (plan) vs. 8:30 AM-9:00 PM (README); Danielle at 8:30 PM.
+ 8. [ ] Confirm the 2026-10-12 $50 plan: store quote (README) vs. "obtained" (Timeline). The 2026-10-24 bill does not show it.
+ 9. [ ] Hotspot cancellation: 2026-10-24 bill shows usage ending 2026-10-13 but $92.29 still billed for 2026-10-25 to 2026-11-24. Add to the letter.
+10. [ ] Device deactivation date: `customer_profile_and_evidence.md` says 2026-10-12; the bill shows hotspot usage through 2026-10-13.
+11. [ ] `dispute_letter_final.md` header says "Submitted: 2026-10-13" but it is not submitted. Fix the header.
+12. [ ] Reconcile the overcharge estimate: $450-825 (header), $750-1000 (README), $2,000-2,500 (Executive Summary), $600-900 (letter).
+13. [ ] Letter: verify the May 2025 bill amount ($225.60) and Foundation Account 00036089 against the bill.
+14. [ ] Replace the "Files in This Dispute Directory" list: `analysis_comparison.md`, `letters/`, and `evidence/` do not exist.
+15. [ ] Update `CLAUDE.md` "Known Inconsistencies" to match the current file names and figures.
+16. [ ] Decide whether to delete `TODO.md` now that it is merged.
 
 ## Formal Dispute Letter Template
 
@@ -283,13 +334,13 @@ SPECIFIC UNAUTHORIZED CHARGES:
    - Hotspot base: $70.99 to $100.99 (+$30/month, +42.3%)
    - Physical device unchanged: Netgear Nighthawk M1 (IMEI 015240000553847, Service #984-381-5800)
    - Plan tier changed from "Unlimited Premium PL - 3 Lines" to "1 Line" without authorization
-   - Root cause: October 8 tech support confirmed IMEA number was "incorrectly flagged in AT&T system for a long time," causing device to be treated as personal phone rather than hotspot
+   - Root cause: October 8, 2026 tech support confirmed IMEA number was "incorrectly flagged in AT&T system for a long time," causing device to be treated as personal phone rather than hotspot
    - This billing error cascaded back months, inflating charges retroactively
 
 3. "Next Up Anytime" Unauthorized Feature Charges
    - Both lines charged $10/month each = $20/month total
    - Present on every bill since at least May 2025 (16+ months x $20 = $320+)
-   - User explicitly rejected this feature Oct 12 in-store and Oct 13 by phone
+   - User explicitly rejected this feature Oct 12, 2026 in-store and Oct 13, 2026 by phone
    - No customer authorization documentation in system
    - Incompatible with customer usage pattern (device retention 2+ years, zero interest in upgrades)
 
