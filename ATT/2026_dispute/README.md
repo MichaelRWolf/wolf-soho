@@ -10,16 +10,16 @@ Tracking AT&T account billing dispute for account **293590230** (Michael Wolf). 
 
 ## Files in This Directory
 
-| File                                 | Purpose                                                                       |
-|--------------------------------------|-------------------------------------------------------------------------------|
-| **dispute_letter_final.md**          | ✅ Ready to submit via att.com/dispute                                        |
-| **billing_summary_table.md**         | Month-by-month billing analysis (May 2025 - Aug 2026) showing plan changes    |
-| **billing_data.jsonl**               | Structured data extract (all bills) for future analysis & reuse               |
-| **call_log_2026-10-13.md**           | Call notes: Danielle (support, LA), Oct 13 evening; April 24 event discussion |
-| **PLAN_dispute.md**                  | Original dispute strategy & timeline                                          |
-| **customer_profile_and_evidence.md** | Evidence supporting the dispute                                               |
-| **analysis_august_2026_bill.md**     | Detailed breakdown of August 2026 bill                                        |
-| **README.md**                        | This file                                                                     |
+| File                                                                     | Purpose                                                                       |
+|--------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| **[dispute_letter_final.md](dispute_letter_final.md)**                   | ✅ Ready to submit via att.com/dispute                                        |
+| **[billing_summary_table.md](billing_summary_table.md)**                 | Month-by-month billing analysis (May 2025 - Aug 2026) showing plan changes    |
+| **[billing_data.jsonl](billing_data.jsonl)**                             | Structured data extract (all bills) for future analysis & reuse               |
+| **[call_log_2026-10-13.md](call_log_2026-10-13.md)**                     | Call notes: Danielle (support, LA), Oct 13 evening; April 24 event discussion |
+| **[PLAN_dispute.md](PLAN_dispute.md)**                                   | Original dispute strategy & timeline                                          |
+| **[customer_profile_and_evidence.md](customer_profile_and_evidence.md)** | Evidence supporting the dispute                                               |
+| **[analysis_august_2026_bill.md](analysis_august_2026_bill.md)**         | Detailed breakdown of August 2026 bill                                        |
+| **[README.md](README.md)**                                               | This file                                                                     |
 
 ---
 
@@ -94,7 +94,7 @@ Tracking AT&T account billing dispute for account **293590230** (Michael Wolf). 
 
 ### Once TODOs Complete
 
-1. Prepare formal dispute letter (template in PLAN_dispute.md)
+1. Prepare formal dispute letter (template in [PLAN_dispute.md](PLAN_dispute.md))
 2. Print, sign, send via certified mail OR email to AT&T dispute dept
 3. Await AT&T response (30 days)
 

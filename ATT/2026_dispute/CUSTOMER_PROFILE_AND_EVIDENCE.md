@@ -24,7 +24,7 @@
 
 ### Evidence of Luddite Pattern
 
-From equipment_portable.md:
+From [equipment_portable.md](../../equipment_portable.md):
 
 - Nighthawk M1 hotspot (IMEI 015240000553847): Used 2+ years before deactivation
 - Marginal performance in Crystal River area for 2+ years -- user kept using it instead of upgrading
@@ -114,7 +114,7 @@ Foundation Account IDs don't normally change. A change indicates a system reclas
 
 ## The Nighthawk M1 IMEA Issue
 
-### From equipment_portable.md
+### From [equipment_portable.md](../../equipment_portable.md)
 
 ```text
 IMEI: 015240000553847
@@ -199,7 +199,7 @@ Luddite customers (keep phones 2-4+ years, never upgrade within contract term) a
 
 1. **26-year customer:** Since Jan 2000, no switches despite multiple service failures
 2. **Documented rejection of "Next Up Anytime":** Oct 12 in-store and Oct 13 phone call -- no authorization trail
-3. **Luddite usage pattern:** Equipment_portable.md proves 2+ year device retention, contradicts upgrade-feature rationale
+3. **Luddite usage pattern:** [Equipment_portable.md](../../equipment_portable.md) proves 2+ year device retention, contradicts upgrade-feature rationale
 4. **Foundation Account change:** Evidence of backend system rework or error
 5. **IMEA misclassification:** Tech support admits error "in system for a long time" -- systematic billing error, not customer error
 6. **Unauthorized plan tier jump:** Hotspot went from $66.31 to $92.26/month for same device -- $30/month due to system error
@@ -262,6 +262,6 @@ Luddite customers (keep phones 2-4+ years, never upgrade within contract term) a
 
 **Document prepared:** 2026-10-13  
 **Last updated:** 2026-10-13  
-**Oldest bill available:** May 24, 2025 (ATTBill_0230_2025-05-24.pdf)  
-**Evidence sources:** May 2025 & Aug 2026 bill PDFs, equipment_portable.md, user account history  
+**Oldest bill available:** May 24, 2025 ([ATTBill_0230_2025-05-24.pdf](../ATTBill/ATTBill_0230_2025-05-24.pdf))  
+**Evidence sources:** May 2025 & Aug 2026 bill PDFs, [equipment_portable.md](../../equipment_portable.md), user account history  
 **Next step:** Call 611 to request Feb-Apr 2026 bills; fold confirmed evidence into formal dispute letter

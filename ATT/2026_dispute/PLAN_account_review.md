@@ -38,7 +38,7 @@ Source: Cheboygan store quote 2026-10-12 and callback 2026-10-13. No written con
 
 ### Goal 3: Account review filed
 
-- [ ] Wendy reviews the letter (required before edits to `dispute_letter_final.md`).
+- [ ] Wendy reviews the letter (required before edits to [`dispute_letter_final.md`](dispute_letter_final.md)).
 - [ ] Submit the account review request at att.com/dispute.
 - [ ] Record the case number and submission date with year here.
 
