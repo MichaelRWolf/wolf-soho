@@ -17,6 +17,20 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 ---
 
+## Background
+
+- We have been AT&T customers since January 2000 and trusted the company for 26 years. We no longer do.
+- The 2026-10-24 bill (page 4) says AT&T updated its Consumer Service Agreement (att.com/CSA), effective 2026-11-01. The bill says continued use means acceptance. We did not sign anything.
+- Summary of the change (from att.com/CSA, 2026-11-07; verify against the full agreement):
+  - Disputes still go to informal resolution, small claims court, or individual arbitration.
+  - Arbitration administrator changes from the American Arbitration Association to JAMS.
+  - Group disputes of 25 or more similar claims can move to court after two rounds of individual arbitration and mediation (subsection 1.3.2.7).
+  - Class action and jury trial waivers expand to cover court as well as arbitration (Section 1.12).
+  - Small claims procedures are not described as changed.
+- Opt-out:
+  - Ending service before 2026-11-01 was the way out for accounts signed up before 2026-09-01. That date has passed.
+  - Rejecting the arbitration changes (subsection 1.3.2) is allowed "within 30 days" by notice under subsection 1.3.2.8. The start date for the 30 days is not stated on the page. Check the full agreement.
+
 ## Bill Snapshot Comparison
 
 ### June 2025 Bill ($212.24)
@@ -169,7 +183,8 @@ Silent plan upgrades, unauthorized device charges, and bad IMEA data created a c
 
 #### Phase 3: Escalation (If Unresolved)
 
-- If AT&T denies within 30 days, escalate to NC PUC complaint
+- Escalate even if AT&T resolves the dispute: file NC PUC complaint regardless of AT&T's response
+- If AT&T denies within 30 days, also pursue small claims action
 - Consult with attorney about small claims action
 - Research class-action possibilities (IMEA misclassification)
 
@@ -288,7 +303,13 @@ Merged from TODO.md (last updated 2026-10-13) and the artifact review.
 13. [ ] Letter: verify the May 2025 bill amount ($225.60) and Foundation Account 00036089 against the bill.
 14. [ ] Replace the "Files in This Dispute Directory" list: `analysis_comparison.md`, `letters/`, and `evidence/` do not exist.
 15. [ ] Update `CLAUDE.md` "Known Inconsistencies" to match the current file names and figures.
-16. [ ] Decide whether to delete `TODO.md` now that it is merged.
+16. [x] Decide whether to delete `TODO.md` now that it is merged. (Deleted 2026-11-07, commit `b03116f`.)
+
+### Arbitration and carrier decision
+
+1. [ ] Wendy: review the dispute resolution and arbitration terms in the 2026-10-24 bill annotation (page 4 of `ATTBill_0230_2026-10-24.pdf`; Consumer Service Agreement effective 2026-11-01). Decide whether this is a deal breaker, weighing the cost of changing carriers.
+2. [ ] Get the full Consumer Service Agreement and find the start date of the 30-day arbitration opt-out (subsection 1.3.2.8). Today is 2026-11-07, so the window may already be running.
+3. [ ] If we decide to reject the arbitration changes, send the subsection 1.3.2.8 notice inside the window. Keep proof of sending.
 
 ## Formal Dispute Letter Template
 
