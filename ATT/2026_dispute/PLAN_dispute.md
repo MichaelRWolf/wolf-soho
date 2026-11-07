@@ -360,7 +360,7 @@ When AT&T replies, their answer should address:
 
 ## Files in This Dispute Directory
 
-- **DISPUTE_PLAN.md** (this file) -- Strategy and timeline
+- **PLAN_dispute.md** (this file) -- Strategy and timeline
 - **analysis_comparison.md** -- Detailed month-by-month bill breakdown (TBD)
 - **letters/** -- Formal dispute letter and correspondence drafts
 - **evidence/** -- Scans of bills, receipts, call transcripts (as collected)

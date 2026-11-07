@@ -12,7 +12,7 @@ Document set for the AT&T billing dispute (account details and history in README
 - **TODO.md** - Pre-submission checklist and evidence gaps. Keep it in sync with README.md's "Next Actions".
 - **dispute_letter_final.md** - Letter to submit via att.com/dispute. Edit only after Wendy's review.
 - **dispute_letter_outline.md** - Earlier outline the final letter was built from.
-- **dispute_plan.md** - Strategy, escalation path, and negotiation positions.
+- **PLAN_dispute.md** - Strategy, escalation path, and negotiation positions.
 - **billing_data.jsonl** - One JSON object per bill (`month`, `total_due`, per-line `*_plan`/`*_base`/`*_total`, `notes`). Structured source for the summary table.
 - **billing_summary_table.md** - Month-by-month table derived from billing_data.jsonl.
 - **analysis_august_2026_bill.md** - Line-item breakdown of the August 2026 bill.
@@ -30,6 +30,6 @@ Document set for the AT&T billing dispute (account details and history in README
 
 ## Known Inconsistencies
 
-- README.md and TODO.md point to `DISPUTE_PLAN.md` and `DISPUTE_LETTER_OUTLINE.md`. The actual filenames are lowercase.
-- Estimated overcharge differs between documents: README.md says $750-1000+, dispute_plan.md says $450-825 in one section and $2,000-2,500 in another. Reconcile before the letter cites a total.
+- README.md and TODO.md point to `PLAN_dispute.md` and `DISPUTE_LETTER_OUTLINE.md`. The actual filenames are lowercase.
+- Estimated overcharge differs between documents: README.md says $750-1000+, PLAN_dispute.md says $450-825 in one section and $2,000-2,500 in another. Reconcile before the letter cites a total.
 - dispute_letter_final.md header says "Submitted: 2026-10-13", but its status line and TODO.md say not yet submitted.
