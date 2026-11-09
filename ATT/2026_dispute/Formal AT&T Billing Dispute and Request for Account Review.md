@@ -103,8 +103,7 @@ We request that AT&T:
 
 We are not proposing an arbitrary settlement amount. We expect AT&T to investigate its own transaction and billing records, determine the correct charges, and reimburse us accordingly.
 
-**Closing
-**
+**Closing**
 
 We have remained AT&T customers for approximately 26 years.
 
