@@ -110,7 +110,7 @@ We have remained AT&T customers for approximately 26 years.
 
 We entered the January 2025 transaction in good faith, accepting a package that was represented as a better value. Instead, we paid substantially more than promised.
 
-When we returned for help in spring 2026, our explicit instruction not to change our service was disregarded - which Again raised our bill.
+When we returned for help in spring 2026, our explicit instruction not to change our service was disregarded - which again raised our bill.
 
 Our subsequent efforts to obtain service, cancel an unnecessary line, and understand our bills have involved repeated conversations and a continuing lack of documentation.
 
