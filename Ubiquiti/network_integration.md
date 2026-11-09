@@ -1,5 +1,7 @@
 # Ubiquiti Network Integration Guide
 
+info: nighthawk no longer active. sold 2026-11
+
 ## Current Network Architecture
 
 ### Existing Setup

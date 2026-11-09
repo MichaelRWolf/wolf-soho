@@ -55,9 +55,9 @@
 - MAC Address: 44:A5:6E:E9:59:29
 - SIM Serial: 890141033345577095
 - Service Number: +1 (984) 381-5800
-- Status: Device deactivated 2026-10-12 in Cheboygan MI AT&T Store
+- Status: Sold on eBay 2026-11 for $35. Device deactivated 2026-10-12 in Cheboygan MI AT&T Store
 - Notes: Marginal performance in Crystal River area (used 2+ years). Was limping along on LTE before deactivation.
-- eBay Listing: [Listed on eBay 2026-10-16](nighthawk-m1-ebay-listing.md)
+- eBay Listing: [Listed on eBay 2026-10-16, sold 2026-11 for $35](eBay/nighthawk-m1-ebay-listing.md)
 - Credentials: Stored in 1Password as "wolfden-hotspot - Nighthawk/Netgear - 192.168.1.1"
 
 ## WiFi Extender

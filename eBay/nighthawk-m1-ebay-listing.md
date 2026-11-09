@@ -4,6 +4,11 @@
 
 ## Work Log
 
+## Status -- Resolved / Closed
+
+- Sold 2026-11 for $35.
+- Buyer found the package. Issue closed; no further action.
+
 ## 2026-11-02 -- eBay buyer message thread
 
 - 3:33 PM (eBay time): buyer message

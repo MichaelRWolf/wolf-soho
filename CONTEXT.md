@@ -5,14 +5,14 @@ ambiguous language. Read this file at the start of any network-related session.
 
 ## Network Infrastructure -- Rascally Raccoon PtP (Winter 2025-2026)
 
-| Name                   | Device                       | IP (Static)  |
-|------------------------|------------------------------|--------------|
-| `beryl`                | GL.iNet Beryl GL-MT1300      |              |
-| `loco-station`         | Ubiquiti NanoStation Loco5AC | 192.168.1.21 |
-| `running-wolf-hotspot` | Netgear Nighthawk M1         |              |
-| `wolfden-nas`          | Synology DS220j              |              |
-| `wolfden-mesh`         | Ubiquiti UAP-AC-M-US         |              |
-| `cheapo-extender`      | Generic USB WiFi repeater    |              |
+| Name                   | Device                                                      | IP (Static)  |
+|------------------------|-------------------------------------------------------------|--------------|
+| `beryl`                | GL.iNet Beryl GL-MT1300                                     |              |
+| `loco-station`         | Ubiquiti NanoStation Loco5AC                                | 192.168.1.21 |
+| `running-wolf-hotspot` | Netgear Nighthawk M1 (info: no longer active. sold 2026-11) |              |
+| `wolfden-nas`          | Synology DS220j                                             |              |
+| `wolfden-mesh`         | Ubiquiti UAP-AC-M-US                                        |              |
+| `cheapo-extender`      | Generic USB WiFi repeater                                   |              |
 
 ## Network Infrastructure -- Rascally Raccoon PtP (Winter 2025-2026) -- Moe's House Side
 

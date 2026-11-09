@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # nighthawk-signal -- live cell signal stats for Netgear Nighthawk M1
+# info: nighthawk no longer active. sold 2026-11. Not installed by make install; kept for reference.
 #
 # TODO:
 #   - OpenCellID API: use Keychain token to resolve Cell ID → GPS coordinates

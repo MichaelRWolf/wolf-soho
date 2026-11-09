@@ -63,6 +63,7 @@
 
 ## `running-wolf-hotspot` -- Netgear Nighthawk M1
 
+- info: nighthawk no longer active. sold 2026-11
 - Model: Nighthawk M1 (AT&T; full model number TBD -- may be MR1100)
 - IMEI: 015240000553847
 - MAC (Ethernet LAN): 44:a5:6e:e9:59:26
@@ -121,8 +122,8 @@
 
 **Quick Reference:**
 
-| Antenna              | MAC Suffix | Distance (ft) | Bearing (°) | Status                    |
-|----------------------|------------|---------------|-------------|---------------------------|
+| Antenna              | MAC Suffix | Distance (ft) | Bearing (°) | Status                     |
+|----------------------|------------|---------------|-------------|----------------------------|
 | Welcome Antenna      | :38        | 0             | --          | ✅ Outdoor, primary        |
 | Barn North Antenna   | :C1        | 200           | 45          | ✅ Outdoor ridge           |
 | Barn Equipment Panel | :93        | 227           | 15          | ✅ Inside barn, north side |

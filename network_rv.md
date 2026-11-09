@@ -169,7 +169,7 @@ Possible alternatives (to be tested):
 ## Variant: On The Road
 
 WAN source: cellular -- michael-iphone or wendy-iphone hotspot, or running-wolf-hotspot
-(Netgear Nighthawk M1). Used while driving interstate, Cracker Barrel stops, etc.
+(Netgear Nighthawk M1; info: nighthawk no longer active. sold 2026-11). Used while driving interstate, Cracker Barrel stops, etc.
 
 ### Data Path Options
 
