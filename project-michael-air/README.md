@@ -2,6 +2,8 @@
 
 **Status:** High-priority tasks complete (2026-08-13 to 2026-08-17); ongoing validation.
 
+**GitHub:** [project-michael-air on GitHub](https://github.com/MichaelRWolf/wolf-soho/tree/main/project-michael-air)
+
 ## Overview
 
 Replacement for `michael-pro` (water damaged, recovered via Time Machine). New machine is a MacBook Air (M3, 13-inch, 2024).
